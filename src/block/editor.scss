@@ -1,15 +1,35 @@
-/**
- * #.# Editor Styles
- *
- * CSS for just Backend enqueued after style.scss
- * which makes it higher in priority.
- */
+@import "../_partials/variables";
+@import "../_partials/mixins";
 
-.wp-block-cgb-block-gutenberg-forms  {
-  background: $green;
-  border: 0.2rem solid $black;
-  color: $black;
-  margin: 0 auto;
-  max-width: 740px;
-  padding: 2rem;
+.cwp-form {
+	& .cwp-field {
+		& .cwp-field-set {
+			@include field();
+		}
+
+		& .cwp-checkbox-set {
+			@include checkbox-field("backend");
+		}
+
+		& .cwp-required:not(.cwp-noticed) {
+			@include isRequired("toggle");
+		}
+
+		& .cwp-required.cwp-noticed {
+			@include isRequired("noticed");
+		}
+	}
+
+	& .cwp-submit {
+		padding: 20px 0px;
+		& .cwp-submit-btn {
+			@include defaultSubmit();
+		}
+	}
+}
+
+//miscs
+
+.cwp-heading {
+	margin: 0px 0px !important;
 }

@@ -1,1 +1,45 @@
-.wp-block-cgb-block-cgb{color:#292929;background:#ff4500;border:0.2rem solid #292929;padding:2rem}
+.cwp-form .cwp-field .cwp-field-set input {
+  width: 100%;
+  padding: 10px 10px;
+  -webkit-transition: 0.5s;
+  -o-transition: 0.5s;
+  transition: 0.5s; }
+
+.cwp-form .cwp-field .cwp-field-set textarea {
+  width: 100%;
+  padding: 10px 10px; }
+
+.cwp-form .cwp-field .cwp-field-set label {
+  width: 100%; }
+  .cwp-form .cwp-field .cwp-field-set label span {
+    color: #bbbbbb;
+    font-weight: 600; }
+
+.cwp-form .cwp-field .cwp-checkbox-set label span {
+  color: #bbbbbb;
+  font-weight: 600; }
+
+.cwp-form .cwp-field .cwp-checkbox-set .cwp-checkbox-option {
+  display: -ms-flexbox;
+  display: flex;
+  margin: 10px 0px; }
+  .cwp-form .cwp-field .cwp-checkbox-set .cwp-checkbox-option label {
+    width: 100%; }
+  .cwp-form .cwp-field .cwp-checkbox-set .cwp-checkbox-option input[type="checkbox"] {
+    margin: 5px 5px 0px 0px; }
+  .cwp-form .cwp-field .cwp-checkbox-set .cwp-checkbox-option button {
+    background: red;
+    color: #fff;
+    margin: 0px 0px 0px 5px;
+    border: none;
+    outline: none; }
+
+.cwp-form .cwp-submit {
+  padding: 20px 0px; }
+  .cwp-form .cwp-submit .cwp-submit-btn {
+    background-color: #007cba;
+    color: #eee;
+    border: none;
+    outline: none;
+    padding: 10px 25px;
+    letter-spacing: 1px; }

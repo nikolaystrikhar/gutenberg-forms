@@ -1,0 +1,107 @@
+@import "./variables";
+
+@mixin normalize_button() {
+	border: none;
+	outline: none;
+}
+
+@mixin defaultSubmit() {
+	background-color: $primaryColor;
+	color: $secondaryColor;
+	border: none;
+	outline: none;
+	padding: 10px 25px;
+	letter-spacing: 1px;
+}
+
+@mixin field() {
+	& input {
+		width: 100%;
+		padding: 10px 10px;
+		transition: 0.5s;
+	}
+	& textarea {
+		width: 100%;
+		padding: 10px 10px;
+	}
+
+	& label {
+		width: 100%;
+
+		& span {
+			color: darken($secondaryColor, 20%);
+			font-weight: 600;
+		}
+	}
+}
+
+@mixin checkbox-field($preview_type) {
+	@if $preview_type == "backend" {
+		& .cwp-checkbox-option {
+			display: flex;
+			margin: 10px 0px;
+			& input[type="text"] {
+				width: 100%;
+			}
+
+			& input[type="checkbox"] {
+				margin: 5px 5px 0px 0px;
+			}
+
+			& button {
+				background: $danger;
+				color: #fff;
+				margin: 0px 0px 0px 5px;
+				@include normalize_button();
+			}
+		}
+
+		& .cwp-checkbox-controls {
+			& button {
+				color: $primaryColor;
+				border: 1px solid $primaryColor !important;
+				padding: 3px 11px;
+				background-color: #fff;
+				@include normalize_button();
+			}
+		}
+	} @else {
+		& label {
+			& span {
+				color: darken($secondaryColor, 20%);
+				font-weight: 600;
+			}
+		}
+
+		& .cwp-checkbox-option {
+			display: flex;
+			margin: 10px 0px;
+			& label {
+				width: 100%;
+			}
+
+			& input[type="checkbox"] {
+				margin: 5px 5px 0px 0px;
+			}
+
+			& button {
+				background: $danger;
+				color: #fff;
+				margin: 0px 0px 0px 5px;
+				@include normalize_button();
+			}
+		}
+	}
+}
+
+@mixin isRequired($type) {
+	display: flex;
+	flex-direction: row;
+	justify-content: flex-end;
+
+	& h3 {
+		font-size: 11px;
+		margin: 0px 8px !important;
+		color: if($type == "noticed", $danger !important, $primaryColor !important);
+	}
+}

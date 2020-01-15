@@ -1,13 +1,22 @@
-/**
- * #.# Common SCSS
- *
- * Can include things like variables and mixins
- * that are used across the project.
-*/
+@import "./_partials/variables";
+@import "./_partials/mixins";
 
-// Colors.
-$black: rgb(41, 41, 41);
-$white: #f4f4f4;
-$gray: #dedede;
-$green: #bada55;
-$red: orangered;
+.cwp-form {
+	& .cwp-field {
+		& .cwp-field-set {
+			@include field();
+		}
+
+		& .cwp-checkbox-set {
+			@include checkbox-field("frontend");
+		}
+	}
+
+	& .cwp-submit {
+		padding: 20px 0px;
+
+		& .cwp-submit-btn {
+			@include defaultSubmit();
+		}
+	}
+}
