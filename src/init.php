@@ -20,6 +20,14 @@ function gutenberg_forms_cgb_block_assets() {
 		true
 	);
 
+	wp_register_script(
+		'gutenberg-forms-custom-js',
+		plugins_url( '/dist/custom_frontend.js', dirname( __FILE__ ) ), 
+		array('jquery'),
+		null, 
+		true 
+	);
+
 	wp_register_style(
 		'gutenberg_forms-cgb-block-editor-css', 
 		plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ), 
@@ -41,6 +49,7 @@ function gutenberg_forms_cgb_block_assets() {
 		'cgb/block-gutenberg-forms', array(
 			'style'         => 'gutenberg_forms-cgb-style-css',
 			'editor_script' => 'gutenberg_forms-cgb-block-js',
+			'script'		=> 'gutenberg-forms-custom-js',
 			'editor_style'  => 'gutenberg_forms-cgb-block-editor-css',
 		)
 	);

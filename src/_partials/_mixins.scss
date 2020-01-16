@@ -5,9 +5,21 @@
 	outline: none;
 }
 
+@mixin buttonAlignment() {
+	&.justify-start {
+		justify-content: start;
+	}
+
+	&.justify-center {
+		justify-content: center;
+	}
+
+	&.justify-end {
+		justify-content: flex-end;
+	}
+}
+
 @mixin defaultSubmit() {
-	background-color: $primaryColor;
-	color: $secondaryColor;
 	border: none;
 	outline: none;
 	padding: 10px 25px;
@@ -23,6 +35,7 @@
 	& textarea {
 		width: 100%;
 		padding: 10px 10px;
+		max-width: 100%;
 	}
 
 	& label {
@@ -89,6 +102,119 @@
 				color: #fff;
 				margin: 0px 0px 0px 5px;
 				@include normalize_button();
+			}
+		}
+	}
+}
+
+@mixin radio-field($preview_type) {
+	@if $preview_type == "backend" {
+		& .cwp-radios-option {
+			display: flex;
+			margin: 10px 0px;
+			& input[type="text"] {
+				width: 100%;
+			}
+
+			& input[type="radio"] {
+				margin: 5px 5px 0px 0px;
+			}
+
+			& button {
+				background: $danger;
+				color: #fff;
+				margin: 0px 0px 0px 5px;
+				@include normalize_button();
+			}
+		}
+
+		& .cwp-radios-controls {
+			& button {
+				color: $primaryColor;
+				border: 1px solid $primaryColor !important;
+				padding: 3px 11px;
+				background-color: #fff;
+				@include normalize_button();
+			}
+		}
+	} @else {
+		& label {
+			& span {
+				color: darken($secondaryColor, 20%);
+				font-weight: 600;
+			}
+		}
+
+		& .cwp-radio-option {
+			display: flex;
+			margin: 10px 0px;
+			& label {
+				width: 100%;
+			}
+
+			& input[type="radio"] {
+				margin: 5px 5px 0px 0px;
+			}
+
+			& button {
+				background: $danger;
+				color: #fff;
+				margin: 0px 0px 0px 5px;
+				@include normalize_button();
+			}
+		}
+	}
+}
+
+@mixin select-field($preview_type) {
+	@if $preview_type == "backend" {
+		& .cwp-select-option {
+			display: flex;
+			margin: 10px 0px;
+			& input[type="text"] {
+				width: 100%;
+			}
+
+			& input[type="select"] {
+				margin: 5px 5px 0px 0px;
+			}
+
+			& button {
+				background: $danger;
+				color: #fff;
+				margin: 0px 0px 0px 5px;
+				@include normalize_button();
+			}
+		}
+
+		& select {
+			width: 100%;
+		}
+
+		& .cwp-select-controls {
+			& button {
+				color: $primaryColor;
+				border: 1px solid $primaryColor !important;
+				padding: 3px 11px;
+				background-color: #fff;
+				@include normalize_button();
+			}
+		}
+	} @else {
+		& label {
+			& span {
+				color: darken($secondaryColor, 20%);
+				font-weight: 600;
+			}
+		}
+
+		& {
+			display: flex;
+			flex-direction: column;
+			margin: 10px 0px;
+
+			& label {
+				width: 100%;
 			}
 		}
 	}

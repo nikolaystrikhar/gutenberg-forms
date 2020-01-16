@@ -11,6 +11,14 @@
 			@include checkbox-field("backend");
 		}
 
+		& .cwp-radios-set {
+			@include radio-field("backend");
+		}
+
+		& .cwp-select-set {
+			@include select-field("backend");
+		}
+
 		& .cwp-required:not(.cwp-noticed) {
 			@include isRequired("toggle");
 		}
@@ -22,6 +30,8 @@
 
 	& .cwp-submit {
 		padding: 20px 0px;
+		display: flex;
+		@include buttonAlignment();
 		& .cwp-submit-btn {
 			@include defaultSubmit();
 		}
@@ -32,4 +42,8 @@
 
 .cwp-heading {
 	margin: 0px 0px !important;
+}
+
+.cwp-option {
+	margin: 20px 0px !important;
 }

@@ -39,11 +39,65 @@ import checkboxSave from "../Form Childs/checkbox/save";
 
 ////////////////////////////////!checkbox!//////////////////////////////////////////////
 
+////////////////////////////////!datepicker!//////////////////////////////////////////////
+
+import datePickerEdit from "../Form Childs/datePicker/edit";
+import datePickerSave from "../Form Childs/datePicker/save";
+
+////////////////////////////////!datepicker!//////////////////////////////////////////////
+
+////////////////////////////////!radio!//////////////////////////////////////////////
+
+import radioEdit from "../Form Childs/radio/edit";
+import radioSave from "../Form Childs/radio/save";
+
+////////////////////////////////!radio!//////////////////////////////////////////////
+
+////////////////////////////////!phone!//////////////////////////////////////////////
+
+import phoneEdit from "../Form Childs/phone/edit";
+import phoneSave from "../Form Childs/phone/save";
+
+////////////////////////////////!phone!//////////////////////////////////////////////
+
+////////////////////////////////!website!//////////////////////////////////////////////
+
+import websiteEdit from "../Form Childs/website/edit";
+import websiteSave from "../Form Childs/website/save";
+
+////////////////////////////////!website!//////////////////////////////////////////////
+
+////////////////////////////////!text!//////////////////////////////////////////////
+
+import textEdit from "../Form Childs/text/edit";
+import textSave from "../Form Childs/text/save";
+
+////////////////////////////////!text!//////////////////////////////////////////////
+
+////////////////////////////////!text!//////////////////////////////////////////////
+
+import selectEdit from "../Form Childs/select/edit";
+import selectSave from "../Form Childs/select/save";
+
+////////////////////////////////!text!//////////////////////////////////////////////
+
 registerBlockType("cwp/block-gutenberg-forms", {
 	title: __("Gutenberg Forms"),
 	icon: "shield",
 	category: "common",
 	keywords: [__("gutenberg-forms"), __("forms")],
+	attributes: {
+		submitLabel: {
+			type: "string",
+			default: "Submit"
+		},
+		buttonSetting: {
+			type: "object",
+			default: {
+				alignment: "justify-start"
+			}
+		}
+	},
 	edit: mainEdit,
 	save: mainSave
 });
@@ -122,7 +176,7 @@ registerBlockType("cwp/message", {
 
 registerBlockType("cwp/checkbox", {
 	title: __("checkbox"),
-	icon: "marker",
+	icon: "yes",
 	category: "common",
 	keywords: [__("gutenberg-forms"), __("forms"), __("checkbox")],
 	edit: checkboxEdit,
@@ -140,6 +194,164 @@ registerBlockType("cwp/checkbox", {
 				},
 				{
 					label: "Checkbox 2"
+				}
+			]
+		},
+		label: {
+			type: "string",
+			default: "Choose One"
+		}
+	},
+	parent: ["cwp/block-gutenberg-forms"]
+});
+
+registerBlockType("cwp/datepicker", {
+	title: __("Date Picker"),
+	icon: "calendar-alt",
+	category: "common",
+	keywords: [__("gutenberg-forms"), __("forms"), __("datepicker")],
+	edit: datePickerEdit,
+	save: datePickerSave,
+	attributes: {
+		isRequired: {
+			type: "boolean",
+			default: false
+		},
+		label: {
+			type: "string",
+			default: "Pick Date"
+		},
+		placeholder: {
+			type: "string",
+			default: ""
+		}
+	},
+	parent: ["cwp/block-gutenberg-forms"]
+});
+
+registerBlockType("cwp/radio", {
+	title: __("Radio"),
+	icon: "marker",
+	category: "common",
+	keywords: [__("gutenberg-forms"), __("forms"), __("radio")],
+	edit: radioEdit,
+	save: radioSave,
+	attributes: {
+		isRequired: {
+			type: "boolean",
+			default: false
+		},
+		options: {
+			type: "array",
+			default: [
+				{
+					label: "Radio 1"
+				},
+				{
+					label: "Radio 2"
+				}
+			]
+		},
+		label: {
+			type: "string",
+			default: "Choose One"
+		}
+	},
+	parent: ["cwp/block-gutenberg-forms"]
+});
+
+registerBlockType("cwp/phone", {
+	title: __("Phone"),
+	icon: "phone",
+	category: "common",
+	keywords: [__("gutenberg-forms"), __("forms"), __("phone")],
+	edit: phoneEdit,
+	save: phoneSave,
+	attributes: {
+		phone: {
+			type: "string",
+			default: ""
+		},
+		isRequired: {
+			type: "boolean",
+			default: false
+		},
+		label: {
+			type: "string",
+			default: "Phone No:"
+		}
+	},
+	parent: ["cwp/block-gutenberg-forms"]
+});
+
+registerBlockType("cwp/website", {
+	title: __("Website"),
+	icon: "laptop",
+	category: "common",
+	keywords: [__("gutenberg-forms"), __("forms"), __("website")],
+	edit: websiteEdit,
+	save: websiteSave,
+	attributes: {
+		website: {
+			type: "string",
+			default: ""
+		},
+		isRequired: {
+			type: "boolean",
+			default: false
+		},
+		label: {
+			type: "string",
+			default: "Website"
+		}
+	},
+	parent: ["cwp/block-gutenberg-forms"]
+});
+
+registerBlockType("cwp/text", {
+	title: __("Text"),
+	icon: "text",
+	category: "common",
+	keywords: [__("gutenberg-forms"), __("forms"), __("text")],
+	edit: textEdit,
+	save: textSave,
+	attributes: {
+		text: {
+			type: "string",
+			default: ""
+		},
+		isRequired: {
+			type: "boolean",
+			default: false
+		},
+		label: {
+			type: "string",
+			default: "Text"
+		}
+	},
+	parent: ["cwp/block-gutenberg-forms"]
+});
+
+registerBlockType("cwp/select", {
+	title: __("Select"),
+	icon: "menu-alt",
+	category: "common",
+	keywords: [__("gutenberg-forms"), __("forms"), __("select")],
+	edit: selectEdit,
+	save: selectSave,
+	attributes: {
+		isRequired: {
+			type: "boolean",
+			default: false
+		},
+		options: {
+			type: "array",
+			default: [
+				{
+					label: "Select 1"
+				},
+				{
+					label: "Select 2"
 				}
 			]
 		},

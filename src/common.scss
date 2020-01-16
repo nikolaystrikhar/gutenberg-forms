@@ -1,5 +1,6 @@
 @import "./_partials/variables";
 @import "./_partials/mixins";
+@import "./lib/datepicker";
 
 .cwp-form {
 	& .cwp-field {
@@ -10,11 +11,20 @@
 		& .cwp-checkbox-set {
 			@include checkbox-field("frontend");
 		}
+
+		& .cwp-radio-set {
+			@include radio-field("frontend");
+		}
+
+		& .cwp-select-set {
+			@include select-field("frontend");
+		}
 	}
 
 	& .cwp-submit {
 		padding: 20px 0px;
-
+		display: flex;
+		@include buttonAlignment();
 		& .cwp-submit-btn {
 			@include defaultSubmit();
 		}
