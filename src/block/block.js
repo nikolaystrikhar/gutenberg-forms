@@ -82,6 +82,8 @@ import selectSave from "../Form Childs/select/save";
 ////////////////////////////////!text!//////////////////////////////////////////////
 
 registerBlockType("cwp/block-gutenberg-forms", {
+	align: true,
+	align: ["left", "right", "full"],
 	title: __("Gutenberg Forms"),
 	icon: "shield",
 	category: "common",

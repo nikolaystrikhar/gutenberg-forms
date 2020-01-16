@@ -70,6 +70,28 @@ this.maxHours=t.getHours(),this.maxMinutes=t.getMinutes(),this.d.lastSelectedDat
             $(".cwp-datepicker.cwp-field input").datepicker({
                 language: 'en',
             });
+
+
+            $.fn.validator = function() {
+              //some default form constants
+
+              const submit = $(this).find('.cwp-submit-btn'),
+                    required_fields = $(this).find('[data-required="true"]'),
+                    un_required_fields = $(this).find('[data-required="false"]');
+
+
+              submit.click( function() {
+                console.log("validator");
+              } )
+             
+            } 
+
+            $('.cwp-form').each(function() {
+              $(this).validator(); // initializing custom validation
+            })
+
+
+
         })
 
 });

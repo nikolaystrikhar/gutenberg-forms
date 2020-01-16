@@ -1,7 +1,5 @@
 import React from "react";
 import {
-	FormToggle,
-	Toolbar,
 	PanelRow,
 	PanelBody,
 	Button,
@@ -10,12 +8,7 @@ import {
 	ColorPicker,
 	ColorPalette
 } from "@wordpress/components";
-const {
-	InspectorControls,
-	BlockControls,
-	BlockIcon,
-	RichText
-} = wp.blockEditor;
+const { InspectorControls } = wp.blockEditor;
 
 function Inspector(prop) {
 	const props = prop.data;
