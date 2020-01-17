@@ -32,10 +32,35 @@
 		padding: 10px 10px;
 		transition: 0.5s;
 	}
+
+	& input.error {
+		border: 1px solid $danger;
+		outline: $danger;
+
+		&:focus {
+			border: 1px solid $danger;
+			outline: $danger;
+		}
+	}
+
+	& label.error {
+		color: $danger;
+	}
+
 	& textarea {
 		width: 100%;
 		padding: 10px 10px;
 		max-width: 100%;
+	}
+
+	& textarea.error {
+		border: 1px solid $danger;
+		outline: $danger;
+
+		&:focus {
+			border: 1px solid $danger;
+			outline: $danger;
+		}
 	}
 
 	& label {
@@ -89,12 +114,23 @@
 		& .cwp-checkbox-option {
 			display: flex;
 			margin: 10px 0px;
+			position: relative;
 			& label {
 				width: 100%;
 			}
 
 			& input[type="checkbox"] {
 				margin: 5px 5px 0px 0px;
+			}
+
+			& input[type="checkbox"].error {
+				color: $danger;
+			}
+
+			& label.error {
+				color: $danger;
+				position: absolute;
+				bottom: -20px;
 			}
 
 			& button {
@@ -148,6 +184,7 @@
 		& .cwp-radio-option {
 			display: flex;
 			margin: 10px 0px;
+			position: relative;
 			& label {
 				width: 100%;
 			}
@@ -155,7 +192,11 @@
 			& input[type="radio"] {
 				margin: 5px 5px 0px 0px;
 			}
-
+			& label.error {
+				color: $danger;
+				position: absolute;
+				bottom: -20px;
+			}
 			& button {
 				background: $danger;
 				color: #fff;
@@ -206,6 +247,15 @@
 				color: darken($secondaryColor, 20%);
 				font-weight: 600;
 			}
+		}
+
+		& label.error {
+			color: $danger;
+		}
+
+		& select.error {
+			outline: $danger;
+			border: 1px solid $danger;
 		}
 
 		& {

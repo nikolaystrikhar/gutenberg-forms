@@ -2,7 +2,7 @@ import React from "react";
 import { isEmpty } from "lodash";
 
 function save(props) {
-	const { email, isRequired, label } = props.attributes;
+	const { email, isRequired, label, id } = props.attributes;
 
 	const getLabel = () => {
 		const { label, isRequired } = props.attributes;
@@ -18,11 +18,18 @@ function save(props) {
 
 	return (
 		<div className="cwp-email cwp-field">
-			<div className="cwp-field-set" data-required={isRequired}>
+			<div className="cwp-field-set">
 				{!isEmpty(label) && (
 					<label dangerouslySetInnerHTML={{ __html: getLabel() }}></label>
 				)}
-				<input placeholder={email} />
+				<input
+					name={id}
+					type="email"
+					data-cwp-field
+					data-validation="email"
+					data-required={isRequired}
+					placeholder={email}
+				/>
 			</div>
 		</div>
 	);

@@ -14,7 +14,7 @@ import { clone, pullAt } from "lodash";
 const { RichText } = wp.blockEditor;
 
 function edit(props) {
-	let { options, isRequired, label } = props.attributes;
+	let { options, isRequired, label, id } = props.attributes;
 
 	const [select, setSelect] = useState([]);
 
@@ -22,6 +22,8 @@ function edit(props) {
 		let { options } = props.attributes;
 
 		setSelect(options);
+
+		props.setAttributes({ id: props.clientId });
 	}, []);
 
 	const handleRequired = () => {

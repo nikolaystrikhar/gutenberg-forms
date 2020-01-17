@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import {
 	FormToggle,
 	Toolbar,
@@ -29,8 +29,10 @@ function edit(props) {
 		props.setAttributes({ label });
 	};
 
-	const { text, isRequired, label } = props.attributes;
-
+	const { text, isRequired, label, id } = props.attributes;
+	useEffect(() => {
+		props.setAttributes({ id: props.clientId });
+	}, []);
 	return [
 		!!props.isSelected && (
 			<InspectorControls>

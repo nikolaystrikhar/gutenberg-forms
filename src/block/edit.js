@@ -17,12 +17,10 @@ function edit(props) {
 		<Inspector data={props} />,
 		null,
 		<div className="cwp-form">
-			<form>
-				<InnerBlocks
-					templateLock={false}
-					renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
-				/>
-			</form>
+			<InnerBlocks
+				templateLock={false}
+				renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
+			/>
 			<div className={`cwp-submit ${alignment}`}>
 				<button
 					className="cwp-submit-btn"

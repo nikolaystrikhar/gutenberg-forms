@@ -14,7 +14,7 @@ import { clone, pullAt } from "lodash";
 const { RichText } = wp.blockEditor;
 
 function edit(props) {
-	let { options, isRequired, label } = props.attributes;
+	let { options, isRequired, label, id } = props.attributes;
 
 	const [checkboxes, setCheckboxes] = useState([]);
 
@@ -73,6 +73,10 @@ function edit(props) {
 		setCheckboxes(new_options);
 		props.setAttributes({ options: new_options });
 	};
+
+	useEffect(() => {
+		props.setAttributes({ id: props.clientId });
+	}, []);
 
 	return [
 		<InspectorControls>

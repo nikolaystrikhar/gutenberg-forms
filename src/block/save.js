@@ -10,19 +10,20 @@ function edit(props) {
 
 	return (
 		<div className="cwp-form">
-			<form>
+			<form noValidate>
 				<InnerBlocks.Content />
+				<div className={`cwp-submit ${alignment}`}>
+					<button
+						type="submit"
+						style={{
+							backgroundColor: buttonSetting.backgroundColor,
+							color: buttonSetting.color
+						}}
+						className="cwp-submit-btn"
+						dangerouslySetInnerHTML={{ __html: submitLabel }}
+					></button>
+				</div>
 			</form>
-			<div className={`cwp-submit ${alignment}`}>
-				<button
-					style={{
-						backgroundColor: buttonSetting.backgroundColor,
-						color: buttonSetting.color
-					}}
-					className="cwp-submit-btn"
-					dangerouslySetInnerHTML={{ __html: submitLabel }}
-				></button>
-			</div>
 		</div>
 	);
 }

@@ -98,6 +98,10 @@ registerBlockType("cwp/block-gutenberg-forms", {
 			default: {
 				alignment: "justify-start"
 			}
+		},
+		id: {
+			type: "string",
+			default: ""
 		}
 	},
 	edit: mainEdit,
@@ -123,6 +127,10 @@ registerBlockType("cwp/email", {
 		label: {
 			type: "string",
 			default: "Email"
+		},
+		id: {
+			type: "string",
+			default: ""
 		}
 	},
 	parent: ["cwp/block-gutenberg-forms"]
@@ -147,6 +155,10 @@ registerBlockType("cwp/name", {
 		label: {
 			type: "string",
 			default: "Name"
+		},
+		id: {
+			type: "string",
+			default: ""
 		}
 	},
 	parent: ["cwp/block-gutenberg-forms"]
@@ -171,6 +183,10 @@ registerBlockType("cwp/message", {
 		label: {
 			type: "string",
 			default: "Message"
+		},
+		id: {
+			type: "string",
+			default: ""
 		}
 	},
 	parent: ["cwp/block-gutenberg-forms"]
@@ -202,6 +218,10 @@ registerBlockType("cwp/checkbox", {
 		label: {
 			type: "string",
 			default: "Choose One"
+		},
+		id: {
+			type: "string",
+			default: ""
 		}
 	},
 	parent: ["cwp/block-gutenberg-forms"]
@@ -224,6 +244,10 @@ registerBlockType("cwp/datepicker", {
 			default: "Pick Date"
 		},
 		placeholder: {
+			type: "string",
+			default: ""
+		},
+		id: {
 			type: "string",
 			default: ""
 		}
@@ -257,6 +281,10 @@ registerBlockType("cwp/radio", {
 		label: {
 			type: "string",
 			default: "Choose One"
+		},
+		id: {
+			type: "string",
+			default: ""
 		}
 	},
 	parent: ["cwp/block-gutenberg-forms"]
@@ -281,6 +309,10 @@ registerBlockType("cwp/phone", {
 		label: {
 			type: "string",
 			default: "Phone No:"
+		},
+		id: {
+			type: "string",
+			default: ""
 		}
 	},
 	parent: ["cwp/block-gutenberg-forms"]
@@ -305,6 +337,10 @@ registerBlockType("cwp/website", {
 		label: {
 			type: "string",
 			default: "Website"
+		},
+		id: {
+			type: "string",
+			default: ""
 		}
 	},
 	parent: ["cwp/block-gutenberg-forms"]
@@ -329,6 +365,10 @@ registerBlockType("cwp/text", {
 		label: {
 			type: "string",
 			default: "Text"
+		},
+		id: {
+			type: "string",
+			default: ""
 		}
 	},
 	parent: ["cwp/block-gutenberg-forms"]
@@ -360,6 +400,10 @@ registerBlockType("cwp/select", {
 		label: {
 			type: "string",
 			default: "Choose One"
+		},
+		id: {
+			type: "string",
+			default: ""
 		}
 	},
 	parent: ["cwp/block-gutenberg-forms"]

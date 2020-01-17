@@ -2,7 +2,7 @@ import React from "react";
 import { isEmpty } from "lodash";
 
 function save(props) {
-	const { message, isRequired, label } = props.attributes;
+	const { message, isRequired, label, id } = props.attributes;
 
 	const getLabel = () => {
 		const { label, isRequired } = props.attributes;
@@ -18,11 +18,17 @@ function save(props) {
 
 	return (
 		<div className="cwp-message cwp-field">
-			<div className="cwp-field-set" data-required={isRequired}>
+			<div className="cwp-field-set">
 				{!isEmpty(label) && (
 					<label dangerouslySetInnerHTML={{ __html: getLabel() }}></label>
 				)}
-				<textarea placeholder={message} />
+				<textarea
+					data-cwp-field
+					name={id}
+					data-required={isRequired}
+					data-rule="false"
+					placeholder={message}
+				/>
 			</div>
 		</div>
 	);

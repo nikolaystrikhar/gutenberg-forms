@@ -2,7 +2,7 @@ import React from "react";
 import { isEmpty } from "lodash";
 
 function save(props) {
-	const { isRequired, options, label } = props.attributes;
+	const { isRequired, options, label, id } = props.attributes;
 
 	const getLabel = () => {
 		const { label, isRequired } = props.attributes;
@@ -25,7 +25,14 @@ function save(props) {
 				{options.map((checkbox, index) => {
 					return (
 						<div className="cwp-checkbox-option">
-							<input checked={checkbox.checked} type="checkbox" />
+							<input
+								name={id}
+								data-rule="false"
+								data-required={isRequired}
+								data-cwp-field
+								checked={checkbox.checked}
+								type="checkbox"
+							/>
 							<label>{checkbox.label}</label>
 						</div>
 					);

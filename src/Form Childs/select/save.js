@@ -2,7 +2,7 @@ import React from "react";
 import { isEmpty } from "lodash";
 
 function save(props) {
-	const { isRequired, options, label } = props.attributes;
+	const { isRequired, options, label, id } = props.attributes;
 
 	const getLabel = () => {
 		const { label, isRequired } = props.attributes;
@@ -22,7 +22,16 @@ function save(props) {
 				{!isEmpty(label) && (
 					<label dangerouslySetInnerHTML={{ __html: getLabel() }}></label>
 				)}
-				<select>
+				<select
+					name={id}
+					type="select"
+					data-rule="false"
+					data-cwp-field
+					data-required={isRequired}
+				>
+					<option value="" disabled selected>
+						Select your option
+					</option>
 					{options.map((s, index) => {
 						return <option value={s.label}>{s.label}</option>;
 					})}

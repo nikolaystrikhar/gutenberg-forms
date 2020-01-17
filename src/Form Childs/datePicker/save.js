@@ -2,7 +2,7 @@ import React from "react";
 import { isEmpty } from "lodash";
 
 function save(props) {
-	const { placeholder, isRequired, label } = props.attributes;
+	const { placeholder, isRequired, label, id } = props.attributes;
 
 	const getLabel = () => {
 		const { label, isRequired } = props.attributes;
@@ -22,7 +22,17 @@ function save(props) {
 				{!isEmpty(label) && (
 					<label dangerouslySetInnerHTML={{ __html: getLabel() }}></label>
 				)}
-				<input data-language="en" placeholder={placeholder} />
+				<input
+					readOnly
+					name={id}
+					data-required={isRequired}
+					data-cwp-field
+					data-rule="false"
+					data-validation="date"
+					data-validation-format="dd/mm/yyyy"
+					data-language="en"
+					placeholder={placeholder}
+				/>
 			</div>
 		</div>
 	);

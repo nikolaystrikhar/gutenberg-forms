@@ -1,17 +1,18 @@
-import React from "react";
 import { isEmpty } from "lodash";
 
 function save(props) {
-	const { isRequired, options, label } = props.attributes;
+	const { isRequired, options, label, id } = props.attributes;
 
 	const getLabel = () => {
 		const { label, isRequired } = props.attributes;
 
-		let required = "<span>(Required)</span>";
+		const required = "<span>(Required)</span>";
 
-		let required_label = label + " " + required;
+		const required_label = label + " " + required;
 
-		if (isRequired) return required_label;
+		if (isRequired) {
+			return required_label;
+		}
 
 		return label;
 	};
@@ -22,21 +23,22 @@ function save(props) {
 				{!isEmpty(label) && (
 					<label dangerouslySetInnerHTML={{ __html: getLabel() }}></label>
 				)}
-				<form>
-					{options.map((radio, index) => {
-						return (
-							<div className="cwp-radio-option">
-								<input
-									name="option"
-									value={radio.label}
-									checked={radio.checked}
-									type="radio"
-								/>
-								<label>{radio.label}</label>
-							</div>
-						);
-					})}
-				</form>
+				{options.map((radio, index) => {
+					return (
+						<div className="cwp-radio-option">
+							<input
+								name={id}
+								data-rule="false"
+								data-required={isRequired}
+								value={radio.label}
+								data-cwp-field
+								checked={radio.checked}
+								type="radio"
+							/>
+							<label>{radio.label}</label>
+						</div>
+					);
+				})}
 			</div>
 		</div>
 	);
