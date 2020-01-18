@@ -34,7 +34,7 @@ function edit(props) {
 
 	const addSelect = () => {
 		let newOption = {
-			label: "Select " + (select.length + 1)
+			label: "Option " + (select.length + 1)
 		};
 
 		let new_options = clone(select);
@@ -85,6 +85,9 @@ function edit(props) {
 	const SelectView = () => {
 		return (
 			<select>
+				<option value="" disabled selected>
+					Select your option
+				</option>
 				{select.map((s, index) => {
 					return <option value={s.label}>{s.label}</option>;
 				})}

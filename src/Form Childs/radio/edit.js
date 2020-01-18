@@ -9,7 +9,7 @@ import {
 
 const { InspectorControls, BlockControls, BlockIcon } = wp.blockEditor;
 
-import { clone, pullAt } from "lodash";
+import { clone, pullAt, isEqual } from "lodash";
 
 const { RichText } = wp.blockEditor;
 
@@ -21,9 +21,27 @@ function edit(props) {
 	useEffect(() => {
 		let { options } = props.attributes;
 
-		setRadios(options);
+		const checked = options.find(c => c.checked);
 
-		props.setAttributes({ id: props.clientId });
+		if (checked) {
+			let opt = clone(options);
+
+			let remove_extra_checked = opt.map(v => {
+				if (!isEqual(v, checked)) {
+					return {
+						...v,
+						checked: false
+					};
+				} else return v;
+			});
+			setRadios(remove_extra_checked);
+
+			props.setAttributes({ id: props.clientId });
+		} else {
+			setRadios(options);
+
+			props.setAttributes({ id: props.clientId });
+		}
 	}, []);
 
 	const handleRequired = () => {
@@ -34,7 +52,7 @@ function edit(props) {
 
 	const addRadio = () => {
 		let newOption = {
-			label: "Radio " + (radios.length + 1),
+			label: "Option " + (radios.length + 1),
 			checked: false
 		};
 

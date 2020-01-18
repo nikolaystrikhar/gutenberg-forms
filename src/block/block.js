@@ -81,11 +81,16 @@ import selectSave from "../Form Childs/select/save";
 
 ////////////////////////////////!text!//////////////////////////////////////////////
 
+import { clone } from "lodash";
+import Icon from "./Icon";
+
+const { createBlock } = wp.blocks;
+
 registerBlockType("cwp/block-gutenberg-forms", {
 	align: true,
 	align: ["left", "right", "full"],
 	title: __("Gutenberg Forms"),
-	icon: "shield",
+	icon: __(<Icon icon="main" />),
 	category: "common",
 	keywords: [__("gutenberg-forms"), __("forms")],
 	attributes: {
@@ -96,7 +101,9 @@ registerBlockType("cwp/block-gutenberg-forms", {
 		buttonSetting: {
 			type: "object",
 			default: {
-				alignment: "justify-start"
+				alignment: "justify-start",
+				color: "#fff",
+				backgroundColor: "#007cba"
 			}
 		},
 		id: {
@@ -108,6 +115,56 @@ registerBlockType("cwp/block-gutenberg-forms", {
 	save: mainSave
 });
 
+const myAttrs = [
+	"email",
+	"name",
+	"message",
+	"checkbox",
+	"datepicker",
+	"radio",
+	"phone",
+	"website",
+	"text",
+	"select"
+];
+
+const radio_enabled_fields = ["select", "radio", "checkbox"];
+
+//for striping out the rich_text tags;
+const stripTags = str => {
+	return str.replace(/<[^>]*>?/gm, ""); //some fancy
+};
+
+//?custom-function for fields_transformation purpose;
+
+const getFieldTransform = (attrs, field) => {
+	const matchedKey = myAttrs.find(prop => prop in attrs);
+	const fieldBlock = "cwp/".concat(field);
+
+	const config = {
+		isRequired: attrs.isRequired,
+		[field]: attrs[matchedKey]
+	};
+
+	if (
+		!myAttrs.includes(stripTags(attrs.label.toLowerCase())) &&
+		stripTags(attrs.label) !== "Choose One"
+	) {
+		//when the label has changed...
+		config.label = attrs.label;
+	}
+
+	if (radio_enabled_fields.includes(field) && attrs.options) {
+		//^^^ This condition ensures that we are
+		// 	  currently transforming from a radio_enabled_field into
+		//	  another radio_enabled_field;
+
+		config.options = attrs.options; //Like a piece of cake ;-D
+	}
+
+	return createBlock(fieldBlock, config);
+};
+
 registerBlockType("cwp/email", {
 	title: __("Email"),
 	icon: "email",
@@ -115,6 +172,15 @@ registerBlockType("cwp/email", {
 	keywords: [__("gutenberg-forms"), __("forms"), __("mail")],
 	edit: emailEdit,
 	save: emailSave,
+	transforms: {
+		from: [
+			{
+				type: "block",
+				blocks: myAttrs.map(block => "cwp/".concat(block)),
+				transform: a => getFieldTransform(a, "email")
+			}
+		]
+	},
 	attributes: {
 		email: {
 			type: "string",
@@ -161,6 +227,15 @@ registerBlockType("cwp/name", {
 			default: ""
 		}
 	},
+	transforms: {
+		from: [
+			{
+				type: "block",
+				blocks: myAttrs.map(block => "cwp/".concat(block)),
+				transform: a => getFieldTransform(a, "name")
+			}
+		]
+	},
 	parent: ["cwp/block-gutenberg-forms"]
 });
 
@@ -187,6 +262,15 @@ registerBlockType("cwp/message", {
 		id: {
 			type: "string",
 			default: ""
+		},
+		transforms: {
+			from: [
+				{
+					type: "block",
+					blocks: myAttrs.map(block => "cwp/".concat(block)),
+					transform: a => getFieldTransform(a, "message")
+				}
+			]
 		}
 	},
 	parent: ["cwp/block-gutenberg-forms"]
@@ -208,10 +292,10 @@ registerBlockType("cwp/checkbox", {
 			type: "array",
 			default: [
 				{
-					label: "Checkbox 1"
+					label: "Option 1"
 				},
 				{
-					label: "Checkbox 2"
+					label: "Option 2"
 				}
 			]
 		},
@@ -223,6 +307,15 @@ registerBlockType("cwp/checkbox", {
 			type: "string",
 			default: ""
 		}
+	},
+	transforms: {
+		from: [
+			{
+				type: "block",
+				blocks: myAttrs.map(block => "cwp/".concat(block)),
+				transform: a => getFieldTransform(a, "checkbox")
+			}
+		]
 	},
 	parent: ["cwp/block-gutenberg-forms"]
 });
@@ -252,6 +345,15 @@ registerBlockType("cwp/datepicker", {
 			default: ""
 		}
 	},
+	transforms: {
+		from: [
+			{
+				type: "block",
+				blocks: myAttrs.map(block => "cwp/".concat(block)),
+				transform: a => getFieldTransform(a, "datepicker")
+			}
+		]
+	},
 	parent: ["cwp/block-gutenberg-forms"]
 });
 
@@ -271,10 +373,10 @@ registerBlockType("cwp/radio", {
 			type: "array",
 			default: [
 				{
-					label: "Radio 1"
+					label: "Option 1"
 				},
 				{
-					label: "Radio 2"
+					label: "Option 2"
 				}
 			]
 		},
@@ -286,6 +388,15 @@ registerBlockType("cwp/radio", {
 			type: "string",
 			default: ""
 		}
+	},
+	transforms: {
+		from: [
+			{
+				type: "block",
+				blocks: myAttrs.map(block => "cwp/".concat(block)),
+				transform: a => getFieldTransform(a, "radio")
+			}
+		]
 	},
 	parent: ["cwp/block-gutenberg-forms"]
 });
@@ -315,6 +426,15 @@ registerBlockType("cwp/phone", {
 			default: ""
 		}
 	},
+	transforms: {
+		from: [
+			{
+				type: "block",
+				blocks: myAttrs.map(block => "cwp/".concat(block)),
+				transform: a => getFieldTransform(a, "phone")
+			}
+		]
+	},
 	parent: ["cwp/block-gutenberg-forms"]
 });
 
@@ -342,6 +462,15 @@ registerBlockType("cwp/website", {
 			type: "string",
 			default: ""
 		}
+	},
+	transforms: {
+		from: [
+			{
+				type: "block",
+				blocks: myAttrs.map(block => "cwp/".concat(block)),
+				transform: a => getFieldTransform(a, "website")
+			}
+		]
 	},
 	parent: ["cwp/block-gutenberg-forms"]
 });
@@ -371,6 +500,15 @@ registerBlockType("cwp/text", {
 			default: ""
 		}
 	},
+	transforms: {
+		from: [
+			{
+				type: "block",
+				blocks: myAttrs.map(block => "cwp/".concat(block)),
+				transform: a => getFieldTransform(a, "text")
+			}
+		]
+	},
 	parent: ["cwp/block-gutenberg-forms"]
 });
 
@@ -390,10 +528,10 @@ registerBlockType("cwp/select", {
 			type: "array",
 			default: [
 				{
-					label: "Select 1"
+					label: "Option 1"
 				},
 				{
-					label: "Select 2"
+					label: "Option 2"
 				}
 			]
 		},
@@ -405,6 +543,15 @@ registerBlockType("cwp/select", {
 			type: "string",
 			default: ""
 		}
+	},
+	transforms: {
+		from: [
+			{
+				type: "block",
+				blocks: myAttrs.map(block => "cwp/".concat(block)),
+				transform: a => getFieldTransform(a, "select")
+			}
+		]
 	},
 	parent: ["cwp/block-gutenberg-forms"]
 });

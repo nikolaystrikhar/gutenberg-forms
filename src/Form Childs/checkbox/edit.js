@@ -32,7 +32,7 @@ function edit(props) {
 
 	const addCheckbox = () => {
 		let newOption = {
-			label: "Checkbox " + (checkboxes.length + 1),
+			label: "Option " + (checkboxes.length + 1),
 			checked: false
 		};
 

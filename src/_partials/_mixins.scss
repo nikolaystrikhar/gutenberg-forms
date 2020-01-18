@@ -51,6 +51,7 @@
 		width: 100%;
 		padding: 10px 10px;
 		max-width: 100%;
+		height: 257px;
 	}
 
 	& textarea.error {
@@ -230,6 +231,7 @@
 
 		& select {
 			width: 100%;
+			max-width: 100%;
 		}
 
 		& .cwp-select-controls {
