@@ -81,14 +81,35 @@ import selectSave from "../Form Childs/select/save";
 
 ////////////////////////////////!text!//////////////////////////////////////////////
 
+////////////////////////////////!formColumn!//////////////////////////////////////////////
+
+import formColumnEdit from "../Form Childs/form-column/edit";
+import formColumnSave from "../Form Childs/form-column/save";
+
+////////////////////////////////!formColumn!//////////////////////////////////////////////
+
+////////////////////////////////!Column!//////////////////////////////////////////////
+
+import columnEdit from "../Form Childs/form-column/child/column/edit";
+import columnSave from "../Form Childs/form-column/child/column/save";
+
+// ^^ Child block for the form-column block for creating layouts;
+
+////////////////////////////////!Column!//////////////////////////////////////////////
+
 import { clone } from "lodash";
 import Icon from "./Icon";
+
+const fieldParents = ["cwp/block-gutenberg-forms", "cwp/column"],
+	fieldSupport = {
+		align: true,
+		align: ["wide", "full", "center"]
+	};
 
 const { createBlock } = wp.blocks;
 
 registerBlockType("cwp/block-gutenberg-forms", {
-	align: true,
-	align: ["left", "right", "full"],
+	supports: fieldSupport,
 	title: __("Gutenberg Forms"),
 	icon: __(<Icon icon="main" />),
 	category: "common",
@@ -199,7 +220,7 @@ registerBlockType("cwp/email", {
 			default: ""
 		}
 	},
-	parent: ["cwp/block-gutenberg-forms"]
+	parent: fieldParents
 });
 
 registerBlockType("cwp/name", {
@@ -236,7 +257,7 @@ registerBlockType("cwp/name", {
 			}
 		]
 	},
-	parent: ["cwp/block-gutenberg-forms"]
+	parent: fieldParents
 });
 
 registerBlockType("cwp/message", {
@@ -263,6 +284,10 @@ registerBlockType("cwp/message", {
 			type: "string",
 			default: ""
 		},
+		height: {
+			type: "number",
+			default: 200
+		},
 		transforms: {
 			from: [
 				{
@@ -273,7 +298,7 @@ registerBlockType("cwp/message", {
 			]
 		}
 	},
-	parent: ["cwp/block-gutenberg-forms"]
+	parent: fieldParents
 });
 
 registerBlockType("cwp/checkbox", {
@@ -317,7 +342,7 @@ registerBlockType("cwp/checkbox", {
 			}
 		]
 	},
-	parent: ["cwp/block-gutenberg-forms"]
+	parent: fieldParents
 });
 
 registerBlockType("cwp/datepicker", {
@@ -354,7 +379,7 @@ registerBlockType("cwp/datepicker", {
 			}
 		]
 	},
-	parent: ["cwp/block-gutenberg-forms"]
+	parent: fieldParents
 });
 
 registerBlockType("cwp/radio", {
@@ -398,7 +423,7 @@ registerBlockType("cwp/radio", {
 			}
 		]
 	},
-	parent: ["cwp/block-gutenberg-forms"]
+	parent: fieldParents
 });
 
 registerBlockType("cwp/phone", {
@@ -435,7 +460,7 @@ registerBlockType("cwp/phone", {
 			}
 		]
 	},
-	parent: ["cwp/block-gutenberg-forms"]
+	parent: fieldParents
 });
 
 registerBlockType("cwp/website", {
@@ -472,7 +497,7 @@ registerBlockType("cwp/website", {
 			}
 		]
 	},
-	parent: ["cwp/block-gutenberg-forms"]
+	parent: fieldParents
 });
 
 registerBlockType("cwp/text", {
@@ -509,7 +534,7 @@ registerBlockType("cwp/text", {
 			}
 		]
 	},
-	parent: ["cwp/block-gutenberg-forms"]
+	parent: fieldParents
 });
 
 registerBlockType("cwp/select", {
@@ -553,5 +578,50 @@ registerBlockType("cwp/select", {
 			}
 		]
 	},
-	parent: ["cwp/block-gutenberg-forms"]
+	parent: fieldParents
+});
+
+registerBlockType("cwp/form-column", {
+	title: __("Form Column"),
+	icon: "editor-table",
+	category: "common",
+	keywords: [
+		__("gutenberg-forms"),
+		__("forms"),
+		__("form-column"),
+		__("column")
+	],
+	edit: formColumnEdit,
+	save: formColumnSave,
+	attributes: {
+		columns: {
+			type: "number",
+			default: 3
+		},
+		intro: {
+			type: "boolean",
+			default: false
+		}
+	},
+	supports: {
+		align: true,
+		align: ["wide", "full", "center"]
+	},
+	parent: fieldParents
+});
+
+registerBlockType("cwp/column", {
+	title: __("Column"),
+	icon: "editor-table",
+	category: "common",
+	keywords: [
+		__("gutenberg-forms"),
+		__("forms"),
+		__("form-column"),
+		__("column")
+	],
+	edit: columnEdit,
+	save: columnSave,
+	attributes: {},
+	parent: ["cwp/form-column"]
 });

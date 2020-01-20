@@ -2,7 +2,7 @@ import React from "react";
 import { isEmpty } from "lodash";
 
 function save(props) {
-	const { message, isRequired, label, id } = props.attributes;
+	const { message, isRequired, label, id, height } = props.attributes;
 
 	const getLabel = () => {
 		const { label, isRequired } = props.attributes;
@@ -23,6 +23,7 @@ function save(props) {
 					<label dangerouslySetInnerHTML={{ __html: getLabel() }}></label>
 				)}
 				<textarea
+					style={{ height: height }}
 					data-cwp-field
 					name={id}
 					data-required={isRequired}

@@ -2,7 +2,43 @@
 @import "./_partials/mixins";
 @import "./lib/datepicker";
 
+@mixin getColumn($col) {
+	& .cwp-col {
+		width: calc((100% / #{$col}) - 20px);
+		&:nth-child(1) {
+			margin: 0px 10px 0px 0px;
+			width: calc((100% / #{$col}) - 10px) !important;
+		}
+
+		&:not(:nth-child(1)) {
+			margin: 0px 10px;
+		}
+
+		&:nth-child(#{$col}) {
+			width: calc((100% / #{$col}) - 10px) !important;
+			margin: 0px 0px 0px 10px;
+		}
+	}
+}
+
 .cwp-form {
+	& .cwp-form-col-main-preview {
+		display: flex;
+		flex-direction: row;
+
+		&[data-cols="2"] {
+			@include getColumn(2);
+		}
+
+		&[data-cols="3"] {
+			@include getColumn(3);
+		}
+
+		&[data-cols="4"] {
+			@include getColumn(4);
+		}
+	}
+
 	& .cwp-field {
 		& .cwp-field-set {
 			@include field();

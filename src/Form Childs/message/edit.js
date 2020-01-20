@@ -3,8 +3,10 @@ import {
 	FormToggle,
 	Toolbar,
 	PanelRow,
-	PanelBody
+	PanelBody,
+	ResizableBox
 } from "@wordpress/components";
+import $ from "jquery";
 const {
 	InspectorControls,
 	BlockControls,
@@ -29,10 +31,11 @@ function edit(props) {
 		props.setAttributes({ label });
 	};
 
-	const { message, isRequired, label, id } = props.attributes;
+	const { message, isRequired, label, id, height } = props.attributes;
 	useEffect(() => {
 		props.setAttributes({ id: props.clientId });
 	}, []);
+
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
@@ -63,7 +66,35 @@ function edit(props) {
 			)}
 			<div className="cwp-field-set">
 				<RichText tag="label" value={label} onChange={handleLabel} />
-				<textarea value={message} onChange={handleChange} />
+				<ResizableBox
+					size={{
+						height,
+						width: "100%"
+					}}
+					showHandle={true}
+					minHeight="50"
+					enable={{
+						top: false,
+						right: false,
+						bottom: true,
+						left: false,
+						topRight: false,
+						bottomRight: false,
+						bottomLeft: false,
+						topLeft: false
+					}}
+					onResizeStop={(event, direction, elt, delta) => {
+						props.setAttributes({
+							height: parseInt(height + delta.height, 10)
+						});
+					}}
+				>
+					<textarea
+						value={message}
+						style={{ height: height }}
+						onChange={handleChange}
+					/>
+				</ResizableBox>
 			</div>
 		</div>
 	];

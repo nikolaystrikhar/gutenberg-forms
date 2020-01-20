@@ -2,6 +2,14 @@
 @import "../_partials/mixins";
 
 .cwp-form {
+	& .cwp-form-col-main {
+		@include column();
+
+		& .cwp_column_intro_selector {
+			@include column_introduction();
+		}
+	}
+
 	& .cwp-field {
 		& .cwp-field-set {
 			@include field();

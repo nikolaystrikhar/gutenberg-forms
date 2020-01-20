@@ -84,9 +84,4 @@ function create_posttype() {
 
 //custom_postype for our gutenberg-forms;
 add_action('init', 'create_posttype');
-
-
-
-
-
 add_action('init', 'gutenberg_forms_cgb_block_assets');

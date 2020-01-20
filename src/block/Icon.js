@@ -73,6 +73,69 @@ function Icon(props) {
 					</filter>
 				</defs>
 			</svg>
+		),
+		twoColumn: () => (
+			<svg
+				height="26"
+				viewBox="0 0 50 26"
+				width="50"
+				xmlns="http://www.w3.org/2000/svg"
+				class="dashicon"
+				role="img"
+				aria-hidden="true"
+				focusable="false"
+			>
+				<g fill-rule="evenodd">
+					<path
+						d="m48.0833333 0h-46.16666663c-1.05416667 0-1.91666667.9-1.91666667 2v22c0 1.1.8625 2 1.91666667 2h46.16666663c1.0541667 0 1.9166667-.9 1.9166667-2v-22c0-1.1-.8625-2-1.9166667-2zm0 24h-46.16666663v-22h46.16666663z"
+						fill-rule="nonzero"
+					></path>
+					<path d="m24 2h2v22h-2z"></path>
+				</g>
+			</svg>
+		),
+		threeColumn: () => (
+			<svg
+				height="26"
+				viewBox="0 0 50 26"
+				width="50"
+				xmlns="http://www.w3.org/2000/svg"
+				class="dashicon"
+				role="img"
+				aria-hidden="true"
+				focusable="false"
+			>
+				<g fill-rule="evenodd">
+					<path
+						d="m48.0833333 0h-46.16666663c-1.05416667 0-1.91666667.9-1.91666667 2v22c0 1.1.8625 2 1.91666667 2h46.16666663c1.0541667 0 1.9166667-.9 1.9166667-2v-22c0-1.1-.8625-2-1.9166667-2zm0 24h-46.16666663v-22h46.16666663z"
+						fill-rule="nonzero"
+					></path>
+					<path d="m16 2h2v22h-2z"></path>
+					<path d="m32 2h2v22h-2z"></path>
+				</g>
+			</svg>
+		),
+		fourColumn: () => (
+			<svg
+				height="26"
+				viewBox="0 0 50 26"
+				width="50"
+				xmlns="http://www.w3.org/2000/svg"
+				class="dashicon"
+				role="img"
+				aria-hidden="true"
+				focusable="false"
+			>
+				<g fill-rule="evenodd">
+					<path
+						d="m48.0833333 0h-46.16666663c-1.05416667 0-1.91666667.9-1.91666667 2v22c0 1.1.8625 2 1.91666667 2h46.16666663c1.0541667 0 1.9166667-.9 1.9166667-2v-22c0-1.1-.8625-2-1.9166667-2zm0 24h-46.16666663v-22h46.16666663z"
+						fill-rule="nonzero"
+					></path>
+					<path d="m12 2h2v22h-2z"></path>
+					<path d="m24 2h2v22h-2z"></path>
+					<path d="m36 2h2v22h-2z"></path>
+				</g>
+			</svg>
 		)
 	});
 
