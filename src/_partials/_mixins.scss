@@ -340,3 +340,22 @@
 		}
 	}
 }
+
+@mixin templateBuilder() {
+
+	& .cwp-builder-field {
+		display: block;
+		margin: 10px 0px;
+		
+		& textarea {
+			width:100%;
+			height: 300px;
+		}
+
+		& input {
+			width: 100%;
+		}
+	}
+
+	
+}

@@ -23,6 +23,10 @@ function edit(props) {
 
 		const checked = options.find(c => c.checked);
 
+		const encoded_data = encodeURIComponent(
+			window.btoa(`-${isRequired}-radio`)
+		);
+
 		if (checked) {
 			let opt = clone(options);
 
@@ -36,11 +40,11 @@ function edit(props) {
 			});
 			setRadios(remove_extra_checked);
 
-			props.setAttributes({ id: props.clientId });
+			props.setAttributes({ id: props.clientId + encoded_data });
 		} else {
 			setRadios(options);
 
-			props.setAttributes({ id: props.clientId });
+			props.setAttributes({ id: props.clientId + encoded_data });
 		}
 	}, []);
 

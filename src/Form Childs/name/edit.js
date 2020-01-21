@@ -31,7 +31,9 @@ function edit(props) {
 
 	const { name, isRequired, label, id } = props.attributes;
 	useEffect(() => {
-		props.setAttributes({ id: props.clientId });
+		const encoded_data = encodeURIComponent(window.btoa(`-${isRequired}-name`));
+
+		props.setAttributes({ id: props.clientId + encoded_data });
 	}, []);
 	return [
 		!!props.isSelected && (

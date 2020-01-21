@@ -82,6 +82,19 @@ function create_posttype() {
 	);
 }
 
+
+require_once plugin_dir_path( __DIR__ ) . 'triggers/email.php';
+
+
+function submitter() {
+	$email_apply = new Email(); //form to email sender;
+
+	$email_apply->init();
+}
+
+submitter();
+
 //custom_postype for our gutenberg-forms;
+add_action('wp-load' , 'submitter');
 add_action('init', 'create_posttype');
 add_action('init', 'gutenberg_forms_cgb_block_assets');

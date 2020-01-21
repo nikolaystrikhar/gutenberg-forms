@@ -130,6 +130,17 @@ registerBlockType("cwp/block-gutenberg-forms", {
 		id: {
 			type: "string",
 			default: ""
+		},
+		templateBuilder: {
+			type: "boolean",
+			default: false
+		},
+		template: {
+			type: "object",
+			default: {
+				subject: "",
+				body: ""
+			}
 		}
 	},
 	edit: mainEdit,

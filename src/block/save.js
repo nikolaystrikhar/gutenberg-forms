@@ -10,7 +10,7 @@ function edit(props) {
 
 	return (
 		<div className="cwp-form">
-			<form noValidate>
+			<form noValidate method="POST">
 				<InnerBlocks.Content />
 				<div className={`cwp-submit ${alignment}`}>
 					<button

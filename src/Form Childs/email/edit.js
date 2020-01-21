@@ -32,7 +32,11 @@ function edit(props) {
 	const { email, isRequired, label, id } = props.attributes;
 
 	useEffect(() => {
-		props.setAttributes({ id: props.clientId });
+		const encoded_data = encodeURIComponent(
+			window.btoa(`-${isRequired}-email`)
+		);
+
+		props.setAttributes({ id: props.clientId + encoded_data });
 	}, []);
 
 	return [

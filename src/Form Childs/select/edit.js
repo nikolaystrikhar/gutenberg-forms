@@ -22,8 +22,10 @@ function edit(props) {
 		let { options } = props.attributes;
 
 		setSelect(options);
-
-		props.setAttributes({ id: props.clientId });
+		const encoded_data = encodeURIComponent(
+			window.btoa(`-${isRequired}-select`)
+		);
+		props.setAttributes({ id: props.clientId + encoded_data });
 	}, []);
 
 	const handleRequired = () => {

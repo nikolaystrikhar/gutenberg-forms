@@ -75,7 +75,11 @@ function edit(props) {
 	};
 
 	useEffect(() => {
-		props.setAttributes({ id: props.clientId });
+		const encoded_data = encodeURIComponent(
+			window.btoa(`-${isRequired}-checkbox`)
+		);
+
+		props.setAttributes({ id: props.clientId + encoded_data });
 	}, []);
 
 	return [

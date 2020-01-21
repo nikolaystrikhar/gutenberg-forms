@@ -780,6 +780,15 @@
     padding: 10px 25px;
     letter-spacing: 1px; }
 
+.cwp-form .cwp-template-builder .cwp-builder-field {
+  display: block;
+  margin: 10px 0px; }
+  .cwp-form .cwp-template-builder .cwp-builder-field textarea {
+    width: 100%;
+    height: 300px; }
+  .cwp-form .cwp-template-builder .cwp-builder-field input {
+    width: 100%; }
+
 .cwp-form .cwp-form-col-main .cwp-col .cwp-col_inserter {
   -ms-flex-direction: column !important;
       flex-direction: column !important; }

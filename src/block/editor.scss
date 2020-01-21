@@ -2,6 +2,11 @@
 @import "../_partials/mixins";
 
 .cwp-form {
+
+	& .cwp-template-builder {
+		@include templateBuilder();
+	}
+
 	& .cwp-form-col-main {
 		@include column();
 

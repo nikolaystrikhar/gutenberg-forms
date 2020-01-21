@@ -76,6 +76,7 @@ this.maxHours=t.getHours(),this.maxMinutes=t.getMinutes(),this.d.lastSelectedDat
               language: 'en',
           });
 
+
           function getRules(f) {
 
             let fields = f.find('[data-cwp-field]'),
@@ -122,7 +123,7 @@ this.maxHours=t.getHours(),this.maxMinutes=t.getMinutes(),this.d.lastSelectedDat
                 rules: {...getRules(form)}
               };
 
-
+                
 
               form.validate(config);
 
