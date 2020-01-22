@@ -3,9 +3,10 @@
 
     class Email {
         
-        public function __construct() {
+        public function __construct($post_content) {
 
             $this->validator = new Validator();
+            $this->post_content = $post_content;
 
         }
 
@@ -31,6 +32,21 @@
             }
         }
 
+        private function get_templates($id) {
+
+            $templates = array();
+
+            foreach( $this->post_content as $f => $block ) {
+
+                if ( $block['blockName'] === "cwp/block-gutenberg-forms" && $block['attrs']['id'] === $id ) {
+
+                    $templates[] = json_decode($block['attrs']['template'], JSON_PRETTY_PRINT);
+
+                }
+
+            }
+            return $templates;
+        }
 
         public function init() {
 
@@ -43,13 +59,14 @@
 
                 $is_valid = $this->validator->validate( $field_type, $field_value );
 
+
                 $arranged_fields[] = array( 
                                         'field_type' => end( $this->validator->decode( $field_type ) ),
                                         'field_value' => $field_value,
-                                        'is_valid'    => $is_valid
+                                        'is_valid'    => $is_valid,
+                                        'field_id'    => $field_id,
                 );
             }
-            
 
            if ( $this->is_fields_valid( $arranged_fields ) ) {
                // check if all the fields are valid;
@@ -59,6 +76,8 @@
         }
 
         public function sendMail( $fields ) {
+
+
 
             $mail_content = array(
                 'to'   => 'sk4915497@gmail.com',
@@ -70,7 +89,16 @@
             extract( $mail_content ); // extracting the data _ out in variables;
 
 
-            mail($to, $subject, $body); //sending the mail;
+            $template = $this->get_templates($_POST['submit']);
+
+
+            // var_dump($template);
+            //var_dump($fields);
+
+
+            
+
+            //mail($to, $subject, $body); //sending the mail;
 
         }
       

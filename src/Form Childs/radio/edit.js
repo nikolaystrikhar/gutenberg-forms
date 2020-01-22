@@ -6,6 +6,7 @@ import {
 	PanelBody,
 	Icon
 } from "@wordpress/components";
+import { getFieldName } from '../../block/misc/helper';
 
 const { InspectorControls, BlockControls, BlockIcon } = wp.blockEditor;
 
@@ -39,10 +40,12 @@ function edit(props) {
 				} else return v;
 			});
 			setRadios(remove_extra_checked);
+			props.setAttributes({ field_name: getFieldName('radio' , props.clientId)  })
 
 			props.setAttributes({ id: props.clientId + encoded_data });
 		} else {
 			setRadios(options);
+			props.setAttributes({ field_name: getFieldName('radio' , props.clientId)  })
 
 			props.setAttributes({ id: props.clientId + encoded_data });
 		}

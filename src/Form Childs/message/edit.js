@@ -6,6 +6,8 @@ import {
 	PanelBody,
 	ResizableBox
 } from "@wordpress/components";
+import { getFieldName } from '../../block/misc/helper';
+
 import $ from "jquery";
 const {
 	InspectorControls,
@@ -36,6 +38,7 @@ function edit(props) {
 		const encoded_data = encodeURIComponent(
 			window.btoa(`-${isRequired}-message`)
 		);
+		props.setAttributes({ field_name: getFieldName('message' , props.clientId)  })
 
 		props.setAttributes({ id: props.clientId + encoded_data });
 	}, []);

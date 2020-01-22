@@ -5,6 +5,9 @@ import {
 	PanelRow,
 	PanelBody
 } from "@wordpress/components";
+
+import { getFieldName } from "../../block/misc/helper";
+
 const {
 	InspectorControls,
 	BlockControls,
@@ -33,9 +36,11 @@ function edit(props) {
 
 	useEffect(() => {
 		const encoded_data = encodeURIComponent(
-			window.btoa(`-${isRequired}-email`)
+			window.btoa(
+				`--${getFieldName("email", props.clientId)}-${isRequired}-email`
+			)
 		);
-
+		props.setAttributes({ field_name: getFieldName("email", props.clientId) });
 		props.setAttributes({ id: props.clientId + encoded_data });
 	}, []);
 

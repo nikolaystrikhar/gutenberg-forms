@@ -10,6 +10,7 @@ import {
 const { InspectorControls, BlockControls, BlockIcon } = wp.blockEditor;
 
 import { clone, pullAt } from "lodash";
+import { getFieldName } from '../../block/misc/helper';
 
 const { RichText } = wp.blockEditor;
 
@@ -22,6 +23,9 @@ function edit(props) {
 		let { options } = props.attributes;
 
 		setCheckboxes(options);
+
+		props.setAttributes({ field_name: getFieldName('checkbox' , props.clientId)  })
+
 	}, []);
 
 	const handleRequired = () => {

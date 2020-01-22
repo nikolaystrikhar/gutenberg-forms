@@ -136,11 +136,11 @@ registerBlockType("cwp/block-gutenberg-forms", {
 			default: false
 		},
 		template: {
-			type: "object",
-			default: {
+			type: "string",
+			default: JSON.stringify({
 				subject: "",
 				body: ""
-			}
+			})
 		}
 	},
 	edit: mainEdit,
@@ -229,6 +229,10 @@ registerBlockType("cwp/email", {
 		id: {
 			type: "string",
 			default: ""
+		},
+		field_name: {
+			type: "string",
+			default: ""
 		}
 	},
 	parent: fieldParents
@@ -255,6 +259,10 @@ registerBlockType("cwp/name", {
 			default: "Name"
 		},
 		id: {
+			type: "string",
+			default: ""
+		},
+		field_name: {
 			type: "string",
 			default: ""
 		}
@@ -299,15 +307,19 @@ registerBlockType("cwp/message", {
 			type: "number",
 			default: 200
 		},
-		transforms: {
-			from: [
-				{
-					type: "block",
-					blocks: myAttrs.map(block => "cwp/".concat(block)),
-					transform: a => getFieldTransform(a, "message")
-				}
-			]
+		field_name: {
+			type: "string",
+			default: ""
 		}
+	},
+	transforms: {
+		from: [
+			{
+				type: "block",
+				blocks: myAttrs.map(block => "cwp/".concat(block)),
+				transform: a => getFieldTransform(a, "message")
+			}
+		]
 	},
 	parent: fieldParents
 });
@@ -340,6 +352,10 @@ registerBlockType("cwp/checkbox", {
 			default: "Choose One"
 		},
 		id: {
+			type: "string",
+			default: ""
+		},
+		field_name: {
 			type: "string",
 			default: ""
 		}
@@ -377,6 +393,10 @@ registerBlockType("cwp/datepicker", {
 			default: ""
 		},
 		id: {
+			type: "string",
+			default: ""
+		},
+		field_name: {
 			type: "string",
 			default: ""
 		}
@@ -423,6 +443,10 @@ registerBlockType("cwp/radio", {
 		id: {
 			type: "string",
 			default: ""
+		},
+		field_name: {
+			type: "string",
+			default: ""
 		}
 	},
 	transforms: {
@@ -458,6 +482,10 @@ registerBlockType("cwp/phone", {
 			default: "Phone No:"
 		},
 		id: {
+			type: "string",
+			default: ""
+		},
+		field_name: {
 			type: "string",
 			default: ""
 		}
@@ -497,6 +525,10 @@ registerBlockType("cwp/website", {
 		id: {
 			type: "string",
 			default: ""
+		},
+		field_name: {
+			type: "string",
+			default: ""
 		}
 	},
 	transforms: {
@@ -532,6 +564,10 @@ registerBlockType("cwp/text", {
 			default: "Text"
 		},
 		id: {
+			type: "string",
+			default: ""
+		},
+		field_name: {
 			type: "string",
 			default: ""
 		}
@@ -576,6 +612,10 @@ registerBlockType("cwp/select", {
 			default: "Choose One"
 		},
 		id: {
+			type: "string",
+			default: ""
+		},
+		field_name: {
 			type: "string",
 			default: ""
 		}

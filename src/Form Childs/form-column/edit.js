@@ -1,7 +1,8 @@
-import React, { useState } from "react";
+import React, { useEffect } from "react";
 import { InnerBlocks, InspectorControls } from "@wordpress/block-editor";
 import { RangeControl, PanelBody } from "@wordpress/components";
 import Introduction from "./components/introduction";
+
 
 function edit(props) {
 	const { columns, intro } = props.attributes,
@@ -21,24 +22,15 @@ function edit(props) {
 		setAttributes({ columns: cols });
 	};
 
+
 	const handleSelect = cols => {
 		setAttributes({ columns: cols, intro: true });
 	};
 
+	
+
 	return [
-		<InspectorControls>
-			<PanelBody title="Columns Setting">
-				{/* <div className="cwp-option">
-					<RangeControl
-						label="Columns"
-						value={columns}
-						min={2}
-						max={4}
-						onChange={handleColumns}
-					/>
-				</div> */}
-			</PanelBody>
-		</InspectorControls>,
+		null,
 		null,
 		<div className="cwp-form-col-main">
 			{!intro ? (

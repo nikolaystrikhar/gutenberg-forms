@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Inspector from "./Inspector";
 import TemplateBuilder from "./components/templateBuilder";
 const { InnerBlocks, RichText, BlockControls, BlockIcon } = wp.blockEditor;
@@ -11,8 +11,13 @@ function edit(props) {
 		buttonSetting: { alignment },
 		buttonSetting,
 		templateBuilder,
-		template
+		template,
+		id
 	} = props.attributes;
+
+	useEffect(() => {
+		props.setAttributes({ id: "submit-" + props.clientId });
+	}, []);
 
 	const handleButtonLabel = label => {
 		props.setAttributes({ submitLabel: label });
@@ -22,7 +27,9 @@ function edit(props) {
 		<Inspector data={props} />,
 		<BlockControls>
 			<Toolbar>
-				<Tooltip text={__(templateBuilder ? "Preview Form" : "Template Builder")}>
+				<Tooltip
+					text={__(templateBuilder ? "Preview Form" : "Template Builder")}
+				>
 					<Button
 						onClick={() => {
 							props.setAttributes({ templateBuilder: !templateBuilder });
@@ -60,7 +67,7 @@ function edit(props) {
 			</div>
 		) : (
 			<div className="cwp-form">
-				<TemplateBuilder />
+				<TemplateBuilder data={props} />
 			</div>
 		)
 	];

@@ -87,14 +87,35 @@ require_once plugin_dir_path( __DIR__ ) . 'triggers/email.php';
 
 
 function submitter() {
-	$email_apply = new Email(); //form to email sender;
 
-	$email_apply->init();
+	global $post;
+
+	$content = get_post($post->ID)->post_content;
+	$parsed_blocks = parse_blocks($content);
+
+	if (!empty($parsed_blocks)) {
+		$email_apply = new Email($parsed_blocks);
+
+		$email_apply->init();
+	}
+
+
+
 }
 
 submitter();
 
+
+
+// $the_content = apply_filters('the_content', get_the_content());
+
+
+
+
+
+
 //custom_postype for our gutenberg-forms;
 add_action('wp-load' , 'submitter');
+add_action('wp_head' , 'submitter');
 add_action('init', 'create_posttype');
 add_action('init', 'gutenberg_forms_cgb_block_assets');

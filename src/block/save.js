@@ -1,11 +1,12 @@
 import React from "react";
 const { InnerBlocks } = wp.blockEditor;
 
-function edit(props) {
+function save(props) {
 	const {
 		submitLabel,
 		buttonSetting: { alignment },
-		buttonSetting
+		buttonSetting,
+		id
 	} = props.attributes;
 
 	return (
@@ -14,6 +15,8 @@ function edit(props) {
 				<InnerBlocks.Content />
 				<div className={`cwp-submit ${alignment}`}>
 					<button
+						name="submit"
+						value={id}
 						type="submit"
 						style={{
 							backgroundColor: buttonSetting.backgroundColor,
@@ -28,4 +31,4 @@ function edit(props) {
 	);
 }
 
-export default edit;
+export default save;

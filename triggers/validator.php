@@ -35,8 +35,9 @@
 
 
             return array(
-                'is_required' => $dV[1],
-                'type'        => preg_replace('/[0-9]+/' , '' , $dV[2])
+                'is_required' => $dV[4],
+                'type'        => preg_replace('/[0-9]+/' , '' , $dV[2]),
+                'field_id'    => $dV[3]
             );
 
 

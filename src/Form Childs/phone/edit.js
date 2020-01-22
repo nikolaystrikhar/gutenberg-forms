@@ -5,6 +5,8 @@ import {
 	PanelRow,
 	PanelBody
 } from "@wordpress/components";
+import { getFieldName } from '../../block/misc/helper';
+
 const {
 	InspectorControls,
 	BlockControls,
@@ -34,6 +36,7 @@ function edit(props) {
 		const encoded_data = encodeURIComponent(
 			window.btoa(`-${isRequired}-phone`)
 		);
+		props.setAttributes({ field_name: getFieldName('phone' , props.clientId)  })
 
 		props.setAttributes({ id: props.clientId + encoded_data });
 	}, []);

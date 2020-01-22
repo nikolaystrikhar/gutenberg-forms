@@ -5,6 +5,8 @@ import {
 	PanelRow,
 	PanelBody
 } from "@wordpress/components";
+import { getFieldName } from '../../block/misc/helper';
+
 const {
 	InspectorControls,
 	BlockControls,
@@ -35,6 +37,7 @@ function edit(props) {
 		const encoded_data = encodeURIComponent(
 			window.btoa(`-${isRequired}-datepicker`)
 		);
+		props.setAttributes({ field_name: getFieldName('datePicker' , props.clientId)  })
 		props.setAttributes({ id: props.clientId + encoded_data });
 	}, []);
 
