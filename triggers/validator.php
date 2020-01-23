@@ -1,4 +1,4 @@
-<?php 
+<?php
 
     class Validator {
 
@@ -46,7 +46,6 @@
         public function validate( $type, $value ) {
 
             $decoded_field = $this->decode($type);
-
 
             if ( $decoded_field['is_required'] === true && $this->isEmpty($value)) {
                 return false;

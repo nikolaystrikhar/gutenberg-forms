@@ -41,7 +41,7 @@ function edit(props) {
 			)
 		);
 		props.setAttributes({ field_name: getFieldName("email", props.clientId) });
-		props.setAttributes({ id: props.clientId + encoded_data });
+		props.setAttributes({ id: props.clientId + "__" + encoded_data });
 	}, []);
 
 	return [

@@ -342,13 +342,16 @@
 }
 
 @mixin templateBuilder() {
+	& .cwp_data_drop {
+		text-align: right;
+	}
 
 	& .cwp-builder-field {
 		display: block;
 		margin: 10px 0px;
-		
+
 		& textarea {
-			width:100%;
+			width: 100%;
 			height: 300px;
 		}
 
@@ -356,6 +359,4 @@
 			width: 100%;
 		}
 	}
-
-	
 }

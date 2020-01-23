@@ -37,10 +37,12 @@
             $templates = array();
 
             foreach( $this->post_content as $f => $block ) {
-
                 if ( $block['blockName'] === "cwp/block-gutenberg-forms" && $block['attrs']['id'] === $id ) {
 
-                    $templates[] = json_decode($block['attrs']['template'], JSON_PRETTY_PRINT);
+                    $decoded_template = json_decode($block['attrs']['template'], JSON_PRETTY_PRINT);
+
+
+                    $templates[] = $decoded_template;
 
                 }
 
@@ -55,18 +57,21 @@
 
             foreach ( $_POST as $field_id => $field_value ) {
 
-                $field_type = end( explode( "-", $field_id ) ); //type of the field i.e email,name etc;
+                $field_type = end( explode( "__", $field_id ) ); //type of the field i.e email,name etc;
 
                 $is_valid = $this->validator->validate( $field_type, $field_value );
 
 
+
                 $arranged_fields[] = array( 
-                                        'field_type' => end( $this->validator->decode( $field_type ) ),
+                                        'field_data_id' => end($this->validator->decode( $field_type )),
                                         'field_value' => $field_value,
                                         'is_valid'    => $is_valid,
                                         'field_id'    => $field_id,
+                                        'field_type'  => $this->validator->decode( $field_type )['type']
                 );
             }
+
 
            if ( $this->is_fields_valid( $arranged_fields ) ) {
                // check if all the fields are valid;
@@ -75,30 +80,47 @@
 
         }
 
+        private function with_fields( $fields, $target ) {
+
+            $result = $target;
+            $data = array();
+
+            foreach( $fields as $field => $field_value ) {
+
+
+                $field_name = "{{".$field_value['field_type']."-".$field_value['field_data_id']."}}";
+                
+                if ($field_name !== "{{-}}") {
+                    $data[$field_name] = $field_value['field_value'];
+                }
+            }
+
+
+            $replaced_str = strtr($target, $data);
+
+            // var_dump($replaced_str , $data);
+
+            return $replaced_str;
+
+        }
+
         public function sendMail( $fields ) {
 
+            $template = $this->get_templates($_POST['submit'])[0];
 
 
-            $mail_content = array(
-                'to'   => 'sk4915497@gmail.com',
-                'subject' => 'The subject',
-                'body'     => 'THE NEW MAIL BODY SENDED FROM THE GUTENBERG-FORMS PLUGIN',
-                'headers' => array('Content-Type: text/html; charset=UTF-8','From: My Site Name &lt;support@example.com')
-            );
+            isset($template) && extract($template);
 
-            extract( $mail_content ); // extracting the data _ out in variables;
+            // var_dump($fields);
 
-
-            $template = $this->get_templates($_POST['submit']);
+            $to = "sk4915497@gmail.com";
+            $mail_subject = $this->with_fields($fields, $subject);
+            $mail_body = $this->with_fields($fields, $body);
 
 
-            // var_dump($template);
-            //var_dump($fields);
 
+            wp_mail($to,$mail_subject,$mail_body); //sending the mail;
 
-            
-
-            //mail($to, $subject, $body); //sending the mail;
 
         }
       

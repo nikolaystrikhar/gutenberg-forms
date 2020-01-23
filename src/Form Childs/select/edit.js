@@ -6,8 +6,7 @@ import {
 	PanelBody,
 	Icon
 } from "@wordpress/components";
-import { getFieldName } from '../../block/misc/helper';
-
+import { getFieldName } from "../../block/misc/helper";
 
 const { InspectorControls, BlockControls, BlockIcon } = wp.blockEditor;
 
@@ -25,11 +24,13 @@ function edit(props) {
 
 		setSelect(options);
 		const encoded_data = encodeURIComponent(
-			window.btoa(`-${isRequired}-select`)
+			window.btoa(
+				`--${getFieldName("select", props.clientId)}-${isRequired}-select`
+			)
 		);
-		props.setAttributes({ field_name: getFieldName('select' , props.clientId)  })
+		props.setAttributes({ field_name: getFieldName("select", props.clientId) });
 
-		props.setAttributes({ id: props.clientId + encoded_data });
+		props.setAttributes({ id: props.clientId + "__" + encoded_data });
 	}, []);
 
 	const handleRequired = () => {

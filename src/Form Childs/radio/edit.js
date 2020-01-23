@@ -6,7 +6,7 @@ import {
 	PanelBody,
 	Icon
 } from "@wordpress/components";
-import { getFieldName } from '../../block/misc/helper';
+import { getFieldName } from "../../block/misc/helper";
 
 const { InspectorControls, BlockControls, BlockIcon } = wp.blockEditor;
 
@@ -25,7 +25,9 @@ function edit(props) {
 		const checked = options.find(c => c.checked);
 
 		const encoded_data = encodeURIComponent(
-			window.btoa(`-${isRequired}-radio`)
+			window.btoa(
+				`--${getFieldName("radio", props.clientId)}-${isRequired}-radio`
+			)
 		);
 
 		if (checked) {
@@ -40,14 +42,18 @@ function edit(props) {
 				} else return v;
 			});
 			setRadios(remove_extra_checked);
-			props.setAttributes({ field_name: getFieldName('radio' , props.clientId)  })
+			props.setAttributes({
+				field_name: getFieldName("radio", props.clientId)
+			});
 
-			props.setAttributes({ id: props.clientId + encoded_data });
+			props.setAttributes({ id: props.clientId + "__" + encoded_data });
 		} else {
 			setRadios(options);
-			props.setAttributes({ field_name: getFieldName('radio' , props.clientId)  })
+			props.setAttributes({
+				field_name: getFieldName("radio", props.clientId)
+			});
 
-			props.setAttributes({ id: props.clientId + encoded_data });
+			props.setAttributes({ id: props.clientId + "__" + encoded_data });
 		}
 	}, []);
 

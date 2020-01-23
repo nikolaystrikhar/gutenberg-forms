@@ -6,7 +6,7 @@ import {
 	PanelBody,
 	ResizableBox
 } from "@wordpress/components";
-import { getFieldName } from '../../block/misc/helper';
+import { getFieldName } from "../../block/misc/helper";
 
 import $ from "jquery";
 const {
@@ -36,11 +36,15 @@ function edit(props) {
 	const { message, isRequired, label, id, height } = props.attributes;
 	useEffect(() => {
 		const encoded_data = encodeURIComponent(
-			window.btoa(`-${isRequired}-message`)
+			window.btoa(
+				`--${getFieldName("message", props.clientId)}-${isRequired}-message`
+			)
 		);
-		props.setAttributes({ field_name: getFieldName('message' , props.clientId)  })
+		props.setAttributes({
+			field_name: getFieldName("message", props.clientId)
+		});
 
-		props.setAttributes({ id: props.clientId + encoded_data });
+		props.setAttributes({ id: props.clientId + "__" + encoded_data });
 	}, []);
 
 	return [

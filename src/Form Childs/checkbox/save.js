@@ -27,6 +27,7 @@ function save(props) {
 						<div className="cwp-checkbox-option">
 							<input
 								name={id}
+								value={checkbox.label}
 								data-rule="false"
 								data-required={isRequired}
 								data-cwp-field
