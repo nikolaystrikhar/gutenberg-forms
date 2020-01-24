@@ -2,7 +2,7 @@ import React, { useRef, useState } from "react";
 import { map } from "lodash";
 import { Fragment } from "@wordpress/element";
 import { DropdownMenu, MenuGroup, MenuItem } from "@wordpress/components";
-import { getFieldIcon } from "../misc/helper";
+import { getFieldIcon, serializeFields } from "../misc/helper";
 import $ from "jquery";
 const { getBlock } = wp.data.select("core/block-editor");
 
@@ -62,6 +62,8 @@ function TemplateBuilder(prop) {
 		}
 	};
 
+	console.log(serializeFields(child_fields));
+
 	return (
 		<div className="cwp-template-builder">
 			<div className="cwp_data_drop">
@@ -69,24 +71,19 @@ function TemplateBuilder(prop) {
 					{({ onClose }) => (
 						<Fragment>
 							<MenuGroup>
-								{map(child_fields, field => {
-									if (
-										field.name.startsWith("cwp/") &&
-										field.name !== "cwp/form-column"
-									) {
-										const { field_name } = field.attributes;
-										return (
-											<MenuItem
-												icon={getFieldIcon(field_name)}
-												onClick={() => {
-													onClose();
-													addFieldId(field_name);
-												}}
-											>
-												<span draggable={true}>{field_name}</span>
-											</MenuItem>
-										);
-									}
+								{map(serializeFields(child_fields), field => {
+									const { fieldName } = field;
+									return (
+										<MenuItem
+											icon={getFieldIcon(fieldName.toLowerCase())}
+											onClick={() => {
+												onClose();
+												addFieldId(fieldName.field_id);
+											}}
+										>
+											<span draggable={true}>{fieldName.toLowerCase()}</span>
+										</MenuItem>
+									);
 								})}
 							</MenuGroup>
 						</Fragment>

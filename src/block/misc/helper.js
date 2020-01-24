@@ -1,3 +1,5 @@
+const { getBlock } = wp.data.select("core/block-editor");
+
 export function getFieldName(field, id) {
 	let shorten_id = id.substring(0, 6);
 
@@ -31,4 +33,23 @@ export function getFieldIcon(name) {
 		default:
 			return;
 	}
+}
+
+export function serializeFields(fields) {
+	let f = [];
+
+	fields.forEach(field => {
+		if (field.name.startsWith("cwp/") && field.name !== "cwp/form-column" && field.name !== "cwp/column") {
+			f.push({
+				fieldName: field.attributes.label,
+				field_id: field.attributes.field_name
+			});
+		} else if ( field.name === "cwp/column" ) {
+			f.push(...serializeFields(field.innerBlocks));
+		} else if (field.name === "cwp/form-column") {
+			f.push(...serializeFields(field.innerBlocks));
+		}
+	});
+
+	return f;
 }
