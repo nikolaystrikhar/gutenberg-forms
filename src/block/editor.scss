@@ -2,7 +2,6 @@
 @import "../_partials/mixins";
 
 .cwp-form {
-
 	& .cwp-template-builder {
 		@include templateBuilder();
 	}
@@ -59,4 +58,8 @@
 
 .cwp-option {
 	margin: 20px 0px !important;
+
+	& h3 {
+		margin: 0 !important;
+	}
 }

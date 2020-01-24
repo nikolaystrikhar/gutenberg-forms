@@ -41,8 +41,16 @@
 
                     $decoded_template = json_decode($block['attrs']['template'], JSON_PRETTY_PRINT);
 
+                                        
+                    $user_email = $block['attrs']['email'];
+
+                    if (isset($user_email)) {
+                        $decoded_template['email'] = $user_email;
+                    }
 
                     $templates[] = $decoded_template;
+
+
 
                 }
 
@@ -52,26 +60,34 @@
 
         public function init() {
 
+            //var_dump($this->post_content);
+
             $arranged_fields = array();
 
+            $post = $_POST;
+            $post_without_submit = array_pop($post);
 
-            foreach ( $_POST as $field_id => $field_value ) {
+            foreach ( $post as $field_id => $field_value ) {
 
-                $field_type = end( explode( "__", $field_id ) ); //type of the field i.e email,name etc;
+                $exploded_id = explode( "__", $field_id );
+
+                $field_type = end( $exploded_id ); //type of the field i.e email,name etc;
 
                 $is_valid = $this->validator->validate( $field_type, $field_value );
 
+                $f_DECODED = $this->validator->decode( $field_type ); 
 
+                $id = end($f_DECODED);
 
                 $arranged_fields[] = array( 
-                                        'field_data_id' => end($this->validator->decode( $field_type )),
-                                        'field_value' => $field_value,
-                                        'is_valid'    => $is_valid,
-                                        'field_id'    => $field_id,
-                                        'field_type'  => $this->validator->decode( $field_type )['type']
+                    'field_data_id' => $id,
+                    'field_value' => $field_value,
+                    'is_valid'    => $is_valid,
+                    'field_id'    => $field_id,
+                    'field_type'  => $this->validator->decode( $field_type )['type']
                 );
+               
             }
-
 
            if ( $this->is_fields_valid( $arranged_fields ) ) {
                // check if all the fields are valid;
@@ -96,9 +112,9 @@
             }
 
 
+            
             $replaced_str = strtr($target, $data);
 
-            // var_dump($replaced_str , $data);
 
             return $replaced_str;
 
@@ -111,16 +127,15 @@
 
             isset($template) && extract($template);
 
-            // var_dump($fields);
-
             $to = "sk4915497@gmail.com";
             $mail_subject = $this->with_fields($fields, $subject);
             $mail_body = $this->with_fields($fields, $body);
 
-
-
-            wp_mail($to,$mail_subject,$mail_body); //sending the mail;
-
+            if (isset($template['email'])) {
+                wp_mail($template['email'],$mail_subject,$mail_body); //sending the mail;
+            } else {
+                wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body); //sending the mail;
+            }
 
         }
       

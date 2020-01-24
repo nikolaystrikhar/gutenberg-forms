@@ -286,6 +286,10 @@
 
 @mixin column() {
 	& .cwp-col {
+		& .block-list-appender {
+			width: 100% !important;
+		}
+
 		& .cwp-col_inserter {
 			flex-direction: column !important;
 		}

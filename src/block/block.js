@@ -141,6 +141,10 @@ registerBlockType("cwp/block-gutenberg-forms", {
 				subject: "",
 				body: ""
 			})
+		},
+		email: {
+			type: "string",
+			default: ""
 		}
 	},
 	edit: mainEdit,
@@ -652,6 +656,10 @@ registerBlockType("cwp/form-column", {
 		intro: {
 			type: "boolean",
 			default: false
+		},
+		stack: {
+			type: "boolean",
+			default: true
 		}
 	},
 	supports: {

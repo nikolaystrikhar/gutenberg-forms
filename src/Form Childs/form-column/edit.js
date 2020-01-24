@@ -1,11 +1,15 @@
 import React, { useEffect } from "react";
 import { InnerBlocks, InspectorControls } from "@wordpress/block-editor";
-import { RangeControl, PanelBody } from "@wordpress/components";
+import {
+	RangeControl,
+	PanelBody,
+	FormToggle,
+	PanelRow
+} from "@wordpress/components";
 import Introduction from "./components/introduction";
 
-
 function edit(props) {
-	const { columns, intro } = props.attributes,
+	const { columns, intro, stack } = props.attributes,
 		{ setAttributes } = props;
 
 	const getTemplates = () => {
@@ -22,15 +26,24 @@ function edit(props) {
 		setAttributes({ columns: cols });
 	};
 
-
 	const handleSelect = cols => {
 		setAttributes({ columns: cols, intro: true });
 	};
 
-	
-
 	return [
-		null,
+		<InspectorControls>
+			<PanelBody icon="layout" title="Layout Settings">
+				<div className="cwp-option">
+					<PanelRow>
+						<h3>Stack on Mobile</h3>
+						<FormToggle
+							checked={stack}
+							onChange={() => setAttributes({ stack: !stack })}
+						/>
+					</PanelRow>
+				</div>
+			</PanelBody>
+		</InspectorControls>,
 		null,
 		<div className="cwp-form-col-main">
 			{!intro ? (

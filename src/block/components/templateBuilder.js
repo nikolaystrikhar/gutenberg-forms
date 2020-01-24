@@ -72,13 +72,14 @@ function TemplateBuilder(prop) {
 						<Fragment>
 							<MenuGroup>
 								{map(serializeFields(child_fields), field => {
-									const { fieldName } = field;
+									const { fieldName, field_id, blockName } = field;
+
 									return (
 										<MenuItem
-											icon={getFieldIcon(fieldName.toLowerCase())}
+											icon={getFieldIcon(blockName)}
 											onClick={() => {
 												onClose();
-												addFieldId(fieldName.field_id);
+												addFieldId(field_id);
 											}}
 										>
 											<span draggable={true}>{fieldName.toLowerCase()}</span>

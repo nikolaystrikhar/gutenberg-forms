@@ -2,12 +2,26 @@
 @import "./_partials/mixins";
 @import "./lib/datepicker";
 
+@media (max-width: 600px) {
+	.cwp-form {
+		& .cwp-form-col-main-preview {
+			&.cwp_stack_columns {
+				flex-direction: column !important;
+				& .cwp-col {
+					width: 100% !important;
+					margin: 0px 0px 0px 0px !important;
+				}
+			}
+		}
+	}
+}
+
 @mixin getColumn($col) {
 	& .cwp-col {
 		width: calc((100% / #{$col}) - 20px);
 		&:nth-child(1) {
 			margin: 0px 10px 0px 0px;
-			width: calc((100% / #{$col}) - 10px) !important;
+			width: calc((100% / #{$col}) - 10px);
 		}
 
 		&:not(:nth-child(1)) {
@@ -15,7 +29,7 @@
 		}
 
 		&:nth-child(#{$col}) {
-			width: calc((100% / #{$col}) - 10px) !important;
+			width: calc((100% / #{$col}) - 10px);
 			margin: 0px 0px 0px 10px;
 		}
 	}

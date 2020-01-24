@@ -7,7 +7,7 @@ export function getFieldName(field, id) {
 }
 
 export function getFieldIcon(name) {
-	let field = name.split("-")[0];
+	const field = name.split("/")[name.split("/").length - 1];
 
 	switch (field) {
 		case "email":
@@ -39,12 +39,17 @@ export function serializeFields(fields) {
 	let f = [];
 
 	fields.forEach(field => {
-		if (field.name.startsWith("cwp/") && field.name !== "cwp/form-column" && field.name !== "cwp/column") {
+		if (
+			field.name.startsWith("cwp/") &&
+			field.name !== "cwp/form-column" &&
+			field.name !== "cwp/column"
+		) {
 			f.push({
+				blockName: field.name,
 				fieldName: field.attributes.label,
 				field_id: field.attributes.field_name
 			});
-		} else if ( field.name === "cwp/column" ) {
+		} else if (field.name === "cwp/column") {
 			f.push(...serializeFields(field.innerBlocks));
 		} else if (field.name === "cwp/form-column") {
 			f.push(...serializeFields(field.innerBlocks));

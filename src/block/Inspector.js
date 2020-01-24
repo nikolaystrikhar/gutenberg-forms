@@ -6,14 +6,18 @@ import {
 	ButtonGroup,
 	Icon,
 	ColorPicker,
-	ColorPalette
+	ColorPalette,
+	TextControl,
+	Notice
 } from "@wordpress/components";
+import { isEmpty } from "lodash";
+
 const { InspectorControls } = wp.blockEditor;
 
 function Inspector(prop) {
 	const props = prop.data;
 
-	const { buttonSetting } = props.attributes;
+	const { buttonSetting, email } = props.attributes;
 
 	const handleAlignment = aln => {
 		props.setAttributes({
@@ -52,7 +56,7 @@ function Inspector(prop) {
 
 	return (
 		<InspectorControls>
-			<PanelBody title="Button Setting">
+			<PanelBody icon="admin-settings" title="Button Setting">
 				<div className="cwp-option">
 					<PanelRow>
 						<h3 className="cwp-heading">Alignment</h3>
@@ -94,6 +98,20 @@ function Inspector(prop) {
 						colors={colors}
 						value={buttonSetting.color}
 						onChange={color => handleButtonSetting("color", color)}
+					/>
+				</div>
+			</PanelBody>
+			<PanelBody icon="admin-users" title="Account Setting">
+				{isEmpty(email) && (
+					<Notice isDismissible={false} status="warning">
+						By Default Email will be sent to the admin account
+					</Notice>
+				)}
+				<div className="cwp-option">
+					<TextControl
+						label="Email Account"
+						value={email}
+						onChange={email => props.setAttributes({ email })}
 					/>
 				</div>
 			</PanelBody>

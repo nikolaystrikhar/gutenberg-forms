@@ -2,7 +2,14 @@ import React, { useEffect } from "react";
 import Inspector from "./Inspector";
 import TemplateBuilder from "./components/templateBuilder";
 const { InnerBlocks, RichText, BlockControls, BlockIcon } = wp.blockEditor;
-const { Button, Dashicon, IconButton, Toolbar, Tooltip } = wp.components;
+const {
+	Button,
+	Dashicon,
+	IconButton,
+	Toolbar,
+	Tooltip,
+	Notice
+} = wp.components;
 const { __ } = wp.i18n;
 
 function edit(props) {

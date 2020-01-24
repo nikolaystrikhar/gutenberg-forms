@@ -34,6 +34,10 @@
             $dV = explode('-', urldecode(base64_decode($t)));
 
 
+            if (count($dV) === 1) {
+                return array();
+            }
+
             return array(
                 'is_required' => $dV[4],
                 'type'        => preg_replace('/[0-9]+/' , '' , $dV[2]),
@@ -47,9 +51,9 @@
 
             $decoded_field = $this->decode($type);
 
-            if ( $decoded_field['is_required'] === true && $this->isEmpty($value)) {
+            if ( count($decoded_field) !== 0 && $decoded_field['is_required'] === true && $this->isEmpty($value)) {
                 return false;
-            }  else {
+            }  else if (count($decoded_field) !== 0) {
                 switch ( $decoded_field[ 'type' ] ) {
 
                     case 'email' : return $this->isEmail($value);

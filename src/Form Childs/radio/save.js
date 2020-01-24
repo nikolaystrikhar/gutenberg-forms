@@ -32,7 +32,7 @@ function save(props) {
 								data-required={isRequired}
 								value={radio.label}
 								data-cwp-field
-								value={checkbox.label}
+								value={radio.label}
 								checked={radio.checked}
 								type="radio"
 							/>
