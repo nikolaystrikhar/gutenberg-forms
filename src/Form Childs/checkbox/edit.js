@@ -10,12 +10,16 @@ import {
 const { InspectorControls, BlockControls, BlockIcon } = wp.blockEditor;
 
 import { clone, pullAt } from "lodash";
-import { getFieldName } from "../../block/misc/helper";
+import {
+	getFieldName,
+	extract_id,
+	getEncodedData
+} from "../../block/misc/helper";
 
 const { RichText } = wp.blockEditor;
 
 function edit(props) {
-	let { options, isRequired, label, id } = props.attributes;
+	let { options, isRequired, label, id, field_name } = props.attributes;
 
 	const [checkboxes, setCheckboxes] = useState([]);
 
@@ -24,9 +28,24 @@ function edit(props) {
 
 		setCheckboxes(options);
 
-		props.setAttributes({
-			field_name: getFieldName("checkbox", props.clientId)
-		});
+		if (field_name === "") {
+			props.setAttributes({
+				field_name: getFieldName("checkbox", props.clientId)
+			});
+			props.setAttributes({
+				id:
+					props.clientId +
+					"__" +
+					getEncodedData("checkbox", props.clientId, isRequired)
+			});
+		} else if (field_name !== "") {
+			props.setAttributes({
+				id:
+					extract_id(field_name) +
+					"__" +
+					getEncodedData("checkbox", extract_id(field_name), isRequired)
+			});
+		}
 	}, []);
 
 	const handleRequired = () => {
@@ -78,16 +97,6 @@ function edit(props) {
 		setCheckboxes(new_options);
 		props.setAttributes({ options: new_options });
 	};
-
-	useEffect(() => {
-		const encoded_data = encodeURIComponent(
-			window.btoa(
-				`--${getFieldName("checkbox", props.clientId)}-${isRequired}-checkbox`
-			)
-		);
-
-		props.setAttributes({ id: props.clientId + "__" + encoded_data });
-	}, []);
 
 	return [
 		<InspectorControls>

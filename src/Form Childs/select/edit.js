@@ -6,7 +6,11 @@ import {
 	PanelBody,
 	Icon
 } from "@wordpress/components";
-import { getFieldName } from "../../block/misc/helper";
+import {
+	getFieldName,
+	extract_id,
+	getEncodedData
+} from "../../block/misc/helper";
 
 const { InspectorControls, BlockControls, BlockIcon } = wp.blockEditor;
 
@@ -15,7 +19,7 @@ import { clone, pullAt } from "lodash";
 const { RichText } = wp.blockEditor;
 
 function edit(props) {
-	let { options, isRequired, label, id } = props.attributes;
+	let { options, isRequired, label, id, field_name } = props.attributes;
 
 	const [select, setSelect] = useState([]);
 
@@ -23,14 +27,25 @@ function edit(props) {
 		let { options } = props.attributes;
 
 		setSelect(options);
-		const encoded_data = encodeURIComponent(
-			window.btoa(
-				`--${getFieldName("select", props.clientId)}-${isRequired}-select`
-			)
-		);
-		props.setAttributes({ field_name: getFieldName("select", props.clientId) });
 
-		props.setAttributes({ id: props.clientId + "__" + encoded_data });
+		if (field_name === "") {
+			props.setAttributes({
+				field_name: getFieldName("select", props.clientId)
+			});
+			props.setAttributes({
+				id:
+					props.clientId +
+					"__" +
+					getEncodedData("select", props.clientId, isRequired)
+			});
+		} else if (field_name !== "") {
+			props.setAttributes({
+				id:
+					extract_id(field_name) +
+					"__" +
+					getEncodedData("select", extract_id(field_name), isRequired)
+			});
+		}
 	}, []);
 
 	const handleRequired = () => {

@@ -5,7 +5,11 @@ import {
 	PanelRow,
 	PanelBody
 } from "@wordpress/components";
-import { getFieldName } from "../../block/misc/helper";
+import {
+	getFieldName,
+	extract_id,
+	getEncodedData
+} from "../../block/misc/helper";
 
 const {
 	InspectorControls,
@@ -31,16 +35,24 @@ function edit(props) {
 		props.setAttributes({ label });
 	};
 
-	const { name, isRequired, label, id } = props.attributes;
+	const { name, isRequired, label, id, field_name } = props.attributes;
 	useEffect(() => {
-		const encoded_data = encodeURIComponent(
-			window.btoa(
-				`--${getFieldName("name", props.clientId)}-${isRequired}-name`
-			)
-		);
-		props.setAttributes({ field_name: getFieldName("name", props.clientId) });
-
-		props.setAttributes({ id: props.clientId + "__" + encoded_data });
+		if (field_name === "") {
+			props.setAttributes({ field_name: getFieldName("name", props.clientId) });
+			props.setAttributes({
+				id:
+					props.clientId +
+					"__" +
+					getEncodedData("name", props.clientId, isRequired)
+			});
+		} else if (field_name !== "") {
+			props.setAttributes({
+				id:
+					extract_id(field_name) +
+					"__" +
+					getEncodedData("name", extract_id(field_name), isRequired)
+			});
+		}
 	}, []);
 	return [
 		!!props.isSelected && (

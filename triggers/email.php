@@ -42,10 +42,13 @@
                     $decoded_template = json_decode($block['attrs']['template'], JSON_PRETTY_PRINT);
 
                                         
-                    $user_email = $block['attrs']['email'];
 
-                    if (isset($user_email)) {
-                        $decoded_template['email'] = $user_email;
+                    if (array_key_exists('email' ,$block['attrs'])) {
+                        $user_email = $block['attrs']['email'];
+
+                        if ($this->validator->validate('email' , $user_email)) {
+                            $decoded_template['email'] = $user_email;
+                        }
                     }
 
                     $templates[] = $decoded_template;
@@ -112,7 +115,6 @@
             }
 
 
-            
             $replaced_str = strtr($target, $data);
 
 
@@ -127,12 +129,14 @@
 
             isset($template) && extract($template);
 
-            $to = "sk4915497@gmail.com";
             $mail_subject = $this->with_fields($fields, $subject);
             $mail_body = $this->with_fields($fields, $body);
 
-            if (isset($template['email'])) {
+
+
+            if (array_key_exists('email' , $template)) {
                 wp_mail($template['email'],$mail_subject,$mail_body); //sending the mail;
+            
             } else {
                 wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body); //sending the mail;
             }

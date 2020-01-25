@@ -6,7 +6,11 @@ import {
 	PanelBody,
 	ResizableBox
 } from "@wordpress/components";
-import { getFieldName } from "../../block/misc/helper";
+import {
+	getFieldName,
+	extract_id,
+	getEncodedData
+} from "../../block/misc/helper";
 
 import $ from "jquery";
 const {
@@ -33,18 +37,33 @@ function edit(props) {
 		props.setAttributes({ label });
 	};
 
-	const { message, isRequired, label, id, height } = props.attributes;
+	const {
+		message,
+		isRequired,
+		label,
+		id,
+		height,
+		field_name
+	} = props.attributes;
 	useEffect(() => {
-		const encoded_data = encodeURIComponent(
-			window.btoa(
-				`--${getFieldName("message", props.clientId)}-${isRequired}-message`
-			)
-		);
-		props.setAttributes({
-			field_name: getFieldName("message", props.clientId)
-		});
-
-		props.setAttributes({ id: props.clientId + "__" + encoded_data });
+		if (field_name === "") {
+			props.setAttributes({
+				field_name: getFieldName("message", props.clientId)
+			});
+			props.setAttributes({
+				id:
+					props.clientId +
+					"__" +
+					getEncodedData("message", props.clientId, isRequired)
+			});
+		} else if (field_name !== "") {
+			props.setAttributes({
+				id:
+					extract_id(field_name) +
+					"__" +
+					getEncodedData("message", extract_id(field_name), isRequired)
+			});
+		}
 	}, []);
 
 	return [

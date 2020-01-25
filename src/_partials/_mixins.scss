@@ -278,7 +278,7 @@
 	justify-content: flex-end;
 
 	& h3 {
-		font-size: 11px;
+		font-size: 11px !important;
 		margin: 0px 8px !important;
 		color: if($type == "noticed", $danger !important, $primaryColor !important);
 	}
@@ -287,7 +287,14 @@
 @mixin column() {
 	& .cwp-col {
 		& .block-list-appender {
-			width: 100% !important;
+			width: 90% !important;
+			margin: auto;
+		}
+
+		& .editor-block-list__layout {
+			& div[data-type] {
+				margin: 0 !important;
+			}
 		}
 
 		& .cwp-col_inserter {
@@ -301,15 +308,27 @@
 			flex-direction: row;
 			justify-content: space-between;
 
+			& .cwp-col {
+				& .block-editor-block-list__layout {
+					display: flex;
+					flex-direction: column !important;
+				}
+			}
+
 			& [data-type="cwp/column"] {
 				width: 50%;
 				transform-origin: center center;
 				margin: 0px 10px;
 
 				& .cwp-col_inserter {
+					& div[data-type] {
+						margin: 0 !important;
+					}
+
 					& div:nth-child(1) {
 						& button {
-							width: 100%;
+							width: 90% !important;
+							margin: auto;
 						}
 					}
 				}

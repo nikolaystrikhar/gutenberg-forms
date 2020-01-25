@@ -6,7 +6,11 @@ import {
 	PanelBody,
 	Icon
 } from "@wordpress/components";
-import { getFieldName } from "../../block/misc/helper";
+import {
+	getFieldName,
+	extract_id,
+	getEncodedData
+} from "../../block/misc/helper";
 
 const { InspectorControls, BlockControls, BlockIcon } = wp.blockEditor;
 
@@ -15,7 +19,7 @@ import { clone, pullAt, isEqual } from "lodash";
 const { RichText } = wp.blockEditor;
 
 function edit(props) {
-	let { options, isRequired, label, id } = props.attributes;
+	let { options, isRequired, label, id, field_name } = props.attributes;
 
 	const [radios, setRadios] = useState([]);
 
@@ -23,12 +27,6 @@ function edit(props) {
 		let { options } = props.attributes;
 
 		const checked = options.find(c => c.checked);
-
-		const encoded_data = encodeURIComponent(
-			window.btoa(
-				`--${getFieldName("radio", props.clientId)}-${isRequired}-radio`
-			)
-		);
 
 		if (checked) {
 			let opt = clone(options);
@@ -42,18 +40,27 @@ function edit(props) {
 				} else return v;
 			});
 			setRadios(remove_extra_checked);
-			props.setAttributes({
-				field_name: getFieldName("radio", props.clientId)
-			});
-
-			props.setAttributes({ id: props.clientId + "__" + encoded_data });
 		} else {
 			setRadios(options);
+		}
+
+		if (field_name === "") {
 			props.setAttributes({
 				field_name: getFieldName("radio", props.clientId)
 			});
-
-			props.setAttributes({ id: props.clientId + "__" + encoded_data });
+			props.setAttributes({
+				id:
+					props.clientId +
+					"__" +
+					getEncodedData("radio", props.clientId, isRequired)
+			});
+		} else if (field_name !== "") {
+			props.setAttributes({
+				id:
+					extract_id(field_name) +
+					"__" +
+					getEncodedData("radio", extract_id(field_name), isRequired)
+			});
 		}
 	}, []);
 

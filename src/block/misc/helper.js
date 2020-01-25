@@ -6,6 +6,18 @@ export function getFieldName(field, id) {
 	return field + "-" + shorten_id;
 }
 
+export function extract_id(id) {
+	let exploded = id.split("-");
+
+	return exploded[exploded.length - 1];
+}
+
+export function getEncodedData(f, id, isRequired) {
+	return encodeURIComponent(
+		window.btoa(`--${getFieldName(f, id)}-${isRequired}-${f}`)
+	);
+}
+
 export function getFieldIcon(name) {
 	const field = name.split("/")[name.split("/").length - 1];
 
