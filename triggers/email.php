@@ -39,18 +39,44 @@
             foreach( $this->post_content as $f => $block ) {
                 if ( $block['blockName'] === "cwp/block-gutenberg-forms" && $block['attrs']['id'] === $id ) {
 
-                    $decoded_template = json_decode($block['attrs']['template'], JSON_PRETTY_PRINT);
-
+                    $decoded_template = array();
                                         
+                    $attributes = $block['attrs'];
 
-                    if (array_key_exists('email' ,$block['attrs'])) {
-                        $user_email = $block['attrs']['email'];
+                    if (array_key_exists('template' , $attributes)) {
+                        $decoded_template[] = json_decode($attributes['template'], JSON_PRETTY_PRINT);
+                    } else {
+                        $decoded_template['subject'] = "";
+                        $decoded_template['body'] = "";
+                    }
+
+                    if (array_key_exists('email' ,$attributes)) {
+                        $user_email = $attributes['email'];
 
                         if ($this->validator->validate('email' , $user_email)) {
                             $decoded_template['email'] = $user_email;
                         }
                     }
 
+                    if (array_key_exists('successType' , $attributes)) {
+                        $decoded_template['successType'] = $attributes['successType'];
+                    } else {
+                        $decoded_template['successType'] = "url";
+                    }
+
+                    if (array_key_exists('successURL' , $attributes)) {
+                        $decoded_template['successURL'] = $attributes['successURL'];
+                    } else {
+                        $decoded_template['successURL'] = "";
+                    }
+
+                    if (array_key_exists('successMessage' , $attributes)) {
+                        $decoded_template['successMessage'] = $attributes['successMessage'];
+                    } else {
+                        $decoded_template['successMessage'] = "The form has been submitted Successfully!";
+                    }
+
+                    
                     $templates[] = $decoded_template;
 
 
@@ -63,7 +89,6 @@
 
         public function init() {
 
-            //var_dump($this->post_content);
 
             $arranged_fields = array();
 
@@ -91,6 +116,7 @@
                 );
                
             }
+
 
            if ( $this->is_fields_valid( $arranged_fields ) ) {
                // check if all the fields are valid;
@@ -122,6 +148,42 @@
 
         }
 
+        private function url_success($url) {
+            
+            if ($this->validator->isURL($url)) {
+                $string = '<script type="text/javascript">';
+                $string .= 'window.location = "' . $url . '"';
+                $string .= '</script>';
+
+                echo $string;
+            }
+
+        }
+
+        private function message_success( $message ) {
+
+            $message_id = $_POST['submit'];
+
+            $hidden_style = "<style> #$message_id { display: block !important } </style>";
+
+            if ($this->validator->isEmpty($message)) {
+                echo $hidden_style;
+            }
+
+        }
+
+        private function attempt_success( $template ) {
+            extract($template);
+
+
+            if ($successType === "url") {
+                $this->url_success($successURL);
+            } else if ($successType === "message") {
+                $this->message_success($successMessage);
+            }
+
+        }
+
         public function sendMail( $fields ) {
 
             $template = $this->get_templates($_POST['submit'])[0];
@@ -135,10 +197,11 @@
 
 
             if (array_key_exists('email' , $template)) {
-                wp_mail($template['email'],$mail_subject,$mail_body); //sending the mail;
-            
+               wp_mail($template['email'],$mail_subject,$mail_body); //sending the mail;
+               $this->attempt_success($template);
             } else {
                 wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body); //sending the mail;
+                $this->attempt_success($template);
             }
 
         }

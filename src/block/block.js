@@ -145,6 +145,18 @@ registerBlockType("cwp/block-gutenberg-forms", {
 		email: {
 			type: "string",
 			default: ""
+		},
+		successURL: {
+			type: "string",
+			default: ""
+		},
+		successType: {
+			type: "string",
+			default: "url"
+		},
+		successMessage: {
+			type: "string",
+			default: "The form has been submitted Successfully!"
 		}
 	},
 	edit: mainEdit,
@@ -201,6 +213,47 @@ const getFieldTransform = (attrs, field) => {
 	return createBlock(fieldBlock, config);
 };
 
+registerBlockType("cwp/name", {
+	title: __("Name"),
+	icon: "admin-users",
+	category: "common",
+	keywords: [__("gutenberg-forms"), __("forms"), __("name")],
+	edit: nameEdit,
+	save: nameSave,
+	attributes: {
+		name: {
+			type: "string",
+			default: ""
+		},
+		isRequired: {
+			type: "boolean",
+			default: false
+		},
+		label: {
+			type: "string",
+			default: "Name"
+		},
+		id: {
+			type: "string",
+			default: ""
+		},
+		field_name: {
+			type: "string",
+			default: ""
+		}
+	},
+	transforms: {
+		from: [
+			{
+				type: "block",
+				blocks: myAttrs.map(block => "cwp/".concat(block)),
+				transform: a => getFieldTransform(a, "name")
+			}
+		]
+	},
+	parent: fieldParents
+});
+
 registerBlockType("cwp/email", {
 	title: __("Email"),
 	icon: "email",
@@ -242,15 +295,15 @@ registerBlockType("cwp/email", {
 	parent: fieldParents
 });
 
-registerBlockType("cwp/name", {
-	title: __("Name"),
-	icon: "admin-users",
+registerBlockType("cwp/text", {
+	title: __("Text"),
+	icon: "text",
 	category: "common",
-	keywords: [__("gutenberg-forms"), __("forms"), __("name")],
-	edit: nameEdit,
-	save: nameSave,
+	keywords: [__("gutenberg-forms"), __("forms"), __("text")],
+	edit: textEdit,
+	save: textSave,
 	attributes: {
-		name: {
+		text: {
 			type: "string",
 			default: ""
 		},
@@ -260,7 +313,7 @@ registerBlockType("cwp/name", {
 		},
 		label: {
 			type: "string",
-			default: "Name"
+			default: "Text"
 		},
 		id: {
 			type: "string",
@@ -276,7 +329,7 @@ registerBlockType("cwp/name", {
 			{
 				type: "block",
 				blocks: myAttrs.map(block => "cwp/".concat(block)),
-				transform: a => getFieldTransform(a, "name")
+				transform: a => getFieldTransform(a, "text")
 			}
 		]
 	},
@@ -541,47 +594,6 @@ registerBlockType("cwp/website", {
 				type: "block",
 				blocks: myAttrs.map(block => "cwp/".concat(block)),
 				transform: a => getFieldTransform(a, "website")
-			}
-		]
-	},
-	parent: fieldParents
-});
-
-registerBlockType("cwp/text", {
-	title: __("Text"),
-	icon: "text",
-	category: "common",
-	keywords: [__("gutenberg-forms"), __("forms"), __("text")],
-	edit: textEdit,
-	save: textSave,
-	attributes: {
-		text: {
-			type: "string",
-			default: ""
-		},
-		isRequired: {
-			type: "boolean",
-			default: false
-		},
-		label: {
-			type: "string",
-			default: "Text"
-		},
-		id: {
-			type: "string",
-			default: ""
-		},
-		field_name: {
-			type: "string",
-			default: ""
-		}
-	},
-	transforms: {
-		from: [
-			{
-				type: "block",
-				blocks: myAttrs.map(block => "cwp/".concat(block)),
-				transform: a => getFieldTransform(a, "text")
 			}
 		]
 	},

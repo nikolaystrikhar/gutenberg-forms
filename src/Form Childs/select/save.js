@@ -26,7 +26,7 @@ function save(props) {
 					name={id}
 					type="select"
 					data-rule="false"
-					value={checkbox.label}
+					value={label}
 					data-cwp-field
 					data-required={isRequired}
 				>

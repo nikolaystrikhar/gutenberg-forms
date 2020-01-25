@@ -17,7 +17,13 @@ const { InspectorControls } = wp.blockEditor;
 function Inspector(prop) {
 	const props = prop.data;
 
-	const { buttonSetting, email } = props.attributes;
+	const {
+		buttonSetting,
+		email,
+		successURL,
+		successType,
+		successMessage
+	} = props.attributes;
 
 	const handleAlignment = aln => {
 		props.setAttributes({
@@ -46,6 +52,16 @@ function Inspector(prop) {
 				[t]: v
 			}
 		});
+	};
+
+	const getSuccess = t => {
+		return successType === t
+			? {
+					isPrimary: true
+			  }
+			: {
+					isDefault: false
+			  };
 	};
 
 	const colors = [
@@ -113,6 +129,44 @@ function Inspector(prop) {
 						value={email}
 						onChange={email => props.setAttributes({ email })}
 					/>
+				</div>
+			</PanelBody>
+			<PanelBody icon="yes" title="Success Setting">
+				<div className="cwp-option">
+					<PanelRow>
+						<h3>Success Type</h3>
+						<ButtonGroup>
+							<Button
+								{...getSuccess("url")}
+								onClick={() => props.setAttributes({ successType: "url" })}
+							>
+								URL
+							</Button>
+							<Button
+								{...getSuccess("message")}
+								onClick={() => props.setAttributes({ successType: "message" })}
+							>
+								Message
+							</Button>
+						</ButtonGroup>
+					</PanelRow>
+				</div>
+				<div className="cwp-option">
+					{successType === "url" ? (
+						<TextControl
+							label="Success Url (Redirect)"
+							value={successURL}
+							onChange={successURL => props.setAttributes({ successURL })}
+						/>
+					) : (
+						<TextControl
+							label="Success Message"
+							value={successMessage}
+							onChange={successMessage =>
+								props.setAttributes({ successMessage })
+							}
+						/>
+					)}
 				</div>
 			</PanelBody>
 		</InspectorControls>

@@ -367,6 +367,9 @@
 @mixin templateBuilder() {
 	& .cwp_data_drop {
 		text-align: right;
+		& button {
+			margin-left: auto !important;
+		}
 	}
 
 	& .cwp-builder-field {
@@ -382,4 +385,10 @@
 			width: 100%;
 		}
 	}
+}
+
+@mixin successMessage() {
+	border-left: 2px solid green;
+	padding: 20px 20px;
+	background: #00800030;
 }

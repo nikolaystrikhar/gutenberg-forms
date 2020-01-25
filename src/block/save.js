@@ -6,7 +6,9 @@ function save(props) {
 		submitLabel,
 		buttonSetting: { alignment },
 		buttonSetting,
-		id
+		id,
+		successType,
+		successMessage
 	} = props.attributes;
 
 	return (
@@ -22,11 +24,16 @@ function save(props) {
 							backgroundColor: buttonSetting.backgroundColor,
 							color: buttonSetting.color
 						}}
-						className="cwp-submit-btn"
+						className="cwp-s	ubmit-btn"
 						dangerouslySetInnerHTML={{ __html: submitLabel }}
 					></button>
 				</div>
 			</form>
+			{successType === "message" && (
+				<div id={id} className="cwp-success cwp-hidden">
+					{successMessage}
+				</div>
+			)}
 		</div>
 	);
 }

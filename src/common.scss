@@ -36,6 +36,14 @@
 }
 
 .cwp-form {
+	& .cwp-success {
+		@include successMessage();
+	}
+
+	& .cwp-hidden {
+		display: none;
+	}
+
 	& .cwp-form-col-main-preview {
 		display: flex;
 		flex-direction: row;
