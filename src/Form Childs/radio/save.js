@@ -26,17 +26,20 @@ function save(props) {
 				{options.map((radio, index) => {
 					return (
 						<div className="cwp-radio-option">
-							<input
-								name={id}
-								data-rule="false"
-								data-required={isRequired}
-								value={radio.label}
-								data-cwp-field
-								value={radio.label}
-								checked={radio.checked}
-								type="radio"
-							/>
-							<label>{radio.label}</label>
+							<label>
+								<span className="cwp-checkmark"></span>
+								<input
+									name={id}
+									data-rule="false"
+									data-required={isRequired}
+									value={radio.label}
+									data-cwp-field
+									value={radio.label}
+									checked={radio.checked}
+									type="radio"
+								/>
+								{radio.label}
+							</label>
 						</div>
 					);
 				})}

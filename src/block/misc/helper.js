@@ -42,6 +42,8 @@ export function getFieldIcon(name) {
 			return "text";
 		case "select":
 			return "menu-alt";
+		case "number":
+			return "screenoptions";
 		default:
 			return;
 	}

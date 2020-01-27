@@ -392,3 +392,109 @@
 	padding: 20px 20px;
 	background: #00800030;
 }
+
+//form styles
+
+@mixin bordered() {
+	& .cwp-field {
+		& input {
+			border: 3px solid;
+		}
+
+		& textarea {
+			border: 3px solid;
+		}
+	}
+}
+
+@mixin paper() {
+	& .cwp-field {
+		& select,
+		& textarea,
+		& input {
+			border-bottom: 2px solid;
+			border-left: none;
+			border-top: none;
+			border-right: none;
+
+			&:focus {
+				outline: none;
+				border-bottom: 2px solid $primaryColor;
+			}
+		}
+
+		&.cwp-checkbox,
+		&.cwp-radio {
+			& .cwp-checkbox-option,
+			& .cwp-radio-option {
+				& label.cwp-active {
+					& .cwp-checkmark {
+						left: 9px;
+						top: 5px;
+						width: 5px;
+						height: 10px;
+						border: 1px solid #000;
+						padding: 6px 2px;
+
+						border-width: 0 3px 3px 0;
+						-webkit-transform: rotate(45deg);
+						-ms-transform: rotate(45deg);
+						transform: rotate(45deg);
+					}
+				}
+
+				& label {
+					display: block;
+					position: relative;
+					padding-left: 35px;
+					margin-bottom: 12px;
+					cursor: pointer;
+					font-size: 15px;
+					-webkit-user-select: none;
+					-moz-user-select: none;
+					-ms-user-select: none;
+					user-select: none;
+
+					& input[type="checkbox"],
+					& input[type="radio"] {
+						position: absolute;
+						opacity: 0;
+						cursor: pointer;
+						height: 0;
+						width: 0;
+					}
+
+					& .cwp-checkmark {
+						position: absolute;
+						top: 0;
+						left: 0;
+						height: 25px;
+						width: 25px;
+						background-color: #eee;
+					}
+
+					&:hover input[type="checkbox"] ~ .cwp-checkmark,
+					&:hover input[type="radio"] ~ .cwp-checkmark {
+						background-color: #ccc;
+					}
+
+					& input[type="checkbox"]:checked ~ .cwp-checkmark,
+					& input[type="radio"]:checked ~ .cwp-checkmark {
+						background-color: #2196f3;
+					}
+
+					& .cwp-checkmark:after {
+						content: "";
+						position: absolute;
+						display: none;
+					}
+
+					& input[type="checkbox"]:checked ~ .cwp-checkmark:after,
+					& input[type="radio"]:checked ~ .cwp-checkmark:after {
+						display: block;
+					}
+				}
+			}
+		}
+	}
+}

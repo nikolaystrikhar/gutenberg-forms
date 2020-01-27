@@ -51,7 +51,7 @@ function edit(props) {
 			</Toolbar>
 		</BlockControls>,
 		!templateBuilder ? (
-			<div className="cwp-form">
+			<div className={`cwp-form ${props.className}`}>
 				<InnerBlocks
 					templateLock={false}
 					renderAppender={() => <InnerBlocks.ButtonBlockAppender />}

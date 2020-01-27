@@ -117,7 +117,6 @@
                
             }
 
-
            if ( $this->is_fields_valid( $arranged_fields ) ) {
                // check if all the fields are valid;
                 $this->sendMail( $arranged_fields );
@@ -191,8 +190,9 @@
 
             isset($template) && extract($template);
 
-            $mail_subject = $this->with_fields($fields, $subject);
-            $mail_body = $this->with_fields($fields, $body);
+
+            $mail_subject = $this->with_fields($fields, $template[0]['subject']);
+            $mail_body = $this->with_fields($fields, $template[0]['body']);
 
 
 

@@ -81,6 +81,9 @@ this.maxHours=t.getHours(),this.maxMinutes=t.getMinutes(),this.d.lastSelectedDat
 
             let fields = f.find('[data-cwp-field]'),
                 rules = {};
+
+
+
             
             fields.each(function() {
               let name = $(this).attr('name'),
@@ -94,6 +97,37 @@ this.maxHours=t.getHours(),this.maxMinutes=t.getMinutes(),this.d.lastSelectedDat
                 ex = {
                   minLength: 9,
                 }
+              }
+
+              if (type === "checkbox") {
+                $(this).on('input', function(e) {
+                    let c = e.target.checked;
+                    if (c) {
+                      $(this).parent().addClass('cwp-active');
+                    } else {
+                      $(this).parent().removeClass('cwp-active');
+                    }
+                })
+              } 
+              if (type === "range") {
+                
+                const t = this;
+              
+                $(f).on('submit',function(event) {
+                  if (required === true && $(t).data('default') === Number($(t).val())) {
+                    $(t).addClass('error');
+                    const field_parent = $(t).parent();
+
+                    if (!field_parent.find('.cwp-error').length) {
+                      event.preventDefault();
+
+                      field_parent.append('<label class="cwp-error">This field is required.</label>');
+                    }
+                  } else {
+                    $(this).submit();
+                  }
+
+                })
               }
 
 
@@ -123,7 +157,15 @@ this.maxHours=t.getHours(),this.maxMinutes=t.getMinutes(),this.d.lastSelectedDat
                 rules: {...getRules(form)}
               };
 
-                
+              $(form).find('.cwp-radio-set').each(function() {
+                const radios = $(this).find('input');
+                const t = this;
+                radios.each(function() {
+                  console.log($(t).find('input:checked'));
+                })
+              
+
+              })
 
               form.validate(config);
 

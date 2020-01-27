@@ -25,16 +25,19 @@ function save(props) {
 				{options.map((checkbox, index) => {
 					return (
 						<div className="cwp-checkbox-option">
-							<input
-								name={id}
-								value={checkbox.label}
-								data-rule="false"
-								data-required={isRequired}
-								data-cwp-field
-								checked={checkbox.checked}
-								type="checkbox"
-							/>
-							<label>{checkbox.label}</label>
+							<label>
+								<span className="cwp-checkmark"></span>
+								<input
+									name={id}
+									value={checkbox.label}
+									data-rule="false"
+									data-required={isRequired}
+									data-cwp-field
+									checked={checkbox.checked}
+									type="checkbox"
+								/>
+								{checkbox.label}
+							</label>
 						</div>
 					);
 				})}

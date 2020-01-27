@@ -97,6 +97,13 @@ import columnSave from "../Form Childs/form-column/child/column/save";
 
 ////////////////////////////////!Column!//////////////////////////////////////////////
 
+////////////////////////////////!Number!//////////////////////////////////////////////
+
+import numberEdit from "../Form Childs/number/edit";
+import numberSave from "../Form Childs/number/save";
+
+////////////////////////////////!Number!//////////////////////////////////////////////
+
 import { clone } from "lodash";
 import Icon from "./Icon";
 
@@ -182,6 +189,17 @@ const radio_enabled_fields = ["select", "radio", "checkbox"];
 const stripTags = str => {
 	return str.replace(/<[^>]*>?/gm, ""); //some fancy
 };
+
+//?registering block styles for the form block;
+wp.blocks.registerBlockStyle("cwp/block-gutenberg-forms", {
+	name: "bordered",
+	label: "Bordered"
+});
+
+wp.blocks.registerBlockStyle("cwp/block-gutenberg-forms", {
+	name: "paper",
+	label: "Paper"
+});
 
 //?custom-function for fields_transformation purpose;
 
@@ -695,4 +713,57 @@ registerBlockType("cwp/column", {
 	save: columnSave,
 	attributes: {},
 	parent: ["cwp/form-column"]
+});
+
+registerBlockType("cwp/number", {
+	title: __("Number"),
+	icon: "screenoptions",
+	category: "common",
+	keywords: [__("gutenberg-forms"), __("forms"), __("number")],
+	edit: numberEdit,
+	save: numberSave,
+	attributes: {
+		number: {
+			type: "string",
+			default: "0"
+		},
+		isRequired: {
+			type: "boolean",
+			default: false
+		},
+		label: {
+			type: "string",
+			default: "Enter Number:"
+		},
+		id: {
+			type: "string",
+			default: ""
+		},
+		field_name: {
+			type: "string",
+			default: ""
+		},
+		isRange: {
+			type: "boolean",
+			default: false
+		},
+		rangeMax: {
+			type: "number",
+			default: 100
+		},
+		rangeMin: {
+			type: "number",
+			default: 0
+		}
+	},
+	transforms: {
+		from: [
+			{
+				type: "block",
+				blocks: myAttrs.map(block => "cwp/".concat(block)),
+				transform: a => getFieldTransform(a, "number")
+			}
+		]
+	},
+	parent: fieldParents
 });

@@ -36,6 +36,14 @@
 }
 
 .cwp-form {
+	&.is-style-bordered {
+		@include bordered();
+	}
+
+	&.is-style-paper {
+		@include paper();
+	}
+
 	& .cwp-success {
 		@include successMessage();
 	}
@@ -63,6 +71,9 @@
 
 	& .cwp-field {
 		& .cwp-field-set {
+			& .cwp-error {
+				color: $danger;
+			}
 			@include field();
 		}
 

@@ -47,6 +47,15 @@
 
         }
 
+        public function isNumber($num) {
+
+            $as_integer = (int)$num;
+
+            if (gettype($as_integer) === "integer") return true;
+            return false;
+
+        }
+
         public function validate( $type, $value ) {
 
             $decoded_field = $this->decode($type);
@@ -59,6 +68,8 @@
                     case 'email' : return $this->isEmail($value);
                     break;
                     case 'website': return $this->isURL($value);
+                    break;
+                    case 'number': return $this->isNumber($value);
                     break;
                     default: return true;
 
