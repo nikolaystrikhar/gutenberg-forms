@@ -172,8 +172,9 @@
         }
 
         private function attempt_success( $template ) {
-            extract($template);
 
+            if (!isset($template)) return;
+            extract($template);
 
             if ($successType === "url") {
                 $this->url_success($successURL);
@@ -197,10 +198,10 @@
 
 
             if (array_key_exists('email' , $template)) {
-               wp_mail($template['email'],$mail_subject,$mail_body); //sending the mail;
+              // wp_mail($template['email'],$mail_subject,$mail_body); //sending the mail;
                $this->attempt_success($template);
             } else {
-                wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body); //sending the mail;
+                //wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body); //sending the mail;
                 $this->attempt_success($template);
             }
 

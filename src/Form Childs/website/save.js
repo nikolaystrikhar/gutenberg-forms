@@ -24,7 +24,9 @@ function save(props) {
 				)}
 				<input
 					data-cwp-field
-					data-required={isRequired}
+					required={isRequired}
+					type="url"
+					data-parsley-type="url"
 					name={id}
 					type="url"
 					placeholder={website}

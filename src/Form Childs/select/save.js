@@ -28,7 +28,7 @@ function save(props) {
 					data-rule="false"
 					value={label}
 					data-cwp-field
-					data-required={isRequired}
+					required={isRequired}
 				>
 					<option value="" disabled selected>
 						Select your option

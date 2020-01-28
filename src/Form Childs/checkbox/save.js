@@ -16,6 +16,16 @@ function save(props) {
 		return label;
 	};
 
+	const getRequired = index => {
+		if (isRequired && index === 0) {
+			return {
+				"data-parsley-mincheck": "1"
+			};
+		} else {
+			return {};
+		}
+	};
+
 	return (
 		<div className="cwp-checkbox cwp-field">
 			<div className="cwp-checkbox-set">
@@ -25,19 +35,17 @@ function save(props) {
 				{options.map((checkbox, index) => {
 					return (
 						<div className="cwp-checkbox-option">
-							<label>
-								<span className="cwp-checkmark"></span>
-								<input
-									name={id}
-									value={checkbox.label}
-									data-rule="false"
-									data-required={isRequired}
-									data-cwp-field
-									checked={checkbox.checked}
-									type="checkbox"
-								/>
-								{checkbox.label}
-							</label>
+							<input
+								{...getRequired(index)}
+								id={id.concat(index.toString())}
+								name={id}
+								value={checkbox.label}
+								data-rule="false"
+								data-cwp-field
+								checked={checkbox.checked}
+								type="checkbox"
+							/>
+							<label for={id.concat(index.toString())}>{checkbox.label}</label>
 						</div>
 					);
 				})}

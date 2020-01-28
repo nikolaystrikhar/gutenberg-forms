@@ -27,7 +27,7 @@ function save(props) {
 					data-rule="false"
 					data-cwp-field
 					placeholder={text}
-					data-required={isRequired}
+					required={isRequired}
 				/>
 			</div>
 		</div>

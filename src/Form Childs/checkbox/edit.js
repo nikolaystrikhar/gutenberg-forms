@@ -90,10 +90,10 @@ function edit(props) {
 		props.setAttributes({ options: new_options });
 	};
 
-	const handleCheck = (e, index) => {
+	const handleCheck = (v, index) => {
 		let new_options = clone(options);
 
-		new_options[index].checked = e.target.checked;
+		new_options[index].checked = v;
 		setCheckboxes(new_options);
 		props.setAttributes({ options: new_options });
 	};
@@ -130,10 +130,16 @@ function edit(props) {
 					return (
 						<div className="cwp-checkbox-option">
 							<input
+								id={id.concat(index.toString())}
 								checked={checkbox.checked}
-								onClick={e => handleCheck(e, index)}
 								type="checkbox"
+								onClick={() => handleCheck(!checkbox.checked, index)}
 							/>
+							<label
+								style={{ width: "auto" }}
+								for={id.concat(index.toString())}
+								onClick={() => handleCheck(!checkbox.checked, index)}
+							></label>
 							{!!props.isSelected ? (
 								<input
 									onChange={e => handleChange(e, index)}

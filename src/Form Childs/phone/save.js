@@ -28,7 +28,7 @@ function save(props) {
 					data-phone="true"
 					data-rule="false"
 					placeholder={phone}
-					data-required={isRequired}
+					required={isRequired}
 				/>
 			</div>
 		</div>

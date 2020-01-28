@@ -26,7 +26,7 @@ function save(props) {
 					style={{ height: height }}
 					data-cwp-field
 					name={id}
-					data-required={isRequired}
+					required={isRequired}
 					data-rule="false"
 					placeholder={message}
 				/>

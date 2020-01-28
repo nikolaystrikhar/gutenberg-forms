@@ -13,7 +13,7 @@ function save(props) {
 
 	return (
 		<div className="cwp-form">
-			<form noValidate method="POST">
+			<form data-parsley-validate method="POST">
 				<InnerBlocks.Content />
 				<div className={`cwp-submit ${alignment}`}>
 					<button
@@ -24,7 +24,7 @@ function save(props) {
 							backgroundColor: buttonSetting.backgroundColor,
 							color: buttonSetting.color
 						}}
-						className="cwp-s	ubmit-btn"
+						className="cwp-submit-btn"
 						dangerouslySetInnerHTML={{ __html: submitLabel }}
 					></button>
 				</div>

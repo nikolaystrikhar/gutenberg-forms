@@ -190,12 +190,6 @@ const stripTags = str => {
 	return str.replace(/<[^>]*>?/gm, ""); //some fancy
 };
 
-//?registering block styles for the form block;
-wp.blocks.registerBlockStyle("cwp/block-gutenberg-forms", {
-	name: "bordered",
-	label: "Bordered"
-});
-
 wp.blocks.registerBlockStyle("cwp/block-gutenberg-forms", {
 	name: "paper",
 	label: "Paper"

@@ -36,10 +36,6 @@
 }
 
 .cwp-form {
-	&.is-style-bordered {
-		@include bordered();
-	}
-
 	&.is-style-paper {
 		@include paper();
 	}

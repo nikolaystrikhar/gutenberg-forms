@@ -27,7 +27,8 @@ function save(props) {
 					type="email"
 					data-cwp-field
 					data-validation="email"
-					data-required={isRequired}
+					data-parsley-type="email"
+					required={isRequired}
 					placeholder={email}
 				/>
 			</div>

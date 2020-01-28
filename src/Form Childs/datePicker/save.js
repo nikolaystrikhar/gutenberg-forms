@@ -25,7 +25,7 @@ function save(props) {
 				<input
 					readOnly
 					name={id}
-					data-required={isRequired}
+					required={isRequired}
 					data-cwp-field
 					data-rule="false"
 					data-validation="date"

@@ -27,7 +27,7 @@ function save(props) {
 					name={id}
 					data-rule="false"
 					placeholder={name}
-					data-required={isRequired}
+					required={isRequired}
 				/>
 			</div>
 		</div>

@@ -36,7 +36,7 @@ function save(props) {
 						name={id}
 						value={number}
 						max={rangeMax}
-						data-required={isRequired}
+						required={isRequired}
 						min={rangeMin}
 						data-default={number}
 						data-rule="false"
@@ -45,11 +45,12 @@ function save(props) {
 				) : (
 					<input
 						data-cwp-field
+						data-parsley-type="integer"
 						name={id}
 						data-rule="false"
 						data-default={number}
 						value={number}
-						data-required={isRequired}
+						required={isRequired}
 						max={rangeMax}
 						min={rangeMin}
 						type="number"

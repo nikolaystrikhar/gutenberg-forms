@@ -5,6 +5,27 @@
 	outline: none;
 }
 
+@mixin dashicon() {
+	font-family: dashicons;
+	display: inline-block;
+	line-height: 1;
+	font-weight: 400;
+	font-style: normal;
+	speak: none;
+	text-decoration: inherit;
+	text-transform: none;
+	text-rendering: auto;
+	-webkit-font-smoothing: antialiased;
+	-moz-osx-font-smoothing: grayscale;
+	width: 20px;
+	height: 20px;
+	font-size: 17px;
+	padding: 0px;
+	vertical-align: top;
+	text-align: center;
+	transition: color 0.1s ease-in;
+}
+
 @mixin buttonAlignment() {
 	&.justify-start {
 		justify-content: start;
@@ -326,7 +347,7 @@
 					}
 
 					& div:nth-child(1) {
-						& button {
+						& button.components-button {
 							width: 90% !important;
 							margin: auto;
 						}
@@ -387,6 +408,43 @@
 	}
 }
 
+@mixin getSelectiveStyling($icon, $type) {
+	& input[type="#{$type}"] {
+		opacity: 0;
+		position: absolute;
+	}
+
+	& input[type="#{$type}"],
+	label {
+		display: inline-block;
+		vertical-align: middle;
+		margin: 5px;
+		cursor: pointer;
+	}
+	& label {
+		position: relative;
+		width: auto;
+	}
+	& input[type="#{$type}"] + label::before {
+		content: "";
+		background: #fff;
+		border: 2px solid #ddd;
+		display: inline-block;
+		vertical-align: middle;
+		width: 20px;
+		height: 20px;
+		padding: 2px;
+		margin-right: 10px;
+		border-radius: if($type == "radio", 100%, 0%);
+		text-align: center;
+	}
+	& input[type="#{$type}"]:checked + label::before {
+		content: if($type == "radio", "", $icon);
+		background: if($type == "radio", #928e8eeb, #fff);
+		@include dashicon();
+	}
+}
+
 @mixin successMessage() {
 	border-left: 2px solid green;
 	padding: 20px 20px;
@@ -399,10 +457,12 @@
 	& .cwp-field {
 		& input {
 			border: 3px solid;
+			background-color: transparent;
 		}
 
 		& textarea {
 			border: 3px solid;
+			background-color: transparent;
 		}
 	}
 }
@@ -413,9 +473,10 @@
 		& textarea,
 		& input {
 			border-bottom: 2px solid;
-			border-left: none;
-			border-top: none;
-			border-right: none;
+			border-top: 1px solid #eee;
+			border-right: 1px solid #eee;
+			border-left: 1px solid #eee;
+			background-color: transparent;
 
 			&:focus {
 				outline: none;
@@ -423,76 +484,21 @@
 			}
 		}
 
-		&.cwp-checkbox,
-		&.cwp-radio {
-			& .cwp-checkbox-option,
-			& .cwp-radio-option {
-				& label.cwp-active {
-					& .cwp-checkmark {
-						left: 9px;
-						top: 5px;
-						width: 5px;
-						height: 10px;
-						border: 1px solid #000;
-						padding: 6px 2px;
-
-						border-width: 0 3px 3px 0;
-						-webkit-transform: rotate(45deg);
-						-ms-transform: rotate(45deg);
-						transform: rotate(45deg);
-					}
+		&.cwp-radio,
+		&.cwp-radios {
+			& .cwp-radio-set,
+			& .cwp-radios-set {
+				& .cwp-radio-option,
+				& .cwp-radios-option {
+					@include getSelectiveStyling("\f12a", "radio");
 				}
+			}
+		}
 
-				& label {
-					display: block;
-					position: relative;
-					padding-left: 35px;
-					margin-bottom: 12px;
-					cursor: pointer;
-					font-size: 15px;
-					-webkit-user-select: none;
-					-moz-user-select: none;
-					-ms-user-select: none;
-					user-select: none;
-
-					& input[type="checkbox"],
-					& input[type="radio"] {
-						position: absolute;
-						opacity: 0;
-						cursor: pointer;
-						height: 0;
-						width: 0;
-					}
-
-					& .cwp-checkmark {
-						position: absolute;
-						top: 0;
-						left: 0;
-						height: 25px;
-						width: 25px;
-						background-color: #eee;
-					}
-
-					&:hover input[type="checkbox"] ~ .cwp-checkmark,
-					&:hover input[type="radio"] ~ .cwp-checkmark {
-						background-color: #ccc;
-					}
-
-					& input[type="checkbox"]:checked ~ .cwp-checkmark,
-					& input[type="radio"]:checked ~ .cwp-checkmark {
-						background-color: #2196f3;
-					}
-
-					& .cwp-checkmark:after {
-						content: "";
-						position: absolute;
-						display: none;
-					}
-
-					& input[type="checkbox"]:checked ~ .cwp-checkmark:after,
-					& input[type="radio"]:checked ~ .cwp-checkmark:after {
-						display: block;
-					}
+		&.cwp-checkbox {
+			& .cwp-checkbox-set {
+				& .cwp-checkbox-option {
+					@include getSelectiveStyling("\f147", "checkbox");
 				}
 			}
 		}

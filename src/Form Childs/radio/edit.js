@@ -106,12 +106,12 @@ function edit(props) {
 		props.setAttributes({ options: new_options });
 	};
 
-	const handleCheck = (e, index) => {
+	const handleCheck = (c, index) => {
 		let new_options = clone(options);
 
 		new_options.forEach(v => (v.checked = false));
 
-		new_options[index].checked = e.target.checked;
+		new_options[index].checked = c;
 
 		setRadios(new_options);
 		props.setAttributes({ options: new_options });
@@ -149,10 +149,16 @@ function edit(props) {
 					return (
 						<div className="cwp-radios-option">
 							<input
+								id={id.concat(index.toString())}
 								checked={radio.checked}
-								onClick={e => handleCheck(e, index)}
+								onClick={() => handleCheck(!radio.checked, index)}
 								type="radio"
 							/>
+							<label
+								style={{ width: "auto" }}
+								onClick={() => handleCheck(!radio.checked, index)}
+								for={id.concat(index.toString())}
+							></label>
 							{!!props.isSelected ? (
 								<input
 									onChange={e => handleChange(e, index)}
