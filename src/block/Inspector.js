@@ -8,9 +8,8 @@ import {
 	ColorPicker,
 	ColorPalette,
 	TextControl,
-	Notice
+	FormToggle
 } from "@wordpress/components";
-import { isEmpty } from "lodash";
 
 const { InspectorControls } = wp.blockEditor;
 
@@ -22,7 +21,8 @@ function Inspector(prop) {
 		email,
 		successURL,
 		successType,
-		successMessage
+		successMessage,
+		templateBuilder
 	} = props.attributes;
 
 	const handleAlignment = aln => {
@@ -72,7 +72,7 @@ function Inspector(prop) {
 
 	return (
 		<InspectorControls>
-			<PanelBody icon="admin-settings" title="Button Setting">
+			<PanelBody icon="admin-settings" title="General">
 				<div className="cwp-option">
 					<PanelRow>
 						<h3 className="cwp-heading">Alignment</h3>
@@ -117,21 +117,20 @@ function Inspector(prop) {
 					/>
 				</div>
 			</PanelBody>
-			<PanelBody icon="admin-users" title="Account Setting">
-				{isEmpty(email) && (
-					<Notice isDismissible={false} status="warning">
-						By Default Email will be sent to the admin account
-					</Notice>
-				)}
+			<PanelBody icon="info" title="Notification">
 				<div className="cwp-option">
-					<TextControl
-						label="Email Account"
-						value={email}
-						onChange={email => props.setAttributes({ email })}
-					/>
+					<PanelRow>
+						<h3>Email Builder</h3>
+						<FormToggle
+							checked={templateBuilder}
+							onChange={s =>
+								props.setAttributes({ templateBuilder: !templateBuilder })
+							}
+						/>
+					</PanelRow>
 				</div>
 			</PanelBody>
-			<PanelBody icon="yes" title="Success Setting">
+			<PanelBody icon="yes" title="Confirmation">
 				<div className="cwp-option">
 					<PanelRow>
 						<h3>Success Type</h3>

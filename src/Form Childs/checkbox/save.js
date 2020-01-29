@@ -28,13 +28,15 @@ function save(props) {
 
 	return (
 		<div className="cwp-checkbox cwp-field">
-			<div className="cwp-checkbox-set">
+			<div
+				className={`cwp-checkbox-set ${isRequired ? "required-checkbox" : ""}`}
+			>
 				{!isEmpty(label) && (
 					<label dangerouslySetInnerHTML={{ __html: getLabel() }}></label>
 				)}
 				{options.map((checkbox, index) => {
 					return (
-						<div className="cwp-checkbox-option">
+						<div className={`cwp-checkbox-option`}>
 							<input
 								{...getRequired(index)}
 								id={id.concat(index.toString())}

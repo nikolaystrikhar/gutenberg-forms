@@ -34,16 +34,14 @@ function edit(props) {
 		<Inspector data={props} />,
 		<BlockControls>
 			<Toolbar>
-				<Tooltip
-					text={__(templateBuilder ? "Preview Form" : "Template Builder")}
-				>
+				<Tooltip text={__(templateBuilder ? "Form Builder" : "Email Builder")}>
 					<Button
 						onClick={() => {
 							props.setAttributes({ templateBuilder: !templateBuilder });
 						}}
 					>
 						<BlockIcon
-							icon={templateBuilder ? "welcome-view-site" : "edit"}
+							icon={templateBuilder ? "feedback" : "email"}
 							showColors
 						/>
 					</Button>
@@ -53,6 +51,11 @@ function edit(props) {
 		!templateBuilder ? (
 			<div className={`cwp-form ${props.className}`}>
 				<InnerBlocks
+					template={[
+						["cwp/name", {}],
+						["cwp/email", {}],
+						["cwp/message", {}]
+					]}
 					templateLock={false}
 					renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
 				/>

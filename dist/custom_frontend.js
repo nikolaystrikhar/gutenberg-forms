@@ -148,5 +148,59 @@ this.maxHours=t.getHours(),this.maxMinutes=t.getMinutes(),this.d.lastSelectedDat
               language: 'en',
           });
 
+          $('.cwp-form form').each(function() {
+            $(this).on('submit' , function(e) {
+              let required_checkboxes = $(this).find('.cwp-checkbox-set.required-checkbox');
+
+              required_checkboxes.each(function(index) {
+                if ($(this).find('input:checkbox').filter(':checked').length < 1){
+                  e.preventDefault();
+                  
+
+                  if (!$(this).find('.cwp-warning').length) {
+                    $(this).append(`
+                    <div class="cwp-warning">
+                      <div>
+                        <span class="dashicons dashicons-info"></span>
+                      </div>
+                      <div>
+                        Please Select Atleast One Checkbox!
+                      </div>
+                    </div>
+                  `)
+                  }
+                } else if ($(this).find('.cwp-warning').length) {
+                  $(this).find('.cwp-warning').remove();
+                }
+              })
+
+              $(this).on('submit' , function(e) {
+                let required_radios = $(this).find('.cwp-radio-set.required-radio');
+  
+                required_radios.each(function(index) {
+                  if ($(this).find('input:radio').filter(':checked').length < 1){
+                    e.preventDefault();
+                    
+  
+                    if (!$(this).find('.cwp-warning').length) {
+                      $(this).append(`
+                      <div class="cwp-warning">
+                        <div>
+                          <span class="dashicons dashicons-info"></span>
+                        </div>
+                        <div>
+                          Please Select A Radio!
+                        </div>
+                      </div>
+                    `)
+                    }
+                  } else if ($(this).find('.cwp-warning').length) {
+                    $(this).find('.cwp-warning').remove();
+                  }
+                })
+              })
+            })
+          })
+
       })
 });

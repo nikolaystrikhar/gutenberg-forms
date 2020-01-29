@@ -46,8 +46,11 @@
                     if (array_key_exists('template' , $attributes)) {
                         $decoded_template[] = json_decode($attributes['template'], JSON_PRETTY_PRINT);
                     } else {
-                        $decoded_template['subject'] = "";
-                        $decoded_template['body'] = "";
+
+                        $decoded_template[] = array(
+                            'subject' => "",
+                            'body'    => ""
+                        );
                     }
 
                     if (array_key_exists('email' ,$attributes)) {
@@ -55,6 +58,15 @@
 
                         if ($this->validator->validate('email' , $user_email)) {
                             $decoded_template['email'] = $user_email;
+                        }
+                    }
+                    if (array_key_exists('fromEmail' ,$attributes)) {
+                        $from_email = $attributes['fromEmail'];
+
+                        if ($this->validator->isEmail($from_email)) {
+                            $decoded_template['fromEmail'] = $from_email;
+                        } else {
+                            $decoded_template['fromEmail'] = "";
                         }
                     }
 
@@ -194,14 +206,28 @@
 
             $mail_subject = $this->with_fields($fields, $template[0]['subject']);
             $mail_body = $this->with_fields($fields, $template[0]['body']);
-
-
+   
 
             if (array_key_exists('email' , $template)) {
-              // wp_mail($template['email'],$mail_subject,$mail_body); //sending the mail;
-               $this->attempt_success($template);
+                
+                
+                if ($this->validator->isEmpty($template['fromEmail'])) {
+                    wp_mail($template['email'],$mail_subject,$mail_body);
+                } else {
+                    wp_mail($template['email'],$mail_subject,$mail_body , "From: $fromEmail");
+                }
+                 
+                
+                $this->attempt_success($template);
             } else {
-                //wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body); //sending the mail;
+                if ($this->validator->isEmpty($template['fromEmail'])) {
+                    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body);
+
+
+                } else {
+
+                    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , "From: $fromEmail");
+                }
                 $this->attempt_success($template);
             }
 

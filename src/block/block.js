@@ -118,7 +118,7 @@ const { createBlock } = wp.blocks;
 registerBlockType("cwp/block-gutenberg-forms", {
 	supports: fieldSupport,
 	title: __("Gutenberg Forms"),
-	icon: __(<Icon icon="main" />),
+	icon: __("feedback"),
 	category: "common",
 	keywords: [__("gutenberg-forms"), __("forms")],
 	attributes: {
@@ -150,6 +150,10 @@ registerBlockType("cwp/block-gutenberg-forms", {
 			})
 		},
 		email: {
+			type: "string",
+			default: ""
+		},
+		fromEmail: {
 			type: "string",
 			default: ""
 		},

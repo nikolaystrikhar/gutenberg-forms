@@ -1,7 +1,13 @@
 import React, { useRef, useState } from "react";
-import { map } from "lodash";
+import { map, isEmpty } from "lodash";
 import { Fragment } from "@wordpress/element";
-import { DropdownMenu, MenuGroup, MenuItem } from "@wordpress/components";
+import {
+	DropdownMenu,
+	MenuGroup,
+	MenuItem,
+	Notice,
+	TextControl
+} from "@wordpress/components";
 import { getFieldIcon, serializeFields } from "../misc/helper";
 import $ from "jquery";
 const { getBlock } = wp.data.select("core/block-editor");
@@ -10,7 +16,7 @@ function TemplateBuilder(prop) {
 	const props = prop.data;
 
 	const { clientId } = props,
-		{ template } = props.attributes;
+		{ template, email, fromEmail } = props.attributes;
 
 	let child_fields = getBlock(clientId).innerBlocks;
 
@@ -44,8 +50,6 @@ function TemplateBuilder(prop) {
 			textAreaTxt.substring(caretPos);
 
 		if (currentForm === "subject") {
-			console.log(val);
-
 			props.setAttributes({
 				template: JSON.stringify({
 					...JSON.parse(template),
@@ -61,8 +65,6 @@ function TemplateBuilder(prop) {
 			});
 		}
 	};
-
-	console.log(serializeFields(child_fields));
 
 	return (
 		<div className="cwp-template-builder">
@@ -91,6 +93,22 @@ function TemplateBuilder(prop) {
 					)}
 				</DropdownMenu>
 			</div>
+
+			<div className="cwp-builder-field">
+				<label>To</label>
+				<input
+					value={email}
+					onChange={e => props.setAttributes({ email: e.target.value })}
+				/>
+			</div>
+
+			{/* <div className="cwp-builder-field">
+				<label>From</label>
+				<input
+					value={fromEmail}
+					onChange={e => props.setAttributes({ fromEmail: e.target.value })}
+				/>
+			</div> */}
 			<div className="cwp-builder-field">
 				<label>Subject</label>
 				<input

@@ -28,6 +28,7 @@ function save(props) {
 					data-phone="true"
 					data-rule="false"
 					placeholder={phone}
+					pattern="[\+\d\d\d\d\d\d\d\d\d\d\d]+"
 					required={isRequired}
 				/>
 			</div>

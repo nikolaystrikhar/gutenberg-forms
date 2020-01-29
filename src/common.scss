@@ -95,3 +95,15 @@
 		}
 	}
 }
+
+.cwp-warning {
+	display: flex;
+	flex-direction: row;
+	background: #fff3cd;
+	color: #856404;
+	padding: 15px;
+
+	& div:nth-child(1) {
+		margin: 3px 5px 0px 0px;
+	}
+}

@@ -19,7 +19,7 @@ function save(props) {
 
 	return (
 		<div className="cwp-radio cwp-field">
-			<div className="cwp-radio-set">
+			<div className={`cwp-radio-set ${isRequired ? "required-radio" : ""}`}>
 				{!isEmpty(label) && (
 					<label dangerouslySetInnerHTML={{ __html: getLabel() }}></label>
 				)}
