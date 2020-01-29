@@ -65,9 +65,9 @@
 
                         if ($this->validator->isEmail($from_email)) {
                             $decoded_template['fromEmail'] = $from_email;
-                        } else {
-                            $decoded_template['fromEmail'] = "";
                         }
+                    } else {
+                        $decoded_template['fromEmail'] = "";
                     }
 
                     if (array_key_exists('successType' , $attributes)) {
@@ -211,7 +211,7 @@
             if (array_key_exists('email' , $template)) {
                 
                 
-                if ($this->validator->isEmpty($template['fromEmail'])) {
+                if ($this->validator->isEmpty($fromEmail)) {
                     wp_mail($template['email'],$mail_subject,$mail_body);
                 } else {
                     wp_mail($template['email'],$mail_subject,$mail_body , "From: $fromEmail");
@@ -220,12 +220,10 @@
                 
                 $this->attempt_success($template);
             } else {
-                if ($this->validator->isEmpty($template['fromEmail'])) {
+
+                if ($this->validator->isEmpty($fromEmail)) {
                     wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body);
-
-
                 } else {
-
                     wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , "From: $fromEmail");
                 }
                 $this->attempt_success($template);
