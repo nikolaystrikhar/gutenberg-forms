@@ -22,7 +22,9 @@ function Inspector(prop) {
 		successURL,
 		successType,
 		successMessage,
-		templateBuilder
+		templateBuilder,
+		recaptcha,
+		recaptcha: { siteKey, clientSecret }
 	} = props.attributes;
 
 	const handleAlignment = aln => {
@@ -69,6 +71,10 @@ function Inspector(prop) {
 		{ name: "white", color: "#fff" },
 		{ name: "blue", color: "#00f" }
 	];
+
+	const handleCaptcha = (v, t) => {
+		props.setAttributes({ recaptcha: { ...recaptcha, [t]: v } });
+	};
 
 	return (
 		<InspectorControls>
@@ -166,6 +172,31 @@ function Inspector(prop) {
 							}
 						/>
 					)}
+				</div>
+			</PanelBody>
+			<PanelBody icon="googleplus" title="ReCapctha v3">
+				<div className="cwp-option">
+					<PanelRow>
+						<h3>Enable</h3>
+						<FormToggle
+							checked={recaptcha.enable}
+							onChange={s => handleCaptcha(!recaptcha.enable, "enable")}
+						/>
+					</PanelRow>
+				</div>
+				<div className="cwp-option">
+					<TextControl
+						label="Site Key"
+						value={siteKey}
+						onChange={v => handleCaptcha(v, "siteKey")}
+					/>
+				</div>
+				<div className="cwp-option">
+					<TextControl
+						label="Client Secret"
+						value={clientSecret}
+						onChange={v => handleCaptcha(v, "clientSecret")}
+					/>
 				</div>
 			</PanelBody>
 		</InspectorControls>

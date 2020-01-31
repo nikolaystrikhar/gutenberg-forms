@@ -385,6 +385,12 @@
 	}
 }
 
+@mixin captcha() {
+	& .cwp-captcha-inner {
+		@include field();
+	}
+}
+
 @mixin templateBuilder() {
 	& .cwp_data_drop {
 		text-align: right;

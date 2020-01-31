@@ -104,6 +104,13 @@ import numberSave from "../Form Childs/number/save";
 
 ////////////////////////////////!Number!//////////////////////////////////////////////
 
+////////////////////////////////!Captcha!//////////////////////////////////////////////
+
+import captchaEdit from "../Form Childs/captcha/edit";
+import captchaSave from "../Form Childs/captcha/save";
+
+////////////////////////////////!Captcha!//////////////////////////////////////////////
+
 import { clone } from "lodash";
 import Icon from "./Icon";
 
@@ -168,6 +175,14 @@ registerBlockType("cwp/block-gutenberg-forms", {
 		successMessage: {
 			type: "string",
 			default: "The form has been submitted Successfully!"
+		},
+		recaptcha: {
+			type: "object",
+			default: {
+				enable: false,
+				siteKey: "",
+				clientSecret: ""
+			}
 		}
 	},
 	edit: mainEdit,
@@ -184,7 +199,8 @@ const myAttrs = [
 	"phone",
 	"website",
 	"text",
-	"select"
+	"select",
+	"number"
 ];
 
 const radio_enabled_fields = ["select", "radio", "checkbox"];
@@ -763,5 +779,16 @@ registerBlockType("cwp/number", {
 			}
 		]
 	},
+	parent: fieldParents
+});
+
+registerBlockType("cwp/captcha", {
+	title: __("Captcha"),
+	icon: "warning",
+	category: "common",
+	keywords: [__("gutenberg-forms"), __("forms"), __("captcha")],
+	edit: captchaEdit,
+	save: captchaSave,
+	attributes: {},
 	parent: fieldParents
 });

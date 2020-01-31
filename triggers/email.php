@@ -1,6 +1,18 @@
 <?php 
     require_once plugin_dir_path( __DIR__ ) . 'triggers/validator.php';
 
+    function array_remove_keys($array, $keys) {
+ 
+        // array_diff_key() expected an associative array.
+        $assocKeys = array();
+        foreach($keys as $key) {
+            $assocKeys[$key] = true;
+        }
+     
+        return array_diff_key($array, $assocKeys);
+    }
+
+
     class Email {
         
         public function __construct($post_content) {
@@ -99,6 +111,36 @@
             return $templates;
         }
 
+
+        private function has_captcha($post){
+            if (array_key_exists('g-recaptcha-response' , $post)) {
+                return true;
+            } else return false;
+        }
+
+        private function execute_captchas($user_response) {
+            $fields_string = '';
+            $fields = array(
+                'secret' => '6LcYkNQUAAAAAPtrdWpDaswjXPdpQjNZj4YYUUmu',
+                'response' => $user_response
+            );
+            foreach($fields as $key=>$value)
+            $fields_string .= $key . '=' . $value . '&';
+            $fields_string = rtrim($fields_string, '&');
+    
+            $ch = curl_init();
+            curl_setopt($ch, CURLOPT_URL, 'https://www.google.com/recaptcha/api/siteverify');
+            curl_setopt($ch, CURLOPT_POST, count($fields));
+            curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
+            curl_setopt($ch, CURLOPT_RETURNTRANSFER, True);
+    
+            $result = curl_exec($ch);
+            curl_close($ch);
+    
+            return json_decode($result, true);
+
+        }
+
         public function init() {
 
 
@@ -107,8 +149,13 @@
             $post = $_POST;
             $post_without_submit = array_pop($post);
 
-            foreach ( $post as $field_id => $field_value ) {
 
+            if ($this->has_captcha($post)) {
+               var_dump($this->execute_captchas($post['g-recaptcha-response']));
+            }
+
+
+            foreach ( $post as $field_id => $field_value ) {
                 $exploded_id = explode( "__", $field_id );
 
                 $field_type = end( $exploded_id ); //type of the field i.e email,name etc;
@@ -117,6 +164,9 @@
 
                 $f_DECODED = $this->validator->decode( $field_type ); 
 
+
+                $type = array_key_exists('type' , $this->validator->decode( $field_type )) ? $this->validator->decode( $field_type )['type'] : "";
+
                 $id = end($f_DECODED);
 
                 $arranged_fields[] = array( 
@@ -124,11 +174,10 @@
                     'field_value' => $field_value,
                     'is_valid'    => $is_valid,
                     'field_id'    => $field_id,
-                    'field_type'  => $this->validator->decode( $field_type )['type']
+                    'field_type'  =>  $type
                 );
                
             }
-
            if ( $this->is_fields_valid( $arranged_fields ) ) {
                // check if all the fields are valid;
                 $this->sendMail( $arranged_fields );
@@ -212,9 +261,12 @@
                 
                 
                 if ($this->validator->isEmpty($fromEmail)) {
-                    wp_mail($template['email'],$mail_subject,$mail_body);
+                    //wp_mail($template['email'],$mail_subject,$mail_body);
+                    var_dump('Mail Send');
                 } else {
-                    wp_mail($template['email'],$mail_subject,$mail_body , "From: $fromEmail");
+                    var_dump('Mail Send');
+
+                    //wp_mail($template['email'],$mail_subject,$mail_body , "From: $fromEmail");
                 }
                  
                 
@@ -222,9 +274,13 @@
             } else {
 
                 if ($this->validator->isEmpty($fromEmail)) {
-                    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body);
+                    var_dump('Mail Send');
+
+                    //wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body);
                 } else {
-                    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , "From: $fromEmail");
+                    var_dump('Mail Send');
+
+                    //wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , "From: $fromEmail");
                 }
                 $this->attempt_success($template);
             }

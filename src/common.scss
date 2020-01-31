@@ -73,6 +73,10 @@
 			@include field();
 		}
 
+		&.cwp-captcha {
+			@include captcha();
+		}
+
 		& .cwp-checkbox-set {
 			@include checkbox-field("frontend");
 		}

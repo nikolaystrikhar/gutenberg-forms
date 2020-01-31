@@ -2,14 +2,10 @@ import React, { useEffect } from "react";
 import Inspector from "./Inspector";
 import TemplateBuilder from "./components/templateBuilder";
 const { InnerBlocks, RichText, BlockControls, BlockIcon } = wp.blockEditor;
-const {
-	Button,
-	Dashicon,
-	IconButton,
-	Toolbar,
-	Tooltip,
-	Notice
-} = wp.components;
+const { Button, Toolbar, Tooltip } = wp.components;
+
+const { getBlock } = wp.data.select("core/editor");
+const { serialize } = wp.blocks;
 const { __ } = wp.i18n;
 
 function edit(props) {
