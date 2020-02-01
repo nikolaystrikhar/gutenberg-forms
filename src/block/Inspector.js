@@ -8,6 +8,7 @@ import {
 	ColorPicker,
 	ColorPalette,
 	TextControl,
+	TextareaControl,
 	FormToggle
 } from "@wordpress/components";
 
@@ -164,7 +165,7 @@ function Inspector(prop) {
 							onChange={successURL => props.setAttributes({ successURL })}
 						/>
 					) : (
-						<TextControl
+						<TextareaControl
 							label="Success Message"
 							value={successMessage}
 							onChange={successMessage =>
@@ -174,7 +175,7 @@ function Inspector(prop) {
 					)}
 				</div>
 			</PanelBody>
-			<PanelBody icon="googleplus" title="ReCapctha v3">
+			<PanelBody icon="googleplus" title="reCAPTCHA v2">
 				<div className="cwp-option">
 					<PanelRow>
 						<h3>Enable</h3>

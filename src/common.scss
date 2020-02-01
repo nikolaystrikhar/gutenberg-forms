@@ -90,6 +90,10 @@
 		}
 	}
 
+	& .g-recaptcha {
+		margin: 20px 0px;
+	}
+
 	& .cwp-submit {
 		padding: 20px 0px;
 		display: flex;
@@ -97,6 +101,13 @@
 		& .cwp-submit-btn {
 			@include defaultSubmit();
 		}
+	}
+
+	& .cwp-danger-captcha {
+		background-color: #ed9898;
+		border-left: 2px solid $danger;
+		padding: 12px 12px;
+		color: #fff;
 	}
 }
 

@@ -54,6 +54,9 @@ function save(props) {
 						{successMessage}
 					</div>
 				)}
+				<div id={id + "-captcha"} className="cwp-danger-captcha cwp-hidden">
+					Incorrect Captcha!
+				</div>
 			</div>
 			{recaptcha.enable && (
 				<div id="cwp-protected">

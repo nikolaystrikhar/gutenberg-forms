@@ -55,6 +55,11 @@
                                         
                     $attributes = $block['attrs'];
 
+                    if (array_key_exists('recaptcha' , $attributes)) {
+                        $decoded_template['recaptcha'] = $attributes['recaptcha']; 
+                    }
+
+
                     if (array_key_exists('template' , $attributes)) {
                         $decoded_template[] = json_decode($attributes['template'], JSON_PRETTY_PRINT);
                     } else {
@@ -118,28 +123,22 @@
             } else return false;
         }
 
-        private function execute_captchas($user_response) {
-            $fields_string = '';
-            $fields = array(
-                'secret' => '6LcYkNQUAAAAAPtrdWpDaswjXPdpQjNZj4YYUUmu',
-                'response' => $user_response
-            );
-            foreach($fields as $key=>$value)
-            $fields_string .= $key . '=' . $value . '&';
-            $fields_string = rtrim($fields_string, '&');
-    
-            $ch = curl_init();
-            curl_setopt($ch, CURLOPT_URL, 'https://www.google.com/recaptcha/api/siteverify');
-            curl_setopt($ch, CURLOPT_POST, count($fields));
-            curl_setopt($ch, CURLOPT_POSTFIELDS, $fields_string);
-            curl_setopt($ch, CURLOPT_RETURNTRANSFER, True);
-    
-            $result = curl_exec($ch);
-            curl_close($ch);
-    
-            return json_decode($result, true);
+        private function execute_captchas($user_response , $secretKey) {
 
-        }
+            if ($secretKey === "") return false;
+            if ($user_response === "") return false;            
+            
+            
+            $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secretKey.'&response='.$user_response); 
+        
+            $response = json_decode($verifyResponse, true);
+
+            if (array_key_exists('success' , $response) ) {
+                return $response['success'];
+            } 
+
+            return false;
+        }   
 
         public function init() {
 
@@ -149,16 +148,10 @@
             $post = $_POST;
             $post_without_submit = array_pop($post);
 
-
-            if ($this->has_captcha($post)) {
-               var_dump($this->execute_captchas($post['g-recaptcha-response']));
-            }
-
-
             foreach ( $post as $field_id => $field_value ) {
                 $exploded_id = explode( "__", $field_id );
 
-                $field_type = end( $exploded_id ); //type of the field i.e email,name etc;
+                $field_type = end( $exploded_id ); //type of th e field i.e email,name etc;
 
                 $is_valid = $this->validator->validate( $field_type, $field_value );
 
@@ -172,12 +165,14 @@
                 $arranged_fields[] = array( 
                     'field_data_id' => $id,
                     'field_value' => $field_value,
-                    'is_valid'    => $is_valid,
-                    'field_id'    => $field_id,
+                    'is_valid'    => $field_id === "g-recaptcha-response" ? true: $is_valid,
+                    'field_id'    => $field_id , 
                     'field_type'  =>  $type
                 );
                
             }
+
+
            if ( $this->is_fields_valid( $arranged_fields ) ) {
                // check if all the fields are valid;
                 $this->sendMail( $arranged_fields );
@@ -255,18 +250,31 @@
 
             $mail_subject = $this->with_fields($fields, $template[0]['subject']);
             $mail_body = $this->with_fields($fields, $template[0]['body']);
-   
+            
+
+            $post = $_POST;
+
+
+            if ($this->has_captcha($post)) {
+                $captcha_success = $this->execute_captchas($post['g-recaptcha-response'], $template['recaptcha']['clientSecret']);
+
+                if (!$captcha_success) {
+                    $captcha_danger = $_POST['submit']."-captcha";
+
+                    echo "<style> .cwp-danger-captcha#$captcha_danger { display:block !important } </style>";
+
+                    return;
+                }
+            }
+
+
 
             if (array_key_exists('email' , $template)) {
-                
-                
+               
                 if ($this->validator->isEmpty($fromEmail)) {
-                    //wp_mail($template['email'],$mail_subject,$mail_body);
-                    var_dump('Mail Send');
+                    wp_mail($template['email'],$mail_subject,$mail_body);
                 } else {
-                    var_dump('Mail Send');
-
-                    //wp_mail($template['email'],$mail_subject,$mail_body , "From: $fromEmail");
+                    wp_mail($template['email'],$mail_subject,$mail_body , "From: $fromEmail");
                 }
                  
                 
@@ -274,13 +282,9 @@
             } else {
 
                 if ($this->validator->isEmpty($fromEmail)) {
-                    var_dump('Mail Send');
-
-                    //wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body);
+                    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body);
                 } else {
-                    var_dump('Mail Send');
-
-                    //wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , "From: $fromEmail");
+                    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , "From: $fromEmail");
                 }
                 $this->attempt_success($template);
             }

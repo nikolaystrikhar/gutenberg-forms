@@ -57,6 +57,7 @@ function gutenberg_forms_cgb_block_assets()
 	);
 }
 
+
 // Our custom post type function
 function create_posttype() {
 
@@ -102,8 +103,28 @@ function submitter() {
 
 }
 
+function my_admin_page_contents() {
+	return "<h1>Hola World</h1>";
+}
 
 
+// require_once plugin_dir_path( __DIR__ ) . 'admin/admin.php';
+
+// function my_sub_menu() {
+
+// 	add_submenu_page( 
+// 		"edit.php?post_type=forms", 
+// 		__( 'Form Settings', 'my-textdomain' ),
+// 		__( 'Form Settings', 'my-textdomain' ), 
+// 		'manage_options', 
+// 		'cwp-forms-settings', 
+// 		'Settings'
+// 	);
+
+// }
+
+
+// add_action( 'admin_menu', 'my_sub_menu' );
 
 //custom_postype for our gutenberg-forms;
 add_action('wp_head' , 'submitter');
