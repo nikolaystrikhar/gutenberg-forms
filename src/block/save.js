@@ -22,10 +22,10 @@ function save(props) {
 			  };
 
 	`;
-
+	
 	return (
 		<Fragment>
-			<div className="cwp-form">
+			<div className={`cwp-form ${props.className}`}>
 				<form data-parsley-validate method="POST">
 					<InnerBlocks.Content />
 					{recaptcha.enable && (

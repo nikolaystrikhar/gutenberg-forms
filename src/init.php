@@ -59,29 +59,29 @@ function gutenberg_forms_cgb_block_assets()
 
 
 // Our custom post type function
-function create_posttype() {
+// function create_posttype() {
 
-	register_post_type(
-		'forms',
-		// CPT Options
-		array(
-			'labels' => array(
-				'name' => __('Forms'),
-				'singular_name' => __('Form')
-			),
-			'icon' => 'email-alt',
-			'supports' => array('editor', 'title'),
-			'show_in_rest' => true,
-			'template' => array(
-				array( 'cwp/block-gutenberg-forms', array() )
-			),
-			'template_lock' => 'all',
-			'public' => true,
-			'has_archive' => true,
-			'rewrite' => array('slug' => 'forms'),
-		)
-	);
-}
+// 	register_post_type(
+// 		'forms',
+// 		// CPT Options
+// 		array(
+// 			'labels' => array(
+// 				'name' => __('Forms'),
+// 				'singular_name' => __('Form')
+// 			),
+// 			'icon' => 'email-alt',
+// 			'supports' => array('editor', 'title'),
+// 			'show_in_rest' => true,
+// 			'template' => array(
+// 				array( 'cwp/block-gutenberg-forms', array() )
+// 			),
+// 			'template_lock' => 'all',
+// 			'public' => true,
+// 			'has_archive' => true,
+// 			'rewrite' => array('slug' => 'forms'),
+// 		)
+// 	);
+// }
 
 
 require_once plugin_dir_path( __DIR__ ) . 'triggers/email.php';
@@ -129,5 +129,5 @@ function my_admin_page_contents() {
 //custom_postype for our gutenberg-forms;
 add_action('wp_head' , 'submitter');
 add_action('wp-load' , 'submitter');
-add_action('init', 'create_posttype');
+// add_action('init', 'create_posttype');
 add_action('init', 'gutenberg_forms_cgb_block_assets');

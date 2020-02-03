@@ -392,16 +392,43 @@
 }
 
 @mixin templateBuilder() {
+	background: #eee;
+	padding: 20px;
+
+	& h3 {
+		text-align: center;
+
+		& svg {
+			vertical-align: bottom;
+		}
+	}
+
+	& p {
+		color: #746b6b;
+	}
+
 	& .cwp_data_drop {
 		text-align: right;
+
+		& span {
+			vertical-align: text-bottom;
+		}
+
 		& button {
 			margin-left: auto !important;
+			color: #000 !important;
 		}
 	}
 
 	& .cwp-builder-field {
 		display: block;
 		margin: 10px 0px;
+
+		& label {
+			& span {
+				color: $danger;
+			}
+		}
 
 		& textarea {
 			width: 100%;
@@ -411,6 +438,10 @@
 		& input {
 			width: 100%;
 		}
+	}
+
+	& .cwp-save_template {
+		text-align: right;
 	}
 }
 

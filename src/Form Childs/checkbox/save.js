@@ -1,5 +1,6 @@
 import React from "react";
 import { isEmpty } from "lodash";
+import { strip_tags } from "../../block/misc/helper";
 
 function save(props) {
 	const { isRequired, options, label, id } = props.attributes;
@@ -38,6 +39,7 @@ function save(props) {
 					return (
 						<div className={`cwp-checkbox-option`}>
 							<input
+								aria-label={strip_tags(label)}
 								{...getRequired(index)}
 								id={id.concat(index.toString())}
 								name={id}

@@ -1,4 +1,5 @@
 import { isEmpty } from "lodash";
+import { strip_tags } from "../../block/misc/helper";
 
 function save(props) {
 	const { isRequired, options, label, id } = props.attributes;
@@ -27,6 +28,7 @@ function save(props) {
 					return (
 						<div className="cwp-radio-option">
 							<input
+								aria-label={strip_tags(label)}
 								id={id.concat(index.toString())}
 								name={id}
 								data-rule="false"

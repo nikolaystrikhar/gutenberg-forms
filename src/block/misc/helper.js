@@ -72,3 +72,9 @@ export function serializeFields(fields) {
 
 	return f;
 }
+
+export function strip_tags(str) {
+	let withoutTags = str.replace(/<[^>]*>?/gm, "");
+
+	return str;
+}

@@ -90,7 +90,7 @@
                     if (array_key_exists('successType' , $attributes)) {
                         $decoded_template['successType'] = $attributes['successType'];
                     } else {
-                        $decoded_template['successType'] = "url";
+                        $decoded_template['successType'] = "message";
                     }
 
                     if (array_key_exists('successURL' , $attributes)) {

@@ -9,7 +9,8 @@ import {
 import {
 	getFieldName,
 	extract_id,
-	getEncodedData
+	getEncodedData,
+	strip_tags
 } from "../../block/misc/helper";
 
 const { InspectorControls, BlockControls, BlockIcon } = wp.blockEditor;
@@ -93,6 +94,7 @@ function edit(props) {
 		return (
 			<div className="cwp-select-option">
 				<input
+					aria-label={strip_tags(label)}
 					onChange={e => handleChange(e, index)}
 					type="text"
 					value={s.label}

@@ -1,5 +1,6 @@
 import React from "react";
 import { isEmpty } from "lodash";
+import { strip_tags } from "../../block/misc/helper";
 
 function save(props) {
 	const { text, isRequired, label, id } = props.attributes;
@@ -23,6 +24,7 @@ function save(props) {
 					<label dangerouslySetInnerHTML={{ __html: getLabel() }}></label>
 				)}
 				<input
+					aria-label={strip_tags(label)}
 					name={id}
 					data-rule="false"
 					data-cwp-field

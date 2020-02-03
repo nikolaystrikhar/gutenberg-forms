@@ -1,5 +1,6 @@
 import React from "react";
 import { isEmpty } from "lodash";
+import { strip_tags } from "../../block/misc/helper";
 
 function save(props) {
 	const { message, isRequired, label, id, height } = props.attributes;
@@ -23,6 +24,7 @@ function save(props) {
 					<label dangerouslySetInnerHTML={{ __html: getLabel() }}></label>
 				)}
 				<textarea
+					aria-label={strip_tags(label)}
 					style={{ height: height }}
 					data-cwp-field
 					name={id}

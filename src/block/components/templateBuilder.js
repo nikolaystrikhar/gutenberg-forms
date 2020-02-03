@@ -5,8 +5,8 @@ import {
 	DropdownMenu,
 	MenuGroup,
 	MenuItem,
-	Notice,
-	TextControl
+	Icon,
+	Button
 } from "@wordpress/components";
 import { getFieldIcon, serializeFields } from "../misc/helper";
 import $ from "jquery";
@@ -16,7 +16,7 @@ function TemplateBuilder(prop) {
 	const props = prop.data;
 
 	const { clientId } = props,
-		{ template, email, fromEmail } = props.attributes;
+		{ template, email, fromEmail, templateBuilder } = props.attributes;
 
 	let child_fields = getBlock(clientId).innerBlocks;
 
@@ -68,7 +68,16 @@ function TemplateBuilder(prop) {
 
 	return (
 		<div className="cwp-template-builder">
+			<h3>
+				<Icon icon="email" size="40" /> Email Builder
+			</h3>
+			<p>
+				This is where you can edit the template that will be sent to the email
+				Address. If no email is entered then the email will by default sent to
+				the admin email!
+			</p>
 			<div className="cwp_data_drop">
+				<span>Field Data</span>
 				<DropdownMenu icon="list-view" label="Add Field Data">
 					{({ onClose }) => (
 						<Fragment>
@@ -110,7 +119,9 @@ function TemplateBuilder(prop) {
 				/>
 			</div> */}
 			<div className="cwp-builder-field">
-				<label>Subject</label>
+				<label>
+					Subject <span>*</span>
+				</label>
 				<input
 					ref={subjectArea}
 					onClick={() => setCurrentForm("subject")}
@@ -120,7 +131,9 @@ function TemplateBuilder(prop) {
 			</div>
 
 			<div className="cwp-builder-field">
-				<label>Body</label>
+				<label>
+					Body <span>*</span>
+				</label>
 				<textarea
 					ref={bodyArea}
 					value={body}
@@ -129,6 +142,16 @@ function TemplateBuilder(prop) {
 						handleChange(e, "body");
 					}}
 				></textarea>
+			</div>
+			<div className="cwp-save_template">
+				<Button
+					isPrimary
+					onClick={() => {
+						props.setAttributes({ templateBuilder: !templateBuilder });
+					}}
+				>
+					Save
+				</Button>
 			</div>
 		</div>
 	);

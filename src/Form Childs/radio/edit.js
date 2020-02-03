@@ -159,7 +159,7 @@ function edit(props) {
 								onClick={() => handleCheck(!radio.checked, index)}
 								for={id.concat(index.toString())}
 							></label>
-							{!!props.isSelected ? (
+							{ !! props.isSelected ? (
 								<input
 									onChange={e => handleChange(e, index)}
 									type="text"

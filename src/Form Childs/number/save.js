@@ -1,5 +1,6 @@
 import React from "react";
 import { isEmpty } from "lodash";
+import { strip_tags } from "../../block/misc/helper";
 
 function save(props) {
 	const {
@@ -44,6 +45,7 @@ function save(props) {
 					/>
 				) : (
 					<input
+						aria-label={strip_tags(label)}
 						data-cwp-field
 						data-parsley-type="integer"
 						name={id}

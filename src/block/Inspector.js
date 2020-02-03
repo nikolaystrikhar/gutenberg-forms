@@ -1,4 +1,4 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
 	PanelRow,
 	PanelBody,
@@ -9,7 +9,8 @@ import {
 	ColorPalette,
 	TextControl,
 	TextareaControl,
-	FormToggle
+	FormToggle,
+	Notice
 } from "@wordpress/components";
 
 const { InspectorControls } = wp.blockEditor;
@@ -40,11 +41,11 @@ function Inspector(prop) {
 	const getAlignmentProps = aln => {
 		if (buttonSetting.alignment === aln)
 			return {
-				isDefault: true
+				isPrimary: true
 			};
 
 		return {
-			isPrimary: true
+			isDefault: true
 		};
 	};
 
@@ -63,7 +64,7 @@ function Inspector(prop) {
 					isPrimary: true
 			  }
 			: {
-					isDefault: false
+					isDefault: true
 			  };
 	};
 
@@ -82,7 +83,7 @@ function Inspector(prop) {
 			<PanelBody icon="admin-settings" title="General">
 				<div className="cwp-option">
 					<PanelRow>
-						<h3 className="cwp-heading">Alignment</h3>
+						<h3 className="cwp-heading">Button Alignment</h3>
 						<ButtonGroup>
 							<Button
 								{...getAlignmentProps("justify-start")}
@@ -106,7 +107,7 @@ function Inspector(prop) {
 					</PanelRow>
 				</div>
 				<div className="cwp-option">
-					<h3 className="cwp-heading">Background Color</h3>
+					<h3 className="cwp-heading">Button Background Color</h3>
 					<ColorPicker
 						color={buttonSetting.backgroundColor}
 						onChangeComplete={c =>
@@ -116,7 +117,7 @@ function Inspector(prop) {
 					/>
 				</div>
 				<div className="cwp-option">
-					<h3 className="cwp-heading">Color</h3>
+					<h3 className="cwp-heading">Button Color</h3>
 					<ColorPalette
 						colors={colors}
 						value={buttonSetting.color}
@@ -177,6 +178,15 @@ function Inspector(prop) {
 			</PanelBody>
 			<PanelBody icon="googleplus" title="reCAPTCHA v2">
 				<div className="cwp-option">
+					<p>
+						reCAPTCHA requires a Site and Private API key. Sign up for a free{" "}
+						<a href="https://www.google.com/recaptcha" target="__blank">
+							reCAPTCHA key
+						</a>
+						.
+					</p>
+				</div>
+				<div className="cwp-option">
 					<PanelRow>
 						<h3>Enable</h3>
 						<FormToggle
@@ -185,20 +195,31 @@ function Inspector(prop) {
 						/>
 					</PanelRow>
 				</div>
-				<div className="cwp-option">
-					<TextControl
-						label="Site Key"
-						value={siteKey}
-						onChange={v => handleCaptcha(v, "siteKey")}
-					/>
-				</div>
-				<div className="cwp-option">
-					<TextControl
-						label="Client Secret"
-						value={clientSecret}
-						onChange={v => handleCaptcha(v, "clientSecret")}
-					/>
-				</div>
+				{recaptcha.enable && (
+					<Fragment>
+						<div className="cwp-option">
+							<TextControl
+								label="Site Key"
+								value={siteKey}
+								onChange={v => handleCaptcha(v, "siteKey")}
+							/>
+						</div>
+						<div className="cwp-option">
+							<TextControl
+								label="Client Secret"
+								value={clientSecret}
+								onChange={v => handleCaptcha(v, "clientSecret")}
+							/>
+						</div>
+					</Fragment>
+				)}
+				{recaptcha.enable && (
+					<div className="cwp-option">
+						<p>
+							<Icon icon="info" /> Will only work & show on front-end.
+						</p>
+					</div>
+				)}
 			</PanelBody>
 		</InspectorControls>
 	);
