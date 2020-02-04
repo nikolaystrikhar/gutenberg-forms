@@ -36,14 +36,16 @@ function edit(props) {
 				id:
 					props.clientId +
 					"__" +
-					getEncodedData("checkbox", props.clientId, isRequired)
+					getEncodedData("checkbox", props.clientId, isRequired) +
+					"[]"
 			});
 		} else if (field_name !== "") {
 			props.setAttributes({
 				id:
 					extract_id(field_name) +
 					"__" +
-					getEncodedData("checkbox", extract_id(field_name), isRequired)
+					getEncodedData("checkbox", extract_id(field_name), isRequired) +
+					"[]"
 			});
 		}
 	}, []);

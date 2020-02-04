@@ -162,11 +162,12 @@
 
                 $id = end($f_DECODED);
 
+
                 $arranged_fields[] = array( 
                     'field_data_id' => $id,
-                    'field_value' => $field_value,
+                    'field_value' => is_array($field_value) ? join("," , $field_value) : $field_value,
                     'is_valid'    => $field_id === "g-recaptcha-response" ? true: $is_valid,
-                    'field_id'    => $field_id , 
+                    'field_id'    => $field_id, 
                     'field_type'  =>  $type
                 );
                
@@ -240,6 +241,18 @@
 
         }
 
+        private function get_multiple($field) {
+            if( isset($field) && is_array($field) ) {
+                foreach($field as $fruit) {
+                    // eg. "I have a grapefruit!"
+                    echo "I have a {$fruit}!";
+                    // -- insert into database call might go here
+                }
+            
+                return $fruitList = implode(', ', $field);
+            }
+        }
+
         public function sendMail( $fields ) {
 
             $template = $this->get_templates($_POST['submit'])[0];
@@ -267,8 +280,6 @@
                 }
             }
 
-
-
             if (array_key_exists('email' , $template)) {
                
                 if ($this->validator->isEmpty($fromEmail)) {
@@ -288,6 +299,7 @@
                 }
                 $this->attempt_success($template);
             }
+
 
         }
       

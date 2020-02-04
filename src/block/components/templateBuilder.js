@@ -1,4 +1,4 @@
-import React, { useRef, useState } from "react";
+import React, { useRef, useState, useEffect } from "react";
 import { map, isEmpty } from "lodash";
 import { Fragment } from "@wordpress/element";
 import {
@@ -33,6 +33,21 @@ function TemplateBuilder(prop) {
 
 	const subject = JSON.parse(template).subject;
 	const body = JSON.parse(template).body;
+
+	useEffect(() => {
+		if (isEmpty(subject) && isEmpty(body)) {
+			const fields = serializeFields(child_fields).map(v => {
+				return "{{" + v.field_id + "}}";
+			});
+
+			props.setAttributes({
+				template: JSON.stringify({
+					subject: "New Form Submission",
+					body: ` Form Data: \n ${fields.join("\n")} `
+				})
+			});
+		}
+	}, []);
 
 	const [currentForm, setCurrentForm] = useState("subject");
 
