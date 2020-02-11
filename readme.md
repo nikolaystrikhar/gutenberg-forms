@@ -1,13 +1,9 @@
-=== WordPress Form Builder Plugin - Gutenberg Forms ===
-Contributors: munirkamal
-Tags: wordpress form,  gutenberg form, contact form, gutenberg block, contact form plugin, forms, form builder, custom form, contact button, contact me, custom contact form, form manager, form, forms builder, forms creator, captcha, recaptcha, Akismet, email form, web form, feedback form, email submit form, message form, contact form block, wordpress form plugin
-Requires at least: 4.8
-Tested up to: 5.3
-Stable tag: 1.0.4
-License: GPLv2 or later
-License URI: https://www.gnu.org/licenses/gpl-2.0.html
+# WordPress Form Builder Plugin - Gutenberg Forms
 
-The Next Generation WordPress Form Builder. Build forms directly within Gutenberg editor live. Add & arrange form fields like blocks.
+[![WordPress plugin](https://img.shields.io/wordpress/plugin/dt/forms-gutenberg.svg?style=flat)](https://wordpress.org/plugins/forms-gutenberg/) [![WordPress plugin](https://img.shields.io/wordpress/plugin/v/forms-gutenberg.svg?style=flat)](https://wordpress.org/plugins/forms-gutenberg/) [![WordPress](https://img.shields.io/wordpress/v/forms-gutenberg.svg?style=flat)]() [![License](https://img.shields.io/badge/license-GPL--2.0%2B-red.svg)](https://github.com/munirkamal/gutenberg-forms/blob/master/LICENSE)
+
+
+[Gutenberg Forms](https://wordpress.org/plugins/forms-gutenberg/) is the Next Generation WordPress Form Builder. Build forms directly within Gutenberg editor live. Add & arrange form fields like blocks.
 
 
 == Description ==
