@@ -1,15 +1,14 @@
 <?php
 /**
- * Plugin Name: gutenberg-forms
- * Plugin URI: https://github.com/ahmadawais/create-guten-block/
- * Description: gutenberg-forms — is a Gutenberg plugin.
- * Author: zafarKamal
- * Author URI: https://demo.cakewp.com/
- * Version: 1.0.0
- * License: GPL2+
+ * Plugin Name: WordPress Form Builder Plugin - Gutenberg Forms
+ * Plugin URI: https://www.gutenbergforms.com
+ * Description: The Next Generation WordPress Form Builder. Build forms directly within Gutenberg editor live. Add & arrange form fields like blocks.
+ * Author: munirkamal
+ * Author URI: https://cakewp.com/
+ * Version: 1.0.4
+ * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
  *
- * @package CGB
  */
 
 if ( ! defined( 'ABSPATH' ) ) {
