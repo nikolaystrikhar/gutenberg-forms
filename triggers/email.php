@@ -280,15 +280,9 @@
             if (array_key_exists('email' , $template)) {
                
                 if ($this->validator->isEmpty($fromEmail)) {
-                    // wp_mail($template['email'],$mail_subject,$mail_body);
-
-                    var_dump('MAIL SENDED');
-
+                    wp_mail($template['email'],$mail_subject,$mail_body);
                 } else {
-
-                    var_dump('MAIL SENDED');
-
-                    // wp_mail($template['email'],$mail_subject,$mail_body , "From: $fromEmail");
+                    wp_mail($template['email'],$mail_subject,$mail_body , "From: $fromEmail");
                 }
                  
                 
@@ -296,15 +290,9 @@
             } else {
 
                 if ($this->validator->isEmpty($fromEmail)) {
-
-                    var_dump('MAIL SENDED');
-
-                    // wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body);
+                    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body);
                 } else {
-
-                    var_dump('MAIL SENDED');
-
-                    // wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , "From: $fromEmail");
+                    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , "From: $fromEmail");
                 }
                 $this->attempt_success($template);
             }
