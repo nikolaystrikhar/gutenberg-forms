@@ -12,6 +12,17 @@
 
         }
 
+        public function sanitizedValue( $type, $value ) {
+            # This function will sanitize all the fields according to thier types with php build in filters.
+
+            if ($type === "email") {
+                return filter_var( $value, FILTER_SANITIZE_EMAIL );
+            }
+
+            return filter_var( $value, FILTER_SANITIZE_SPECIAL_CHARS );
+
+        }
+
         public function isEmail($email) {
 
             if ( !filter_var( $email , FILTER_VALIDATE_EMAIL ) ) return false;

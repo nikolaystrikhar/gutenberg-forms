@@ -74,7 +74,7 @@ function edit(props) {
 			</InspectorControls>
 		),
 		!!props.isSelected && <BlockControls></BlockControls>,
-		<div className="cwp-field cwp-datepicker">
+		<div className={`cwp-field cwp-datepicker ${props.className}`}>
 			{!!props.isSelected && (
 				<div className="cwp-required">
 					<h3>Required</h3>

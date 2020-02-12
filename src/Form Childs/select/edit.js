@@ -133,7 +133,11 @@ function edit(props) {
 			</PanelBody>
 		</InspectorControls>,
 		null,
-		<div className="cwp-select cwp-field">
+		<div
+			className={`cwp-select cwp-field ${
+				!props.isSelected ? props.className : ""
+			}`}
+		>
 			{!!props.isSelected && (
 				<div className="cwp-required">
 					<h3>Required</h3>

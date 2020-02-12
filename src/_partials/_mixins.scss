@@ -48,6 +48,8 @@
 }
 
 @mixin field() {
+	margin: 20px 0px;
+
 	& input {
 		width: 100%;
 		padding: 10px 10px;
@@ -86,8 +88,6 @@
 	}
 
 	& label {
-		width: 100%;
-
 		& span {
 			color: darken($secondaryColor, 20%);
 			font-weight: 600;
@@ -538,6 +538,41 @@
 					@include getSelectiveStyling("\f147", "checkbox");
 				}
 			}
+		}
+	}
+}
+
+@mixin inline-field($margin) {
+	display: flex;
+	flex-direction: row; //for inline label
+	align-items: top;
+
+	& .cwp-radios-option,
+	& .cwp-checkbox-option {
+		margin: 0px 10px;
+	}
+
+	& select {
+		width: 100%;
+	}
+
+	& div[role="textbox"] {
+		display: flex;
+		width: auto !important;
+		margin: $margin;
+
+		& span {
+			margin: 0px 5px;
+		}
+	}
+
+	& label {
+		display: flex;
+		width: auto !important;
+		margin: $margin;
+
+		& span {
+			margin: 0px 5px;
 		}
 	}
 }

@@ -2,11 +2,9 @@
 
 [![WordPress plugin](https://img.shields.io/wordpress/plugin/dt/forms-gutenberg.svg?style=flat)](https://wordpress.org/plugins/forms-gutenberg/) [![WordPress plugin](https://img.shields.io/wordpress/plugin/v/forms-gutenberg.svg?style=flat)](https://wordpress.org/plugins/forms-gutenberg/) [![WordPress](https://img.shields.io/wordpress/v/forms-gutenberg.svg?style=flat)]() [![License](https://img.shields.io/badge/license-GPL--2.0%2B-red.svg)](https://github.com/munirkamal/gutenberg-forms/blob/master/LICENSE)
 
-
 [Gutenberg Forms](https://wordpress.org/plugins/forms-gutenberg/) is the Next Generation WordPress Form Builder. Build forms directly within Gutenberg editor live. Add & arrange form fields like blocks.
 
 [![Gutenberg Forms, is the Next Generation WordPress Form Builder](https://ps.w.org/forms-gutenberg/assets/banner-1544x500.png)](https://wordpress.org/plugins/forms-gutenberg/)
-
 
 ## Description
 
@@ -18,26 +16,24 @@ That’s why we built <a href="https://gutenbergforms.com/" rel="friend" title="
 
 Gutenberg Forms adds a Form Block in Gutenberg and all the form fields are child blocks which you can add within the Form Block, nice and easy. You can add multiple contact forms, and you can customize the form within the Gutenberg Editor. Google reCAPTCHA integration added for spam filtering.
 
-
 ## Privacy Notice
 
 With the default configuration, this plugin, in itself, does not:
 
-* track users by stealth;
-* write any user personal data to the database (as of now);
-* send any data to external servers;
-* use cookies.
+- track users by stealth;
+- write any user personal data to the database (as of now);
+- send any data to external servers;
+- use cookies.
 
 If you activate certain features in this plugin, the contact form submitter's personal data, including their IP address, may be sent to the service provider. Thus, confirming the provider's privacy policy is recommended. These features include:
 
-* reCAPTCHA ([Google](https://policies.google.com/?hl=en))
-
+- reCAPTCHA ([Google](https://policies.google.com/?hl=en))
 
 ## Connect
 
--   [Download on WordPress.org](https://wordpress.org/plugins/forms-gutenberg/)
--   [Follow Author on Twitter](https://twitter.com/m_munirkamal)
--   [Visit Website](https://gutenbergforms.com/)
+- [Download on WordPress.org](https://wordpress.org/plugins/forms-gutenberg/)
+- [Follow Author on Twitter](https://twitter.com/m_munirkamal)
+- [Visit Website](https://gutenbergforms.com/)
 
 ## Support
 
@@ -74,17 +70,23 @@ We appreciate all contributions and don't want a wall of rules to get in the way
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
+= 1.0.5 =
+
+- Fixed: Frontend Styling
+- Added: Inline field Styling
+- Improved: Sanitization
+
 = 1.0.4 (04 Feb 2020) =
 
-* Re-done the entire plugin from scratch to work with the latest Gutenberg APIs.
-* Added: Email Notification Builder
-* Added: Form Columns Block
-* Added: Transform Fields to Another functionality
+- Re-done the entire plugin from scratch to work with the latest Gutenberg APIs.
+- Added: Email Notification Builder
+- Added: Form Columns Block
+- Added: Transform Fields to Another functionality
 
 = 1.0.1 (18 Oct 2018) =
 
-* Fixed: Minor issues.
+- Fixed: Minor issues.
 
 = 1.0.0 (16 Oct 2018) =
 
-* Initial release with the basic functionality and fields added.
+- Initial release with the basic functionality and fields added.

@@ -57,6 +57,12 @@ For basic usage, you can also have a look at the plugin website [Gutenberg Forms
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
+= 1.0.5 =
+
+- Fixed: Frontend Styling
+- Added: Inline field Styling
+- Improved: Sanitization
+
 = 1.0.4 (04 Feb 2020) =
 
 * Re-done the entire plugin from scratch to work with the latest Gutenberg APIs.

@@ -140,6 +140,9 @@
             return false;
         }   
 
+
+
+
         public function init() {
 
 
@@ -162,17 +165,17 @@
 
                 $id = end($f_DECODED);
 
+                $sanitizedValue = $this->validator->sanitizedValue($type, $field_value);
 
                 $arranged_fields[] = array( 
                     'field_data_id' => $id,
-                    'field_value' => is_array($field_value) ? join("," , $field_value) : $field_value,
+                    'field_value' => is_array($field_value) ? join("," , $field_value) : $sanitizedValue,
                     'is_valid'    => $field_id === "g-recaptcha-response" ? true: $is_valid,
                     'field_id'    => $field_id, 
                     'field_type'  =>  $type
                 );
                
             }
-
 
            if ( $this->is_fields_valid( $arranged_fields ) ) {
                // check if all the fields are valid;
@@ -243,13 +246,7 @@
 
         private function get_multiple($field) {
             if( isset($field) && is_array($field) ) {
-                foreach($field as $fruit) {
-                    // eg. "I have a grapefruit!"
-                    echo "I have a {$fruit}!";
-                    // -- insert into database call might go here
-                }
-            
-                return $fruitList = implode(', ', $field);
+                return $fieldList = implode(', ', $field);
             }
         }
 
@@ -283,9 +280,15 @@
             if (array_key_exists('email' , $template)) {
                
                 if ($this->validator->isEmpty($fromEmail)) {
-                    wp_mail($template['email'],$mail_subject,$mail_body);
+                    // wp_mail($template['email'],$mail_subject,$mail_body);
+
+                    var_dump('MAIL SENDED');
+
                 } else {
-                    wp_mail($template['email'],$mail_subject,$mail_body , "From: $fromEmail");
+
+                    var_dump('MAIL SENDED');
+
+                    // wp_mail($template['email'],$mail_subject,$mail_body , "From: $fromEmail");
                 }
                  
                 
@@ -293,9 +296,15 @@
             } else {
 
                 if ($this->validator->isEmpty($fromEmail)) {
-                    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body);
+
+                    var_dump('MAIL SENDED');
+
+                    // wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body);
                 } else {
-                    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , "From: $fromEmail");
+
+                    var_dump('MAIL SENDED');
+
+                    // wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , "From: $fromEmail");
                 }
                 $this->attempt_success($template);
             }

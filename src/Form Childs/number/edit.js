@@ -100,7 +100,7 @@ function edit(props) {
 			</InspectorControls>
 		),
 		!!props.isSelected && <BlockControls></BlockControls>,
-		<div className="cwp-number cwp-field">
+		<div className={`cwp-number cwp-field ${props.className}`}>
 			{!!props.isSelected && (
 				<div className="cwp-required">
 					<h3>Range Slider</h3>

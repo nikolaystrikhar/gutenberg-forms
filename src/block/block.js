@@ -104,16 +104,17 @@ import numberSave from "../Form Childs/number/save";
 
 ////////////////////////////////!Number!//////////////////////////////////////////////
 
-import { clone } from "lodash";
-import Icon from "./Icon";
+import { applyFormStyles } from "./formStyles/index";
+import { registerFieldStyles } from "./fieldStyles/index";
+import { getFieldTransform } from "./functions/index";
+
+//for sanitizing the label
 
 const fieldParents = ["cwp/block-gutenberg-forms", "cwp/column"],
 	fieldSupport = {
 		align: true,
 		align: ["wide", "full", "center"]
 	};
-
-const { createBlock } = wp.blocks;
 
 registerBlockType("cwp/block-gutenberg-forms", {
 	supports: fieldSupport,
@@ -196,47 +197,8 @@ const myAttrs = [
 	"number"
 ];
 
-const radio_enabled_fields = ["select", "radio", "checkbox"];
-
-//for striping out the rich_text tags;
-const stripTags = str => {
-	return str.replace(/<[^>]*>?/gm, ""); //some fancy
-};
-
-wp.blocks.registerBlockStyle("cwp/block-gutenberg-forms", {
-	name: "paper",
-	label: "Paper"
-});
-
-//?custom-function for fields_transformation purpose;
-
-const getFieldTransform = (attrs, field) => {
-	const matchedKey = myAttrs.find(prop => prop in attrs);
-	const fieldBlock = "cwp/".concat(field);
-
-	const config = {
-		isRequired: attrs.isRequired,
-		[field]: attrs[matchedKey]
-	};
-
-	if (
-		!myAttrs.includes(stripTags(attrs.label.toLowerCase())) &&
-		stripTags(attrs.label) !== "Choose One"
-	) {
-		//when the label has changed...
-		config.label = attrs.label;
-	}
-
-	if (radio_enabled_fields.includes(field) && attrs.options) {
-		//^^^ This condition ensures that we are
-		// 	  currently transforming from a radio_enabled_field into
-		//	  another radio_enabled_field;
-
-		config.options = attrs.options; //Like a piece of cake ;-D
-	}
-
-	return createBlock(fieldBlock, config);
-};
+applyFormStyles("cwp/block-gutenberg-forms"); //registering styles
+registerFieldStyles(myAttrs); //registering field styles
 
 registerBlockType("cwp/name", {
 	title: __("Name"),

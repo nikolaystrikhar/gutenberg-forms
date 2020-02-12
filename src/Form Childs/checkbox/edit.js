@@ -114,7 +114,7 @@ function edit(props) {
 			</PanelBody>
 		</InspectorControls>,
 		null,
-		<div className="cwp-checkbox cwp-field">
+		<div className={`cwp-checkbox cwp-field ${props.className}`}>
 			{!!props.isSelected && (
 				<div className="cwp-required">
 					<h3>Required</h3>
@@ -126,7 +126,11 @@ function edit(props) {
 					<h3>Required</h3>
 				</div>
 			)}
-			<div className="cwp-checkbox-set">
+			<div
+				className={`cwp-checkbox-set-backend cwp-checkbox-set ${
+					!props.isSelected ? "cwp-checkbox-set-preview" : ""
+				}`}
+			>
 				<RichText tag="label" value={label} onChange={handleLabel} />
 				{checkboxes.map((checkbox, index) => {
 					return (

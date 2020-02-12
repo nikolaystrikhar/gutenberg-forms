@@ -22,11 +22,11 @@ function save(props) {
 			  };
 
 	`;
-	
+
 	return (
-		<Fragment>
-			<div className={`cwp-form ${props.className}`}>
-				<form data-parsley-validate method="POST">
+		<div>
+			<div className="cwp-form">
+				<form method="POST">
 					<InnerBlocks.Content />
 					{recaptcha.enable && (
 						<div
@@ -54,9 +54,11 @@ function save(props) {
 						{successMessage}
 					</div>
 				)}
-				<div id={id + "-captcha"} className="cwp-danger-captcha cwp-hidden">
-					Incorrect Captcha!
-				</div>
+				{recaptcha.enable && (
+					<div id={id + "-captcha"} className="cwp-danger-captcha cwp-hidden">
+						Incorrect Captcha!
+					</div>
+				)}
 			</div>
 			{recaptcha.enable && (
 				<div id="cwp-protected">
@@ -76,7 +78,7 @@ function save(props) {
 					<script dangerouslySetInnerHTML={{ __html: captcha_p }}></script>
 				</div>
 			)}
-		</Fragment>
+		</div>
 	);
 }
 

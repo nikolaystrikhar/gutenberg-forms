@@ -131,7 +131,7 @@ function edit(props) {
 			</PanelBody>
 		</InspectorControls>,
 		null,
-		<div className="cwp-radios cwp-field">
+		<div className={`cwp-radios cwp-field ${props.className}`}>
 			{!!props.isSelected && (
 				<div className="cwp-required">
 					<h3>Required</h3>
@@ -143,7 +143,11 @@ function edit(props) {
 					<h3>Required</h3>
 				</div>
 			)}
-			<div className="cwp-radios-set">
+			<div
+				className={`cwp-radios-set ${
+					!props.isSelected ? "cwp-radio-set-preview" : ""
+				}`}
+			>
 				<RichText tag="label" value={label} onChange={handleLabel} />
 				{radios.map((radio, index) => {
 					return (
@@ -159,7 +163,7 @@ function edit(props) {
 								onClick={() => handleCheck(!radio.checked, index)}
 								for={id.concat(index.toString())}
 							></label>
-							{ !! props.isSelected ? (
+							{!!props.isSelected ? (
 								<input
 									onChange={e => handleChange(e, index)}
 									type="text"
