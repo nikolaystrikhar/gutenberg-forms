@@ -35,107 +35,109 @@
 	}
 }
 
-.cwp-form {
+.wp-block-cwp-block-gutenberg-forms {
 	&.is-style-paper {
 		@include paper();
 	}
 
-	& .cwp-success {
-		@include successMessage();
+	& .cwp-form {
+		& .cwp-success {
+			@include successMessage();
+		}
+
+		& .cwp-hidden {
+			display: none;
+		}
+
+		& .cwp-form-col-main-preview {
+			display: flex;
+			flex-direction: row;
+
+			&[data-cols="2"] {
+				@include getColumn(2);
+			}
+
+			&[data-cols="3"] {
+				@include getColumn(3);
+			}
+
+			&[data-cols="4"] {
+				@include getColumn(4);
+			}
+		}
+
+		& .cwp-field {
+			&.is-style-inline {
+				& .cwp-field-set,
+				& .cwp-radio-set,
+				& .cwp-checkbox-set:not(.cwp-checkbox-set-backend),
+				& .cwp-select-set {
+					@include inline-field(0px 20px 0px 0px);
+				}
+
+				& .cwp-checkbox-set.cwp-checkbox-set-backend.cwp-checkbox-set-preview {
+					@include inline-field(0px);
+				}
+
+				& .cwp-radio-set-preview {
+					@include inline-field(0px);
+				}
+			}
+
+			& .cwp-field-set {
+				& .cwp-error {
+					color: $danger;
+				}
+				@include field();
+			}
+
+			&.cwp-captcha {
+				@include captcha();
+			}
+
+			& .cwp-checkbox-set {
+				@include checkbox-field("frontend");
+			}
+
+			& .cwp-radio-set {
+				@include radio-field("frontend");
+			}
+
+			& .cwp-select-set {
+				@include select-field("frontend");
+			}
+		}
+
+		& .g-recaptcha {
+			margin: 20px 0px;
+		}
+
+		& .cwp-submit {
+			padding: 20px 0px;
+			display: flex;
+			@include buttonAlignment();
+			& .cwp-submit-btn {
+				@include defaultSubmit();
+			}
+		}
+
+		& .cwp-danger-captcha {
+			background-color: #ed9898;
+			border-left: 2px solid $danger;
+			padding: 12px 12px;
+			color: #fff;
+		}
 	}
 
-	& .cwp-hidden {
-		display: none;
-	}
-
-	& .cwp-form-col-main-preview {
+	.cwp-warning {
 		display: flex;
 		flex-direction: row;
+		background: #fff3cd;
+		color: #856404;
+		padding: 15px;
 
-		&[data-cols="2"] {
-			@include getColumn(2);
+		& div:nth-child(1) {
+			margin: 3px 5px 0px 0px;
 		}
-
-		&[data-cols="3"] {
-			@include getColumn(3);
-		}
-
-		&[data-cols="4"] {
-			@include getColumn(4);
-		}
-	}
-
-	& .cwp-field {
-		&.is-style-inline {
-			& .cwp-field-set,
-			& .cwp-radio-set,
-			& .cwp-checkbox-set:not(.cwp-checkbox-set-backend),
-			& .cwp-select-set {
-				@include inline-field(0px 20px 0px 0px);
-			}
-
-			& .cwp-checkbox-set.cwp-checkbox-set-backend.cwp-checkbox-set-preview {
-				@include inline-field(0px);
-			}
-
-			& .cwp-radio-set-preview {
-				@include inline-field(0px);
-			}
-		}
-
-		& .cwp-field-set {
-			& .cwp-error {
-				color: $danger;
-			}
-			@include field();
-		}
-
-		&.cwp-captcha {
-			@include captcha();
-		}
-
-		& .cwp-checkbox-set {
-			@include checkbox-field("frontend");
-		}
-
-		& .cwp-radio-set {
-			@include radio-field("frontend");
-		}
-
-		& .cwp-select-set {
-			@include select-field("frontend");
-		}
-	}
-
-	& .g-recaptcha {
-		margin: 20px 0px;
-	}
-
-	& .cwp-submit {
-		padding: 20px 0px;
-		display: flex;
-		@include buttonAlignment();
-		& .cwp-submit-btn {
-			@include defaultSubmit();
-		}
-	}
-
-	& .cwp-danger-captcha {
-		background-color: #ed9898;
-		border-left: 2px solid $danger;
-		padding: 12px 12px;
-		color: #fff;
-	}
-}
-
-.cwp-warning {
-	display: flex;
-	flex-direction: row;
-	background: #fff3cd;
-	color: #856404;
-	padding: 15px;
-
-	& div:nth-child(1) {
-		margin: 3px 5px 0px 0px;
 	}
 }

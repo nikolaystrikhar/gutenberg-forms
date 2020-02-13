@@ -1,5 +1,5 @@
 import React from "react";
-import { isEmpty } from "lodash";
+import { isEmpty, has } from "lodash";
 import { strip_tags } from "../../block/misc/helper";
 
 function save(props) {
@@ -8,7 +8,7 @@ function save(props) {
 	const getLabel = () => {
 		const { label, isRequired } = props.attributes;
 
-		let required = "<span>(Required)</span>";
+		let required = `<abbr title="required" aria-label="required">*</abbr>`;
 
 		let required_label = label + " " + required;
 
@@ -49,7 +49,21 @@ function save(props) {
 								checked={checkbox.checked}
 								type="checkbox"
 							/>
-							<label for={id.concat(index.toString())}>{checkbox.label}</label>
+							<label for={id.concat(index.toString())}>
+								{checkbox.label}
+
+								{has(checkbox, "image") && (
+									<div className="cwp-checkbox-image">
+										<img
+											style={{
+												height: checkbox.image.height,
+												width: checkbox.image.width
+											}}
+											src={checkbox.image.url}
+										/>
+									</div>
+								)}
+							</label>
 						</div>
 					);
 				})}

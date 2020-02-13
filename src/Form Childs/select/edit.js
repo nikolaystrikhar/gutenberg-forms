@@ -1,10 +1,11 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, useRef } from "react";
 import {
 	FormToggle,
 	Toolbar,
 	PanelRow,
 	PanelBody,
-	Icon
+	Icon,
+	Button
 } from "@wordpress/components";
 import {
 	getFieldName,
@@ -23,6 +24,13 @@ function edit(props) {
 	let { options, isRequired, label, id, field_name } = props.attributes;
 
 	const [select, setSelect] = useState([]);
+
+	const [focus, setFocus] = useState({
+		f: false,
+		index: null
+	});
+
+	const selectContainer = useRef();
 
 	useEffect(() => {
 		let { options } = props.attributes;
@@ -48,6 +56,22 @@ function edit(props) {
 			});
 		}
 	}, []);
+
+	useEffect(() => {
+		let boxes = selectContainer.current.querySelectorAll(
+			'.cwp-select-option input[type="text"]'
+		);
+
+		if (focus.f) {
+			if (focus.index === null) {
+				boxes[boxes.length - 1].focus();
+			} else {
+				boxes[focus.index].focus();
+			}
+
+			setFocus({ f: false, index: null });
+		}
+	}, [select, focus]); //subscribing to any further changes...
 
 	const handleRequired = () => {
 		const { isRequired } = props.attributes;
@@ -84,10 +108,42 @@ function edit(props) {
 	const handleChange = (e, index) => {
 		let new_options = clone(options);
 
-		new_options[index].label = e.target.value;
+		new_options[index] = {
+			...new_options[index],
+			label: e.target.value
+		};
 
 		setSelect(new_options);
 		props.setAttributes({ options: new_options });
+	};
+
+	let handleDuplicate = index => {
+		let new_options = clone(options);
+
+		new_options.splice(index, 0, new_options[index]);
+
+		setSelect(new_options);
+		props.setAttributes({ options: new_options });
+	};
+
+	let handleEnter = index => {
+		let new_options = clone(options);
+
+		new_options.splice(index + 1, 0, { label: "" });
+
+		setSelect(new_options);
+		props.setAttributes({ options: new_options });
+		setFocus({ f: true, index: index + 1 });
+	};
+
+	let handleBackspace = index => {
+		if (select[index].label === "") {
+			handleDelete(index);
+
+			if (select[index - 1]) {
+				setFocus({ f: true, index: index - 1 });
+			}
+		}
 	};
 
 	const editView = select.map((s, index) => {
@@ -98,10 +154,17 @@ function edit(props) {
 					onChange={e => handleChange(e, index)}
 					type="text"
 					value={s.label}
+					onKeyDown={e => {
+						e.key === "Enter" && handleEnter(index);
+						e.key === "Backspace" && handleBackspace(index);
+					}}
 				/>
-				<button onClick={() => handleDelete(index)}>
-					<Icon icon="trash" />
-				</button>
+				<Button isDefault onClick={() => handleDuplicate(index)}>
+					<Icon icon="admin-page" />
+				</Button>
+				<Button isDefault onClick={() => handleDelete(index)}>
+					<Icon icon="no-alt" />
+				</Button>
 			</div>
 		);
 	});
@@ -149,7 +212,7 @@ function edit(props) {
 					<h3>Required</h3>
 				</div>
 			)}
-			<div className="cwp-select-set">
+			<div className="cwp-select-set" ref={selectContainer}>
 				<RichText tag="label" value={label} onChange={handleLabel} />
 				{!!props.isSelected ? editView : <SelectView />}
 				{!!props.isSelected && (

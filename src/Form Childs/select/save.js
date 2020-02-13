@@ -7,7 +7,7 @@ function save(props) {
 	const getLabel = () => {
 		const { label, isRequired } = props.attributes;
 
-		let required = "<span>(Required)</span>";
+		let required = `<abbr title="required" aria-label="required">*</abbr>`;
 
 		let required_label = label + " " + required;
 

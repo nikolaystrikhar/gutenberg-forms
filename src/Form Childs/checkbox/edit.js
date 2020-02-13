@@ -1,15 +1,19 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment, useRef } from "react";
 import {
 	FormToggle,
 	Toolbar,
 	PanelRow,
 	PanelBody,
-	Icon
+	Icon,
+	Button
 } from "@wordpress/components";
 
 const { InspectorControls, BlockControls, BlockIcon } = wp.blockEditor;
 
-import { clone, pullAt } from "lodash";
+import { clone, pullAt, has } from "lodash";
+import ImageUpload from "../../block/components/imageUpload";
+import ImagePreview from "../../block/components/imagePreview";
+
 import {
 	getFieldName,
 	extract_id,
@@ -22,6 +26,12 @@ function edit(props) {
 	let { options, isRequired, label, id, field_name } = props.attributes;
 
 	const [checkboxes, setCheckboxes] = useState([]);
+	const [focus, setFocus] = useState({
+		f: false,
+		index: null
+	});
+
+	let checkboxContainer = useRef();
 
 	useEffect(() => {
 		let { options } = props.attributes;
@@ -49,6 +59,22 @@ function edit(props) {
 			});
 		}
 	}, []);
+
+	useEffect(() => {
+		let boxes = checkboxContainer.current.querySelectorAll(
+			'.cwp-checkbox-option input[type="text"]'
+		);
+
+		if (focus.f) {
+			if (focus.index === null) {
+				boxes[boxes.length - 1].focus();
+			} else {
+				boxes[focus.index].focus();
+			}
+
+			setFocus({ f: false, index: null });
+		}
+	}, [checkboxes, focus]); //subscribing to any further changes...
 
 	const handleRequired = () => {
 		const { isRequired } = props.attributes;
@@ -86,7 +112,10 @@ function edit(props) {
 	const handleChange = (e, index) => {
 		let new_options = clone(options);
 
-		new_options[index].label = e.target.value;
+		new_options[index] = {
+			...new_options[index],
+			label: e.target.value
+		};
 
 		setCheckboxes(new_options);
 		props.setAttributes({ options: new_options });
@@ -98,6 +127,53 @@ function edit(props) {
 		new_options[index].checked = v;
 		setCheckboxes(new_options);
 		props.setAttributes({ options: new_options });
+	};
+
+	const handleImage = (img, index, action) => {
+		let new_options = clone(options);
+
+		if (action === "add") {
+			new_options[index].image = img;
+		}
+
+		if (action === "remove") {
+			const checkboxToRemove = new_options[index];
+			new_options[index] = {
+				label: checkboxToRemove.label
+			};
+		}
+
+		setCheckboxes(new_options);
+		props.setAttributes({ options: new_options });
+	};
+
+	let handleDuplicate = index => {
+		let new_options = clone(options);
+
+		new_options.splice(index, 0, new_options[index]);
+
+		setCheckboxes(new_options);
+		props.setAttributes({ options: new_options });
+	};
+
+	let handleEnter = index => {
+		let new_options = clone(options);
+
+		new_options.splice(index + 1, 0, { label: "" });
+
+		setCheckboxes(new_options);
+		props.setAttributes({ options: new_options });
+		setFocus({ f: true, index: index + 1 });
+	};
+
+	let handleBackspace = index => {
+		if (checkboxes[index].label === "") {
+			handleDelete(index);
+
+			if (checkboxes[index - 1]) {
+				setFocus({ f: true, index: index - 1 });
+			}
+		}
 	};
 
 	return [
@@ -127,40 +203,68 @@ function edit(props) {
 				</div>
 			)}
 			<div
+				ref={checkboxContainer}
 				className={`cwp-checkbox-set-backend cwp-checkbox-set ${
 					!props.isSelected ? "cwp-checkbox-set-preview" : ""
 				}`}
 			>
 				<RichText tag="label" value={label} onChange={handleLabel} />
 				{checkboxes.map((checkbox, index) => {
+					const hasImage = has(checkbox, "image"),
+						image = hasImage ? checkbox.image.url : "";
+
 					return (
-						<div className="cwp-checkbox-option">
-							<input
-								id={id.concat(index.toString())}
-								checked={checkbox.checked}
-								type="checkbox"
-								onClick={() => handleCheck(!checkbox.checked, index)}
-							/>
-							<label
-								style={{ width: "auto" }}
-								for={id.concat(index.toString())}
-								onClick={() => handleCheck(!checkbox.checked, index)}
-							></label>
-							{!!props.isSelected ? (
+						<Fragment>
+							<div className="cwp-checkbox-option">
 								<input
-									onChange={e => handleChange(e, index)}
-									type="text"
-									value={checkbox.label}
+									id={id.concat(index.toString())}
+									checked={checkbox.checked}
+									type="checkbox"
+									onClick={() => handleCheck(!checkbox.checked, index)}
 								/>
-							) : (
-								<label>{checkbox.label}</label>
+								<label
+									style={{ width: "auto" }}
+									for={id.concat(index.toString())}
+									onClick={() => handleCheck(!checkbox.checked, index)}
+								></label>
+								{!!props.isSelected ? (
+									<input
+										onChange={e => handleChange(e, index)}
+										onKeyDown={e => {
+											e.key === "Enter" && handleEnter(index);
+											e.key === "Backspace" && handleBackspace(index);
+										}}
+										type="text"
+										value={checkbox.label}
+									/>
+								) : (
+									<label>{checkbox.label}</label>
+								)}
+								{!!props.isSelected && (
+									<Fragment>
+										<ImageUpload
+											icon="format-image"
+											value={image}
+											onSelect={img => handleImage(img, index, "add")}
+										/>
+										<Button isDefault onClick={() => handleDuplicate(index)}>
+											<Icon icon="admin-page" />
+										</Button>
+										<Button isDefault onClick={() => handleDelete(index)}>
+											<Icon icon="no-alt" />
+										</Button>
+									</Fragment>
+								)}
+							</div>
+							{hasImage && (
+								<ImagePreview
+									onEdit={img => handleImage(img, index, "add")}
+									onRemove={() => handleImage(null, index, "remove")}
+									isSelected={props.isSelected}
+									image={checkbox.image}
+								/>
 							)}
-							{!!props.isSelected && (
-								<button onClick={() => handleDelete(index)}>
-									<Icon icon="trash" />
-								</button>
-							)}
-						</div>
+						</Fragment>
 					);
 				})}
 				{!!props.isSelected && (

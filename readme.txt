@@ -62,6 +62,9 @@ For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 - Fixed: Frontend Styling
 - Added: Inline field Styling
 - Improved: Sanitization
+- Added: Image Select for Checkbox, Radio
+- Improved: Options UI for Checkbox,Radio,Select
+- Improved: Form Markup
 
 = 1.0.4 (04 Feb 2020) =
 

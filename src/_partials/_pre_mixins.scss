@@ -1,0 +1,27 @@
+@mixin ImagePreview() {
+	& .cwp-img {
+		position: relative;
+		margin: 26px 0px;
+
+		& img {
+			width: 100%;
+			height: 100%;
+		}
+
+		& .cwp-close-image {
+			position: absolute;
+			top: 0;
+			right: 0;
+
+			& button {
+				&:nth-child(1) {
+					margin: 0px 3px 0px 0px;
+				}
+
+				&:nth-child(2) {
+					margin: 0px 0px 0px 3px;
+				}
+			}
+		}
+	}
+}

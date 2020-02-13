@@ -1,27 +1,37 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment, useRef } from "react";
 import {
 	FormToggle,
 	Toolbar,
 	PanelRow,
 	PanelBody,
-	Icon
+	Icon,
+	Button
 } from "@wordpress/components";
 import {
 	getFieldName,
 	extract_id,
 	getEncodedData
 } from "../../block/misc/helper";
+import ImageUpload from "../../block/components/imageUpload";
+import ImagePreview from "../../block/components/imagePreview";
 
 const { InspectorControls, BlockControls, BlockIcon } = wp.blockEditor;
 
-import { clone, pullAt, isEqual } from "lodash";
+import { clone, pullAt, isEqual, has } from "lodash";
 
 const { RichText } = wp.blockEditor;
 
 function edit(props) {
 	let { options, isRequired, label, id, field_name } = props.attributes;
 
+	const radiosContainer = useRef();
+
 	const [radios, setRadios] = useState([]);
+
+	const [focus, setFocus] = useState({
+		f: false,
+		index: null
+	});
 
 	useEffect(() => {
 		let { options } = props.attributes;
@@ -64,6 +74,22 @@ function edit(props) {
 		}
 	}, []);
 
+	useEffect(() => {
+		let boxes = radiosContainer.current.querySelectorAll(
+			'.cwp-radios-option input[type="text"]'
+		);
+
+		if (focus.f) {
+			if (focus.index === null) {
+				boxes[boxes.length - 1].focus();
+			} else {
+				boxes[focus.index].focus();
+			}
+
+			setFocus({ f: false, index: null });
+		}
+	}, [radios, focus]); //subscribing to any further changes...
+
 	const handleRequired = () => {
 		const { isRequired } = props.attributes;
 
@@ -100,7 +126,10 @@ function edit(props) {
 	const handleChange = (e, index) => {
 		let new_options = clone(options);
 
-		new_options[index].label = e.target.value;
+		new_options[index] = {
+			...new_options[index],
+			label: e.target.value
+		};
 
 		setRadios(new_options);
 		props.setAttributes({ options: new_options });
@@ -115,6 +144,53 @@ function edit(props) {
 
 		setRadios(new_options);
 		props.setAttributes({ options: new_options });
+	};
+
+	const handleImage = (img, index, action) => {
+		let new_options = clone(options);
+
+		if (action === "add") {
+			new_options[index].image = img;
+		}
+
+		if (action === "remove") {
+			const RadioToRemove = new_options[index];
+			new_options[index] = {
+				label: RadioToRemove.label
+			};
+		}
+
+		setRadios(new_options);
+		props.setAttributes({ options: new_options });
+	};
+
+	let handleDuplicate = index => {
+		let new_options = clone(options);
+
+		new_options.splice(index, 0, new_options[index]);
+
+		setRadios(new_options);
+		props.setAttributes({ options: new_options });
+	};
+
+	let handleEnter = index => {
+		let new_options = clone(options);
+
+		new_options.splice(index + 1, 0, { label: "" });
+
+		setRadios(new_options);
+		props.setAttributes({ options: new_options });
+		setFocus({ f: true, index: index + 1 });
+	};
+
+	let handleBackspace = index => {
+		if (radios[index].label === "") {
+			handleDelete(index);
+
+			if (radios[index - 1]) {
+				setFocus({ f: true, index: index - 1 });
+			}
+		}
 	};
 
 	return [
@@ -144,40 +220,68 @@ function edit(props) {
 				</div>
 			)}
 			<div
+				ref={radiosContainer}
 				className={`cwp-radios-set ${
 					!props.isSelected ? "cwp-radio-set-preview" : ""
 				}`}
 			>
 				<RichText tag="label" value={label} onChange={handleLabel} />
 				{radios.map((radio, index) => {
+					const hasImage = has(radio, "image"),
+						image = hasImage ? radio.image.url : "";
+
 					return (
-						<div className="cwp-radios-option">
-							<input
-								id={id.concat(index.toString())}
-								checked={radio.checked}
-								onClick={() => handleCheck(!radio.checked, index)}
-								type="radio"
-							/>
-							<label
-								style={{ width: "auto" }}
-								onClick={() => handleCheck(!radio.checked, index)}
-								for={id.concat(index.toString())}
-							></label>
-							{!!props.isSelected ? (
+						<Fragment>
+							<div className="cwp-radios-option">
 								<input
-									onChange={e => handleChange(e, index)}
-									type="text"
-									value={radio.label}
+									id={id.concat(index.toString())}
+									checked={radio.checked}
+									onClick={() => handleCheck(!radio.checked, index)}
+									type="radio"
 								/>
-							) : (
-								<label>{radio.label}</label>
+								<label
+									style={{ width: "auto" }}
+									onClick={() => handleCheck(!radio.checked, index)}
+									for={id.concat(index.toString())}
+								></label>
+								{!!props.isSelected ? (
+									<input
+										onKeyDown={e => {
+											e.key === "Enter" && handleEnter(index);
+											e.key === "Backspace" && handleBackspace(index);
+										}}
+										onChange={e => handleChange(e, index)}
+										type="text"
+										value={radio.label}
+									/>
+								) : (
+									<label>{radio.label}</label>
+								)}
+								{!!props.isSelected && (
+									<Fragment>
+										<ImageUpload
+											icon="format-image"
+											value={image}
+											onSelect={img => handleImage(img, index, "add")}
+										/>
+										<Button isDefault onClick={() => handleDuplicate(index)}>
+											<Icon icon="admin-page" />
+										</Button>
+										<Button isDefault onClick={() => handleDelete(index)}>
+											<Icon icon="no-alt" />
+										</Button>
+									</Fragment>
+								)}
+							</div>
+							{hasImage && (
+								<ImagePreview
+									onEdit={img => handleImage(img, index, "add")}
+									onRemove={() => handleImage(null, index, "remove")}
+									isSelected={props.isSelected}
+									image={radio.image}
+								/>
 							)}
-							{!!props.isSelected && (
-								<button onClick={() => handleDelete(index)}>
-									<Icon icon="trash" />
-								</button>
-							)}
-						</div>
+						</Fragment>
 					);
 				})}
 				{!!props.isSelected && (

@@ -1,4 +1,5 @@
 @import "./variables";
+@import "./pre_mixins";
 
 @mixin normalize_button() {
 	border: none;
@@ -88,8 +89,8 @@
 	}
 
 	& label {
-		& span {
-			color: darken($secondaryColor, 20%);
+		& abbr {
+			color: $danger;
 			font-weight: 600;
 		}
 	}
@@ -107,13 +108,10 @@
 			& input[type="checkbox"] {
 				margin: 5px 5px 0px 0px;
 			}
+		}
 
-			& button {
-				background: $danger;
-				color: #fff;
-				margin: 0px 0px 0px 5px;
-				@include normalize_button();
-			}
+		& .cwp-image-preview {
+			@include ImagePreview();
 		}
 
 		& .cwp-checkbox-controls {
@@ -125,8 +123,16 @@
 				@include normalize_button();
 			}
 		}
+
+		& button {
+			margin: 0px 5px;
+		}
 	} @else {
 		& label {
+			& .cwp-checkbox-image {
+				margin: 10px 0px;
+			}
+
 			& span {
 				color: darken($secondaryColor, 20%);
 				font-weight: 600;
@@ -154,13 +160,6 @@
 				position: absolute;
 				bottom: -20px;
 			}
-
-			& button {
-				background: $danger;
-				color: #fff;
-				margin: 0px 0px 0px 5px;
-				@include normalize_button();
-			}
 		}
 	}
 }
@@ -177,13 +176,10 @@
 			& input[type="radio"] {
 				margin: 5px 5px 0px 0px;
 			}
+		}
 
-			& button {
-				background: $danger;
-				color: #fff;
-				margin: 0px 0px 0px 5px;
-				@include normalize_button();
-			}
+		& .cwp-image-preview {
+			@include ImagePreview();
 		}
 
 		& .cwp-radios-controls {
@@ -195,11 +191,17 @@
 				@include normalize_button();
 			}
 		}
+		& button {
+			margin: 0px 5px;
+		}
 	} @else {
 		& label {
 			& span {
 				color: darken($secondaryColor, 20%);
 				font-weight: 600;
+			}
+			& .cwp-checkbox-image {
+				margin: 10px 0px;
 			}
 		}
 
@@ -219,12 +221,6 @@
 				position: absolute;
 				bottom: -20px;
 			}
-			& button {
-				background: $danger;
-				color: #fff;
-				margin: 0px 0px 0px 5px;
-				@include normalize_button();
-			}
 		}
 	}
 }
@@ -241,13 +237,6 @@
 			& input[type="select"] {
 				margin: 5px 5px 0px 0px;
 			}
-
-			& button {
-				background: $danger;
-				color: #fff;
-				margin: 0px 0px 0px 5px;
-				@include normalize_button();
-			}
 		}
 
 		& select {
@@ -263,6 +252,9 @@
 				background-color: #fff;
 				@include normalize_button();
 			}
+		}
+		& button {
+			margin: 0px 5px;
 		}
 	} @else {
 		& label {
@@ -570,6 +562,10 @@
 		display: flex;
 		width: auto !important;
 		margin: $margin;
+
+		& .cwp-checkbox-image {
+			margin: 0px 12px;
+		}
 
 		& span {
 			margin: 0px 5px;

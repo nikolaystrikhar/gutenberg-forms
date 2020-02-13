@@ -16,7 +16,7 @@ function save(props) {
 	const getLabel = () => {
 		const { label, isRequired } = props.attributes;
 
-		let required = "<span>(Required)</span>";
+		let required = `<abbr title="required" aria-label="required">*</abbr>`;
 
 		let required_label = label + " " + required;
 
@@ -29,10 +29,14 @@ function save(props) {
 		<div className="cwp-number cwp-field">
 			<div className="cwp-field-set">
 				{!isEmpty(label) && (
-					<label dangerouslySetInnerHTML={{ __html: getLabel() }}></label>
+					<label
+						for={id}
+						dangerouslySetInnerHTML={{ __html: getLabel() }}
+					></label>
 				)}
 				{isRange ? (
 					<input
+						id={id}
 						data-cwp-field
 						name={id}
 						value={number}
@@ -45,6 +49,7 @@ function save(props) {
 					/>
 				) : (
 					<input
+						id={id}
 						aria-label={strip_tags(label)}
 						data-cwp-field
 						data-parsley-type="integer"

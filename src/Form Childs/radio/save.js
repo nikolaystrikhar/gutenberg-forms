@@ -1,4 +1,4 @@
-import { isEmpty } from "lodash";
+import { isEmpty, has } from "lodash";
 import { strip_tags } from "../../block/misc/helper";
 
 function save(props) {
@@ -7,7 +7,7 @@ function save(props) {
 	const getLabel = () => {
 		const { label, isRequired } = props.attributes;
 
-		const required = "<span>(Required)</span>";
+		const required = `<abbr title="required" aria-label="required">*</abbr>`;
 
 		const required_label = label + " " + required;
 
@@ -38,7 +38,20 @@ function save(props) {
 								type="radio"
 								checked={radio.checked}
 							/>
-							<label for={id.concat(index.toString())}>{radio.label}</label>
+							<label for={id.concat(index.toString())}>
+								{radio.label}
+								{has(radio, "image") && (
+									<div className="cwp-radio-image">
+										<img
+											style={{
+												height: radio.image.height,
+												width: radio.image.width
+											}}
+											src={radio.image.url}
+										/>
+									</div>
+								)}
+							</label>
 						</div>
 					);
 				})}

@@ -8,7 +8,7 @@ function save(props) {
 	const getLabel = () => {
 		const { label, isRequired } = props.attributes;
 
-		let required = "<span>(Required)</span>";
+		let required = `<abbr title="required" aria-label="required">*</abbr>`;
 
 		let required_label = label + " " + required;
 
@@ -21,9 +21,13 @@ function save(props) {
 		<div className="cwp-message cwp-field">
 			<div className="cwp-field-set">
 				{!isEmpty(label) && (
-					<label dangerouslySetInnerHTML={{ __html: getLabel() }}></label>
+					<label
+						for={id}
+						dangerouslySetInnerHTML={{ __html: getLabel() }}
+					></label>
 				)}
 				<textarea
+					id={id}
 					aria-label={strip_tags(label)}
 					style={{ height: height }}
 					data-cwp-field
