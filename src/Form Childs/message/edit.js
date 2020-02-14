@@ -4,7 +4,8 @@ import {
 	Toolbar,
 	PanelRow,
 	PanelBody,
-	ResizableBox
+	ResizableBox,
+	TextControl
 } from "@wordpress/components";
 import {
 	getFieldName,
@@ -43,7 +44,8 @@ function edit(props) {
 		label,
 		id,
 		height,
-		field_name
+		field_name,
+		requiredLabel
 	} = props.attributes;
 	useEffect(() => {
 		if (field_name === "") {
@@ -78,6 +80,17 @@ function edit(props) {
 							onChange={handleRequired}
 						/>
 					</PanelRow>
+					{isRequired && (
+						<div className="cwp-option">
+							<h3 className="cwp-heading">Required Label</h3>
+							<TextControl
+								onChange={label =>
+									props.setAttributes({ requiredLabel: label })
+								}
+								value={requiredLabel}
+							/>
+						</div>
+					)}
 				</PanelBody>
 			</InspectorControls>
 		),

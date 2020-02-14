@@ -6,6 +6,7 @@ import {
 	PanelBody,
 	TextControl
 } from "@wordpress/components";
+
 import {
 	getFieldName,
 	extract_id,
@@ -20,10 +21,10 @@ const {
 } = wp.blockEditor;
 
 function edit(props) {
-	const handleChange = e => {
-		let name = e.target.value;
+	const handleChange = v => {
+		let yes_no = v;
 
-		props.setAttributes({ name });
+		props.setAttributes({ yes_no });
 	};
 
 	const handleRequired = () => {
@@ -37,31 +38,35 @@ function edit(props) {
 	};
 
 	const {
-		name,
+		yes_no,
 		isRequired,
 		label,
 		id,
 		field_name,
 		requiredLabel
 	} = props.attributes;
+
 	useEffect(() => {
 		if (field_name === "") {
-			props.setAttributes({ field_name: getFieldName("name", props.clientId) });
+			props.setAttributes({
+				field_name: getFieldName("yes_no", props.clientId)
+			});
 			props.setAttributes({
 				id:
 					props.clientId +
 					"__" +
-					getEncodedData("name", props.clientId, isRequired)
+					getEncodedData("yes_no", props.clientId, isRequired)
 			});
 		} else if (field_name !== "") {
 			props.setAttributes({
 				id:
 					extract_id(field_name) +
 					"__" +
-					getEncodedData("name", extract_id(field_name), isRequired)
+					getEncodedData("yes_no", extract_id(field_name), isRequired)
 			});
 		}
 	}, []);
+
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
@@ -88,8 +93,8 @@ function edit(props) {
 				</PanelBody>
 			</InspectorControls>
 		),
-		!!props.isSelected && <BlockControls></BlockControls>,
-		<div className={`cwp-name cwp-field ${props.className}`}>
+		null,
+		<div className={`cwp-yes-no cwp-field cwp-misc-field ${props.className}`}>
 			{!!props.isSelected && (
 				<div className="cwp-required">
 					<h3>Required</h3>
@@ -103,7 +108,15 @@ function edit(props) {
 			)}
 			<div className="cwp-field-set">
 				<RichText tag="label" value={label} onChange={handleLabel} />
-				<input value={name} onChange={handleChange} />
+
+				<label className="cwp-switch">
+					<input
+						type="checkbox"
+						checked={yes_no}
+						onChange={() => handleChange(!yes_no)}
+					/>
+					<span className="cwp-slider"></span>
+				</label>
 			</div>
 		</div>
 	];

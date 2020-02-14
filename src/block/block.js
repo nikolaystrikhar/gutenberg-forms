@@ -104,13 +104,31 @@ import numberSave from "../Form Childs/number/save";
 
 ////////////////////////////////!Number!//////////////////////////////////////////////
 
+////////////////////////////////!formGroup!//////////////////////////////////////////////
+
+import formGroupEdit from "../Form Childs/form-group/edit";
+import formGroupSave from "../Form Childs/form-group/save";
+
+////////////////////////////////!formGroup!//////////////////////////////////////////////
+
+////////////////////////////////!yesNo!//////////////////////////////////////////////
+
+import yesNoEdit from "../Form Childs/yes & no/edit";
+import yesNoSave from "../Form Childs/yes & no/save";
+
+////////////////////////////////!yesNo!//////////////////////////////////////////////
+
 import { applyFormStyles } from "./formStyles/index";
 import { registerFieldStyles } from "./fieldStyles/index";
 import { getFieldTransform } from "./functions/index";
 
 //for sanitizing the label
 
-const fieldParents = ["cwp/block-gutenberg-forms", "cwp/column"],
+const fieldParents = [
+		"cwp/block-gutenberg-forms",
+		"cwp/column",
+		"cwp/form-group"
+	],
 	fieldSupport = {
 		align: true,
 		align: ["wide", "full", "center"]
@@ -194,7 +212,8 @@ const myAttrs = [
 	"website",
 	"text",
 	"select",
-	"number"
+	"number",
+	"yes-no"
 ];
 
 applyFormStyles("cwp/block-gutenberg-forms"); //registering styles
@@ -385,9 +404,6 @@ registerBlockType("cwp/checkbox", {
 			default: [
 				{
 					label: "Option 1"
-				},
-				{
-					label: "Option 2"
 				}
 			]
 		},
@@ -402,6 +418,10 @@ registerBlockType("cwp/checkbox", {
 		field_name: {
 			type: "string",
 			default: ""
+		},
+		requiredLabel: {
+			type: "string",
+			default: "*"
 		}
 	},
 	transforms: {
@@ -443,6 +463,10 @@ registerBlockType("cwp/datepicker", {
 		field_name: {
 			type: "string",
 			default: ""
+		},
+		requiredLabel: {
+			type: "string",
+			default: "*"
 		}
 	},
 	transforms: {
@@ -491,6 +515,10 @@ registerBlockType("cwp/radio", {
 		field_name: {
 			type: "string",
 			default: ""
+		},
+		requiredLabel: {
+			type: "string",
+			default: "*"
 		}
 	},
 	transforms: {
@@ -532,6 +560,10 @@ registerBlockType("cwp/phone", {
 		field_name: {
 			type: "string",
 			default: ""
+		},
+		requiredLabel: {
+			type: "string",
+			default: "*"
 		}
 	},
 	transforms: {
@@ -573,6 +605,10 @@ registerBlockType("cwp/website", {
 		field_name: {
 			type: "string",
 			default: ""
+		},
+		requiredLabel: {
+			type: "string",
+			default: "*"
 		}
 	},
 	transforms: {
@@ -621,6 +657,10 @@ registerBlockType("cwp/select", {
 		field_name: {
 			type: "string",
 			default: ""
+		},
+		requiredLabel: {
+			type: "string",
+			default: "*"
 		}
 	},
 	transforms: {
@@ -723,6 +763,10 @@ registerBlockType("cwp/number", {
 		rangeMin: {
 			type: "number",
 			default: 0
+		},
+		requiredLabel: {
+			type: "string",
+			default: "*"
 		}
 	},
 	transforms: {
@@ -733,6 +777,71 @@ registerBlockType("cwp/number", {
 				transform: a => getFieldTransform(a, "number")
 			}
 		]
+	},
+	parent: fieldParents
+});
+
+registerBlockType("cwp/form-group", {
+	title: __("Form Group"),
+	icon: "forms",
+	category: "common",
+	keywords: [
+		__("gutenberg-forms"),
+		__("forms"),
+		__("form group"),
+		__("column")
+	],
+	edit: formGroupEdit,
+	save: formGroupSave,
+	attributes: {
+		styling: {
+			type: "object",
+			default: {
+				backgroundColor: "rgb(238, 238, 238)",
+				color: "rgb(49, 49, 49)",
+				padding: 25
+			}
+		}
+	},
+	supports: {
+		align: true,
+		align: ["wide", "full", "center"]
+	},
+	parent: fieldParents
+});
+
+registerBlockType("cwp/yes-no", {
+	title: __("Yes / No"),
+	icon: "no",
+	category: "common",
+	keywords: [__("gutenberg-forms"), __("forms"), __("yes-no")],
+	edit: yesNoEdit,
+	save: yesNoSave,
+	attributes: {
+		yes_no: {
+			type: "boolean",
+			defaut: false
+		},
+		requiredLabel: {
+			type: "string",
+			default: "*"
+		},
+		isRequired: {
+			type: "boolean",
+			default: false
+		},
+		label: {
+			type: "string",
+			default: "Yes Or No?"
+		},
+		id: {
+			type: "string",
+			default: ""
+		},
+		field_name: {
+			type: "string",
+			default: ""
+		}
 	},
 	parent: fieldParents
 });

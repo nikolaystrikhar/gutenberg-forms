@@ -5,7 +5,8 @@ import {
 	PanelRow,
 	PanelBody,
 	Icon,
-	Button
+	Button,
+	TextControl
 } from "@wordpress/components";
 import {
 	getFieldName,
@@ -21,7 +22,14 @@ import { clone, pullAt } from "lodash";
 const { RichText } = wp.blockEditor;
 
 function edit(props) {
-	let { options, isRequired, label, id, field_name } = props.attributes;
+	let {
+		options,
+		isRequired,
+		label,
+		id,
+		field_name,
+		requiredLabel
+	} = props.attributes;
 
 	const [select, setSelect] = useState([]);
 
@@ -193,6 +201,15 @@ function edit(props) {
 						onChange={handleRequired}
 					/>
 				</PanelRow>
+				{isRequired && (
+					<div className="cwp-option">
+						<h3 className="cwp-heading">Required Label</h3>
+						<TextControl
+							onChange={label => props.setAttributes({ requiredLabel: label })}
+							value={requiredLabel}
+						/>
+					</div>
+				)}
 			</PanelBody>
 		</InspectorControls>,
 		null,

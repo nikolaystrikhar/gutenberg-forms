@@ -2,12 +2,12 @@ import React from "react";
 import { isEmpty } from "lodash";
 
 function save(props) {
-	const { isRequired, options, label, id } = props.attributes;
+	const { isRequired, options, label, id, requiredLabel } = props.attributes;
 
 	const getLabel = () => {
 		const { label, isRequired } = props.attributes;
 
-		let required = `<abbr title="required" aria-label="required">*</abbr>`;
+		let required = `<abbr title="required" aria-label="required">${requiredLabel}</abbr>`;
 
 		let required_label = label + " " + required;
 

@@ -3,12 +3,19 @@ import { isEmpty } from "lodash";
 import { strip_tags } from "../../block/misc/helper";
 
 function save(props) {
-	const { message, isRequired, label, id, height } = props.attributes;
+	const {
+		message,
+		isRequired,
+		label,
+		id,
+		height,
+		requiredLabel
+	} = props.attributes;
 
 	const getLabel = () => {
 		const { label, isRequired } = props.attributes;
 
-		let required = `<abbr title="required" aria-label="required">*</abbr>`;
+		let required = `<abbr title="required" aria-label="required">${requiredLabel}</abbr>`;
 
 		let required_label = label + " " + required;
 

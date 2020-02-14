@@ -3,6 +3,20 @@ const { createBlock } = wp.blocks;
 
 const radio_enabled_fields = ["select", "radio", "checkbox"]; //fields that support multiple
 
+const myAttrs = [
+	"email",
+	"name",
+	"message",
+	"checkbox",
+	"datepicker",
+	"radio",
+	"phone",
+	"website",
+	"text",
+	"select",
+	"number"
+];
+
 //?custom-function for fields_transformation purpose;
 export const getFieldTransform = (attrs, field) => {
 	const matchedKey = myAttrs.find(prop => prop in attrs);

@@ -3,7 +3,7 @@ import { isEmpty } from "lodash";
 import { strip_tags } from "../../block/misc/helper";
 
 function save(props) {
-	const { text, isRequired, label, id, requiredLabel } = props.attributes;
+	const { yes_no, isRequired, label, id, requiredLabel } = props.attributes;
 
 	const getLabel = () => {
 		const { label, isRequired } = props.attributes;
@@ -18,7 +18,7 @@ function save(props) {
 	};
 
 	return (
-		<div className="cwp-text cwp-field">
+		<div className="cwp-yes-no cwp-field">
 			<div className="cwp-field-set">
 				{!isEmpty(label) && (
 					<label
@@ -26,15 +26,16 @@ function save(props) {
 						dangerouslySetInnerHTML={{ __html: getLabel() }}
 					></label>
 				)}
-				<input
-					id={id}
-					aria-label={strip_tags(label)}
-					name={id}
-					data-rule="false"
-					data-cwp-field
-					placeholder={text}
-					required={isRequired}
-				/>
+				<label className="cwp-switch">
+					<input
+						name={id}
+						id={id}
+						aria-label={strip_tags(label)}
+						type="checkbox"
+						checked={yes_no}
+					/>
+					<span className="cwp-slider"></span>
+				</label>
 			</div>
 		</div>
 	);

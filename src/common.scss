@@ -95,6 +95,12 @@
 				@include captcha();
 			}
 
+			&.cwp-yes-no {
+				& .cwp-field-set {
+					@include switch();
+				}
+			}
+
 			& .cwp-checkbox-set {
 				@include checkbox-field("frontend");
 			}

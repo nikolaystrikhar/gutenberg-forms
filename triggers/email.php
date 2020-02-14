@@ -149,7 +149,10 @@
             $arranged_fields = array();
 
             $post = $_POST;
+            var_dump($_POST);
+
             $post_without_submit = array_pop($post);
+
 
             foreach ( $post as $field_id => $field_value ) {
                 $exploded_id = explode( "__", $field_id );
@@ -278,11 +281,10 @@
             }
 
             if (array_key_exists('email' , $template)) {
-               
                 if ($this->validator->isEmpty($fromEmail)) {
                     wp_mail($template['email'],$mail_subject,$mail_body);
                 } else {
-                    wp_mail($template['email'],$mail_subject,$mail_body , "From: $fromEmail");
+                   wp_mail($template['email'],$mail_subject,$mail_body , "From: $fromEmail");
                 }
                  
                 

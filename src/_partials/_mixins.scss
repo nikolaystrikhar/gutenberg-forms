@@ -51,7 +51,7 @@
 @mixin field() {
 	margin: 20px 0px;
 
-	& input {
+	input {
 		width: 100%;
 		padding: 10px 10px;
 		transition: 0.5s;
@@ -539,6 +539,12 @@
 	flex-direction: row; //for inline label
 	align-items: top;
 
+	& .cwp-switch {
+		width: 70px !important;
+		margin-top: 0px !important;
+		margin-bottom: 0px !important;
+	}
+
 	& .cwp-radios-option,
 	& .cwp-checkbox-option {
 		margin: 0px 10px;
@@ -569,6 +575,71 @@
 
 		& span {
 			margin: 0px 5px;
+		}
+	}
+}
+
+@mixin switch() {
+	& .cwp-switch {
+		position: relative;
+		display: inline-block;
+		width: 60px;
+		height: 34px;
+		display: flex;
+		margin: 10px 0px;
+		flex-direction: column;
+
+		& input {
+			opacity: 0;
+			width: 0;
+			height: 0;
+
+			&:checked + .cwp-slider {
+				background-color: #2196f3;
+			}
+
+			&:checked + .cwp-slider:before {
+				transform: translateX(26px);
+			}
+		}
+
+		& .cwp-slider {
+			position: absolute;
+			cursor: pointer;
+			top: 0;
+			left: 0;
+			right: 0;
+			bottom: 0;
+			background-color: #ccc;
+			-webkit-transition: 0.4s;
+			transition: 0.4s;
+
+			& input {
+				& input {
+					&:focus + .cwp-slider {
+						box-shadow: 0 0 1px #2196f3;
+					}
+				}
+			}
+
+			&::before {
+				position: absolute;
+				content: "";
+				height: 26px;
+				width: 26px;
+				left: 4px;
+				bottom: 4px;
+				background-color: white;
+				-webkit-transition: 0.4s;
+				transition: 0.4s;
+			}
+
+			& .cwp-round {
+				border-radius: 34px;
+				&::before {
+					border-radius: 50%;
+				}
+			}
 		}
 	}
 }

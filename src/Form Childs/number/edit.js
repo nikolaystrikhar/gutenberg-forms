@@ -4,7 +4,8 @@ import {
 	Toolbar,
 	PanelRow,
 	PanelBody,
-	RangeControl
+	RangeControl,
+	TextControl
 } from "@wordpress/components";
 import {
 	getFieldName,
@@ -44,7 +45,8 @@ function edit(props) {
 		field_name,
 		isRange,
 		rangeMax,
-		rangeMin
+		rangeMin,
+		requiredLabel
 	} = props.attributes;
 	useEffect(() => {
 		if (field_name === "") {
@@ -78,6 +80,17 @@ function edit(props) {
 							onChange={handleRequired}
 						/>
 					</PanelRow>
+					{isRequired && (
+						<div className="cwp-option">
+							<h3 className="cwp-heading">Required Label</h3>
+							<TextControl
+								onChange={label =>
+									props.setAttributes({ requiredLabel: label })
+								}
+								value={requiredLabel}
+							/>
+						</div>
+					)}
 				</PanelBody>
 				<PanelBody title="Range Setting" icon="admin-settings">
 					<div className="cwp-option">

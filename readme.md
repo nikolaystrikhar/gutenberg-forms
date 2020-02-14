@@ -78,6 +78,9 @@ For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 - Added: Image Select for Checkbox, Radio
 - Improved: Options UI for Checkbox,Radio,Select
 - Improved: Form Markup
+- Added: Form Group Block
+- Added: Yes/No Field
+- Added: Required Text Option
 
 = 1.0.4 (04 Feb 2020) =
 

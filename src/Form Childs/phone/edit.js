@@ -3,7 +3,8 @@ import {
 	FormToggle,
 	Toolbar,
 	PanelRow,
-	PanelBody
+	PanelBody,
+	TextControl
 } from "@wordpress/components";
 import {
 	getFieldName,
@@ -35,7 +36,14 @@ function edit(props) {
 		props.setAttributes({ label });
 	};
 
-	const { phone, isRequired, label, id, field_name } = props.attributes;
+	const {
+		phone,
+		isRequired,
+		label,
+		id,
+		field_name,
+		requiredLabel
+	} = props.attributes;
 	useEffect(() => {
 		if (field_name === "") {
 			props.setAttributes({
@@ -68,6 +76,17 @@ function edit(props) {
 							onChange={handleRequired}
 						/>
 					</PanelRow>
+					{isRequired && (
+						<div className="cwp-option">
+							<h3 className="cwp-heading">Required Label</h3>
+							<TextControl
+								onChange={label =>
+									props.setAttributes({ requiredLabel: label })
+								}
+								value={requiredLabel}
+							/>
+						</div>
+					)}
 				</PanelBody>
 			</InspectorControls>
 		),
