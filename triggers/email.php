@@ -149,7 +149,6 @@
             $arranged_fields = array();
 
             $post = $_POST;
-            var_dump($_POST);
 
             $post_without_submit = array_pop($post);
 
