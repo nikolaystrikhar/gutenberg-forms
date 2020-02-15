@@ -45,6 +45,10 @@
 			@include successMessage();
 		}
 
+		& fieldset.cwp-form-group {
+			@include group();
+		}
+
 		& .cwp-hidden {
 			display: none;
 		}

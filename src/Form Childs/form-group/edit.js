@@ -1,16 +1,23 @@
 import React from "react";
 import Inspector from "./Inspector";
-const { InnerBlocks } = wp.blockEditor;
+const { InnerBlocks, RichText } = wp.blockEditor;
 
 function edit(props) {
-	const { styling } = props.attributes;
+	const { styling, label } = props.attributes;
+
+	const handleLabel = label => {
+		props.setAttributes({ label });
+	};
 
 	return [
 		!!props.isSelected && <Inspector data={props} />,
 		null,
-		<div style={styling} className="cwp-form-group">
-			<InnerBlocks />
-		</div>
+		<fieldset style={styling} className="cwp-form-group">
+			<RichText tag="legend" onChange={handleLabel} value={label} />
+			<div className="cwp-group-fields">
+				<InnerBlocks />
+			</div>
+		</fieldset>
 	];
 }
 

@@ -801,6 +801,14 @@ registerBlockType("cwp/form-group", {
 				color: "rgb(49, 49, 49)",
 				padding: 25
 			}
+		},
+		label: {
+			type: "string",
+			default: "My Group"
+		},
+		content: {
+			type: "string",
+			default: ""
 		}
 	},
 	supports: {

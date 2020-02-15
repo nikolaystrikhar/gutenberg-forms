@@ -178,6 +178,8 @@
                 );
                
             }
+        
+
 
            if ( $this->is_fields_valid( $arranged_fields ) ) {
                // check if all the fields are valid;
@@ -297,8 +299,5 @@
                 }
                 $this->attempt_success($template);
             }
-
-
         }
-      
     }

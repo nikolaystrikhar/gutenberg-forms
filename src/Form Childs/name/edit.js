@@ -76,7 +76,7 @@ function edit(props) {
 					</PanelRow>
 					{isRequired && (
 						<div className="cwp-option">
-							<h3 className="cwp-heading">Required Label</h3>
+							<h3 className="cwp-heading">Required Text</h3>
 							<TextControl
 								onChange={label =>
 									props.setAttributes({ requiredLabel: label })

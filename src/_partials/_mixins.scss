@@ -643,3 +643,17 @@
 		}
 	}
 }
+
+@mixin group() {
+	& legend {
+		margin: 0px 0px 20px 0px;
+		padding: 0;
+		float: left;
+		clear: both;
+		font-size: 15px;
+	}
+
+	& .cwp-group-fields {
+		clear: both;
+	}
+}

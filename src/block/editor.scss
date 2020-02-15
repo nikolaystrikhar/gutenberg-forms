@@ -2,6 +2,26 @@
 @import "../_partials/mixins";
 
 .cwp-form {
+	&.cwp-showEditor {
+		&.cwp-form_main {
+			display: none;
+		}
+
+		& .cwp-editor {
+			display: block;
+		}
+	}
+
+	&.cwp-hideEditor {
+		&.cwp-form_main {
+			display: block;
+		}
+
+		& .cwp-editor {
+			display: none;
+		}
+	}
+
 	& .cwp-template-builder {
 		@include templateBuilder();
 	}

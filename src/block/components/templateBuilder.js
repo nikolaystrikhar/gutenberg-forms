@@ -34,6 +34,8 @@ function TemplateBuilder(prop) {
 	const subject = JSON.parse(template).subject;
 	const body = JSON.parse(template).body;
 
+	let bodyId = "cwp-body-" + clientId + "body";
+
 	useEffect(() => {
 		if (isEmpty(subject) && isEmpty(body)) {
 			const fields = serializeFields(child_fields).map(v => {
@@ -150,6 +152,7 @@ function TemplateBuilder(prop) {
 					Body <span>*</span>
 				</label>
 				<textarea
+					id={clientId.concat("body")}
 					ref={bodyArea}
 					value={body}
 					onClick={() => setCurrentForm("body")}
@@ -158,6 +161,7 @@ function TemplateBuilder(prop) {
 					}}
 				></textarea>
 			</div>
+
 			<div className="cwp-save_template">
 				<Button
 					isPrimary

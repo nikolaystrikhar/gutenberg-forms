@@ -30,10 +30,17 @@ function save(props) {
 					<input
 						name={id}
 						id={id}
+						type="hidden"
+						value={yes_no ? "yes" : "no"}
+						readOnly
+					/>
+					<input
+						required={isRequired}
 						aria-label={strip_tags(label)}
 						type="checkbox"
 						checked={yes_no}
 					/>
+
 					<span className="cwp-slider"></span>
 				</label>
 			</div>

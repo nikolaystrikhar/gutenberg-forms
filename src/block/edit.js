@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import Inspector from "./Inspector";
 import TemplateBuilder from "./components/templateBuilder";
 const { InnerBlocks, RichText, BlockControls, BlockIcon } = wp.blockEditor;
@@ -26,6 +26,8 @@ function edit(props) {
 		props.setAttributes({ submitLabel: label });
 	};
 
+	const showEditor = !templateBuilder ? "cwp-hideEditor" : "cwp-showEditor";
+
 	return [
 		<Inspector data={props} />,
 		<BlockControls>
@@ -44,8 +46,10 @@ function edit(props) {
 				</Tooltip>
 			</Toolbar>
 		</BlockControls>,
-		!templateBuilder ? (
-			<div className={`cwp-form ${props.className}`}>
+		<Fragment>
+			<div
+				className={`cwp-form cwp-form_main ${props.className} ${showEditor}`}
+			>
 				<InnerBlocks
 					template={[
 						["cwp/name", {}],
@@ -71,11 +75,12 @@ function edit(props) {
 					</button>
 				</div>
 			</div>
-		) : (
-			<div className="cwp-form">
-				<TemplateBuilder data={props} />
+			<div className={`cwp-form ${showEditor}`}>
+				<div className="cwp-editor">
+					<TemplateBuilder data={props} />
+				</div>
 			</div>
-		)
+		</Fragment>
 	];
 }
 
