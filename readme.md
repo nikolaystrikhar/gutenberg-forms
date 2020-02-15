@@ -70,7 +70,7 @@ We appreciate all contributions and don't want a wall of rules to get in the way
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
-= 1.0.5 =
+= 1.0.5 (15 Feb 2020) =
 
 - Fixed: Frontend Styling
 - Added: Inline field Styling
