@@ -9,21 +9,30 @@ function save(props) {
 		label,
 		id,
 		height,
-		requiredLabel
+		requiredLabel,
+		messages: { empty, invalid },
+		pattern
 	} = props.attributes;
 
 	const getLabel = () => {
 		const { label, isRequired } = props.attributes;
 
-		let required = `<abbr title="required" aria-label="required">${requiredLabel}</abbr>`;
-
+		let required = !isEmpty(requiredLabel)
+			? `<abbr title="required" aria-label="required">${requiredLabel}</abbr>`
+			: "";
 		let required_label = label + " " + required;
 
 		if (isRequired) return required_label;
 
 		return label;
 	};
-
+	let errors = JSON.stringify({
+		mismatch: invalid,
+		empty
+	});
+	let getPattern = () => {
+		return isEmpty(pattern) ? {} : { pattern };
+	};
 	return (
 		<div className="cwp-message cwp-field">
 			<div className="cwp-field-set">
@@ -39,8 +48,11 @@ function save(props) {
 					style={{ height: height }}
 					data-cwp-field
 					name={id}
+					title={invalid}
 					required={isRequired}
+					data-errors={errors}
 					data-rule="false"
+					{...getPattern()}
 					placeholder={message}
 				/>
 			</div>

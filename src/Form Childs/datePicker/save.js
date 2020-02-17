@@ -13,9 +13,9 @@ function save(props) {
 
 	const getLabel = () => {
 		const { label, isRequired } = props.attributes;
-
-		let required = `<abbr title="required" aria-label="required">${requiredLabel}</abbr>`;
-
+		let required = !isEmpty(requiredLabel)
+			? `<abbr title="required" aria-label="required">${requiredLabel}</abbr>`
+			: "";
 		let required_label = label + " " + required;
 
 		if (isRequired) return required_label;

@@ -3,20 +3,31 @@ import { isEmpty } from "lodash";
 import { strip_tags } from "../../block/misc/helper";
 
 function save(props) {
-	const { website, isRequired, label, id, requiredLabel } = props.attributes;
+	const {
+		website,
+		isRequired,
+		label,
+		id,
+		requiredLabel,
+		messages: { invalid, empty },
+		messages
+	} = props.attributes;
 
 	const getLabel = () => {
 		const { label, isRequired } = props.attributes;
-
-		let required = `<abbr title="required" aria-label="required">${requiredLabel}</abbr>`;
-
+		let required = !isEmpty(requiredLabel)
+			? `<abbr title="required" aria-label="required">${requiredLabel}</abbr>`
+			: "";
 		let required_label = label + " " + required;
 
 		if (isRequired) return required_label;
 
 		return label;
 	};
-
+	let errors = JSON.stringify({
+		mismatch: invalid,
+		empty
+	});
 	return (
 		<div className="cwp-website cwp-field">
 			<div className="cwp-field-set">
@@ -32,7 +43,7 @@ function save(props) {
 					data-cwp-field
 					required={isRequired}
 					type="url"
-					data-parsley-type="url"
+					data-errors={errors}
 					name={id}
 					type="url"
 					placeholder={website}

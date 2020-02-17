@@ -120,7 +120,7 @@ import yesNoSave from "../Form Childs/yes & no/save";
 
 import { applyFormStyles } from "./formStyles/index";
 import { registerFieldStyles } from "./fieldStyles/index";
-import { getFieldTransform } from "./functions/index";
+import { getFieldTransform, defaultFieldMessages } from "./functions/index";
 
 //for sanitizing the label
 
@@ -195,6 +195,10 @@ registerBlockType("cwp/block-gutenberg-forms", {
 				siteKey: "",
 				clientSecret: ""
 			}
+		},
+		messages: {
+			type: "array",
+			default: defaultFieldMessages
 		}
 	},
 	edit: mainEdit,
@@ -244,6 +248,17 @@ registerBlockType("cwp/name", {
 			default: ""
 		},
 		field_name: {
+			type: "string",
+			default: ""
+		},
+		messages: {
+			type: "object",
+			default: {
+				empty: "Please fill out this field!",
+				invalidName: "The name {{value}} is not valid!"
+			}
+		},
+		pattern: {
 			type: "string",
 			default: ""
 		}
@@ -296,6 +311,13 @@ registerBlockType("cwp/email", {
 		field_name: {
 			type: "string",
 			default: ""
+		},
+		messages: {
+			type: "object",
+			default: {
+				empty: "Please fill out this field!",
+				invalidEmail: "The email {{value}} is not valid!"
+			}
 		}
 	},
 	parent: fieldParents
@@ -326,6 +348,17 @@ registerBlockType("cwp/text", {
 			default: ""
 		},
 		field_name: {
+			type: "string",
+			default: ""
+		},
+		messages: {
+			type: "object",
+			default: {
+				empty: "Please fill out this field!",
+				invalid: "The text {{value}} is not valid!"
+			}
+		},
+		pattern: {
 			type: "string",
 			default: ""
 		}
@@ -371,6 +404,17 @@ registerBlockType("cwp/message", {
 			default: 200
 		},
 		field_name: {
+			type: "string",
+			default: ""
+		},
+		messages: {
+			type: "object",
+			default: {
+				empty: "Please fill out this field!",
+				invalid: "The message {{value}} is not valid!"
+			}
+		},
+		pattern: {
 			type: "string",
 			default: ""
 		}
@@ -422,6 +466,12 @@ registerBlockType("cwp/checkbox", {
 		requiredLabel: {
 			type: "string",
 			default: "*"
+		},
+		messages: {
+			type: "object",
+			default: {
+				empty: "Please select atleast one checkbox!"
+			}
 		}
 	},
 	transforms: {
@@ -467,6 +517,10 @@ registerBlockType("cwp/datepicker", {
 		requiredLabel: {
 			type: "string",
 			default: "*"
+		},
+		errorValidityText: {
+			type: "string",
+			default: "Please fill out this field!"
 		}
 	},
 	transforms: {
@@ -519,6 +573,12 @@ registerBlockType("cwp/radio", {
 		requiredLabel: {
 			type: "string",
 			default: "*"
+		},
+		messages: {
+			type: "object",
+			default: {
+				empty: "Please select radio!"
+			}
 		}
 	},
 	transforms: {
@@ -564,6 +624,17 @@ registerBlockType("cwp/phone", {
 		requiredLabel: {
 			type: "string",
 			default: "*"
+		},
+		messages: {
+			type: "object",
+			default: {
+				empty: "Please fill out this field!",
+				invalid: "The phone {{value}} is not valid!"
+			}
+		},
+		pattern: {
+			type: "string",
+			default: "[\\+\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d]+"
 		}
 	},
 	transforms: {
@@ -609,6 +680,13 @@ registerBlockType("cwp/website", {
 		requiredLabel: {
 			type: "string",
 			default: "*"
+		},
+		messages: {
+			type: "object",
+			default: {
+				empty: "Please fill out this field!",
+				invalid: "The website {{value}} is not valid!"
+			}
 		}
 	},
 	transforms: {
@@ -661,6 +739,12 @@ registerBlockType("cwp/select", {
 		requiredLabel: {
 			type: "string",
 			default: "*"
+		},
+		messages: {
+			type: "object",
+			default: {
+				empty: "Please select option!"
+			}
 		}
 	},
 	transforms: {
@@ -767,6 +851,10 @@ registerBlockType("cwp/number", {
 		requiredLabel: {
 			type: "string",
 			default: "*"
+		},
+		errorValidityText: {
+			type: "string",
+			default: "Please fill out this field!"
 		}
 	},
 	transforms: {
@@ -849,6 +937,10 @@ registerBlockType("cwp/yes-no", {
 		field_name: {
 			type: "string",
 			default: ""
+		},
+		errorValidityText: {
+			type: "string",
+			default: "Please fill out this field!"
 		}
 	},
 	parent: fieldParents

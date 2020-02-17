@@ -1,10 +1,11 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import {
 	FormToggle,
 	Toolbar,
 	PanelRow,
 	PanelBody,
-	TextControl
+	TextControl,
+	Icon
 } from "@wordpress/components";
 
 import {
@@ -12,6 +13,8 @@ import {
 	extract_id,
 	getEncodedData
 } from "../../block/misc/helper";
+
+import { clone, set } from "lodash";
 
 const {
 	InspectorControls,
@@ -43,7 +46,9 @@ function edit(props) {
 		label,
 		id,
 		field_name,
-		requiredLabel
+		requiredLabel,
+		messages: { empty, invalidEmail },
+		messages
 	} = props.attributes;
 
 	useEffect(() => {
@@ -67,6 +72,14 @@ function edit(props) {
 		}
 	}, []);
 
+	const setMessages = (type, m) => {
+		let newMessages = clone(messages);
+
+		set(newMessages, type, m);
+
+		props.setAttributes({ messages: newMessages });
+	};
+
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
@@ -80,16 +93,41 @@ function edit(props) {
 						/>
 					</PanelRow>
 					{isRequired && (
+						<Fragment>
+							<div className="cwp-option">
+								<h3 className="cwp-heading">Required Text</h3>
+								<TextControl
+									onChange={label =>
+										props.setAttributes({ requiredLabel: label })
+									}
+									value={requiredLabel}
+								/>
+							</div>
+						</Fragment>
+					)}
+				</PanelBody>
+				<PanelBody title="Messages" icon="email">
+					{isRequired && (
 						<div className="cwp-option">
-							<h3 className="cwp-heading">Required Text</h3>
+							<h3 className="cwp-heading">Required Error</h3>
 							<TextControl
-								onChange={label =>
-									props.setAttributes({ requiredLabel: label })
-								}
-								value={requiredLabel}
+								onChange={label => setMessages("empty", label)}
+								value={empty}
 							/>
 						</div>
 					)}
+					<div className="cwp-option">
+						<h3 className="cwp-heading">Invalid Email Error</h3>
+						<TextControl
+							onChange={v => setMessages("invalidEmail", v)}
+							value={invalidEmail}
+						/>
+					</div>
+					<div className="cwp-option">
+						<p>
+							<Icon icon="info" /> Use {"{{value}}"} to insert field value!
+						</p>
+					</div>
 				</PanelBody>
 			</InspectorControls>
 		),

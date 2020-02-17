@@ -127,3 +127,9 @@ export const basicColorScheme = [
 		name: "Very dark gray"
 	}
 ];
+
+export const firstCapital = str => {
+	let c = str.substring(0, 1).toUpperCase();
+
+	return c.concat(str.substring(1, str.length));
+};

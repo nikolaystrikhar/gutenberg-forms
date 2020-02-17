@@ -11,7 +11,7 @@ import {
 
 const { InspectorControls, BlockControls, BlockIcon } = wp.blockEditor;
 
-import { clone, pullAt, has } from "lodash";
+import { clone, pullAt, has, set } from "lodash";
 import ImageUpload from "../../block/components/imageUpload";
 import ImagePreview from "../../block/components/imagePreview";
 
@@ -30,7 +30,9 @@ function edit(props) {
 		label,
 		id,
 		field_name,
-		requiredLabel
+		requiredLabel,
+		messages,
+		messages: { empty }
 	} = props.attributes;
 
 	const [checkboxes, setCheckboxes] = useState([]);
@@ -67,6 +69,14 @@ function edit(props) {
 			});
 		}
 	}, []);
+
+	const setMessages = (type, m) => {
+		let newMessages = clone(messages);
+
+		set(newMessages, type, m);
+
+		props.setAttributes({ messages: newMessages });
+	};
 
 	useEffect(() => {
 		let boxes = checkboxContainer.current.querySelectorAll(
@@ -208,6 +218,17 @@ function edit(props) {
 					</div>
 				)}
 			</PanelBody>
+			{isRequired && (
+				<PanelBody title="Messages" icon="email">
+					<div className="cwp-option">
+						<h3 className="cwp-heading">Required Error</h3>
+						<TextControl
+							onChange={label => setMessages("empty", label)}
+							value={messages}
+						/>
+					</div>
+				</PanelBody>
+			)}
 		</InspectorControls>,
 		null,
 		<div className={`cwp-checkbox cwp-field ${props.className}`}>

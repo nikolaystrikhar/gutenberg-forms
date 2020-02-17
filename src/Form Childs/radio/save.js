@@ -2,13 +2,22 @@ import { isEmpty, has } from "lodash";
 import { strip_tags } from "../../block/misc/helper";
 
 function save(props) {
-	const { isRequired, options, label, id, requiredLabel } = props.attributes;
+	const {
+		isRequired,
+		options,
+		label,
+		id,
+		requiredLabel,
+		messages,
+		messages: { empty }
+	} = props.attributes;
 
 	const getLabel = () => {
 		const { label, isRequired } = props.attributes;
 
-		const required = `<abbr title="required" aria-label="required">${requiredLabel}</abbr>`;
-
+		let required = !isEmpty(requiredLabel)
+			? `<abbr title="required" aria-label="required">${requiredLabel}</abbr>`
+			: "";
 		const required_label = label + " " + required;
 
 		if (isRequired) {
@@ -18,9 +27,16 @@ function save(props) {
 		return label;
 	};
 
+	let errors = JSON.stringify({
+		empty
+	});
+
 	return (
 		<div className="cwp-radio cwp-field">
-			<div className={`cwp-radio-set ${isRequired ? "required-radio" : ""}`}>
+			<div
+				data-errors={errors}
+				className={`cwp-radio-set ${isRequired ? "required-radio" : ""}`}
+			>
 				{!isEmpty(label) && (
 					<label dangerouslySetInnerHTML={{ __html: getLabel() }}></label>
 				)}

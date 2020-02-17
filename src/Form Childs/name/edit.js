@@ -1,16 +1,19 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import {
 	FormToggle,
 	Toolbar,
 	PanelRow,
 	PanelBody,
-	TextControl
+	TextControl,
+	Icon
 } from "@wordpress/components";
 import {
 	getFieldName,
 	extract_id,
 	getEncodedData
 } from "../../block/misc/helper";
+
+import { clone, set } from "lodash";
 
 const {
 	InspectorControls,
@@ -42,8 +45,12 @@ function edit(props) {
 		label,
 		id,
 		field_name,
-		requiredLabel
+		requiredLabel,
+		messages: { empty, invalidName },
+		messages,
+		pattern
 	} = props.attributes;
+
 	useEffect(() => {
 		if (field_name === "") {
 			props.setAttributes({ field_name: getFieldName("name", props.clientId) });
@@ -62,10 +69,23 @@ function edit(props) {
 			});
 		}
 	}, []);
+
+	const setMessages = (type, m) => {
+		let newMessages = clone(messages);
+
+		set(newMessages, type, m);
+
+		props.setAttributes({ messages: newMessages });
+	};
+
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
-				<PanelBody title="Field Settings" initialOpen={true}>
+				<PanelBody
+					title="Field Settings"
+					icon="admin-generic"
+					initialOpen={true}
+				>
 					<PanelRow>
 						<h3 className="cwp-heading">Required</h3>
 						<FormToggle
@@ -75,16 +95,50 @@ function edit(props) {
 						/>
 					</PanelRow>
 					{isRequired && (
+						<Fragment>
+							<div className="cwp-option">
+								<h3 className="cwp-heading">Required Text</h3>
+								<TextControl
+									onChange={label =>
+										props.setAttributes({ requiredLabel: label })
+									}
+									value={requiredLabel}
+								/>
+							</div>
+						</Fragment>
+					)}
+				</PanelBody>
+				<PanelBody title="Messages" icon="email">
+					{isRequired && (
 						<div className="cwp-option">
-							<h3 className="cwp-heading">Required Text</h3>
+							<h3 className="cwp-heading">Required Error</h3>
 							<TextControl
-								onChange={label =>
-									props.setAttributes({ requiredLabel: label })
-								}
-								value={requiredLabel}
+								onChange={label => setMessages("empty", label)}
+								value={empty}
 							/>
 						</div>
 					)}
+					<div className="cwp-option">
+						<h3 className="cwp-heading">Invalid Name Error</h3>
+						<TextControl
+							onChange={v => setMessages("invalidName", v)}
+							value={invalidName}
+						/>
+					</div>
+					<div className="cwp-option">
+						<p>
+							<Icon icon="info" /> Use {"{{value}}"} to insert field value!
+						</p>
+					</div>
+				</PanelBody>
+				<PanelBody title="Validation" icon="lock">
+					<div className="cwp-option">
+						<TextControl
+							label="Pattern (RegExp)"
+							onChange={pattern => props.setAttributes({ pattern })}
+							value={pattern}
+						/>
+					</div>
 				</PanelBody>
 			</InspectorControls>
 		),

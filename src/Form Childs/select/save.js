@@ -2,19 +2,32 @@ import React from "react";
 import { isEmpty } from "lodash";
 
 function save(props) {
-	const { isRequired, options, label, id, requiredLabel } = props.attributes;
+	const {
+		isRequired,
+		options,
+		label,
+		id,
+		requiredLabel,
+		messages,
+		messages: { empty }
+	} = props.attributes;
 
 	const getLabel = () => {
 		const { label, isRequired } = props.attributes;
 
-		let required = `<abbr title="required" aria-label="required">${requiredLabel}</abbr>`;
-
+		let required = !isEmpty(requiredLabel)
+			? `<abbr title="required" aria-label="required">${requiredLabel}</abbr>`
+			: "";
 		let required_label = label + " " + required;
 
 		if (isRequired) return required_label;
 
 		return label;
 	};
+
+	const errors = JSON.stringify({
+		empty
+	});
 
 	return (
 		<div className="cwp-select cwp-field">
@@ -28,6 +41,7 @@ function save(props) {
 					data-rule="false"
 					value={label}
 					data-cwp-field
+					data-errors={errors}
 					required={isRequired}
 				>
 					<option value="" disabled selected>

@@ -3,13 +3,25 @@ import { isEmpty, has } from "lodash";
 import { strip_tags } from "../../block/misc/helper";
 
 function save(props) {
-	const { isRequired, options, label, id } = props.attributes;
+	const {
+		isRequired,
+		options,
+		label,
+		id,
+		messages,
+		messages: { empty }
+	} = props.attributes;
+
+	let errors = JSON.stringify({
+		empty
+	});
 
 	const getLabel = () => {
 		const { label, isRequired, requiredLabel } = props.attributes;
 
-		let required = `<abbr title="required" aria-label="required">${requiredLabel}</abbr>`;
-
+		let required = !isEmpty(requiredLabel)
+			? `<abbr title="required" aria-label="required">${requiredLabel}</abbr>`
+			: "";
 		let required_label = label + " " + required;
 
 		if (isRequired) return required_label;
@@ -30,6 +42,7 @@ function save(props) {
 	return (
 		<div className="cwp-checkbox cwp-field">
 			<div
+				data-errors={errors}
 				className={`cwp-checkbox-set ${isRequired ? "required-checkbox" : ""}`}
 			>
 				{!isEmpty(label) && (

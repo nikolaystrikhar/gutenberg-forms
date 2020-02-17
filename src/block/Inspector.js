@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import {
 	PanelRow,
 	PanelBody,
@@ -12,6 +12,9 @@ import {
 	FormToggle,
 	Notice
 } from "@wordpress/components";
+import { set, clone } from "lodash";
+import MappedMessages from "./components/messages";
+import { changeChildValue } from "./functions/index";
 
 const { InspectorControls } = wp.blockEditor;
 
@@ -23,6 +26,7 @@ function Inspector(prop) {
 		email,
 		successURL,
 		successType,
+		messages,
 		successMessage,
 		templateBuilder,
 		recaptcha,
@@ -77,6 +81,24 @@ function Inspector(prop) {
 	const handleCaptcha = (v, t) => {
 		props.setAttributes({ recaptcha: { ...recaptcha, [t]: v } });
 	};
+
+	const handleMessagesChange = (t, v, i, fieldName) => {
+		let newMessages = clone(messages);
+
+		newMessages[i] = {
+			...newMessages[i],
+			[t]: v
+		};
+
+		props.setAttributes({ messages: newMessages });
+		changeChildValue(fieldName, props.clientId, newMessages[i]);
+	};
+
+	useEffect(() => {
+		messages.forEach(v => {
+			changeChildValue("cwp/".concat(v.fieldName), props.clientId, v);
+		});
+	}, [props]);
 
 	return (
 		<InspectorControls>
@@ -220,6 +242,9 @@ function Inspector(prop) {
 						</p>
 					</div>
 				)}
+			</PanelBody>
+			<PanelBody title="Messages" icon="email">
+				<MappedMessages val={messages} onChange={handleMessagesChange} />
 			</PanelBody>
 		</InspectorControls>
 	);

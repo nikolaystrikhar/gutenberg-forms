@@ -295,7 +295,7 @@
                 if ($this->validator->isEmpty($fromEmail)) {
                     wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body);
                 } else {
-                    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , "From: $fromEmail");
+                   wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , "From: $fromEmail");
                 }
                 $this->attempt_success($template);
             }

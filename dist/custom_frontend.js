@@ -1854,14 +1854,21 @@ jQuery(function($) {
 					) {
 						e.preventDefault();
 
+						let errMessage = $(this).data("errors");
+
 						if (!$(this).find(".cwp-warning").length) {
 							$(this).append(`
                     <div class="cwp-warning">
                       <div>
                         <span class="dashicons dashicons-info"></span>
                       </div>
-                      <div>
-                        Please Select Atleast One Checkbox!
+					  <div>
+					  ${
+							errMessage.empty.trim().length === 0
+								? "Please select atleast one checkbox!"
+								: errMessage.empty
+						}
+                        
                       </div>
                     </div>
                   `);
@@ -1873,37 +1880,90 @@ jQuery(function($) {
 					}
 				});
 
-				$(this).on("submit", function(e) {
-					let required_radios = $(this).find(".cwp-radio-set.required-radio");
+				let required_radios = $(this).find(".cwp-radio-set.required-radio");
 
-					required_radios.each(function(index) {
-						if (
-							$(this)
-								.find("input:radio")
-								.filter(":checked").length < 1
-						) {
-							e.preventDefault();
+				required_radios.each(function(index) {
+					if (
+						$(this)
+							.find("input:radio")
+							.filter(":checked").length < 1
+					) {
+						let errMessage = $(this).data("errors");
 
-							if (!$(this).find(".cwp-warning").length) {
-								$(this).append(`
+						e.preventDefault();
+
+						if (!$(this).find(".cwp-warning").length) {
+							$(this).append(`
                       <div class="cwp-warning">
                         <div>
                           <span class="dashicons dashicons-info"></span>
                         </div>
                         <div>
-                          Please Select A Radio!
+						${
+							errMessage.empty.trim().length === 0
+								? "Please select radio!"
+								: errMessage.empty
+						}
                         </div>
                       </div>
                     `);
-							}
-						} else if ($(this).find(".cwp-warning").length) {
-							$(this)
-								.find(".cwp-warning")
-								.remove();
 						}
-					});
+					} else if ($(this).find(".cwp-warning").length) {
+						$(this)
+							.find(".cwp-warning")
+							.remove();
+					}
 				});
 			});
 		});
+	});
+});
+document.addEventListener("DOMContentLoaded", function() {
+	var elements = document.querySelectorAll(".cwp-form [data-cwp-field]");
+
+	elements.forEach(elem => {
+		elem.oninvalid = function(e) {
+			const validityText = JSON.parse(e.target.dataset.errors);
+
+			if (validityText.mismatch) {
+				let mismatchWithValue = validityText.mismatch.replace(
+					/{{value}}/g,
+					e.target.value
+				);
+
+				e.target.setCustomValidity("");
+				if (!e.target.validity.valid) {
+					e.target.value === ""
+						? e.target.setCustomValidity(validityText.empty)
+						: e.target.setCustomValidity(mismatchWithValue);
+				}
+			} else if (validityText.empty){
+				e.target.setCustomValidity("");
+				if (!e.target.validity.valid) {
+					e.target.value === ""
+						? e.target.setCustomValidity(validityText.empty) : null
+				}
+			}
+		};
+		elem.onkeydown = function(e) {
+			e.target.setCustomValidity("");
+
+			const parseErrors = JSON.parse(e.target.dataset.errors);
+			const typeMismatchMessage = parseErrors.mismatch;
+
+			if (parseErrors.mismatch) {
+				let mismatchWithValue = typeMismatchMessage.replace(
+					/{{value}}/g,
+					e.target.value
+				);
+
+				e.target.setAttribute("title", mismatchWithValue);
+				if (e.target.validity.typeMismatch) {
+					e.target.setCustomValidity(
+						mismatchWithValue ? mismatchWithValue : ""
+					);
+				}
+			}
+		};
 	});
 });

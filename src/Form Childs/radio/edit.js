@@ -18,7 +18,7 @@ import ImagePreview from "../../block/components/imagePreview";
 
 const { InspectorControls, BlockControls, BlockIcon } = wp.blockEditor;
 
-import { clone, pullAt, isEqual, has } from "lodash";
+import { clone, pullAt, isEqual, has, set } from "lodash";
 
 const { RichText } = wp.blockEditor;
 
@@ -29,7 +29,9 @@ function edit(props) {
 		label,
 		id,
 		field_name,
-		requiredLabel
+		requiredLabel,
+		messages: { empty },
+		messages
 	} = props.attributes;
 
 	const radiosContainer = useRef();
@@ -204,6 +206,14 @@ function edit(props) {
 		}
 	};
 
+	const setMessages = (type, m) => {
+		let newMessages = clone(messages);
+
+		set(newMessages, type, m);
+
+		props.setAttributes({ messages: newMessages });
+	};
+
 	return [
 		<InspectorControls>
 			<PanelBody title="Field Settings" initialOpen={true}>
@@ -225,6 +235,17 @@ function edit(props) {
 					</div>
 				)}
 			</PanelBody>
+			{isRequired && (
+				<PanelBody title="Messages" icon="email">
+					<div className="cwp-option">
+						<h3 className="cwp-heading">Required Error</h3>
+						<TextControl
+							onChange={label => setMessages("empty", label)}
+							value={empty}
+						/>
+					</div>
+				</PanelBody>
+			)}
 		</InspectorControls>,
 		null,
 		<div className={`cwp-radios cwp-field ${props.className}`}>

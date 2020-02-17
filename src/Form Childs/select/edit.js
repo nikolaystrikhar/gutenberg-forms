@@ -17,7 +17,7 @@ import {
 
 const { InspectorControls, BlockControls, BlockIcon } = wp.blockEditor;
 
-import { clone, pullAt } from "lodash";
+import { clone, pullAt, set } from "lodash";
 
 const { RichText } = wp.blockEditor;
 
@@ -28,7 +28,9 @@ function edit(props) {
 		label,
 		id,
 		field_name,
-		requiredLabel
+		requiredLabel,
+		messages: { empty },
+		messages
 	} = props.attributes;
 
 	const [select, setSelect] = useState([]);
@@ -154,6 +156,14 @@ function edit(props) {
 		}
 	};
 
+	const setMessages = (type, m) => {
+		let newMessages = clone(messages);
+
+		set(newMessages, type, m);
+
+		props.setAttributes({ messages: newMessages });
+	};
+
 	const editView = select.map((s, index) => {
 		return (
 			<div className="cwp-select-option">
@@ -211,6 +221,17 @@ function edit(props) {
 					</div>
 				)}
 			</PanelBody>
+			{isRequired && (
+				<PanelBody title="Messages" icon="email">
+					<div className="cwp-option">
+						<h3 className="cwp-heading">Required Error</h3>
+						<TextControl
+							onChange={label => setMessages("empty", label)}
+							value={empty}
+						/>
+					</div>
+				</PanelBody>
+			)}
 		</InspectorControls>,
 		null,
 		<div

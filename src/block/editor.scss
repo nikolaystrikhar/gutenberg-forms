@@ -94,8 +94,17 @@
 .cwp-option {
 	margin: 20px 0px !important;
 
+	& h3.cwp-message_header {
+		margin: 0px 0px 10px 0px !important;
+		display: flex;
+
+		& svg {
+			margin: 0px 10px;
+		}
+	}
+
 	& h3 {
-		margin: 0 !important;
+		margin: 0;
 	}
 
 	& p {

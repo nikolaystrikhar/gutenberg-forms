@@ -3,18 +3,36 @@ import { isEmpty } from "lodash";
 import { strip_tags } from "../../block/misc/helper";
 
 function save(props) {
-	const { name, isRequired, label, id, requiredLabel } = props.attributes;
+	const {
+		name,
+		isRequired,
+		label,
+		id,
+		requiredLabel,
+		messages: { empty, invalidName },
+		pattern
+	} = props.attributes;
 
 	const getLabel = () => {
 		const { label, isRequired } = props.attributes;
 
-		let required = `<abbr title="required" aria-label="required">${requiredLabel}</abbr>`;
-
+		let required = !isEmpty(requiredLabel)
+			? `<abbr title="required" aria-label="required">${requiredLabel}</abbr>`
+			: "";
 		let required_label = label + " " + required;
 
 		if (isRequired) return required_label;
 
 		return label;
+	};
+
+	let errors = JSON.stringify({
+		mismatch: invalidName,
+		empty
+	});
+
+	let getPattern = () => {
+		return isEmpty(pattern) ? {} : { pattern };
 	};
 
 	return (
@@ -30,7 +48,10 @@ function save(props) {
 					id={id}
 					aria-label={strip_tags(label)}
 					data-cwp-field
+					{...getPattern()}
 					name={id}
+					title={invalidName}
+					data-errors={errors}
 					data-rule="false"
 					placeholder={name}
 					required={isRequired}
