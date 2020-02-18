@@ -8,7 +8,10 @@ function save(props) {
 		isRequired,
 		label,
 		id,
-		requiredLabel
+		requiredLabel,
+		type,
+		messages: { empty },
+		format
 	} = props.attributes;
 
 	const getLabel = () => {
@@ -23,6 +26,21 @@ function save(props) {
 		return label;
 	};
 
+	let getFieldType = () => {
+		switch (type) {
+			case "both":
+				return "datetime-local";
+			case "time":
+				return "time";
+			case "date":
+				return "date";
+		}
+	};
+
+	let errors = JSON.stringify({
+		empty
+	});
+
 	return (
 		<div className="cwp-datepicker cwp-field">
 			<div className="cwp-field-set" data-required={isRequired}>
@@ -34,16 +52,19 @@ function save(props) {
 				)}
 				<input
 					id={id}
+					type="text"
 					aria-label={strip_tags(label)}
-					readOnly
 					name={id}
+					readOnly
 					required={isRequired}
 					data-cwp-field
 					data-rule="false"
+					data-format={format}
+					data-errors={errors}
 					data-validation="date"
 					data-validation-format="dd/mm/yyyy"
 					data-language="en"
-					placeholder={placeholder}
+					value={placeholder}
 				/>
 			</div>
 		</div>

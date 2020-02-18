@@ -1,7 +1,9 @@
 import { strip_tags } from "../misc/helper";
-import { each, has, omit } from "lodash";
+import { each, has, omit, isEqual, clone, assign } from "lodash";
 const { createBlock } = wp.blocks;
-const { getBlock } = wp.data.select("core/block-editor");
+const { getBlock, getBlockRootClientId, getBlockParents } = wp.data.select(
+	"core/block-editor"
+);
 const { updateBlockAttributes } = wp.data.dispatch("core/block-editor");
 
 const radio_enabled_fields = ["select", "radio", "checkbox"]; //fields that support multiple
@@ -96,7 +98,25 @@ export const defaultFieldMessages = [
 	}
 ];
 
-export function changeChildValue(slug, clientId, attrs) {
+function isDefaultValues(blockAttrs, type, fName, messages) {
+	//ensuring that the block values aren't changed!
+
+	if (!has(blockAttrs, "messages")) return;
+
+	let defaultMessage = messages.find(v => v.fieldName === fName);
+
+	let statics = defaultFieldMessages.find(v => v.fieldName === fName);
+
+	if (statics[type] === blockAttrs.messages[type]) {
+		return true;
+	} else if (blockAttrs.messages[type] === defaultMessage[type]) {
+		return true;
+	}
+
+	return false;
+}
+
+export function changeChildValue(slug, clientId, attrs, type, messages) {
 	const block = getBlock(clientId); // getting the current main parent block
 
 	if (!has(block, "innerBlocks")) return;
@@ -107,11 +127,25 @@ export function changeChildValue(slug, clientId, attrs) {
 		if (targetBlock) {
 			let cId = b.clientId;
 
-			updateBlockAttributes(cId, { messages: omit(attrs, "fieldName") });
+			if (isDefaultValues(b.attributes, type, attrs.fieldName, messages)) {
+				updateBlockAttributes(cId, { messages: omit(attrs, "fieldName") });
+			}
 		} else if (layoutBlocks.includes(b.name)) {
 			changeChildValue(slug, b.clientId, attrs); // recursion
 		}
 	});
 
 	// return block;
+}
+
+export function getRootMessages(clientId, blockName) {
+	const rootForms = getBlockParents(clientId);
+	const rootBlock = getBlock(rootForms[0]);
+
+	if (rootBlock.name !== "cwp/block-gutenberg-forms") return false;
+
+	let { messages } = rootBlock.attributes;
+	const defaultMessage = messages.find(v => v.fieldName === blockName);
+
+	return defaultMessage;
 }

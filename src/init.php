@@ -126,6 +126,17 @@ function my_admin_page_contents() {
 
 // add_action( 'admin_menu', 'my_sub_menu' );
 
+
+function cwp_gutenberg_forms_messages_meta() {
+    register_post_meta( 'post', 'myguten_meta_block_field', array(
+        'show_in_rest' => true,
+        'single' => true,
+        'type' => 'string',
+    ) );
+}
+
+add_action( 'init', 'cwp_gutenberg_forms_messages_meta' );
+
 //custom_postype for our gutenberg-forms;
 add_action('wp_head' , 'submitter');
 add_action('wp-load' , 'submitter');

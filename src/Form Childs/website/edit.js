@@ -13,7 +13,8 @@ import {
 	getEncodedData
 } from "../../block/misc/helper";
 
-import { set, clone } from "lodash";
+import { set, clone, assign } from "lodash";
+import { getRootMessages } from "../../block/functions/index";
 
 const {
 	InspectorControls,
@@ -50,6 +51,16 @@ function edit(props) {
 		messages
 	} = props.attributes;
 	useEffect(() => {
+		let rootMessages = getRootMessages(props.clientId, "website");
+
+		if (rootMessages) {
+			const newMessages = clone(messages);
+
+			assign(newMessages, rootMessages);
+
+			props.setAttributes({ messages: newMessages });
+		}
+
 		if (field_name === "") {
 			props.setAttributes({
 				field_name: getFieldName("website", props.clientId)

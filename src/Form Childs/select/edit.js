@@ -17,7 +17,8 @@ import {
 
 const { InspectorControls, BlockControls, BlockIcon } = wp.blockEditor;
 
-import { clone, pullAt, set } from "lodash";
+import { clone, pullAt, set, assign } from "lodash";
+import { getRootMessages } from "../../block/functions/index";
 
 const { RichText } = wp.blockEditor;
 
@@ -43,6 +44,16 @@ function edit(props) {
 	const selectContainer = useRef();
 
 	useEffect(() => {
+		let rootMessages = getRootMessages(props.clientId, "select");
+
+		if (rootMessages) {
+			const newMessages = clone(messages);
+
+			assign(newMessages, rootMessages);
+
+			props.setAttributes({ messages: newMessages });
+		}
+
 		let { options } = props.attributes;
 
 		setSelect(options);

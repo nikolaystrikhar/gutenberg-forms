@@ -518,9 +518,15 @@ registerBlockType("cwp/datepicker", {
 			type: "string",
 			default: "*"
 		},
-		errorValidityText: {
+		format: {
 			type: "string",
-			default: "Please fill out this field!"
+			default: "DD/MM/YYYY"
+		},
+		messages: {
+			type: "object",
+			default: {
+				empty: "Please select date!"
+			}
 		}
 	},
 	transforms: {
@@ -818,7 +824,7 @@ registerBlockType("cwp/number", {
 	attributes: {
 		number: {
 			type: "string",
-			default: "0"
+			default: ""
 		},
 		isRequired: {
 			type: "boolean",

@@ -1,4 +1,5 @@
 import React from "react";
+import { isEmpty } from "lodash";
 const { InnerBlocks } = wp.blockEditor;
 
 function save(props) {
@@ -6,7 +7,9 @@ function save(props) {
 
 	return (
 		<fieldset style={styling} className="cwp-form-group">
-			<legend dangerouslySetInnerHTML={{ __html: label }}></legend>
+			{!isEmpty(label) && (
+				<legend dangerouslySetInnerHTML={{ __html: label }}></legend>
+			)}
 			<div className="cwp-group-fields">
 				<InnerBlocks.Content />
 			</div>

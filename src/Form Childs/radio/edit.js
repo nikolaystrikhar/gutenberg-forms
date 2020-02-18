@@ -18,7 +18,8 @@ import ImagePreview from "../../block/components/imagePreview";
 
 const { InspectorControls, BlockControls, BlockIcon } = wp.blockEditor;
 
-import { clone, pullAt, isEqual, has, set } from "lodash";
+import { clone, pullAt, isEqual, has, set, assign } from "lodash";
+import { getRootMessages } from "../../block/functions/index";
 
 const { RichText } = wp.blockEditor;
 
@@ -44,6 +45,16 @@ function edit(props) {
 	});
 
 	useEffect(() => {
+		let rootMessages = getRootMessages(props.clientId, "radio");
+
+		if (rootMessages) {
+			const newMessages = clone(messages);
+
+			assign(newMessages, rootMessages);
+
+			props.setAttributes({ messages: newMessages });
+		}
+
 		let { options } = props.attributes;
 
 		const checked = options.find(c => c.checked);

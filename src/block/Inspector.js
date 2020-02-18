@@ -89,16 +89,9 @@ function Inspector(prop) {
 			...newMessages[i],
 			[t]: v
 		};
-
 		props.setAttributes({ messages: newMessages });
-		changeChildValue(fieldName, props.clientId, newMessages[i]);
+		changeChildValue(fieldName, props.clientId, newMessages[i], t, messages);
 	};
-
-	useEffect(() => {
-		messages.forEach(v => {
-			changeChildValue("cwp/".concat(v.fieldName), props.clientId, v);
-		});
-	}, [props]);
 
 	return (
 		<InspectorControls>

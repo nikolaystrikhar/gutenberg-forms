@@ -1,6 +1,6 @@
 @import "./_partials/variables";
 @import "./_partials/mixins";
-@import "./lib/datepicker";
+@import "../src/block/lib/datePicker.scss";
 
 @media (max-width: 600px) {
 	.cwp-form {
