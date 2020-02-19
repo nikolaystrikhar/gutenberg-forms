@@ -149,3 +149,44 @@ export function getRootMessages(clientId, blockName) {
 
 	return defaultMessage;
 }
+
+export function getSiblings(clientId) {
+	const block = getBlockParents(clientId),
+		rootBlock = getBlock(block[0]); //i.e = gutenberg-forms;
+
+	if (
+		rootBlock.name !== "cwp/block-gutenberg-forms" &&
+		has(rootBlock, "innerBlocks")
+	)
+		return false;
+
+	let siblingValues = [];
+
+	rootBlock.innerBlocks.forEach(v => {
+		const breaked = v.name.split("/");
+
+		const conditions = {
+			isCakewpBlock: v.name.startsWith("cwp/"), //ensuring that this is our block!
+			isFieldBlock: myAttrs.includes(breaked[breaked.length - 1]), //ensuring that it is a gutenberg-form field;
+			isLayoutBlock: layoutBlocks.includes(v.name), //ensuring that it is not a layout block
+			currentBlock: v.clientId === clientId //ensuring that this is not the block
+		};
+
+		if (
+			conditions.isCakewpBlock &&
+			conditions.isFieldBlock &&
+			!conditions.isLayoutBlock &&
+			!conditions.currentBlock
+		) {
+			siblingValues.push(v.attributes);
+		} else if (conditions.isLayoutBlock) {
+			siblingValues.push(...getSiblings(v.clientId)); //getting inner fields in layout blocks
+		}
+	});
+
+	return siblingValues;
+}
+
+export function stringifyCondition(c) {
+	return JSON.stringify(c);
+}

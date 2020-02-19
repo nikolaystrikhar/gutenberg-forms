@@ -14,6 +14,7 @@ const { InspectorControls, BlockControls, BlockIcon } = wp.blockEditor;
 import { clone, pullAt, has, set } from "lodash";
 import ImageUpload from "../../block/components/imageUpload";
 import ImagePreview from "../../block/components/imagePreview";
+import ConditionalLogic from "../../block/components/condition";
 
 import {
 	getFieldName,
@@ -32,7 +33,8 @@ function edit(props) {
 		field_name,
 		requiredLabel,
 		messages,
-		messages: { empty }
+		messages: { empty },
+		condition
 	} = props.attributes;
 
 	const [checkboxes, setCheckboxes] = useState([]);
@@ -229,6 +231,14 @@ function edit(props) {
 					</div>
 				</PanelBody>
 			)}
+			<PanelBody title="Condition" icon="hidden">
+				<ConditionalLogic
+					condition={condition}
+					set={props.setAttributes}
+					clientId={props.clientId}
+					useCondition={props.attributes.enableCondition}
+				/>
+			</PanelBody>
 		</InspectorControls>,
 		null,
 		<div className={`cwp-checkbox cwp-field ${props.className}`}>

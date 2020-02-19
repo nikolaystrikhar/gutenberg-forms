@@ -1,6 +1,7 @@
 import React from "react";
 import { isEmpty } from "lodash";
 import { strip_tags } from "../../block/misc/helper";
+import { stringifyCondition } from "../../block/functions";
 
 function save(props) {
 	const {
@@ -10,7 +11,8 @@ function save(props) {
 		id,
 		requiredLabel,
 		messages: { empty, invalidName },
-		pattern
+		pattern,
+		condition
 	} = props.attributes;
 
 	const getLabel = () => {
@@ -35,8 +37,19 @@ function save(props) {
 		return isEmpty(pattern) ? {} : { pattern };
 	};
 
+	const getCondition = () => {
+		if (props.attributes.enableCondition) {
+			//verifying the condition
+			return {
+				"data-condition": stringifyCondition(condition)
+			};
+		}
+
+		return {};
+	};
+
 	return (
-		<div className="cwp-name cwp-field">
+		<div className="cwp-name cwp-field" {...getCondition()}>
 			<div className="cwp-field-set">
 				{!isEmpty(label) && (
 					<label

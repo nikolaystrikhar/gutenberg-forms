@@ -4,17 +4,17 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-function gutenberg_forms_cgb_block_assets()
+function gutenberg_forms_cwp_block_assets()
 {
 	wp_register_style(
-		'gutenberg_forms-cgb-style-css',
+		'gutenberg_forms-cwp-style-css',
 		plugins_url('dist/blocks.style.build.css', dirname(__FILE__)),
 		array('wp-editor'),
 		null
 	);
 
 	wp_register_script(
-		'gutenberg_forms-cgb-block-js',
+		'gutenberg_forms-cwp-block-js',
 		plugins_url('/dist/blocks.build.js', dirname(__FILE__)),
 		array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor'),
 		null,
@@ -30,15 +30,15 @@ function gutenberg_forms_cgb_block_assets()
 	);
 
 	wp_register_style(
-		'gutenberg_forms-cgb-block-editor-css',
+		'gutenberg_forms-cwp-block-editor-css',
 		plugins_url('dist/blocks.editor.build.css', dirname(__FILE__)),
 		array('wp-edit-blocks'),
 		null
 	);
 
 	wp_localize_script(
-		'gutenberg_forms-cgb-block-js',
-		'cgbGlobal',
+		'gutenberg_forms-cwp-block-js',
+		'cwpGlobal',
 		[
 			'pluginDirPath' => plugin_dir_path(__DIR__),
 			'pluginDirUrl'  => plugin_dir_url(__DIR__),
@@ -47,12 +47,12 @@ function gutenberg_forms_cgb_block_assets()
 
 
 	register_block_type(
-		'cgb/block-gutenberg-forms',
+		'cwp/block-gutenberg-forms',
 		array(
-			'style'         => 'gutenberg_forms-cgb-style-css',
-			'editor_script' => 'gutenberg_forms-cgb-block-js',
+			'style'         => 'gutenberg_forms-cwp-style-css',
+			'editor_script' => 'gutenberg_forms-cwp-block-js',
 			'script'		=> 'gutenberg-forms-custom-js',
-			'editor_style'  => 'gutenberg_forms-cgb-block-editor-css',
+			'editor_style'  => 'gutenberg_forms-cwp-block-editor-css',
 		)
 	);
 }
@@ -141,4 +141,4 @@ add_action( 'init', 'cwp_gutenberg_forms_messages_meta' );
 add_action('wp_head' , 'submitter');
 add_action('wp-load' , 'submitter');
 // add_action('init', 'create_posttype');
-add_action('init', 'gutenberg_forms_cgb_block_assets');
+add_action('init', 'gutenberg_forms_cwp_block_assets');

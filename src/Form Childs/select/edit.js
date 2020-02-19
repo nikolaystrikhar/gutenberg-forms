@@ -19,6 +19,7 @@ const { InspectorControls, BlockControls, BlockIcon } = wp.blockEditor;
 
 import { clone, pullAt, set, assign } from "lodash";
 import { getRootMessages } from "../../block/functions/index";
+import ConditionalLogic from "../../block/components/condition";
 
 const { RichText } = wp.blockEditor;
 
@@ -31,7 +32,8 @@ function edit(props) {
 		field_name,
 		requiredLabel,
 		messages: { empty },
-		messages
+		messages,
+		condition
 	} = props.attributes;
 
 	const [select, setSelect] = useState([]);
@@ -231,6 +233,14 @@ function edit(props) {
 						/>
 					</div>
 				)}
+			</PanelBody>
+			<PanelBody title="Condition" icon="hidden">
+				<ConditionalLogic
+					condition={condition}
+					set={props.setAttributes}
+					clientId={props.clientId}
+					useCondition={props.attributes.enableCondition}
+				/>
 			</PanelBody>
 			{isRequired && (
 				<PanelBody title="Messages" icon="email">

@@ -231,6 +231,10 @@ registerBlockType("cwp/name", {
 	edit: nameEdit,
 	save: nameSave,
 	attributes: {
+		enableCondition: {
+			type: "boolean",
+			default: false
+		},
 		name: {
 			type: "string",
 			default: ""
@@ -261,6 +265,14 @@ registerBlockType("cwp/name", {
 		pattern: {
 			type: "string",
 			default: ""
+		},
+		condition: {
+			type: "object",
+			default: {
+				field: null,
+				condition: "===",
+				value: ""
+			}
 		}
 	},
 	transforms: {
@@ -292,6 +304,10 @@ registerBlockType("cwp/email", {
 		]
 	},
 	attributes: {
+		enableCondition: {
+			type: "boolean",
+			default: false
+		},
 		email: {
 			type: "string",
 			default: ""
@@ -318,6 +334,14 @@ registerBlockType("cwp/email", {
 				empty: "Please fill out this field!",
 				invalidEmail: "The email {{value}} is not valid!"
 			}
+		},
+		condition: {
+			type: "object",
+			default: {
+				field: null,
+				condition: "===",
+				value: ""
+			}
 		}
 	},
 	parent: fieldParents
@@ -331,6 +355,10 @@ registerBlockType("cwp/text", {
 	edit: textEdit,
 	save: textSave,
 	attributes: {
+		enableCondition: {
+			type: "boolean",
+			default: false
+		},
 		text: {
 			type: "string",
 			default: ""
@@ -361,6 +389,14 @@ registerBlockType("cwp/text", {
 		pattern: {
 			type: "string",
 			default: ""
+		},
+		condition: {
+			type: "object",
+			default: {
+				field: null,
+				condition: "===",
+				value: ""
+			}
 		}
 	},
 	transforms: {
@@ -383,6 +419,10 @@ registerBlockType("cwp/message", {
 	edit: messageEdit,
 	save: messageSave,
 	attributes: {
+		enableCondition: {
+			type: "boolean",
+			default: false
+		},
 		message: {
 			type: "string",
 			default: ""
@@ -417,6 +457,14 @@ registerBlockType("cwp/message", {
 		pattern: {
 			type: "string",
 			default: ""
+		},
+		condition: {
+			type: "object",
+			default: {
+				field: null,
+				condition: "===",
+				value: ""
+			}
 		}
 	},
 	transforms: {
@@ -451,6 +499,10 @@ registerBlockType("cwp/checkbox", {
 				}
 			]
 		},
+		enableCondition: {
+			type: "boolean",
+			default: false
+		},
 		label: {
 			type: "string",
 			default: "Choose One"
@@ -471,6 +523,14 @@ registerBlockType("cwp/checkbox", {
 			type: "object",
 			default: {
 				empty: "Please select atleast one checkbox!"
+			}
+		},
+		condition: {
+			type: "object",
+			default: {
+				field: null,
+				condition: "===",
+				value: ""
 			}
 		}
 	},
@@ -494,6 +554,10 @@ registerBlockType("cwp/datepicker", {
 	edit: datePickerEdit,
 	save: datePickerSave,
 	attributes: {
+		enableCondition: {
+			type: "boolean",
+			default: false
+		},
 		isRequired: {
 			type: "boolean",
 			default: false
@@ -527,6 +591,14 @@ registerBlockType("cwp/datepicker", {
 			default: {
 				empty: "Please select date!"
 			}
+		},
+		condition: {
+			type: "object",
+			default: {
+				field: null,
+				condition: "===",
+				value: ""
+			}
 		}
 	},
 	transforms: {
@@ -549,6 +621,10 @@ registerBlockType("cwp/radio", {
 	edit: radioEdit,
 	save: radioSave,
 	attributes: {
+		enableCondition: {
+			type: "boolean",
+			default: false
+		},
 		isRequired: {
 			type: "boolean",
 			default: false
@@ -585,6 +661,14 @@ registerBlockType("cwp/radio", {
 			default: {
 				empty: "Please select radio!"
 			}
+		},
+		condition: {
+			type: "object",
+			default: {
+				field: null,
+				condition: "===",
+				value: ""
+			}
 		}
 	},
 	transforms: {
@@ -607,6 +691,10 @@ registerBlockType("cwp/phone", {
 	edit: phoneEdit,
 	save: phoneSave,
 	attributes: {
+		enableCondition: {
+			type: "boolean",
+			default: false
+		},
 		phone: {
 			type: "string",
 			default: ""
@@ -641,6 +729,14 @@ registerBlockType("cwp/phone", {
 		pattern: {
 			type: "string",
 			default: "[\\+\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d]+"
+		},
+		condition: {
+			type: "object",
+			default: {
+				field: null,
+				condition: "===",
+				value: ""
+			}
 		}
 	},
 	transforms: {
@@ -663,6 +759,10 @@ registerBlockType("cwp/website", {
 	edit: websiteEdit,
 	save: websiteSave,
 	attributes: {
+		enableCondition: {
+			type: "boolean",
+			default: false
+		},
 		website: {
 			type: "string",
 			default: ""
@@ -692,6 +792,14 @@ registerBlockType("cwp/website", {
 			default: {
 				empty: "Please fill out this field!",
 				invalid: "The website {{value}} is not valid!"
+			}
+		},
+		condition: {
+			type: "object",
+			default: {
+				field: null,
+				condition: "===",
+				value: ""
 			}
 		}
 	},
@@ -738,6 +846,10 @@ registerBlockType("cwp/select", {
 			type: "string",
 			default: ""
 		},
+		enableCondition: {
+			type: "boolean",
+			default: false
+		},
 		field_name: {
 			type: "string",
 			default: ""
@@ -750,6 +862,14 @@ registerBlockType("cwp/select", {
 			type: "object",
 			default: {
 				empty: "Please select option!"
+			}
+		},
+		condition: {
+			type: "object",
+			default: {
+				field: null,
+				condition: "===",
+				value: ""
 			}
 		}
 	},
@@ -822,6 +942,10 @@ registerBlockType("cwp/number", {
 	edit: numberEdit,
 	save: numberSave,
 	attributes: {
+		enableCondition: {
+			type: "boolean",
+			default: false
+		},
 		number: {
 			type: "string",
 			default: ""
@@ -861,6 +985,14 @@ registerBlockType("cwp/number", {
 		errorValidityText: {
 			type: "string",
 			default: "Please fill out this field!"
+		},
+		condition: {
+			type: "object",
+			default: {
+				field: null,
+				condition: "===",
+				value: ""
+			}
 		}
 	},
 	transforms: {
@@ -947,6 +1079,18 @@ registerBlockType("cwp/yes-no", {
 		errorValidityText: {
 			type: "string",
 			default: "Please fill out this field!"
+		},
+		enableCondition: {
+			type: "boolean",
+			default: false
+		},
+		condition: {
+			type: "object",
+			default: {
+				field: null,
+				condition: "===",
+				value: ""
+			}
 		}
 	},
 	parent: fieldParents

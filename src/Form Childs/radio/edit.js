@@ -15,6 +15,7 @@ import {
 } from "../../block/misc/helper";
 import ImageUpload from "../../block/components/imageUpload";
 import ImagePreview from "../../block/components/imagePreview";
+import ConditionalLogic from "../../block/components/condition";
 
 const { InspectorControls, BlockControls, BlockIcon } = wp.blockEditor;
 
@@ -32,7 +33,8 @@ function edit(props) {
 		field_name,
 		requiredLabel,
 		messages: { empty },
-		messages
+		messages,
+		condition
 	} = props.attributes;
 
 	const radiosContainer = useRef();
@@ -246,6 +248,15 @@ function edit(props) {
 					</div>
 				)}
 			</PanelBody>
+			<PanelBody title="Condition" icon="hidden">
+				<ConditionalLogic
+					condition={condition}
+					set={props.setAttributes}
+					clientId={props.clientId}
+					useCondition={props.attributes.enableCondition}
+				/>
+			</PanelBody>
+
 			{isRequired && (
 				<PanelBody title="Messages" icon="email">
 					<div className="cwp-option">

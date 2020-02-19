@@ -13,6 +13,7 @@ import {
 	getEncodedData
 } from "../../block/misc/helper";
 import { getRootMessages } from "../../block/functions/index";
+import ConditionalLogic from "../../block/components/condition";
 
 import { clone, set, assign } from "lodash";
 
@@ -49,7 +50,8 @@ function edit(props) {
 		requiredLabel,
 		messages: { empty, invalidName },
 		messages,
-		pattern
+		pattern,
+		condition
 	} = props.attributes;
 
 	useEffect(() => {
@@ -118,6 +120,14 @@ function edit(props) {
 							</div>
 						</Fragment>
 					)}
+				</PanelBody>
+				<PanelBody title="Condition" icon="hidden">
+					<ConditionalLogic
+						condition={condition}
+						set={props.setAttributes}
+						clientId={props.clientId}
+						useCondition={props.attributes.enableCondition}
+					/>
 				</PanelBody>
 				<PanelBody title="Messages" icon="email">
 					{isRequired && (

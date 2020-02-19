@@ -15,6 +15,7 @@ import {
 
 import { set, clone, assign } from "lodash";
 import { getRootMessages } from "../../block/functions/index";
+import ConditionalLogic from "../../block/components/condition";
 
 const {
 	InspectorControls,
@@ -48,7 +49,8 @@ function edit(props) {
 		field_name,
 		requiredLabel,
 		messages: { invalid, empty },
-		messages
+		messages,
+		condition
 	} = props.attributes;
 	useEffect(() => {
 		let rootMessages = getRootMessages(props.clientId, "website");
@@ -116,6 +118,14 @@ function edit(props) {
 							/>
 						</div>
 					)}
+				</PanelBody>
+				<PanelBody title="Condition" icon="hidden">
+					<ConditionalLogic
+						condition={condition}
+						set={props.setAttributes}
+						clientId={props.clientId}
+						useCondition={props.attributes.enableCondition}
+					/>
 				</PanelBody>
 				<PanelBody title="Messages" icon="email">
 					{isRequired && (

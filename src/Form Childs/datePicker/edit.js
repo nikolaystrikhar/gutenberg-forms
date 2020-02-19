@@ -14,6 +14,7 @@ import {
 } from "../../block/misc/helper";
 import DatePicker from "../../block/components/datepicker";
 import { clone, set } from "lodash";
+import ConditionalLogic from "../../block/components/condition";
 
 const {
 	InspectorControls,
@@ -50,7 +51,8 @@ function edit(props) {
 		type,
 		messages: { empty },
 		messages,
-		format
+		format,
+		condition
 	} = props.attributes;
 
 	useEffect(() => {
@@ -142,6 +144,14 @@ function edit(props) {
 							}}
 						/>
 					</div>
+				</PanelBody>
+				<PanelBody title="Condition" icon="hidden">
+					<ConditionalLogic
+						condition={condition}
+						set={props.setAttributes}
+						clientId={props.clientId}
+						useCondition={props.attributes.enableCondition}
+					/>
 				</PanelBody>
 				{isRequired && (
 					<PanelBody title="Messages" icon="email">

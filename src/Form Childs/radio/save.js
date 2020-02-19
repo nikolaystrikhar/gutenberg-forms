@@ -1,5 +1,6 @@
 import { isEmpty, has } from "lodash";
 import { strip_tags } from "../../block/misc/helper";
+import { stringifyCondition } from "../../block/functions";
 
 function save(props) {
 	const {
@@ -9,7 +10,8 @@ function save(props) {
 		id,
 		requiredLabel,
 		messages,
-		messages: { empty }
+		messages: { empty },
+		condition
 	} = props.attributes;
 
 	const getLabel = () => {
@@ -31,8 +33,19 @@ function save(props) {
 		empty
 	});
 
+	const getCondition = () => {
+		if (props.attributes.enableCondition) {
+			//verifying the condition
+			return {
+				"data-condition": stringifyCondition(condition)
+			};
+		}
+
+		return {};
+	};
+
 	return (
-		<div className="cwp-radio cwp-field">
+		<div className="cwp-radio cwp-field" {...getCondition()}>
 			<div
 				data-errors={errors}
 				className={`cwp-radio-set ${isRequired ? "required-radio" : ""}`}

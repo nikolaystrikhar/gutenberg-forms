@@ -1,6 +1,7 @@
 import React from "react";
 import { isEmpty } from "lodash";
 import { strip_tags } from "../../block/misc/helper";
+import { stringifyCondition } from "../../block/functions";
 
 function save(props) {
 	const {
@@ -11,7 +12,8 @@ function save(props) {
 		requiredLabel,
 		type,
 		messages: { empty },
-		format
+		format,
+		condition
 	} = props.attributes;
 
 	const getLabel = () => {
@@ -41,8 +43,19 @@ function save(props) {
 		empty
 	});
 
+	const getCondition = () => {
+		if (!isEmpty(condition.field)) {
+			//verifying the condition
+			return {
+				"data-condition": stringifyCondition(condition)
+			};
+		}
+
+		return {};
+	};
+
 	return (
-		<div className="cwp-datepicker cwp-field">
+		<div className="cwp-datepicker cwp-field" {...getCondition()}>
 			<div className="cwp-field-set" data-required={isRequired}>
 				{!isEmpty(label) && (
 					<label

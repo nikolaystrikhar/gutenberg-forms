@@ -1,6 +1,7 @@
 import React from "react";
 import { isEmpty, has } from "lodash";
 import { strip_tags } from "../../block/misc/helper";
+import { stringifyCondition } from "../../block/functions";
 
 function save(props) {
 	const {
@@ -9,7 +10,8 @@ function save(props) {
 		label,
 		id,
 		messages,
-		messages: { empty }
+		messages: { empty },
+		condition
 	} = props.attributes;
 
 	let errors = JSON.stringify({
@@ -39,8 +41,19 @@ function save(props) {
 		}
 	};
 
+	const getCondition = () => {
+		if (!isEmpty(condition.field)) {
+			//verifying the condition
+			return {
+				"data-condition": stringifyCondition(condition)
+			};
+		}
+
+		return {};
+	};
+
 	return (
-		<div className="cwp-checkbox cwp-field">
+		<div className="cwp-checkbox cwp-field" {...getCondition()}>
 			<div
 				data-errors={errors}
 				className={`cwp-checkbox-set ${isRequired ? "required-checkbox" : ""}`}

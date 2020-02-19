@@ -15,6 +15,7 @@ import {
 
 import { clone, set, assign } from "lodash";
 import { getRootMessages } from "../../block/functions/index";
+import ConditionalLogic from "../../block/components/condition";
 
 const {
 	InspectorControls,
@@ -49,7 +50,8 @@ function edit(props) {
 		requiredLabel,
 		messages,
 		messages: { invalid, empty },
-		pattern
+		pattern,
+		condition
 	} = props.attributes;
 
 	useEffect(() => {
@@ -115,6 +117,15 @@ function edit(props) {
 						</div>
 					)}
 				</PanelBody>
+				<PanelBody title="Condition" icon="hidden">
+					<ConditionalLogic
+						condition={condition}
+						set={props.setAttributes}
+						clientId={props.clientId}
+						useCondition={props.attributes.enableCondition}
+					/>
+				</PanelBody>
+
 				<PanelBody title="Messages" icon="email">
 					{isRequired && (
 						<div className="cwp-option">

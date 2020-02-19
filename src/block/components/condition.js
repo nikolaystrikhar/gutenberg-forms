@@ -1,0 +1,161 @@
+import React, { Fragment } from "react";
+import {
+	SelectControl,
+	TextControl,
+	FormToggle,
+	PanelRow
+} from "@wordpress/components";
+import { getSiblings } from "../functions";
+import { has, set, clone, isEmpty } from "lodash";
+
+function Condition(props) {
+	let currentField = props.fieldName,
+		{ clientId, condition } = props; // where props.set === props.setAttributes
+
+	const getOptions = () => {
+		let fields = [
+			{
+				value: null,
+				disabled: true,
+				label: "Select Field"
+			}
+		];
+
+		// function getSiblings( clientId ) => return the relatives of the particular field inside a parent/root block
+
+		getSiblings(clientId).forEach(sibling => {
+			if (!has(sibling, "label") && !has(sibling, "field_name")) return;
+			const { label, field_name } = sibling; //destructuring the label attribute from the sibling field..
+
+			fields.push({ value: field_name, label: label }); //pushing the option to the select field
+			//where field_name is the unique id of the field;
+		});
+
+		return fields;
+	};
+
+	const handleConditionChange = (value, type) => {
+		const newCondition = clone(condition); //creating a copy of the existing condition;
+
+		set(newCondition, type, value); //modifying the condition copy;
+
+		props.set({ condition: newCondition }); //props.setAttributes()
+	};
+
+	let operators = [
+		{
+			value: "===",
+			label: "Is Equal To"
+		},
+		{
+			value: "!==",
+			label: "Not Equal To"
+		}
+	];
+
+	const getValueType = () => {
+		if (isEmpty(condition.field)) return null;
+
+		const splitted_fieldName = condition.field.split("-"),
+			fieldName = splitted_fieldName[0];
+
+		const siblings = getSiblings(clientId);
+
+		let currentSibling = siblings.filter(v => v.field_name === condition.field),
+			selectOptions;
+
+		if (
+			fieldName === "select" ||
+			fieldName === "radio" ||
+			fieldName === "checkbox"
+		) {
+			if (has(currentSibling[0], "options")) {
+				selectOptions = currentSibling[0].options.map(v => {
+					return {
+						...v,
+						value: v.label
+					};
+				});
+			}
+		}
+
+		switch (fieldName) {
+			case "radio":
+				return (
+					<SelectControl
+						value={condition.value}
+						onChange={val => {
+							handleConditionChange(val, "value");
+						}}
+						options={selectOptions}
+					/>
+				);
+			case "checkbox":
+				return (
+					<SelectControl
+						multiple
+						value={condition.value}
+						onChange={val => {
+							handleConditionChange(val, "value");
+						}}
+						options={selectOptions}
+					/>
+				);
+			case "select":
+				return (
+					<SelectControl
+						value={condition.value}
+						onChange={val => {
+							handleConditionChange(val, "value");
+						}}
+						options={selectOptions}
+					/>
+				);
+			default:
+				return (
+					<TextControl
+						value={condition.value}
+						placeholder="value"
+						onChange={val => handleConditionChange(val, "value")}
+					/>
+				);
+		}
+	};
+
+	return (
+		<div className="cwp-form-condition-component">
+			<div className="cwp-option">
+				<PanelRow>
+					<h3>Use Condition</h3>
+					<FormToggle
+						checked={props.useCondition}
+						onChange={() => props.set({ enableCondition: !props.useCondition })}
+					/>
+				</PanelRow>
+			</div>
+
+			{props.useCondition && (
+				<Fragment>
+					<h3>Show if</h3>
+					<SelectControl
+						value={condition.field}
+						options={getOptions()}
+						onChange={field => {
+							handleConditionChange(field, "field");
+						}}
+					/>
+					<SelectControl
+						onChange={operator => {
+							handleConditionChange(operator, "condition");
+						}}
+						value={condition.condition}
+						options={operators}
+					/>
+					{getValueType()}
+				</Fragment>
+			)}
+		</div>
+	);
+}
+
+export default Condition;

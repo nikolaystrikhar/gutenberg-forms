@@ -1,5 +1,6 @@
 import React from "react";
 import { isEmpty } from "lodash";
+import { stringifyCondition } from "../../block/functions";
 
 function save(props) {
 	const {
@@ -24,13 +25,22 @@ function save(props) {
 
 		return label;
 	};
+	const getCondition = () => {
+		if (props.attributes.enableCondition) {
+			//verifying the condition
+			return {
+				"data-condition": stringifyCondition(condition)
+			};
+		}
 
+		return {};
+	};
 	const errors = JSON.stringify({
 		empty
 	});
 
 	return (
-		<div className="cwp-select cwp-field">
+		<div className="cwp-select cwp-field" {...getCondition()}>
 			<div className="cwp-select-set">
 				{!isEmpty(label) && (
 					<label dangerouslySetInnerHTML={{ __html: getLabel() }}></label>
@@ -38,6 +48,7 @@ function save(props) {
 				<select
 					name={id}
 					type="select"
+					id={id}
 					data-rule="false"
 					value={label}
 					data-cwp-field
