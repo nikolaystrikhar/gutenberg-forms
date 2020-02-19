@@ -70,6 +70,13 @@ We appreciate all contributions and don't want a wall of rules to get in the way
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
+= 1.0.6 =
+
+- Added: Custom Pattern Option for Messages,Text,Phone,Name fields
+- Added: Option to define Custom validation Messages for All fields
+- Added: Option to define default validation Messages in the main form block
+- Added: Basic Conditional Logic to All fields
+
 = 1.0.5 (15 Feb 2020) =
 
 - Fixed: Frontend Styling
