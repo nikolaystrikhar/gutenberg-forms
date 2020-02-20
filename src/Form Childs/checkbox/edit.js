@@ -34,7 +34,8 @@ function edit(props) {
 		requiredLabel,
 		messages,
 		messages: { empty },
-		condition
+		condition,
+		enableCondition
 	} = props.attributes;
 
 	const [checkboxes, setCheckboxes] = useState([]);
@@ -202,14 +203,22 @@ function edit(props) {
 	return [
 		<InspectorControls>
 			<PanelBody title="Field Settings" initialOpen={true}>
-				<PanelRow>
-					<h3 className="cwp-heading">Required</h3>
-					<FormToggle
-						label="Required"
-						checked={isRequired}
-						onChange={handleRequired}
-					/>
-				</PanelRow>
+				{!enableCondition ? (
+					<PanelRow>
+						<h3 className="cwp-heading">Required</h3>
+						<FormToggle
+							label="Required"
+							checked={isRequired}
+							onChange={handleRequired}
+						/>
+					</PanelRow>
+				) : (
+					<div className="cwp-option">
+						<p>
+							<Icon icon="info" /> You cannot set a conditional field required!
+						</p>
+					</div>
+				)}
 				{isRequired && (
 					<div className="cwp-option">
 						<h3 className="cwp-heading">Required Text</h3>
@@ -242,13 +251,13 @@ function edit(props) {
 		</InspectorControls>,
 		null,
 		<div className={`cwp-checkbox cwp-field ${props.className}`}>
-			{!!props.isSelected && (
+			{!!props.isSelected && !enableCondition && (
 				<div className="cwp-required">
 					<h3>Required</h3>
 					<FormToggle checked={isRequired} onChange={handleRequired} />
 				</div>
 			)}
-			{!props.isSelected && isRequired && (
+			{!props.isSelected && isRequired && !enableCondition && (
 				<div className="cwp-required cwp-noticed">
 					<h3>Required</h3>
 				</div>

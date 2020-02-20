@@ -118,6 +118,13 @@ import yesNoSave from "../Form Childs/yes & no/save";
 
 ////////////////////////////////!yesNo!//////////////////////////////////////////////
 
+////////////////////////////////!yesNo!//////////////////////////////////////////////
+
+import formButtonEdit from "../Form Childs/form-button/edit";
+import formButtonSave from "../Form Childs/form-button/Save";
+
+////////////////////////////////!yesNo!//////////////////////////////////////////////
+
 import { applyFormStyles } from "./formStyles/index";
 import { registerFieldStyles } from "./fieldStyles/index";
 import { getFieldTransform, defaultFieldMessages } from "./functions/index";
@@ -148,6 +155,7 @@ registerBlockType("cwp/block-gutenberg-forms", {
 		buttonSetting: {
 			type: "object",
 			default: {
+				disable: false,
 				alignment: "justify-start",
 				color: "#fff",
 				backgroundColor: "#007cba"
@@ -1035,6 +1043,18 @@ registerBlockType("cwp/form-group", {
 		content: {
 			type: "string",
 			default: ""
+		},
+		condition: {
+			type: "object",
+			default: {
+				field: null,
+				condition: "===",
+				value: ""
+			}
+		},
+		enableCondition: {
+			type: "boolean",
+			default: false
 		}
 	},
 	supports: {
@@ -1092,6 +1112,59 @@ registerBlockType("cwp/yes-no", {
 				value: ""
 			}
 		}
+	},
+	parent: fieldParents
+});
+
+registerBlockType("cwp/form-button", {
+	title: __("Form Button"),
+	icon: __(
+		<svg
+			width="24"
+			height="24"
+			viewBox="0 0 24 24"
+			xmlns="http://www.w3.org/2000/svg"
+			role="img"
+			aria-hidden="true"
+			focusable="false"
+		>
+			<path d="M19 6H5c-1.1 0-2 .9-2 2v8c0 1.1.9 2 2 2h14c1.1 0 2-.9 2-2V8c0-1.1-.9-2-2-2zm0 10H5V8h14v8z"></path>
+		</svg>
+	),
+	category: "common",
+	keywords: [
+		__("gutenberg-forms"),
+		__("forms"),
+		__("form group"),
+		__("column")
+	],
+	edit: formButtonEdit,
+	save: formButtonSave,
+	attributes: {
+		label: {
+			type: "string",
+			default: "Submit"
+		},
+		parentId: {
+			type: "string",
+			default: ""
+		},
+		action: {
+			default: "submit",
+			type: "string"
+		},
+		styling: {
+			type: "object",
+			default: {
+				backgroundColor: "rgb(238, 238, 238)",
+				color: "rgb(49, 49, 49)",
+				padding: 25
+			}
+		}
+	},
+	supports: {
+		align: true,
+		align: ["wide", "full", "center"]
 	},
 	parent: fieldParents
 });

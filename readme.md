@@ -76,6 +76,8 @@ For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 - Added: Option to define Custom validation Messages for All fields
 - Added: Option to define default validation Messages in the main form block
 - Added: Basic Conditional Logic to All fields
+- Added: Form Button Block with actions Submit/Reset
+- Added: Option to disable default Submit Button
 
 = 1.0.5 (15 Feb 2020) =
 

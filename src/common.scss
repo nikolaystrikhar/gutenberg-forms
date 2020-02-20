@@ -41,6 +41,10 @@
 	}
 
 	& .cwp-form {
+		& .wp-block-cwp-form-button {
+			@include normalize_button();
+		}
+
 		& .cwp-success {
 			@include successMessage();
 		}

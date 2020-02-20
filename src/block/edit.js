@@ -59,21 +59,23 @@ function edit(props) {
 					templateLock={false}
 					renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
 				/>
-				<div className={`cwp-submit ${alignment}`}>
-					<button
-						className="cwp-submit-btn"
-						style={{
-							backgroundColor: buttonSetting.backgroundColor,
-							color: buttonSetting.color
-						}}
-					>
-						<RichText
-							tag="span"
-							value={submitLabel}
-							onChange={handleButtonLabel}
-						/>
-					</button>
-				</div>
+				{!buttonSetting.disable && (
+					<div className={`cwp-submit ${alignment}`}>
+						<button
+							className="cwp-submit-btn"
+							style={{
+								backgroundColor: buttonSetting.backgroundColor,
+								color: buttonSetting.color
+							}}
+						>
+							<RichText
+								tag="span"
+								value={submitLabel}
+								onChange={handleButtonLabel}
+							/>
+						</button>
+					</div>
+				)}
 			</div>
 			<div className={`cwp-form ${showEditor}`}>
 				<div className="cwp-editor">

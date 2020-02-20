@@ -7,6 +7,7 @@ import {
 } from "@wordpress/components";
 import { basicColorScheme } from "../../block/misc/helper";
 import { set, clone } from "lodash";
+import ConditionalLogic from "../../block/components/condition";
 
 const { InspectorControls } = wp.blockEditor;
 
@@ -16,7 +17,8 @@ function Inspector(prop) {
 	const props = prop.data,
 		{
 			styling,
-			styling: { backgroundColor, color, padding }
+			styling: { backgroundColor, color, padding },
+			condition
 		} = props.attributes;
 
 	const handleStyling = (style, key) => {
@@ -29,7 +31,7 @@ function Inspector(prop) {
 
 	return (
 		<InspectorControls>
-			<PanelBody title={__("Styling")}>
+			<PanelBody title={__("Styling")} icon="admin-appearance">
 				<div className="cwp-option">
 					<h3 className="cwp-heading">Background Color</h3>
 					<ColorPalette
@@ -53,6 +55,14 @@ function Inspector(prop) {
 						onChange={padd => handleStyling(padd, "padding")}
 					/>
 				</div>
+			</PanelBody>
+			<PanelBody title={__("Condition")} icon="hidden">
+				<ConditionalLogic
+					condition={condition}
+					set={props.setAttributes}
+					clientId={props.clientId}
+					useCondition={props.attributes.enableCondition}
+				/>
 			</PanelBody>
 		</InspectorControls>
 	);

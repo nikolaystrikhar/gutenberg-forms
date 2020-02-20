@@ -71,20 +71,33 @@
 
             $decoded_field = $this->decode($type);
 
+
             if ( count($decoded_field) !== 0 && $decoded_field['is_required'] === true && $this->isEmpty($value)) {
                 return false;
             }  else if (count($decoded_field) !== 0) {
-                switch ( $decoded_field[ 'type' ] ) {
-
-                    case 'email' : return $this->isEmail($value);
-                    break;
-                    case 'website': return $this->isURL($value);
-                    break;
-                    case 'number': return $this->isNumber($value);
-                    break;
-                    default: return true;
-
+                
+                $type = $decoded_field['type'];
+                $required = $decoded_field['is_required'];
+                
+                if ($type === "email" and $required === 'true') {
+                    return $this->isEmpty($value) ? false : $this->isEmail($value);
+                } else if ($type === "email" and $required === 'true') {
+                    return $this->isEmpty($value) ? true : $this->isEmail($value);
+                } else if ($type === 'website' and $required === 'true') {
+                    return $this->isEmpty($value) ? false : $this->isURL($value);
+                } else if ($type === 'website' and $required === 'false') {
+                    return  $this->isEmpty($value) ? true :  $this->isURL($value);
+                } else if ($type === 'number' and $required === 'true') {
+                    return $this->isEmpty($value) ? true : $this->isNumber($value);
+                } else if ($type === 'number' and $required === 'false') {
+                    return $this->isEmpty($value) ? true :  $this->isNumber($value);
+                } else if ($required === 'true') {
+                    return $this->isEmpty($value);
+                } else {
+                    return true;
                 }
+              
+
             }
 
         }

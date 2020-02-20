@@ -1600,6 +1600,17 @@ jQuery(function($) {
 
 		$(".cwp-form form").each(function() {
 			let condition = new Conditional(this);
+			const self = this;
+
+			this.querySelectorAll(".cwp-reset_btn").forEach(resetBtn => {
+				resetBtn.onclick = e => {
+					e.preventDefault();
+
+					self.querySelectorAll("[data-cwp-field]").forEach(v => {
+						v.value = "";
+					});
+				};
+			});
 		});
 	});
 });

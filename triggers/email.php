@@ -150,6 +150,7 @@
 
             $post = $_POST;
 
+
             $post_without_submit = array_pop($post);
 
 
@@ -178,9 +179,6 @@
                 );
                
             }
-        
-
-
            if ( $this->is_fields_valid( $arranged_fields ) ) {
                // check if all the fields are valid;
                 $this->sendMail( $arranged_fields );
@@ -257,6 +255,7 @@
         public function sendMail( $fields ) {
 
             $template = $this->get_templates($_POST['submit'])[0];
+
 
 
             isset($template) && extract($template);

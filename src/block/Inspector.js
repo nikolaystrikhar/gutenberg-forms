@@ -98,6 +98,17 @@ function Inspector(prop) {
 			<PanelBody icon="admin-settings" title="General">
 				<div className="cwp-option">
 					<PanelRow>
+						<h3>Disable Submit Button</h3>
+						<FormToggle
+							checked={buttonSetting.disable}
+							onChange={() =>
+								handleButtonSetting("disable", !buttonSetting.disable)
+							}
+						/>
+					</PanelRow>
+				</div>
+				<div className="cwp-option">
+					<PanelRow>
 						<h3 className="cwp-heading">Button Alignment</h3>
 						<ButtonGroup>
 							<Button

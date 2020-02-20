@@ -35,19 +35,21 @@ function save(props) {
 							data-sitekey={siteKey}
 						></div>
 					)}
-					<div className={`cwp-submit ${alignment}`}>
-						<button
-							name="submit"
-							value={id}
-							type="submit"
-							style={{
-								backgroundColor: buttonSetting.backgroundColor,
-								color: buttonSetting.color
-							}}
-							className="cwp-submit-btn"
-							dangerouslySetInnerHTML={{ __html: submitLabel }}
-						></button>
-					</div>
+					{!buttonSetting.disable && (
+						<div className={`cwp-submit ${alignment}`}>
+							<button
+								name="submit"
+								value={id}
+								type="submit"
+								style={{
+									backgroundColor: buttonSetting.backgroundColor,
+									color: buttonSetting.color
+								}}
+								className="cwp-submit-btn"
+								dangerouslySetInnerHTML={{ __html: submitLabel }}
+							></button>
+						</div>
+					)}
 				</form>
 				{successType === "message" && (
 					<div id={id} className="cwp-success cwp-hidden">

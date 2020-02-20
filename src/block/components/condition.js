@@ -129,7 +129,14 @@ function Condition(props) {
 					<h3>Use Condition</h3>
 					<FormToggle
 						checked={props.useCondition}
-						onChange={() => props.set({ enableCondition: !props.useCondition })}
+						onChange={() => {
+							if (props.useCondition === false) {
+								props.set({ isRequired: false });
+							}
+							props.set({
+								enableCondition: !props.useCondition
+							});
+						}}
 					/>
 				</PanelRow>
 			</div>

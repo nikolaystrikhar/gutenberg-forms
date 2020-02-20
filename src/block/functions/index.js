@@ -32,6 +32,11 @@ export const getFieldTransform = (attrs, field) => {
 		[field]: attrs[matchedKey]
 	};
 
+	if (has(attrs, "condition")) {
+		config["condition"] = attrs["condition"];
+		config.enableCondition = attrs.enableCondition;
+	}
+
 	if (
 		!myAttrs.includes(strip_tags(attrs.label.toLowerCase())) &&
 		strip_tags(attrs.label) !== "Choose One"
@@ -150,6 +155,24 @@ export function getRootMessages(clientId, blockName) {
 	return defaultMessage;
 }
 
+export function getChildAttributes(clientId) {
+	const rootBlock = getBlock(clientId); //i.e = gutenberg-forms;
+	let childAttrs = [];
+
+	if (!has(rootBlock, "innerBlocks")) return childAttrs;
+
+	rootBlock.innerBlocks.forEach(v => {
+		if (has(v, "attributes")) {
+			childAttrs.push(v.attributes);
+		} else if (layoutBlocks.includes(v.name)) {
+			//which means field are nested even more!
+			childAttrs.push(...getChildAttributes(v.clientId));
+		}
+	});
+
+	return childAttrs;
+}
+
 export function getSiblings(clientId) {
 	const block = getBlockParents(clientId),
 		rootBlock = getBlock(block[0]); //i.e = gutenberg-forms;
@@ -180,7 +203,7 @@ export function getSiblings(clientId) {
 		) {
 			siblingValues.push(v.attributes);
 		} else if (conditions.isLayoutBlock) {
-			siblingValues.push(...getSiblings(v.clientId)); //getting inner fields in layout blocks
+			siblingValues.push(...getChildAttributes(v.clientId)); //getting inner fields in layout blocks
 		}
 	});
 
