@@ -107,49 +107,53 @@ function Inspector(prop) {
 						/>
 					</PanelRow>
 				</div>
-				<div className="cwp-option">
-					<PanelRow>
-						<h3 className="cwp-heading">Button Alignment</h3>
-						<ButtonGroup>
-							<Button
-								{...getAlignmentProps("justify-start")}
-								onClick={() => handleAlignment("justify-start")}
-							>
-								<Icon icon="editor-alignleft" />
-							</Button>
-							<Button
-								{...getAlignmentProps("justify-center")}
-								onClick={() => handleAlignment("justify-center")}
-							>
-								<Icon icon="editor-aligncenter" />
-							</Button>
-							<Button
-								{...getAlignmentProps("justify-end")}
-								onClick={() => handleAlignment("justify-end")}
-							>
-								<Icon icon="editor-alignright" />
-							</Button>
-						</ButtonGroup>
-					</PanelRow>
-				</div>
-				<div className="cwp-option">
-					<h3 className="cwp-heading">Button Background Color</h3>
-					<ColorPicker
-						color={buttonSetting.backgroundColor}
-						onChangeComplete={c =>
-							handleButtonSetting("backgroundColor", c.hex)
-						}
-						disableAlpha
-					/>
-				</div>
-				<div className="cwp-option">
-					<h3 className="cwp-heading">Button Color</h3>
-					<ColorPalette
-						colors={colors}
-						value={buttonSetting.color}
-						onChange={color => handleButtonSetting("color", color)}
-					/>
-				</div>
+				{!buttonSetting.disable && (
+					<Fragment>
+						<div className="cwp-option">
+							<PanelRow>
+								<h3 className="cwp-heading">Button Alignment</h3>
+								<ButtonGroup>
+									<Button
+										{...getAlignmentProps("justify-start")}
+										onClick={() => handleAlignment("justify-start")}
+									>
+										<Icon icon="editor-alignleft" />
+									</Button>
+									<Button
+										{...getAlignmentProps("justify-center")}
+										onClick={() => handleAlignment("justify-center")}
+									>
+										<Icon icon="editor-aligncenter" />
+									</Button>
+									<Button
+										{...getAlignmentProps("justify-end")}
+										onClick={() => handleAlignment("justify-end")}
+									>
+										<Icon icon="editor-alignright" />
+									</Button>
+								</ButtonGroup>
+							</PanelRow>
+						</div>
+						<div className="cwp-option">
+							<h3 className="cwp-heading">Button Background Color</h3>
+							<ColorPicker
+								color={buttonSetting.backgroundColor}
+								onChangeComplete={c =>
+									handleButtonSetting("backgroundColor", c.hex)
+								}
+								disableAlpha
+							/>
+						</div>
+						<div className="cwp-option">
+							<h3 className="cwp-heading">Button Color</h3>
+							<ColorPalette
+								colors={colors}
+								value={buttonSetting.color}
+								onChange={color => handleButtonSetting("color", color)}
+							/>
+						</div>
+					</Fragment>
+				)}
 			</PanelBody>
 			<PanelBody icon="info" title="Notification">
 				<div className="cwp-option">

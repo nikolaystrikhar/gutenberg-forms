@@ -1,9 +1,11 @@
-import React from "react";
+import React, { Fragment } from "react";
 import Inspector from "./Inspector";
+import { Notice } from "@wordpress/components";
+import { isChildFieldsRequired } from "../../block/functions";
 const { InnerBlocks, RichText } = wp.blockEditor;
 
 function edit(props) {
-	const { styling, label } = props.attributes;
+	const { styling, label, enableCondition } = props.attributes;
 
 	const handleLabel = label => {
 		props.setAttributes({ label });
@@ -12,12 +14,19 @@ function edit(props) {
 	return [
 		!!props.isSelected && <Inspector data={props} />,
 		null,
-		<fieldset style={styling} className="cwp-form-group">
-			<RichText tag="legend" onChange={handleLabel} value={label} />
-			<div className="cwp-group-fields">
-				<InnerBlocks />
-			</div>
-		</fieldset>
+		<Fragment>
+			{isChildFieldsRequired(props.clientId) && enableCondition && (
+				<Notice status="error" isDismissible={false}>
+					Do not have a required fields inside a conditional group.
+				</Notice>
+			)}
+			<fieldset style={styling} className="cwp-form-group">
+				<RichText tag="legend" onChange={handleLabel} value={label} />
+				<div className="cwp-group-fields">
+					<InnerBlocks />
+				</div>
+			</fieldset>
+		</Fragment>
 	];
 }
 

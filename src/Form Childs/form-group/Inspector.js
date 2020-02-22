@@ -3,11 +3,13 @@ import {
 	PanelRow,
 	PanelBody,
 	ColorPalette,
-	RangeControl
+	RangeControl,
+	Notice
 } from "@wordpress/components";
 import { basicColorScheme } from "../../block/misc/helper";
 import { set, clone } from "lodash";
 import ConditionalLogic from "../../block/components/condition";
+import { isChildFieldsRequired } from "../../block/functions";
 
 const { InspectorControls } = wp.blockEditor;
 
@@ -18,7 +20,8 @@ function Inspector(prop) {
 		{
 			styling,
 			styling: { backgroundColor, color, padding },
-			condition
+			condition,
+			enableCondition
 		} = props.attributes;
 
 	const handleStyling = (style, key) => {
@@ -31,6 +34,11 @@ function Inspector(prop) {
 
 	return (
 		<InspectorControls>
+			{isChildFieldsRequired(props.clientId) && enableCondition && (
+				<Notice status="error" isDismissible={false}>
+					Do not have a required fields inside a conditional group.
+				</Notice>
+			)}
 			<PanelBody title={__("Styling")} icon="admin-appearance">
 				<div className="cwp-option">
 					<h3 className="cwp-heading">Background Color</h3>

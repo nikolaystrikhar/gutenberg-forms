@@ -78,6 +78,8 @@ For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 - Added: Basic Conditional Logic to All fields
 - Added: Form Button Block with actions Submit/Reset
 - Added: Option to disable default Submit Button
+- Added: Calculation Block
+- Fixed: Bug fixes
 
 = 1.0.5 (15 Feb 2020) =
 

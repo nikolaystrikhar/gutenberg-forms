@@ -173,7 +173,7 @@ export function getChildAttributes(clientId) {
 	return childAttrs;
 }
 
-export function getSiblings(clientId) {
+export function getSiblings(clientId, slug = null) {
 	const block = getBlockParents(clientId),
 		rootBlock = getBlock(block[0]); //i.e = gutenberg-forms;
 
@@ -201,7 +201,12 @@ export function getSiblings(clientId) {
 			!conditions.isLayoutBlock &&
 			!conditions.currentBlock
 		) {
-			siblingValues.push(v.attributes);
+			if (slug === null) {
+				siblingValues.push(v.attributes);
+			} else if (slug === v.name) {
+				//for specified block fields
+				siblingValues.push(v.attributes);
+			}
 		} else if (conditions.isLayoutBlock) {
 			siblingValues.push(...getChildAttributes(v.clientId)); //getting inner fields in layout blocks
 		}
@@ -212,4 +217,17 @@ export function getSiblings(clientId) {
 
 export function stringifyCondition(c) {
 	return JSON.stringify(c);
+}
+
+export function isChildFieldsRequired(clientId) {
+	const childs = getChildAttributes(clientId);
+	let res = false;
+
+	childs.forEach(child => {
+		if (child.isRequired) {
+			res = true;
+		}
+	});
+
+	return res;
 }

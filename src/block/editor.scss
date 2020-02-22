@@ -52,6 +52,17 @@
 			@include field();
 		}
 
+		&.cwp-calculation {
+			& .cwp-field-set {
+				display: flex;
+				flex-direction: column !important;
+			}
+
+			& .cwp-form-calc-builder {
+				@include formulaBuilder();
+			}
+		}
+
 		&.cwp-yes-no {
 			& .cwp-field-set {
 				@include switch();

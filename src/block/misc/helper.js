@@ -46,6 +46,8 @@ export function getFieldIcon(name) {
 			return "screenoptions";
 		case "yes-no":
 			return "no";
+		case "form-calculation":
+			return "media-document";
 		default:
 			return;
 	}

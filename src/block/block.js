@@ -118,12 +118,19 @@ import yesNoSave from "../Form Childs/yes & no/save";
 
 ////////////////////////////////!yesNo!//////////////////////////////////////////////
 
-////////////////////////////////!yesNo!//////////////////////////////////////////////
+////////////////////////////////!formButton!//////////////////////////////////////////////
 
 import formButtonEdit from "../Form Childs/form-button/edit";
 import formButtonSave from "../Form Childs/form-button/Save";
 
-////////////////////////////////!yesNo!//////////////////////////////////////////////
+////////////////////////////////!formButton!//////////////////////////////////////////////
+
+////////////////////////////////!calc!//////////////////////////////////////////////
+
+import calculationEdit from "../Form Childs/calculation/edit";
+import calculationSave from "../Form Childs/calculation/save";
+
+////////////////////////////////!calc!//////////////////////////////////////////////
 
 import { applyFormStyles } from "./formStyles/index";
 import { registerFieldStyles } from "./fieldStyles/index";
@@ -281,6 +288,10 @@ registerBlockType("cwp/name", {
 				condition: "===",
 				value: ""
 			}
+		},
+		requiredLabel: {
+			type: "string",
+			default: "*"
 		}
 	},
 	transforms: {
@@ -335,6 +346,10 @@ registerBlockType("cwp/email", {
 		field_name: {
 			type: "string",
 			default: ""
+		},
+		requiredLabel: {
+			type: "string",
+			default: "*"
 		},
 		messages: {
 			type: "object",
@@ -405,6 +420,10 @@ registerBlockType("cwp/text", {
 				condition: "===",
 				value: ""
 			}
+		},
+		requiredLabel: {
+			type: "string",
+			default: "*"
 		}
 	},
 	transforms: {
@@ -473,6 +492,10 @@ registerBlockType("cwp/message", {
 				condition: "===",
 				value: ""
 			}
+		},
+		requiredLabel: {
+			type: "string",
+			default: "*"
 		}
 	},
 	transforms: {
@@ -540,6 +563,10 @@ registerBlockType("cwp/checkbox", {
 				condition: "===",
 				value: ""
 			}
+		},
+		requiredLabel: {
+			type: "string",
+			default: "*"
 		}
 	},
 	transforms: {
@@ -607,6 +634,10 @@ registerBlockType("cwp/datepicker", {
 				condition: "===",
 				value: ""
 			}
+		},
+		requiredLabel: {
+			type: "string",
+			default: "*"
 		}
 	},
 	transforms: {
@@ -677,6 +708,10 @@ registerBlockType("cwp/radio", {
 				condition: "===",
 				value: ""
 			}
+		},
+		requiredLabel: {
+			type: "string",
+			default: "*"
 		}
 	},
 	transforms: {
@@ -745,6 +780,10 @@ registerBlockType("cwp/phone", {
 				condition: "===",
 				value: ""
 			}
+		},
+		requiredLabel: {
+			type: "string",
+			default: "*"
 		}
 	},
 	transforms: {
@@ -809,6 +848,10 @@ registerBlockType("cwp/website", {
 				condition: "===",
 				value: ""
 			}
+		},
+		requiredLabel: {
+			type: "string",
+			default: "*"
 		}
 	},
 	transforms: {
@@ -1132,12 +1175,7 @@ registerBlockType("cwp/form-button", {
 		</svg>
 	),
 	category: "common",
-	keywords: [
-		__("gutenberg-forms"),
-		__("forms"),
-		__("form group"),
-		__("column")
-	],
+	keywords: [__("gutenberg-forms"), __("forms"), __("button")],
 	edit: formButtonEdit,
 	save: formButtonSave,
 	attributes: {
@@ -1160,6 +1198,72 @@ registerBlockType("cwp/form-button", {
 				color: "rgb(49, 49, 49)",
 				padding: 25
 			}
+		}
+	},
+	supports: {
+		align: true,
+		align: ["wide", "full", "center"]
+	},
+	parent: fieldParents
+});
+
+registerBlockType("cwp/form-calculation", {
+	title: __("Calculation"),
+	icon: "media-document",
+	category: "common",
+	keywords: [__("gutenberg-forms"), __("forms"), __("calculation")],
+	edit: calculationEdit,
+	save: calculationSave,
+	attributes: {
+		formulaBuilder: {
+			type: "boolean",
+			default: true
+		},
+		calculation: {
+			type: "string",
+			default: ""
+		},
+		label: {
+			type: "string",
+			default: "Calculation"
+		},
+		id: {
+			type: "string",
+			default: ""
+		},
+		field_name: {
+			type: "string",
+			default: ""
+		},
+		formula: {
+			type: "string",
+			default: ""
+		},
+		condition: {
+			type: "object",
+			default: {
+				field: null,
+				condition: "===",
+				value: ""
+			}
+		},
+		styling: {
+			type: "object",
+			default: {
+				fontSize: 40
+			}
+		},
+		enableCondition: {
+			type: "boolean",
+			default: false
+		},
+		postfix: {
+			type: "string",
+			default: ""
+		},
+		prefix: {
+			type: "string",
+			default: ""
 		}
 	},
 	supports: {

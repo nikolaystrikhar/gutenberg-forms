@@ -1397,7 +1397,10 @@ jQuery(function($) {
 			this.form = $(form);
 			this.fields = this.form.find("[data-cwp-field]");
 			this.conditionalFields = this.form.find("[data-condition]");
-			this.init();
+
+			if (this.conditionalFields.length) {
+				this.init();
+			}
 		}
 
 		parseCondition(cond) {
@@ -1500,6 +1503,100 @@ jQuery(function($) {
 				});
 			});
 		}
+	}
+
+	function getRegex(fields) {
+		let res = [];
+
+		fields.forEach((f, i) => {
+			if (i !== fields.length - 1) {
+				res += `{{${f}}}|`;
+			} else if (i === fields.length - 1) {
+				res += `{{${f}}}`;
+			}
+		});
+
+		return new RegExp(res, "g");
+	}
+
+	function getMapObject(fields, data) {
+		let res = {};
+
+		fields.forEach(f => {
+			let breaked = f.split("-");
+
+			const fieldName =
+				"number" +
+				breaked[1].substring(0, 1).toUpperCase() +
+				breaked[1].substring(1, breaked[1].length);
+
+			res["{{" + f + "}}"] = data[fieldName];
+		});
+		return res;
+	}
+
+	function applyCalculation(form) {
+		form.find(".cwp-field.cwp-calculation").each(function() {
+			let formula = $(this).attr("data-cwp-calculation");
+			// let fields = formula.match(/[(number)\-\d\w]+/g);
+			const f = formula.match(/[{{]+[\/number\-\d\w]+[}}]+/g);
+			const fields = f.map(v => v.substring(2, v.length - 2));
+
+			const self = $(this),
+				t = this;
+
+			form.find("[data-cwp-field]").each(function() {
+				$(this).on("input", function() {
+					const target = $(this)
+						.attr("id")
+						.substring(0, 6);
+					var replace = `number-${target}`;
+
+					if (fields.includes(replace)) {
+						self.attr(`data-${replace}`, $(this).val());
+					}
+
+					fields.forEach(field => {
+						let expression = formula;
+						let regExp = getRegex(fields);
+
+						const mapObj = getMapObject(fields, t.dataset);
+
+						expression = expression.replace(regExp, function(matched) {
+							return mapObj[matched];
+						});
+
+						self.find("input").val(eval(expression));
+						self.find(".cwp-calc-result").html(eval(expression));
+					});
+				});
+				fields.forEach(field => {
+					let expression = formula;
+					let regExp = getRegex(fields);
+
+					const mapObj = getMapObject(fields, t.dataset);
+
+					expression = expression.replace(regExp, function(matched) {
+						return mapObj[matched];
+					});
+
+					self.find("input").val(eval(expression));
+					self.find(".cwp-calc-result").html(eval(expression));
+				});
+
+				const target = $(this)
+					.attr("id")
+					.substring(0, 6);
+				var replace = `number-${target}`;
+
+				if (fields.includes(replace)) {
+					self.attr(
+						`data-${replace}`,
+						$(this).val() === "" ? 0 : $(this).val()
+					);
+				}
+			});
+		});
 	}
 
 	$().ready(function() {
@@ -1611,6 +1708,10 @@ jQuery(function($) {
 					});
 				};
 			});
+
+			if ($(this).find(".cwp-field.cwp-calculation").length) {
+				applyCalculation($(this));
+			}
 		});
 	});
 });
@@ -1619,46 +1720,50 @@ document.addEventListener("DOMContentLoaded", function() {
 
 	elements.forEach(elem => {
 		elem.oninvalid = function(e) {
-			const validityText = JSON.parse(e.target.dataset.errors);
+			if (e.target.dataset.errors) {
+				const validityText = JSON.parse(e.target.dataset.errors);
 
-			if (validityText.mismatch) {
-				let mismatchWithValue = validityText.mismatch.replace(
-					/{{value}}/g,
-					e.target.value
-				);
+				if (validityText.mismatch) {
+					let mismatchWithValue = validityText.mismatch.replace(
+						/{{value}}/g,
+						e.target.value
+					);
 
-				e.target.setCustomValidity("");
-				if (!e.target.validity.valid) {
-					e.target.value === ""
-						? e.target.setCustomValidity(validityText.empty)
-						: e.target.setCustomValidity(mismatchWithValue);
-				}
-			} else if (validityText.empty) {
-				e.target.setCustomValidity("");
-				if (!e.target.validity.valid) {
-					e.target.value === ""
-						? e.target.setCustomValidity(validityText.empty)
-						: null;
+					e.target.setCustomValidity("");
+					if (!e.target.validity.valid) {
+						e.target.value === ""
+							? e.target.setCustomValidity(validityText.empty)
+							: e.target.setCustomValidity(mismatchWithValue);
+					}
+				} else if (validityText.empty) {
+					e.target.setCustomValidity("");
+					if (!e.target.validity.valid) {
+						e.target.value === ""
+							? e.target.setCustomValidity(validityText.empty)
+							: null;
+					}
 				}
 			}
 		};
 		elem.onkeydown = function(e) {
-			e.target.setCustomValidity("");
+			if (e.target.dataset.errors) {
+				e.target.setCustomValidity("");
 
-			const parseErrors = JSON.parse(e.target.dataset.errors);
-			const typeMismatchMessage = parseErrors.mismatch;
+				const parseErrors = JSON.parse(e.target.dataset.errors);
+				const typeMismatchMessage = parseErrors.mismatch;
 
-			if (parseErrors.mismatch) {
-				let mismatchWithValue = typeMismatchMessage.replace(
-					/{{value}}/g,
-					e.target.value
-				);
-
-				e.target.setAttribute("title", mismatchWithValue);
-				if (e.target.validity.typeMismatch) {
-					e.target.setCustomValidity(
-						mismatchWithValue ? mismatchWithValue : ""
+				if (parseErrors.mismatch) {
+					let mismatchWithValue = typeMismatchMessage.replace(
+						/{{value}}/g,
+						e.target.value
 					);
+
+					e.target.setAttribute("title", mismatchWithValue);
+					if (e.target.validity.typeMismatch) {
+						e.target.setCustomValidity(
+							mismatchWithValue ? mismatchWithValue : ""
+						);
+					}
 				}
 			}
 		};
