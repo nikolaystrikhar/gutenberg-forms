@@ -163,9 +163,7 @@ registerBlockType("cwp/block-gutenberg-forms", {
 			type: "object",
 			default: {
 				disable: false,
-				alignment: "justify-start",
-				color: "#fff",
-				backgroundColor: "#007cba"
+				alignment: "justify-start"
 			}
 		},
 		id: {
@@ -214,6 +212,14 @@ registerBlockType("cwp/block-gutenberg-forms", {
 		messages: {
 			type: "array",
 			default: defaultFieldMessages
+		},
+		theme: {
+			type: "object",
+			default: {
+				accentColor: "",
+				textColor: "",
+				fieldBackgroundColor: ""
+			}
 		}
 	},
 	edit: mainEdit,
@@ -1225,7 +1231,7 @@ registerBlockType("cwp/form-calculation", {
 		},
 		label: {
 			type: "string",
-			default: "Calculation"
+			default: "Total"
 		},
 		id: {
 			type: "string",

@@ -15,6 +15,7 @@ import {
 import { set, clone } from "lodash";
 import MappedMessages from "./components/messages";
 import { changeChildValue } from "./functions/index";
+import { basicColorScheme } from "./misc/helper";
 
 const { InspectorControls } = wp.blockEditor;
 
@@ -30,6 +31,7 @@ function Inspector(prop) {
 		successMessage,
 		templateBuilder,
 		recaptcha,
+		theme,
 		recaptcha: { siteKey, clientSecret }
 	} = props.attributes;
 
@@ -93,9 +95,17 @@ function Inspector(prop) {
 		changeChildValue(fieldName, props.clientId, newMessages[i], t, messages);
 	};
 
+	const handleStyling = (style, key) => {
+		const themeStyling = clone(theme);
+
+		set(themeStyling, key, style); //changing the color;
+
+		props.setAttributes({ theme: themeStyling });
+	};
+
 	return (
 		<InspectorControls>
-			<PanelBody icon="admin-settings" title="General">
+			<PanelBody initialOpen={true} icon="admin-settings" title="General">
 				<div className="cwp-option">
 					<PanelRow>
 						<h3>Disable Submit Button</h3>
@@ -134,28 +144,10 @@ function Inspector(prop) {
 								</ButtonGroup>
 							</PanelRow>
 						</div>
-						<div className="cwp-option">
-							<h3 className="cwp-heading">Button Background Color</h3>
-							<ColorPicker
-								color={buttonSetting.backgroundColor}
-								onChangeComplete={c =>
-									handleButtonSetting("backgroundColor", c.hex)
-								}
-								disableAlpha
-							/>
-						</div>
-						<div className="cwp-option">
-							<h3 className="cwp-heading">Button Color</h3>
-							<ColorPalette
-								colors={colors}
-								value={buttonSetting.color}
-								onChange={color => handleButtonSetting("color", color)}
-							/>
-						</div>
 					</Fragment>
 				)}
 			</PanelBody>
-			<PanelBody icon="info" title="Notification">
+			<PanelBody initialOpen={false} icon="info" title="Notification">
 				<div className="cwp-option">
 					<PanelRow>
 						<h3>Email Builder</h3>
@@ -168,7 +160,7 @@ function Inspector(prop) {
 					</PanelRow>
 				</div>
 			</PanelBody>
-			<PanelBody icon="yes" title="Confirmation">
+			<PanelBody initialOpen={false} icon="yes" title="Confirmation">
 				<div className="cwp-option">
 					<PanelRow>
 						<h3>Success Type</h3>
@@ -206,7 +198,7 @@ function Inspector(prop) {
 					)}
 				</div>
 			</PanelBody>
-			<PanelBody icon="googleplus" title="reCAPTCHA v2">
+			<PanelBody initialOpen={false} icon="googleplus" title="reCAPTCHA v2">
 				<div className="cwp-option">
 					<p>
 						reCAPTCHA requires a Site and Private API key. Sign up for a free{" "}
@@ -251,8 +243,34 @@ function Inspector(prop) {
 					</div>
 				)}
 			</PanelBody>
-			<PanelBody title="Messages" icon="email">
+			<PanelBody initialOpen={false} title="Messages" icon="email">
 				<MappedMessages val={messages} onChange={handleMessagesChange} />
+			</PanelBody>
+			<PanelBody initialOpen={false} icon="admin-appearance" title="Theme">
+				<div className="cwp-option">
+					<h3 className="cwp-heading">Accent Color</h3>
+					<ColorPalette
+						colors={basicColorScheme}
+						value={theme.accentColor}
+						onChange={color => handleStyling(color, "accentColor")}
+					/>
+				</div>
+				<div className="cwp-option">
+					<h3 className="cwp-heading">Text Color</h3>
+					<ColorPalette
+						colors={basicColorScheme}
+						value={theme.textColor}
+						onChange={color => handleStyling(color, "textColor")}
+					/>
+				</div>
+				<div className="cwp-option">
+					<h3 className="cwp-heading">Field Background Color</h3>
+					<ColorPalette
+						colors={basicColorScheme}
+						value={theme.fieldBackgroundColor}
+						onChange={color => handleStyling(color, "fieldBackgroundColor")}
+					/>
+				</div>
 			</PanelBody>
 		</InspectorControls>
 	);

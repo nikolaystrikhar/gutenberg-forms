@@ -1,4 +1,5 @@
 import React, { Fragment } from "react";
+import { getThemeStyling } from "./misc/helper";
 const { InnerBlocks } = wp.blockEditor;
 
 function save(props) {
@@ -10,6 +11,7 @@ function save(props) {
 		successType,
 		successMessage,
 		recaptcha,
+		theme,
 		recaptcha: { siteKey }
 	} = props.attributes;
 
@@ -22,10 +24,10 @@ function save(props) {
 			  };
 
 	`;
-
+	const formId = id && id.split("-")[1];
 	return (
 		<div>
-			<div className="cwp-form">
+			<div className="cwp-form" id={formId}>
 				<form method="POST">
 					<InnerBlocks.Content />
 					{recaptcha.enable && (
@@ -41,11 +43,7 @@ function save(props) {
 								name="submit"
 								value={id}
 								type="submit"
-								style={{
-									backgroundColor: buttonSetting.backgroundColor,
-									color: buttonSetting.color
-								}}
-								className="cwp-submit-btn"
+								className="cwp-submit-btn cwp-default-submit-btn"
 								dangerouslySetInnerHTML={{ __html: submitLabel }}
 							></button>
 						</div>
@@ -80,6 +78,7 @@ function save(props) {
 					<script dangerouslySetInnerHTML={{ __html: captcha_p }}></script>
 				</div>
 			)}
+			<div dangerouslySetInnerHTML={{ __html: getThemeStyling(theme) }}></div>
 		</div>
 	);
 }

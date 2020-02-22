@@ -1,6 +1,7 @@
 import React, { useEffect, Fragment } from "react";
 import Inspector from "./Inspector";
 import TemplateBuilder from "./components/templateBuilder";
+import { getThemeStyling } from "./misc/helper";
 const { InnerBlocks, RichText, BlockControls, BlockIcon } = wp.blockEditor;
 const { Button, Toolbar, Tooltip } = wp.components;
 
@@ -15,8 +16,11 @@ function edit(props) {
 		buttonSetting,
 		templateBuilder,
 		template,
-		id
+		id,
+		theme
 	} = props.attributes;
+
+	const formId = id && id.split("-")[1];
 
 	useEffect(() => {
 		props.setAttributes({ id: "submit-" + props.clientId });
@@ -48,6 +52,7 @@ function edit(props) {
 		</BlockControls>,
 		<Fragment>
 			<div
+				id={formId}
 				className={`cwp-form cwp-form_main ${props.className} ${showEditor}`}
 			>
 				<InnerBlocks
@@ -61,13 +66,7 @@ function edit(props) {
 				/>
 				{!buttonSetting.disable && (
 					<div className={`cwp-submit ${alignment}`}>
-						<button
-							className="cwp-submit-btn"
-							style={{
-								backgroundColor: buttonSetting.backgroundColor,
-								color: buttonSetting.color
-							}}
-						>
+						<button className="cwp-submit-btn cwp-default-submit-btn">
 							<RichText
 								tag="span"
 								value={submitLabel}
@@ -82,6 +81,7 @@ function edit(props) {
 					<TemplateBuilder data={props} />
 				</div>
 			</div>
+			<div dangerouslySetInnerHTML={{ __html: getThemeStyling(theme) }}></div>
 		</Fragment>
 	];
 }

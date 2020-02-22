@@ -135,3 +135,30 @@ export const firstCapital = str => {
 
 	return c.concat(str.substring(1, str.length));
 };
+
+export function getThemeStyling(theme) {
+	const { accentColor, textColor, fieldBackgroundColor } = theme;
+
+	return `<style>
+
+
+	.cwp-form .cwp-field label {
+			color: ${textColor} !important;
+		}
+		.cwp-form .cwp-default-submit-btn {
+			color: ${accentColor} !important;
+			background-color: ${fieldBackgroundColor} !important;
+		}
+
+		.cwp-form .cwp-field [data-cwp-field], 
+		.cwp-form .cwp-field .cwp-field-set input, 
+		.cwp-form .cwp-field .cwp-field-set textarea  {
+
+			border: 1px solid ${accentColor} !important;
+			background-color: ${fieldBackgroundColor} !important;
+			color: ${textColor} !important;
+
+		}
+
+	</style>`;
+}

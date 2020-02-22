@@ -96,7 +96,7 @@ function edit(props) {
 					</div>
 					<div className="cwp-option">
 						<PanelRow>
-							<h3>Formula Builder</h3>
+							<h3>Formula Editor</h3>
 							<FormToggle
 								checked={formulaBuilder}
 								onChange={() =>
@@ -129,7 +129,7 @@ function edit(props) {
 			<BlockControls>
 				<Toolbar>
 					<Tooltip
-						text={__(formulaBuilder ? "Preview Field" : "Formula Builder")}
+						text={__(formulaBuilder ? "Preview Field" : "Formula Editor")}
 					>
 						<Button
 							onClick={() => {
