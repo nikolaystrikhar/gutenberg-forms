@@ -70,7 +70,7 @@ We appreciate all contributions and don't want a wall of rules to get in the way
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
-= 1.0.6 =
+= 1.0.6 (22 Feb 2020) =
 
 - Added: Custom Pattern Option for Messages,Text,Phone,Name fields
 - Added: Option to define Custom validation Messages for All fields
