@@ -1,5 +1,5 @@
-import { strip_tags } from "../misc/helper";
-import { each, has, omit, isEqual, clone, assign } from "lodash";
+import { strip_tags, extract_id } from "../misc/helper";
+import { each, has, omit, isEqual, clone, assign, isEmpty } from "lodash";
 const { createBlock } = wp.blocks;
 const { getBlock, getBlockRootClientId, getBlockParents } = wp.data.select(
 	"core/block-editor"
@@ -100,6 +100,11 @@ export const defaultFieldMessages = [
 	{
 		fieldName: "select",
 		empty: "Please select option!"
+	},
+	{
+		fieldName: "number",
+		empty: "Please fill out this field!",
+		invalid: "The number {{value}} is not in range!"
 	}
 ];
 
@@ -163,7 +168,7 @@ export function getChildAttributes(clientId) {
 
 	rootBlock.innerBlocks.forEach(v => {
 		if (has(v, "attributes")) {
-			childAttrs.push(v.attributes);
+			childAttrs.push(v["attributes"]);
 		} else if (layoutBlocks.includes(v.name)) {
 			//which means field are nested even more!
 			childAttrs.push(...getChildAttributes(v.clientId));

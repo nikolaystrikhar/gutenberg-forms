@@ -1,10 +1,10 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import {
 	FormToggle,
-	Toolbar,
 	PanelRow,
 	PanelBody,
 	RangeControl,
+	Icon,
 	TextControl
 } from "@wordpress/components";
 import {
@@ -12,6 +12,9 @@ import {
 	extract_id,
 	getEncodedData
 } from "../../block/misc/helper";
+
+import { clone, set, assign } from "lodash";
+import { getRootMessages, isSameId } from "../../block/functions";
 
 const {
 	InspectorControls,
@@ -46,9 +49,23 @@ function edit(props) {
 		isRange,
 		rangeMax,
 		rangeMin,
-		requiredLabel
+		requiredLabel,
+		messages: { invalid, empty },
+		messages,
+		steps
 	} = props.attributes;
+
 	useEffect(() => {
+		let rootMessages = getRootMessages(props.clientId, "number");
+
+		if (rootMessages) {
+			const newMessages = clone(messages);
+
+			assign(newMessages, rootMessages);
+
+			props.setAttributes({ messages: newMessages });
+		}
+
 		if (field_name === "") {
 			props.setAttributes({
 				field_name: getFieldName("number", props.clientId)
@@ -68,10 +85,23 @@ function edit(props) {
 			});
 		}
 	}, []);
+
+	const setMessages = (type, m) => {
+		let newMessages = clone(messages);
+
+		set(newMessages, type, m);
+
+		props.setAttributes({ messages: newMessages });
+	};
+
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
-				<PanelBody title="Field Settings" initialOpen={true}>
+				<PanelBody
+					title="Field Settings"
+					icon="admin-generic"
+					initialOpen={true}
+				>
 					<PanelRow>
 						<h3 className="cwp-heading">Required</h3>
 						<FormToggle
@@ -91,6 +121,14 @@ function edit(props) {
 							/>
 						</div>
 					)}
+					<RangeControl
+						min={0}
+						max={10000}
+						value={steps}
+						step={0.1}
+						onChange={steps => props.setAttributes({ steps })}
+						label="Steps"
+					/>
 				</PanelBody>
 				<PanelBody title="Range Setting" icon="admin-settings">
 					<div className="cwp-option">
@@ -110,6 +148,29 @@ function edit(props) {
 						/>
 					</div>
 				</PanelBody>
+				<PanelBody title="Messages" icon="email">
+					{isRequired && (
+						<div className="cwp-option">
+							<h3 className="cwp-heading">Required Error</h3>
+							<TextControl
+								onChange={label => setMessages("empty", label)}
+								value={empty}
+							/>
+						</div>
+					)}
+					<div className="cwp-option">
+						<h3 className="cwp-heading">Invalid Number Error</h3>
+						<TextControl
+							onChange={v => setMessages("invalid", v)}
+							value={invalid}
+						/>
+					</div>
+					<div className="cwp-option">
+						<p>
+							<Icon icon="info" /> Use {"{{value}}"} to insert field value!
+						</p>
+					</div>
+				</PanelBody>
 			</InspectorControls>
 		),
 		!!props.isSelected && <BlockControls></BlockControls>,
@@ -125,25 +186,40 @@ function edit(props) {
 					<FormToggle checked={isRequired} onChange={handleRequired} />
 				</div>
 			)}
-			{!props.isSelected && isRequired && (
-				<div className="cwp-required cwp-noticed">
-					<h3>Required</h3>
-				</div>
-			)}
+
 			<div className="cwp-field-set">
-				<RichText tag="label" value={label} onChange={handleLabel} />
+				<div className="cwp-label-wrap">
+					<RichText tag="label" value={label} onChange={handleLabel} />
+					{!props.isSelected && isRequired && (
+						<div className="cwp-required cwp-noticed">
+							<h3>{requiredLabel}</h3>
+						</div>
+					)}
+				</div>
 				{isRange ? (
-					<input
-						value={number}
-						max={rangeMax}
-						min={rangeMin}
-						type="range"
-						onChange={handleChange}
-					/>
+					<div className="cwp-range-set">
+						<input
+							value={number}
+							max={rangeMax}
+							min={rangeMin}
+							type="range"
+							step={steps}
+							onChange={handleChange}
+						/>
+						<input
+							value={number}
+							step={steps}
+							type="number"
+							max={rangeMax}
+							min={rangeMin}
+							onChange={handleChange}
+						/>
+					</div>
 				) : (
 					<input
 						value={number}
 						max={rangeMax}
+						step={steps}
 						min={rangeMin}
 						type="number"
 						onChange={handleChange}

@@ -24,7 +24,8 @@ function save(props) {
 			  };
 
 	`;
-	const formId = id && id.split("-")[1];
+	const formId = id && "form-".concat(id.split("-")[1]);
+
 	return (
 		<div>
 			<div className="cwp-form" id={formId}>
@@ -78,7 +79,9 @@ function save(props) {
 					<script dangerouslySetInnerHTML={{ __html: captcha_p }}></script>
 				</div>
 			)}
-			<div dangerouslySetInnerHTML={{ __html: getThemeStyling(theme) }}></div>
+			<div
+				dangerouslySetInnerHTML={{ __html: getThemeStyling(theme, formId) }}
+			></div>
 		</div>
 	);
 }

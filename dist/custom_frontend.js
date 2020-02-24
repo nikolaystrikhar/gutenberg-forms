@@ -1386,6 +1386,7 @@ jQuery(function($) {
 							}
 						}
 					});
+					datePicker.setMinDate(new Date("Thu Jan 1 1920"));
 				});
 		});
 
@@ -1716,6 +1717,22 @@ jQuery(function($) {
 					});
 				};
 			});
+
+			let rangeSliders = $(this).find(".cwp-range-set");
+
+			if (rangeSliders.length) {
+				rangeSliders.each(function() {
+					let rangeInput = $(this).find('input[type="range"]');
+					let numberInput = $(this).find('input[type="number"]');
+
+					rangeInput.on("input", function() {
+						numberInput.val($(this).val());
+					});
+					numberInput.on("input", function() {
+						rangeInput.val($(this).val());
+					});
+				});
+			}
 
 			if ($(this).find(".cwp-field.cwp-calculation").length) {
 				applyCalculation($(this));

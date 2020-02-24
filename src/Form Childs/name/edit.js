@@ -181,13 +181,15 @@ function edit(props) {
 					<FormToggle checked={isRequired} onChange={handleRequired} />
 				</div>
 			)}
-			{!props.isSelected && isRequired && !enableCondition && (
-				<div className="cwp-required cwp-noticed">
-					<h3>Required</h3>
-				</div>
-			)}
 			<div className="cwp-field-set">
-				<RichText tag="label" value={label} onChange={handleLabel} />
+				<div className="cwp-label-wrap">
+					<RichText tag="label" value={label} onChange={handleLabel} />
+					{!props.isSelected && isRequired && !enableCondition && (
+						<div className="cwp-required cwp-noticed">
+							<h3>{requiredLabel}</h3>
+						</div>
+					)}
+				</div>
 				<input value={name} onChange={handleChange} />
 			</div>
 		</div>

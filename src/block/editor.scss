@@ -48,11 +48,63 @@
 			}
 		}
 
+		& .cwp-select-set {
+			& .cwp-label-wrap {
+				display: flex;
+				flex-direction: row;
+				justify-content: start;
+			}
+		}
+
+		& .cwp-checkbox-set {
+			& .cwp-label-wrap {
+				display: flex;
+				flex-direction: row;
+				justify-content: start;
+			}
+		}
+
+		& .cwp-radios-set {
+			& .cwp-label-wrap {
+				display: flex;
+				flex-direction: row;
+				justify-content: start;
+			}
+		}
+
 		& .cwp-field-set {
+			& .cwp-label-wrap {
+				display: flex;
+				flex-direction: row;
+				justify-content: start;
+			}
+
 			@include field();
+
+			& .cwp-range-set {
+				display: flex;
+				flex-direction: row;
+
+				& input[type="number"] {
+					flex: 1;
+					width: 50px;
+					margin: 0px 0px 0px 15px;
+				}
+			}
 		}
 
 		&.cwp-calculation {
+			& .cwp-calc-toggle {
+				display: flex;
+				flex-direction: row;
+				justify-content: flex-end;
+
+				& h3 {
+					margin: 0px 10px 0px 0px;
+					font-size: 15px;
+				}
+			}
+
 			& .cwp-field-set {
 				display: flex;
 				flex-direction: column !important;

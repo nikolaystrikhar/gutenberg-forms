@@ -75,6 +75,17 @@
 		}
 
 		& .cwp-field {
+			& .cwp-range-set {
+				display: flex;
+				flex-direction: row;
+
+				& input[type="number"] {
+					flex: 1;
+					width: 60px;
+					margin: 0px 0px 0px 15px;
+				}
+			}
+
 			&.cwp-calculation {
 				& .cwp-field-set {
 					display: flex;
@@ -107,6 +118,8 @@
 				& .cwp-error {
 					color: $danger;
 				}
+
+
 				@include field();
 			}
 
@@ -121,14 +134,19 @@
 			}
 
 			& .cwp-checkbox-set {
+				margin: 20px 0px !important;
 				@include checkbox-field("frontend");
 			}
 
 			& .cwp-radio-set {
+				margin: 20px 0px !important;
+
 				@include radio-field("frontend");
 			}
 
 			& .cwp-select-set {
+				margin: 20px 0px !important;
+
 				@include select-field("frontend");
 			}
 		}

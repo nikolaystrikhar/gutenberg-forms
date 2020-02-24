@@ -20,7 +20,7 @@ function edit(props) {
 		theme
 	} = props.attributes;
 
-	const formId = id && id.split("-")[1];
+	const formId = id && "form-".concat(id.split("-")[1]);
 
 	useEffect(() => {
 		props.setAttributes({ id: "submit-" + props.clientId });
@@ -81,7 +81,9 @@ function edit(props) {
 					<TemplateBuilder data={props} />
 				</div>
 			</div>
-			<div dangerouslySetInnerHTML={{ __html: getThemeStyling(theme) }}></div>
+			<div
+				dangerouslySetInnerHTML={{ __html: getThemeStyling(theme, formId) }}
+			></div>
 		</Fragment>
 	];
 }

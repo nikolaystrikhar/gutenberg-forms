@@ -7,6 +7,11 @@ import {
 	PanelRow
 } from "@wordpress/components";
 import Introduction from "./components/introduction";
+import { createBlock } from "@wordpress/blocks";
+import { map } from "lodash";
+
+const { replaceInnerBlocks } = wp.data.dispatch("core/block-editor");
+const { getBlock } = wp.data.select("core/block-editor");
 
 function edit(props) {
 	const { columns, intro, stack } = props.attributes,
@@ -30,9 +35,42 @@ function edit(props) {
 		setAttributes({ columns: cols, intro: true });
 	};
 
+	const createBlocksFromInnerBlocksTemplate = innerBlocksTemplate => {
+		return map(innerBlocksTemplate, ([name, attributes, innerBlocks = []]) =>
+			createBlock(
+				name,
+				attributes,
+				createBlocksFromInnerBlocksTemplate(innerBlocks)
+			)
+		);
+	};
+
 	return [
 		<InspectorControls>
 			<PanelBody icon="layout" title="Layout Settings">
+				<div className="cwp-option">
+					<h3>Columns</h3>
+					<PanelRow>
+						<RangeControl
+							max={6}
+							min={2}
+							onChange={c => {
+								props.setAttributes({ columns: c });
+
+								const currentInnerBlocks = getBlock(props.clientId).innerBlocks;
+
+								for (let i = columns; i < c; ++i) {
+									currentInnerBlocks.push(
+										...createBlocksFromInnerBlocksTemplate([["cwp/column", {}]])
+									);
+								}
+
+								replaceInnerBlocks(props.clientId, currentInnerBlocks);
+							}}
+							value={columns}
+						/>
+					</PanelRow>
+				</div>
 				<div className="cwp-option">
 					<PanelRow>
 						<h3>Stack on Mobile</h3>

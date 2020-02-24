@@ -144,6 +144,15 @@ function edit(props) {
 		),
 
 		<div className={`cwp-calculation cwp-field ${props.className}`}>
+			<div className="cwp-calc-toggle">
+				<h3>Formula Editor</h3>
+				<FormToggle
+					checked={formulaBuilder}
+					onChange={() =>
+						props.setAttributes({ formulaBuilder: !formulaBuilder })
+					}
+				/>
+			</div>
 			{formulaBuilder ? (
 				<FormulaBuilder data={props} />
 			) : (

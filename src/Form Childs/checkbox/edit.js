@@ -235,7 +235,7 @@ function edit(props) {
 						<h3 className="cwp-heading">Required Error</h3>
 						<TextControl
 							onChange={label => setMessages("empty", label)}
-							value={messages}
+							value={messages.empty}
 						/>
 					</div>
 				</PanelBody>
@@ -257,18 +257,22 @@ function edit(props) {
 					<FormToggle checked={isRequired} onChange={handleRequired} />
 				</div>
 			)}
-			{!props.isSelected && isRequired && !enableCondition && (
-				<div className="cwp-required cwp-noticed">
-					<h3>Required</h3>
-				</div>
-			)}
+
 			<div
 				ref={checkboxContainer}
 				className={`cwp-checkbox-set-backend cwp-checkbox-set ${
 					!props.isSelected ? "cwp-checkbox-set-preview" : ""
 				}`}
 			>
-				<RichText tag="label" value={label} onChange={handleLabel} />
+				<div className="cwp-label-wrap">
+					<RichText tag="label" value={label} onChange={handleLabel} />
+
+					{!props.isSelected && isRequired && !enableCondition && (
+						<div className="cwp-required cwp-noticed">
+							<h3>{requiredLabel}</h3>
+						</div>
+					)}
+				</div>
 				{checkboxes.map((checkbox, index) => {
 					const hasImage = has(checkbox, "image"),
 						image = hasImage ? checkbox.image.url : "";

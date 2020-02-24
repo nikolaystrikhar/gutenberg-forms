@@ -67,7 +67,7 @@ function edit(props) {
 					</PanelRow>
 				</div>
 			</PanelBody>
-			<PanelBody title="Styling" icon="admin-appearance">
+			<PanelBody title="Colors" icon="admin-appearance">
 				<div className="cwp-option">
 					<h3 className="cwp-heading">Background Color</h3>
 					<ColorPalette

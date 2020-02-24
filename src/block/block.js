@@ -216,9 +216,9 @@ registerBlockType("cwp/block-gutenberg-forms", {
 		theme: {
 			type: "object",
 			default: {
-				accentColor: "",
-				textColor: "",
-				fieldBackgroundColor: ""
+				accentColor: "rgb(49, 49, 49)",
+				textColor: "rgb(49, 49, 49)",
+				fieldBackgroundColor: "rgb(238, 238, 238)"
 			}
 		}
 	},
@@ -551,10 +551,6 @@ registerBlockType("cwp/checkbox", {
 		field_name: {
 			type: "string",
 			default: ""
-		},
-		requiredLabel: {
-			type: "string",
-			default: "*"
 		},
 		messages: {
 			type: "object",
@@ -1027,6 +1023,10 @@ registerBlockType("cwp/number", {
 			type: "boolean",
 			default: false
 		},
+		steps: {
+			type: "number",
+			default: 1
+		},
 		rangeMax: {
 			type: "number",
 			default: 100
@@ -1049,6 +1049,13 @@ registerBlockType("cwp/number", {
 				field: null,
 				condition: "===",
 				value: ""
+			}
+		},
+		messages: {
+			type: "object",
+			default: {
+				empty: "Please fill out this field!",
+				invalid: "The number {{value}} is not in range!"
 			}
 		}
 	},

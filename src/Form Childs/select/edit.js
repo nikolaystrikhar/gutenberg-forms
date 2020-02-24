@@ -203,7 +203,7 @@ function edit(props) {
 
 	const SelectView = () => {
 		return (
-			<select>
+			<select data-cwp-field>
 				<option value="" disabled selected>
 					Select your option
 				</option>
@@ -275,13 +275,16 @@ function edit(props) {
 					<FormToggle checked={isRequired} onChange={handleRequired} />
 				</div>
 			)}
-			{!props.isSelected && isRequired && !enableCondition && (
-				<div className="cwp-required cwp-noticed">
-					<h3>Required</h3>
-				</div>
-			)}
+
 			<div className="cwp-select-set" ref={selectContainer}>
-				<RichText tag="label" value={label} onChange={handleLabel} />
+				<div className="cwp-label-wrap">
+					<RichText tag="label" value={label} onChange={handleLabel} />
+					{!props.isSelected && isRequired && !enableCondition && (
+						<div className="cwp-required cwp-noticed">
+							<h3>{requiredLabel}</h3>
+						</div>
+					)}
+				</div>
 				{!!props.isSelected ? editView : <SelectView />}
 				{!!props.isSelected && (
 					<div className="cwp-select-controls">

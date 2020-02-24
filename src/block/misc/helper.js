@@ -136,25 +136,39 @@ export const firstCapital = str => {
 	return c.concat(str.substring(1, str.length));
 };
 
-export function getThemeStyling(theme) {
+export function getThemeStyling(theme, id) {
 	const { accentColor, textColor, fieldBackgroundColor } = theme;
 
 	return `<style>
 
-
-	.cwp-form .cwp-field label {
-			color: ${textColor} !important;
-		}
-		.cwp-form .cwp-default-submit-btn {
-			color: ${accentColor} !important;
+		#${id}.cwp-form .cwp-field.cwp-yes-no .cwp-field-set .cwp-switch input:checked + .cwp-slider {
 			background-color: ${fieldBackgroundColor} !important;
 		}
 
-		.cwp-form .cwp-field [data-cwp-field], 
-		.cwp-form .cwp-field .cwp-field-set input, 
-		.cwp-form .cwp-field .cwp-field-set textarea  {
+		#${id}.cwp-form .cwp-field label {
+			color: ${textColor} !important;
+		}
 
-			border: 1px solid ${accentColor} !important;
+		#${id}.cwp-form .cwp-field .rich-text {
+			color: ${textColor} !important;
+		}
+
+		#${id}.cwp-form .cwp-default-submit-btn {
+			color: ${accentColor} !important;
+			background-color: ${fieldBackgroundColor} !important;
+			border: 1px solid ${accentColor};
+		}
+
+		#${id}.cwp-form .cwp-field.cwp-number .cwp-field-set .cwp-range-set input[type="range"] {
+			border:none !important;
+		}
+
+
+		#${id}.cwp-form .cwp-field [data-cwp-field], 
+		#${id}.cwp-form .cwp-field .cwp-field-set input, 
+		#${id}.cwp-form .cwp-field .cwp-field-set textarea  {
+
+			border: 1px solid ${accentColor};
 			background-color: ${fieldBackgroundColor} !important;
 			color: ${textColor} !important;
 

@@ -105,7 +105,37 @@ function Inspector(prop) {
 
 	return (
 		<InspectorControls>
-			<PanelBody initialOpen={true} icon="admin-settings" title="General">
+			<PanelBody
+				initialOpen={false}
+				icon="admin-appearance"
+				title="Form Design"
+			>
+				<div className="cwp-option">
+					<h3 className="cwp-heading">Accent Color</h3>
+					<ColorPalette
+						colors={basicColorScheme}
+						value={theme.accentColor}
+						onChange={color => handleStyling(color, "accentColor")}
+					/>
+				</div>
+				<div className="cwp-option">
+					<h3 className="cwp-heading">Text Color</h3>
+					<ColorPalette
+						colors={basicColorScheme}
+						value={theme.textColor}
+						onChange={color => handleStyling(color, "textColor")}
+					/>
+				</div>
+				<div className="cwp-option">
+					<h3 className="cwp-heading">Field Background Color</h3>
+					<ColorPalette
+						colors={basicColorScheme}
+						value={theme.fieldBackgroundColor}
+						onChange={color => handleStyling(color, "fieldBackgroundColor")}
+					/>
+				</div>
+			</PanelBody>
+			<PanelBody initialOpen={false} icon="admin-settings" title="General">
 				<div className="cwp-option">
 					<PanelRow>
 						<h3>Disable Submit Button</h3>
@@ -146,11 +176,9 @@ function Inspector(prop) {
 						</div>
 					</Fragment>
 				)}
-			</PanelBody>
-			<PanelBody initialOpen={false} icon="info" title="Notification">
 				<div className="cwp-option">
 					<PanelRow>
-						<h3>Email Builder</h3>
+						<h3>Email Notification Builder</h3>
 						<FormToggle
 							checked={templateBuilder}
 							onChange={s =>
@@ -159,11 +187,9 @@ function Inspector(prop) {
 						/>
 					</PanelRow>
 				</div>
-			</PanelBody>
-			<PanelBody initialOpen={false} icon="yes" title="Confirmation">
 				<div className="cwp-option">
 					<PanelRow>
-						<h3>Success Type</h3>
+						<h3>Confirmation Type</h3>
 						<ButtonGroup>
 							<Button
 								{...getSuccess("url")}
@@ -244,33 +270,13 @@ function Inspector(prop) {
 				)}
 			</PanelBody>
 			<PanelBody initialOpen={false} title="Messages" icon="email">
+				<div className="cwp-option">
+					<p>
+						<Icon icon="info" /> You can edit validations messages used for
+						various field types here. Use {`{{ value }}`} to insert field value.
+					</p>
+				</div>
 				<MappedMessages val={messages} onChange={handleMessagesChange} />
-			</PanelBody>
-			<PanelBody initialOpen={false} icon="admin-appearance" title="Theme">
-				<div className="cwp-option">
-					<h3 className="cwp-heading">Accent Color</h3>
-					<ColorPalette
-						colors={basicColorScheme}
-						value={theme.accentColor}
-						onChange={color => handleStyling(color, "accentColor")}
-					/>
-				</div>
-				<div className="cwp-option">
-					<h3 className="cwp-heading">Text Color</h3>
-					<ColorPalette
-						colors={basicColorScheme}
-						value={theme.textColor}
-						onChange={color => handleStyling(color, "textColor")}
-					/>
-				</div>
-				<div className="cwp-option">
-					<h3 className="cwp-heading">Field Background Color</h3>
-					<ColorPalette
-						colors={basicColorScheme}
-						value={theme.fieldBackgroundColor}
-						onChange={color => handleStyling(color, "fieldBackgroundColor")}
-					/>
-				</div>
 			</PanelBody>
 		</InspectorControls>
 	);

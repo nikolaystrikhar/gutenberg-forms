@@ -10,7 +10,8 @@ function save(props) {
 		id,
 		requiredLabel,
 		messages,
-		messages: { empty }
+		messages: { empty },
+		condition
 	} = props.attributes;
 
 	const getLabel = () => {
