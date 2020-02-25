@@ -216,9 +216,9 @@ registerBlockType("cwp/block-gutenberg-forms", {
 		theme: {
 			type: "object",
 			default: {
-				accentColor: "rgb(49, 49, 49)",
-				textColor: "rgb(49, 49, 49)",
-				fieldBackgroundColor: "rgb(238, 238, 238)"
+				accentColor: "",
+				textColor: "",
+				fieldBackgroundColor: ""
 			}
 		}
 	},

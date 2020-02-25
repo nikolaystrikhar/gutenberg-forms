@@ -10,7 +10,9 @@ import Introduction from "./components/introduction";
 import { createBlock } from "@wordpress/blocks";
 import { map } from "lodash";
 
-const { replaceInnerBlocks } = wp.data.dispatch("core/block-editor");
+const { replaceInnerBlocks, selectBlock } = wp.data.dispatch(
+	"core/block-editor"
+);
 const { getBlock } = wp.data.select("core/block-editor");
 
 function edit(props) {
@@ -59,13 +61,21 @@ function edit(props) {
 
 								const currentInnerBlocks = getBlock(props.clientId).innerBlocks;
 
-								for (let i = columns; i < c; ++i) {
-									currentInnerBlocks.push(
-										...createBlocksFromInnerBlocksTemplate([["cwp/column", {}]])
-									);
+								if (c > currentInnerBlocks.length - 1) {
+									for (let i = columns; i < c; ++i) {
+										currentInnerBlocks.push(
+											...createBlocksFromInnerBlocksTemplate([
+												["cwp/column", {}]
+											])
+										);
+									}
+									replaceInnerBlocks(props.clientId, currentInnerBlocks);
+									selectBlock(props.clientId);
+								} else {
+									currentInnerBlocks.pop();
+									replaceInnerBlocks(props.clientId, currentInnerBlocks);
+									selectBlock(props.clientId);
 								}
-
-								replaceInnerBlocks(props.clientId, currentInnerBlocks);
 							}}
 							value={columns}
 						/>

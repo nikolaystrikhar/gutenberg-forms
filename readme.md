@@ -70,6 +70,13 @@ We appreciate all contributions and don't want a wall of rules to get in the way
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
+= 1.0.7 =
+
+- Added: Form Theme Options
+- Improved: form columns can now be changed after selection
+- Improved: Better organized options for form
+- Improved: Number field
+
 = 1.0.6 (22 Feb 2020) =
 
 - Added: Custom Pattern Option for Messages,Text,Phone,Name fields

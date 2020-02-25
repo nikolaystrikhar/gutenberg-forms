@@ -135,7 +135,7 @@ function Inspector(prop) {
 					/>
 				</div>
 			</PanelBody>
-			<PanelBody initialOpen={false} icon="admin-settings" title="General">
+			<PanelBody initialOpen={true} icon="admin-settings" title="General">
 				<div className="cwp-option">
 					<PanelRow>
 						<h3>Disable Submit Button</h3>
