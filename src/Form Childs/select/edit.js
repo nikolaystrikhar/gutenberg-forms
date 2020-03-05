@@ -243,7 +243,7 @@ function edit(props) {
 					</div>
 				)}
 			</PanelBody>
-			<PanelBody title="Condition" icon="hidden">
+			<PanelBody title="Condition">
 				<ConditionalLogic
 					condition={condition}
 					set={props.setAttributes}
@@ -252,7 +252,7 @@ function edit(props) {
 				/>
 			</PanelBody>
 			{isRequired && (
-				<PanelBody title="Messages" icon="email">
+				<PanelBody title="Messages">
 					<div className="cwp-option">
 						<h3 className="cwp-heading">Required Error</h3>
 						<TextControl

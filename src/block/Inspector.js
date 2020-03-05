@@ -105,11 +105,7 @@ function Inspector(prop) {
 
 	return (
 		<InspectorControls>
-			<PanelBody
-				initialOpen={false}
-				icon="admin-appearance"
-				title="Form Design"
-			>
+			<PanelBody initialOpen={false} title="Form Design">
 				<div className="cwp-option">
 					<h3 className="cwp-heading">Accent Color</h3>
 					<ColorPalette
@@ -135,7 +131,7 @@ function Inspector(prop) {
 					/>
 				</div>
 			</PanelBody>
-			<PanelBody initialOpen={true} icon="admin-settings" title="General">
+			<PanelBody initialOpen={true} title="General">
 				<div className="cwp-option">
 					<PanelRow>
 						<h3>Disable Submit Button</h3>
@@ -224,7 +220,7 @@ function Inspector(prop) {
 					)}
 				</div>
 			</PanelBody>
-			<PanelBody initialOpen={false} icon="googleplus" title="reCAPTCHA v2">
+			<PanelBody initialOpen={false} title="reCAPTCHA v2">
 				<div className="cwp-option">
 					<p>
 						reCAPTCHA requires a Site and Private API key. Sign up for a free{" "}
@@ -269,7 +265,7 @@ function Inspector(prop) {
 					</div>
 				)}
 			</PanelBody>
-			<PanelBody initialOpen={false} title="Messages" icon="email">
+			<PanelBody initialOpen={false} title="Messages">
 				<div className="cwp-option">
 					<p>
 						<Icon icon="info" /> You can edit validations messages used for

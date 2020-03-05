@@ -77,7 +77,7 @@ function edit(props) {
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
-				<PanelBody title={__("Field Settings")} icon="admin-generic">
+				<PanelBody title={__("Field Settings")}>
 					<div className="cwp-option">
 						<h3>Prefix</h3>
 
@@ -106,7 +106,7 @@ function edit(props) {
 						</PanelRow>
 					</div>
 				</PanelBody>
-				<PanelBody title="Condition" icon="hidden">
+				<PanelBody title="Condition">
 					<ConditionalLogic
 						condition={condition}
 						set={props.setAttributes}
@@ -114,7 +114,7 @@ function edit(props) {
 						useCondition={props.attributes.enableCondition}
 					/>
 				</PanelBody>
-				<PanelBody title={__("Styling")} icon="admin-appearance">
+				<PanelBody title={__("Styling")}>
 					<div className="cwp-option">
 						<RangeControl
 							value={styling.fontSize}

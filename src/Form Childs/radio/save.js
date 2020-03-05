@@ -11,7 +11,8 @@ function save(props) {
 		requiredLabel,
 		messages,
 		messages: { empty },
-		condition
+		condition,
+		fieldStyle
 	} = props.attributes;
 
 	const getLabel = () => {
@@ -34,7 +35,7 @@ function save(props) {
 	});
 
 	const getCondition = () => {
-		if (props.attributes.enableCondition) {
+		if (props.attributes.enableCondition && !isEmpty(condition.field)) {
 			//verifying the condition
 			return {
 				"data-condition": stringifyCondition(condition)
@@ -45,7 +46,10 @@ function save(props) {
 	};
 
 	return (
-		<div className="cwp-radio cwp-field" {...getCondition()}>
+		<div
+			className={`cwp-radio cwp-field is-style-${fieldStyle}`}
+			{...getCondition()}
+		>
 			<div
 				data-errors={errors}
 				className={`cwp-radio-set ${isRequired ? "required-radio" : ""}`}

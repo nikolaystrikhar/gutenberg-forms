@@ -569,6 +569,10 @@ registerBlockType("cwp/checkbox", {
 		requiredLabel: {
 			type: "string",
 			default: "*"
+		},
+		fieldStyle: {
+			type: "string",
+			default: "block"
 		}
 	},
 	transforms: {
@@ -714,6 +718,10 @@ registerBlockType("cwp/radio", {
 		requiredLabel: {
 			type: "string",
 			default: "*"
+		},
+		fieldStyle: {
+			type: "string",
+			default: "block"
 		}
 	},
 	transforms: {

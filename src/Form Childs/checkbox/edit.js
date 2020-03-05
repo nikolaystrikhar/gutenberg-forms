@@ -6,7 +6,8 @@ import {
 	PanelBody,
 	Icon,
 	Button,
-	TextControl
+	TextControl,
+	SelectControl
 } from "@wordpress/components";
 
 const { InspectorControls, BlockControls, BlockIcon } = wp.blockEditor;
@@ -35,7 +36,8 @@ function edit(props) {
 		messages,
 		messages: { empty },
 		condition,
-		enableCondition
+		enableCondition,
+		fieldStyle
 	} = props.attributes;
 
 	const [checkboxes, setCheckboxes] = useState([]);
@@ -228,9 +230,22 @@ function edit(props) {
 						/>
 					</div>
 				)}
+				<div className="cwp-option">
+					<SelectControl
+						label="Layout"
+						value={fieldStyle}
+						options={[
+							{ label: "Block", value: "block" },
+							{ label: "Inline", value: "inline" }
+						]}
+						onChange={s => {
+							props.setAttributes({ fieldStyle: s });
+						}}
+					/>
+				</div>
 			</PanelBody>
 			{isRequired && (
-				<PanelBody title="Messages" icon="email">
+				<PanelBody title="Messages">
 					<div className="cwp-option">
 						<h3 className="cwp-heading">Required Error</h3>
 						<TextControl
@@ -240,7 +255,7 @@ function edit(props) {
 					</div>
 				</PanelBody>
 			)}
-			<PanelBody title="Condition" icon="hidden">
+			<PanelBody title="Condition">
 				<ConditionalLogic
 					condition={condition}
 					set={props.setAttributes}
@@ -250,7 +265,9 @@ function edit(props) {
 			</PanelBody>
 		</InspectorControls>,
 		null,
-		<div className={`cwp-checkbox cwp-field ${props.className}`}>
+		<div
+			className={`cwp-checkbox cwp-field ${props.className} is-style-${fieldStyle}`}
+		>
 			{!!props.isSelected && !enableCondition && (
 				<div className="cwp-required">
 					<h3>Required</h3>
@@ -286,11 +303,13 @@ function edit(props) {
 									type="checkbox"
 									onClick={() => handleCheck(!checkbox.checked, index)}
 								/>
-								<label
-									style={{ width: "auto" }}
-									for={id.concat(index.toString())}
-									onClick={() => handleCheck(!checkbox.checked, index)}
-								></label>
+								{!!props.isSelected && (
+									<label
+										style={{ width: "auto" }}
+										for={id.concat(index.toString())}
+										onClick={() => handleCheck(!checkbox.checked, index)}
+									></label>
+								)}
 								{!!props.isSelected ? (
 									<input
 										onChange={e => handleChange(e, index)}
@@ -302,7 +321,17 @@ function edit(props) {
 										value={checkbox.label}
 									/>
 								) : (
-									<label>{checkbox.label}</label>
+									<label>
+										{checkbox.label}{" "}
+										{hasImage && (
+											<ImagePreview
+												onEdit={img => handleImage(img, index, "add")}
+												onRemove={() => handleImage(null, index, "remove")}
+												isSelected={props.isSelected}
+												image={checkbox.image}
+											/>
+										)}
+									</label>
 								)}
 								{!!props.isSelected && (
 									<Fragment>
@@ -320,7 +349,7 @@ function edit(props) {
 									</Fragment>
 								)}
 							</div>
-							{hasImage && (
+							{hasImage && props.isSelected && (
 								<ImagePreview
 									onEdit={img => handleImage(img, index, "add")}
 									onRemove={() => handleImage(null, index, "remove")}

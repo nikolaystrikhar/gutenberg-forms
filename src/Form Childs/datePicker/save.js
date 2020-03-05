@@ -13,7 +13,8 @@ function save(props) {
 		type,
 		messages: { empty },
 		format,
-		condition
+		condition,
+		enableCondition
 	} = props.attributes;
 
 	const getLabel = () => {
@@ -44,7 +45,7 @@ function save(props) {
 	});
 
 	const getCondition = () => {
-		if (!isEmpty(condition.field)) {
+		if (!isEmpty(condition.field) && enableCondition) {
 			//verifying the condition
 			return {
 				"data-condition": stringifyCondition(condition)

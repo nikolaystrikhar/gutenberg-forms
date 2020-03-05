@@ -14,7 +14,7 @@ import {
 } from "../../block/misc/helper";
 
 import { clone, set, assign } from "lodash";
-import { getRootMessages, isSameId } from "../../block/functions";
+import { getRootMessages, detectSimilarFields } from "../../block/functions";
 
 const {
 	InspectorControls,
@@ -66,7 +66,7 @@ function edit(props) {
 			props.setAttributes({ messages: newMessages });
 		}
 
-		if (field_name === "") {
+		if (field_name === "" || detectSimilarFields(props.clientId, field_name)) {
 			props.setAttributes({
 				field_name: getFieldName("number", props.clientId)
 			});
@@ -76,7 +76,10 @@ function edit(props) {
 					"__" +
 					getEncodedData("number", props.clientId, isRequired)
 			});
-		} else if (field_name !== "") {
+		} else if (
+			field_name !== "" &&
+			detectSimilarFields(props.clientId, field_name)
+		) {
 			props.setAttributes({
 				id:
 					extract_id(field_name) +
@@ -97,19 +100,17 @@ function edit(props) {
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
-				<PanelBody
-					title="Field Settings"
-					icon="admin-generic"
-					initialOpen={true}
-				>
-					<PanelRow>
-						<h3 className="cwp-heading">Required</h3>
-						<FormToggle
-							label="Required"
-							checked={isRequired}
-							onChange={handleRequired}
-						/>
-					</PanelRow>
+				<PanelBody title="Field Settings" initialOpen={true}>
+					<div className="cwp-option">
+						<PanelRow>
+							<h3 className="cwp-heading">Required</h3>
+							<FormToggle
+								label="Required"
+								checked={isRequired}
+								onChange={handleRequired}
+							/>
+						</PanelRow>
+					</div>
 					{isRequired && (
 						<div className="cwp-option">
 							<h3 className="cwp-heading">Required Text</h3>
@@ -129,8 +130,6 @@ function edit(props) {
 						onChange={steps => props.setAttributes({ steps })}
 						label="Steps"
 					/>
-				</PanelBody>
-				<PanelBody title="Range Setting" icon="admin-settings">
 					<div className="cwp-option">
 						<RangeControl
 							min={0}
@@ -148,7 +147,7 @@ function edit(props) {
 						/>
 					</div>
 				</PanelBody>
-				<PanelBody title="Messages" icon="email">
+				<PanelBody title="Messages">
 					{isRequired && (
 						<div className="cwp-option">
 							<h3 className="cwp-heading">Required Error</h3>

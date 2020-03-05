@@ -38,7 +38,7 @@ function save(props) {
 	};
 
 	const getCondition = () => {
-		if (props.attributes.enableCondition) {
+		if (props.attributes.enableCondition && !isEmpty(condition.field)) {
 			//verifying the condition
 			return {
 				"data-condition": stringifyCondition(condition)

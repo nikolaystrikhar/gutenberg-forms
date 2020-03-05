@@ -46,7 +46,7 @@ function edit(props) {
 
 	return [
 		<InspectorControls>
-			<PanelBody title="Settings" icon="admin-generic">
+			<PanelBody title="Settings">
 				<div className="cwp-option">
 					<PanelRow>
 						<h3>Action</h3>
@@ -67,7 +67,7 @@ function edit(props) {
 					</PanelRow>
 				</div>
 			</PanelBody>
-			<PanelBody title="Colors" icon="admin-appearance">
+			<PanelBody title="Colors">
 				<div className="cwp-option">
 					<h3 className="cwp-heading">Background Color</h3>
 					<ColorPalette

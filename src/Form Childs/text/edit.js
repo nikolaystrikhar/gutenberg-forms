@@ -94,11 +94,7 @@ function edit(props) {
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
-				<PanelBody
-					title="Field Settings"
-					icon="admin-generic"
-					initialOpen={true}
-				>
+				<PanelBody title="Field Settings" initialOpen={true}>
 					{!enableCondition ? (
 						<PanelRow>
 							<h3 className="cwp-heading">Required</h3>
@@ -129,7 +125,7 @@ function edit(props) {
 						</div>
 					)}
 				</PanelBody>
-				<PanelBody title="Condition" icon="hidden">
+				<PanelBody title="Condition">
 					<ConditionalLogic
 						condition={condition}
 						set={props.setAttributes}
@@ -137,7 +133,7 @@ function edit(props) {
 						useCondition={props.attributes.enableCondition}
 					/>
 				</PanelBody>
-				<PanelBody title="Messages" icon="email">
+				<PanelBody title="Messages">
 					{isRequired && (
 						<div className="cwp-option">
 							<h3 className="cwp-heading">Required Error</h3>
@@ -160,7 +156,7 @@ function edit(props) {
 						</p>
 					</div>
 				</PanelBody>
-				<PanelBody title="Validation" icon="lock">
+				<PanelBody title="Validation">
 					<div className="cwp-option">
 						<TextControl
 							label="Pattern (RegExp)"

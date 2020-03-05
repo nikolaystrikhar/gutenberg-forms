@@ -41,10 +41,20 @@
 	& .cwp-field {
 		&.is-style-inline {
 			& .cwp-field-set,
-			& .cwp-radio-set,
-			& .cwp-checkbox-set:not(.cwp-checkbox-set-backend),
+			& .cwp-radio-set-preview,
+			& .cwp-checkbox-set-preview,
 			& .cwp-select-set {
 				@include inline-field(0px 20px 0px 0px);
+			}
+		}
+
+		&.is-style-button {
+			& .cwp-checkbox-set-preview {
+				@include buttonStyle();
+			}
+
+			& .cwp-radio-set-preview {
+				@include buttonStyle();
 			}
 		}
 

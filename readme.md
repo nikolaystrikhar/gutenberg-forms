@@ -70,7 +70,13 @@ We appreciate all contributions and don't want a wall of rules to get in the way
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
-= 1.0.7 =
+= 1.0.8 =
+
+- Fixed: Bugs
+- Improved: UI and organized options
+- Added: New style for radio and checkbox fields
+
+= 1.0.7 = (28 Feb 2020)
 
 - Added: Form Theme Options
 - Improved: form columns can now be changed after selection

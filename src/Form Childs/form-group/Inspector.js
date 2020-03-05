@@ -39,7 +39,7 @@ function Inspector(prop) {
 					Do not have a required fields inside a conditional group.
 				</Notice>
 			)}
-			<PanelBody title={__("Styling")} icon="admin-appearance">
+			<PanelBody title={__("Styling")}>
 				<div className="cwp-option">
 					<h3 className="cwp-heading">Background Color</h3>
 					<ColorPalette
@@ -64,7 +64,7 @@ function Inspector(prop) {
 					/>
 				</div>
 			</PanelBody>
-			<PanelBody title={__("Condition")} icon="hidden">
+			<PanelBody title={__("Condition")}>
 				<ConditionalLogic
 					condition={condition}
 					set={props.setAttributes}

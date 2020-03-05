@@ -81,7 +81,7 @@
 
 				& input[type="number"] {
 					flex: 1;
-					width: 60px;
+					width: auto;
 					margin: 0px 0px 0px 15px;
 				}
 			}
@@ -94,6 +94,16 @@
 					& span {
 						font-size: 40px;
 					}
+				}
+			}
+
+			&.is-style-button {
+				& .cwp-checkbox-set {
+					@include buttonStyle();
+				}
+
+				& .cwp-radio-set {
+					@include buttonStyle();
 				}
 			}
 
@@ -118,7 +128,6 @@
 				& .cwp-error {
 					color: $danger;
 				}
-
 
 				@include field();
 			}

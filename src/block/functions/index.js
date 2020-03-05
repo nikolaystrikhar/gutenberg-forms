@@ -1,9 +1,11 @@
 import { strip_tags, extract_id } from "../misc/helper";
-import { each, has, omit, isEqual, clone, assign, isEmpty } from "lodash";
+import { each, has, omit, isEqual, clone, assign, isEmpty, get } from "lodash";
 const { createBlock } = wp.blocks;
-const { getBlock, getBlockRootClientId, getBlockParents } = wp.data.select(
-	"core/block-editor"
-);
+const {
+	getBlock,
+	getBlockRootClientId,
+	getBlockHierarchyRootClientId
+} = wp.data.select("core/block-editor");
 const { updateBlockAttributes } = wp.data.dispatch("core/block-editor");
 
 const radio_enabled_fields = ["select", "radio", "checkbox"]; //fields that support multiple
@@ -149,8 +151,8 @@ export function changeChildValue(slug, clientId, attrs, type, messages) {
 }
 
 export function getRootMessages(clientId, blockName) {
-	const rootForms = getBlockParents(clientId);
-	const rootBlock = getBlock(rootForms[0]);
+	const rootForms = getBlockHierarchyRootClientId(clientId);
+	const rootBlock = getBlock(rootForms);
 
 	if (rootBlock.name !== "cwp/block-gutenberg-forms") return false;
 
@@ -179,8 +181,8 @@ export function getChildAttributes(clientId) {
 }
 
 export function getSiblings(clientId, slug = null) {
-	const block = getBlockParents(clientId),
-		rootBlock = getBlock(block[0]); //i.e = gutenberg-forms;
+	const block = getBlockHierarchyRootClientId(clientId),
+		rootBlock = getBlock(block); //i.e = gutenberg-forms;
 
 	if (
 		rootBlock.name !== "cwp/block-gutenberg-forms" &&
@@ -235,4 +237,32 @@ export function isChildFieldsRequired(clientId) {
 	});
 
 	return res;
+}
+
+export function detectSimilarFields(clientId, field_id) {
+	//this will detect the similar id across fields
+
+	const root = getBlock(getBlockHierarchyRootClientId(clientId));
+	let result = false;
+
+	if (!has(root, "innerBlocks")) return;
+
+	root.innerBlocks.forEach(block => {
+		let { attributes } = block;
+
+		if (layoutBlocks.includes(block.name)) {
+			result = detectSimilarFields(block);
+		} else {
+			if (has(attributes, "field_name")) {
+				if (
+					isEqual(get(attributes, "field_name"), field_id) &&
+					!isEqual(block.clientId, clientId)
+				) {
+					result = true;
+				}
+			}
+		}
+	});
+
+	return result;
 }

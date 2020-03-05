@@ -11,7 +11,9 @@ function save(props) {
 		id,
 		messages,
 		messages: { empty },
-		condition
+		condition,
+		fieldStyle,
+		enableCondition
 	} = props.attributes;
 
 	let errors = JSON.stringify({
@@ -42,7 +44,7 @@ function save(props) {
 	};
 
 	const getCondition = () => {
-		if (!isEmpty(condition.field)) {
+		if (!isEmpty(condition.field) && enableCondition) {
 			//verifying the condition
 			return {
 				"data-condition": stringifyCondition(condition)
@@ -53,7 +55,10 @@ function save(props) {
 	};
 
 	return (
-		<div className="cwp-checkbox cwp-field" {...getCondition()}>
+		<div
+			className={`cwp-checkbox cwp-field is-style-${fieldStyle}`}
+			{...getCondition()}
+		>
 			<div
 				data-errors={errors}
 				className={`cwp-checkbox-set ${isRequired ? "required-checkbox" : ""}`}

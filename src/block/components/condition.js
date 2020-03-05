@@ -1,4 +1,4 @@
-import React, { Fragment } from "react";
+import React, { Fragment, useEffect } from "react";
 import {
 	SelectControl,
 	TextControl,
@@ -11,6 +11,14 @@ import { has, set, clone, isEmpty } from "lodash";
 function Condition(props) {
 	let currentField = props.fieldName,
 		{ clientId, condition } = props; // where props.set === props.setAttributes
+
+	useEffect(() => {
+		let first_field = getOptions()[1];
+
+		if (!isEmpty(first_field) && has(first_field, "value")) {
+			handleConditionChange(first_field.value, "field");
+		}
+	}, []);
 
 	const getOptions = () => {
 		let fields = [
