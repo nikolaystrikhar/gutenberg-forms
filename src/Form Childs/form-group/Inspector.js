@@ -19,7 +19,7 @@ function Inspector(prop) {
 	const props = prop.data,
 		{
 			styling,
-			styling: { backgroundColor, color, padding },
+			styling: { backgroundColor, color, padding, borderColor },
 			condition,
 			enableCondition
 		} = props.attributes;
@@ -61,6 +61,14 @@ function Inspector(prop) {
 						value={padding}
 						label={__("Padding")}
 						onChange={padd => handleStyling(padd, "padding")}
+					/>
+				</div>
+				<div className="cwp-option">
+					<h3 className="cwp-heading">Border Color</h3>
+					<ColorPalette
+						colors={basicColorScheme}
+						value={borderColor}
+						onChange={color => handleStyling(color, "borderColor")}
 					/>
 				</div>
 			</PanelBody>
