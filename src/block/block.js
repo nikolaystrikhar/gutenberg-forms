@@ -1098,7 +1098,8 @@ registerBlockType("cwp/form-group", {
 				backgroundColor: "rgb(238, 238, 238)",
 				color: "rgb(49, 49, 49)",
 				padding: 25,
-				borderColor: "rgb(220, 215, 202)"
+				borderColor: "rgb(220, 215, 202)",
+				borderWidth: 2,
 			}
 		},
 		label: {
