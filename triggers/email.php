@@ -1,20 +1,20 @@
-<?php 
+<?php
     require_once plugin_dir_path( __DIR__ ) . 'triggers/validator.php';
 
     function array_remove_keys($array, $keys) {
- 
+
         // array_diff_key() expected an associative array.
         $assocKeys = array();
         foreach($keys as $key) {
             $assocKeys[$key] = true;
         }
-     
+
         return array_diff_key($array, $assocKeys);
     }
 
 
     class Email {
-        
+
         public function __construct($post_content) {
 
             $this->validator = new Validator();
@@ -32,31 +32,35 @@
                 $v = true;
 
                 foreach ( $f as $field_id => $field_value ) {
-    
+
                     if ( !$field_value[ 'is_valid' ] ) {
                         $v = false;
                         break;
                     } else continue;
-    
+
                 }
-    
+
                 return $v;
             }
         }
 
-        private function get_templates($id) {
+        private function get_templates($id, $blocks = null) {
+            if (is_null($blocks)) {
+                $blocks = $this->post_content;
+            }
 
             $templates = array();
 
-            foreach( $this->post_content as $f => $block ) {
+            foreach( $blocks as $f => $block ) {
+
                 if ( $block['blockName'] === "cwp/block-gutenberg-forms" && $block['attrs']['id'] === $id ) {
 
                     $decoded_template = array();
-                                        
+
                     $attributes = $block['attrs'];
 
                     if (array_key_exists('recaptcha' , $attributes)) {
-                        $decoded_template['recaptcha'] = $attributes['recaptcha']; 
+                        $decoded_template['recaptcha'] = $attributes['recaptcha'];
                     }
 
 
@@ -105,14 +109,14 @@
                         $decoded_template['successMessage'] = "The form has been submitted Successfully!";
                     }
 
-                    
                     $templates[] = $decoded_template;
 
-
-
+                } else {
+                    $templates += $this->get_templates($id, $block['innerBlocks']);
                 }
 
             }
+
             return $templates;
         }
 
@@ -126,19 +130,19 @@
         private function execute_captchas($user_response , $secretKey) {
 
             if ($secretKey === "") return false;
-            if ($user_response === "") return false;            
-            
-            
-            $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secretKey.'&response='.$user_response); 
-        
+            if ($user_response === "") return false;
+
+
+            $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secretKey.'&response='.$user_response);
+
             $response = json_decode($verifyResponse, true);
 
             if (array_key_exists('success' , $response) ) {
                 return $response['success'];
-            } 
+            }
 
             return false;
-        }   
+        }
 
 
 
@@ -161,7 +165,7 @@
 
                 $is_valid = $this->validator->validate( $field_type, $field_value );
 
-                $f_DECODED = $this->validator->decode( $field_type ); 
+                $f_DECODED = $this->validator->decode( $field_type );
 
 
                 $type = array_key_exists('type' , $this->validator->decode( $field_type )) ? $this->validator->decode( $field_type )['type'] : "";
@@ -170,14 +174,14 @@
 
                 $sanitizedValue = $this->validator->sanitizedValue($type, $field_value);
 
-                $arranged_fields[] = array( 
+                $arranged_fields[] = array(
                     'field_data_id' => $id,
                     'field_value' => is_array($field_value) ? join("," , $field_value) : $sanitizedValue,
                     'is_valid'    => $field_id === "g-recaptcha-response" ? true: $is_valid,
-                    'field_id'    => $field_id, 
+                    'field_id'    => $field_id,
                     'field_type'  =>  $type
                 );
-               
+
             }
            if ( $this->is_fields_valid( $arranged_fields ) ) {
                // check if all the fields are valid;
@@ -195,7 +199,7 @@
 
 
                 $field_name = "{{".$field_value['field_type']."-".$field_value['field_data_id']."}}";
-                
+
                 if ($field_name !== "{{-}}") {
                     $data[$field_name] = $field_value['field_value'];
                 }
@@ -210,7 +214,7 @@
         }
 
         private function url_success($url) {
-            
+
             if ($this->validator->isURL($url)) {
                 $string = '<script type="text/javascript">';
                 $string .= 'window.location = "' . $url . '"';
@@ -263,7 +267,7 @@
 
             $mail_subject = $this->with_fields($fields, $template[0]['subject']);
             $mail_body = $this->with_fields($fields, $template[0]['body']);
-            
+
 
             $post = $_POST;
 
@@ -286,8 +290,8 @@
                 } else {
                    wp_mail($template['email'],$mail_subject,$mail_body , "From: $fromEmail");
                 }
-                 
-                
+
+
                 $this->attempt_success($template);
             } else {
 
