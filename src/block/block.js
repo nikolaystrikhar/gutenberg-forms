@@ -1100,6 +1100,7 @@ registerBlockType("cwp/form-group", {
 				padding: 25,
 				borderColor: "rgb(220, 215, 202)",
 				borderWidth: 2,
+				borderRadius: 0,
 			}
 		},
 		label: {
