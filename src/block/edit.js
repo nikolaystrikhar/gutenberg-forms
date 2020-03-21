@@ -2,6 +2,9 @@ import React, { useEffect, Fragment } from "react";
 import Inspector from "./Inspector";
 import TemplateBuilder from "./components/templateBuilder";
 import { getThemeStyling } from "./misc/helper";
+import Introduction from "./components/introduction";
+import { isEmpty } from "lodash";
+import { getAllowedBlocks, getFormTemplates } from "../block/functions/index";
 const { InnerBlocks, RichText, BlockControls, BlockIcon } = wp.blockEditor;
 const { Button, Toolbar, Tooltip } = wp.components;
 
@@ -17,7 +20,8 @@ function edit(props) {
 		templateBuilder,
 		template,
 		id,
-		theme
+		theme,
+		formType
 	} = props.attributes;
 
 	const formId = id && "form-".concat(id.split("-")[1]);
@@ -31,6 +35,10 @@ function edit(props) {
 	};
 
 	const showEditor = !templateBuilder ? "cwp-hideEditor" : "cwp-showEditor";
+
+	const handleTypeChange = (type) => {
+		props.setAttributes({ formType: type });
+	}
 
 	return [
 		<Inspector data={props} />,
@@ -51,39 +59,42 @@ function edit(props) {
 			</Toolbar>
 		</BlockControls>,
 		<Fragment>
-			<div
-				id={formId}
-				className={`cwp-form cwp-form_main ${props.className} ${showEditor}`}
-			>
-				<InnerBlocks
-					template={[
-						["cwp/name", {}],
-						["cwp/email", {}],
-						["cwp/message", {}]
-					]}
-					templateLock={false}
-					renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
-				/>
-				{!buttonSetting.disable && (
-					<div className={`cwp-submit ${alignment}`}>
-						<button className="cwp-submit-btn cwp-default-submit-btn">
-							<RichText
-								tag="span"
-								value={submitLabel}
-								onChange={handleButtonLabel}
+			{
+				isEmpty(formType) ?
+					<Introduction onSelect={handleTypeChange} /> : <Fragment>
+						<div
+							id={formId}
+							className={`cwp-form cwp-form_main ${props.className} ${showEditor}`}
+						>
+							<InnerBlocks
+								template={getFormTemplates(formType)}
+								allowedBlocks={getAllowedBlocks(formType)}
+								templateLock={false}
+								renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
 							/>
-						</button>
-					</div>
-				)}
-			</div>
-			<div className={`cwp-form ${showEditor}`}>
-				<div className="cwp-editor">
-					<TemplateBuilder data={props} />
-				</div>
-			</div>
-			<div
-				dangerouslySetInnerHTML={{ __html: getThemeStyling(theme, formId) }}
-			></div>
+							{!buttonSetting.disable && (
+								<div className={`cwp-submit ${alignment}`}>
+									<button className="cwp-submit-btn cwp-default-submit-btn">
+										<RichText
+											tag="span"
+											value={submitLabel}
+											onChange={handleButtonLabel}
+										/>
+									</button>
+								</div>
+							)}
+						</div>
+						<div className={`cwp-form ${showEditor}`}>
+							<div className="cwp-editor">
+								<TemplateBuilder data={props} />
+							</div>
+						</div>
+						<div
+							dangerouslySetInnerHTML={{ __html: getThemeStyling(theme, formId) }}
+						></div>
+					</Fragment>
+			}
+
 		</Fragment>
 	];
 }

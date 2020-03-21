@@ -132,6 +132,13 @@ import calculationSave from "../Form Childs/calculation/save";
 
 ////////////////////////////////!calc!//////////////////////////////////////////////
 
+////////////////////////////////!step!//////////////////////////////////////////////
+
+import stepFormEdit from "../Form Childs/form-step/edit";
+import stepFormSave from "../Form Childs/form-step/save";
+
+////////////////////////////////!step!//////////////////////////////////////////////
+
 import { applyFormStyles } from "./formStyles/index";
 import { registerFieldStyles } from "./fieldStyles/index";
 import { getFieldTransform, defaultFieldMessages } from "./functions/index";
@@ -139,10 +146,10 @@ import { getFieldTransform, defaultFieldMessages } from "./functions/index";
 //for sanitizing the label
 
 const fieldParents = [
-		"cwp/block-gutenberg-forms",
-		"cwp/column",
-		"cwp/form-group"
-	],
+	"cwp/block-gutenberg-forms",
+	"cwp/column",
+	"cwp/form-group"
+],
 	fieldSupport = {
 		align: true,
 		align: ["wide", "full", "center"]
@@ -220,6 +227,10 @@ registerBlockType("cwp/block-gutenberg-forms", {
 				textColor: "",
 				fieldBackgroundColor: ""
 			}
+		},
+		formType: {
+			type: "string",
+			default: ""
 		}
 	},
 	edit: mainEdit,
@@ -1295,4 +1306,22 @@ registerBlockType("cwp/form-calculation", {
 		align: ["wide", "full", "center"]
 	},
 	parent: fieldParents
+});
+
+
+registerBlockType("cwp/form-step", {
+	title: __("Form Step"),
+	icon: "editor-table",
+	category: "common",
+	keywords: [
+		__("gutenberg-forms"),
+		__("forms"),
+		__("form-step"),
+		__("step"),
+		__("multistep")
+	],
+	edit: stepFormEdit,
+	save: stepFormSave,
+	attributes: {},
+	parent: ["cwp/block-gutenberg-forms"]
 });

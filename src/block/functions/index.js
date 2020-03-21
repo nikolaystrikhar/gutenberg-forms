@@ -1,6 +1,12 @@
 import { strip_tags, extract_id } from "../misc/helper";
 import { each, has, omit, isEqual, clone, assign, isEmpty, get } from "lodash";
-const { createBlock } = wp.blocks;
+
+import formStepSave from "../../Form Childs/form-step/save";
+import formStepEdit from "../../Form Childs/form-step/edit";
+
+const { createBlock, registerBlockType } = wp.blocks;
+const { __ } = wp.i18n;
+
 const {
 	getBlock,
 	getBlockRootClientId,
@@ -10,7 +16,7 @@ const { updateBlockAttributes } = wp.data.dispatch("core/block-editor");
 
 const radio_enabled_fields = ["select", "radio", "checkbox"]; //fields that support multiple
 
-const myAttrs = [
+export const myAttrs = [
 	"email",
 	"name",
 	"message",
@@ -23,6 +29,17 @@ const myAttrs = [
 	"select",
 	"number"
 ];
+
+export function getAllowedBlocks(type) {
+	const prefixed = myAttrs.map(slug => "cwp/" + slug); // ["cwp/email" , .....];
+
+	if (type === "multiStep") {
+		prefixed.push("cwp/form-step");
+	}
+
+	return prefixed;
+
+}
 
 //?custom-function for fields_transformation purpose;
 export const getFieldTransform = (attrs, field) => {
@@ -320,4 +337,26 @@ export function detectSimilarFields(clientId, field_id) {
 	});
 
 	return result;
+}
+
+export function getFormTemplates(type) {
+
+	const commonTemplate = [
+		["cwp/name", {}],
+		["cwp/email", {}],
+		["cwp/message", {}]
+	]
+
+	if (type === 'standard') {
+		return commonTemplate
+	}
+
+	if (type === 'multiStep') {
+
+		return [
+			['cwp/form-step', {}, commonTemplate]
+		]
+
+	}
+
 }
