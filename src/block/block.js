@@ -11,13 +11,6 @@ import mainSave from "./save";
 
 ////////////////////////////////!MAIN!//////////////////////////////////////////////
 
-////////////////////////////////!radio!//////////////////////////////////////////////
-
-import radioEdit from "../Form Childs/radio/edit";
-import radioSave from "../Form Childs/radio/save";
-
-////////////////////////////////!radio!//////////////////////////////////////////////
-
 ////////////////////////////////!website!//////////////////////////////////////////////
 
 import websiteEdit from "../Form Childs/website/edit";
@@ -237,84 +230,6 @@ registerBlockType("cwp/text", {
 				type: "block",
 				blocks: myAttrs.map(block => "cwp/".concat(block)),
 				transform: a => getFieldTransform(a, "text")
-			}
-		]
-	},
-	parent: fieldParents
-});
-
-registerBlockType("cwp/radio", {
-	title: __("Radio"),
-	icon: "marker",
-	category: "common",
-	keywords: [__("gutenberg-forms"), __("forms"), __("radio")],
-	edit: radioEdit,
-	save: radioSave,
-	attributes: {
-		enableCondition: {
-			type: "boolean",
-			default: false
-		},
-		isRequired: {
-			type: "boolean",
-			default: false
-		},
-		options: {
-			type: "array",
-			default: [
-				{
-					label: "Option 1"
-				},
-				{
-					label: "Option 2"
-				}
-			]
-		},
-		label: {
-			type: "string",
-			default: "Choose One"
-		},
-		id: {
-			type: "string",
-			default: ""
-		},
-		field_name: {
-			type: "string",
-			default: ""
-		},
-		requiredLabel: {
-			type: "string",
-			default: "*"
-		},
-		messages: {
-			type: "object",
-			default: {
-				empty: "Please select radio!"
-			}
-		},
-		condition: {
-			type: "object",
-			default: {
-				field: null,
-				condition: "===",
-				value: ""
-			}
-		},
-		requiredLabel: {
-			type: "string",
-			default: "*"
-		},
-		fieldStyle: {
-			type: "string",
-			default: "block"
-		}
-	},
-	transforms: {
-		from: [
-			{
-				type: "block",
-				blocks: myAttrs.map(block => "cwp/".concat(block)),
-				transform: a => getFieldTransform(a, "radio")
 			}
 		]
 	},
