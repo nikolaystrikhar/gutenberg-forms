@@ -110,13 +110,17 @@ export const defaultFieldMessages = [
 	}
 ];
 
-
-export function getRootFormBlock(clientId) {
+/**
+ * Find the root form block.
+ *
+ * @param {string} clientId The id of the block of which we are finding the root
+ * @param {string} asRoot Whether to use the given clientId as the root of the search.
+ */
+export function getRootFormBlock(clientId, asRoot = false) {
 	//this functions will return the root form through which the given field is nested
 	//excepting all of the cases;
-
-	const rootBlock = getBlock(getBlockHierarchyRootClientId(clientId)); //getting the root block;
-
+	const rootId = asRoot ? clientId : getBlockHierarchyRootClientId(clientId)
+	const rootBlock = getBlock(rootId); //getting the root block;
 
 	//checking if the root block is "cwp/gutenberg-forms" or it is nested inside of this root block
 	// for example "cwp/cover" can furthur nest our "cwp/gutenberg-forms" block
@@ -128,9 +132,8 @@ export function getRootFormBlock(clientId) {
 		return rootBlock;
 	}
 
-
-	//if ^ condition did'nt satisfied this means our block is nested
-	//inside some block so we need to find our root form inside this block
+	// The  above condition didn't succeed, so our form block is nested somewhere
+	// so we need to find our root form inside this block
 
 	let rootForm;
 
@@ -145,8 +148,8 @@ export function getRootFormBlock(clientId) {
 			break;
 
 		} else if (has(childBlock, 'innerBlocks')) {
-
-			let nestedSearch = getRootFormBlock(childBlock.clientId);
+			// Try to find the form block within this child. Make sure it's treated as the search root.
+			let nestedSearch = getRootFormBlock(childBlock.clientId, true);
 
 			if (!isEmpty(nestedSearch)) {
 				rootForm = nestedSearch;
@@ -156,7 +159,6 @@ export function getRootFormBlock(clientId) {
 		}
 
 	}
-
 
 	return rootForm;
 }
