@@ -18,13 +18,6 @@ import radioSave from "../Form Childs/radio/save";
 
 ////////////////////////////////!radio!//////////////////////////////////////////////
 
-////////////////////////////////!phone!//////////////////////////////////////////////
-
-import phoneEdit from "../Form Childs/phone/edit";
-import phoneSave from "../Form Childs/phone/save";
-
-////////////////////////////////!phone!//////////////////////////////////////////////
-
 ////////////////////////////////!website!//////////////////////////////////////////////
 
 import websiteEdit from "../Form Childs/website/edit";
@@ -322,78 +315,6 @@ registerBlockType("cwp/radio", {
 				type: "block",
 				blocks: myAttrs.map(block => "cwp/".concat(block)),
 				transform: a => getFieldTransform(a, "radio")
-			}
-		]
-	},
-	parent: fieldParents
-});
-
-registerBlockType("cwp/phone", {
-	title: __("Phone"),
-	icon: "phone",
-	category: "common",
-	keywords: [__("gutenberg-forms"), __("forms"), __("phone")],
-	edit: phoneEdit,
-	save: phoneSave,
-	attributes: {
-		enableCondition: {
-			type: "boolean",
-			default: false
-		},
-		phone: {
-			type: "string",
-			default: ""
-		},
-		isRequired: {
-			type: "boolean",
-			default: false
-		},
-		label: {
-			type: "string",
-			default: "Phone No:"
-		},
-		id: {
-			type: "string",
-			default: ""
-		},
-		field_name: {
-			type: "string",
-			default: ""
-		},
-		requiredLabel: {
-			type: "string",
-			default: "*"
-		},
-		messages: {
-			type: "object",
-			default: {
-				empty: "Please fill out this field!",
-				invalid: "The phone {{value}} is not valid!"
-			}
-		},
-		pattern: {
-			type: "string",
-			default: "[\\+\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d]+"
-		},
-		condition: {
-			type: "object",
-			default: {
-				field: null,
-				condition: "===",
-				value: ""
-			}
-		},
-		requiredLabel: {
-			type: "string",
-			default: "*"
-		}
-	},
-	transforms: {
-		from: [
-			{
-				type: "block",
-				blocks: myAttrs.map(block => "cwp/".concat(block)),
-				transform: a => getFieldTransform(a, "phone")
 			}
 		]
 	},
