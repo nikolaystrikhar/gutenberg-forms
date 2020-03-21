@@ -71,7 +71,7 @@ function save(props) {
 								type="radio"
 								checked={radio.checked}
 							/>
-							<label for={id.concat(index.toString())}>
+							<label htmlFor={id.concat(index.toString())}>
 								{radio.label}
 								{has(radio, "image") && (
 									<div className="cwp-radio-image">
