@@ -3,7 +3,8 @@ import { each, has, omit, isEqual, clone, assign, isEmpty, get } from "lodash";
 const { createBlock } = wp.blocks;
 const {
 	getBlock,
-	getBlockRootClientId
+	getBlockRootClientId,
+	getBlockHierarchyRootClientId
 } = wp.data.select("core/block-editor");
 const { updateBlockAttributes } = wp.data.dispatch("core/block-editor");
 
@@ -109,6 +110,60 @@ export const defaultFieldMessages = [
 	}
 ];
 
+/**
+ * Find the root form block.
+ *
+ * @param {string} clientId The id of the block of which we are finding the root
+ * @param {string} asRoot Whether to use the given clientId as the root of the search.
+ */
+export function getRootFormBlock(clientId, asRoot = false) {
+	//this functions will return the root form through which the given field is nested
+	//excepting all of the cases;
+	const rootId = asRoot ? clientId : getBlockHierarchyRootClientId(clientId)
+	const rootBlock = getBlock(rootId); //getting the root block;
+
+	//checking if the root block is "cwp/gutenberg-forms" or it is nested inside of this root block
+	// for example "cwp/cover" can furthur nest our "cwp/gutenberg-forms" block
+
+	if (rootBlock.name === "cwp/block-gutenberg-forms") {
+		// if this condition is satisfied then our form is not nested inside
+		// any other block, so we can simply return the root form
+
+		return rootBlock;
+	}
+
+	// The  above condition didn't succeed, so our form block is nested somewhere
+	// so we need to find our root form inside this block
+
+	let rootForm;
+
+	for (const childBlock of rootBlock.innerBlocks) {
+		// our root form block is nested somewhere here...
+
+		if (childBlock.name === "cwp/block-gutenberg-forms") {
+			// if this condition is satisfied, This should be our block...
+
+			rootForm = childBlock;
+
+			break;
+
+		} else if (has(childBlock, 'innerBlocks')) {
+			// Try to find the form block within this child. Make sure it's treated as the search root.
+			let nestedSearch = getRootFormBlock(childBlock.clientId, true);
+
+			if (!isEmpty(nestedSearch)) {
+				rootForm = nestedSearch;
+			}
+
+
+		}
+
+	}
+
+	return rootForm;
+}
+
+
 function isDefaultValues(blockAttrs, type, fName, messages) {
 	//ensuring that the block values aren't changed!
 
@@ -150,8 +205,8 @@ export function changeChildValue(slug, clientId, attrs, type, messages) {
 }
 
 export function getRootMessages(clientId, blockName) {
-	const rootForms = getBlockRootClientId(clientId);
-	const rootBlock = getBlock(rootForms);
+	const rootBlock = getRootFormBlock(clientId);
+
 
 	if (rootBlock.name !== "cwp/block-gutenberg-forms") return [{}];
 
@@ -168,20 +223,22 @@ export function getChildAttributes(clientId) {
 	if (!has(rootBlock, "innerBlocks")) return childAttrs;
 
 	rootBlock.innerBlocks.forEach(v => {
-		if (has(v, "attributes")) {
-			childAttrs.push(v["attributes"]);
-		} else if (layoutBlocks.includes(v.name)) {
+
+		if (layoutBlocks.includes(v.name)) {
 			//which means field are nested even more!
 			childAttrs.push(...getChildAttributes(v.clientId));
+		} else if (has(v, "attributes")) {
+			childAttrs.push(v["attributes"]);
 		}
 	});
 
 	return childAttrs;
 }
 
+
 export function getSiblings(clientId, slug = null) {
-	const block = getBlockRootClientId(clientId),
-		rootBlock = getBlock(block); //i.e = gutenberg-forms;
+	const rootBlock = getRootFormBlock(clientId); //i.e = gutenberg-forms;
+
 
 	if (
 		rootBlock.name !== "cwp/block-gutenberg-forms" &&
@@ -217,6 +274,7 @@ export function getSiblings(clientId, slug = null) {
 			siblingValues.push(...getChildAttributes(v.clientId)); //getting inner fields in layout blocks
 		}
 	});
+
 
 	return siblingValues;
 }

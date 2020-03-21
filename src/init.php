@@ -9,7 +9,7 @@ function gutenberg_forms_cwp_block_assets()
 	wp_register_style(
 		'gutenberg_forms-cwp-style-css',
 		plugins_url('dist/blocks.style.build.css', dirname(__FILE__)),
-		array('wp-editor'),
+		is_admin() ? array('wp-editor') : null,
 		null
 	);
 
@@ -112,12 +112,12 @@ function my_admin_page_contents() {
 
 // function my_sub_menu() {
 
-// 	add_submenu_page( 
-// 		"edit.php?post_type=forms", 
+// 	add_submenu_page(
+// 		"edit.php?post_type=forms",
 // 		__( 'Form Settings', 'my-textdomain' ),
-// 		__( 'Form Settings', 'my-textdomain' ), 
-// 		'manage_options', 
-// 		'cwp-forms-settings', 
+// 		__( 'Form Settings', 'my-textdomain' ),
+// 		'manage_options',
+// 		'cwp-forms-settings',
 // 		'Settings'
 // 	);
 

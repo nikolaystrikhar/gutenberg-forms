@@ -57,8 +57,12 @@ For basic usage, you can also have a look at the plugin website [Gutenberg Forms
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
+= 1.0.9 = (21 Mar 2020)
 
-= 1.0.8 = 
+- Fixed: Bugs
+- Improved: Code 
+
+= 1.0.8 = (7 Mar 2020)
 - Fixed: Bugs
 - Improved: UI and organized options
 - Added: New style for radio and checkbox fields
