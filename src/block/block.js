@@ -11,13 +11,6 @@ import mainSave from "./save";
 
 ////////////////////////////////!MAIN!//////////////////////////////////////////////
 
-////////////////////////////////!email!//////////////////////////////////////////////
-
-import emailEdit from "../Form Childs/email/edit";
-import emailSave from "../Form Childs/email/save";
-
-////////////////////////////////!email!//////////////////////////////////////////////
-
 ////////////////////////////////!name!//////////////////////////////////////////////
 
 import nameEdit from "../Form Childs/name/edit";
@@ -287,70 +280,6 @@ registerBlockType("cwp/name", {
 				transform: a => getFieldTransform(a, "name")
 			}
 		]
-	},
-	parent: fieldParents
-});
-
-registerBlockType("cwp/email", {
-	title: __("Email"),
-	icon: "email",
-	category: "common",
-	keywords: [__("gutenberg-forms"), __("forms"), __("mail")],
-	edit: emailEdit,
-	save: emailSave,
-	transforms: {
-		from: [
-			{
-				type: "block",
-				blocks: myAttrs.map(block => "cwp/".concat(block)),
-				transform: a => getFieldTransform(a, "email")
-			}
-		]
-	},
-	attributes: {
-		enableCondition: {
-			type: "boolean",
-			default: false
-		},
-		email: {
-			type: "string",
-			default: ""
-		},
-		isRequired: {
-			type: "boolean",
-			default: false
-		},
-		label: {
-			type: "string",
-			default: "Email"
-		},
-		id: {
-			type: "string",
-			default: ""
-		},
-		field_name: {
-			type: "string",
-			default: ""
-		},
-		requiredLabel: {
-			type: "string",
-			default: "*"
-		},
-		messages: {
-			type: "object",
-			default: {
-				empty: "Please fill out this field!",
-				invalidEmail: "The email {{value}} is not valid!"
-			}
-		},
-		condition: {
-			type: "object",
-			default: {
-				field: null,
-				condition: "===",
-				value: ""
-			}
-		}
 	},
 	parent: fieldParents
 });
