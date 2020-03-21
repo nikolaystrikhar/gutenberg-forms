@@ -1,6 +1,6 @@
 <?php
     require_once plugin_dir_path( __DIR__ ) . 'triggers/validator.php';
-
+ 
     function array_remove_keys($array, $keys) {
 
         // array_diff_key() expected an associative array.
