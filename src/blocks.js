@@ -17,3 +17,4 @@ import './blocks/email/index.js';
 import './blocks/form-button/index.js';
 import './blocks/form-calculation/index.js';
 import './blocks/form-group/index.js';
+import './blocks/message/index.js';

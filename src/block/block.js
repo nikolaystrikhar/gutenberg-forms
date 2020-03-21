@@ -18,13 +18,6 @@ import nameSave from "../Form Childs/name/save";
 
 ////////////////////////////////!name!//////////////////////////////////////////////
 
-////////////////////////////////!message!//////////////////////////////////////////////
-
-import messageEdit from "../Form Childs/message/edit";
-import messageSave from "../Form Childs/message/save";
-
-////////////////////////////////!message!//////////////////////////////////////////////
-
 ////////////////////////////////!radio!//////////////////////////////////////////////
 
 import radioEdit from "../Form Childs/radio/edit";
@@ -332,78 +325,6 @@ registerBlockType("cwp/text", {
 				type: "block",
 				blocks: myAttrs.map(block => "cwp/".concat(block)),
 				transform: a => getFieldTransform(a, "text")
-			}
-		]
-	},
-	parent: fieldParents
-});
-
-registerBlockType("cwp/message", {
-	title: __("Message"),
-	icon: "testimonial",
-	category: "common",
-	keywords: [__("gutenberg-forms"), __("forms"), __("message")],
-	edit: messageEdit,
-	save: messageSave,
-	attributes: {
-		enableCondition: {
-			type: "boolean",
-			default: false
-		},
-		message: {
-			type: "string",
-			default: ""
-		},
-		isRequired: {
-			type: "boolean",
-			default: false
-		},
-		label: {
-			type: "string",
-			default: "Message"
-		},
-		id: {
-			type: "string",
-			default: ""
-		},
-		height: {
-			type: "number",
-			default: 200
-		},
-		field_name: {
-			type: "string",
-			default: ""
-		},
-		messages: {
-			type: "object",
-			default: {
-				empty: "Please fill out this field!",
-				invalid: "The message {{value}} is not valid!"
-			}
-		},
-		pattern: {
-			type: "string",
-			default: ""
-		},
-		condition: {
-			type: "object",
-			default: {
-				field: null,
-				condition: "===",
-				value: ""
-			}
-		},
-		requiredLabel: {
-			type: "string",
-			default: "*"
-		}
-	},
-	transforms: {
-		from: [
-			{
-				type: "block",
-				blocks: myAttrs.map(block => "cwp/".concat(block)),
-				transform: a => getFieldTransform(a, "message")
 			}
 		]
 	},
