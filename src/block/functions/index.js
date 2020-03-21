@@ -3,8 +3,7 @@ import { each, has, omit, isEqual, clone, assign, isEmpty, get } from "lodash";
 const { createBlock } = wp.blocks;
 const {
 	getBlock,
-	getBlockRootClientId,
-	getBlockHierarchyRootClientId
+	getBlockRootClientId
 } = wp.data.select("core/block-editor");
 const { updateBlockAttributes } = wp.data.dispatch("core/block-editor");
 
@@ -151,10 +150,10 @@ export function changeChildValue(slug, clientId, attrs, type, messages) {
 }
 
 export function getRootMessages(clientId, blockName) {
-	const rootForms = getBlockHierarchyRootClientId(clientId);
+	const rootForms = getBlockRootClientId(clientId);
 	const rootBlock = getBlock(rootForms);
 
-	if (rootBlock.name !== "cwp/block-gutenberg-forms") return false;
+	if (rootBlock.name !== "cwp/block-gutenberg-forms") return [{}];
 
 	let { messages } = rootBlock.attributes;
 	const defaultMessage = messages.find(v => v.fieldName === blockName);
@@ -181,7 +180,7 @@ export function getChildAttributes(clientId) {
 }
 
 export function getSiblings(clientId, slug = null) {
-	const block = getBlockHierarchyRootClientId(clientId),
+	const block = getBlockRootClientId(clientId),
 		rootBlock = getBlock(block); //i.e = gutenberg-forms;
 
 	if (
@@ -242,7 +241,7 @@ export function isChildFieldsRequired(clientId) {
 export function detectSimilarFields(clientId, field_id) {
 	//this will detect the similar id across fields
 
-	const root = getBlock(getBlockHierarchyRootClientId(clientId));
+	const root = getBlock(getBlockRootClientId(clientId));
 	let result = false;
 
 	if (!has(root, "innerBlocks")) return;

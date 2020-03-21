@@ -56,6 +56,7 @@ function edit(props) {
 	} = props.attributes;
 
 	useEffect(() => {
+		console.log(props.clientId);
 		let rootMessages = getRootMessages(props.clientId, "email");
 
 		if (rootMessages) {
@@ -108,13 +109,13 @@ function edit(props) {
 							/>
 						</PanelRow>
 					) : (
-						<div className="cwp-option">
-							<p>
-								<Icon icon="info" /> You cannot set a conditional field
+							<div className="cwp-option">
+								<p>
+									<Icon icon="info" /> You cannot set a conditional field
 								required!
 							</p>
-						</div>
-					)}
+							</div>
+						)}
 					{isRequired && (
 						<Fragment>
 							<div className="cwp-option">
