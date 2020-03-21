@@ -7,9 +7,9 @@ import {
 	Button,
 	PanelRow
 } from "@wordpress/components";
-import { basicColorScheme } from "../../block/misc/helper";
+import { basicColorScheme, strip_tags, firstCapital } from "../../block/misc/helper";
 import { clone, set } from "lodash";
-const { getBlockParents } = wp.data.select("core/block-editor");
+import { getRootFormBlock } from "../../block/functions/index";
 const { RichText, InspectorControls } = wp.blockEditor;
 
 function edit(props) {
@@ -19,6 +19,14 @@ function edit(props) {
 		label,
 		action
 	} = props.attributes;
+
+
+	const buttonStyling = {
+		...styling,
+		padding: `${Math.floor(padding / 3)}px ${padding}px `,
+
+	}
+
 
 	const handleStyling = (style, key) => {
 		const buttonStyling = clone(styling);
@@ -40,8 +48,18 @@ function edit(props) {
 		};
 	};
 
+	const handleAction = (newAction) => {
+		props.setAttributes({ action: newAction });
+
+
+		if (strip_tags(label).toLowerCase() === action) {
+			props.setAttributes({ label: firstCapital(newAction) })
+		}
+
+	}
+
 	React.useEffect(() => {
-		props.setAttributes({ parentId: getBlockParents(props.clientId)[0] });
+		props.setAttributes({ parentId: getRootFormBlock(props.clientId).clientId });
 	});
 
 	return [
@@ -52,13 +70,13 @@ function edit(props) {
 						<h3>Action</h3>
 						<ButtonGroup>
 							<Button
-								onClick={() => props.setAttributes({ action: "reset" })}
+								onClick={() => handleAction("reset")}
 								{...getActiveButtonGroup("action", "reset")}
 							>
 								Reset
 							</Button>
 							<Button
-								onClick={() => props.setAttributes({ action: "submit" })}
+								onClick={() => handleAction("submit")}
 								{...getActiveButtonGroup("action", "submit")}
 							>
 								Submit
@@ -96,7 +114,7 @@ function edit(props) {
 			</PanelBody>
 		</InspectorControls>,
 		null,
-		<button style={styling} className={props.className}>
+		<button style={buttonStyling} className={props.className}>
 			<RichText
 				tag="span"
 				value={label}

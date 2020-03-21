@@ -56,7 +56,6 @@ function edit(props) {
 	} = props.attributes;
 
 	useEffect(() => {
-		console.log(props.clientId);
 		let rootMessages = getRootMessages(props.clientId, "email");
 
 		if (rootMessages) {
