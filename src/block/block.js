@@ -32,13 +32,6 @@ import messageSave from "../Form Childs/message/save";
 
 ////////////////////////////////!message!//////////////////////////////////////////////
 
-////////////////////////////////!datepicker!//////////////////////////////////////////////
-
-import datePickerEdit from "../Form Childs/datePicker/edit";
-import datePickerSave from "../Form Childs/datePicker/save";
-
-////////////////////////////////!datepicker!//////////////////////////////////////////////
-
 ////////////////////////////////!radio!//////////////////////////////////////////////
 
 import radioEdit from "../Form Childs/radio/edit";
@@ -496,77 +489,6 @@ registerBlockType("cwp/message", {
 				type: "block",
 				blocks: myAttrs.map(block => "cwp/".concat(block)),
 				transform: a => getFieldTransform(a, "message")
-			}
-		]
-	},
-	parent: fieldParents
-});
-
-registerBlockType("cwp/datepicker", {
-	title: __("Date Picker"),
-	icon: "calendar-alt",
-	category: "common",
-	keywords: [__("gutenberg-forms"), __("forms"), __("datepicker")],
-	edit: datePickerEdit,
-	save: datePickerSave,
-	attributes: {
-		enableCondition: {
-			type: "boolean",
-			default: false
-		},
-		isRequired: {
-			type: "boolean",
-			default: false
-		},
-		label: {
-			type: "string",
-			default: "Pick Date"
-		},
-		placeholder: {
-			type: "string",
-			default: ""
-		},
-		id: {
-			type: "string",
-			default: ""
-		},
-		field_name: {
-			type: "string",
-			default: ""
-		},
-		requiredLabel: {
-			type: "string",
-			default: "*"
-		},
-		format: {
-			type: "string",
-			default: "DD/MM/YYYY"
-		},
-		messages: {
-			type: "object",
-			default: {
-				empty: "Please select date!"
-			}
-		},
-		condition: {
-			type: "object",
-			default: {
-				field: null,
-				condition: "===",
-				value: ""
-			}
-		},
-		requiredLabel: {
-			type: "string",
-			default: "*"
-		}
-	},
-	transforms: {
-		from: [
-			{
-				type: "block",
-				blocks: myAttrs.map(block => "cwp/".concat(block)),
-				transform: a => getFieldTransform(a, "datepicker")
 			}
 		]
 	},
