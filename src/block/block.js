@@ -125,13 +125,6 @@ import formButtonSave from "../Form Childs/form-button/save";
 
 ////////////////////////////////!formButton!//////////////////////////////////////////////
 
-////////////////////////////////!calc!//////////////////////////////////////////////
-
-import calculationEdit from "../Form Childs/calculation/edit";
-import calculationSave from "../Form Childs/calculation/save";
-
-////////////////////////////////!calc!//////////////////////////////////////////////
-
 import { applyFormStyles } from "./formStyles/index";
 import { registerFieldStyles } from "./fieldStyles/index";
 import { getFieldTransform, defaultFieldMessages } from "./functions/index";
@@ -1222,72 +1215,6 @@ registerBlockType("cwp/form-button", {
 				color: "rgb(49, 49, 49)",
 				padding: 25
 			}
-		}
-	},
-	supports: {
-		align: true,
-		align: ["wide", "full", "center"]
-	},
-	parent: fieldParents
-});
-
-registerBlockType("cwp/form-calculation", {
-	title: __("Calculation"),
-	icon: "media-document",
-	category: "common",
-	keywords: [__("gutenberg-forms"), __("forms"), __("calculation")],
-	edit: calculationEdit,
-	save: calculationSave,
-	attributes: {
-		formulaBuilder: {
-			type: "boolean",
-			default: true
-		},
-		calculation: {
-			type: "string",
-			default: ""
-		},
-		label: {
-			type: "string",
-			default: "Total"
-		},
-		id: {
-			type: "string",
-			default: ""
-		},
-		field_name: {
-			type: "string",
-			default: ""
-		},
-		formula: {
-			type: "string",
-			default: ""
-		},
-		condition: {
-			type: "object",
-			default: {
-				field: null,
-				condition: "===",
-				value: ""
-			}
-		},
-		styling: {
-			type: "object",
-			default: {
-				fontSize: 40
-			}
-		},
-		enableCondition: {
-			type: "boolean",
-			default: false
-		},
-		postfix: {
-			type: "string",
-			default: ""
-		},
-		prefix: {
-			type: "string",
-			default: ""
 		}
 	},
 	supports: {
