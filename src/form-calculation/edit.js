@@ -15,11 +15,11 @@ import {
 	extract_id,
 	getEncodedData,
 	basicColorScheme
-} from "../../block/misc/helper";
+} from "../block/misc/helper";
 import { set, clone, isEmpty } from "lodash";
-import { getSiblings } from "../../block/functions/index";
-import ConditionalLogic from "../../block/components/condition";
-import FormulaBuilder from "../../block/components/formulaBuilder";
+import { getSiblings } from "../block/functions";
+import ConditionalLogic from "../block/components/condition";
+import FormulaBuilder from "../block/components/formulaBuilder";
 
 const {
 	InspectorControls,

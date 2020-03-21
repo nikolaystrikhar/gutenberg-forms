@@ -10,3 +10,9 @@
  */
 
 import './block/block.js';
+
+/**
+ * Form Calculation Block
+ */
+import './form-calculation/index.js';
+
