@@ -80,7 +80,7 @@ function save(props) {
 								checked={checkbox.checked}
 								type="checkbox"
 							/>
-							<label for={id.concat(index.toString())}>
+							<label htmlFor={id.concat(index.toString())}>
 								{checkbox.label}
 
 								{has(checkbox, "image") && (
