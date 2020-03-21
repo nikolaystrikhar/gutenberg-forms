@@ -19,3 +19,4 @@ import './blocks/form-calculation/index.js';
 import './blocks/form-group/index.js';
 import './blocks/message/index.js';
 import './blocks/name/index.js';
+import './blocks/number/index.js';

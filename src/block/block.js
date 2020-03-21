@@ -62,13 +62,6 @@ import columnSave from "../Form Childs/form-column/child/column/save";
 
 ////////////////////////////////!Column!//////////////////////////////////////////////
 
-////////////////////////////////!Number!//////////////////////////////////////////////
-
-import numberEdit from "../Form Childs/number/edit";
-import numberSave from "../Form Childs/number/save";
-
-////////////////////////////////!Number!//////////////////////////////////////////////
-
 ////////////////////////////////!yesNo!//////////////////////////////////////////////
 
 import yesNoEdit from "../Form Childs/yes & no/edit";
@@ -592,90 +585,6 @@ registerBlockType("cwp/column", {
 	save: columnSave,
 	attributes: {},
 	parent: ["cwp/form-column"]
-});
-
-registerBlockType("cwp/number", {
-	title: __("Number"),
-	icon: "screenoptions",
-	category: "common",
-	keywords: [__("gutenberg-forms"), __("forms"), __("number")],
-	edit: numberEdit,
-	save: numberSave,
-	attributes: {
-		enableCondition: {
-			type: "boolean",
-			default: false
-		},
-		number: {
-			type: "string",
-			default: ""
-		},
-		isRequired: {
-			type: "boolean",
-			default: false
-		},
-		label: {
-			type: "string",
-			default: "Enter Number:"
-		},
-		id: {
-			type: "string",
-			default: ""
-		},
-		field_name: {
-			type: "string",
-			default: ""
-		},
-		isRange: {
-			type: "boolean",
-			default: false
-		},
-		steps: {
-			type: "number",
-			default: 1
-		},
-		rangeMax: {
-			type: "number",
-			default: 100
-		},
-		rangeMin: {
-			type: "number",
-			default: 0
-		},
-		requiredLabel: {
-			type: "string",
-			default: "*"
-		},
-		errorValidityText: {
-			type: "string",
-			default: "Please fill out this field!"
-		},
-		condition: {
-			type: "object",
-			default: {
-				field: null,
-				condition: "===",
-				value: ""
-			}
-		},
-		messages: {
-			type: "object",
-			default: {
-				empty: "Please fill out this field!",
-				invalid: "The number {{value}} is not in range!"
-			}
-		}
-	},
-	transforms: {
-		from: [
-			{
-				type: "block",
-				blocks: myAttrs.map(block => "cwp/".concat(block)),
-				transform: a => getFieldTransform(a, "number")
-			}
-		]
-	},
-	parent: fieldParents
 });
 
 registerBlockType("cwp/yes-no", {
