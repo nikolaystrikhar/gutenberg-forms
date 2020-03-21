@@ -4,10 +4,16 @@ import { stringifyCondition } from "../../block/functions";
 const { InnerBlocks } = wp.blockEditor;
 
 function save(props) {
-	const { styling, label, condition } = props.attributes;
+	const { styling, label, condition, enableCondition } = props.attributes;
+
+	const groupStyling = {
+		border: `${styling.borderWidth}px solid ${styling.borderColor}`,
+		...styling
+	}
+
 
 	const getCondition = () => {
-		if (!isEmpty(condition.field)) {
+		if (enableCondition) {
 			//verifying the condition
 			return {
 				"data-condition": stringifyCondition(condition)
@@ -17,7 +23,7 @@ function save(props) {
 		return {};
 	};
 	return (
-		<fieldset style={styling} className="cwp-form-group" {...getCondition()}>
+		<fieldset style={groupStyling} className="cwp-form-group" {...getCondition()}>
 			{!isEmpty(label) && (
 				<legend dangerouslySetInnerHTML={{ __html: label }}></legend>
 			)}

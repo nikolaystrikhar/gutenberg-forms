@@ -477,12 +477,12 @@ http://nicolasgallagher.com/micro-clearfix-hack/
     text-align: center;
     -webkit-box-shadow: 0 0 0 rgba(255, 255, 255, 0);
             box-shadow: 0 0 0 rgba(255, 255, 255, 0);
-    -webkit-transition: border-color 0.15s ease-out, color 0.25s ease-out, background-color 0.15s ease-out, box-shadow 0.15s ease-out;
-    -webkit-transition: border-color 0.15s ease-out, color 0.25s ease-out, background-color 0.15s ease-out, -webkit-box-shadow 0.15s ease-out;
-    transition: border-color 0.15s ease-out, color 0.25s ease-out, background-color 0.15s ease-out, -webkit-box-shadow 0.15s ease-out;
-    -o-transition: border-color 0.15s ease-out, color 0.25s ease-out, background-color 0.15s ease-out, box-shadow 0.15s ease-out;
-    transition: border-color 0.15s ease-out, color 0.25s ease-out, background-color 0.15s ease-out, box-shadow 0.15s ease-out;
-    transition: border-color 0.15s ease-out, color 0.25s ease-out, background-color 0.15s ease-out, box-shadow 0.15s ease-out, -webkit-box-shadow 0.15s ease-out; }
+    -webkit-transition: border-color 0.15s ease-out, color 0.25s ease-out, background-color 0.15s ease-out, box-shadow 0.15s ease-out;
+    -webkit-transition: border-color 0.15s ease-out, color 0.25s ease-out, background-color 0.15s ease-out, -webkit-box-shadow 0.15s ease-out;
+    transition: border-color 0.15s ease-out, color 0.25s ease-out, background-color 0.15s ease-out, -webkit-box-shadow 0.15s ease-out;
+    -o-transition: border-color 0.15s ease-out, color 0.25s ease-out, background-color 0.15s ease-out, box-shadow 0.15s ease-out;
+    transition: border-color 0.15s ease-out, color 0.25s ease-out, background-color 0.15s ease-out, box-shadow 0.15s ease-out;
+    transition: border-color 0.15s ease-out, color 0.25s ease-out, background-color 0.15s ease-out, box-shadow 0.15s ease-out, -webkit-box-shadow 0.15s ease-out; }
 
 .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field.is-style-button .cwp-radio-set input {
   width: 0;
@@ -504,12 +504,12 @@ http://nicolasgallagher.com/micro-clearfix-hack/
     text-align: center;
     -webkit-box-shadow: 0 0 0 rgba(255, 255, 255, 0);
             box-shadow: 0 0 0 rgba(255, 255, 255, 0);
-    -webkit-transition: border-color 0.15s ease-out, color 0.25s ease-out, background-color 0.15s ease-out, box-shadow 0.15s ease-out;
-    -webkit-transition: border-color 0.15s ease-out, color 0.25s ease-out, background-color 0.15s ease-out, -webkit-box-shadow 0.15s ease-out;
-    transition: border-color 0.15s ease-out, color 0.25s ease-out, background-color 0.15s ease-out, -webkit-box-shadow 0.15s ease-out;
-    -o-transition: border-color 0.15s ease-out, color 0.25s ease-out, background-color 0.15s ease-out, box-shadow 0.15s ease-out;
-    transition: border-color 0.15s ease-out, color 0.25s ease-out, background-color 0.15s ease-out, box-shadow 0.15s ease-out;
-    transition: border-color 0.15s ease-out, color 0.25s ease-out, background-color 0.15s ease-out, box-shadow 0.15s ease-out, -webkit-box-shadow 0.15s ease-out; }
+    -webkit-transition: border-color 0.15s ease-out, color 0.25s ease-out, background-color 0.15s ease-out, box-shadow 0.15s ease-out;
+    -webkit-transition: border-color 0.15s ease-out, color 0.25s ease-out, background-color 0.15s ease-out, -webkit-box-shadow 0.15s ease-out;
+    transition: border-color 0.15s ease-out, color 0.25s ease-out, background-color 0.15s ease-out, -webkit-box-shadow 0.15s ease-out;
+    -o-transition: border-color 0.15s ease-out, color 0.25s ease-out, background-color 0.15s ease-out, box-shadow 0.15s ease-out;
+    transition: border-color 0.15s ease-out, color 0.25s ease-out, background-color 0.15s ease-out, box-shadow 0.15s ease-out;
+    transition: border-color 0.15s ease-out, color 0.25s ease-out, background-color 0.15s ease-out, box-shadow 0.15s ease-out, -webkit-box-shadow 0.15s ease-out; }
 
 .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field.is-style-inline .cwp-field-set,
 .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field.is-style-inline .cwp-radio-set,

@@ -27,6 +27,8 @@ function Inspector(prop) {
 	const handleStyling = (style, key) => {
 		const groupStyling = clone(styling);
 
+		console.log(style, key);
+
 		set(groupStyling, key, style); //changing the color;
 
 		props.setAttributes({ styling: groupStyling });
@@ -56,13 +58,7 @@ function Inspector(prop) {
 						onChange={color => handleStyling(color, "color")}
 					/>
 				</div>
-				<div className="cwp-option">
-					<RangeControl
-						value={padding}
-						label={__("Padding")}
-						onChange={padd => handleStyling(padd, "padding")}
-					/>
-				</div>
+
 				<div className="cwp-option">
 					<h3 className="cwp-heading">Border Color</h3>
 					<ColorPalette
@@ -88,6 +84,13 @@ function Inspector(prop) {
 						max={100}
 						initialPosition={0}
 						onChange={value => handleStyling(value, "borderRadius")}
+					/>
+				</div>
+				<div className="cwp-option">
+					<RangeControl
+						value={padding}
+						label={__("Padding")}
+						onChange={padd => handleStyling(padd, "padding")}
 					/>
 				</div>
 			</PanelBody>
