@@ -32,13 +32,6 @@ import messageSave from "../Form Childs/message/save";
 
 ////////////////////////////////!message!//////////////////////////////////////////////
 
-////////////////////////////////!checkbox!//////////////////////////////////////////////
-
-import checkboxEdit from "../Form Childs/checkbox/edit";
-import checkboxSave from "../Form Childs/checkbox/save";
-
-////////////////////////////////!checkbox!//////////////////////////////////////////////
-
 ////////////////////////////////!datepicker!//////////////////////////////////////////////
 
 import datePickerEdit from "../Form Childs/datePicker/edit";
@@ -503,77 +496,6 @@ registerBlockType("cwp/message", {
 				type: "block",
 				blocks: myAttrs.map(block => "cwp/".concat(block)),
 				transform: a => getFieldTransform(a, "message")
-			}
-		]
-	},
-	parent: fieldParents
-});
-
-registerBlockType("cwp/checkbox", {
-	title: __("checkbox"),
-	icon: "yes",
-	category: "common",
-	keywords: [__("gutenberg-forms"), __("forms"), __("checkbox")],
-	edit: checkboxEdit,
-	save: checkboxSave,
-	attributes: {
-		isRequired: {
-			type: "boolean",
-			default: false
-		},
-		options: {
-			type: "array",
-			default: [
-				{
-					label: "Option 1"
-				}
-			]
-		},
-		enableCondition: {
-			type: "boolean",
-			default: false
-		},
-		label: {
-			type: "string",
-			default: "Choose One"
-		},
-		id: {
-			type: "string",
-			default: ""
-		},
-		field_name: {
-			type: "string",
-			default: ""
-		},
-		messages: {
-			type: "object",
-			default: {
-				empty: "Please select atleast one checkbox!"
-			}
-		},
-		condition: {
-			type: "object",
-			default: {
-				field: null,
-				condition: "===",
-				value: ""
-			}
-		},
-		requiredLabel: {
-			type: "string",
-			default: "*"
-		},
-		fieldStyle: {
-			type: "string",
-			default: "block"
-		}
-	},
-	transforms: {
-		from: [
-			{
-				type: "block",
-				blocks: myAttrs.map(block => "cwp/".concat(block)),
-				transform: a => getFieldTransform(a, "checkbox")
 			}
 		]
 	},

@@ -11,4 +11,5 @@
 
 import './block/block.js';
 
+import './blocks/checkbox/index.js';
 import './blocks/form-calculation/index.js';
