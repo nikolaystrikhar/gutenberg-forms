@@ -4,7 +4,7 @@ const { registerBlockType } = wp.blocks;
 import emailEdit from "./edit.js";
 import emailSave from "./save.js";
 import { getFieldTransform } from '../../block/functions';
-import { fieldParents } from '../../constants';
+import { fieldParents, myAttrs } from '../../constants';
 
 registerBlockType("cwp/email", {
 	title: __("Email"),
