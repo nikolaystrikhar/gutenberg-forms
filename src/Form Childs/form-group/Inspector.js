@@ -19,13 +19,15 @@ function Inspector(prop) {
 	const props = prop.data,
 		{
 			styling,
-			styling: { backgroundColor, color, padding },
+			styling: { backgroundColor, color, padding, borderColor, borderWidth, borderRadius },
 			condition,
 			enableCondition
 		} = props.attributes;
 
 	const handleStyling = (style, key) => {
 		const groupStyling = clone(styling);
+
+		console.log(style, key);
 
 		set(groupStyling, key, style); //changing the color;
 
@@ -54,6 +56,34 @@ function Inspector(prop) {
 						colors={basicColorScheme}
 						value={color}
 						onChange={color => handleStyling(color, "color")}
+					/>
+				</div>
+
+				<div className="cwp-option">
+					<h3 className="cwp-heading">Border Color</h3>
+					<ColorPalette
+						colors={basicColorScheme}
+						value={borderColor}
+						onChange={color => handleStyling(color, "borderColor")}
+					/>
+				</div>
+				<div className="cwp-option">
+					<h3 className="cwp-heading">Border Width [px]</h3>
+					<RangeControl
+						value={borderWidth}
+						min={0}
+						max={20}
+						onChange={borderWidth => handleStyling(borderWidth, "borderWidth")}
+					/>
+				</div>
+				<div className="cwp-option">
+					<h3 className="cwp-heading">Border Radius [px]</h3>
+					<RangeControl
+						value={borderRadius}
+						min={0}
+						max={100}
+						initialPosition={0}
+						onChange={value => handleStyling(value, "borderRadius")}
 					/>
 				</div>
 				<div className="cwp-option">

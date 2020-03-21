@@ -121,7 +121,7 @@ import yesNoSave from "../Form Childs/yes & no/save";
 ////////////////////////////////!formButton!//////////////////////////////////////////////
 
 import formButtonEdit from "../Form Childs/form-button/edit";
-import formButtonSave from "../Form Childs/form-button/Save";
+import formButtonSave from "../Form Childs/form-button/save";
 
 ////////////////////////////////!formButton!//////////////////////////////////////////////
 
@@ -1097,7 +1097,10 @@ registerBlockType("cwp/form-group", {
 			default: {
 				backgroundColor: "rgb(238, 238, 238)",
 				color: "rgb(49, 49, 49)",
-				padding: 25
+				padding: 25,
+				borderColor: "rgb(220, 215, 202)",
+				borderWidth: 2,
+				borderRadius: 0,
 			}
 		},
 		label: {

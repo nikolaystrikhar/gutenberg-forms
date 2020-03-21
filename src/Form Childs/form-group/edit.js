@@ -11,6 +11,11 @@ function edit(props) {
 		props.setAttributes({ label });
 	};
 
+	const groupStyling = {
+		border: `${styling.borderWidth}px solid ${styling.borderColor}`,
+		...styling
+	}
+
 	return [
 		!!props.isSelected && <Inspector data={props} />,
 		null,
@@ -20,7 +25,7 @@ function edit(props) {
 					Do not have a required fields inside a conditional group.
 				</Notice>
 			)}
-			<fieldset style={styling} className="cwp-form-group">
+			<fieldset style={groupStyling} className="cwp-form-group">
 				<RichText tag="legend" onChange={handleLabel} value={label} />
 				<div className="cwp-group-fields">
 					<InnerBlocks />
