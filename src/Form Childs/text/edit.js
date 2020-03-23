@@ -5,6 +5,7 @@ import {
 	PanelRow,
 	PanelBody,
 	TextControl,
+	RangeControl,
 	Icon
 } from "@wordpress/components";
 import {
@@ -22,6 +23,8 @@ const {
 	BlockIcon,
 	RichText
 } = wp.blockEditor;
+
+const { __ } = wp.i18n;
 
 function edit(props) {
 	const handleChange = e => {
@@ -50,6 +53,8 @@ function edit(props) {
 		messages,
 		messages: { invalid, empty },
 		pattern,
+		minimumLength,
+		maximumLength,
 		condition,
 		enableCondition
 	} = props.attributes;
@@ -124,6 +129,24 @@ function edit(props) {
 							/>
 						</div>
 					)}
+
+					<div className="cwp-option">
+						<RangeControl
+							label={__('Minimum Length')}
+							value={minimumLength}
+							initialPosition={0}
+							onChange={value => props.setAttributes({ minimumLength: value })}
+							min={0}
+							max={100}
+						/>
+						<RangeControl
+							label={__('Maximum Length')}
+							value={maximumLength}
+							onChange={value => props.setAttributes({ maximumLength: value })}
+							min={1}
+							max={100}
+						/>
+					</div>
 				</PanelBody>
 				<PanelBody title="Condition">
 					<ConditionalLogic

@@ -431,6 +431,14 @@ registerBlockType("cwp/text", {
 			type: "string",
 			default: ""
 		},
+		minimumLength: {
+			type: "number",
+			default: 0,
+		},
+		maximumLength: {
+			type: "number",
+			default: 100,
+		},
 		condition: {
 			type: "object",
 			default: {
