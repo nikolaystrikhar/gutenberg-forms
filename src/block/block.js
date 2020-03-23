@@ -27,13 +27,6 @@ import columnSave from "../Form Childs/form-column/child/column/save";
 
 ////////////////////////////////!Column!//////////////////////////////////////////////
 
-////////////////////////////////!yesNo!//////////////////////////////////////////////
-
-import yesNoEdit from "../Form Childs/yes & no/edit";
-import yesNoSave from "../Form Childs/yes & no/save";
-
-////////////////////////////////!yesNo!//////////////////////////////////////////////
-
 import { applyFormStyles } from "./formStyles/index";
 import { registerFieldStyles } from "./fieldStyles/index";
 import { getFieldTransform, defaultFieldMessages } from "./functions/index";
@@ -195,54 +188,4 @@ registerBlockType("cwp/column", {
 	parent: ["cwp/form-column"]
 });
 
-registerBlockType("cwp/yes-no", {
-	title: __("Yes / No"),
-	icon: "no",
-	category: "common",
-	keywords: [__("gutenberg-forms"), __("forms"), __("yes-no")],
-	edit: yesNoEdit,
-	save: yesNoSave,
-	attributes: {
-		yes_no: {
-			type: "boolean",
-			defaut: false
-		},
-		requiredLabel: {
-			type: "string",
-			default: "*"
-		},
-		isRequired: {
-			type: "boolean",
-			default: false
-		},
-		label: {
-			type: "string",
-			default: "Yes Or No?"
-		},
-		id: {
-			type: "string",
-			default: ""
-		},
-		field_name: {
-			type: "string",
-			default: ""
-		},
-		errorValidityText: {
-			type: "string",
-			default: "Please fill out this field!"
-		},
-		enableCondition: {
-			type: "boolean",
-			default: false
-		},
-		condition: {
-			type: "object",
-			default: {
-				field: null,
-				condition: "===",
-				value: ""
-			}
-		}
-	},
-	parent: fieldParents
-});
+

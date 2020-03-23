@@ -25,3 +25,4 @@ import './blocks/radio/index.js';
 import './blocks/select/index.js';
 import './blocks/text/index.js';
 import './blocks/website/index.js';
+import './blocks/yes-no/index.js';
