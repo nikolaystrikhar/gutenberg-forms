@@ -22,3 +22,4 @@ import './blocks/name/index.js';
 import './blocks/number/index.js';
 import './blocks/phone/index.js';
 import './blocks/radio/index.js';
+import './blocks/select/index.js';
