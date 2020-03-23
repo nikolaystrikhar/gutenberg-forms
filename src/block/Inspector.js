@@ -67,11 +67,11 @@ function Inspector(prop) {
 	const getSuccess = t => {
 		return successType === t
 			? {
-					isPrimary: true
-			  }
+				isPrimary: true
+			}
 			: {
-					isDefault: true
-			  };
+				isDefault: true
+			};
 	};
 
 	const colors = [
@@ -210,14 +210,14 @@ function Inspector(prop) {
 							onChange={successURL => props.setAttributes({ successURL })}
 						/>
 					) : (
-						<TextareaControl
-							label="Success Message"
-							value={successMessage}
-							onChange={successMessage =>
-								props.setAttributes({ successMessage })
-							}
-						/>
-					)}
+							<TextareaControl
+								label="Success Message"
+								value={successMessage}
+								onChange={successMessage =>
+									props.setAttributes({ successMessage })
+								}
+							/>
+						)}
 				</div>
 			</PanelBody>
 			<PanelBody initialOpen={false} title="reCAPTCHA v2">
