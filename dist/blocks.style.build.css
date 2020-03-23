@@ -380,6 +380,13 @@ http://nicolasgallagher.com/micro-clearfix-hack/
   -o-transition: color 0.1s ease-in;
   transition: color 0.1s ease-in; }
 
+.wp-block-cwp-block-gutenberg-forms .cwp-form[data-formtype="multiStep"] .cwp-form-step {
+  display: none;
+  padding: 0px;
+  border: none; }
+  .wp-block-cwp-block-gutenberg-forms .cwp-form[data-formtype="multiStep"] .cwp-form-step.cwp-active-step {
+    display: block; }
+
 .wp-block-cwp-block-gutenberg-forms .cwp-form .wp-block-cwp-form-button {
   border: none;
   outline: none; }

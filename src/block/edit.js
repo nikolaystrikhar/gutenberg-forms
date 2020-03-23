@@ -37,11 +37,16 @@ function edit(props) {
 	const showEditor = !templateBuilder ? "cwp-hideEditor" : "cwp-showEditor";
 
 	const handleTypeChange = (type) => {
-		props.setAttributes({ formType: type });
+
+		const buttonSetting = {
+			...buttonSetting,
+			disable: type === 'multiStep' ? true : false
+		}
+		props.setAttributes({ formType: type, buttonSetting });
 	}
 
 	return [
-		<Inspector data={props} />,
+		isEmpty(formType) ? null : <Inspector data={props} />,
 		<BlockControls>
 			<Toolbar>
 				<Tooltip text={__(templateBuilder ? "Form Builder" : "Email Builder")}>

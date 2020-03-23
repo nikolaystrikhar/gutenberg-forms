@@ -41,6 +41,21 @@
 	}
 
 	& .cwp-form {
+
+		&[data-formtype="multiStep"] {
+			& .cwp-form-step {
+				display:none;
+				padding: 0px;
+				border: none;
+
+				&.cwp-active-step {
+					display:block;
+				}
+			}	
+
+
+		}
+
 		& .wp-block-cwp-form-button {
 			@include normalize_button();
 		}

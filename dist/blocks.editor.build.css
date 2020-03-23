@@ -380,6 +380,13 @@ http://nicolasgallagher.com/micro-clearfix-hack/
   -o-transition: color 0.1s ease-in;
   transition: color 0.1s ease-in; }
 
+.wp-block-cwp-block-gutenberg-forms .cwp-form[data-formtype="multiStep"] .cwp-form-step {
+  display: none;
+  padding: 0px;
+  border: none; }
+  .wp-block-cwp-block-gutenberg-forms .cwp-form[data-formtype="multiStep"] .cwp-form-step.cwp-active-step {
+    display: block; }
+
 .wp-block-cwp-block-gutenberg-forms .cwp-form .wp-block-cwp-form-button {
   border: none;
   outline: none; }
@@ -973,6 +980,49 @@ http://nicolasgallagher.com/micro-clearfix-hack/
     .cwp-form .cwp-form-col-main .cwp_column_intro_selector button.cwp_selector:hover {
       background-color: #007cba;
       color: #fff; }
+
+.cwp-form .cwp-form-step .step-divider .divider {
+  display: table;
+  font-size: 24px;
+  text-align: center;
+  width: 75%;
+  /* divider width */
+  margin: 40px auto; }
+  .cwp-form .cwp-form-step .step-divider .divider span {
+    display: table-cell;
+    position: relative;
+    font-size: 16px; }
+    .cwp-form .cwp-form-step .step-divider .divider span:first-child {
+      background-image: -webkit-gradient(linear, 0 0, 0 100%, from(transparent), to(#000));
+      background-image: -webkit-linear-gradient(180deg, transparent, #000);
+      background-image: -o-linear-gradient(180deg, transparent, #000);
+      background-image: -webkit-gradient(linear, left top, right top, from(transparent), to(#000));
+      background-image: -webkit-linear-gradient(left, transparent, #000);
+      background-image: -o-linear-gradient(left, transparent, #000);
+      background-image: linear-gradient(90deg, transparent, #000); }
+  .cwp-form .cwp-form-step .step-divider .divider span:first-child, .cwp-form .cwp-form-step .step-divider .divider span:last-child {
+    width: 50%;
+    top: 13px;
+    /* adjust vertical align */
+    /* line width */
+    background-size: 100% 2px;
+    /* line width */
+    background-position: 0 0, 0 100%;
+    background-repeat: no-repeat; }
+  .cwp-form .cwp-form-step .step-divider .divider span:nth-child(2) {
+    color: #000;
+    padding: 0px 5px;
+    width: auto;
+    white-space: nowrap; }
+  .cwp-form .cwp-form-step .step-divider .divider span:last-child {
+    /* color changes in here */
+    background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#000), to(transparent));
+    background-image: -webkit-linear-gradient(180deg, #000, transparent);
+    background-image: -o-linear-gradient(180deg, #000, transparent);
+    background-image: -webkit-gradient(linear, left top, right top, from(#000), to(transparent));
+    background-image: -webkit-linear-gradient(left, #000, transparent);
+    background-image: -o-linear-gradient(left, #000, transparent);
+    background-image: linear-gradient(90deg, #000, transparent); }
 
 .cwp-form .cwp-field.is-style-inline .cwp-field-set,
 .cwp-form .cwp-field.is-style-inline .cwp-radio-set-preview,

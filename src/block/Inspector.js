@@ -32,6 +32,7 @@ function Inspector(prop) {
 		templateBuilder,
 		recaptcha,
 		theme,
+		formType,
 		recaptcha: { siteKey, clientSecret }
 	} = props.attributes;
 
@@ -73,12 +74,6 @@ function Inspector(prop) {
 				isDefault: true
 			};
 	};
-
-	const colors = [
-		{ name: "red", color: "#f00" },
-		{ name: "white", color: "#fff" },
-		{ name: "blue", color: "#00f" }
-	];
 
 	const handleCaptcha = (v, t) => {
 		props.setAttributes({ recaptcha: { ...recaptcha, [t]: v } });
@@ -132,17 +127,19 @@ function Inspector(prop) {
 				</div>
 			</PanelBody>
 			<PanelBody initialOpen={true} title="General">
-				<div className="cwp-option">
-					<PanelRow>
-						<h3>Disable Submit Button</h3>
-						<FormToggle
-							checked={buttonSetting.disable}
-							onChange={() =>
-								handleButtonSetting("disable", !buttonSetting.disable)
-							}
-						/>
-					</PanelRow>
-				</div>
+				{
+					formType !== "multiStep" && <div className="cwp-option">
+						<PanelRow>
+							<h3>Disable Submit Button</h3>
+							<FormToggle
+								checked={buttonSetting.disable}
+								onChange={() =>
+									handleButtonSetting("disable", !buttonSetting.disable)
+								}
+							/>
+						</PanelRow>
+					</div>
+				}
 				{!buttonSetting.disable && (
 					<Fragment>
 						<div className="cwp-option column">

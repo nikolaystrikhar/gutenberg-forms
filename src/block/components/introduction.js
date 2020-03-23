@@ -14,7 +14,7 @@ function Introduction(props) {
             <h3>Form Type</h3>
             <div className="cwp-form-types">
                 <Button isPrimary onClick={() => handleType("standard")}>Standard</Button>
-                <Button isPrimary onClick={() => handleType("multiStep")}>MultiStep</Button>
+                <Button isPrimary onClick={() => handleType("multiStep")}>Multi Step</Button>
             </div>
         </div>
     )

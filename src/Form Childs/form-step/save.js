@@ -3,9 +3,9 @@ import { InnerBlocks } from "@wordpress/block-editor";
 
 function save(props) {
     return (
-        <div className="cwp-form-step">
+        <fieldset className="cwp-form-step">
             <InnerBlocks.Content />
-        </div>
+        </fieldset>
     );
 }
 

@@ -1,11 +1,11 @@
-jQuery(function($) {
+jQuery(function ($) {
 	/*!
 	 * Pikaday
 	 *
 	 * Copyright © 2014 David Bushell | BSD & MIT license | https://github.com/Pikaday/Pikaday
 	 */
 
-	(function(root, factory) {
+	(function (root, factory) {
 		"use strict";
 
 		var moment;
@@ -14,22 +14,22 @@ jQuery(function($) {
 			// Load moment.js as an optional dependency
 			try {
 				moment = require("moment");
-			} catch (e) {}
+			} catch (e) { }
 			module.exports = factory(moment);
 		} else if (typeof define === "function" && define.amd) {
 			// AMD. Register as an anonymous module.
-			define(function(req) {
+			define(function (req) {
 				// Load moment.js as an optional dependency
 				var id = "moment";
 				try {
 					moment = req(id);
-				} catch (e) {}
+				} catch (e) { }
 				return factory(moment);
 			});
 		} else {
 			root.Pikaday = factory(root.moment);
 		}
-	})(this, function(moment) {
+	})(this, function (moment) {
 		"use strict";
 
 		/**
@@ -39,54 +39,54 @@ jQuery(function($) {
 			hasEventListeners = !!window.addEventListener,
 			document = window.document,
 			sto = window.setTimeout,
-			addEvent = function(el, e, callback, capture) {
+			addEvent = function (el, e, callback, capture) {
 				if (hasEventListeners) {
 					el.addEventListener(e, callback, !!capture);
 				} else {
 					el.attachEvent("on" + e, callback);
 				}
 			},
-			removeEvent = function(el, e, callback, capture) {
+			removeEvent = function (el, e, callback, capture) {
 				if (hasEventListeners) {
 					el.removeEventListener(e, callback, !!capture);
 				} else {
 					el.detachEvent("on" + e, callback);
 				}
 			},
-			trim = function(str) {
+			trim = function (str) {
 				return str.trim ? str.trim() : str.replace(/^\s+|\s+$/g, "");
 			},
-			hasClass = function(el, cn) {
+			hasClass = function (el, cn) {
 				return (" " + el.className + " ").indexOf(" " + cn + " ") !== -1;
 			},
-			addClass = function(el, cn) {
+			addClass = function (el, cn) {
 				if (!hasClass(el, cn)) {
 					el.className = el.className === "" ? cn : el.className + " " + cn;
 				}
 			},
-			removeClass = function(el, cn) {
+			removeClass = function (el, cn) {
 				el.className = trim(
 					(" " + el.className + " ").replace(" " + cn + " ", " ")
 				);
 			},
-			isArray = function(obj) {
+			isArray = function (obj) {
 				return /Array/.test(Object.prototype.toString.call(obj));
 			},
-			isDate = function(obj) {
+			isDate = function (obj) {
 				return (
 					/Date/.test(Object.prototype.toString.call(obj)) &&
 					!isNaN(obj.getTime())
 				);
 			},
-			isWeekend = function(date) {
+			isWeekend = function (date) {
 				var day = date.getDay();
 				return day === 0 || day === 6;
 			},
-			isLeapYear = function(year) {
+			isLeapYear = function (year) {
 				// solution by Matti Virkkunen: http://stackoverflow.com/a/4881951
 				return (year % 4 === 0 && year % 100 !== 0) || year % 400 === 0;
 			},
-			getDaysInMonth = function(year, month) {
+			getDaysInMonth = function (year, month) {
 				return [
 					31,
 					isLeapYear(year) ? 29 : 28,
@@ -102,14 +102,14 @@ jQuery(function($) {
 					31
 				][month];
 			},
-			setToStartOfDay = function(date) {
+			setToStartOfDay = function (date) {
 				if (isDate(date)) date.setHours(0, 0, 0, 0);
 			},
-			compareDates = function(a, b) {
+			compareDates = function (a, b) {
 				// weak date comparison (use setToStartOfDay(date) to ensure correct result)
 				return a.getTime() === b.getTime();
 			},
-			extend = function(to, from, overwrite) {
+			extend = function (to, from, overwrite) {
 				var prop, hasProp;
 				for (prop in from) {
 					hasProp = to[prop] !== undefined;
@@ -136,7 +136,7 @@ jQuery(function($) {
 				}
 				return to;
 			},
-			fireEvent = function(el, eventName, data) {
+			fireEvent = function (el, eventName, data) {
 				var ev;
 
 				if (document.createEvent) {
@@ -150,7 +150,7 @@ jQuery(function($) {
 					el.fireEvent("on" + eventName, ev);
 				}
 			},
-			adjustCalendar = function(calendar) {
+			adjustCalendar = function (calendar) {
 				if (calendar.month < 0) {
 					calendar.year -= Math.ceil(Math.abs(calendar.month) / 12);
 					calendar.month += 12;
@@ -301,14 +301,14 @@ jQuery(function($) {
 			/**
 			 * templating functions to abstract HTML rendering
 			 */
-			renderDayName = function(opts, day, abbr) {
+			renderDayName = function (opts, day, abbr) {
 				day += opts.firstDay;
 				while (day >= 7) {
 					day -= 7;
 				}
 				return abbr ? opts.i18n.weekdaysShort[day] : opts.i18n.weekdays[day];
 			},
-			renderDay = function(opts) {
+			renderDay = function (opts) {
 				var arr = [];
 				var ariaSelected = "false";
 				if (opts.isEmpty) {
@@ -365,7 +365,7 @@ jQuery(function($) {
 					"</td>"
 				);
 			},
-			renderWeek = function(d, m, y) {
+			renderWeek = function (d, m, y) {
 				// Lifted from http://javascript.about.com/library/blweekyear.htm, lightly modified.
 				var onejan = new Date(y, 0, 1),
 					weekNum = Math.ceil(
@@ -373,7 +373,7 @@ jQuery(function($) {
 					);
 				return '<td class="pika-week">' + weekNum + "</td>";
 			},
-			renderRow = function(days, isRTL, pickWholeWeek, isRowSelected) {
+			renderRow = function (days, isRTL, pickWholeWeek, isRowSelected) {
 				return (
 					'<tr class="pika-row' +
 					(pickWholeWeek ? " pick-whole-week" : "") +
@@ -383,10 +383,10 @@ jQuery(function($) {
 					"</tr>"
 				);
 			},
-			renderBody = function(rows) {
+			renderBody = function (rows) {
 				return "<tbody>" + rows.join("") + "</tbody>";
 			},
-			renderHead = function(opts) {
+			renderHead = function (opts) {
 				var i,
 					arr = [];
 				if (opts.showWeekNumber) {
@@ -395,10 +395,10 @@ jQuery(function($) {
 				for (i = 0; i < 7; i++) {
 					arr.push(
 						'<th scope="col"><abbr title="' +
-							renderDayName(opts, i) +
-							'">' +
-							renderDayName(opts, i, true) +
-							"</abbr></th>"
+						renderDayName(opts, i) +
+						'">' +
+						renderDayName(opts, i, true) +
+						"</abbr></th>"
 					);
 				}
 				return (
@@ -407,7 +407,7 @@ jQuery(function($) {
 					"</tr></thead>"
 				);
 			},
-			renderTitle = function(instance, c, year, month, refYear, randId) {
+			renderTitle = function (instance, c, year, month, refYear, randId) {
 				var i,
 					j,
 					arr,
@@ -426,16 +426,16 @@ jQuery(function($) {
 				for (arr = [], i = 0; i < 12; i++) {
 					arr.push(
 						'<option value="' +
-							(year === refYear ? i - c : 12 + i - c) +
-							'"' +
-							(i === month ? ' selected="selected"' : "") +
-							((isMinYear && i < opts.minMonth) ||
+						(year === refYear ? i - c : 12 + i - c) +
+						'"' +
+						(i === month ? ' selected="selected"' : "") +
+						((isMinYear && i < opts.minMonth) ||
 							(isMaxYear && i > opts.maxMonth)
-								? 'disabled="disabled"'
-								: "") +
-							">" +
-							opts.i18n.months[i] +
-							"</option>"
+							? 'disabled="disabled"'
+							: "") +
+						">" +
+						opts.i18n.months[i] +
+						"</option>"
 					);
 				}
 
@@ -458,12 +458,12 @@ jQuery(function($) {
 					if (i >= opts.minYear) {
 						arr.push(
 							'<option value="' +
-								i +
-								'"' +
-								(i === year ? ' selected="selected"' : "") +
-								">" +
-								i +
-								"</option>"
+							i +
+							'"' +
+							(i === year ? ' selected="selected"' : "") +
+							">" +
+							i +
+							"</option>"
 						);
 					}
 				}
@@ -508,7 +508,7 @@ jQuery(function($) {
 
 				return (html += "</div>");
 			},
-			renderTable = function(opts, data, randId) {
+			renderTable = function (opts, data, randId) {
 				return (
 					'<table cellpadding="0" cellspacing="0" class="pika-table" role="grid" aria-labelledby="' +
 					randId +
@@ -521,11 +521,11 @@ jQuery(function($) {
 			/**
 			 * Pikaday constructor
 			 */
-			Pikaday = function(options) {
+			Pikaday = function (options) {
 				var self = this,
 					opts = self.config(options);
 
-				self._onMouseDown = function(e) {
+				self._onMouseDown = function (e) {
 					if (!self._v) {
 						return;
 					}
@@ -549,7 +549,7 @@ jQuery(function($) {
 								)
 							);
 							if (opts.bound) {
-								sto(function() {
+								sto(function () {
 									self.hide();
 									if (opts.blurFieldOnSelect && opts.field) {
 										opts.field.blur();
@@ -575,7 +575,7 @@ jQuery(function($) {
 					}
 				};
 
-				self._onChange = function(e) {
+				self._onChange = function (e) {
 					e = e || window.event;
 					var target = e.target || e.srcElement;
 					if (!target) {
@@ -588,7 +588,7 @@ jQuery(function($) {
 					}
 				};
 
-				self._onKeyChange = function(e) {
+				self._onKeyChange = function (e) {
 					e = e || window.event;
 
 					if (self.isVisible()) {
@@ -616,7 +616,7 @@ jQuery(function($) {
 					}
 				};
 
-				self._onInputChange = function(e) {
+				self._onInputChange = function (e) {
 					var date;
 
 					if (e.firedBy === self) {
@@ -638,15 +638,15 @@ jQuery(function($) {
 					}
 				};
 
-				self._onInputFocus = function() {
+				self._onInputFocus = function () {
 					self.show();
 				};
 
-				self._onInputClick = function() {
+				self._onInputClick = function () {
 					self.show();
 				};
 
-				self._onInputBlur = function() {
+				self._onInputBlur = function () {
 					// IE allows pika div to gain focus; catch blur the input field
 					var pEl = document.activeElement;
 					do {
@@ -656,14 +656,14 @@ jQuery(function($) {
 					} while ((pEl = pEl.parentNode));
 
 					if (!self._c) {
-						self._b = sto(function() {
+						self._b = sto(function () {
 							self.hide();
 						}, 50);
 					}
 					self._c = false;
 				};
 
-				self._onClick = function(e) {
+				self._onClick = function (e) {
 					e = e || window.event;
 					var target = e.target || e.srcElement,
 						pEl = target;
@@ -750,7 +750,7 @@ jQuery(function($) {
 			/**
 			 * configure functionality
 			 */
-			config: function(options) {
+			config: function (options) {
 				if (!this._o) {
 					this._o = extend({}, defaults, true);
 				}
@@ -813,7 +813,7 @@ jQuery(function($) {
 			/**
 			 * return a formatted string of the current selection (using Moment.js if available)
 			 */
-			toString: function(format) {
+			toString: function (format) {
 				format = format || this._o.format;
 				if (!isDate(this._d)) {
 					return "";
@@ -830,14 +830,14 @@ jQuery(function($) {
 			/**
 			 * return a Moment.js object of the current selection (if available)
 			 */
-			getMoment: function() {
+			getMoment: function () {
 				return hasMoment ? moment(this._d) : null;
 			},
 
 			/**
 			 * set the current selection from a Moment.js object (if available)
 			 */
-			setMoment: function(date, preventOnSelect) {
+			setMoment: function (date, preventOnSelect) {
 				if (hasMoment && moment.isMoment(date)) {
 					this.setDate(date.toDate(), preventOnSelect);
 				}
@@ -846,14 +846,14 @@ jQuery(function($) {
 			/**
 			 * return a Date object of the current selection
 			 */
-			getDate: function() {
+			getDate: function () {
 				return isDate(this._d) ? new Date(this._d.getTime()) : null;
 			},
 
 			/**
 			 * set the current selection
 			 */
-			setDate: function(date, preventOnSelect) {
+			setDate: function (date, preventOnSelect) {
 				if (!date) {
 					this._d = null;
 
@@ -896,7 +896,7 @@ jQuery(function($) {
 			/**
 			 * change view to a specific date
 			 */
-			gotoDate: function(date) {
+			gotoDate: function (date) {
 				var newCalendar = true;
 
 				if (!isDate(date)) {
@@ -905,10 +905,10 @@ jQuery(function($) {
 
 				if (this.calendars) {
 					var firstVisibleDate = new Date(
-							this.calendars[0].year,
-							this.calendars[0].month,
-							1
-						),
+						this.calendars[0].year,
+						this.calendars[0].month,
+						1
+					),
 						lastVisibleDate = new Date(
 							this.calendars[this.calendars.length - 1].year,
 							this.calendars[this.calendars.length - 1].month,
@@ -938,7 +938,7 @@ jQuery(function($) {
 				this.adjustCalendars();
 			},
 
-			adjustDate: function(sign, days) {
+			adjustDate: function (sign, days) {
 				var day = this.getDate() || new Date();
 				var difference = parseInt(days) * 24 * 60 * 60 * 1000;
 
@@ -953,7 +953,7 @@ jQuery(function($) {
 				this.setDate(newDay);
 			},
 
-			adjustCalendars: function() {
+			adjustCalendars: function () {
 				this.calendars[0] = adjustCalendar(this.calendars[0]);
 				for (var c = 1; c < this._o.numberOfMonths; c++) {
 					this.calendars[c] = adjustCalendar({
@@ -964,26 +964,26 @@ jQuery(function($) {
 				this.draw();
 			},
 
-			gotoToday: function() {
+			gotoToday: function () {
 				this.gotoDate(new Date());
 			},
 
 			/**
 			 * change view to a specific month (zero-index, e.g. 0: January)
 			 */
-			gotoMonth: function(month) {
+			gotoMonth: function (month) {
 				if (!isNaN(month)) {
 					this.calendars[0].month = parseInt(month, 10);
 					this.adjustCalendars();
 				}
 			},
 
-			nextMonth: function() {
+			nextMonth: function () {
 				this.calendars[0].month++;
 				this.adjustCalendars();
 			},
 
-			prevMonth: function() {
+			prevMonth: function () {
 				this.calendars[0].month--;
 				this.adjustCalendars();
 			},
@@ -991,7 +991,7 @@ jQuery(function($) {
 			/**
 			 * change view to a specific full year (e.g. "2012")
 			 */
-			gotoYear: function(year) {
+			gotoYear: function (year) {
 				if (!isNaN(year)) {
 					this.calendars[0].year = parseInt(year, 10);
 					this.adjustCalendars();
@@ -1001,7 +1001,7 @@ jQuery(function($) {
 			/**
 			 * change the minDate
 			 */
-			setMinDate: function(value) {
+			setMinDate: function (value) {
 				if (value instanceof Date) {
 					setToStartOfDay(value);
 					this._o.minDate = value;
@@ -1020,7 +1020,7 @@ jQuery(function($) {
 			/**
 			 * change the maxDate
 			 */
-			setMaxDate: function(value) {
+			setMaxDate: function (value) {
 				if (value instanceof Date) {
 					setToStartOfDay(value);
 					this._o.maxDate = value;
@@ -1036,18 +1036,18 @@ jQuery(function($) {
 				this.draw();
 			},
 
-			setStartRange: function(value) {
+			setStartRange: function (value) {
 				this._o.startRange = value;
 			},
 
-			setEndRange: function(value) {
+			setEndRange: function (value) {
 				this._o.endRange = value;
 			},
 
 			/**
 			 * refresh the HTML
 			 */
-			draw: function(force) {
+			draw: function (force) {
 				if (!this._v && !force) {
 					return;
 				}
@@ -1102,7 +1102,7 @@ jQuery(function($) {
 
 				if (opts.bound) {
 					if (opts.field.type !== "hidden") {
-						sto(function() {
+						sto(function () {
 							opts.trigger.focus();
 						}, 1);
 					}
@@ -1118,7 +1118,7 @@ jQuery(function($) {
 				}
 			},
 
-			adjustPosition: function() {
+			adjustPosition: function () {
 				var field,
 					pEl,
 					width,
@@ -1194,7 +1194,7 @@ jQuery(function($) {
 			/**
 			 * render HTML for a particular month
 			 */
-			render: function(year, month, randId) {
+			render: function (year, month, randId) {
 				var opts = this._o,
 					now = new Date(),
 					days = getDaysInMonth(year, month),
@@ -1298,11 +1298,11 @@ jQuery(function($) {
 				return renderTable(opts, data, randId);
 			},
 
-			isVisible: function() {
+			isVisible: function () {
 				return this._v;
 			},
 
-			show: function() {
+			show: function () {
 				if (!this.isVisible()) {
 					this._v = true;
 					this.draw();
@@ -1317,7 +1317,7 @@ jQuery(function($) {
 				}
 			},
 
-			hide: function() {
+			hide: function () {
 				var v = this._v;
 				if (v !== false) {
 					if (this._o.bound) {
@@ -1337,7 +1337,7 @@ jQuery(function($) {
 			/**
 			 * GAME OVER
 			 */
-			destroy: function() {
+			destroy: function () {
 				var opts = this._o;
 
 				this.hide();
@@ -1361,10 +1361,10 @@ jQuery(function($) {
 			}
 		};
 
-		$(".cwp-form form").each(function() {
+		$(".cwp-form form").each(function () {
 			$(this)
 				.find(".cwp-datepicker input")
-				.each(function() {
+				.each(function () {
 					const format = $(this).data("format");
 
 					const datePicker = new Pikaday({
@@ -1437,12 +1437,12 @@ jQuery(function($) {
 			const { conditionalFields, fields } = this,
 				t = this;
 
-			conditionalFields.each(function() {
+			conditionalFields.each(function () {
 				let condition = t.parseCondition($(this).data("condition"));
 
 				condition["elem"] = $(this);
 
-				t.fields.each(function() {
+				t.fields.each(function () {
 					let target = $(this)
 						.attr("id")
 						.startsWith(condition["field"]);
@@ -1460,8 +1460,8 @@ jQuery(function($) {
 					}
 				});
 
-				t.fields.each(function() {
-					$(this).on("input", function() {
+				t.fields.each(function () {
+					$(this).on("input", function () {
 						let target = $(this)
 							.attr("id")
 							.startsWith(condition["field"]);
@@ -1472,7 +1472,7 @@ jQuery(function($) {
 							fieldValue = [];
 							t.form
 								.find(`input[name="${$(this).attr("name")}"]:checked`)
-								.each(function() {
+								.each(function () {
 									fieldValue.push($(this).val());
 								});
 						} else {
@@ -1503,6 +1503,81 @@ jQuery(function($) {
 					});
 				});
 			});
+		}
+	}
+
+	class MultiStepForm {
+		constructor(target) {
+			this.target = $(target);
+			this.steps = this.target.find(".cwp-form-step")
+
+			this.init();
+		}
+
+		init() {
+			// displaying the first step by default;
+			this.steps.eq(0).addClass('cwp-active-step');
+			this.handleEvents();
+		}
+
+		checkValidity(fields) {
+
+			let validity = true;
+
+			fields.each(function () {
+				const _is_field_valid_ = $(this).find('[data-cwp-field]')[0].checkValidity();
+
+				if (!_is_field_valid_) {
+					validity = false;
+				}
+
+			});
+
+			return validity;
+		}
+
+		reportValidity(fields) {
+			fields.each(function () {
+				$(this).find('[data-cwp-field]')[0].reportValidity();
+			});
+		}
+
+		handleEvents() {
+			const { steps } = this;
+			const t = this;
+
+			steps.each(function () {
+
+				const self = $(this);
+				const triggers_in_this_step = $(this).find('.multistep-trigger');
+				const fields_in_this_step = $(this).find('.cwp-field');
+
+
+
+				triggers_in_this_step.each(function () {
+					const trigger = $(this).data('trigger');
+
+					$(this).click(function (e) {
+						e.preventDefault();
+
+						if (!t.checkValidity(fields_in_this_step)) {
+							t.reportValidity(fields_in_this_step);
+						}
+
+						if (trigger === "next" && t.checkValidity(fields_in_this_step)) {
+							t.steps.removeClass('cwp-active-step');
+							self.next().addClass('cwp-active-step');
+						} else if (trigger === "previous") {
+							t.steps.removeClass('cwp-active-step');
+							self.prev().addClass('cwp-active-step');
+						}
+					});
+
+				})
+
+
+			});
+
 		}
 	}
 
@@ -1545,7 +1620,7 @@ jQuery(function($) {
 	}
 
 	function applyCalculation(form) {
-		form.find(".cwp-field.cwp-calculation").each(function() {
+		form.find(".cwp-field.cwp-calculation").each(function () {
 			let formula = $(this).attr("data-cwp-calculation");
 			// let fields = formula.match(/[(number)\-\d\w]+/g);
 			const f = formula.match(/[{{]+[\/number\-\d\w]+[}}]+/g);
@@ -1554,8 +1629,8 @@ jQuery(function($) {
 			const self = $(this),
 				t = this;
 
-			form.find("[data-cwp-field]").each(function() {
-				$(this).on("input", function() {
+			form.find("[data-cwp-field]").each(function () {
+				$(this).on("input", function () {
 					const target = $(this)
 						.attr("id")
 						.substring(0, 6);
@@ -1571,7 +1646,7 @@ jQuery(function($) {
 
 						const mapObj = getMapObject(fields, t.dataset);
 
-						expression = expression.replace(regExp, function(matched) {
+						expression = expression.replace(regExp, function (matched) {
 							return mapObj[matched];
 						});
 
@@ -1585,7 +1660,7 @@ jQuery(function($) {
 
 					const mapObj = getMapObject(fields, t.dataset);
 
-					expression = expression.replace(regExp, function(matched) {
+					expression = expression.replace(regExp, function (matched) {
 						return mapObj[matched];
 					});
 
@@ -1608,11 +1683,12 @@ jQuery(function($) {
 		});
 	}
 
-	$().ready(function() {
-		$(".cwp-form form").each(function() {
+	$().ready(function () {
+		$(".cwp-form form").each(function () {
+
 			$(this)
 				.find(".cwp-yes-no input[type='checkbox']")
-				.change(function() {
+				.change(function () {
 					if ($(this).prop("checked")) {
 						$(this).val("yes");
 						$(this)
@@ -1628,12 +1704,12 @@ jQuery(function($) {
 					}
 				});
 
-			$(this).on("submit", function(e) {
+			$(this).on("submit", function (e) {
 				let required_checkboxes = $(this).find(
 					".cwp-checkbox-set.required-checkbox"
 				);
 
-				required_checkboxes.each(function(index) {
+				required_checkboxes.each(function (index) {
 					if (
 						$(this)
 							.find("input:checkbox")
@@ -1651,10 +1727,10 @@ jQuery(function($) {
                       </div>
 					  <div>
 					  ${
-							errMessage.empty.trim().length === 0
-								? "Please select atleast one checkbox!"
-								: errMessage.empty
-						}
+								errMessage.empty.trim().length === 0
+									? "Please select atleast one checkbox!"
+									: errMessage.empty
+								}
                         
                       </div>
                     </div>
@@ -1669,7 +1745,7 @@ jQuery(function($) {
 
 				let required_radios = $(this).find(".cwp-radio-set.required-radio");
 
-				required_radios.each(function(index) {
+				required_radios.each(function (index) {
 					if (
 						$(this)
 							.find("input:radio")
@@ -1687,10 +1763,10 @@ jQuery(function($) {
                         </div>
                         <div>
 						${
-							errMessage.empty.trim().length === 0
-								? "Please select radio!"
-								: errMessage.empty
-						}
+								errMessage.empty.trim().length === 0
+									? "Please select radio!"
+									: errMessage.empty
+								}
                         </div>
                       </div>
                     `);
@@ -1704,7 +1780,7 @@ jQuery(function($) {
 			});
 		});
 
-		$(".cwp-form form").each(function() {
+		$(".cwp-form form").each(function () {
 			let condition = new Conditional(this);
 			const self = this;
 
@@ -1721,14 +1797,14 @@ jQuery(function($) {
 			let rangeSliders = $(this).find(".cwp-range-set");
 
 			if (rangeSliders.length) {
-				rangeSliders.each(function() {
+				rangeSliders.each(function () {
 					let rangeInput = $(this).find('input[type="range"]');
 					let numberInput = $(this).find('input[type="number"]');
 
-					rangeInput.on("input", function() {
+					rangeInput.on("input", function () {
 						numberInput.val($(this).val());
 					});
-					numberInput.on("input", function() {
+					numberInput.on("input", function () {
 						rangeInput.val($(this).val());
 					});
 				});
@@ -1738,13 +1814,23 @@ jQuery(function($) {
 				applyCalculation($(this));
 			}
 		});
+
+		$('.cwp-form').each(function () {
+			console.log($(this).data('formtype'));
+
+			if ($(this).data('formtype') === 'multiStep') {
+				const multiStepForm = new MultiStepForm(this);
+			}
+		})
 	});
 });
-document.addEventListener("DOMContentLoaded", function() {
+
+
+document.addEventListener("DOMContentLoaded", function () {
 	var elements = document.querySelectorAll(".cwp-form [data-cwp-field]");
 
 	elements.forEach(elem => {
-		elem.oninvalid = function(e) {
+		elem.oninvalid = function (e) {
 			if (e.target.dataset.errors) {
 				const validityText = JSON.parse(e.target.dataset.errors);
 
@@ -1770,7 +1856,7 @@ document.addEventListener("DOMContentLoaded", function() {
 				}
 			}
 		};
-		elem.onkeydown = function(e) {
+		elem.onkeydown = function (e) {
 			if (e.target.dataset.errors) {
 				e.target.setCustomValidity("");
 

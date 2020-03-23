@@ -43,6 +43,12 @@
 		}
 	}
 
+	& .cwp-form-step {
+		& .step-divider {
+			@include divider();
+		}
+	}
+
 	& .cwp-field {
 		&.is-style-inline {
 			& .cwp-field-set,

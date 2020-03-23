@@ -356,7 +356,8 @@ export function getFormTemplates(type) {
 	if (type === 'multiStep') {
 
 		return [
-			['cwp/form-step', {}, commonTemplate]
+			['cwp/form-step', {}, [['cwp/name', {}]]],
+			['cwp/form-step', {}, [['cwp/email', {}]]]
 		]
 
 	}

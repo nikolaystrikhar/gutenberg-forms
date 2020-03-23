@@ -12,7 +12,8 @@ function save(props) {
 		successMessage,
 		recaptcha,
 		theme,
-		recaptcha: { siteKey }
+		recaptcha: { siteKey },
+		formType
 	} = props.attributes;
 
 	const captcha_p = `
@@ -26,9 +27,10 @@ function save(props) {
 	`;
 	const formId = id && "form-".concat(id.split("-")[1]);
 
+
 	return (
 		<div>
-			<div className="cwp-form" id={formId}>
+			<div className="cwp-form" data-formtype={formType} id={formId}>
 				<form method="POST">
 					<InnerBlocks.Content />
 					{recaptcha.enable && (

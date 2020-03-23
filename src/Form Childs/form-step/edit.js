@@ -4,12 +4,12 @@ import { InnerBlocks } from "@wordpress/block-editor";
 function edit(props) {
     return (
         <div className="cwp-form-step">
-            <h3>Step Start</h3>
+            <span className="step-divider start"><div class="divider"><span></span><span>Step Start</span><span></span></div></span>
             <InnerBlocks
                 templateLock={false}
                 renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
             />
-            <h3>Step End</h3>
+            <span className="step-divider end"><div class="divider"><span></span><span>Step End</span><span></span></div></span>
         </div>
     );
 }
