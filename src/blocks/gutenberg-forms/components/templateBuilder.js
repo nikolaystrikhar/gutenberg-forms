@@ -8,7 +8,7 @@ import {
 	Icon,
 	Button
 } from "@wordpress/components";
-import { getFieldIcon, serializeFields } from "../misc/helper";
+import { getFieldIcon, serializeFields } from "../../../block/misc/helper";
 import $ from "jquery";
 const { getBlock } = wp.data.select("core/block-editor");
 

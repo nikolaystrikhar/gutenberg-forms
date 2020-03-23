@@ -1,6 +1,6 @@
 import React, { Fragment } from "react";
 import { TextControl, Icon } from "@wordpress/components";
-import { firstCapital, getFieldIcon } from "../misc/helper";
+import { firstCapital, getFieldIcon } from "../../../block/misc/helper.js";
 import { has } from "lodash";
 const { __ } = wp.i18n;
 export default function CustomMessages(props) {

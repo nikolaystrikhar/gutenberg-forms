@@ -14,8 +14,8 @@ import {
 } from "@wordpress/components";
 import { set, clone } from "lodash";
 import MappedMessages from "./components/messages";
-import { changeChildValue } from "./functions/index";
-import { basicColorScheme } from "./misc/helper";
+import { changeChildValue } from "../../block/functions/index";
+import { basicColorScheme } from "../../block/misc/helper";
 
 const { InspectorControls } = wp.blockEditor;
 

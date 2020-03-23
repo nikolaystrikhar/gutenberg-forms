@@ -1,7 +1,7 @@
 import React, { useEffect, Fragment } from "react";
 import Inspector from "./Inspector";
 import TemplateBuilder from "./components/templateBuilder";
-import { getThemeStyling } from "./misc/helper";
+import { getThemeStyling } from "../../block/misc/helper";
 const { InnerBlocks, RichText, BlockControls, BlockIcon } = wp.blockEditor;
 const { Button, Toolbar, Tooltip } = wp.components;
 

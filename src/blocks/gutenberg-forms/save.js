@@ -1,5 +1,5 @@
 import React, { Fragment } from "react";
-import { getThemeStyling } from "./misc/helper";
+import { getThemeStyling } from "../../block/misc/helper";
 const { InnerBlocks } = wp.blockEditor;
 
 function save(props) {
