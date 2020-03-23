@@ -3,13 +3,11 @@ import {
 	PanelBody,
 	ColorPalette,
 	RangeControl,
-	ButtonGroup,
-	Button,
-	PanelRow
+	SelectControl
 } from "@wordpress/components";
 import { basicColorScheme, strip_tags, firstCapital } from "../../block/misc/helper";
-import { clone, set } from "lodash";
-import { getRootFormBlock } from "../../block/functions/index";
+import { clone, set, get } from "lodash";
+import { getRootFormBlock, } from "../../block/functions/index";
 const { RichText, InspectorControls } = wp.blockEditor;
 
 function edit(props) {
@@ -36,17 +34,6 @@ function edit(props) {
 		props.setAttributes({ styling: buttonStyling });
 	};
 
-	const getActiveButtonGroup = (a, v) => {
-		if (props.attributes[a] === v) {
-			return {
-				isPrimary: true
-			};
-		}
-
-		return {
-			isDefault: true
-		};
-	};
 
 	const handleAction = (newAction) => {
 		props.setAttributes({ action: newAction });
@@ -62,27 +49,47 @@ function edit(props) {
 		props.setAttributes({ parentId: getRootFormBlock(props.clientId).clientId });
 	});
 
+	const getActions = () => {
+		const rootForm = getRootFormBlock(props.clientId);
+		const rootType = get(rootForm, 'attributes.formType'); //getting the type of form i.e multistep,standard;
+
+		let actions = [
+			{
+				label: "Reset", value: "reset"
+			},
+			{
+				label: "Submit", value: "submit"
+			}
+		];
+
+		if (rootType === "multiStep") {
+			actions.push(...[
+				{
+					label: "Next", value: "next"
+				},
+				{
+					label: "Previous", value: "previous"
+				}
+			])
+		}
+
+
+		return actions;
+	}
+
 	return [
 		<InspectorControls>
 			<PanelBody title="Settings">
-				<div className="cwp-option">
-					<PanelRow>
-						<h3>Action</h3>
-						<ButtonGroup>
-							<Button
-								onClick={() => handleAction("reset")}
-								{...getActiveButtonGroup("action", "reset")}
-							>
-								Reset
-							</Button>
-							<Button
-								onClick={() => handleAction("submit")}
-								{...getActiveButtonGroup("action", "submit")}
-							>
-								Submit
-							</Button>
-						</ButtonGroup>
-					</PanelRow>
+				<div className="cwp-option column">
+
+					<h3>Action</h3>
+					<div className="cwp-column">
+						<SelectControl
+							value={action}
+							options={getActions()}
+							onChange={(action) => handleAction(action)}
+						/>
+					</div>
 				</div>
 			</PanelBody>
 			<PanelBody title="Colors">

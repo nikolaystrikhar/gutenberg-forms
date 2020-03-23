@@ -2,6 +2,10 @@
 @import "../_partials/mixins";
 
 
+.cwp-forms-introduction {
+	@include Introduction();
+}
+
 .cwp-form {
 	& .wp-block-cwp-form-button {
 		@include normalize_button();
@@ -36,6 +40,12 @@
 
 		& .cwp_column_intro_selector {
 			@include column_introduction();
+		}
+	}
+
+	& .cwp-form-step {
+		& .step-divider {
+			@include divider();
 		}
 	}
 
