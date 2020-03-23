@@ -12,6 +12,7 @@
 import './block/block.js';
 
 import './blocks/checkbox/index.js';
+import './blocks/column/index.js';
 import './blocks/datepicker/index.js';
 import './blocks/email/index.js';
 import './blocks/form-button/index.js';

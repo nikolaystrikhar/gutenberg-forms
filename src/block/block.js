@@ -11,15 +11,6 @@ import mainSave from "./save";
 
 ////////////////////////////////!MAIN!//////////////////////////////////////////////
 
-////////////////////////////////!Column!//////////////////////////////////////////////
-
-import columnEdit from "../Form Childs/form-column/child/column/edit";
-import columnSave from "../Form Childs/form-column/child/column/save";
-
-// ^^ Child block for the form-column block for creating layouts;
-
-////////////////////////////////!Column!//////////////////////////////////////////////
-
 import { applyFormStyles } from "./formStyles/index";
 import { registerFieldStyles } from "./fieldStyles/index";
 import { getFieldTransform, defaultFieldMessages } from "./functions/index";
@@ -131,23 +122,3 @@ const myAttrs = [
 
 applyFormStyles("cwp/block-gutenberg-forms"); //registering styles
 registerFieldStyles(myAttrs); //registering field styles
-
-
-
-registerBlockType("cwp/column", {
-	title: __("Column"),
-	icon: "editor-table",
-	category: "common",
-	keywords: [
-		__("gutenberg-forms"),
-		__("forms"),
-		__("form-column"),
-		__("column")
-	],
-	edit: columnEdit,
-	save: columnSave,
-	attributes: {},
-	parent: ["cwp/form-column"]
-});
-
-
