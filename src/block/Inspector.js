@@ -145,9 +145,9 @@ function Inspector(prop) {
 				</div>
 				{!buttonSetting.disable && (
 					<Fragment>
-						<div className="cwp-option">
-							<PanelRow>
-								<h3 className="cwp-heading">Button Alignment</h3>
+						<div className="cwp-option column">
+							<h3 className="cwp-heading">Button Alignment</h3>
+							<div className="cwp-column">
 								<ButtonGroup>
 									<Button
 										{...getAlignmentProps("justify-start")}
@@ -168,7 +168,7 @@ function Inspector(prop) {
 										<Icon icon="editor-alignright" />
 									</Button>
 								</ButtonGroup>
-							</PanelRow>
+							</div>
 						</div>
 					</Fragment>
 				)}
@@ -183,9 +183,9 @@ function Inspector(prop) {
 						/>
 					</PanelRow>
 				</div>
-				<div className="cwp-option">
-					<PanelRow>
-						<h3>Confirmation Type</h3>
+				<div className="cwp-option column">
+					<h3>Confirmation Type</h3>
+					<div className="cwp-column">
 						<ButtonGroup>
 							<Button
 								{...getSuccess("url")}
@@ -200,7 +200,7 @@ function Inspector(prop) {
 								Message
 							</Button>
 						</ButtonGroup>
-					</PanelRow>
+					</div>
 				</div>
 				<div className="cwp-option">
 					{successType === "url" ? (
