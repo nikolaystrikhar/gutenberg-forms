@@ -24,3 +24,4 @@ import './blocks/phone/index.js';
 import './blocks/radio/index.js';
 import './blocks/select/index.js';
 import './blocks/text/index.js';
+import './blocks/website/index.js';

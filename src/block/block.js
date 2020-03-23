@@ -11,13 +11,6 @@ import mainSave from "./save";
 
 ////////////////////////////////!MAIN!//////////////////////////////////////////////
 
-////////////////////////////////!website!//////////////////////////////////////////////
-
-import websiteEdit from "../Form Childs/website/edit";
-import websiteSave from "../Form Childs/website/save";
-
-////////////////////////////////!website!//////////////////////////////////////////////
-
 ////////////////////////////////!formColumn!//////////////////////////////////////////////
 
 import formColumnEdit from "../Form Childs/form-column/edit";
@@ -152,75 +145,6 @@ const myAttrs = [
 
 applyFormStyles("cwp/block-gutenberg-forms"); //registering styles
 registerFieldStyles(myAttrs); //registering field styles
-
-
-registerBlockType("cwp/website", {
-	title: __("Website"),
-	icon: "laptop",
-	category: "common",
-	keywords: [__("gutenberg-forms"), __("forms"), __("website")],
-	edit: websiteEdit,
-	save: websiteSave,
-	attributes: {
-		enableCondition: {
-			type: "boolean",
-			default: false
-		},
-		website: {
-			type: "string",
-			default: ""
-		},
-		isRequired: {
-			type: "boolean",
-			default: false
-		},
-		label: {
-			type: "string",
-			default: "Website"
-		},
-		id: {
-			type: "string",
-			default: ""
-		},
-		field_name: {
-			type: "string",
-			default: ""
-		},
-		requiredLabel: {
-			type: "string",
-			default: "*"
-		},
-		messages: {
-			type: "object",
-			default: {
-				empty: "Please fill out this field!",
-				invalid: "The website {{value}} is not valid!"
-			}
-		},
-		condition: {
-			type: "object",
-			default: {
-				field: null,
-				condition: "===",
-				value: ""
-			}
-		},
-		requiredLabel: {
-			type: "string",
-			default: "*"
-		}
-	},
-	transforms: {
-		from: [
-			{
-				type: "block",
-				blocks: myAttrs.map(block => "cwp/".concat(block)),
-				transform: a => getFieldTransform(a, "website")
-			}
-		]
-	},
-	parent: fieldParents
-});
 
 registerBlockType("cwp/form-column", {
 	title: __("Form Column"),
