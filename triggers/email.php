@@ -1,6 +1,6 @@
 <?php
     require_once plugin_dir_path( __DIR__ ) . 'triggers/validator.php';
- 
+
     function array_remove_keys($array, $keys) {
 
         // array_diff_key() expected an associative array.
@@ -184,9 +184,31 @@
            if ( $this->is_fields_valid( $arranged_fields ) ) {
                // check if all the fields are valid;
                 $this->sendMail( $arranged_fields );
+
+			   /**
+				* @todo Put this somewhere else and add an if statement before to check if the user wants the form
+				*    	 entries to be stored in the database
+				*/
+			   $this->save_form_data_to_cpt( $arranged_fields );
            }
 
         }
+
+        private function save_form_data_to_cpt( $fields ) {
+        	var_dump( $fields );
+
+        	$new_fields = [];
+			foreach ( $fields as $field ) {
+				$new_fields[ $field[ 'field_type'] ] = $field[ 'field_value' ];
+        	}
+
+        	$new_post = [
+        		'post_type' => 'cwp_forms_entry',
+				'post_content' => serialize( $new_fields ),
+			];
+
+        	wp_insert_post( $new_post );
+		}
 
         private function with_fields( $fields, $target ) {
 
@@ -295,7 +317,7 @@
 
                 if ($this->validator->isEmpty($fromEmail)) {
                     wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body);
-                    
+
                 } else {
                     wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , "From: $fromEmail");
                 }
