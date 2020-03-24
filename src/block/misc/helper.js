@@ -49,6 +49,8 @@ export function getFieldIcon(name) {
 			return "no";
 		case "form-calculation":
 			return "media-document";
+		case 'file-upload':
+			return "upload";
 		default:
 			return;
 	}

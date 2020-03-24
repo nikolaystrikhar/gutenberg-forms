@@ -27,7 +27,8 @@ export const myAttrs = [
 	"website",
 	"text",
 	"select",
-	"number"
+	"number",
+	"file-upload"
 ];
 
 export function getAllowedBlocks(type) {

@@ -7,9 +7,9 @@ import fileUploadEdit from "./edit.js";
 import fileUploadSave from "./save.js";
 
 
-registerBlockType("cwp/form-button", {
-    title: __("Form Button"),
-    icon: __('upload'),
+registerBlockType("cwp/file-upload", {
+    title: __("File"),
+    icon: 'upload',
     category: "common",
     keywords: [__("gutenberg-forms"), __("forms"), __("file"), __("file upload")],
     edit: fileUploadEdit,

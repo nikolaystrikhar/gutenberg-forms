@@ -22,5 +22,6 @@ export const myAttrs = [
 	"text",
 	"select",
 	"number",
-	"yes-no"
+	"yes-no",
+	"file-upload"
 ];
