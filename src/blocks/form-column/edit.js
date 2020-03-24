@@ -51,35 +51,33 @@ function edit(props) {
 		<InspectorControls>
 			<PanelBody icon="layout" title="Layout Settings">
 				<div className="cwp-option">
-					<h3>Columns</h3>
-					<PanelRow>
-						<RangeControl
-							max={6}
-							min={2}
-							onChange={c => {
-								props.setAttributes({ columns: c });
+					<RangeControl
+						label="Columns"
+						max={6}
+						min={2}
+						onChange={c => {
+							props.setAttributes({ columns: c });
 
-								const currentInnerBlocks = getBlock(props.clientId).innerBlocks;
+							const currentInnerBlocks = getBlock(props.clientId).innerBlocks;
 
-								if (c > currentInnerBlocks.length - 1) {
-									for (let i = columns; i < c; ++i) {
-										currentInnerBlocks.push(
-											...createBlocksFromInnerBlocksTemplate([
-												["cwp/column", {}]
-											])
-										);
-									}
-									replaceInnerBlocks(props.clientId, currentInnerBlocks);
-									selectBlock(props.clientId);
-								} else {
-									currentInnerBlocks.pop();
-									replaceInnerBlocks(props.clientId, currentInnerBlocks);
-									selectBlock(props.clientId);
+							if (c > currentInnerBlocks.length - 1) {
+								for (let i = columns; i < c; ++i) {
+									currentInnerBlocks.push(
+										...createBlocksFromInnerBlocksTemplate([
+											["cwp/column", {}]
+										])
+									);
 								}
-							}}
-							value={columns}
-						/>
-					</PanelRow>
+								replaceInnerBlocks(props.clientId, currentInnerBlocks);
+								selectBlock(props.clientId);
+							} else {
+								currentInnerBlocks.pop();
+								replaceInnerBlocks(props.clientId, currentInnerBlocks);
+								selectBlock(props.clientId);
+							}
+						}}
+						value={columns}
+					/>
 				</div>
 				<div className="cwp-option">
 					<PanelRow>
@@ -97,13 +95,13 @@ function edit(props) {
 			{!intro ? (
 				<Introduction onSelect={handleSelect} />
 			) : (
-				<InnerBlocks
-					templateLock={"insert"}
-					renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
-					template={getTemplates()}
-					templateInsertUpdatesSelection={true}
-				/>
-			)}
+					<InnerBlocks
+						templateLock={"insert"}
+						renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
+						template={getTemplates()}
+						templateInsertUpdatesSelection={true}
+					/>
+				)}
 		</div>
 	];
 }

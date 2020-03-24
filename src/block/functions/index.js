@@ -356,8 +356,16 @@ export function getFormTemplates(type) {
 	if (type === 'multiStep') {
 
 		return [
-			['cwp/form-step', {}, [['cwp/name', {}]]],
-			['cwp/form-step', {}, [['cwp/email', {}]]]
+			['cwp/form-step', {}, [
+				['cwp/name', {}],
+				['cwp/form-button', { action: 'next', label: 'Next' }]
+			]
+			],
+			['cwp/form-step', {}, [
+				['cwp/email', {}],
+				['cwp/form-button', { action: 'previous', label: 'Previous' }]
+			]
+			]
 		]
 
 	}
