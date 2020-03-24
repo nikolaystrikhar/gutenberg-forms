@@ -12,7 +12,9 @@ function save(props) {
 		requiredLabel,
 		messages: { invalid, empty },
 		messages,
-		pattern
+		pattern,
+		minimumLength,
+		maximumLength,
 	} = props.attributes;
 
 	const getLabel = () => {
@@ -67,6 +69,8 @@ function save(props) {
 					{...getPattern()}
 					placeholder={text}
 					required={isRequired}
+					minLength={minimumLength}
+					maxLength={maximumLength}
 				/>
 			</div>
 		</div>

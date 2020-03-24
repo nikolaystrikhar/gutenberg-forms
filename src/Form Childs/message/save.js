@@ -14,7 +14,9 @@ function save(props) {
 		messages: { empty, invalid },
 		pattern,
 		condition,
-		enableCondition
+		enableCondition,
+		minimumLength,
+		maximumLength
 	} = props.attributes;
 
 	const getLabel = () => {
@@ -62,6 +64,8 @@ function save(props) {
 					aria-label={strip_tags(label)}
 					style={{ height: height }}
 					data-cwp-field
+					minLength={minimumLength}
+					maxLength={maximumLength}
 					name={id}
 					title={invalid}
 					required={isRequired}

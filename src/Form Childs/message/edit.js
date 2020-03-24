@@ -6,7 +6,8 @@ import {
 	PanelBody,
 	ResizableBox,
 	TextControl,
-	Icon
+	Icon,
+	RangeControl
 } from "@wordpress/components";
 import {
 	getFieldName,
@@ -17,6 +18,8 @@ import {
 import { clone, set, assign } from "lodash";
 import { getRootMessages } from "../../block/functions/index";
 import ConditionalLogic from "../../block/components/condition";
+
+const { __ } = wp.i18n;
 
 const {
 	InspectorControls,
@@ -54,7 +57,9 @@ function edit(props) {
 		messages,
 		pattern,
 		condition,
-		enableCondition
+		enableCondition,
+		minimumLength,
+		maximumLength
 	} = props.attributes;
 	useEffect(() => {
 		let rootMessages = getRootMessages(props.clientId, "message");
@@ -109,13 +114,13 @@ function edit(props) {
 							/>
 						</PanelRow>
 					) : (
-						<div className="cwp-option">
-							<p>
-								<Icon icon="info" /> You cannot set a conditional field
+							<div className="cwp-option">
+								<p>
+									<Icon icon="info" /> You cannot set a conditional field
 								required!
 							</p>
-						</div>
-					)}
+							</div>
+						)}
 					{isRequired && (
 						<div className="cwp-option">
 							<h3 className="cwp-heading">Required Text</h3>
@@ -127,6 +132,23 @@ function edit(props) {
 							/>
 						</div>
 					)}
+					<div className="cwp-option">
+						<RangeControl
+							label={__('Minimum Length')}
+							value={minimumLength}
+							initialPosition={0}
+							onChange={value => props.setAttributes({ minimumLength: value })}
+							min={0}
+							max={100}
+						/>
+						<RangeControl
+							label={__('Maximum Length')}
+							value={maximumLength}
+							onChange={value => props.setAttributes({ maximumLength: value })}
+							min={1}
+							max={100}
+						/>
+					</div>
 				</PanelBody>
 				<PanelBody title="Condition">
 					<ConditionalLogic
