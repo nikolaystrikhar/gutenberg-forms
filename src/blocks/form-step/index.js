@@ -1,3 +1,6 @@
+const { registerBlockType } = wp.blocks;
+const { __ } = wp.i18n;
+
 import stepFormEdit from "./edit";
 import stepFormSave from "./save";
 
