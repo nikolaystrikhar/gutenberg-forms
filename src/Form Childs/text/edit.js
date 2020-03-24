@@ -110,13 +110,13 @@ function edit(props) {
 							/>
 						</PanelRow>
 					) : (
-						<div className="cwp-option">
-							<p>
-								<Icon icon="info" /> You cannot set a conditional field
+							<div className="cwp-option">
+								<p>
+									<Icon icon="info" /> You cannot set a conditional field
 								required!
 							</p>
-						</div>
-					)}
+							</div>
+						)}
 
 					{isRequired && (
 						<div className="cwp-option">

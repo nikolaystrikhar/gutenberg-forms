@@ -97,13 +97,13 @@ function edit(props) {
 			{!intro ? (
 				<Introduction onSelect={handleSelect} />
 			) : (
-				<InnerBlocks
-					templateLock={"insert"}
-					renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
-					template={getTemplates()}
-					templateInsertUpdatesSelection={true}
-				/>
-			)}
+					<InnerBlocks
+						templateLock={"insert"}
+						renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
+						template={getTemplates()}
+						templateInsertUpdatesSelection={true}
+					/>
+				)}
 		</div>
 	];
 }
