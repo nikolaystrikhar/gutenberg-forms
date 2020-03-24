@@ -11,21 +11,32 @@ function save(props) {
 
 	}
 
-	return action === "submit" ? (
-		<button
-			style={buttonStyling}
-			name="submit"
-			value={id}
-			type="submit"
-			dangerouslySetInnerHTML={{ __html: label }}
-		></button>
-	) : (
-			<button
+
+	switch (action) {
+		case 'submit':
+			return <button
+				style={buttonStyling}
+				name="submit"
+				value={id}
+				type="submit"
+				dangerouslySetInnerHTML={{ __html: label }}
+			></button>;
+		case 'reset':
+			return <button
 				style={buttonStyling}
 				className="cwp-reset_btn"
 				dangerouslySetInnerHTML={{ __html: label }}
 			></button>
-		);
+		default:
+			return <button
+				style={buttonStyling}
+				data-trigger={action}
+				className={`cwp-multistep_btn multistep-trigger`}
+				dangerouslySetInnerHTML={{ __html: label }}
+			></button>
+	}
+
+
 }
 
 export default save;

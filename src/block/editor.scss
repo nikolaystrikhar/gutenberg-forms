@@ -2,6 +2,10 @@
 @import "../_partials/mixins";
 
 
+.cwp-forms-introduction {
+	@include Introduction();
+}
+
 .cwp-form {
 	& .wp-block-cwp-form-button {
 		@include normalize_button();
@@ -36,6 +40,12 @@
 
 		& .cwp_column_intro_selector {
 			@include column_introduction();
+		}
+	}
+
+	& .cwp-form-step {
+		& .step-divider {
+			@include divider();
 		}
 	}
 
@@ -170,7 +180,14 @@
 }
 
 .cwp-option {
+	
 	margin: 20px 0px !important;
+
+	&.column {
+		& .cwp-column {
+			margin: 10px 0px;
+		}
+	}
 
 	& h3.cwp-message_header {
 		margin: 0px 0px 10px 0px !important;

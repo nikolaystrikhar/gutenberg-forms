@@ -54,18 +54,24 @@ export function getFieldIcon(name) {
 	}
 }
 
-const layoutBlocks = ["cwp/form-column", "cwp/column", "cwp/form-group"]; //blocks that will be ignored while serializing...
+const layoutBlocks = ["cwp/form-column", "cwp/column", "cwp/form-group", "cwp/form-step"]; //blocks that will be ignored while serializing...
+const misc_blocks = ['cwp/form-button'];
 
 export function serializeFields(fields) {
 	let f = [];
 
 	fields.forEach(field => {
 		if (field.name.startsWith("cwp/") && !layoutBlocks.includes(field.name)) {
-			f.push({
-				blockName: field.name,
-				fieldName: field.attributes.label,
-				field_id: field.attributes.field_name
-			});
+
+			if (!misc_blocks.includes(field.name)) {
+				f.push({
+					blockName: field.name,
+					fieldName: field.attributes.label,
+					field_id: field.attributes.field_name
+				});
+			}
+
+
 		} else if (layoutBlocks.includes(field.name)) {
 			f.push(...serializeFields(field.innerBlocks));
 		}
@@ -143,36 +149,36 @@ export function getThemeStyling(theme, id) {
 	return `<style>
 
 		${
-			!isEmpty(fieldBackgroundColor)
-				? `#${id}.cwp-form .cwp-field.cwp-yes-no .cwp-field-set .cwp-switch input:checked + .cwp-slider {
+		!isEmpty(fieldBackgroundColor)
+			? `#${id}.cwp-form .cwp-field.cwp-yes-no .cwp-field-set .cwp-switch input:checked + .cwp-slider {
 			background-color: ${fieldBackgroundColor} !important;
 		}`
-				: ``
+			: ``
 		}
 
 
 		${
-			!isEmpty(textColor)
-				? `#${id}.cwp-form .cwp-field label {
+		!isEmpty(textColor)
+			? `#${id}.cwp-form .cwp-field label {
 				color: ${textColor} !important;
 			}
 			#${id}.cwp-form .cwp-field .rich-text {
 				color: ${textColor} !important;
 			}
 			`
-				: ``
+			: ``
 		}
 		
 		
 
 		${
-			!isEmpty(fieldBackgroundColor) && !isEmpty(accentColor)
-				? `#${id}.cwp-form .cwp-default-submit-btn {
+		!isEmpty(fieldBackgroundColor) && !isEmpty(accentColor)
+			? `#${id}.cwp-form .cwp-default-submit-btn {
 				color: ${accentColor} !important;
 				background-color: ${fieldBackgroundColor} !important;
 				border: 1px solid ${accentColor};
 			}`
-				: ``
+			: ``
 		}
 
 		#${id}.cwp-form .cwp-field.cwp-number .cwp-field-set .cwp-range-set input[type="range"] {
@@ -181,10 +187,10 @@ export function getThemeStyling(theme, id) {
 
 
 		${
-			!isEmpty(fieldBackgroundColor) &&
+		!isEmpty(fieldBackgroundColor) &&
 			!isEmpty(textColor) &&
 			!isEmpty(accentColor)
-				? `#${id}.cwp-form .cwp-field [data-cwp-field], 
+			? `#${id}.cwp-form .cwp-field [data-cwp-field], 
 			#${id}.cwp-form .cwp-field .cwp-field-set input, 
 			#${id}.cwp-form .cwp-field .cwp-field-set textarea  {
 	
@@ -203,7 +209,7 @@ export function getThemeStyling(theme, id) {
 				z-index: 1;
 			}
 			`
-				: ``
+			: ``
 		}
 
 		#${id}.cwp-form .cwp-field.is-style-button .cwp-checkbox-set input[type="checkbox"] + label,
