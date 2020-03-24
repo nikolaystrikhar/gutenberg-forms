@@ -78,7 +78,11 @@ registerBlockType("cwp/block-gutenberg-forms", {
 				textColor: "",
 				fieldBackgroundColor: ""
 			}
-		}
+		},
+		formType: {
+			type: "string",
+			default: ""
+		},
 	},
 	edit: mainEdit,
 	save: mainSave

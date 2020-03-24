@@ -1,10 +1,9 @@
 import React, { useEffect, Fragment } from "react";
 import Inspector from "./Inspector";
 import TemplateBuilder from "./components/templateBuilder";
-import { getThemeStyling } from "./misc/helper";
 import Introduction from "./components/introduction";
 import { isEmpty } from "lodash";
-import { getAllowedBlocks, getFormTemplates } from "../block/functions/index";
+import { getAllowedBlocks, getFormTemplates } from "../../block/functions/index";
 import { getThemeStyling } from "../../block/misc/helper";
 const { InnerBlocks, RichText, BlockControls, BlockIcon } = wp.blockEditor;
 const { Button, Toolbar, Tooltip } = wp.components;

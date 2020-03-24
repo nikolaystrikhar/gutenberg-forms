@@ -1,7 +1,8 @@
 export const fieldParents = [
 	"cwp/block-gutenberg-forms",
 	"cwp/column",
-	"cwp/form-group"
+	"cwp/form-group",
+	"cwp/form-step",
 ];
 
 export const fieldSupport = {

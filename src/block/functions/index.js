@@ -1,8 +1,8 @@
 import { strip_tags, extract_id } from "../misc/helper";
 import { each, has, omit, isEqual, clone, assign, isEmpty, get } from "lodash";
 
-import formStepSave from "../../Form Childs/form-step/save";
-import formStepEdit from "../../Form Childs/form-step/edit";
+import formStepSave from "../../blocks/form-step/save";
+import formStepEdit from "../../blocks/form-step/edit";
 
 const { createBlock, registerBlockType } = wp.blocks;
 const { __ } = wp.i18n;
