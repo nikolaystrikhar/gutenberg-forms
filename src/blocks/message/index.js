@@ -65,7 +65,15 @@ registerBlockType("cwp/message", {
 		requiredLabel: {
 			type: "string",
 			default: "*"
-		}
+		},
+		minimumLength: {
+			type: "number",
+			default: 0,
+		},
+		maximumLength: {
+			type: "number",
+			default: 100,
+		},
 	},
 	transforms: {
 		from: [
