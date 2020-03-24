@@ -1,14 +1,21 @@
-import React from "react";
+import React, { Fragment } from "react";
 import {
 	PanelBody,
 	ColorPalette,
 	RangeControl,
-	SelectControl
+	SelectControl,
+	DropdownMenu,
+	MenuGroup,
+	MenuItem,
+	Toolbar,
+	Tooltip,
+	Button
 } from "@wordpress/components";
 import { basicColorScheme, strip_tags, firstCapital } from "../../block/misc/helper";
 import { clone, set, get } from "lodash";
 import { getRootFormBlock, } from "../../block/functions/index";
-const { RichText, InspectorControls } = wp.blockEditor;
+const { RichText, InspectorControls, BlockControls } = wp.blockEditor;
+const { __ } = wp.i18n;
 
 function edit(props) {
 	const {
@@ -77,7 +84,10 @@ function edit(props) {
 		return actions;
 	}
 
+	let actionLabel = __(<span>Actions</span>)
+
 	return [
+
 		<InspectorControls>
 			<PanelBody title="Settings">
 				<div className="cwp-option column">
@@ -120,7 +130,29 @@ function edit(props) {
 				</div>
 			</PanelBody>
 		</InspectorControls>,
-		null,
+		<BlockControls>
+			<Toolbar>
+				<DropdownMenu label="Select Action" menuLabel="Action" icon={actionLabel}>
+					{
+						() => (
+							<Fragment>
+								<MenuGroup>
+									{
+										getActions().map(a => {
+
+											let activeIcon = action === a.value ? 'yes' : 'no';
+
+											return <MenuItem type="radio" role="menuitemradio" isSelected={action === a.value} icon={activeIcon} onClick={() => handleAction(a.value)}>{a.label}</MenuItem>
+
+										})
+									}
+								</MenuGroup>
+							</Fragment>
+						)
+					}
+				</DropdownMenu>
+			</Toolbar>
+		</BlockControls >, ,
 		<button style={buttonStyling} className={props.className}>
 			<RichText
 				tag="span"
