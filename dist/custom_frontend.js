@@ -1683,8 +1683,13 @@ jQuery(function ($) {
 		});
 	}
 
+
+
 	$().ready(function () {
+
 		$(".cwp-form form").each(function () {
+
+			
 
 			$(this)
 				.find(".cwp-yes-no input[type='checkbox']")
@@ -1816,8 +1821,6 @@ jQuery(function ($) {
 		});
 
 		$('.cwp-form').each(function () {
-			console.log($(this).data('formtype'));
-
 			if ($(this).data('formtype') === 'multiStep') {
 				const multiStepForm = new MultiStepForm(this);
 			}

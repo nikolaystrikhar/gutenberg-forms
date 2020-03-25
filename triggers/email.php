@@ -1,6 +1,7 @@
 <?php
     require_once plugin_dir_path( __DIR__ ) . 'triggers/validator.php';
- 
+    require_once plugin_dir_path( __DIR__ ) . 'triggers/file.php';
+
     function array_remove_keys($array, $keys) {
 
         // array_diff_key() expected an associative array.
@@ -154,9 +155,15 @@
 
             $post = $_POST;
 
-            $post_without_submit = array_pop($post);
+            $post_without_submit = array_remove_keys($_POST,['submit']);
 
-            foreach ( $post as $field_id => $field_value ) {
+            if (count($_FILES) !== 0) {
+                foreach ($_FILES as $file_id => $file_meta) {
+                    $post_without_submit[$file_id] = $file_meta;
+                }
+            }
+
+            foreach ( $post_without_submit as $field_id => $field_value ) {
                 $exploded_id = explode( "__", $field_id );
 
                 $field_type = end( $exploded_id ); //type of th e field i.e email,name etc;
@@ -172,15 +179,37 @@
 
                 $sanitizedValue = $this->validator->sanitizedValue($type, $field_value);
 
-                $arranged_fields[] = array(
+
+                $sanitized_field_value = NULL;
+
+                if (is_array($field_value)) {
+                    $sanitized_field_value = join("," , $field_value);
+                } else if ( $id === 'upload' ) {
+                    $sanitized_field_value = $field_value;
+                }   
+
+                $arranged_data = array(
                     'field_data_id' => $id,
-                    'field_value' => is_array($field_value) ? join("," , $field_value) : $sanitizedValue,
+                    'field_value' => $sanitized_field_value,
                     'is_valid'    => $field_id === "g-recaptcha-response" ? true: $is_valid,
                     'field_id'    => $field_id,
                     'field_type'  =>  $type
                 );
 
+
+                // if ($id === 'upload') {
+
+                //     $file_support = new FileUpload(); // my custom support for file;
+
+                //     $arranged_data = $file_support->get_valid_meta(); 
+
+                // }
+
+                $arranged_fields[] = $arranged_data;
+
             }
+
+            var_dump($arranged_fields);
            if ( $this->is_fields_valid( $arranged_fields ) ) {
                // check if all the fields are valid;
                 $this->sendMail( $arranged_fields );
@@ -284,20 +313,25 @@
 
             if (array_key_exists('email' , $template)) {
                 if ($this->validator->isEmpty($fromEmail)) {
-                    wp_mail($template['email'],$mail_subject,$mail_body);
+                    // wp_mail($template['email'],$mail_subject,$mail_body);
+                    echo 'MAIL SENDED';
                 } else {
-                    wp_mail($template['email'],$mail_subject,$mail_body , "From: $fromEmail");
+                    // wp_mail($template['email'],$mail_subject,$mail_body , "From: $fromEmail");
+                    echo 'MAIL SENDED';
                 }
 
-
                 $this->attempt_success($template);
+
             } else {
 
                 if ($this->validator->isEmpty($fromEmail)) {
-                    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body);
-                    
+                    // wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body);
+                    echo 'MAIL SENDED';
+
                 } else {
-                    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , "From: $fromEmail");
+                    echo 'MAIL SENDED';
+
+                    // wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , "From: $fromEmail");
                 }
                 $this->attempt_success($template);
             }

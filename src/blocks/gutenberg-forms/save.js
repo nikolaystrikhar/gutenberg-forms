@@ -31,7 +31,7 @@ function save(props) {
 	return (
 		<div>
 			<div className="cwp-form" data-formtype={formType} id={formId}>
-				<form method="POST">
+				<form method="POST" enctype="multipart/form-data">
 					<InnerBlocks.Content />
 					{recaptcha.enable && (
 						<div

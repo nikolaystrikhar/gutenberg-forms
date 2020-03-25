@@ -29,6 +29,8 @@ function gutenberg_forms_cwp_block_assets()
 		true
 	);
 
+
+
 	wp_register_style(
 		'gutenberg_forms-cwp-block-editor-css',
 		plugins_url('dist/blocks.editor.build.css', dirname(__FILE__)),

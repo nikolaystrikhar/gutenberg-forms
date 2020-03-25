@@ -125,6 +125,11 @@ export const defaultFieldMessages = [
 		fieldName: "number",
 		empty: "Please fill out this field!",
 		invalid: "The number {{value}} is not in range!"
+	},
+	{
+		fieldName: "file-upload",
+		empty: "Please select a file",
+		invalid: "The file {{value}} is not valid!"
 	}
 ];
 

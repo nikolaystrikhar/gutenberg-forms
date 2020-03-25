@@ -37,3 +37,4 @@ import './blocks/select/index.js';
 import './blocks/text/index.js';
 import './blocks/website/index.js';
 import './blocks/yes-no/index.js';
+import './blocks/file_upload/index.js';
