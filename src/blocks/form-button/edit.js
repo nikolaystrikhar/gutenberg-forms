@@ -20,7 +20,7 @@ const { __ } = wp.i18n;
 function edit(props) {
 	const {
 		styling,
-		styling: { backgroundColor, color, padding },
+		styling: { backgroundColor, color, padding, borderRadius },
 		label,
 		action
 	} = props.attributes;
@@ -84,7 +84,7 @@ function edit(props) {
 		return actions;
 	}
 
-	let actionLabel = __(<span>Actions</span>)
+	let actionLabel = __(<span>Action</span>)
 
 	return [
 
@@ -126,6 +126,15 @@ function edit(props) {
 						label="Padding"
 						value={padding}
 						onChange={p => handleStyling(p, "padding")}
+					/>
+				</div>
+				<div className="cwp-option">
+					<RangeControl
+						min={0}
+						max={100}
+						label="Border Radius"
+						value={borderRadius}
+						onChange={p => handleStyling(p, "borderRadius")}
 					/>
 				</div>
 			</PanelBody>

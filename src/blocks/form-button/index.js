@@ -43,7 +43,8 @@ registerBlockType("cwp/form-button", {
 			default: {
 				backgroundColor: "rgb(238, 238, 238)",
 				color: "rgb(49, 49, 49)",
-				padding: 25
+				padding: 25,
+				borderRadius: 0
 			}
 		}
 	},
