@@ -20,6 +20,7 @@
 
             $this->validator = new Validator();
             $this->post_content = $post_content;
+            $this->attachments = array();
 
         }
 
@@ -145,9 +146,6 @@
             return false;
         }
 
-
-
-
         public function init() {
 
 
@@ -197,19 +195,36 @@
                 );
 
 
-                // if ($id === 'upload') {
+                if ($id === 'upload') {
 
-                //     $file_support = new FileUpload(); // my custom support for file;
+                    // updating attachment files;
 
-                //     $arranged_data = $file_support->get_valid_meta(); 
+                    $file_to_upload = $_FILES;
+                    $file_name = $file_to_upload[$field_id]['name'];
+                    $tmp_name = $file_to_upload[$field_id]['tmp_name'];
 
-                // }
+                    $allowed =  array('gif','png' ,'jpg', 'doc', 'docx', 'odt', 'pdf', 'zip', 'rar', '7zip');
+                    $ext = pathinfo($file_name, PATHINFO_EXTENSION);
+                    
+                    if( in_array($ext,$allowed) ) {
+                        move_uploaded_file( $tmp_name, WP_CONTENT_DIR.'/uploads/'.basename( $file_name ) );
+                        $file_path = WP_CONTENT_DIR.'/uploads/'.basename( $file_name );
+
+                        $this->attachments[] = $file_path;
+                        
+                    } 
+
+
+                    
+                    
+                }
 
                 $arranged_fields[] = $arranged_data;
 
+                
+
             }
 
-            var_dump($arranged_fields);
            if ( $this->is_fields_valid( $arranged_fields ) ) {
                // check if all the fields are valid;
                 $this->sendMail( $arranged_fields );
@@ -294,7 +309,10 @@
 
             $mail_subject = $this->with_fields($fields, $template[0]['subject']);
             $mail_body = $this->with_fields($fields, $template[0]['body']);
+            $headers = '';
 
+
+            $headers .= 'Content-type: multipart/mixed; charset=iso-8859-1' . "\r\n";
 
             $post = $_POST;
 
@@ -311,7 +329,9 @@
                 }
             }
 
+
             if (array_key_exists('email' , $template)) {
+
                 if ($this->validator->isEmpty($fromEmail)) {
                     // wp_mail($template['email'],$mail_subject,$mail_body);
                     echo 'MAIL SENDED';
@@ -327,12 +347,17 @@
                 if ($this->validator->isEmpty($fromEmail)) {
                     // wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body);
                     echo 'MAIL SENDED';
+                    
 
                 } else {
+                    var_dump($this->attachments);
                     echo 'MAIL SENDED';
-
-                    // wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , "From: $fromEmail");
+                    // wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , $headers , $this->attachments);
+                    echo 'FILE NAME';
+                    
                 }
+                
+
                 $this->attempt_success($template);
             }
         }

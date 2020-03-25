@@ -1,17 +1,11 @@
 <?php
 
-class FileUpload {
-    public function __construct($file_data) {
-        $this->$file_data = $file_data;
-    }
+function get_attachment($file_data) {
 
-    public function get_valid_meta() {
+    $file_name = $file_data['name'];
+    $name = ABSPATH . "/uploads/$file_name.png";
 
-
-        return $this->file_data;
+    return $name;
 
 
-
-
-    }
 }
