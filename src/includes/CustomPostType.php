@@ -7,19 +7,18 @@ class CustomPostType {
 	private $identifier = 'cwp_forms_submission';
 
 	private $args = [
-		'icon' => 'email-alt',
+		'icon' 					=> 'email-alt',
 		'supports'              => array( 'title', 'editor' ),
 		'hierarchical'          => false,
-		'public'                => true,
-		'show_ui'               => true,
-		'show_in_menu'          => true,
-		'menu_position'         => 5,
-		'show_in_admin_bar'     => true,
-		'show_in_nav_menus'     => true,
+		'public'                => false,
+		'show_ui'               => false,
+		'show_in_menu'          => false,
+		'show_in_admin_bar'     => false,
+		'show_in_nav_menus'     => false,
 		'can_export'            => true,
 		'has_archive'           => true,
 		'exclude_from_search'   => true,
-		'publicly_queryable'    => true,
+		'publicly_queryable'    => false,
 		'capability_type'       => 'page',
 		'show_in_rest'          => false,
 	];
