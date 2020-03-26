@@ -135,42 +135,20 @@ function cwp_gutenberg_forms_messages_meta() {
     ) );
 }
 
-// Register Custom Post Type
-function cwp_gutenberg_forms_register_post_type() {
-
-	$args = array(
-		'label'                 => __( 'Gutenberg Forms Submission', 'text_domain' ),
-		'labels' => [
-			'name' => __('Gutenberg Forms'),
-			'singular_name' => __('Gutenberg Forms Entry'),
-		],
-		'icon' => 'email-alt',
-		'description'           => __( 'Post Type Description', 'text_domain' ),
-		'supports'              => array( 'title', 'editor' ),
-		'hierarchical'          => false,
-		'public'                => true,
-		'show_ui'               => true,
-		'show_in_menu'          => true,
-		'menu_position'         => 5,
-		'show_in_admin_bar'     => true,
-		'show_in_nav_menus'     => true,
-		'can_export'            => true,
-		'has_archive'           => true,
-		'exclude_from_search'   => true,
-		'publicly_queryable'    => true,
-		'capability_type'       => 'page',
-		'show_in_rest'          => false,
-	);
-
-	register_post_type( 'cwp_forms_entry', $args);
-
-}
-
-add_action( 'init', 'cwp_gutenberg_forms_messages_meta' );
-
 //custom_postype for our gutenberg-forms;
 add_action('wp_head' , 'submitter');
 add_action('wp-load' , 'submitter');
 // add_action('init', 'create_posttype');
 add_action('init', 'gutenberg_forms_cwp_block_assets');
 add_action('init', 'cwp_gutenberg_forms_register_post_type');
+
+require_once plugin_dir_path( __DIR__ ) . 'src/includes/CustomPostType.php';
+require_once plugin_dir_path( __DIR__ ) . 'src/includes/SubmissionsPage.php';
+
+$cpt = new \CWP\GutenbergForms\CustomPostType();
+$cpt->init();
+
+$submissions_page = new \CWP\GutenbergForms\SubmissionsPage();
+$submissions_page->init();
+
+

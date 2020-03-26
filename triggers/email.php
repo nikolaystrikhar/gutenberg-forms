@@ -195,16 +195,22 @@
         }
 
         private function save_form_data_to_cpt( $fields ) {
-        	var_dump( $fields );
+
+			global $post;
 
         	$new_fields = [];
 			foreach ( $fields as $field ) {
 				$new_fields[ $field[ 'field_type'] ] = $field[ 'field_value' ];
         	}
 
-        	$new_post = [
-        		'post_type' => 'cwp_forms_entry',
+			$new_post = [
+        		'post_type'    => 'cwp_forms_submission',
+				'post_title'   => $post->post_title,
 				'post_content' => serialize( $new_fields ),
+				'post_status'  => 'publish',
+				'meta_input'   => [
+					'form_post_id'   => $post->ID
+				]
 			];
 
         	wp_insert_post( $new_post );
