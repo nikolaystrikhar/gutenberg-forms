@@ -5,24 +5,26 @@ import {
 	PanelRow,
 	PanelBody,
 	TextControl,
-	Icon
+	Icon,
+	FormTokenField
 } from "@wordpress/components";
 import {
 	getFieldName,
 	extract_id,
 	getEncodedData
 } from "../../block/misc/helper";
-import { getRootMessages } from "../../block/functions/index";
+import { getRootMessages, getRootFormBlock } from "../../block/functions/index";
 import ConditionalLogic from "../../block/components/condition";
 
-import { clone, set, assign } from "lodash";
+import { clone, set, assign, isEqual } from "lodash";
 
 const {
 	InspectorControls,
 	BlockControls,
-	BlockIcon,
 	RichText
 } = wp.blockEditor;
+const { updateBlockAttributes } = wp.data.dispatch("core/block-editor");
+
 
 function edit(props) {
 	const handleChange = e => {
@@ -51,8 +53,18 @@ function edit(props) {
 		messages: { empty, invalid },
 		messages,
 		condition,
-		enableCondition
+		enableCondition,
+		allowedFormats
 	} = props.attributes;
+
+	useEffect(() => {
+		// setting the root encryption for form-data;
+
+		const rootForm = getRootFormBlock(props.clientId);
+
+		updateBlockAttributes(rootForm.clientId, { encryption: "multipart/form-data" }); //? like a piece of cake
+				
+	} , [])
 
 	useEffect(() => {
         let rootMessages = getRootMessages(props.clientId, "file-upload");
@@ -91,6 +103,39 @@ function edit(props) {
 		props.setAttributes({ messages: newMessages });
 	};
 
+	const suggestions = [
+		".jpg",
+		".jpeg",
+		".png",
+		".gif",
+		".pdf",
+		".doc",
+		".docx",
+		".ppt",
+		".pptx",
+		".odt",
+		".avi",
+		".ogg",
+		".m4a",
+		".mov",
+		".mp3",
+		".mp4",
+		".mpg",
+		".wav",
+		".wmv"
+	  ];
+
+	const handleFormats = (newFormats) => {
+
+		for (const format of newFormats) {
+			if ( !suggestions.includes(format) ) {
+				return;
+			}
+		}
+
+		props.setAttributes({ allowedFormats: newFormats });
+	}
+
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
@@ -125,6 +170,17 @@ function edit(props) {
 							</div>
 						</Fragment>
 					)}
+					<div className="cwp-option column">
+						<h3>Allowed Formats</h3>
+						<div className="cwp-column">
+						<FormTokenField 
+							value={ allowedFormats } 
+							suggestions={ suggestions } 
+							onChange={ f => handleFormats(f) }
+							placeholder="Allowed Format(s)"
+						/>
+						</div>
+					</div>
 				</PanelBody>
 				<PanelBody title="Condition">
 					<ConditionalLogic

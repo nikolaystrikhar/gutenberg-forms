@@ -1475,6 +1475,8 @@ jQuery(function ($) {
 								.each(function () {
 									fieldValue.push($(this).val());
 								});
+						} else if ($(this).attr('type') === 'file') {
+							fieldValue = $(this).val().replace(/C:\\fakepath\\/i, '');
 						} else {
 							fieldValue = $(this).val();
 						}
@@ -1688,9 +1690,6 @@ jQuery(function ($) {
 	$().ready(function () {
 
 		$(".cwp-form form").each(function () {
-
-			
-
 			$(this)
 				.find(".cwp-yes-no input[type='checkbox']")
 				.change(function () {

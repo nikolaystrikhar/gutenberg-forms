@@ -11,7 +11,8 @@ function save(props) {
 		id,
 		requiredLabel,
 		messages: { empty, invalid },
-		pattern,
+		condition,
+		allowedFormats
 	} = props.attributes;
 
 	const getLabel = () => {
@@ -42,6 +43,29 @@ function save(props) {
 
 		return {};
 	};
+	const suggestions = [
+		".jpg",
+		".jpeg",
+		".png",
+		".gif",
+		".pdf",
+		".doc",
+		".docx",
+		".ppt",
+		".pptx",
+		".odt",
+		".avi",
+		".ogg",
+		".m4a",
+		".mov",
+		".mp3",
+		".mp4",
+		".mpg",
+		".wav",
+		".wmv"
+	  ]
+
+	const acceptFiles = isEmpty(allowedFormats) ? suggestions.join(",") : allowedFormats.join(",");
 
 	return (
 		<div className="cwp-file cwp-field" {...getCondition()}>
@@ -54,6 +78,7 @@ function save(props) {
 				)}
 				<input
 					id={id}
+					accept={acceptFiles}
 					aria-label={strip_tags(label)}
 					data-cwp-field
 					name={id}

@@ -186,7 +186,6 @@ export function getRootFormBlock(clientId, asRoot = false) {
 	return rootForm;
 }
 
-
 function isDefaultValues(blockAttrs, type, fName, messages) {
 	//ensuring that the block values aren't changed!
 

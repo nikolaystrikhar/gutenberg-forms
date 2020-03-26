@@ -4,7 +4,6 @@
 
     function array_remove_keys($array, $keys) {
 
-        // array_diff_key() expected an associative array.
         $assocKeys = array();
         foreach($keys as $key) {
             $assocKeys[$key] = true;
@@ -112,7 +111,7 @@
                     }
 
                     $templates[] = $decoded_template;
-
+                    
                 } else {
                     $templates += $this->get_templates($id, $block['innerBlocks']);
                 }
@@ -121,7 +120,6 @@
 
             return $templates;
         }
-
 
         private function has_captcha($post){
             if (array_key_exists('g-recaptcha-response' , $post)) {
@@ -194,6 +192,7 @@
                     'field_type'  =>  $type
                 );
 
+                // var_dump($this->get_inner_block('cwp/file-upload' , $_POST['submit'])[0]);
 
                 if ($id === 'upload') {
 
@@ -213,9 +212,6 @@
                         $this->attachments[] = $file_path;
                         
                     } 
-
-
-                    
                     
                 }
 
@@ -225,6 +221,8 @@
 
             }
 
+
+            
            if ( $this->is_fields_valid( $arranged_fields ) ) {
                // check if all the fields are valid;
                 $this->sendMail( $arranged_fields );
@@ -312,7 +310,13 @@
             $headers = '';
 
 
-            $headers .= 'Content-type: multipart/mixed; charset=iso-8859-1' . "\r\n";
+            if ( count( $this->attachments ) !== 0 ) {
+                $headers .= 'Content-type: multipart/mixed; charset=iso-8859-1' . "\r\n";
+            }
+
+            if (!is_null($fromEmail)) {
+                $headers .= "From: $fromEmail";
+            }
 
             $post = $_POST;
 
@@ -332,32 +336,24 @@
 
             if (array_key_exists('email' , $template)) {
 
-                if ($this->validator->isEmpty($fromEmail)) {
-                    // wp_mail($template['email'],$mail_subject,$mail_body);
-                    echo 'MAIL SENDED';
+                if ($this->validator->isEmpty($headers)) {
+                    wp_mail($template['email'],$mail_subject,$mail_body , null, $this->attachments);
                 } else {
-                    // wp_mail($template['email'],$mail_subject,$mail_body , "From: $fromEmail");
-                    echo 'MAIL SENDED';
+                    wp_mail($template['email'],$mail_subject,$mail_body , $headers, $this->attachments);
                 }
 
                 $this->attempt_success($template);
 
             } else {
 
-                if ($this->validator->isEmpty($fromEmail)) {
-                    // wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body);
-                    echo 'MAIL SENDED';
+                if ($this->validator->isEmpty($headers)) {
+                    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body, null, $this->attachments);
                     
 
                 } else {
-                    var_dump($this->attachments);
-                    echo 'MAIL SENDED';
-                    // wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , $headers , $this->attachments);
-                    echo 'FILE NAME';
-                    
+                    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , $headers , $this->attachments);
                 }
                 
-
                 $this->attempt_success($template);
             }
         }

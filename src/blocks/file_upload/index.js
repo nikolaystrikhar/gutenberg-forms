@@ -56,6 +56,30 @@ registerBlockType("cwp/file-upload", {
 		requiredLabel: {
 			type: "string",
 			default: "*"
+		},
+		allowedFormats: {
+			type: "string",
+			default: [
+				".jpg",
+				".jpeg",
+				".png",
+				".gif",
+				".pdf",
+				".doc",
+				".docx",
+				".ppt",
+				".pptx",
+				".odt",
+				".avi",
+				".ogg",
+				".m4a",
+				".mov",
+				".mp3",
+				".mp4",
+				".mpg",
+				".wav",
+				".wmv"
+			  ]
 		}
     },
     supports: {
