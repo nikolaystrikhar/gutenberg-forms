@@ -83,6 +83,10 @@ registerBlockType("cwp/block-gutenberg-forms", {
 			type: "string",
 			default: ""
 		},
+		encryption: {
+			type: "string",
+			default: ""
+		}
 	},
 	edit: mainEdit,
 	save: mainSave

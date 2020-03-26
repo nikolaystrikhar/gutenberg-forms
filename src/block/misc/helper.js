@@ -49,13 +49,15 @@ export function getFieldIcon(name) {
 			return "no";
 		case "form-calculation":
 			return "media-document";
+		case 'file-upload':
+			return "media-document";
 		default:
 			return;
 	}
 }
 
 const layoutBlocks = ["cwp/form-column", "cwp/column", "cwp/form-group", "cwp/form-step"]; //blocks that will be ignored while serializing...
-const misc_blocks = ['cwp/form-button'];
+const misc_blocks = ['cwp/form-button', 'cwp/file-upload'];
 
 export function serializeFields(fields) {
 	let f = [];

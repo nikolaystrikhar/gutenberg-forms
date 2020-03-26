@@ -16,7 +16,7 @@ const myAttrs = [
 	"text",
 	"select",
 	"number",
-	"yes-no"
+	"yes-no",
 ];
 
 applyFormStyles("cwp/block-gutenberg-forms"); //registering styles

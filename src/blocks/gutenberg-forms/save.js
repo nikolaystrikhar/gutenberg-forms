@@ -1,5 +1,6 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { getThemeStyling } from "../../block/misc/helper";
+import { isEmpty } from "lodash";
 const { InnerBlocks } = wp.blockEditor;
 
 function save(props) {
@@ -13,7 +14,8 @@ function save(props) {
 		recaptcha,
 		theme,
 		recaptcha: { siteKey },
-		formType
+		formType,
+		encryption
 	} = props.attributes;
 
 	const captcha_p = `
@@ -27,11 +29,20 @@ function save(props) {
 	`;
 	const formId = id && "form-".concat(id.split("-")[1]);
 
+	const getEncryption = () => {
+		if (!isEmpty(encryption)) {
+			return {
+				enctype: encryption
+			}
+		}
+
+		return {};
+	}
 
 	return (
 		<div>
 			<div className="cwp-form" data-formtype={formType} id={formId}>
-				<form method="POST">
+				<form method="POST" {...getEncryption()}>
 					<InnerBlocks.Content />
 					{recaptcha.enable && (
 						<div
