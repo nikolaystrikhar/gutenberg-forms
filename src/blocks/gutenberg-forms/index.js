@@ -86,6 +86,10 @@ registerBlockType("cwp/block-gutenberg-forms", {
 		encryption: {
 			type: "string",
 			default: ""
+		},
+		hideFormOnSuccess: {
+			type: "boolean",
+			default: false
 		}
 	},
 	edit: mainEdit,

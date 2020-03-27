@@ -33,7 +33,8 @@ function Inspector(prop) {
 		recaptcha,
 		theme,
 		formType,
-		recaptcha: { siteKey, clientSecret }
+		recaptcha: { siteKey, clientSecret },
+		hideFormOnSuccess
 	} = props.attributes;
 
 	const handleAlignment = aln => {
@@ -216,6 +217,17 @@ function Inspector(prop) {
 							/>
 						)}
 				</div>
+				{
+					successType === "message" && <div className="cwp-option">
+					<PanelRow>
+						<h3>Hide Form On Success</h3>
+						<FormToggle 
+							checked={hideFormOnSuccess}
+							onChange={() => props.setAttributes({ hideFormOnSuccess: !hideFormOnSuccess })}
+						/>
+					</PanelRow>
+				</div>	
+				}
 			</PanelBody>
 			<PanelBody initialOpen={false} title="reCAPTCHA v2">
 				<div className="cwp-option">

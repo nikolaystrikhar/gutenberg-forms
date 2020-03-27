@@ -111,6 +111,12 @@
                         $decoded_template['successMessage'] = "The form has been submitted Successfully!";
                     }
 
+                    if (array_key_exists('hideFormOnSuccess' , $attributes)) {
+                        $decoded_template['hideFormOnSuccess'] = $attributes['hideFormOnSuccess'];
+                    } else {
+                        $decoded_template['hideFormOnSuccess'] = false;
+                    }
+
                     $templates[] = $decoded_template;
                     
                 } else {
@@ -261,11 +267,19 @@
 
         }
 
-        private function message_success( $message ) {
+        private function message_success( $message, $hideFormOnSuccess ) {
 
             $message_id = $_POST['submit'];
 
-            $hidden_style = "<style> #$message_id { display: block !important } </style>";
+
+            $css = "#$message_id { display: block }";
+
+
+            if ($hideFormOnSuccess === true) {
+                $css .= "\n [data-formid=".$message_id."] { display: none; }";
+            }
+
+            $hidden_style = "<style> $css </style>";
 
             if ($this->validator->isEmpty($message)) {
                 echo $hidden_style;
@@ -281,7 +295,7 @@
             if ($successType === "url") {
                 $this->url_success($successURL);
             } else if ($successType === "message") {
-                $this->message_success($successMessage);
+                $this->message_success($successMessage, $hideFormOnSuccess);
             }
 
         }

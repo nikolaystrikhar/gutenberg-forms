@@ -1689,6 +1689,23 @@ jQuery(function ($) {
 
 	$().ready(function () {
 
+		$('.cwp-form').each(function(){ 
+
+			let formRoot = $(this).find('form');
+
+			let resubmit_btn = $(this).find('.cwp-add_another_submission button')
+
+			if (resubmit_btn.length) {
+
+				resubmit_btn.click(function() {
+					$(this).parent().parent().parent().css('display', 'none');
+					formRoot.css('display' , 'block');
+				});
+
+			}
+
+		});
+
 		$(".cwp-form form").each(function () {
 			$(this)
 				.find(".cwp-yes-no input[type='checkbox']")

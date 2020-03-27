@@ -502,9 +502,21 @@
 }
 
 @mixin successMessage() {
+	
 	border-left: 2px solid green;
 	padding: 20px 20px;
 	background: #00800030;
+
+	& div.wrapper {
+		display: flex;
+		justify-content: space-between;
+
+		& span {
+			display: flex;
+    		flex-direction: column;
+    		justify-content: center;
+		}
+	}
 }
 
 //form styles
