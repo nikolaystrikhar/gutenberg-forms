@@ -145,6 +145,8 @@ export function getRootFormBlock(clientId, asRoot = false) {
 	const rootId = asRoot ? clientId : getBlockHierarchyRootClientId(clientId)
 	const rootBlock = getBlock(rootId); //getting the root block;
 
+	if (isEmpty(rootBlock)) return {}; // null exception
+
 	//checking if the root block is "cwp/gutenberg-forms" or it is nested inside of this root block
 	// for example "cwp/cover" can furthur nest our "cwp/gutenberg-forms" block
 
@@ -261,6 +263,7 @@ export function getChildAttributes(clientId) {
 export function getSiblings(clientId, slug = null) {
 	const rootBlock = getRootFormBlock(clientId); //i.e = gutenberg-forms;
 
+	if (isEmpty(rootBlock)) return []; //null exception
 
 	if (
 		rootBlock.name !== "cwp/block-gutenberg-forms" &&

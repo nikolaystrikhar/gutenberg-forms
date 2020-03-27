@@ -27,7 +27,10 @@ function edit(props) {
 	const formId = id && "form-".concat(id.split("-")[1]);
 
 	useEffect(() => {
-		props.setAttributes({ id: "submit-" + props.clientId });
+		props.setAttributes({ id: "submit-" + props.clientId, template: JSON.stringify({
+			subject: "New Form Submission",
+			body: `Form Data:`
+		}) });
 	}, []);
 
 	const handleButtonLabel = label => {
@@ -91,7 +94,7 @@ function edit(props) {
 						</div>
 						<div className={`cwp-form ${showEditor}`}>
 							<div className="cwp-editor">
-								<TemplateBuilder data={props} />
+								<TemplateBuilder clientId={props.clientId} data={props} />
 							</div>
 						</div>
 						<div

@@ -1,5 +1,5 @@
 import React, { useRef, useState, useEffect } from "react";
-import { map, isEmpty } from "lodash";
+import { map, isEmpty, has } from "lodash";
 import { Fragment } from "@wordpress/element";
 import {
 	DropdownMenu,
@@ -13,12 +13,17 @@ import $ from "jquery";
 const { getBlock } = wp.data.select("core/block-editor");
 
 function TemplateBuilder(prop) {
+
 	const props = prop.data;
 
 	const { clientId } = props,
 		{ template, email, fromEmail, templateBuilder } = props.attributes;
 
-	let child_fields = getBlock(clientId).innerBlocks;
+
+	const root = getBlock(props.clientId);
+
+	let child_fields = !isEmpty(root) ? root.innerBlocks : [];
+
 
 	const handleChange = (e, t) => {
 		let v = e.target.value;
@@ -37,6 +42,7 @@ function TemplateBuilder(prop) {
 	let bodyId = "cwp-body-" + clientId + "body";
 
 	useEffect(() => {
+
 		if (isEmpty(subject) && isEmpty(body)) {
 			const fields = serializeFields(child_fields).map(v => {
 				return "{{" + v.field_id + "}}";

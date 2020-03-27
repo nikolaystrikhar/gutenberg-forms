@@ -45,6 +45,7 @@
             }
         }
 
+
         private function get_templates($id, $blocks = null) {
             if (is_null($blocks)) {
                 $blocks = $this->post_content;
@@ -78,7 +79,7 @@
                     if (array_key_exists('email' ,$attributes)) {
                         $user_email = $attributes['email'];
 
-                        if ($this->validator->validate('email' , $user_email)) {
+                        if ($this->validator->isEmail($user_email)) {
                             $decoded_template['email'] = $user_email;
                         }
                     }
@@ -146,7 +147,6 @@
 
         public function init() {
 
-
             $arranged_fields = array();
 
             $post = $_POST;
@@ -175,14 +175,15 @@
 
                 $sanitizedValue = $this->validator->sanitizedValue($type, $field_value);
 
-
                 $sanitized_field_value = NULL;
 
                 if (is_array($field_value)) {
                     $sanitized_field_value = join("," , $field_value);
                 } else if ( $id === 'upload' ) {
                     $sanitized_field_value = $field_value;
-                }   
+                } else {
+                    $sanitized_field_value = $sanitizedValue;
+                }
 
                 $arranged_data = array(
                     'field_data_id' => $id,
@@ -216,9 +217,6 @@
                 }
 
                 $arranged_fields[] = $arranged_data;
-
-                
-
             }
 
 
@@ -245,9 +243,7 @@
                 }
             }
 
-
             $replaced_str = strtr($target, $data);
-
 
             return $replaced_str;
 
@@ -301,9 +297,7 @@
             $template = $this->get_templates($_POST['submit'])[0];
 
 
-
             isset($template) && extract($template);
-
 
             $mail_subject = $this->with_fields($fields, $template[0]['subject']);
             $mail_body = $this->with_fields($fields, $template[0]['body']);
@@ -334,7 +328,7 @@
             }
 
 
-            if (array_key_exists('email' , $template)) {
+            if (array_key_exists('email' , $template) && !is_null($template)) {
 
                 if ($this->validator->isEmpty($headers)) {
                     wp_mail($template['email'],$mail_subject,$mail_body , null, $this->attachments);
@@ -348,8 +342,6 @@
 
                 if ($this->validator->isEmpty($headers)) {
                     wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body, null, $this->attachments);
-                    
-
                 } else {
                     wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , $headers , $this->attachments);
                 }
