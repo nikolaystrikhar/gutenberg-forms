@@ -93,6 +93,45 @@ class SubmissionsPage {
 	}
 
 	/**
+	 * Return an array of submissions for a specific form id (= the original post's id)
+	 * @param $form_id integer The original post's ID
+	 * @return array Array of submissions to a specific form
+	 */
+	private function get_submissions_by_form( $form_id ) {
+		/**
+		 * Get all form submissions for a specific form identified by its form id stored in post meta
+		 */
+		$query = new \WP_Query( [
+			'post_type'      => 'cwp_forms_submission',
+			'post_status'    => 'publish',
+			'posts_per_page' => -1,
+			'orderby'  		 => 'meta_value_num',
+			'meta_key'		 => 'form_post_id',
+			'order' => 'ASC',
+			'meta_query' => [
+				[
+					'key' => 'form_post_id',
+					'value' => $form_id,
+					'compare' => '=',
+				],
+			],
+		] );
+
+		$submissions = [];
+
+		foreach( $query->posts as $submission ) {
+			$submissions[] = [
+				'id' 	    => $submission->ID,
+				'post_date' => $submission->post_date,
+				'fields'    => unserialize( $submission->post_content ),
+			];
+		}
+
+		return $submissions;
+
+	}
+
+	/**
 	 * Render the page
 	 */
 	public function render() {
@@ -100,20 +139,32 @@ class SubmissionsPage {
 		// @todo add capability check here as well
 
 		if( isset( $_GET[ 'post_id' ] ) ) {
-
-			$form_id = $_GET[ 'post_id' ];
-
-			require_once $this->template_dir . 'submissions-details.php';
+			// Render the details page for a specific form
+			$this->render_details_page( $_GET[ 'post_id' ] );
 			return;
-
 		}
 
 		// Render the overview page if no post_id is in the query string
+		$this->render_overview_page();
 
+	}
+
+	/**
+	 * Render the overview page
+	 */
+	public function render_overview_page() {
 		$forms = $this->get_forms();
-
 		require_once $this->template_dir . 'submissions-overview.php';
+	}
 
+	/**
+	 * Render the details page for a specific form
+	 */
+	private function render_details_page( $form_id ) {
+		$submissions = $this->get_submissions_by_form( $form_id );
+		// Get the columns from the first entry
+		$columns     = array_keys( $submissions[ 0 ][ 'fields' ] );
+		require_once $this->template_dir . 'submissions-details.php';
 	}
 
 }
