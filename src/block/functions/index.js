@@ -1,8 +1,8 @@
 import { strip_tags, extract_id } from "../misc/helper";
 import { each, has, omit, isEqual, clone, assign, isEmpty, get } from "lodash";
 
-import formStepSave from "../../Form Childs/form-step/save";
-import formStepEdit from "../../Form Childs/form-step/edit";
+import formStepSave from "../../blocks/form-step/save";
+import formStepEdit from "../../blocks/form-step/edit";
 
 const { createBlock, registerBlockType } = wp.blocks;
 const { __ } = wp.i18n;
@@ -27,7 +27,8 @@ export const myAttrs = [
 	"website",
 	"text",
 	"select",
-	"number"
+	"number",
+	"file-upload"
 ];
 
 export function getAllowedBlocks(type) {
@@ -124,6 +125,11 @@ export const defaultFieldMessages = [
 		fieldName: "number",
 		empty: "Please fill out this field!",
 		invalid: "The number {{value}} is not in range!"
+	},
+	{
+		fieldName: "file-upload",
+		empty: "Please select a file",
+		invalid: "The file {{value}} is not valid!"
 	}
 ];
 
@@ -179,7 +185,6 @@ export function getRootFormBlock(clientId, asRoot = false) {
 
 	return rootForm;
 }
-
 
 function isDefaultValues(blockAttrs, type, fName, messages) {
 	//ensuring that the block values aren't changed!
