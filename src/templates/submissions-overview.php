@@ -9,7 +9,7 @@
 
 	<?php else: ?>
 
-		<table class="widefat striped">
+		<table class="fixed widefat striped">
 			<thead>
 			<tr>
 				<th>Post ID</th>
