@@ -139,14 +139,14 @@ function edit(props) {
 							initialPosition={0}
 							onChange={value => props.setAttributes({ minimumLength: value })}
 							min={0}
-							max={100}
+							max={1000}
 						/>
 						<RangeControl
 							label={__('Maximum Length')}
 							value={maximumLength}
 							onChange={value => props.setAttributes({ maximumLength: value })}
 							min={1}
-							max={100}
+							max={1000}
 						/>
 					</div>
 				</PanelBody>

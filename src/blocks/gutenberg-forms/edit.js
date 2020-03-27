@@ -27,10 +27,7 @@ function edit(props) {
 	const formId = id && "form-".concat(id.split("-")[1]);
 
 	useEffect(() => {
-		props.setAttributes({ id: "submit-" + props.clientId, template: JSON.stringify({
-			subject: "New Form Submission",
-			body: `Form Data:`
-		}) });
+		props.setAttributes({ id: "submit-" + props.clientId });
 	}, []);
 
 	const handleButtonLabel = label => {

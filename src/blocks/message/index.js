@@ -72,7 +72,7 @@ registerBlockType("cwp/message", {
 		},
 		maximumLength: {
 			type: "number",
-			default: 100,
+			default: 1000,
 		},
 	},
 	transforms: {
