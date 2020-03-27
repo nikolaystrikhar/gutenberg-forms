@@ -46,21 +46,7 @@ function edit(props) {
 
 	const selectContainer = useRef();
 
-	useEffect(() => {
-		let rootMessages = getRootMessages(props.clientId, "select");
-
-		if (rootMessages) {
-			const newMessages = clone(messages);
-
-			assign(newMessages, rootMessages);
-
-			props.setAttributes({ messages: newMessages });
-		}
-
-		let { options } = props.attributes;
-
-		setSelect(options);
-
+	const getRootData = () => {
 		if (field_name === "") {
 			props.setAttributes({
 				field_name: getFieldName("select", props.clientId)
@@ -79,7 +65,27 @@ function edit(props) {
 					getEncodedData("select", extract_id(field_name), isRequired)
 			});
 		}
+	}
+
+	useEffect(() => {
+		let rootMessages = getRootMessages(props.clientId, "select");
+
+		if (rootMessages) {
+			const newMessages = clone(messages);
+
+			assign(newMessages, rootMessages);
+
+			props.setAttributes({ messages: newMessages });
+		}
+
+		let { options } = props.attributes;
+
+		setSelect(options);
+
+		getRootData();
 	}, []);
+
+	useEffect(() => getRootData() , [props]);
 
 	useEffect(() => {
 		let boxes = selectContainer.current.querySelectorAll(

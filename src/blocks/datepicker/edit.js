@@ -56,7 +56,7 @@ function edit(props) {
 		enableCondition
 	} = props.attributes;
 
-	useEffect(() => {
+	const getRootData = () => {
 		if (field_name === "") {
 			props.setAttributes({
 				field_name: getFieldName("datePicker", props.clientId)
@@ -75,7 +75,13 @@ function edit(props) {
 					getEncodedData("datePicker", extract_id(field_name), isRequired)
 			});
 		}
+	}
+
+	useEffect(() => {
+		getRootData();
 	}, []);
+
+	useEffect(() => getRootData() , [props]);
 
 	const getTypeActive = t => {
 		if (type === t) {

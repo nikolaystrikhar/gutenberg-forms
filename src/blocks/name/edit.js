@@ -55,17 +55,8 @@ function edit(props) {
 		enableCondition
 	} = props.attributes;
 
-	useEffect(() => {
-		let rootMessages = getRootMessages(props.clientId, "name");
 
-		if (rootMessages) {
-			const newMessages = clone(messages);
-
-			assign(newMessages, rootMessages);
-
-			props.setAttributes({ messages: newMessages });
-		}
-
+	const getRootData = () => {
 		if (field_name === "") {
 			props.setAttributes({ field_name: getFieldName("name", props.clientId) });
 			props.setAttributes({
@@ -82,7 +73,23 @@ function edit(props) {
 					getEncodedData("name", extract_id(field_name), isRequired)
 			});
 		}
+	}
+
+	useEffect(() => {
+		let rootMessages = getRootMessages(props.clientId, "name");
+
+		if (rootMessages) {
+			const newMessages = clone(messages);
+
+			assign(newMessages, rootMessages);
+
+			props.setAttributes({ messages: newMessages });
+		}
+
+		getRootData();
 	}, []);
+
+	useEffect(() => getRootData() , [props])
 
 	const setMessages = (type, m) => {
 		let newMessages = clone(messages);

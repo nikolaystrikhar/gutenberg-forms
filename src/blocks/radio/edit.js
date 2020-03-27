@@ -49,6 +49,27 @@ function edit(props) {
 		index: null
 	});
 
+	const getRootData = () => {
+		if (field_name === "") {
+			props.setAttributes({
+				field_name: getFieldName("radio", props.clientId)
+			});
+			props.setAttributes({
+				id:
+					props.clientId +
+					"__" +
+					getEncodedData("radio", props.clientId, isRequired)
+			});
+		} else if (field_name !== "") {
+			props.setAttributes({
+				id:
+					extract_id(field_name) +
+					"__" +
+					getEncodedData("radio", extract_id(field_name), isRequired)
+			});
+		}
+	}
+
 	useEffect(() => {
 		let rootMessages = getRootMessages(props.clientId, "radio");
 
@@ -80,25 +101,10 @@ function edit(props) {
 			setRadios(options);
 		}
 
-		if (field_name === "") {
-			props.setAttributes({
-				field_name: getFieldName("radio", props.clientId)
-			});
-			props.setAttributes({
-				id:
-					props.clientId +
-					"__" +
-					getEncodedData("radio", props.clientId, isRequired)
-			});
-		} else if (field_name !== "") {
-			props.setAttributes({
-				id:
-					extract_id(field_name) +
-					"__" +
-					getEncodedData("radio", extract_id(field_name), isRequired)
-			});
-		}
+		getRootData();
 	}, []);
+
+	useEffect(() => getRootData() , [props]);
 
 	useEffect(() => {
 		let boxes = radiosContainer.current.querySelectorAll(

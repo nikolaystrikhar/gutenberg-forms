@@ -46,7 +46,7 @@ function edit(props) {
 		requiredLabel
 	} = props.attributes;
 
-	useEffect(() => {
+	const getRootData = () => {
 		if (field_name === "") {
 			props.setAttributes({
 				field_name: getFieldName("yes_no", props.clientId)
@@ -65,7 +65,13 @@ function edit(props) {
 					getEncodedData("yes_no", extract_id(field_name), isRequired)
 			});
 		}
+	}
+
+	useEffect(() => {
+		getRootData();
 	}, []);
+
+	useEffect(() => getRootData(), [props]);
 
 	return [
 		!!props.isSelected && (

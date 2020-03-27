@@ -48,11 +48,7 @@ function edit(props) {
 
 	let checkboxContainer = useRef();
 
-	useEffect(() => {
-		let { options } = props.attributes;
-
-		setCheckboxes(options);
-
+	const getRootData = () => {
 		if (field_name === "") {
 			props.setAttributes({
 				field_name: getFieldName("checkbox", props.clientId)
@@ -73,7 +69,17 @@ function edit(props) {
 					"[]"
 			});
 		}
+	}
+
+	useEffect(() => {
+		let { options } = props.attributes;
+
+		setCheckboxes(options);
+		getRootData()
+		
 	}, []);
+
+	useEffect(() => getRootData() , [props]);
 
 	const setMessages = (type, m) => {
 		let newMessages = clone(messages);

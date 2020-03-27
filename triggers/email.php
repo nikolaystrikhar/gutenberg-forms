@@ -170,12 +170,13 @@
 
                 $field_type = end( $exploded_id ); //type of th e field i.e email,name etc;
 
-                $is_valid = $this->validator->validate( $field_type, $field_value );
 
                 $f_DECODED = $this->validator->decode( $field_type );
 
 
                 $type = array_key_exists('type' , $this->validator->decode( $field_type )) ? $this->validator->decode( $field_type )['type'] : "";
+
+                $is_valid = $this->validator->validate( $type, $field_value, $field_type );
 
                 $id = end($f_DECODED);
 
@@ -199,9 +200,9 @@
                     'field_type'  =>  $type
                 );
 
-                // var_dump($this->get_inner_block('cwp/file-upload' , $_POST['submit'])[0]);
 
-                if ($id === 'upload') {
+
+                if ($type === 'file_upload') {
 
                     // updating attachment files;
 
@@ -209,16 +210,42 @@
                     $file_name = $file_to_upload[$field_id]['name'];
                     $tmp_name = $file_to_upload[$field_id]['tmp_name'];
 
-                    $allowed =  array('gif','png' ,'jpg', 'doc', 'docx', 'odt', 'pdf', 'zip', 'rar', '7zip');
+                    $allowed_defaults =  array(
+                        "jpg",
+                        "jpeg",
+                        "png",
+                        "gif",
+                        "pdf",
+                        "doc",
+                        "docx",
+                        "ppt",
+                        "pptx",
+                        "odt",
+                        "avi",
+                        "ogg",
+                        "m4a",
+                        "mov",
+                        "mp3",
+                        "mp4",
+                        "mpg",
+                        "wav",
+                        "wmv"
+                    );
+                    $parsed_alloweds =  json_decode($f_DECODED['extra_meta'], false);
+
+                    // $allowed = sizeof($parsed_alloweds) === 0 ? $allowed_defaults : $parsed_alloweds;
+                    
                     $ext = pathinfo($file_name, PATHINFO_EXTENSION);
                     
-                    if( in_array($ext,$allowed) ) {
+                    if( in_array($ext,$allowed_defaults) ) {
                         move_uploaded_file( $tmp_name, WP_CONTENT_DIR.'/uploads/'.basename( $file_name ) );
                         $file_path = WP_CONTENT_DIR.'/uploads/'.basename( $file_name );
 
                         $this->attachments[] = $file_path;
                         
-                    } 
+                    } else {
+                        $arranged_data['is_valid'] = false;
+                    }
                     
                 }
 
@@ -226,7 +253,6 @@
             }
 
 
-            
            if ( $this->is_fields_valid( $arranged_fields ) ) {
                // check if all the fields are valid;
                 $this->sendMail( $arranged_fields );
@@ -269,6 +295,7 @@
 
         private function message_success( $message, $hideFormOnSuccess ) {
 
+
             $message_id = $_POST['submit'];
 
 
@@ -281,9 +308,8 @@
 
             $hidden_style = "<style> $css </style>";
 
-            if ($this->validator->isEmpty($message)) {
-                echo $hidden_style;
-            }
+
+            echo $hidden_style;
 
         }
 
@@ -342,12 +368,15 @@
             }
 
 
-            if (array_key_exists('email' , $template) && !is_null($template)) {
+            if (array_key_exists('email' , $template)) {
 
                 if ($this->validator->isEmpty($headers)) {
-                    wp_mail($template['email'],$mail_subject,$mail_body , null, $this->attachments);
+                    print 'MAIL SENDED';
+
+                    // wp_mail($template['email'],$mail_subject,$mail_body , null, $this->attachments);
                 } else {
-                    wp_mail($template['email'],$mail_subject,$mail_body , $headers, $this->attachments);
+                    print 'MAIL SENDED';
+                    // wp_mail($template['email'],$mail_subject,$mail_body , $headers, $this->attachments);
                 }
 
                 $this->attempt_success($template);
@@ -355,9 +384,13 @@
             } else {
 
                 if ($this->validator->isEmpty($headers)) {
-                    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body, null, $this->attachments);
+                    print 'MAIL SENDED';
+
+                    // wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body, null, $this->attachments);
                 } else {
-                    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , $headers , $this->attachments);
+                    print 'MAIL SENDED';
+
+                    // wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , $headers , $this->attachments);
                 }
                 
                 $this->attempt_success($template);

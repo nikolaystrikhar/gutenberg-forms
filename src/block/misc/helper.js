@@ -13,10 +13,19 @@ export function extract_id(id) {
 	return exploded[exploded.length - 1];
 }
 
-export function getEncodedData(f, id, isRequired) {
-	return encodeURIComponent(
-		window.btoa(`--${getFieldName(f, id)}-${isRequired}-${f}`)
-	);
+export function getEncodedData(f, id, isRequired , extra = null) {
+	
+
+	if (extra === null) {
+		return encodeURIComponent(
+			window.btoa(`--${getFieldName(f, id)}-${isRequired}-${f}`)
+		);
+	} else{ 
+		return encodeURIComponent(
+			window.btoa(`--${getFieldName(f, id)}-${isRequired}-${f}-${extra}`)
+		);
+	}
+
 }
 
 export function getFieldIcon(name) {

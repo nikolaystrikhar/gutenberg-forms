@@ -44,28 +44,28 @@ function save(props) {
 		return {};
 	};
 	const suggestions = [
-		".jpg",
-		".jpeg",
-		".png",
-		".gif",
-		".pdf",
-		".doc",
-		".docx",
-		".ppt",
-		".pptx",
-		".odt",
-		".avi",
-		".ogg",
-		".m4a",
-		".mov",
-		".mp3",
-		".mp4",
-		".mpg",
-		".wav",
-		".wmv"
+		"jpg",
+		"jpeg",
+		"png",
+		"gif",
+		"pdf",
+		"doc",
+		"docx",
+		"ppt",
+		"pptx",
+		"odt",
+		"avi",
+		"ogg",
+		"m4a",
+		"mov",
+		"mp3",
+		"mp4",
+		"mpg",
+		"wav",
+		"wmv"
 	  ]
 
-	const acceptFiles = isEmpty(allowedFormats) ? suggestions.join(",") : allowedFormats.join(",");
+	const acceptFiles = isEmpty(allowedFormats) ? suggestions.map(s => ".".concat(s)).join(",") : allowedFormats.map(s => ".".concat(s)).join(",");
 
 	return (
 		<div className="cwp-file cwp-field" {...getCondition()}>

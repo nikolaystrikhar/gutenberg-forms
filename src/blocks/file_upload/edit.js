@@ -66,6 +66,25 @@ function edit(props) {
 				
 	} , [])
 
+	const setRootData = () => {
+		if (field_name === "") {
+			props.setAttributes({ field_name: getFieldName("file_upload", props.clientId) });
+			props.setAttributes({
+				id:
+					props.clientId +
+					"__" +
+					getEncodedData("file_upload", props.clientId, isRequired, JSON.stringify(allowedFormats))
+			});
+		} else if (field_name !== "") {
+			props.setAttributes({
+				id:
+					extract_id(field_name) +
+					"__" +
+					getEncodedData("file_upload", extract_id(field_name), isRequired, JSON.stringify(allowedFormats))
+			});
+		}
+	}
+
 	useEffect(() => {
         let rootMessages = getRootMessages(props.clientId, "file-upload");
 
@@ -76,24 +95,12 @@ function edit(props) {
 
 			props.setAttributes({ messages: newMessages });
 		}
-
-		if (field_name === "") {
-			props.setAttributes({ field_name: getFieldName("file-upload", props.clientId) });
-			props.setAttributes({
-				id:
-					props.clientId +
-					"__" +
-					getEncodedData("file-upload", props.clientId, isRequired)
-			});
-		} else if (field_name !== "") {
-			props.setAttributes({
-				id:
-					extract_id(field_name) +
-					"__" +
-					getEncodedData("file-upload", extract_id(field_name), isRequired)
-			});
-		}
+		setRootData();
 	}, []);
+
+	useEffect(() => {
+		setRootData();
+	}, [props])
 
 	const setMessages = (type, m) => {
 		let newMessages = clone(messages);
@@ -104,25 +111,25 @@ function edit(props) {
 	};
 
 	const suggestions = [
-		".jpg",
-		".jpeg",
-		".png",
-		".gif",
-		".pdf",
-		".doc",
-		".docx",
-		".ppt",
-		".pptx",
-		".odt",
-		".avi",
-		".ogg",
-		".m4a",
-		".mov",
-		".mp3",
-		".mp4",
-		".mpg",
-		".wav",
-		".wmv"
+		"jpg",
+		"jpeg",
+		"png",
+		"gif",
+		"pdf",
+		"doc",
+		"docx",
+		"ppt",
+		"pptx",
+		"odt",
+		"avi",
+		"ogg",
+		"m4a",
+		"mov",
+		"mp3",
+		"mp4",
+		"mpg",
+		"wav",
+		"wmv"
 	  ];
 
 	const handleFormats = (newFormats) => {
