@@ -2,6 +2,16 @@
 @import "../_partials/mixins";
 
 
+.cwp-intro {
+	& div.types {
+
+		& button {
+			margin: 0px 10px;
+		}
+
+	}
+}
+
 .cwp-form {
 	& .wp-block-cwp-form-button {
 		@include normalize_button();
