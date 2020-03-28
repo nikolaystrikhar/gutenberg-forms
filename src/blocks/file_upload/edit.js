@@ -76,6 +76,7 @@ function edit(props) {
 					getEncodedData("file_upload", props.clientId, isRequired, JSON.stringify(allowedFormats))
 			});
 		} else if (field_name !== "") {
+
 			props.setAttributes({
 				id:
 					extract_id(field_name) +

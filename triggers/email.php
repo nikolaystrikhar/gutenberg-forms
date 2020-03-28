@@ -12,7 +12,6 @@
         return array_diff_key($array, $assocKeys);
     }
 
-
     class Email {
 
         public function __construct($post_content) {
@@ -118,7 +117,7 @@
                     }
 
                     $templates[] = $decoded_template;
-                    
+
                 } else {
                     $templates += $this->get_templates($id, $block['innerBlocks']);
                 }
@@ -233,20 +232,20 @@
                     );
                     $parsed_alloweds =  json_decode($f_DECODED['extra_meta'], false);
 
-                    // $allowed = sizeof($parsed_alloweds) === 0 ? $allowed_defaults : $parsed_alloweds;
-                    
+                    $allowed = sizeof($parsed_alloweds) === 0 ? $allowed_defaults : $parsed_alloweds;
+
                     $ext = pathinfo($file_name, PATHINFO_EXTENSION);
-                    
+
                     if( in_array($ext,$allowed_defaults) ) {
                         move_uploaded_file( $tmp_name, WP_CONTENT_DIR.'/uploads/'.basename( $file_name ) );
                         $file_path = WP_CONTENT_DIR.'/uploads/'.basename( $file_name );
 
                         $this->attachments[] = $file_path;
-                        
+
                     } else {
                         $arranged_data['is_valid'] = false;
                     }
-                    
+
                 }
 
                 $arranged_fields[] = $arranged_data;
@@ -316,12 +315,12 @@
         private function attempt_success( $template ) {
 
             if (!isset($template)) return;
-            extract($template);
+            extract($template)
 
-            if ($successType === "url") {
+            if ( $successType === "url" ) {
                 $this->url_success($successURL);
             } else if ($successType === "message") {
-                $this->message_success($successMessage, $hideFormOnSuccess);
+                $this->message_success( $successMessage, $hideFormOnSuccess );
             }
 
         }
@@ -371,12 +370,9 @@
             if (array_key_exists('email' , $template)) {
 
                 if ($this->validator->isEmpty($headers)) {
-                    print 'MAIL SENDED';
-
-                    // wp_mail($template['email'],$mail_subject,$mail_body , null, $this->attachments);
+                    wp_mail($template['email'],$mail_subject,$mail_body , null, $this->attachments);
                 } else {
-                    print 'MAIL SENDED';
-                    // wp_mail($template['email'],$mail_subject,$mail_body , $headers, $this->attachments);
+                    wp_mail($template['email'],$mail_subject,$mail_body , $headers, $this->attachments);
                 }
 
                 $this->attempt_success($template);
@@ -384,15 +380,11 @@
             } else {
 
                 if ($this->validator->isEmpty($headers)) {
-                    print 'MAIL SENDED';
-
-                    // wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body, null, $this->attachments);
+                    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body, null, $this->attachments);
                 } else {
-                    print 'MAIL SENDED';
-
-                    // wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , $headers , $this->attachments);
+                    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , $headers , $this->attachments);
                 }
-                
+
                 $this->attempt_success($template);
             }
         }
