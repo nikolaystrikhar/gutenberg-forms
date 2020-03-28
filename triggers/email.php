@@ -215,9 +215,13 @@
 
                     $is_allowed = $this->validator->test_file_formats($ext, $parsed_alloweds);
 
+                    $hexed_file_name = md5(uniqid(rand(), true));
+
+                    $hexed_file_name .= ".$ext";
+
                     if( $is_allowed ) {
-                        move_uploaded_file( $tmp_name, WP_CONTENT_DIR.'/uploads/'.basename( $file_name ) );
-                        $file_path = WP_CONTENT_DIR.'/uploads/'.basename( $file_name );
+                        move_uploaded_file( $tmp_name, WP_CONTENT_DIR.'/uploads/'.$hexed_file_name );
+                        $file_path = WP_CONTENT_DIR.'/uploads/'.$hexed_file_name;
 
                         $this->attachments[] = $file_path;
 
