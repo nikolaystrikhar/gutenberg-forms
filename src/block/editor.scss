@@ -2,10 +2,6 @@
 @import "../_partials/mixins";
 
 
-.cwp-forms-introduction {
-	@include Introduction();
-}
-
 .cwp-form {
 	& .wp-block-cwp-form-button {
 		@include normalize_button();

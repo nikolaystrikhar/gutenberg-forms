@@ -6,7 +6,7 @@ import stepFormSave from "./save";
 
 registerBlockType("cwp/form-step", {
 	title: __("Form Step"),
-	icon: "editor-table",
+	icon: "editor-ol-rtl",
 	category: "common",
 	keywords: [
 		__("gutenberg-forms"),

@@ -63,8 +63,8 @@ function edit(props) {
 		const rootForm = getRootFormBlock(props.clientId);
 
 		updateBlockAttributes(rootForm.clientId, { encryption: "multipart/form-data" }); //? like a piece of cake
-				
-	} , [])
+
+	}, [])
 
 	const setRootData = () => {
 		if (field_name === "") {
@@ -76,10 +76,6 @@ function edit(props) {
 					getEncodedData("file_upload", props.clientId, isRequired, JSON.stringify(allowedFormats))
 			});
 		} else if (field_name !== "") {
-
-
-			console.log(JSON.stringify(allowedFormats));
-
 			props.setAttributes({
 				id:
 					extract_id(field_name) +
@@ -90,7 +86,7 @@ function edit(props) {
 	}
 
 	useEffect(() => {
-        let rootMessages = getRootMessages(props.clientId, "file-upload");
+		let rootMessages = getRootMessages(props.clientId, "file-upload");
 
 		if (rootMessages) {
 			const newMessages = clone(messages);
@@ -134,12 +130,12 @@ function edit(props) {
 		"mpg",
 		"wav",
 		"wmv"
-	  ];
+	];
 
 	const handleFormats = (newFormats) => {
 
 		for (const format of newFormats) {
-			if ( !suggestions.includes(format) ) {
+			if (!suggestions.includes(format)) {
 				return;
 			}
 		}
@@ -161,13 +157,13 @@ function edit(props) {
 							/>
 						</PanelRow>
 					) : (
-						<div className="cwp-option">
-							<p>
-								<Icon icon="info" /> You cannot set a conditional field
+							<div className="cwp-option">
+								<p>
+									<Icon icon="info" /> You cannot set a conditional field
 								required!
 							</p>
-						</div>
-					)}
+							</div>
+						)}
 					{isRequired && (
 						<Fragment>
 							<div className="cwp-option">
@@ -184,12 +180,12 @@ function edit(props) {
 					<div className="cwp-option column">
 						<h3>Allowed Formats</h3>
 						<div className="cwp-column">
-						<FormTokenField 
-							value={ allowedFormats } 
-							suggestions={ suggestions } 
-							onChange={ f => handleFormats(f) }
-							placeholder="Allowed Format(s)"
-						/>
+							<FormTokenField
+								value={allowedFormats}
+								suggestions={suggestions}
+								onChange={f => handleFormats(f)}
+								placeholder="Allowed Format(s)"
+							/>
 						</div>
 					</div>
 				</PanelBody>
@@ -243,7 +239,7 @@ function edit(props) {
 						</div>
 					)}
 				</div>
-				<input type="file" required={isRequired}  />
+				<input type="file" disabled required={isRequired} />
 			</div>
 		</div>
 	];

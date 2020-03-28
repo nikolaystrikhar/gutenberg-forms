@@ -70,6 +70,18 @@ We appreciate all contributions and don't want a wall of rules to get in the way
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
+= 1.1.0 = (28 Mar 2020)
+- Added: Multi Step feature
+- Added: File Upload Field
+- Fixed: Bugs
+- Improved: Code
+- Added: Min / Max Length for Text and Message Fields
+- Added: Option To Hide Form On Success
+- Improved: Button Block
+- Improved: Group Block
+
+Thanks to All the Contributors: https://github.com/munirkamal/gutenberg-forms/graphs/contributors
+
 = 1.0.9 = (21 Mar 2020)
 
 - Fixed: Bugs

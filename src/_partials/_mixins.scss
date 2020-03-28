@@ -8,18 +8,6 @@
 	outline: none;
 }
 
-@mixin Introduction() {
-	background: #eee;
-	text-align: center;
-	padding: 40px 50px;
-
-	& .cwp-form-types {
-		& button {
-			margin: 0px 10px !important;
-		}
-	}
-}
-
 @mixin dashicon() {
 	font-family: dashicons;
 	display: inline-block;
