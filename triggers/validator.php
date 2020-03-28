@@ -87,6 +87,37 @@
                 return false;
             }
 
+        }
+
+        public function test_file_formats($ext, $allowed) {
+            $allowed_defaults =  array(
+                "jpg",
+                "jpeg",
+                "png",
+                "gif",
+                "pdf",
+                "doc",
+                "docx",
+                "ppt",
+                "pptx",
+                "odt",
+                "avi",
+                "ogg",
+                "m4a",
+                "mov",
+                "mp3",
+                "mp4",
+                "mpg",
+                "wav",
+                "wmv"
+            );
+
+            if (!is_null($allowed) && sizeof($allowed) !== 0) {
+                return in_array($ext,$allowed);
+
+            } else {
+                return in_array( $ext,$allowed_defaults );
+            }
 
         }
 
@@ -126,8 +157,6 @@
                 } else {
                     return true;
                 }
-              
-
             }
 
         }

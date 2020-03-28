@@ -209,34 +209,13 @@
                     $file_name = $file_to_upload[$field_id]['name'];
                     $tmp_name = $file_to_upload[$field_id]['tmp_name'];
 
-                    $allowed_defaults =  array(
-                        "jpg",
-                        "jpeg",
-                        "png",
-                        "gif",
-                        "pdf",
-                        "doc",
-                        "docx",
-                        "ppt",
-                        "pptx",
-                        "odt",
-                        "avi",
-                        "ogg",
-                        "m4a",
-                        "mov",
-                        "mp3",
-                        "mp4",
-                        "mpg",
-                        "wav",
-                        "wmv"
-                    );
                     $parsed_alloweds =  json_decode($f_DECODED['extra_meta'], false);
-
-                    $allowed = sizeof($parsed_alloweds) === 0 ? $allowed_defaults : $parsed_alloweds;
 
                     $ext = pathinfo($file_name, PATHINFO_EXTENSION);
 
-                    if( in_array($ext,$allowed_defaults) ) {
+                    $is_allowed = $this->validator->test_file_formats($ext, $parsed_alloweds);
+
+                    if( $is_allowed ) {
                         move_uploaded_file( $tmp_name, WP_CONTENT_DIR.'/uploads/'.basename( $file_name ) );
                         $file_path = WP_CONTENT_DIR.'/uploads/'.basename( $file_name );
 
