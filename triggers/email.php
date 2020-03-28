@@ -315,7 +315,7 @@
         private function attempt_success( $template ) {
 
             if (!isset($template)) return;
-            extract($template)
+            extract($template);
 
             if ( $successType === "url" ) {
                 $this->url_success($successURL);

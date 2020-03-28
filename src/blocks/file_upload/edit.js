@@ -77,6 +77,9 @@ function edit(props) {
 			});
 		} else if (field_name !== "") {
 
+
+			console.log(JSON.stringify(allowedFormats));
+
 			props.setAttributes({
 				id:
 					extract_id(field_name) +
