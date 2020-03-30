@@ -1,9 +1,9 @@
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 
-import fieldParents from '../../constants.js';
 import calculationEdit from "./edit.js";
 import calculationSave from "./save.js";
+import { fieldParents } from '../../constants';
 
 
 registerBlockType("cwp/form-calculation", {
