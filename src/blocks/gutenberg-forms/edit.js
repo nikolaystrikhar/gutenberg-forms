@@ -73,7 +73,6 @@ function edit(props) {
 						>
 							<InnerBlocks
 								template={getFormTemplates(formType)}
-								allowedBlocks={getAllowedBlocks(formType)}
 								templateLock={false}
 								renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
 							/>

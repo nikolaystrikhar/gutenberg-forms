@@ -1,3 +1,4 @@
+@import "../_partials/pre_mixins";
 @import "../_partials/variables";
 @import "../_partials/mixins";
 
@@ -147,6 +148,7 @@
 				@include switch();
 			}
 		}
+		@include bulk_add();
 
 		& .cwp-checkbox-set {
 			@include checkbox-field("backend");

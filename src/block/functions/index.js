@@ -76,7 +76,8 @@ export const getFieldTransform = (attrs, field) => {
 	return createBlock(fieldBlock, config);
 };
 
-const layoutBlocks = ["cwp/form-column", "cwp/column", "cwp/form-group"]; //blocks that will be ignored while serializing...
+const layoutBlocks = ["cwp/form-column", "cwp/column", "cwp/form-group", "cwp/form-step"]; //blocks that will be ignored while serializing...
+const miscBlocks = ["cwp/form-button"];
 
 export const defaultFieldMessages = [
 	{
@@ -280,14 +281,16 @@ export function getSiblings(clientId, slug = null) {
 			isCakewpBlock: v.name.startsWith("cwp/"), //ensuring that this is our block!
 			isFieldBlock: myAttrs.includes(breaked[breaked.length - 1]), //ensuring that it is a gutenberg-form field;
 			isLayoutBlock: layoutBlocks.includes(v.name), //ensuring that it is not a layout block
-			currentBlock: v.clientId === clientId //ensuring that this is not the block
+			currentBlock: v.clientId === clientId, //ensuring that this is not the block
+			miscBlocks: miscBlocks.includes(v.name)
 		};
 
 		if (
 			conditions.isCakewpBlock &&
 			conditions.isFieldBlock &&
 			!conditions.isLayoutBlock &&
-			!conditions.currentBlock
+			!conditions.currentBlock &&
+			!conditions.miscBlock
 		) {
 			if (slug === null) {
 				siblingValues.push(v.attributes);

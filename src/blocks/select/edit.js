@@ -1,4 +1,4 @@
-import React, { useState, useEffect, useRef } from "react";
+import React, { useState, useEffect, useRef, Fragment } from "react";
 import {
 	FormToggle,
 	Toolbar,
@@ -20,6 +20,7 @@ const { InspectorControls, BlockControls, BlockIcon } = wp.blockEditor;
 import { clone, pullAt, set, assign } from "lodash";
 import { getRootMessages } from "../../block/functions/index";
 import ConditionalLogic from "../../block/components/condition";
+import Bulk_Add from "../components/bulk_add";
 
 const { RichText } = wp.blockEditor;
 
@@ -34,7 +35,8 @@ function edit(props) {
 		messages: { empty },
 		messages,
 		condition,
-		enableCondition
+		enableCondition,
+		bulkAdd
 	} = props.attributes;
 
 	const [select, setSelect] = useState([]);
@@ -85,9 +87,12 @@ function edit(props) {
 		getRootData();
 	}, []);
 
-	useEffect(() => getRootData() , [props]);
+	useEffect(() => getRootData(), [props]);
 
 	useEffect(() => {
+
+		if (bulkAdd) return;
+
 		let boxes = selectContainer.current.querySelectorAll(
 			'.cwp-select-option input[type="text"]'
 		);
@@ -184,6 +189,21 @@ function edit(props) {
 		props.setAttributes({ messages: newMessages });
 	};
 
+	let clearAll = () => {
+
+		const reset = [
+			{
+				label: "Option 1"
+			}
+		]
+
+		setSelect(reset);
+		props.setAttributes({
+			options: reset
+		});
+
+	}
+
 	const editView = select.map((s, index) => {
 		return (
 			<div className="cwp-select-option">
@@ -233,12 +253,12 @@ function edit(props) {
 						/>
 					</PanelRow>
 				) : (
-					<div className="cwp-option">
-						<p>
-							<Icon icon="info" /> You cannot set a conditional field required!
+						<div className="cwp-option">
+							<p>
+								<Icon icon="info" /> You cannot set a conditional field required!
 						</p>
-					</div>
-				)}
+						</div>
+					)}
 				{isRequired && (
 					<div className="cwp-option">
 						<h3 className="cwp-heading">Required Text</h3>
@@ -273,31 +293,41 @@ function edit(props) {
 		<div
 			className={`cwp-select cwp-field ${
 				!props.isSelected ? props.className : ""
-			}`}
+				}`}
 		>
-			{!!props.isSelected && !enableCondition && (
-				<div className="cwp-required">
-					<h3>Required</h3>
-					<FormToggle checked={isRequired} onChange={handleRequired} />
-				</div>
-			)}
-
-			<div className="cwp-select-set" ref={selectContainer}>
-				<div className="cwp-label-wrap">
-					<RichText tag="label" value={label} onChange={handleLabel} />
-					{!props.isSelected && isRequired && !enableCondition && (
-						<div className="cwp-required cwp-noticed">
-							<h3>{requiredLabel}</h3>
+			{
+				bulkAdd ? <Bulk_Add onChange={(c) => setSelect(c)} data={props} /> : <Fragment>
+					{!!props.isSelected && !enableCondition && (
+						<div className="cwp-required">
+							<h3>Required</h3>
+							<FormToggle checked={isRequired} onChange={handleRequired} />
 						</div>
 					)}
-				</div>
-				{!!props.isSelected ? editView : <SelectView />}
-				{!!props.isSelected && (
-					<div className="cwp-select-controls">
-						<button onClick={addSelect}>Add Option</button>
+
+					<div className="cwp-select-set" ref={selectContainer}>
+						<div className="cwp-label-wrap">
+							<RichText tag="label" value={label} onChange={handleLabel} />
+							{!props.isSelected && isRequired && !enableCondition && (
+								<div className="cwp-required cwp-noticed">
+									<h3>{requiredLabel}</h3>
+								</div>
+							)}
+						</div>
+						{!!props.isSelected ? editView : <SelectView />}
+						{!!props.isSelected && (
+							<div className="cwp-select-controls">
+								<div>
+									<Button isDefault onClick={addSelect}>Add Option</Button>
+									<Button isDefault onClick={() => props.setAttributes({ bulkAdd: true })}>Bulk Add</Button>
+								</div>
+								<div>
+									<Button onClick={clearAll}>Clear All</Button>
+								</div>
+							</div>
+						)}
 					</div>
-				)}
-			</div>
+				</Fragment>
+			}
 		</div>
 	];
 }

@@ -99,7 +99,6 @@ function submitter() {
 	if (!empty($parsed_blocks)) {
 		$email_apply = new Email($parsed_blocks);
 
-
 		$email_apply->init();
 	}
 

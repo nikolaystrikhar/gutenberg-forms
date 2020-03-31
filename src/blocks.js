@@ -19,6 +19,7 @@ import './blocks/gutenberg-forms/index.js';
 /**
  * Inner blocks
  */
+
 import './blocks/checkbox/index.js';
 import './blocks/column/index.js';
 import './blocks/datepicker/index.js';

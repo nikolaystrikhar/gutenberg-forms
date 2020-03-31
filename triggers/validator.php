@@ -50,10 +50,14 @@
                 return array();
             }
 
+            $extra_meta_exists = array_key_exists( 6, $dV ); // testing if the extra meta exist
+            $extra_meta = $extra_meta_exists ? preg_replace('/[0-9]+/' , '', $dV[6]) : NULL;
+
+
             return array(
                 'is_required' => $dV[4],
                 'type'        => preg_replace('/[0-9]+/' , '' , $dV[2]),
-                'extra_meta' => preg_replace('/[0-9]+/' , '', $dV[6]),
+                'extra_meta' => $extra_meta,
                 'field_id'    => $dV[3],
             );
 

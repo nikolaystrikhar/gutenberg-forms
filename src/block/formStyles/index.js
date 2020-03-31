@@ -10,6 +10,6 @@ const formStyles = [
 
 export let applyFormStyles = slug => {
 	each(formStyles, style => {
-		registerBlockStyle(slug, style); //iterating through each style & registering it
+		registerBlockStyle(slug, style); //?iterating through each style & registering it
 	});
 };

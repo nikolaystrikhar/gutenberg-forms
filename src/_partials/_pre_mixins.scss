@@ -25,3 +25,18 @@
 		}
 	}
 }
+
+
+@mixin bulk_add() {
+	& .cwp-bulk-add {
+		& .cwp-save {
+			display: flex;
+			justify-content: flex-end;
+
+			& button:nth-child(1) {
+				margin: 0px 10px 0px 0px;
+			}
+
+		}
+	}
+}

@@ -101,6 +101,9 @@
 
 @mixin checkbox-field($preview_type) {
 	@if $preview_type == "backend" {
+
+		
+
 		& .cwp-checkbox-option {
 			display: flex;
 			margin: 10px 0px;
@@ -118,18 +121,14 @@
 		}
 
 		& .cwp-checkbox-controls {
-			& button {
-				color: $primaryColor;
-				border: 1px solid $primaryColor !important;
-				padding: 3px 11px;
-				background-color: #fff;
-				@include normalize_button();
-			}
+			display: flex;
+			justify-content: space-between;
 		}
 
 		& button {
 			margin: 0px 5px;
 		}
+		
 	} @else {
 		& label {
 			& .cwp-checkbox-image {
@@ -186,13 +185,8 @@
 		}
 
 		& .cwp-radios-controls {
-			& button {
-				color: $primaryColor;
-				border: 1px solid $primaryColor !important;
-				padding: 3px 11px;
-				background-color: #fff;
-				@include normalize_button();
-			}
+			display: flex;
+			justify-content: space-between;
 		}
 		& button {
 			margin: 0px 5px;
@@ -248,13 +242,8 @@
 		}
 
 		& .cwp-select-controls {
-			& button {
-				color: $primaryColor;
-				border: 1px solid $primaryColor !important;
-				padding: 3px 11px;
-				background-color: #fff;
-				@include normalize_button();
-			}
+			display: flex;
+			justify-content: space-between;
 		}
 		& button {
 			margin: 0px 5px;

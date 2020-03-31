@@ -63,6 +63,10 @@ registerBlockType("cwp/select", {
 				condition: "===",
 				value: ""
 			}
+		},
+		bulkAdd: {
+			type: "boolean",
+			default: false
 		}
 	},
 	transforms: {
