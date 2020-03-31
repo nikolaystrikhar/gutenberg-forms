@@ -136,8 +136,13 @@ function cwp_gutenberg_forms_messages_meta() {
     ) );
 }
 
-add_action( 'init', 'cwp_gutenberg_forms_messages_meta' );
+function cwpgutenbergforms_set_script_translations() {
+	wp_set_script_translations( 'gutenberg_forms-cwp-block-js', 'cwp-gutenberg-forms' );
+}
 
+
+add_action( 'init', 'cwpgutenbergforms_set_script_translations' );
+add_action( 'init', 'cwp_gutenberg_forms_messages_meta' );
 //custom_postype for our gutenberg-forms;
 add_action('wp_head' , 'submitter');
 add_action('wp-load' , 'submitter');

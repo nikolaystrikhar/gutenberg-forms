@@ -10,6 +10,7 @@ import { basicColorScheme } from "../../block/misc/helper";
 import { set, clone } from "lodash";
 import ConditionalLogic from "../../block/components/condition";
 import { isChildFieldsRequired } from "../../block/functions";
+import { TEXT_DOMAIN } from "../../block/constants";
 
 const { InspectorControls } = wp.blockEditor;
 
@@ -38,12 +39,14 @@ function Inspector(prop) {
 		<InspectorControls>
 			{isChildFieldsRequired(props.clientId) && enableCondition && (
 				<Notice status="error" isDismissible={false}>
-					Do not have a required fields inside a conditional group.
+					{
+						__("Do not have a required fields inside a conditional group.", TEXT_DOMAIN)
+					}
 				</Notice>
 			)}
 			<PanelBody title={__("Styling")}>
 				<div className="cwp-option">
-					<h3 className="cwp-heading">Background Color</h3>
+					<h3 className="cwp-heading">{__("Background Color", TEXT_DOMAIN)}</h3>
 					<ColorPalette
 						colors={basicColorScheme}
 						value={backgroundColor}
@@ -51,7 +54,7 @@ function Inspector(prop) {
 					/>
 				</div>
 				<div className="cwp-option">
-					<h3 className="cwp-heading">Color</h3>
+					<h3 className="cwp-heading">{__("Color", TEXT_DOMAIN)}</h3>
 					<ColorPalette
 						colors={basicColorScheme}
 						value={color}
@@ -60,7 +63,7 @@ function Inspector(prop) {
 				</div>
 
 				<div className="cwp-option">
-					<h3 className="cwp-heading">Border Color</h3>
+					<h3 className="cwp-heading">{__("Border Color", TEXT_DOMAIN)}</h3>
 					<ColorPalette
 						colors={basicColorScheme}
 						value={borderColor}
@@ -68,7 +71,7 @@ function Inspector(prop) {
 					/>
 				</div>
 				<div className="cwp-option">
-					<h3 className="cwp-heading">Border Width [px]</h3>
+					<h3 className="cwp-heading">{__("Border Width [px]", TEXT_DOMAIN)}</h3>
 					<RangeControl
 						value={borderWidth}
 						min={0}
@@ -77,7 +80,7 @@ function Inspector(prop) {
 					/>
 				</div>
 				<div className="cwp-option">
-					<h3 className="cwp-heading">Border Radius [px]</h3>
+					<h3 className="cwp-heading">{__("Border Radius [px]", TEXT_DOMAIN)}</h3>
 					<RangeControl
 						value={borderRadius}
 						min={0}
@@ -89,12 +92,12 @@ function Inspector(prop) {
 				<div className="cwp-option">
 					<RangeControl
 						value={padding}
-						label={__("Padding")}
+						label={__("Padding", TEXT_DOMAIN)}
 						onChange={padd => handleStyling(padd, "padding")}
 					/>
 				</div>
 			</PanelBody>
-			<PanelBody title={__("Condition")}>
+			<PanelBody title={__("Condition", TEXT_DOMAIN)}>
 				<ConditionalLogic
 					condition={condition}
 					set={props.setAttributes}

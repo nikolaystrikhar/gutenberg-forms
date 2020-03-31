@@ -12,7 +12,10 @@ import {
 	extract_id,
 	getEncodedData
 } from "../../block/misc/helper";
+import { TEXT_DOMAIN } from "../../block/constants/index"
 
+
+const { __ } = wp.i18n;
 const {
 	InspectorControls,
 	BlockControls,
@@ -76,9 +79,9 @@ function edit(props) {
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
-				<PanelBody title="Field Settings" initialOpen={true}>
+				<PanelBody title={__("Field Settings", TEXT_DOMAIN)} initialOpen={true}>
 					<PanelRow>
-						<h3 className="cwp-heading">Required</h3>
+						<h3 className="cwp-heading">{__("Required", TEXT_DOMAIN)}</h3>
 						<FormToggle
 							label="Required"
 							checked={isRequired}
@@ -87,7 +90,7 @@ function edit(props) {
 					</PanelRow>
 					{isRequired && (
 						<div className="cwp-option">
-							<h3 className="cwp-heading">Required Text</h3>
+							<h3 className="cwp-heading">{__("Required Text", TEXT_DOMAIN)}</h3>
 							<TextControl
 								onChange={label =>
 									props.setAttributes({ requiredLabel: label })
@@ -103,7 +106,7 @@ function edit(props) {
 		<div className={`cwp-yes-no cwp-field cwp-misc-field ${props.className}`}>
 			{!!props.isSelected && (
 				<div className="cwp-required">
-					<h3>Required</h3>
+					<h3>{__("Required", TEXT_DOMAIN)}</h3>
 					<FormToggle checked={isRequired} onChange={handleRequired} />
 				</div>
 			)}

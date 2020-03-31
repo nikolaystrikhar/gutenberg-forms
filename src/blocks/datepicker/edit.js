@@ -15,6 +15,7 @@ import {
 import DatePicker from "../../block/components/datepicker";
 import { clone, set } from "lodash";
 import ConditionalLogic from "../../block/components/condition";
+import { TEXT_DOMAIN } from "../../block/constants";
 
 const {
 	InspectorControls,
@@ -22,6 +23,8 @@ const {
 	BlockIcon,
 	RichText
 } = wp.blockEditor;
+const { __ } = wp.i18n;
+
 
 function edit(props) {
 	const handleChange = e => {
@@ -81,7 +84,7 @@ function edit(props) {
 		getRootData();
 	}, []);
 
-	useEffect(() => getRootData() , [props]);
+	useEffect(() => getRootData(), [props]);
 
 	const getTypeActive = t => {
 		if (type === t) {
@@ -117,27 +120,26 @@ function edit(props) {
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
-				<PanelBody title="Field Settings" initialOpen={true}>
+				<PanelBody title={__("Field Settings", TEXT_DOMAIN)} initialOpen={true}>
 					{!enableCondition ? (
 						<PanelRow>
-							<h3 className="cwp-heading">Required</h3>
+							<h3 className="cwp-heading">{__("Required", TEXT_DOMAIN)}</h3>
 							<FormToggle
-								label="Required"
+								label={__("Required", TEXT_DOMAIN)}
 								checked={isRequired}
 								onChange={handleRequired}
 							/>
 						</PanelRow>
 					) : (
-						<div className="cwp-option">
-							<p>
-								<Icon icon="info" /> You cannot set a conditional field
-								required!
-							</p>
-						</div>
-					)}
+							<div className="cwp-option">
+								<p>
+									<Icon icon="info" /> {__("You cannot set a conditional field required!", TEXT_DOMAIN)}
+								</p>
+							</div>
+						)}
 					{isRequired && (
 						<div className="cwp-option">
-							<h3 className="cwp-heading">Required Text</h3>
+							<h3 className="cwp-heading">{__("Required Text", TEXT_DOMAIN)}</h3>
 							<TextControl
 								onChange={label =>
 									props.setAttributes({ requiredLabel: label })
@@ -148,12 +150,12 @@ function edit(props) {
 					)}
 					<div className="cwp-option">
 						<SelectControl
-							label="Format"
+							label={__("Format", TEXT_DOMAIN)}
 							value={format}
 							options={[
-								{ label: "Day Month Year", value: "DD/MM/YYYY" },
-								{ label: "Month Day Year", value: "MM/DD/YYYY" },
-								{ label: "Year Month Day", value: "YYYY/MM/DD" }
+								{ label: __("Day Month Year", TEXT_DOMAIN), value: "DD/MM/YYYY" },
+								{ label: __("Month Day Year", TEXT_DOMAIN), value: "MM/DD/YYYY" },
+								{ label: __("Year Month Day", TEXT_DOMAIN), value: "YYYY/MM/DD" }
 							]}
 							onChange={format => {
 								props.setAttributes({ format });
@@ -172,7 +174,7 @@ function edit(props) {
 				{isRequired && (
 					<PanelBody title="Messages">
 						<div className="cwp-option">
-							<h3 className="cwp-heading">Required Error</h3>
+							<h3 className="cwp-heading">{__("Required Error", TEXT_DOMAIN)}</h3>
 							<TextControl
 								onChange={label => setMessages("empty", label)}
 								value={empty}
@@ -186,7 +188,7 @@ function edit(props) {
 		<div className={`cwp-field cwp-datepicker ${props.className}`}>
 			{!!props.isSelected && !enableCondition && (
 				<div className="cwp-required">
-					<h3>Required</h3>
+					<h3>{__("Required", TEXT_DOMAIN)}</h3>
 					<FormToggle checked={isRequired} onChange={handleRequired} />
 				</div>
 			)}

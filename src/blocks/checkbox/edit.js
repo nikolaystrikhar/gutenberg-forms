@@ -11,21 +11,21 @@ import {
 } from "@wordpress/components";
 
 
-const { InspectorControls, BlockControls, BlockIcon } = wp.blockEditor;
-
 import { clone, pullAt, has, set } from "lodash";
 import ImageUpload from "../../block/components/imageUpload";
 import ImagePreview from "../../block/components/imagePreview";
 import ConditionalLogic from "../../block/components/condition";
-
 import {
 	getFieldName,
 	extract_id,
 	getEncodedData
 } from "../../block/misc/helper";
 import Bulk_Add from "../components/bulk_add";
+import { TEXT_DOMAIN } from "../../block/constants";
 
 const { RichText } = wp.blockEditor;
+const { __ } = wp.i18n;
+const { InspectorControls, BlockControls, BlockIcon } = wp.blockEditor;
 
 function edit(props) {
 	let {
@@ -231,10 +231,10 @@ function edit(props) {
 
 	return [
 		<InspectorControls>
-			<PanelBody title="Field Settings" initialOpen={true}>
+			<PanelBody title={__("Field Settings", TEXT_DOMAIN)} initialOpen={true}>
 				{!enableCondition ? (
 					<PanelRow>
-						<h3 className="cwp-heading">Required</h3>
+						<h3 className="cwp-heading">{__("Required", TEXT_DOMAIN)}</h3>
 						<FormToggle
 							label="Required"
 							checked={isRequired}
@@ -244,13 +244,13 @@ function edit(props) {
 				) : (
 						<div className="cwp-option">
 							<p>
-								<Icon icon="info" /> You cannot set a conditional field required!
-						</p>
+								<Icon icon="info" /> {__("You cannot set a conditional field required!", TEXT_DOMAIN)}
+							</p>
 						</div>
 					)}
 				{isRequired && (
 					<div className="cwp-option">
-						<h3 className="cwp-heading">Required Text</h3>
+						<h3 className="cwp-heading">{__("Required Text", TEXT_DOMAIN)}</h3>
 						<TextControl
 							onChange={label => props.setAttributes({ requiredLabel: label })}
 							value={requiredLabel}
@@ -259,11 +259,11 @@ function edit(props) {
 				)}
 				<div className="cwp-option">
 					<SelectControl
-						label="Layout"
+						label={__("Layout", TEXT_DOMAIN)}
 						value={fieldStyle}
 						options={[
-							{ label: "Block", value: "block" },
-							{ label: "Inline", value: "inline" }
+							{ label: __("Block", TEXT_DOMAIN), value: "block" },
+							{ label: __("Inline", TEXT_DOMAIN), value: "inline" }
 						]}
 						onChange={s => {
 							props.setAttributes({ fieldStyle: s });
@@ -274,7 +274,7 @@ function edit(props) {
 			{isRequired && (
 				<PanelBody title="Messages">
 					<div className="cwp-option">
-						<h3 className="cwp-heading">Required Error</h3>
+						<h3 className="cwp-heading">{__("Required Error", TEXT_DOMAIN)}</h3>
 						<TextControl
 							onChange={label => setMessages("empty", label)}
 							value={messages.empty}
@@ -282,7 +282,7 @@ function edit(props) {
 					</div>
 				</PanelBody>
 			)}
-			<PanelBody title="Condition">
+			<PanelBody title={__("Condition", TEXT_DOMAIN)}>
 				<ConditionalLogic
 					condition={condition}
 					set={props.setAttributes}
@@ -299,7 +299,7 @@ function edit(props) {
 				bulkAdd ? <Bulk_Add onChange={(c) => setCheckboxes(c)} data={props} /> : <Fragment>
 					{!!props.isSelected && !enableCondition && (
 						<div className="cwp-required">
-							<h3>Required</h3>
+							<h3>{__("Required", TEXT_DOMAIN)}</h3>
 							<FormToggle checked={isRequired} onChange={handleRequired} />
 						</div>
 					)}
@@ -392,11 +392,11 @@ function edit(props) {
 						{!!props.isSelected && (
 							<div className="cwp-checkbox-controls">
 								<div>
-									<Button isDefault onClick={addCheckbox}>Add Option</Button>
-									<Button isDefault onClick={() => props.setAttributes({ bulkAdd: true })}>Bulk Add</Button>
+									<Button isDefault onClick={addCheckbox}>{__("Add Option", TEXT_DOMAIN)}</Button>
+									<Button isDefault onClick={() => props.setAttributes({ bulkAdd: true })}>{__("Bulk Add", TEXT_DOMAIN)}</Button>
 								</div>
 								<div>
-									<Button onClick={clearAll}>Clear All</Button>
+									<Button onClick={clearAll}>{__("Clear All", TEXT_DOMAIN)}</Button>
 								</div>
 							</div>
 						)}

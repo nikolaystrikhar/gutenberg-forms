@@ -15,6 +15,9 @@ import {
 
 import { clone, set, assign } from "lodash";
 import { getRootMessages, detectSimilarFields } from "../../block/functions";
+import { TEXT_DOMAIN } from "../../block/constants/index"
+
+const { __ } = wp.i18n;
 
 const {
 	InspectorControls,
@@ -93,7 +96,7 @@ function edit(props) {
 		getRootData();
 	}, []);
 
-	useEffect(() => getRootData()  , [props]);
+	useEffect(() => getRootData(), [props]);
 
 	const setMessages = (type, m) => {
 		let newMessages = clone(messages);
@@ -106,10 +109,10 @@ function edit(props) {
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
-				<PanelBody title="Field Settings" initialOpen={true}>
+				<PanelBody title={__("Field Settings", TEXT_DOMAIN)} initialOpen={true}>
 					<div className="cwp-option">
 						<PanelRow>
-							<h3 className="cwp-heading">Required</h3>
+							<h3 className="cwp-heading">{__("Required", TEXT_DOMAIN)}</h3>
 							<FormToggle
 								label="Required"
 								checked={isRequired}
@@ -119,7 +122,7 @@ function edit(props) {
 					</div>
 					{isRequired && (
 						<div className="cwp-option">
-							<h3 className="cwp-heading">Required Text</h3>
+							<h3 className="cwp-heading">{__("Required Text", TEXT_DOMAIN)}</h3>
 							<TextControl
 								onChange={label =>
 									props.setAttributes({ requiredLabel: label })
@@ -156,7 +159,7 @@ function edit(props) {
 				<PanelBody title="Messages">
 					{isRequired && (
 						<div className="cwp-option">
-							<h3 className="cwp-heading">Required Error</h3>
+							<h3 className="cwp-heading">{__("Required Error", TEXT_DOMAIN)}</h3>
 							<TextControl
 								onChange={label => setMessages("empty", label)}
 								value={empty}
@@ -164,7 +167,7 @@ function edit(props) {
 						</div>
 					)}
 					<div className="cwp-option">
-						<h3 className="cwp-heading">Invalid Number Error</h3>
+						<h3 className="cwp-heading">{__("Invalid Number Error", TEXT_DOMAIN)}</h3>
 						<TextControl
 							onChange={v => setMessages("invalid", v)}
 							value={invalid}
@@ -172,7 +175,7 @@ function edit(props) {
 					</div>
 					<div className="cwp-option">
 						<p>
-							<Icon icon="info" /> Use {"{{value}}"} to insert field value!
+							<Icon icon="info" /> {__("Use {{value}} to insert field value!", TEXT_DOMAIN)}
 						</p>
 					</div>
 				</PanelBody>
@@ -182,12 +185,12 @@ function edit(props) {
 		<div className={`cwp-number cwp-field ${props.className}`}>
 			{!!props.isSelected && (
 				<div className="cwp-required">
-					<h3>Range Slider</h3>
+					<h3>{__("Range Slider", TEXT_DOMAIN)}</h3>
 					<FormToggle
 						checked={isRange}
 						onChange={() => props.setAttributes({ isRange: !isRange })}
 					/>
-					<h3>Required</h3>
+					<h3>{__("Required", TEXT_DOMAIN)}</h3>
 					<FormToggle checked={isRequired} onChange={handleRequired} />
 				</div>
 			)}
@@ -221,15 +224,15 @@ function edit(props) {
 						/>
 					</div>
 				) : (
-					<input
-						value={number}
-						max={rangeMax}
-						step={steps}
-						min={rangeMin}
-						type="number"
-						onChange={handleChange}
-					/>
-				)}
+						<input
+							value={number}
+							max={rangeMax}
+							step={steps}
+							min={rangeMin}
+							type="number"
+							onChange={handleChange}
+						/>
+					)}
 			</div>
 		</div>
 	];

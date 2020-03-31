@@ -14,6 +14,7 @@ import {
 import { basicColorScheme, strip_tags, firstCapital } from "../../block/misc/helper";
 import { clone, set, get } from "lodash";
 import { getRootFormBlock, } from "../../block/functions/index";
+import { TEXT_DOMAIN } from "../../block/constants";
 const { RichText, InspectorControls, BlockControls } = wp.blockEditor;
 const { __ } = wp.i18n;
 
@@ -62,20 +63,20 @@ function edit(props) {
 
 		let actions = [
 			{
-				label: "Reset", value: "reset"
+				label: __("Reset", TEXT_DOMAIN), value: "reset"
 			},
 			{
-				label: "Submit", value: "submit"
+				label: __("Submit", TEXT_DOMAIN), value: "submit"
 			}
 		];
 
 		if (rootType === "multiStep") {
 			actions.push(...[
 				{
-					label: "Next", value: "next"
+					label: __("Next", TEXT_DOMAIN), value: "next"
 				},
 				{
-					label: "Previous", value: "previous"
+					label: __("Previous", TEXT_DOMAIN), value: "previous"
 				}
 			])
 		}
@@ -84,12 +85,12 @@ function edit(props) {
 		return actions;
 	}
 
-	let actionLabel = __(<span>Action</span>)
+	let actionLabel = __(<span>{__("Action", TEXT_DOMAIN)}</span>)
 
 	return [
 
 		<InspectorControls>
-			<PanelBody title="Settings">
+			<PanelBody title={__("Settings", TEXT_DOMAIN)}>
 				<div className="cwp-option column">
 
 					<h3>Action</h3>
@@ -102,9 +103,9 @@ function edit(props) {
 					</div>
 				</div>
 			</PanelBody>
-			<PanelBody title="Colors">
+			<PanelBody title={__("Colors", TEXT_DOMAIN)}>
 				<div className="cwp-option">
-					<h3 className="cwp-heading">Background Color</h3>
+					<h3 className="cwp-heading">{__("Background Color", TEXT_DOMAIN)}</h3>
 					<ColorPalette
 						colors={basicColorScheme}
 						value={backgroundColor}
@@ -112,7 +113,7 @@ function edit(props) {
 					/>
 				</div>
 				<div className="cwp-option">
-					<h3 className="cwp-heading">Color</h3>
+					<h3 className="cwp-heading">{__("Color", TEXT_DOMAIN)}</h3>
 					<ColorPalette
 						colors={basicColorScheme}
 						value={color}
@@ -123,7 +124,7 @@ function edit(props) {
 					<RangeControl
 						min={0}
 						max={100}
-						label="Padding"
+						label={__("Padding", TEXT_DOMAIN)}
 						value={padding}
 						onChange={p => handleStyling(p, "padding")}
 					/>
@@ -132,7 +133,7 @@ function edit(props) {
 					<RangeControl
 						min={0}
 						max={100}
-						label="Border Radius"
+						label={__("Border Radius", TEXT_DOMAIN)}
 						value={borderRadius}
 						onChange={p => handleStyling(p, "borderRadius")}
 					/>
@@ -141,7 +142,7 @@ function edit(props) {
 		</InspectorControls>,
 		<BlockControls>
 			<Toolbar>
-				<DropdownMenu label="Select Action" menuLabel="Action" icon={actionLabel}>
+				<DropdownMenu label={__("Select Action", TEXT_DOMAIN)} menuLabel={__("Action", TEXT_DOMAIN)} icon={actionLabel}>
 					{
 						() => (
 							<Fragment>

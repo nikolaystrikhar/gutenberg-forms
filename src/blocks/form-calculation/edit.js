@@ -20,6 +20,8 @@ import { set, clone, isEmpty } from "lodash";
 import { getSiblings } from "../../block/functions/index";
 import ConditionalLogic from "../../block/components/condition";
 import FormulaBuilder from "../../block/components/formulaBuilder";
+import { TEXT_DOMAIN } from "../../block/constants";
+
 
 const {
 	InspectorControls,
@@ -77,9 +79,9 @@ function edit(props) {
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
-				<PanelBody title={__("Field Settings")}>
+				<PanelBody title={__("Field Settings", TEXT_DOMAIN)}>
 					<div className="cwp-option">
-						<h3>Prefix</h3>
+						<h3>{__("Prefix", TEXT_DOMAIN)}</h3>
 
 						<TextControl
 							value={prefix}
@@ -87,7 +89,7 @@ function edit(props) {
 						/>
 					</div>
 					<div className="cwp-option">
-						<h3>Postfix</h3>
+						<h3>{__("Postfix", TEXT_DOMAIN)}</h3>
 
 						<TextControl
 							value={postfix}
@@ -96,7 +98,7 @@ function edit(props) {
 					</div>
 					<div className="cwp-option">
 						<PanelRow>
-							<h3>Formula Editor</h3>
+							<h3>{__("Formula Editor", TEXT_DOMAIN)}</h3>
 							<FormToggle
 								checked={formulaBuilder}
 								onChange={() =>
@@ -106,7 +108,7 @@ function edit(props) {
 						</PanelRow>
 					</div>
 				</PanelBody>
-				<PanelBody title="Condition">
+				<PanelBody title={__("Condition", TEXT_DOMAIN)}>
 					<ConditionalLogic
 						condition={condition}
 						set={props.setAttributes}
@@ -114,11 +116,11 @@ function edit(props) {
 						useCondition={props.attributes.enableCondition}
 					/>
 				</PanelBody>
-				<PanelBody title={__("Styling")}>
+				<PanelBody title={__("Styling", TEXT_DOMAIN)}>
 					<div className="cwp-option">
 						<RangeControl
 							value={styling.fontSize}
-							label={__("Font Size")}
+							label={__("Font Size", TEXT_DOMAIN)}
 							onChange={size => setStyling(size, "fontSize")}
 						/>
 					</div>
@@ -129,7 +131,7 @@ function edit(props) {
 			<BlockControls>
 				<Toolbar>
 					<Tooltip
-						text={__(formulaBuilder ? "Preview Field" : "Formula Editor")}
+						text={__(formulaBuilder ? __("Preview Field", TEXT_DOMAIN) : __("Formula Editor", TEXT_DOMAIN))}
 					>
 						<Button
 							onClick={() => {
@@ -145,7 +147,7 @@ function edit(props) {
 
 		<div className={`cwp-calculation cwp-field ${props.className}`}>
 			<div className="cwp-calc-toggle">
-				<h3>Formula Editor</h3>
+				<h3>{__("Formula Editor", TEXT_DOMAIN)}</h3>
 				<FormToggle
 					checked={formulaBuilder}
 					onChange={() =>
@@ -156,17 +158,17 @@ function edit(props) {
 			{formulaBuilder ? (
 				<FormulaBuilder data={props} />
 			) : (
-				<div className="cwp-field-set">
-					<RichText tag="label" value={label} onChange={handleLabel} />
-					<div className="cwp-result-wrap">
-						{!isEmpty(prefix) && <span style={styling}>{prefix}</span>}
-						<span className="cwp-calc-result" style={styling}>
-							XX
+					<div className="cwp-field-set">
+						<RichText tag="label" value={label} onChange={handleLabel} />
+						<div className="cwp-result-wrap">
+							{!isEmpty(prefix) && <span style={styling}>{prefix}</span>}
+							<span className="cwp-calc-result" style={styling}>
+								XX
 						</span>
-						{!isEmpty(postfix) && <span style={styling}>{postfix}</span>}
+							{!isEmpty(postfix) && <span style={styling}>{postfix}</span>}
+						</div>
 					</div>
-				</div>
-			)}
+				)}
 		</div>
 	];
 }

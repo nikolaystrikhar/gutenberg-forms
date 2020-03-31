@@ -16,7 +16,11 @@ import {
 import { set, clone, assign } from "lodash";
 import { getRootMessages } from "../../block/functions/index";
 import ConditionalLogic from "../../block/components/condition";
+import { TEXT_DOMAIN } from "../../block/constants/index"
 
+
+
+const { __ } = wp.i18n;
 const {
 	InspectorControls,
 	BlockControls,
@@ -90,7 +94,7 @@ function edit(props) {
 		getRootData();
 	}, []);
 
-	useEffect(() => getRootData() , [props]);
+	useEffect(() => getRootData(), [props]);
 
 	const setMessages = (type, m) => {
 		let newMessages = clone(messages);
@@ -103,10 +107,10 @@ function edit(props) {
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
-				<PanelBody title="Field Settings" initialOpen={true}>
+				<PanelBody title={__("Field Settings", TEXT_DOMAIN)} initialOpen={true}>
 					{!enableCondition ? (
 						<PanelRow>
-							<h3 className="cwp-heading">Required</h3>
+							<h3 className="cwp-heading">{__("Required", TEXT_DOMAIN)}</h3>
 							<FormToggle
 								label="Required"
 								checked={isRequired}
@@ -114,16 +118,15 @@ function edit(props) {
 							/>
 						</PanelRow>
 					) : (
-						<div className="cwp-option">
-							<p>
-								<Icon icon="info" /> You cannot set a conditional field
-								required!
-							</p>
-						</div>
-					)}
+							<div className="cwp-option">
+								<p>
+									<Icon icon="info" /> {__("You cannot set a conditional field required!", TEXT_DOMAIN)}
+								</p>
+							</div>
+						)}
 					{isRequired && (
 						<div className="cwp-option">
-							<h3 className="cwp-heading">Required Text</h3>
+							<h3 className="cwp-heading">{__("Required Text", TEXT_DOMAIN)}</h3>
 							<TextControl
 								onChange={label =>
 									props.setAttributes({ requiredLabel: label })
@@ -133,7 +136,7 @@ function edit(props) {
 						</div>
 					)}
 				</PanelBody>
-				<PanelBody title="Condition">
+				<PanelBody title={__("Condition", TEXT_DOMAIN)}>
 					<ConditionalLogic
 						condition={condition}
 						set={props.setAttributes}
@@ -141,10 +144,10 @@ function edit(props) {
 						useCondition={props.attributes.enableCondition}
 					/>
 				</PanelBody>
-				<PanelBody title="Messages">
+				<PanelBody title={__("Messages", TEXT_DOMAIN)}>
 					{isRequired && (
 						<div className="cwp-option">
-							<h3 className="cwp-heading">Required Error</h3>
+							<h3 className="cwp-heading">{__("Required Error", TEXT_DOMAIN)}</h3>
 							<TextControl
 								onChange={label => setMessages("empty", label)}
 								value={empty}
@@ -152,7 +155,7 @@ function edit(props) {
 						</div>
 					)}
 					<div className="cwp-option">
-						<h3 className="cwp-heading">Invalid Message Error</h3>
+						<h3 className="cwp-heading">{__("Invalid Message Error", TEXT_DOMAIN)}</h3>
 						<TextControl
 							onChange={v => setMessages("invalid", v)}
 							value={invalid}
@@ -160,7 +163,7 @@ function edit(props) {
 					</div>
 					<div className="cwp-option">
 						<p>
-							<Icon icon="info" /> Use {"{{value}}"} to insert field value!
+							<Icon icon="info" /> {__("Use {{value}} to insert field value!", TEXT_DOMAIN)}
 						</p>
 					</div>
 				</PanelBody>
@@ -170,7 +173,7 @@ function edit(props) {
 		<div className={`cwp-website cwp-field ${props.className}`}>
 			{!!props.isSelected && !enableCondition && (
 				<div className="cwp-required">
-					<h3>Required</h3>
+					<h3>{__("Required", TEXT_DOMAIN)}</h3>
 					<FormToggle checked={isRequired} onChange={handleRequired} />
 				</div>
 			)}

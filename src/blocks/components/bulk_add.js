@@ -1,5 +1,7 @@
 import React, { useState, useEffect } from 'react'
 import { TextareaControl, Button } from "@wordpress/components";
+import { TEXT_DOMAIN } from '../../block/constants';
+const { __ } = wp.i18n;
 
 function bulk_add(prop) {
 
@@ -49,8 +51,8 @@ function bulk_add(prop) {
                 onChange={setBulkText}
             />
             <div className="cwp-save">
-                <Button isPrimary onClick={handleSave}>Save</Button>
-                <Button isDefault onClick={() => props.setAttributes({ bulkAdd: false })}>Cancel</Button>
+                <Button isPrimary onClick={handleSave}>{__("Save", TEXT_DOMAIN)}</Button>
+                <Button isDefault onClick={() => props.setAttributes({ bulkAdd: false })}>{__("Cancel", TEXT_DOMAIN)}</Button>
             </div>
         </div>
     )

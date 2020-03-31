@@ -5,6 +5,7 @@ import Introduction from "./components/introduction";
 import { isEmpty } from "lodash";
 import { getAllowedBlocks, getFormTemplates } from "../../block/functions/index";
 import { getThemeStyling } from "../../block/misc/helper";
+import { TEXT_DOMAIN } from "../../block/constants";
 const { InnerBlocks, RichText, BlockControls, BlockIcon } = wp.blockEditor;
 const { Button, Toolbar, Tooltip } = wp.components;
 
@@ -49,7 +50,7 @@ function edit(props) {
 		isEmpty(formType) ? null : <Inspector data={props} />,
 		<BlockControls>
 			<Toolbar>
-				<Tooltip text={__(templateBuilder ? "Form Builder" : "Email Builder")}>
+				<Tooltip text={__(templateBuilder ? 'Form Builder' : "Email Builder", TEXT_DOMAIN)}>
 					<Button
 						onClick={() => {
 							props.setAttributes({ templateBuilder: !templateBuilder });

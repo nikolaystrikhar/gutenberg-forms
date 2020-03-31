@@ -16,8 +16,11 @@ import { set, clone } from "lodash";
 import MappedMessages from "./components/messages";
 import { changeChildValue } from "../../block/functions/index";
 import { basicColorScheme } from "../../block/misc/helper";
+import { TEXT_DOMAIN } from "../../block/constants";
 
 const { InspectorControls } = wp.blockEditor;
+const { __ } = wp.i18n;
+
 
 function Inspector(prop) {
 	const props = prop.data;
@@ -101,9 +104,9 @@ function Inspector(prop) {
 
 	return (
 		<InspectorControls>
-			<PanelBody initialOpen={false} title="Form Design">
+			<PanelBody initialOpen={false} title={__("Form Design", TEXT_DOMAIN)}>
 				<div className="cwp-option">
-					<h3 className="cwp-heading">Accent Color</h3>
+					<h3 className="cwp-heading">{__("Accent Color", TEXT_DOMAIN)}</h3>
 					<ColorPalette
 						colors={basicColorScheme}
 						value={theme.accentColor}
@@ -111,7 +114,7 @@ function Inspector(prop) {
 					/>
 				</div>
 				<div className="cwp-option">
-					<h3 className="cwp-heading">Text Color</h3>
+					<h3 className="cwp-heading">{__("Text Color", TEXT_DOMAIN)}</h3>
 					<ColorPalette
 						colors={basicColorScheme}
 						value={theme.textColor}
@@ -119,7 +122,7 @@ function Inspector(prop) {
 					/>
 				</div>
 				<div className="cwp-option">
-					<h3 className="cwp-heading">Field Background Color</h3>
+					<h3 className="cwp-heading">{__("Field Background Color", TEXT_DOMAIN)}</h3>
 					<ColorPalette
 						colors={basicColorScheme}
 						value={theme.fieldBackgroundColor}
@@ -131,7 +134,7 @@ function Inspector(prop) {
 				{
 					formType !== "multiStep" && <div className="cwp-option">
 						<PanelRow>
-							<h3>Disable Submit Button</h3>
+							<h3>{__("Disable Submit Button", TEXT_DOMAIN)}</h3>
 							<FormToggle
 								checked={buttonSetting.disable}
 								onChange={() =>
@@ -144,7 +147,7 @@ function Inspector(prop) {
 				{!buttonSetting.disable && (
 					<Fragment>
 						<div className="cwp-option column">
-							<h3 className="cwp-heading">Button Alignment</h3>
+							<h3 className="cwp-heading">{__("Button Alignment", TEXT_DOMAIN)}</h3>
 							<div className="cwp-column">
 								<ButtonGroup>
 									<Button
@@ -172,7 +175,7 @@ function Inspector(prop) {
 				)}
 				<div className="cwp-option">
 					<PanelRow>
-						<h3>Email Notification Builder</h3>
+						<h3>{__("Email Notification Builder", TEXT_DOMAIN)}</h3>
 						<FormToggle
 							checked={templateBuilder}
 							onChange={s =>
@@ -182,20 +185,20 @@ function Inspector(prop) {
 					</PanelRow>
 				</div>
 				<div className="cwp-option column">
-					<h3>Confirmation Type</h3>
+					<h3>{__("Confirmation Type", TEXT_DOMAIN)}</h3>
 					<div className="cwp-column">
 						<ButtonGroup>
 							<Button
 								{...getSuccess("url")}
 								onClick={() => props.setAttributes({ successType: "url" })}
 							>
-								URL
+								{__("URL", TEXT_DOMAIN)}
 							</Button>
 							<Button
 								{...getSuccess("message")}
 								onClick={() => props.setAttributes({ successType: "message" })}
 							>
-								Message
+								{__("Message", TEXT_DOMAIN)}
 							</Button>
 						</ButtonGroup>
 					</div>
@@ -203,13 +206,13 @@ function Inspector(prop) {
 				<div className="cwp-option">
 					{successType === "url" ? (
 						<TextControl
-							label="Success Url (Redirect)"
+							label={__("Success Url (Redirect)", TEXT_DOMAIN)}
 							value={successURL}
 							onChange={successURL => props.setAttributes({ successURL })}
 						/>
 					) : (
 							<TextareaControl
-								label="Success Message"
+								label={__("Success Message", TEXT_DOMAIN)}
 								value={successMessage}
 								onChange={successMessage =>
 									props.setAttributes({ successMessage })
@@ -219,22 +222,22 @@ function Inspector(prop) {
 				</div>
 				{
 					successType === "message" && <div className="cwp-option">
-					<PanelRow>
-						<h3>Hide Form On Success</h3>
-						<FormToggle 
-							checked={hideFormOnSuccess}
-							onChange={() => props.setAttributes({ hideFormOnSuccess: !hideFormOnSuccess })}
-						/>
-					</PanelRow>
-				</div>	
+						<PanelRow>
+							<h3>{__("Hide Form On Success", TEXT_DOMAIN)}</h3>
+							<FormToggle
+								checked={hideFormOnSuccess}
+								onChange={() => props.setAttributes({ hideFormOnSuccess: !hideFormOnSuccess })}
+							/>
+						</PanelRow>
+					</div>
 				}
 			</PanelBody>
 			<PanelBody initialOpen={false} title="reCAPTCHA v2">
 				<div className="cwp-option">
 					<p>
-						reCAPTCHA requires a Site and Private API key. Sign up for a free{" "}
+						{__("reCAPTCHA requires a Site and Private API key. Sign up for a free", TEXT_DOMAIN)}
 						<a href="https://www.google.com/recaptcha" target="__blank">
-							reCAPTCHA key
+							{__("reCAPTCHA key", TEXT_DOMAIN)}
 						</a>
 						.
 					</p>
@@ -269,7 +272,7 @@ function Inspector(prop) {
 				{recaptcha.enable && (
 					<div className="cwp-option">
 						<p>
-							<Icon icon="info" /> Will only work & show on front-end.
+							<Icon icon="info" /> {__("Will only work & show on front-end.", TEXT_DOMAIN)}
 						</p>
 					</div>
 				)}
@@ -277,8 +280,9 @@ function Inspector(prop) {
 			<PanelBody initialOpen={false} title="Messages">
 				<div className="cwp-option">
 					<p>
-						<Icon icon="info" /> You can edit validations messages used for
-						various field types here. Use {`{{ value }}`} to insert field value.
+						<Icon icon="info" /> {
+							__("You can edit validations messages used for various field types here. Use {{ value }} to insert field value.", TEXT_DOMAIN)
+						}
 					</p>
 				</div>
 				<MappedMessages val={messages} onChange={handleMessagesChange} />

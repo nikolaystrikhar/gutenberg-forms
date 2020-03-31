@@ -2,7 +2,10 @@ import React, { Fragment } from "react";
 import Inspector from "./Inspector";
 import { Notice } from "@wordpress/components";
 import { isChildFieldsRequired } from "../../block/functions";
+import { TEXT_DOMAIN } from "../../block/constants";
 const { InnerBlocks, RichText } = wp.blockEditor;
+const { __ } = wp.i18n;
+
 
 function edit(props) {
 	const { styling, label, enableCondition } = props.attributes;
@@ -22,7 +25,9 @@ function edit(props) {
 		<Fragment>
 			{isChildFieldsRequired(props.clientId) && enableCondition && (
 				<Notice status="error" isDismissible={false}>
-					Do not have a required fields inside a conditional group.
+					{
+						__("Do not have a required fields inside a conditional group.", TEXT_DOMAIN)
+					}
 				</Notice>
 			)}
 			<fieldset style={groupStyling} className="cwp-form-group">

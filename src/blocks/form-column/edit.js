@@ -9,6 +9,9 @@ import {
 import Introduction from "./components/introduction";
 import { createBlock } from "@wordpress/blocks";
 import { map } from "lodash";
+import { TEXT_DOMAIN } from "../../block/constants";
+const { __ } = wp.i18n;
+
 
 const { replaceInnerBlocks, selectBlock } = wp.data.dispatch(
 	"core/block-editor"
@@ -49,10 +52,10 @@ function edit(props) {
 
 	return [
 		<InspectorControls>
-			<PanelBody icon="layout" title="Layout Settings">
+			<PanelBody icon={__("layout", TEXT_DOMAIN)} title={__("Layout Settings", TEXT_DOMAIN)}>
 				<div className="cwp-option">
 					<RangeControl
-						label="Columns"
+						label={__("Columns", TEXT_DOMAIN)}
 						max={6}
 						min={2}
 						onChange={c => {
@@ -81,7 +84,7 @@ function edit(props) {
 				</div>
 				<div className="cwp-option">
 					<PanelRow>
-						<h3>Stack on Mobile</h3>
+						<h3>{__("Stack on Mobile", TEXT_DOMAIN)}</h3>
 						<FormToggle
 							checked={stack}
 							onChange={() => setAttributes({ stack: !stack })}
