@@ -162,7 +162,7 @@
                 foreach ($_FILES as $file_id => $file_meta) {
                     $post_without_submit[$file_id] = $file_meta;
                 }
-            } 
+            }
 
             foreach ( $post_without_submit as $field_id => $field_value ) {
                 $exploded_id = explode( "__", $field_id );
@@ -246,7 +246,7 @@
         private function with_fields( $fields, $target ) {
 
             $result = $target;
-            $data = array(); 
+            $data = array();
 
             foreach( $fields as $field => $field_value ) {
 
@@ -255,7 +255,7 @@
                 if ($field_name !== "{{-}}") {
                     $data[$field_name] = $field_value['field_value'];
                 }
-        
+
             }
 
             $replaced_str = strtr($target, $data);
@@ -354,11 +354,9 @@
             if (array_key_exists('email' , $template)) {
 
                 if ($this->validator->isEmpty($headers)) {
-                    print "Mail Sended";
-                    // wp_mail($template['email'],$mail_subject,$mail_body , null, $this->attachments);
+                     wp_mail($template['email'],$mail_subject,$mail_body , null, $this->attachments);
                 } else {
-                    print "Mail Sended";
-                    // wp_mail($template['email'],$mail_subject,$mail_body , $headers, $this->attachments);
+                     wp_mail($template['email'],$mail_subject,$mail_body , $headers, $this->attachments);
                 }
 
                 $this->attempt_success($template);
@@ -366,11 +364,9 @@
             } else {
 
                 if ($this->validator->isEmpty($headers)) {
-                    print "Mail Sended";
-                    // wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body, null, $this->attachments);
+                     wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body, null, $this->attachments);
                 } else {
-                    print "Mail Sended";
-                    // wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , $headers , $this->attachments);
+                     wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , $headers , $this->attachments);
                 }
 
                 $this->attempt_success($template);

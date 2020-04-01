@@ -1,6 +1,6 @@
 {
-    "editor.fontFamily": "Hasklig Regular",
+    "editor.fontFamily": "Consolas, 'Courier New', monospace  ",
     "editor.fontLigatures": true,
     "editor.formatOnSave": true,
-    "editor.fontSize": 18
+    "editor.fontSize": 20
 }
