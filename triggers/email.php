@@ -78,7 +78,8 @@
                     if (array_key_exists('email' ,$attributes)) {
                         $user_email = $attributes['email'];
 
-                        if ($this->validator->isEmail($user_email)) {
+
+                        if ($this->validator->is_valid_admin_mail($user_email)) {
                             $decoded_template['email'] = $user_email;
                         }
                     }
@@ -233,7 +234,6 @@
 
                 $arranged_fields[] = $arranged_data;
             }
-
 
            if ( $this->is_fields_valid( $arranged_fields ) ) {
                // check if all the fields are valid;

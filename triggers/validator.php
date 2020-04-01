@@ -23,14 +23,87 @@
 
         }
 
+		/**
+		 * @param $emails_string
+		 * @return boolean
+		 */
+
+        public function is_valid_emails( $emails_string ) {
+
+        	$emails = explode(",", $emails_string);
+
+        	foreach ($emails as $key => $email) {
+
+        		if ( $this->isEmail( $email ) === false ) {
+        			// this means one of the email provided is invalid so we had to break out of the loop
+
+					return false;
+					break;
+
+				} else continue;
+
+			}
+
+			return true;
+		}
+
+		/**
+		 * @param $email {string}
+		 * This function test if the given $email by the user is multiple emails => ex: "test@email.com,test@gmail.com"
+		 * @return array
+		 */
+
+        public function is_multiple_email($email) {
+        	// for enabling user to send email to more then one email
+
+			$exploaded = explode( ',' , $email ); // converting in array;
+			$mailsLen = count($exploaded);
+
+
+			if ($mailsLen === 1) {
+				return false;
+			} else {
+				return true;
+			}
+		}
+
+		/**
+		 * @param $email {string}
+		 * This function test if the email is invalid
+		 * @return bool
+		 */
+
+		public function is_valid_admin_mail($email) {
+
+
+			if ($this->is_multiple_email($email)) {
+
+				return $this->is_valid_emails($email);
+
+			} else {
+
+				if ( !filter_var( $email , FILTER_VALIDATE_EMAIL )  ) {
+					return false;
+				}
+
+				return true;
+			}
+
+		}
+
         public function isEmail($email) {
+			if ( !filter_var( $email , FILTER_VALIDATE_EMAIL )  ) {
+				return false;
+			}
 
-
-            if ( !filter_var( $email , FILTER_VALIDATE_EMAIL )  ) return false;
-
-            return true;
-
+			return true;
         }
+
+		/**
+		 * @param $website {string}
+		 * This function test if the url is invalid
+		 * @return bool
+		 */
 
         public function isURL( $website ) {
             if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$website)) {
@@ -84,10 +157,10 @@
         }
 
         public function is_checkbox_empty($arr) {
-             
+
             if (count($arr) === 0) {
                 return true;
-            } else { 
+            } else {
                 return false;
             }
 
@@ -132,7 +205,7 @@
             if ( count($decoded_field) === 0) {
                 return false;
             }  else if (count($decoded_field) !== 0)  {
-                
+
                 $type = $decoded_field['type'];
                 $required = $decoded_field['is_required'];
 
@@ -149,9 +222,9 @@
                 } else if ($type === 'number' and $required === 'false') {
                     return $this->isEmpty($value) ? true :  $this->isNumber($value);
                 } else if ($type === 'file_upload' and $required === 'true') {
-                    return $this->is_file_empty($value) ? false : true; 
+                    return $this->is_file_empty($value) ? false : true;
                 } else if ($type === 'file_upload' and $required === 'false') {
-                    return $this->is_file_empty($value) ? true : true; 
+                    return $this->is_file_empty($value) ? true : true;
                 } else if ($type === 'checkbox' and $required === 'true') {
                     return $this->is_checkbox_empty($value) ? false : true;
                 } else if ($type === 'checkbox' and $required === 'false') {
