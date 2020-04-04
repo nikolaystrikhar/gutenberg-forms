@@ -13,19 +13,32 @@ export function extract_id(id) {
 	return exploded[exploded.length - 1];
 }
 
-export function getEncodedData(f, id, isRequired , extra = null) {
-	
+export function extract_admin_id(id, type) {
+	let exploded = extract_id(id);
 
+	let admin_id = type + "_" + exploded;
+	return admin_id
+}
+
+export function getEncodedData(f, id, isRequired, adminId, extra = null) {
 	if (extra === null) {
 		return encodeURIComponent(
-			window.btoa(`--${getFieldName(f, id)}-${isRequired}-${f}`)
+			window.btoa(`--${getFieldName(f, id)}-${isRequired}-${f}-${adminId}`)
 		);
-	} else{ 
+	} else {
 		return encodeURIComponent(
-			window.btoa(`--${getFieldName(f, id)}-${isRequired}-${f}-${extra}`)
+			window.btoa(`--${getFieldName(f, id)}-${isRequired}-${f}-${adminId}-${extra}`)
 		);
 	}
 
+}
+
+export function get_admin_id(adminId) {
+	if (isEmpty(adminId.value)) {
+		return adminId.default;
+	} else {
+		return adminId.value;
+	}
 }
 
 export function getFieldIcon(name) {

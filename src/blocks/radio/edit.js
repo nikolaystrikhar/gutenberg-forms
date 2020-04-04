@@ -12,7 +12,9 @@ import {
 import {
 	getFieldName,
 	extract_id,
-	getEncodedData
+	getEncodedData,
+	extract_admin_id,
+	get_admin_id
 } from "../../block/misc/helper";
 import ImageUpload from "../../block/components/imageUpload";
 import ImagePreview from "../../block/components/imagePreview";
@@ -42,7 +44,8 @@ function edit(props) {
 		condition,
 		enableCondition,
 		fieldStyle,
-		bulkAdd
+		bulkAdd,
+		adminId
 	} = props.attributes;
 
 	const radiosContainer = useRef();
@@ -56,21 +59,29 @@ function edit(props) {
 
 	const getRootData = () => {
 		if (field_name === "") {
+
+
+			const newFieldName = getFieldName("radio", props.clientId)
+
 			props.setAttributes({
-				field_name: getFieldName("radio", props.clientId)
+				field_name: newFieldName,
+				adminId: {
+					value: extract_admin_id(newFieldName, 'radio'),
+					default: extract_admin_id(newFieldName, 'radio')
+				}
 			});
 			props.setAttributes({
 				id:
 					props.clientId +
 					"__" +
-					getEncodedData("radio", props.clientId, isRequired)
+					getEncodedData("radio", props.clientId, isRequired, get_admin_id(adminId))
 			});
 		} else if (field_name !== "") {
 			props.setAttributes({
 				id:
 					extract_id(field_name) +
 					"__" +
-					getEncodedData("radio", extract_id(field_name), isRequired)
+					getEncodedData("radio", extract_id(field_name), isRequired, get_admin_id(adminId))
 			});
 		}
 	}
@@ -259,9 +270,28 @@ function edit(props) {
 
 	}
 
+	const handleAdminId = (id) => {
+		props.setAttributes({
+			adminId: {
+				...adminId,
+				value: id.replace(/\s|-/g, "_")
+			}
+		})
+	}
+
 	return [
 		<InspectorControls>
 			<PanelBody title="Field Settings" initialOpen={true}>
+
+				<div className="cwp-option">
+					<TextControl
+						placeholder={adminId.default}
+						label={__("Field ID", TEXT_DOMAIN)}
+						value={adminId.value}
+						onChange={handleAdminId}
+					/>
+				</div>
+
 				{!enableCondition ? (
 					<PanelRow>
 						<h3 className="cwp-heading">{__("Required", TEXT_DOMAIN)}</h3>

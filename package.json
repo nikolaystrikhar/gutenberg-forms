@@ -3,12 +3,12 @@
   "version": "1.0.0",
   "private": true,
   "scripts": {
-    "start": "cgb-scripts start",
-    "build": "cgb-scripts build",
-    "eject": "cgb-scripts eject"
+	"start": "cgb-scripts start",
+	"build": "cgb-scripts build",
+	"eject": "cgb-scripts eject"
   },
   "dependencies": {
-    "cgb-scripts": "1.22.0",
-    "pikaday": "^1.8.0"
+	"cgb-scripts": "1.22.0",
+	"pikaday": "^1.8.0"
   }
 }

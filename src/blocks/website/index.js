@@ -60,6 +60,13 @@ registerBlockType("cwp/website", {
 		requiredLabel: {
 			type: "string",
 			default: "*"
+		},
+		adminId: {
+			type: "object",
+			default: {
+				default: "",
+				value: ""
+			}
 		}
 	},
 	transforms: {

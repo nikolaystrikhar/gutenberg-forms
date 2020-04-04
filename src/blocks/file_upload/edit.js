@@ -11,7 +11,9 @@ import {
 import {
 	getFieldName,
 	extract_id,
-	getEncodedData
+	getEncodedData,
+	extract_admin_id,
+	get_admin_id
 } from "../../block/misc/helper";
 import { getRootMessages, getRootFormBlock } from "../../block/functions/index";
 import ConditionalLogic from "../../block/components/condition";
@@ -56,7 +58,8 @@ function edit(props) {
 		messages,
 		condition,
 		enableCondition,
-		allowedFormats
+		allowedFormats,
+		adminId
 	} = props.attributes;
 
 	useEffect(() => {
@@ -70,19 +73,30 @@ function edit(props) {
 
 	const setRootData = () => {
 		if (field_name === "") {
-			props.setAttributes({ field_name: getFieldName("file_upload", props.clientId) });
+
+
+			const newFieldName = getFieldName("file_upload", props.clientId);
+
+
+			props.setAttributes({
+				field_name: newFieldName,
+				adminId: {
+					value: extract_admin_id(newFieldName, 'file_upload'),
+					default: extract_admin_id(newFieldName, 'file_upload')
+				}
+			});
 			props.setAttributes({
 				id:
 					props.clientId +
 					"__" +
-					getEncodedData("file_upload", props.clientId, isRequired, JSON.stringify(allowedFormats))
+					getEncodedData("file_upload", props.clientId, isRequired, get_admin_id(adminId), JSON.stringify(allowedFormats))
 			});
 		} else if (field_name !== "") {
 			props.setAttributes({
 				id:
 					extract_id(field_name) +
 					"__" +
-					getEncodedData("file_upload", extract_id(field_name), isRequired, JSON.stringify(allowedFormats))
+					getEncodedData("file_upload", extract_id(field_name), isRequired, get_admin_id(adminId), JSON.stringify(allowedFormats))
 			});
 		}
 	}
@@ -145,10 +159,29 @@ function edit(props) {
 		props.setAttributes({ allowedFormats: newFormats });
 	}
 
+	const handleAdminId = (id) => {
+		props.setAttributes({
+			adminId: {
+				...adminId,
+				value: id.replace(/\s|-/g, "_")
+			}
+		})
+	}
+
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
 				<PanelBody title={__("Field Settings", TEXT_DOMAIN)} initialOpen={true}>
+
+					<div className="cwp-option">
+						<TextControl
+							placeholder={adminId.default}
+							label={__("Field ID", TEXT_DOMAIN)}
+							value={adminId.value}
+							onChange={handleAdminId}
+						/>
+					</div>
+
 					{!enableCondition ? (
 						<PanelRow>
 							<h3 className="cwp-heading">{__("Required", TEXT_DOMAIN)}</h3>

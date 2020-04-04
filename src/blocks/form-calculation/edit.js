@@ -14,7 +14,9 @@ import {
 	getFieldName,
 	extract_id,
 	getEncodedData,
-	basicColorScheme
+	basicColorScheme,
+	extract_admin_id,
+	get_admin_id
 } from "../../block/misc/helper";
 import { set, clone, isEmpty } from "lodash";
 import { getSiblings } from "../../block/functions/index";
@@ -44,7 +46,8 @@ function edit(props) {
 		styling,
 		formulaBuilder,
 		postfix,
-		prefix
+		prefix,
+		adminId
 	} = props.attributes;
 
 	const setStyling = (style, styleName) => {
@@ -55,31 +58,67 @@ function edit(props) {
 		props.setAttributes({ styling: newStyling });
 	};
 
-	useEffect(() => {
+
+	const getRootData = () => {
 		if (field_name === "") {
+
+			const newFieldName = getFieldName("calculation", props.clientId);
+
 			props.setAttributes({
-				field_name: getFieldName("calculation", props.clientId)
+				field_name: newFieldName,
+				adminId: {
+					value: extract_admin_id(newFieldName, 'calculation'),
+					default: extract_admin_id(newFieldName, 'calculation')
+				}
 			});
 			props.setAttributes({
 				id:
 					props.clientId +
 					"__" +
-					getEncodedData("calculation", props.clientId, false)
+					getEncodedData("calculation", props.clientId, false, get_admin_id(adminId))
 			});
 		} else if (field_name !== "") {
 			props.setAttributes({
 				id:
 					extract_id(field_name) +
 					"__" +
-					getEncodedData("calculation", extract_id(field_name), false)
+					getEncodedData("calculation", extract_id(field_name), false, get_admin_id(adminId))
 			});
 		}
+	}
+
+	useEffect(() => {
+		getRootData()
 	}, []);
+
+	useEffect(() => {
+		getRootData()
+	}, [props]);
+
+
+	const handleAdminId = (id) => {
+		props.setAttributes({
+			adminId: {
+				...adminId,
+				value: id.replace(/\s|-/g, "_")
+			}
+		})
+	}
 
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
 				<PanelBody title={__("Field Settings", TEXT_DOMAIN)}>
+
+					<div className="cwp-option">
+						<TextControl
+							placeholder={adminId.default}
+							label={__("Field ID", TEXT_DOMAIN)}
+							value={adminId.value}
+							onChange={handleAdminId}
+						/>
+					</div>
+
 					<div className="cwp-option">
 						<h3>{__("Prefix", TEXT_DOMAIN)}</h3>
 
@@ -164,7 +203,7 @@ function edit(props) {
 							{!isEmpty(prefix) && <span style={styling}>{prefix}</span>}
 							<span className="cwp-calc-result" style={styling}>
 								XX
-						</span>
+							</span>
 							{!isEmpty(postfix) && <span style={styling}>{postfix}</span>}
 						</div>
 					</div>

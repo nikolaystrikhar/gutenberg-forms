@@ -74,6 +74,13 @@ registerBlockType("cwp/message", {
 			type: "number",
 			default: 1000,
 		},
+		adminId: {
+			type: "object",
+			default: {
+				default: "",
+				value: ""
+			}
+		}
 	},
 	transforms: {
 		from: [

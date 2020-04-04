@@ -77,7 +77,15 @@ registerBlockType("cwp/number", {
 				empty: "Please fill out this field!",
 				invalid: "The number {{value}} is not in range!"
 			}
+		},
+		adminId: {
+			type: "object",
+			default: {
+				default: "",
+				value: ""
+			}
 		}
+
 	},
 	transforms: {
 		from: [

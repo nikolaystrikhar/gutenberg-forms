@@ -10,7 +10,9 @@ import {
 import {
 	getFieldName,
 	extract_id,
-	getEncodedData
+	getEncodedData,
+	extract_admin_id,
+	get_admin_id
 } from "../../block/misc/helper";
 import DatePicker from "../../block/components/datepicker";
 import { clone, set } from "lodash";
@@ -56,26 +58,35 @@ function edit(props) {
 		messages,
 		format,
 		condition,
-		enableCondition
+		enableCondition,
+		adminId
 	} = props.attributes;
 
 	const getRootData = () => {
 		if (field_name === "") {
+
+
+			const newFieldName = getFieldName("datePicker", props.clientId);
+
 			props.setAttributes({
-				field_name: getFieldName("datePicker", props.clientId)
+				field_name: newFieldName,
+				adminId: {
+					value: extract_admin_id(newFieldName, 'datePicker'),
+					default: extract_admin_id(newFieldName, 'datePicker')
+				}
 			});
 			props.setAttributes({
 				id:
 					props.clientId +
 					"__" +
-					getEncodedData("datePicker", props.clientId, isRequired)
+					getEncodedData("datePicker", props.clientId, isRequired, get_admin_id(adminId))
 			});
 		} else if (field_name !== "") {
 			props.setAttributes({
 				id:
 					extract_id(field_name) +
 					"__" +
-					getEncodedData("datePicker", extract_id(field_name), isRequired)
+					getEncodedData("datePicker", extract_id(field_name), isRequired, get_admin_id(adminId))
 			});
 		}
 	}
@@ -117,10 +128,30 @@ function edit(props) {
 		props.setAttributes({ messages: newMessages });
 	};
 
+
+	const handleAdminId = (id) => {
+		props.setAttributes({
+			adminId: {
+				...adminId,
+				value: id.replace(/\s|-/g, "_")
+			}
+		})
+	}
+
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
 				<PanelBody title={__("Field Settings", TEXT_DOMAIN)} initialOpen={true}>
+
+					<div className="cwp-option">
+						<TextControl
+							placeholder={adminId.default}
+							label={__("Field ID", TEXT_DOMAIN)}
+							value={adminId.value}
+							onChange={handleAdminId}
+						/>
+					</div>
+
 					{!enableCondition ? (
 						<PanelRow>
 							<h3 className="cwp-heading">{__("Required", TEXT_DOMAIN)}</h3>

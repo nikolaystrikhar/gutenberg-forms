@@ -7,13 +7,13 @@ import fileUploadEdit from "./edit.js";
 import fileUploadSave from "./save.js";
 
 registerBlockType("cwp/file-upload", {
-    title: __("File"),
-    icon: 'media-document',
-    category: "common",
-    keywords: [__("gutenberg-forms"), __("forms"), __("file"), __("file upload")],
-    edit: fileUploadEdit,
-    save: fileUploadSave,
-    attributes: {
+	title: __("File"),
+	icon: 'media-document',
+	category: "common",
+	keywords: [__("gutenberg-forms"), __("forms"), __("file"), __("file upload")],
+	edit: fileUploadEdit,
+	save: fileUploadSave,
+	attributes: {
 		enableCondition: {
 			type: "boolean",
 			default: false
@@ -79,12 +79,19 @@ registerBlockType("cwp/file-upload", {
 				"mpg",
 				"wav",
 				"wmv"
-			  ]
+			]
+		},
+		adminId: {
+			type: "object",
+			default: {
+				default: "",
+				value: ""
+			}
 		}
-    },
-    supports: {
-        align: true,
-        align: ["wide", "full", "center"]
-    },
-    parent: fieldParents
+	},
+	supports: {
+		align: true,
+		align: ["wide", "full", "center"]
+	},
+	parent: fieldParents
 });

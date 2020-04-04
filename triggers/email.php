@@ -1,18 +1,16 @@
 <?php
     require_once plugin_dir_path( __DIR__ ) . 'triggers/validator.php';
     require_once plugin_dir_path( __DIR__ ) . 'triggers/file.php';
+    require_once plugin_dir_path( __DIR__ ) . 'triggers/functions.php';
+    require_once plugin_dir_path( __DIR__ ) . 'triggers/submissions.php';
 
-    function array_remove_keys($array, $keys) {
+/**
+ * @property Validator validator
+ * @property wp_post_content post_content
+ * @property array attachments
+ */
 
-        $assocKeys = array();
-        foreach($keys as $key) {
-            $assocKeys[$key] = true;
-        }
-
-        return array_diff_key($array, $assocKeys);
-    }
-
-    class Email {
+class Email {
 
         public function __construct($post_content) {
 
@@ -136,8 +134,12 @@
 
         private function execute_captchas($user_response , $secretKey) {
 
-            if ($secretKey === "") return false;
-            if ($user_response === "") return false;
+            if ($secretKey === "") {
+				return false;
+			}
+            if ($user_response === "") {
+				return false;
+			}
 
 
             $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secretKey.'&response='.$user_response);
@@ -197,15 +199,13 @@
                     'field_value' => $sanitized_field_value,
                     'is_valid'    => $field_id === "g-recaptcha-response" ? true: $is_valid,
                     'field_id'    => $field_id,
-                    'field_type'  =>  $type
+                    'field_type'  =>  $type,
+                    'decoded_entry' =>  $this->validator->decode( $field_type )
                 );
-
-
 
                 if ($type === 'file_upload') {
 
                     // updating attachment files;
-
                     $file_to_upload = $_FILES;
                     $file_name = $file_to_upload[$field_id]['name'];
                     $tmp_name = $file_to_upload[$field_id]['tmp_name'];
@@ -235,6 +235,7 @@
                 $arranged_fields[] = $arranged_data;
             }
 
+           
            if ( $this->is_fields_valid( $arranged_fields ) ) {
                // check if all the fields are valid;
                 $this->sendMail( $arranged_fields );
@@ -298,6 +299,13 @@
 
         private function attempt_success( $template ) {
 
+			/**
+			 * @var string $successType
+			 * @var string $successURL
+			 * @var string $successMessage
+			 * @var boolean $hideFormOnSuccess
+			 */
+
             if (!isset($template)) return;
             extract($template);
 
@@ -309,16 +317,13 @@
 
         }
 
-        private function get_multiple($field) {
-            if( isset($field) && is_array($field) ) {
-                return $fieldList = implode(', ', $field);
-            }
-        }
-
         public function sendMail( $fields ) {
 
             $template = $this->get_templates($_POST['submit'])[0];
 
+			/**
+			 * @var string $fromEmail
+			 */
 
             isset($template) && extract($template);
 
@@ -327,16 +332,15 @@
             $headers = '';
 
 
-            if ( count( $this->attachments ) !== 0 ) {
+			if ( count( $this->attachments ) !== 0 ) {
                 $headers .= 'Content-type: multipart/mixed; charset=iso-8859-1' . "\r\n";
             }
 
-            if (!is_null($fromEmail)) {
-                $headers .= "From: $fromEmail";
-            }
+            if (is_null($fromEmail) === false) {
+				$headers .= "From: $fromEmail";
+			}
 
             $post = $_POST;
-
 
             if ($this->has_captcha($post)) {
                 $captcha_success = $this->execute_captchas($post['g-recaptcha-response'], $template['recaptcha']['clientSecret']);
@@ -350,23 +354,21 @@
                 }
             }
 
-
             if (array_key_exists('email' , $template)) {
 
                 if ($this->validator->isEmpty($headers)) {
-                     wp_mail($template['email'],$mail_subject,$mail_body , null, $this->attachments);
+                    wp_mail($template['email'],$mail_subject,$mail_body , null, $this->attachments);
                 } else {
-                     wp_mail($template['email'],$mail_subject,$mail_body , $headers, $this->attachments);
+                    wp_mail($template['email'],$mail_subject,$mail_body , $headers, $this->attachments);
                 }
 
                 $this->attempt_success($template);
 
             } else {
-
                 if ($this->validator->isEmpty($headers)) {
-                     wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body, null, $this->attachments);
+               	    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body, null, $this->attachments);
                 } else {
-                     wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , $headers , $this->attachments);
+               	    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , $headers , $this->attachments);
                 }
 
                 $this->attempt_success($template);

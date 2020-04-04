@@ -69,6 +69,13 @@ registerBlockType("cwp/checkbox", {
 			type: "boolean",
 			default: false
 		},
+		adminId: {
+			type: "object",
+			default: {
+				default: "",
+				value: ""
+			}
+		}
 	},
 	transforms: {
 		from: [

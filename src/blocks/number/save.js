@@ -75,22 +75,22 @@ function save(props) {
 						/>
 					</div>
 				) : (
-					<input
-						id={id}
-						aria-label={strip_tags(label)}
-						data-cwp-field
-						data-errors={errors}
-						name={id}
-						data-rule="false"
-						data-default={number}
-						value={number}
-						required={isRequired}
-						step={steps}
-						max={rangeMax}
-						min={rangeMin}
-						type="number"
-					/>
-				)}
+						<input
+							id={id}
+							aria-label={strip_tags(label)}
+							data-cwp-field
+							data-errors={errors}
+							name={id}
+							data-rule="false"
+							data-default={number}
+							value={number}
+							required={isRequired}
+							step={steps}
+							max={rangeMax}
+							min={rangeMin}
+							type="number"
+						/>
+					)}
 			</div>
 		</div>
 	);

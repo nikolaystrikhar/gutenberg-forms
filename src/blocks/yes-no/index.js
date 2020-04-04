@@ -52,6 +52,13 @@ registerBlockType("cwp/yes-no", {
 				condition: "===",
 				value: ""
 			}
+		},
+		adminId: {
+			type: "object",
+			default: {
+				default: "",
+				value: ""
+			}
 		}
 	},
 	parent: fieldParents

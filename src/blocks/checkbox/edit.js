@@ -18,7 +18,9 @@ import ConditionalLogic from "../../block/components/condition";
 import {
 	getFieldName,
 	extract_id,
-	getEncodedData
+	getEncodedData,
+	extract_admin_id,
+	get_admin_id
 } from "../../block/misc/helper";
 import Bulk_Add from "../components/bulk_add";
 import { TEXT_DOMAIN } from "../../block/constants";
@@ -40,7 +42,8 @@ function edit(props) {
 		condition,
 		enableCondition,
 		fieldStyle,
-		bulkAdd
+		bulkAdd,
+		adminId
 	} = props.attributes;
 
 	const [checkboxes, setCheckboxes] = useState([]);
@@ -53,14 +56,22 @@ function edit(props) {
 
 	const getRootData = () => {
 		if (field_name === "") {
+
+			const newFieldName = getFieldName('checkbox', props.clientId);
+
 			props.setAttributes({
-				field_name: getFieldName("checkbox", props.clientId)
+				field_name: newFieldName,
+				adminId: {
+					value: extract_admin_id(newFieldName, 'checkbox'),
+					default: extract_admin_id(newFieldName, 'checkbox')
+				}
 			});
+
 			props.setAttributes({
 				id:
 					props.clientId +
 					"__" +
-					getEncodedData("checkbox", props.clientId, isRequired) +
+					getEncodedData("checkbox", props.clientId, isRequired, get_admin_id(adminId)) +
 					"[]"
 			});
 		} else if (field_name !== "") {
@@ -68,7 +79,7 @@ function edit(props) {
 				id:
 					extract_id(field_name) +
 					"__" +
-					getEncodedData("checkbox", extract_id(field_name), isRequired) +
+					getEncodedData("checkbox", extract_id(field_name), isRequired, get_admin_id(adminId)) +
 					"[]"
 			});
 		}
@@ -229,9 +240,28 @@ function edit(props) {
 
 	}
 
+	const handleAdminId = (id) => {
+		props.setAttributes({
+			adminId: {
+				...adminId,
+				value: id.replace(/\s|-/g, "_")
+			}
+		})
+	}
+
 	return [
 		<InspectorControls>
 			<PanelBody title={__("Field Settings", TEXT_DOMAIN)} initialOpen={true}>
+
+				<div className="cwp-option">
+					<TextControl
+						placeholder={adminId.default}
+						label={__("Field ID", TEXT_DOMAIN)}
+						value={adminId.value}
+						onChange={handleAdminId}
+					/>
+				</div>
+
 				{!enableCondition ? (
 					<PanelRow>
 						<h3 className="cwp-heading">{__("Required", TEXT_DOMAIN)}</h3>

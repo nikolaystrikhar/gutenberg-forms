@@ -67,6 +67,13 @@ registerBlockType("cwp/select", {
 		bulkAdd: {
 			type: "boolean",
 			default: false
+		},
+		adminId: {
+			type: "object",
+			default: {
+				default: "",
+				value: ""
+			}
 		}
 	},
 	transforms: {

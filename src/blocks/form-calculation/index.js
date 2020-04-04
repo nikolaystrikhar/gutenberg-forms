@@ -63,6 +63,13 @@ registerBlockType("cwp/form-calculation", {
 		prefix: {
 			type: "string",
 			default: ""
+		},
+		adminId: {
+			type: "object",
+			default: {
+				default: "",
+				value: ""
+			}
 		}
 	},
 	supports: {

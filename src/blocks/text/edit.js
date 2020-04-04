@@ -11,7 +11,9 @@ import {
 import {
 	getFieldName,
 	extract_id,
-	getEncodedData
+	getEncodedData,
+	extract_admin_id,
+	get_admin_id
 } from "../../block/misc/helper";
 import { set, clone, assign } from "lodash";
 import { getRootMessages } from "../../block/functions/index";
@@ -58,24 +60,36 @@ function edit(props) {
 		minimumLength,
 		maximumLength,
 		condition,
+		adminId,
 		enableCondition
 	} = props.attributes;
 
 	const getRootData = () => {
 		if (field_name === "") {
-			props.setAttributes({ field_name: getFieldName("text", props.clientId) });
+
+
+			const newFieldName = getFieldName("text", props.clientId)
+
+			props.setAttributes({
+				field_name: newFieldName,
+				adminId: {
+					value: extract_admin_id(newFieldName, 'text'),
+					default: extract_admin_id(newFieldName, 'text')
+				}
+
+			});
 			props.setAttributes({
 				id:
 					props.clientId +
 					"__" +
-					getEncodedData("text", props.clientId, isRequired)
+					getEncodedData("text", props.clientId, isRequired, get_admin_id(adminId))
 			});
 		} else if (field_name !== "") {
 			props.setAttributes({
 				id:
 					extract_id(field_name) +
 					"__" +
-					getEncodedData("text", extract_id(field_name), isRequired)
+					getEncodedData("text", extract_id(field_name), isRequired, get_admin_id(adminId))
 			});
 		}
 	}
@@ -104,10 +118,30 @@ function edit(props) {
 		props.setAttributes({ messages: newMessages });
 	};
 
+	const handleAdminId = (id) => {
+		props.setAttributes({
+			adminId: {
+				...adminId,
+				value: id.replace(/\s|-/g, "_")
+			}
+		})
+	}
+
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
 				<PanelBody title={__("Field Settings", TEXT_DOMAIN)} initialOpen={true}>
+
+					<div className="cwp-option">
+						<TextControl
+							placeholder={adminId.default}
+							label={__("Field ID", TEXT_DOMAIN)}
+							value={adminId.value}
+							onChange={handleAdminId}
+						/>
+					</div>
+
+
 					{!enableCondition ? (
 						<PanelRow>
 							<h3 className="cwp-heading">{__("Required", TEXT_DOMAIN)}</h3>

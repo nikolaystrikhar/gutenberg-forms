@@ -76,6 +76,13 @@ registerBlockType("cwp/radio", {
 			type: "boolean",
 			default: false
 		},
+		adminId: {
+			type: "object",
+			default: {
+				default: "",
+				value: ""
+			}
+		}
 	},
 	transforms: {
 		from: [

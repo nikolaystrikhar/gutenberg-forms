@@ -118,21 +118,22 @@
 
             $dV = explode('-', urldecode(base64_decode($t)));
 
-
             if (count($dV) === 1) {
                 return array();
             }
 
-            $extra_meta_exists = array_key_exists( 6, $dV ); // testing if the extra meta exist
-            $extra_meta = $extra_meta_exists ? preg_replace('/[0-9]+/' , '', $dV[6]) : NULL;
+            $extra_meta_exists = array_key_exists( 7, $dV ); // testing if the extra meta exist
+            $extra_meta = $extra_meta_exists ? preg_replace('/[0-9]+/' , '', $dV[7]) : NULL;
 
 
             return array(
                 'is_required' => $dV[4],
                 'type'        => preg_replace('/[0-9]+/' , '' , $dV[2]),
+                'admin_id'    => $dV[6],
                 'extra_meta' => $extra_meta,
                 'field_id'    => $dV[3],
             );
+
 
 
         }
@@ -230,7 +231,9 @@
                 } else if ($type === 'checkbox' and $required === 'false') {
                     return $this->is_checkbox_empty($value) ? true : true;
                 } else if ($required === 'true') {
-                    return $this->isEmpty($value);
+                    return $this->isEmpty($value) ? false : true;
+                } else if ($required === 'true') {
+                    return $this->isEmpty($value) ? true : false;
                 } else {
                     return true;
                 }

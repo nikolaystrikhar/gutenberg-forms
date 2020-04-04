@@ -12,7 +12,9 @@ import {
 	getFieldName,
 	extract_id,
 	getEncodedData,
-	strip_tags
+	strip_tags,
+	extract_admin_id,
+	get_admin_id
 } from "../../block/misc/helper";
 
 
@@ -39,7 +41,8 @@ function edit(props) {
 		messages,
 		condition,
 		enableCondition,
-		bulkAdd
+		bulkAdd,
+		adminId
 	} = props.attributes;
 
 	const [select, setSelect] = useState([]);
@@ -53,21 +56,30 @@ function edit(props) {
 
 	const getRootData = () => {
 		if (field_name === "") {
+
+
+			const newFieldName = getFieldName("select", props.clientId)
+
+
 			props.setAttributes({
-				field_name: getFieldName("select", props.clientId)
+				field_name: newFieldName,
+				adminId: {
+					value: extract_admin_id(newFieldName, 'select'),
+					default: extract_admin_id(newFieldName, 'select')
+				}
 			});
 			props.setAttributes({
 				id:
 					props.clientId +
 					"__" +
-					getEncodedData("select", props.clientId, isRequired)
+					getEncodedData("select", props.clientId, isRequired, get_admin_id(adminId))
 			});
 		} else if (field_name !== "") {
 			props.setAttributes({
 				id:
 					extract_id(field_name) +
 					"__" +
-					getEncodedData("select", extract_id(field_name), isRequired)
+					getEncodedData("select", extract_id(field_name), isRequired, get_admin_id(adminId))
 			});
 		}
 	}
@@ -207,6 +219,16 @@ function edit(props) {
 
 	}
 
+
+	const handleAdminId = (id) => {
+		props.setAttributes({
+			adminId: {
+				...adminId,
+				value: id.replace(/\s|-/g, "_")
+			}
+		})
+	}
+
 	const editView = select.map((s, index) => {
 		return (
 			<div className="cwp-select-option">
@@ -246,6 +268,16 @@ function edit(props) {
 	return [
 		<InspectorControls>
 			<PanelBody title={__("Field Settings", TEXT_DOMAIN)} initialOpen={true}>
+
+				<div className="cwp-option">
+					<TextControl
+						placeholder={adminId.default}
+						label={__("Field ID", TEXT_DOMAIN)}
+						value={adminId.value}
+						onChange={handleAdminId}
+					/>
+				</div>
+
 				{!enableCondition ? (
 					<PanelRow>
 						<h3 className="cwp-heading">{__("Required", TEXT_DOMAIN)}</h3>
