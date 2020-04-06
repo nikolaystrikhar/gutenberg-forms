@@ -2,7 +2,10 @@
     require_once plugin_dir_path( __DIR__ ) . 'triggers/validator.php';
     require_once plugin_dir_path( __DIR__ ) . 'triggers/file.php';
     require_once plugin_dir_path( __DIR__ ) . 'triggers/functions.php';
-    require_once plugin_dir_path( __DIR__ ) . 'triggers/submissions.php';
+
+
+    require_once plugin_dir_path( __DIR__ ) . 'submissions/index.php';
+    require_once plugin_dir_path( __DIR__ ) . 'submissions/entries.php';
 
 /**
  * @property Validator validator
@@ -354,23 +357,31 @@ class Email {
                 }
             }
 
+            $newEntry = Entries::create_entry( $template, $mail_subject, $mail_body, $fields, $this->attachments );
+
             if (array_key_exists('email' , $template)) {
 
                 if ($this->validator->isEmpty($headers)) {
-                    wp_mail($template['email'],$mail_subject,$mail_body , null, $this->attachments);
+                    print "Mail Sended";
+                    // wp_mail($template['email'],$mail_subject,$mail_body , null, $this->attachments);
                 } else {
-                    wp_mail($template['email'],$mail_subject,$mail_body , $headers, $this->attachments);
+                    print "Mail Sended";
+                    // wp_mail($template['email'],$mail_subject,$mail_body , $headers, $this->attachments);
                 }
 
+                Entries::post( $newEntry );
                 $this->attempt_success($template);
 
             } else {
                 if ($this->validator->isEmpty($headers)) {
-               	    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body, null, $this->attachments);
+                    print "Mail Sended";
+               	    // wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body, null, $this->attachments);
                 } else {
-               	    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , $headers , $this->attachments);
+                    print "Mail Sended";
+               	    // wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , $headers , $this->attachments);
                 }
-
+                
+                Entries::post( $newEntry );
                 $this->attempt_success($template);
             }
         }
