@@ -105,7 +105,7 @@
 		 * @return bool
 		 */
 
-        public function isURL( $website ) {
+        public static function isURL( $website ) {
             if (!preg_match("/\b(?:(?:https?|ftp):\/\/|www\.)[-a-z0-9+&@#\/%?=~_|!:,.;]*[-a-z0-9+&@#\/%=~_|]/i",$website)) {
                 return false;
             } else {
@@ -116,7 +116,7 @@
 
         public function decode($t) {
 
-            $dV = explode('-', urldecode(base64_decode($t)));
+            $dV = explode('-', base64_decode(urldecode($t)));
 
             if (count($dV) === 1) {
                 return array();

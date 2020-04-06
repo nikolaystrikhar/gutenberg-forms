@@ -79,6 +79,24 @@ class Entries {
         $new_entry->template = $entry['template'];
         $new_entry->fields = $entry['fields'];
 
+        $current_post = get_post( get_the_ID() );
+
+        $new_entry->extra = array(
+            'url' => get_page_link(),
+            'remote_ip' => $_SERVER['REMOTE_ADDR'],
+            'user_agent' => $_SERVER['HTTP_USER_AGENT'],
+            'date' => date("Y/m/d"),
+            'day' => date("l"),
+            'time' => date("h:i:sa"),
+            'post_id' => get_the_ID(),
+            'post_title' => $current_post->post_title,
+            'post_author' => $current_post->post_author,
+            'site_title' => get_bloginfo('name'),
+            'site_description' => get_bloginfo('description'),
+            'site_url' => get_bloginfo('url'),
+            'site_admin_email' => get_bloginfo('admin_email'),
+        );
+
         // inserting this submission into entries cpt
 
         $new_post = array(
@@ -88,18 +106,21 @@ class Entries {
         );
 
 
-        if ( $post_id = wp_insert_post( $new_post ) ) {
+        $post_id = wp_insert_post( $new_post );
+
+        if ( $post_id )  {
             // if the post has been created in the cpt
             // then updating the post meta in the cpt
             
 
             // updating template meta
-
             $template_meta_key = "template__" . self::post_type;
             $fields_meta_key = "fields__" . self::post_type;
+            $extra_meta_key = "extra__" . self::post_type;
 
             update_post_meta( $post_id, $template_meta_key, $new_entry->template );
             update_post_meta( $post_id, $fields_meta_key, $new_entry->fields );
+            update_post_meta( $post_id, $extra_meta_key, $new_entry->extra );
 
         }
 
@@ -123,7 +144,14 @@ class Entries {
 
             $parse_entry = get_value_and_name($field_value);
 
-            $new_entry['fields'][ $parse_entry['admin_id'] ] = $parse_entry['value']; 
+            if ($field_value['field_type'] === 'file_upload') {
+
+                $filename = wp_get_upload_dir()['baseurl'] . '/gutenberg-forms-uploads/' . $field_value['file_name']; 
+
+                $new_entry['fields'][ $parse_entry['admin_id'] ] = $filename; 
+            } else {
+                $new_entry['fields'][ $parse_entry['admin_id'] ] = $parse_entry['value']; 
+            }
 
         }
         

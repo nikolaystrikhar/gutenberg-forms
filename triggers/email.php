@@ -47,6 +47,7 @@ class Email {
 
 
         private function get_templates($id, $blocks = null) {
+
             if (is_null($blocks)) {
                 $blocks = $this->post_content;
             }
@@ -224,8 +225,12 @@ class Email {
                     $hexed_file_name .= ".$ext";
 
                     if( $is_allowed ) {
-                        move_uploaded_file( $tmp_name, WP_CONTENT_DIR.'/uploads/'.$hexed_file_name );
-                        $file_path = WP_CONTENT_DIR.'/uploads/'.$hexed_file_name;
+
+                        wp_mkdir_p( WP_CONTENT_DIR.'/uploads/gutenberg-forms-uploads/' );
+                        move_uploaded_file( $tmp_name, WP_CONTENT_DIR.'/uploads/gutenberg-forms-uploads/'.$hexed_file_name );
+                        $file_path = WP_CONTENT_DIR.'/uploads/gutenberg-forms/'.$hexed_file_name;
+
+                        $arranged_data['file_name'] = $hexed_file_name;
 
                         $this->attachments[] = $file_path;
 
@@ -362,11 +367,9 @@ class Email {
             if (array_key_exists('email' , $template)) {
 
                 if ($this->validator->isEmpty($headers)) {
-                    print "Mail Sended";
-                    // wp_mail($template['email'],$mail_subject,$mail_body , null, $this->attachments);
+                    wp_mail($template['email'],$mail_subject,$mail_body , null, $this->attachments);
                 } else {
-                    print "Mail Sended";
-                    // wp_mail($template['email'],$mail_subject,$mail_body , $headers, $this->attachments);
+                    wp_mail($template['email'],$mail_subject,$mail_body , $headers, $this->attachments);
                 }
 
                 Entries::post( $newEntry );
@@ -374,13 +377,10 @@ class Email {
 
             } else {
                 if ($this->validator->isEmpty($headers)) {
-                    print "Mail Sended";
-               	    // wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body, null, $this->attachments);
+               	    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body, null, $this->attachments);
                 } else {
-                    print "Mail Sended";
-               	    // wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , $headers , $this->attachments);
+               	    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , $headers , $this->attachments);
                 }
-                
                 Entries::post( $newEntry );
                 $this->attempt_success($template);
             }
