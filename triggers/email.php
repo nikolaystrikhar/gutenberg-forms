@@ -4,7 +4,6 @@
     require_once plugin_dir_path( __DIR__ ) . 'triggers/functions.php';
 
 
-    require_once plugin_dir_path( __DIR__ ) . 'submissions/index.php';
     require_once plugin_dir_path( __DIR__ ) . 'submissions/entries.php';
 
 /**
@@ -367,9 +366,15 @@ class Email {
             if (array_key_exists('email' , $template)) {
 
                 if ($this->validator->isEmpty($headers)) {
-                    wp_mail($template['email'],$mail_subject,$mail_body , null, $this->attachments);
+
+                    print "Mail Sended";
+
+                    // wp_mail($template['email'],$mail_subject,$mail_body , null, $this->attachments);
                 } else {
-                    wp_mail($template['email'],$mail_subject,$mail_body , $headers, $this->attachments);
+
+                    print "Mail Sended";
+
+                    // wp_mail($template['email'],$mail_subject,$mail_body , $headers, $this->attachments);
                 }
 
                 Entries::post( $newEntry );
@@ -377,9 +382,15 @@ class Email {
 
             } else {
                 if ($this->validator->isEmpty($headers)) {
-               	    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body, null, $this->attachments);
+
+                    print "Mail Sended";
+
+               	    // wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body, null, $this->attachments);
                 } else {
-               	    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , $headers , $this->attachments);
+
+                    print "Mail Sended";
+
+               	    // wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , $headers , $this->attachments);
                 }
                 Entries::post( $newEntry );
                 $this->attempt_success($template);

@@ -13,13 +13,14 @@ function parse_value( $value ) {
         return "<a href='$value' target='__blank'>$value</a>";
 
     } else {
+
         return $value;
     }
 
 
 }
 
-function Table( $t, $first_capital = false ) {
+function Table( $t, $first_capital = false, $preformat = false ) {
 
 
     echo "<table class='widefat message-fields striped'>";
@@ -28,7 +29,7 @@ function Table( $t, $first_capital = false ) {
         foreach ($t as $heading => $value) {
 
             $table_heading = $first_capital ? ucfirst($heading) : $heading;
-            $table_value = parse_value( $value );
+            $table_value = $preformat ? '<pre>'.parse_value( $value ).'</pre>' : parse_value( $value ); 
 
             echo '
             <tr>

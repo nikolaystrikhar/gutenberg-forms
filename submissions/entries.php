@@ -1,6 +1,7 @@
 <?php 
 
 require_once plugin_dir_path( __DIR__ ) . 'submissions/meta.php';
+require_once plugin_dir_path( __DIR__ ) . 'triggers/functions.php';
 
 
 function get_value_and_name( $field ) {
@@ -24,22 +25,20 @@ class Entries {
 
     public static function register_post_type() {
 
+        $labels = generate_post_type_labels( 'Form Entries', "Entry" , "Entries" , self::text_domain );
 
         // registering post type for entries
         register_post_type (
             self::post_type,
             array(
-                'labels' => array(
-                    'name' => __( 'Gutenberg Forms' , self::text_domain ),
-                    'singular_name' => __( 'Gutenberg Forms' , self::text_domain )
-                ),
+                'labels' => $labels,
                 'content' => false,
-                'menu_icon' => 'dashicons-feedback',
+                'menu_icon' => 'dashicons-list-view',
                 'description'        => __( 'For storing entries', self::text_domain ),
                 'public'             => false,
                 'publicly_queryable' => false,
                 'show_ui'            => true,
-                'show_in_menu'       => true,
+                'show_in_menu'       => 'edit.php?post_type=cwp_gf_entries',
                 'query_var'          => true,
                 'rewrite'            => false,
                 'capability_type'    => 'post',
@@ -55,6 +54,9 @@ class Entries {
             Meta::register_meta_boxes( self::post_type );
         }
 
+        
+
+        
     }
 
     public static function post( $entry = '' ) {
@@ -146,7 +148,9 @@ class Entries {
 
             if ($field_value['field_type'] === 'file_upload') {
 
-                $filename = wp_get_upload_dir()['baseurl'] . '/gutenberg-forms-uploads/' . $field_value['file_name']; 
+
+                $upload_dir_base = wp_get_upload_dir()['baseurl'];
+                $filename = $upload_dir_base . '/gutenberg-forms-uploads/' . $field_value['file_name']; 
 
                 $new_entry['fields'][ $parse_entry['admin_id'] ] = $filename; 
             } else {

@@ -102,9 +102,21 @@ function cwpgutenbergforms_set_script_translations()
 }
 
 
+// function cwp_gutenberg_menu() {
+
+
+// 	// add_menu_page('Gutenberg Forms', 'Gutenberg Forms', 'manage_options', 'edit.php?post_type=cwp_gutenberg_forms', 'callback_render_plugin_menu');
+// }
+
+
+
+
+require_once( plugin_dir_path( __DIR__ ) . '/admin/admin.php' );
+
+
+//custom_postype for our gutenberg-forms;
 add_action('init', 'cwpgutenbergforms_set_script_translations');
 add_action('init', 'cwp_gutenberg_forms_messages_meta');
-//custom_postype for our gutenberg-forms;
 add_action('wp_head', 'submitter');
 add_action('wp-load', 'submitter');
 add_action('init', 'cwp_form_post_type');
