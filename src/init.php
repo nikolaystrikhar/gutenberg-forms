@@ -65,9 +65,12 @@ function cwp_form_post_type() {
 
 
 	require_once plugin_dir_path( __DIR__ ) . 'submissions/entries.php';
+	require_once plugin_dir_path( __DIR__ ) . 'forms-cpt/index.php';
 
+	Form::register_post_type(); //? creating a post_type for forms
 	Entries::register_post_type(); //? creating a post_type for our form entries
- }
+
+}
 
 
 require_once plugin_dir_path(__DIR__) . 'triggers/email.php';
@@ -77,10 +80,15 @@ function submitter()
 
 	global $post;
 
-	$content = get_post( $post->ID )->post_content;
-	$parsed_blocks = parse_blocks( $content );
+	$post = get_post( $post->ID );
+
+
+	$parsed_blocks = parse_blocks( $post->post_content );
 
 	if (!empty($parsed_blocks)) {
+
+		// $block = do_shortcode($parsed_blocks[0]['innerHTML']);
+
 		$email_apply = new Email($parsed_blocks);
 
 		$email_apply->init();
@@ -102,18 +110,8 @@ function cwpgutenbergforms_set_script_translations()
 }
 
 
-// function cwp_gutenberg_menu() {
-
-
-// 	// add_menu_page('Gutenberg Forms', 'Gutenberg Forms', 'manage_options', 'edit.php?post_type=cwp_gutenberg_forms', 'callback_render_plugin_menu');
-// }
-
-
-
 
 require_once( plugin_dir_path( __DIR__ ) . '/admin/admin.php' );
-
-
 //custom_postype for our gutenberg-forms;
 add_action('init', 'cwpgutenbergforms_set_script_translations');
 add_action('init', 'cwp_gutenberg_forms_messages_meta');

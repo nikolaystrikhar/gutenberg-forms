@@ -3,14 +3,17 @@
 @import "../_partials/mixins";
 
 
+@include settings_modal();
+
 .cwp-intro {
+	
 	& div.types {
 
 		& button {
 			margin: 0px 10px;
 		}
-
 	}
+
 }
 
 .cwp-form {

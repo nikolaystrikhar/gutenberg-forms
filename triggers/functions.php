@@ -61,3 +61,48 @@ function generate_post_type_labels( $name, $singular, $plural, $text_domain ) {
 	);
 
 }
+
+function manage_entries_columns_headers( $defaults ) {
+
+	$headers = array();
+
+	$headers['channel'] = 'Channel';
+	$headers['date'] = $defaults['date'];
+
+	return $headers;
+}
+
+function get_custom_entries_columns( $column_name, $post_id ) {
+
+	switch ( $column_name ) {
+
+		case 'channel':
+				echo "<h1>Published</h1>";
+	}
+
+}
+
+function manage_form_columns_headers( $defaults ) {
+
+	$headers = array();
+
+	$headers['title'] = $defaults['title'];
+	$headers['shortcode'] = 'Short Code';
+	$headers['date'] = $defaults['date'];
+
+	return $headers;
+}
+
+function get_custom_form_columns( $column_name, $post_id ) {
+
+	switch ( $column_name ) {
+
+		case 'shortcode':
+				echo "<p><code>[gutenberg_form id='$post_id']</code></p>";
+
+	}
+
+}
+
+
+

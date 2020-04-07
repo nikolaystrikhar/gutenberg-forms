@@ -3,7 +3,8 @@ import { each, has, omit, isEqual, clone, assign, isEmpty, get } from "lodash";
 
 import formStepSave from "../../blocks/form-step/save";
 import formStepEdit from "../../blocks/form-step/edit";
-
+import $ from 'jquery'
+const { getPostType } = wp.data.select('core');
 const { createBlock, registerBlockType } = wp.blocks;
 const { __ } = wp.i18n;
 
@@ -380,5 +381,35 @@ export function getFormTemplates(type) {
 		]
 
 	}
+
+}
+
+export function get_saved_forms() {
+
+
+	return new Promise((resolve, reject) => {
+		// const uri = get(getPostType('cwp_gf_forms'), '_links.wp:items[0].href');
+
+		const uri = 'http://gutenbergforms.local/wp-json/wp/v2/cwp_gf_forms?per_page=2'
+
+		if (!isEmpty(uri)) {
+
+			$.ajax(
+				{
+					url: uri,
+				}
+			)
+				.done(function (data) {
+					resolve(data);
+				})
+				.fail(function (err) {
+					reject(err)
+				})
+
+		} else {
+			reject('invalid url');
+		}
+	})
+
 
 }

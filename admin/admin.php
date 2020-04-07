@@ -15,15 +15,16 @@ class cwp_gutenberg_forms_Page {
         
         $page_title = 'Gutenberg Forms Dashboard';
 		$menu_title = 'Gutenberg Forms';
-		$capability = 'manage_options';
+		$capability =
+		 'manage_options';
 		$slug = 'gutenberg_forms';
 		$callback = array($this, 'cwp_gutenberg_forms_content');
         $icon_url = 'dashicons-feedback';
         
-
 		add_menu_page($page_title, $menu_title, $capability, $slug, $callback, $icon_url);
+        add_submenu_page('gutenberg_forms', 'Form', 'Forms', 'manage_options', 'edit.php?post_type=cwp_gf_forms'); 
         add_submenu_page('gutenberg_forms', 'Entry', 'Entries', 'manage_options', 'edit.php?post_type=cwp_gf_entries'); 
-    
+		
     }
     
 

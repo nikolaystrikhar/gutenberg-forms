@@ -6,6 +6,7 @@ import mainSave from "./save";
 import { defaultFieldMessages } from '../../block/functions';
 import { fieldSupport } from '../../constants';
 
+
 registerBlockType("cwp/block-gutenberg-forms", {
 	supports: fieldSupport,
 	title: __("Gutenberg Forms"),
@@ -88,6 +89,10 @@ registerBlockType("cwp/block-gutenberg-forms", {
 			default: ""
 		},
 		hideFormOnSuccess: {
+			type: "boolean",
+			default: false
+		},
+		cpt: {
 			type: "boolean",
 			default: false
 		}

@@ -54,8 +54,10 @@ class Entries {
             Meta::register_meta_boxes( self::post_type );
         }
 
-        
-
+        // registering and creating custom columns for entries cpt
+        //? set_custom_entries_columns -> functions.php
+        add_filter( 'manage_'. self::post_type .'_posts_columns', 'manage_entries_columns_headers', 100 );
+        add_filter( 'manage_'. self::post_type .'_posts_custom_column', 'get_custom_entries_columns', 100 , 2 );
         
     }
 

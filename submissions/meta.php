@@ -11,9 +11,10 @@ class Meta {
 
         // adding all the meta boxes required
 
-        add_meta_box( "template__$post_type", esc_html__( 'Template', $post_type ), 'template', $post_type, 'normal', 'high' );
         add_meta_box( "fields__$post_type", esc_html__( 'Fields', $post_type ), 'fields', $post_type, 'normal', 'high' );
-        add_meta_box( "extra__$post_type", esc_html__( 'Extra Information', $post_type ), 'extra_info', $post_type, 'normal', 'high' );
+        add_meta_box( "extra__$post_type", esc_html__( 'Additional Information', $post_type ), 'extra_info', $post_type, 'normal', 'high' );
+        add_meta_box( "template__$post_type", esc_html__( 'Email Template', $post_type ), 'template', $post_type, 'normal', 'high' );
+        
     }
 
 
