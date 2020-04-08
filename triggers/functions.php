@@ -106,3 +106,22 @@ function get_custom_form_columns( $column_name, $post_id ) {
 
 
 
+ 
+function get_forms_cpt_data () {
+
+	$args = array(
+		'post_type' => 'cwp_gf_forms'
+	);
+
+	$form_cpt = get_posts( $args );
+
+
+	foreach( $form_cpt as $key => $post ) {
+
+		$post->url = get_post_permalink($post->ID); // getting the preview link of all the cpt forms
+
+	}
+
+	return $form_cpt;
+
+}

@@ -17,7 +17,8 @@ function short_code_callback($atts) {
 			'id' => ''
 	), $atts));
 
-	$content = apply_filters( 'the_content', get_block( $id ) );
+	// $content = apply_filters( 'the_content', get_block( $id ) );
+	$content = get_block( $id );
 	
 	return $content;
 

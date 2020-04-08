@@ -54,7 +54,6 @@ class Email {
             $templates = array();
 
             foreach( $blocks as $f => $block ) {
-
                 if ( $block['blockName'] === "cwp/block-gutenberg-forms" && $block['attrs']['id'] === $id ) {
 
                     $decoded_template = array();
@@ -120,7 +119,7 @@ class Email {
 
                     $templates[] = $decoded_template;
 
-                } else {
+                }else {
                     $templates += $this->get_templates($id, $block['innerBlocks']);
                 }
 
@@ -242,7 +241,7 @@ class Email {
                 $arranged_fields[] = $arranged_data;
             }
 
-           
+        
            if ( $this->is_fields_valid( $arranged_fields ) ) {
                // check if all the fields are valid;
                 $this->sendMail( $arranged_fields );

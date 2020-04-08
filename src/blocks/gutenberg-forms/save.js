@@ -16,7 +16,8 @@ function save(props) {
 		recaptcha: { siteKey },
 		formType,
 		encryption,
-		hideFormOnSuccess
+		hideFormOnSuccess,
+		formLabel
 	} = props.attributes;
 
 	const captcha_p = `
@@ -63,6 +64,7 @@ function save(props) {
 							></button>
 						</div>
 					)}
+
 				</form>
 				{successType === "message" && (
 					<div id={id} className="cwp-success cwp-hidden">

@@ -26,7 +26,9 @@ class Form {
                 'show_in_rest' => true,
                 'supports' => array('editor', 'title'),
                 'template' => array(
-                    array('cwp/block-gutenberg-forms' , array())
+                    array('cwp/block-gutenberg-forms' , array(
+                        'cpt' => true
+                    ))
                 ),
                 'template_lock' => 'all'
             )

@@ -37,6 +37,8 @@ function Sidebar(props) {
         };
     };
 
+    const { isCpt } = props;
+
     return (
         <div className="cwp__sidebar">
             <div className="cwp__panel_main">
@@ -69,9 +71,10 @@ function Sidebar(props) {
                 </Panel>
                 <Panel header={__(<strong>Catagories</strong>)}>
                     <MenuItem
-                        onClick={() => props.applyCatagory('my_forms')}
+                        disabled={isCpt}
+                        onClick={() => props.applyCatagory('Saved Forms')}
                         isSelected={false}
-                        isPrimary={props.currentCatagory === 'my_forms'}
+                        isPrimary={props.currentCatagory === 'Saved Forms'}
                         initialOpen={false}
                     >
                         My Forms
@@ -79,6 +82,7 @@ function Sidebar(props) {
                     <MenuGroup>
                         {catagories.map(c => (
                             <MenuItem
+
                                 onClick={() => props.applyCatagory(c)}
                                 isSelected={true}
                                 isPrimary={props.currentCatagory === c}

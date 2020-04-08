@@ -8,7 +8,7 @@ function Header(props) {
                 <h3>{props.currentCatagory}</h3>
             </div>
             <div className="cwp__search">
-                <TextControl placeholder="Search Template..." />
+                <TextControl placeholder="Search..." />
             </div>
         </div>
     );

@@ -1,7 +1,9 @@
 import React from 'react'
 import { Button } from "@wordpress/components"
 
-function PreviewBlock({ data }) {
+function PreviewBlock(props) {
+
+    const { data } = props;
 
     return (
         <div className="cwp_temp">

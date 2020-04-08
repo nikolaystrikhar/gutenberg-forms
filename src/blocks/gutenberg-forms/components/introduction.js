@@ -17,7 +17,7 @@ function Introduction(props) {
 
     return (
         <div className="cwp-intro">
-            <SettingsModal status={modal} onClose={() => setModal(false)} />
+            <SettingsModal cpt={cpt} clientId={props.data.clientId} status={modal} onClose={() => setModal(false)} />
             <Placeholder icon="feedback" label="Gutenberg Forms" instructions="Select an option to create a new form.">
                 <div className="types">
                     <Button isDefault onClick={() => handleType("standard")}>Standard</Button>

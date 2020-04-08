@@ -95,7 +95,7 @@ registerBlockType("cwp/block-gutenberg-forms", {
 		cpt: {
 			type: "boolean",
 			default: false
-		}
+		},
 	},
 	edit: mainEdit,
 	save: mainSave
