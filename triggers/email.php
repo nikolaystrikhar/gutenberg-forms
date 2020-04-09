@@ -238,10 +238,14 @@ class Email {
 
                 }
 
+                if ( $this->validator->is_hidden_data_field($field_id) ) {
+
+                    $arranged_data['is_valid'] = true;
+                }
+
                 $arranged_fields[] = $arranged_data;
             }
 
-        
            if ( $this->is_fields_valid( $arranged_fields ) ) {
                // check if all the fields are valid;
                 $this->sendMail( $arranged_fields );

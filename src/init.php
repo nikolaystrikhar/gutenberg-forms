@@ -33,8 +33,6 @@ function gutenberg_forms_cwp_block_assets()
 		true
 	);
 
-
-
 	wp_register_style(
 		'gutenberg_forms-cwp-block-editor-css',
 		plugins_url('dist/blocks.editor.build.css', dirname(__FILE__)),
@@ -54,7 +52,6 @@ function gutenberg_forms_cwp_block_assets()
 		]
 	);
 
-
 	register_block_type(
 		'cwp/block-gutenberg-forms',
 		array(
@@ -70,7 +67,7 @@ function gutenberg_forms_cwp_block_assets()
 //! Our custom post type function
 function cwp_form_post_type() {
 
-
+	
 	require_once plugin_dir_path( __DIR__ ) . 'submissions/entries.php';
 	require_once plugin_dir_path( __DIR__ ) . 'forms-cpt/index.php';
 
@@ -88,7 +85,6 @@ function submitter()
 	global $post;
 
 	$post = get_post( $post->ID );
-
 
 	$parsed_blocks = parse_blocks( do_shortcode($post->post_content) );
 

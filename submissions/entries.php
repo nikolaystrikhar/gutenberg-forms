@@ -2,6 +2,7 @@
 
 require_once plugin_dir_path( __DIR__ ) . 'submissions/meta.php';
 require_once plugin_dir_path( __DIR__ ) . 'triggers/functions.php';
+require_once plugin_dir_path( __DIR__ ) . 'triggers/validator.php';
 
 
 function get_value_and_name( $field ) {
@@ -58,7 +59,77 @@ class Entries {
         //? set_custom_entries_columns -> functions.php
         add_filter( 'manage_'. self::post_type .'_posts_columns', 'manage_entries_columns_headers', 100 );
         add_filter( 'manage_'. self::post_type .'_posts_custom_column', 'get_custom_entries_columns', 100 , 2 );
-        
+        add_filter( 'manage_edit-'. self::post_type .'_sortable_columns', 'manage_entries_sortable_columns_headers' );
+
+        add_action( 'restrict_manage_posts', function(){
+            
+            global $wpdb;
+
+            $post = get_post( get_the_ID() );
+
+
+            //only add filter to post type you want
+            if ($post and $post->post_type === self::post_type){
+
+                $forms = array();
+
+                $entries = get_posts(
+                    array(
+                        'post_type' => self::post_type
+                    )
+                );
+
+
+                foreach ($entries as $entry){
+
+                    $entry_meta = get_post_meta(
+                        $entry->ID,
+                        'extra__' . self::post_type
+                    );
+
+                    $forms[$entry_meta[0]['form_id']] = $entry_meta[0]['form_label'];
+                }
+
+                //give a unique name in the select field
+                ?><select name="admin_filter_channel">
+                    <option value="">All Channels</option>
+    
+                    <?php 
+                        $current_v = isset($_GET['admin_filter_channel'])? $_GET['admin_filter_channel'] : '';
+                        
+                        foreach ($forms as $form_id => $form_label) {
+
+                            printf(
+                                '<option value="%s"%s>%s</option>',
+                                $form_id,
+                                $form_label == $current_v ? ' selected="selected"':'',
+                                $form_label 
+                            );
+                        }
+                    ?>
+                </select>
+                <?php
+            }
+        });
+
+        add_filter( 'parse_query', function($query){
+            global $pagenow;
+
+            $post_type = (isset($_GET['post_type'])) ? $_GET['post_type'] : 'post';
+            
+
+            if (is_admin() && $post_type == self::post_type && $pagenow == 'edit.php' && isset($_GET['admin_filter_channel']) && !empty($_GET['admin_filter_channel'])) {
+
+                $channel = $_GET['admin_filter_channel'];  
+
+                $query->query_vars['meta_key'] = 'assigned_channel';
+                $query->query_vars['meta_value'] = $channel;
+                $query->query_vars['meta_compare'] = '=';
+
+            }
+        });
+
+
     }
 
     public static function post( $entry = '' ) {
@@ -84,11 +155,16 @@ class Entries {
         $new_entry->fields = $entry['fields'];
 
         $current_post = get_post( get_the_ID() );
+        $post_meta = $entry['post_meta'];
+
+        $form_label = trim($post_meta['title']) === "" ? $post_meta['form_id'] : $post_meta['title'];
 
         $new_entry->extra = array(
             'url' => get_page_link(),
             'remote_ip' => $_SERVER['REMOTE_ADDR'],
             'user_agent' => $_SERVER['HTTP_USER_AGENT'],
+            'form_id' => $post_meta['form_id'],
+            'form_label' => $form_label, 
             'date' => date("Y/m/d"),
             'day' => date("l"),
             'time' => date("h:i:sa"),
@@ -101,10 +177,11 @@ class Entries {
             'site_admin_email' => get_bloginfo('admin_email'),
         );
 
+
         // inserting this submission into entries cpt
 
         $new_post = array(
-            'post_title' => $new_entry->template['subject'],
+            'post_title' => $form_label,
             'post_status' => 'publish',
 			'post_type'   => self::post_type,
         );
@@ -115,7 +192,6 @@ class Entries {
         if ( $post_id )  {
             // if the post has been created in the cpt
             // then updating the post meta in the cpt
-            
 
             // updating template meta
             $template_meta_key = "template__" . self::post_type;
@@ -143,19 +219,42 @@ class Entries {
         );
 
         $new_entry['fields'] = array();
+        $new_entry['post_meta'] = array(
+            'title' => '',
+            'form_id' => ''
+        );
 
         foreach ( $fields as $field_key => $field_value ) {
 
-            $parse_entry = get_value_and_name($field_value);
+            $is_hidden_field = Validator::is_hidden_data_field( $field_value['field_id'] );
+
 
             if ($field_value['field_type'] === 'file_upload') {
 
+                $parse_entry = get_value_and_name($field_value);
 
                 $upload_dir_base = wp_get_upload_dir()['baseurl'];
                 $filename = $upload_dir_base . '/gutenberg-forms-uploads/' . $field_value['file_name']; 
 
-                $new_entry['fields'][ $parse_entry['admin_id'] ] = $filename; 
-            } else {
+                $new_entry['fields'][ $parse_entry['admin_id'] ] = $filename;
+
+            } else if ( $is_hidden_field ) {
+
+                
+
+                if ($field_value['field_id'] === 'gf_form_label') {
+                
+                    $new_entry['post_meta']['title'] = $field_value['field_value'];
+                
+                } else if ($field_value['field_id'] === 'gf_form_id') {
+
+                    $new_entry['post_meta']['form_id'] = $field_value['field_value'];
+
+                }
+
+
+            } else if (!$is_hidden_field) {
+                $parse_entry = get_value_and_name($field_value);
                 $new_entry['fields'][ $parse_entry['admin_id'] ] = $parse_entry['value']; 
             }
 

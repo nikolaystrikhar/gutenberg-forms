@@ -217,6 +217,9 @@ http://nicolasgallagher.com/micro-clearfix-hack/
   border-bottom: none;
   cursor: help; }
 
+html {
+  scroll-behavior: smooth; }
+
 @media (max-width: 600px) {
   .cwp-form .cwp-form-col-main-preview.cwp_stack_columns {
     -ms-flex-direction: column !important;

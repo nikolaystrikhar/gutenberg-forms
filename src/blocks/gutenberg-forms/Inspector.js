@@ -38,6 +38,8 @@ function Inspector(prop) {
 		formType,
 		recaptcha: { siteKey, clientSecret },
 		hideFormOnSuccess,
+		formLabel,
+		cpt
 	} = props.attributes;
 
 	const handleAlignment = aln => {
@@ -131,6 +133,11 @@ function Inspector(prop) {
 				</div>
 			</PanelBody>
 			<PanelBody initialOpen={true} title={__("General", TEXT_DOMAIN)}>
+				<TextControl
+					label={__("Form Label", TEXT_DOMAIN)}
+					value={formLabel}
+					onChange={formLabel => props.setAttributes({ formLabel })}
+				/>
 				{
 					formType !== "multiStep" && <div className="cwp-option">
 						<PanelRow>

@@ -96,6 +96,10 @@ registerBlockType("cwp/block-gutenberg-forms", {
 			type: "boolean",
 			default: false
 		},
+		formLabel: {
+			type: "string",
+			default: ""
+		}
 	},
 	edit: mainEdit,
 	save: mainSave

@@ -74,12 +74,27 @@ function manage_entries_columns_headers( $defaults ) {
 
 function get_custom_entries_columns( $column_name, $post_id ) {
 
+	$post = get_post( $post_id );
+	$post_meta = get_post_meta( $post_id, 'extra__cwp_gf_entries' );
+
+	$post_url = $post_meta[0]['url'];
+	$form_specific_post_url = $post_url . '#' . $post_meta[0]['form_id'];
+
+
 	switch ( $column_name ) {
 
 		case 'channel':
-				echo "<h1>Published</h1>";
+				echo '<a target="__blank" href="'. $form_specific_post_url .'">'. $post->post_title .'</a>';
+	
 	}
 
+}
+
+function manage_entries_sortable_columns_headers( $columns ) {
+
+	$columns['channel'] = 'Channel';
+
+	return $columns;
 }
 
 function manage_form_columns_headers( $defaults ) {

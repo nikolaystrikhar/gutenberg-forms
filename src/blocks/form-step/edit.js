@@ -20,8 +20,6 @@ function edit(props) {
 
         }
 
-
-
     }, [])
 
 

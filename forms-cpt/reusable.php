@@ -11,13 +11,14 @@ function get_block( $ID ) {
 }
 
 function short_code_callback($atts) {
-            
+
+
 	extract(shortcode_atts(
 		array(
-			'id' => ''
+            'id' => '',
 	), $atts));
 
-	// $content = apply_filters( 'the_content', get_block( $id ) );
+    // var_dump( get_post( $id )->post_title );
 	$content = get_block( $id );
 	
 	return $content;

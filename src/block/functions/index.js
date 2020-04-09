@@ -11,9 +11,11 @@ const { __ } = wp.i18n;
 const {
 	getBlock,
 	getBlockRootClientId,
-	getBlockHierarchyRootClientId
+	getBlockHierarchyRootClientId,
+	getPreviousBlockClientId
 } = wp.data.select("core/block-editor");
 const { updateBlockAttributes } = wp.data.dispatch("core/block-editor");
+const { withSelect } = wp.data;
 
 const radio_enabled_fields = ["select", "radio", "checkbox"]; //fields that support multiple
 
@@ -328,6 +330,7 @@ export function isChildFieldsRequired(clientId) {
 export function detectSimilarFields(clientId, field_id) {
 	//this will detect the similar id across fields
 
+
 	const root = getBlock(getBlockRootClientId(clientId));
 	let result = false;
 
@@ -383,3 +386,38 @@ export function getFormTemplates(type) {
 	}
 
 }
+
+
+export function detect_similar_forms(clientId) {
+
+	//? test if the form is duplicated and has the same form id as the above form
+
+	let previousBlock = getBlock(getPreviousBlockClientId(clientId));
+
+	// getting the previous block because when user duplicate a block it is appended after, Therefore this is the duplicated block
+
+	if (!isEmpty(previousBlock) && get(previousBlock, 'name') === 'cwp/block-gutenberg-forms') {
+		// checking if the previousBlock is not empty and it is our form block
+
+
+		let form_id_prev = get(previousBlock, 'attributes.id');
+
+		let current_form = getBlock(clientId);
+
+		let current_form_id = get(current_form, 'attributes.id')
+
+
+		if (isEqual(form_id_prev, current_form_id)) {
+			return true;
+		}
+
+
+
+	}
+
+
+	return false;
+
+
+}
+

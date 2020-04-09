@@ -15,7 +15,7 @@ function Condition(props) {
 	useEffect(() => {
 		let first_field = getOptions()[1];
 
-		if (!isEmpty(first_field) && has(first_field, "value")) {
+		if (!isEmpty(first_field) && has(first_field, "value") && isEmpty(condition.value)) {
 			handleConditionChange(first_field.value, "field");
 		}
 	}, []);

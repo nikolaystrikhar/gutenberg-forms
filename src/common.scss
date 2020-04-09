@@ -2,6 +2,10 @@
 @import "./_partials/mixins";
 @import "../src/block/lib/datePicker.scss";
 
+html {
+	scroll-behavior: smooth;
+}
+
 @media (max-width: 600px) {
 	.cwp-form {
 		& .cwp-form-col-main-preview {

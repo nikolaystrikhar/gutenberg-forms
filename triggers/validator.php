@@ -199,6 +199,22 @@
 
         }
 
+        public static function is_hidden_data_field( $field ) {
+            // test if this is the hidden field used for passing data
+
+            $hidden_fields = array(
+                'gf_form_label',
+                'gf_form_id'
+            );
+
+            if ( in_array( $field, $hidden_fields ) ) {
+                return true;
+            } else { 
+                return false;
+            }
+
+        }
+
         public function validate( $type, $value, $decode_id ) {
 
             $decoded_field = $this->decode($decode_id);
