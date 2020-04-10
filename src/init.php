@@ -84,15 +84,17 @@ function submitter()
 
 	global $post;
 
-	$post = get_post( $post->ID );
+	if (!empty( $post )) {
+		$post = get_post( $post->ID );
 
-	$parsed_blocks = parse_blocks( do_shortcode($post->post_content) );
+		$parsed_blocks = parse_blocks( do_shortcode($post->post_content) );
 
-	if (!empty($parsed_blocks)) {
+		if (!empty($parsed_blocks)) {
 
-		$email_apply = new Email($parsed_blocks);
+			$email_apply = new Email($parsed_blocks);
 
-		$email_apply->init();
+			$email_apply->init();
+		}
 	}
 }
 

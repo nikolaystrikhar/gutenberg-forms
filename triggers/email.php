@@ -246,7 +246,8 @@ class Email {
                 $arranged_fields[] = $arranged_data;
             }
 
-           if ( $this->is_fields_valid( $arranged_fields ) ) {
+
+            if ( $this->is_fields_valid( $arranged_fields ) ) {
                // check if all the fields are valid;
                 $this->sendMail( $arranged_fields );
            }
@@ -369,15 +370,9 @@ class Email {
             if (array_key_exists('email' , $template)) {
 
                 if ($this->validator->isEmpty($headers)) {
-
-                    print "Mail Sended";
-
-                    // wp_mail($template['email'],$mail_subject,$mail_body , null, $this->attachments);
+                    wp_mail($template['email'],$mail_subject,$mail_body , null, $this->attachments);
                 } else {
-
-                    print "Mail Sended";
-
-                    // wp_mail($template['email'],$mail_subject,$mail_body , $headers, $this->attachments);
+                    wp_mail($template['email'],$mail_subject,$mail_body , $headers, $this->attachments);
                 }
 
                 Entries::post( $newEntry );
@@ -385,15 +380,9 @@ class Email {
 
             } else {
                 if ($this->validator->isEmpty($headers)) {
-
-                    print "Mail Sended";
-
-               	    // wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body, null, $this->attachments);
+               	    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body, null, $this->attachments);
                 } else {
-
-                    print "Mail Sended";
-
-               	    // wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , $headers , $this->attachments);
+               	    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , $headers , $this->attachments);
                 }
                 Entries::post( $newEntry );
                 $this->attempt_success($template);

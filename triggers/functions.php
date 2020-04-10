@@ -75,16 +75,13 @@ function manage_entries_columns_headers( $defaults ) {
 function get_custom_entries_columns( $column_name, $post_id ) {
 
 	$post = get_post( $post_id );
-	$post_meta = get_post_meta( $post_id, 'extra__cwp_gf_entries' );
-
-	$post_url = $post_meta[0]['url'];
-	$form_specific_post_url = $post_url . '#' . $post_meta[0]['form_id'];
+	$preview_entry = get_edit_post_link($post->ID);
 
 
 	switch ( $column_name ) {
 
 		case 'channel':
-				echo '<a target="__blank" href="'. $form_specific_post_url .'">'. $post->post_title .'</a>';
+				echo '<a href="'. $preview_entry .'">'. $post->post_title .'</a>';
 	
 	}
 
@@ -110,18 +107,24 @@ function manage_form_columns_headers( $defaults ) {
 
 function get_custom_form_columns( $column_name, $post_id ) {
 
+    
+    
+    
+    
+    
+    
+	$short_code_style =  'font-family: monospace;background-color: #eee; width: 100%; background: transparent; border: none; height: 30px; padding: 0px 4px;';
+	
+
 	switch ( $column_name ) {
 
 		case 'shortcode':
-				echo "<p><code>[gutenberg_form id='$post_id']</code></p>";
+				echo "<input style='$short_code_style' onFocus='this.select();' value='[gutenberg_form id=". $post_id ."]' readonly />";
 
 	}
 
 }
 
-
-
- 
 function get_forms_cpt_data () {
 
 	$args = array(

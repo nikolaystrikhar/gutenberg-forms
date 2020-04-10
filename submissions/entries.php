@@ -90,9 +90,10 @@ class Entries {
                     $forms[$entry_meta[0]['form_id']] = $entry_meta[0]['form_label'];
                 }
 
-                //give a unique name in the select field
-                ?><select name="admin_filter_channel">
-                    <option value="">All Channels</option>
+                # give a unique name in the select field
+                ?>
+                <select name="admin_filter_channel">
+                    <option value="-1">All Channels</option>
     
                     <?php 
                         $current_v = isset($_GET['admin_filter_channel'])? $_GET['admin_filter_channel'] : '';
@@ -105,6 +106,7 @@ class Entries {
                                 $form_label == $current_v ? ' selected="selected"':'',
                                 $form_label 
                             );
+
                         }
                     ?>
                 </select>
@@ -112,24 +114,54 @@ class Entries {
             }
         });
 
-        add_filter( 'parse_query', function($query){
+        add_filter( 'parse_query', function( $query ) {
+
             global $pagenow;
 
             $post_type = (isset($_GET['post_type'])) ? $_GET['post_type'] : 'post';
             
 
-            if (is_admin() && $post_type == self::post_type && $pagenow == 'edit.php' && isset($_GET['admin_filter_channel']) && !empty($_GET['admin_filter_channel'])) {
+            if (is_admin() AND $post_type == self::post_type AND $pagenow == 'edit.php' AND isset($_GET['admin_filter_channel']) AND !empty($_GET['admin_filter_channel'])) {
+
+                $qv = &$query->query_vars;
+                $qv['meta_query'] = array();
 
                 $channel = $_GET['admin_filter_channel'];  
 
-                $query->query_vars['meta_key'] = 'assigned_channel';
-                $query->query_vars['meta_value'] = $channel;
-                $query->query_vars['meta_compare'] = '=';
+                $qv['meta_query'][] = array(
+
+                    'field' => 'form_id__' . self::post_type,
+                    'value' => $channel,
+                    'compare' => '=',
+                );
 
             }
         });
 
+        add_filter('post_row_actions', function( $actions, $post ) {
 
+
+            // check if the current post_type is yours
+            if ( is_admin() and $post->post_type === self::post_type ) {
+
+                
+                $post_meta = get_post_meta( 
+                    $post->ID,
+                    'extra__' . self::post_type
+                );
+                
+                $post_url = $post_meta[0]['url'];
+                $form_specific_post_url = $post_url . '#' . $post_meta[0]['form_id'];
+                
+                $actions['preview_form'] = '<a target="__blank" href="'. $form_specific_post_url .'">Preview Form</a>';
+
+                return $actions;
+
+            }
+
+            return $actions;
+
+        } , 10 , 2);
     }
 
     public static function post( $entry = '' ) {
@@ -145,19 +177,21 @@ class Entries {
             ),
             'fields' => array()
         );
+        $post_meta = $entry['post_meta'];
 
         $entry = apply_filters( self::text_domain , wp_parse_args( $entry, $defaults ) );
+        $form_label = trim($post_meta['title']) === "" ? $post_meta['form_id'] : $post_meta['title'];
 
         $new_entry = new self();
 
         $new_entry->email = $entry['email'];
         $new_entry->template = $entry['template'];
         $new_entry->fields = $entry['fields'];
+        $new_entry->form_id = $post_meta['form_id'];
+
 
         $current_post = get_post( get_the_ID() );
-        $post_meta = $entry['post_meta'];
 
-        $form_label = trim($post_meta['title']) === "" ? $post_meta['form_id'] : $post_meta['title'];
 
         $new_entry->extra = array(
             'url' => get_page_link(),
@@ -197,10 +231,12 @@ class Entries {
             $template_meta_key = "template__" . self::post_type;
             $fields_meta_key = "fields__" . self::post_type;
             $extra_meta_key = "extra__" . self::post_type;
+            $form_id_meta_key = "form_id__" . self::post_type;
 
             update_post_meta( $post_id, $template_meta_key, $new_entry->template );
             update_post_meta( $post_id, $fields_meta_key, $new_entry->fields );
             update_post_meta( $post_id, $extra_meta_key, $new_entry->extra );
+            update_post_meta( $post_id, $form_id_meta_key, $new_entry->form_id );
 
         }
 
