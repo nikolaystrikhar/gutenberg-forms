@@ -5,6 +5,7 @@ import mainEdit from "./edit";
 import mainSave from "./save";
 import { defaultFieldMessages } from '../../block/functions';
 import { fieldSupport } from '../../constants';
+import { deprecated } from "./deprecated";
 
 
 registerBlockType("cwp/block-gutenberg-forms", {

@@ -6,7 +6,6 @@ class cwp_gutenberg_forms_Page {
 	public function __construct() {
     
         add_action( 'admin_menu', array( $this, 'cwp_gutenberg_forms' ) );
-
     }
     
 
@@ -30,7 +29,22 @@ class cwp_gutenberg_forms_Page {
 
 	public function cwp_gutenberg_forms_content() {
 	?>
-        <div id="cwp_gutenberg_forms_root"></div>
+       
+	   <div class="cwp-gf-settings-wrap">
+    <div class="components-panel">
+        <div class="components-panel__body is-opened">
+            <div class="components-panel__header">
+                <h2>Getting Started with <strong>Gutenberg Forms</strong><code>1.2.0</code></h2>
+                <p>Congratulations! You've just added awesome Gutenberg blocks. Check more information about the plugin below. ACF Blocks is built on top of ACF Pro, please make sure you have ACF Pro plugin installed & activated to use ACF Blocks Free.</p>
+                <iframe width="650" height="380" src="https://www.youtube.com/embed/zupr0fl_qAw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <div class="cwp_gf_admin_btn_wrap">
+					<a href="https://github.com/munirkamal/gutenberg-forms" target="__blank" class="cwp-gf_admin_button">Github</a>
+				</div>
+            </div>
+        </div>
+    </div>
+</div>
+
 	<?php
 	}
 }
