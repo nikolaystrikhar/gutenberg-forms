@@ -5,8 +5,7 @@ import Header from "./components/header"
 import PreviewBlock from './components/preview_block'
 import PostTypeBlock from './components/PostTypeBlock'
 import { isEqual } from 'lodash'
-
-
+import { getTemplates } from '../../../block/api'
 
 
 function Settings({ onClose, status, clientId, cpt }) {
@@ -16,15 +15,29 @@ function Settings({ onClose, status, clientId, cpt }) {
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
 
-    const saved_forms = cwpGlobal["cwp-cpt-forms"];
 
     useEffect(() => {
-        // cpt forms are globally injected using localize script
-        setData(cwpGlobal["cwp-cpt-forms"]);
+
+        getTemplates()
+            .then(templates => {
+
+                console.log(data);
+                setData(templates)
+
+            })
+            .catch(err => {
+
+                console.error(err);
+
+            })
+
     }, [])
 
+    const saved_forms = cwpGlobal["cwp-cpt-forms"];
+
+
     const templates = data.map((data, index) => {
-        return <PreviewBlock key={index} data={data} />
+        return <PreviewBlock onSelect={onClose} clientId={clientId} key={index} data={data} />
     });
 
     const post_types = saved_forms.map((form, index) => {

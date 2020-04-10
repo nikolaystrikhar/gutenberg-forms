@@ -8,22 +8,13 @@ import {
     ButtonGroup,
     Button
 } from "@wordpress/components";
+import { getCatagories } from '../../../../block/api'
+import { TEXT_DOMAIN } from "../../../../block/constants";
 const { __ } = wp.i18n;
 
 function Sidebar(props) {
+
     const [catagories, setCatagories] = useState([]);
-
-    useEffect(() => {
-        // getCatagory("catagories")
-        //     .then(c => {
-        //         setCatagories(c);
-        //     })
-        //     .catch(err => {
-        //         console.error(err);
-        //     });
-
-        setCatagories(['Hero', 'Non Hero'])
-    }, []);
 
     const getActiveCol = c => {
         if (props.columns === c) {
@@ -36,6 +27,14 @@ function Sidebar(props) {
             isDefault: true
         };
     };
+
+    useEffect(() => {
+
+        getCatagories()
+            .then((catags) => setCatagories(catags))
+            .catch(err => console.error(err));
+
+    }, []);
 
     const { isCpt } = props;
 
@@ -69,7 +68,7 @@ function Sidebar(props) {
                         </PanelRow>
                     </div>
                 </Panel>
-                <Panel header={__(<strong>Catagories</strong>)}>
+                <MenuGroup>
                     <MenuItem
                         disabled={isCpt}
                         onClick={() => props.applyCatagory('Saved Forms')}
@@ -79,6 +78,9 @@ function Sidebar(props) {
                     >
                         My Forms
                     </MenuItem>
+                </MenuGroup>
+
+                <PanelBody title={__("Catagories", TEXT_DOMAIN)}>
                     <MenuGroup>
                         {catagories.map(c => (
                             <MenuItem
@@ -92,7 +94,7 @@ function Sidebar(props) {
                             </MenuItem>
                         ))}
                     </MenuGroup>
-                </Panel>
+                </PanelBody>
             </div>
         </div>
     );

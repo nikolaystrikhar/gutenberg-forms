@@ -797,7 +797,8 @@
 	padding: 20px 20px;
 	display: grid;
 	grid-template-columns: repeat($col, 1fr);
-	grid-gap: 20px;
+	column-gap: 20px;
+    row-gap: 100px;
 
 }
 
@@ -890,6 +891,26 @@
 				&[data-cols="2"] {
 					@include columns(2);
 				}
+
+				& .cwp_preview_block {
+					height: 500px;
+
+					& .cwp-media {
+						height: 100%;
+						overflow-y: scroll;
+					}
+
+					& .cwp-header {
+
+						& h3 {
+							margin: auto 0;
+						}
+
+						display: flex;
+						justify-content: space-between;
+					}
+
+				}
 			}
 		}
 
@@ -899,6 +920,7 @@
 
 		& .cwp__content {
 			overflow-y: scroll;
+
 		}
 
 	}

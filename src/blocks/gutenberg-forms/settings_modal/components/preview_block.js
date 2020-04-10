@@ -1,17 +1,50 @@
 import React from 'react'
-import { Button } from "@wordpress/components"
+import { Button, Card, CardBody, CardHeader, CardFooter, CardMedia, Icon } from '@wordpress/components'
+import { get } from 'lodash'
+const { createBlock, parse } = wp.blocks;
+const { replaceBlock } = wp.data.dispatch("core/block-editor");
 
 function PreviewBlock(props) {
 
     const { data } = props;
 
+    const { fields } = data;
+
+    const name = get(fields, 'Name'),
+        screenshot = get(fields, 'Screenshot[0].thumbnails.large.url'),
+        code = get(fields, 'Code');
+
+
+
+    const apply_template = () => {
+
+
+        const [template] = parse(code);
+
+
+        const { name, attributes, innerBlocks } = template;
+
+        replaceBlock(
+            props.clientId,
+            createBlock(
+                name,
+                attributes,
+                innerBlocks
+            )
+        );
+        props.onSelect();
+    }
+
     return (
-        <div className="cwp_temp">
-            <div className="cwp_temp_select">
-                <h3>{data.link}</h3>
-                <iframe src={data.link} />
-            </div>
-        </div>
+        <Card className="cwp_preview_block">
+            <CardHeader className="cwp-header">
+                <h3>{name}</h3>
+                <Button isPrimary target="__blank" onClick={apply_template}>Insert</Button>
+            </CardHeader>
+            <CardMedia className="cwp-media">
+                <img src={screenshot} />
+            </CardMedia>
+        </Card>
     )
 }
 

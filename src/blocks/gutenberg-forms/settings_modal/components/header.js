@@ -5,7 +5,7 @@ function Header(props) {
     return (
         <div className="cwp__header">
             <div className="cwp_selected__catagory">
-                <h3>{props.currentCatagory}</h3>
+                <h2><strong>{props.currentCatagory}</strong></h2>
             </div>
             <div className="cwp__search">
                 <TextControl placeholder="Search..." />

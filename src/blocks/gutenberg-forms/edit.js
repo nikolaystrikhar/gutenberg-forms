@@ -11,7 +11,6 @@ import { withDispatch } from "@wordpress/data";
 const { InnerBlocks, RichText, BlockControls, BlockIcon } = wp.blockEditor;
 const { Button, Toolbar, Tooltip } = wp.components;
 
-
 const { compose } = wp.compose;
 const { __ } = wp.i18n;
 
