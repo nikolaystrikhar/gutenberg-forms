@@ -163,7 +163,9 @@ class Email {
 
             if (count($_FILES) !== 0) {
                 foreach ($_FILES as $file_id => $file_meta) {
-                    $post_without_submit[$file_id] = $file_meta;
+                    if (!empty($file_meta['tmp_name'])) {
+                        $post_without_submit[$file_id] = $file_meta;
+                    }
                 }
             }
 
