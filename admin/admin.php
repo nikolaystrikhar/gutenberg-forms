@@ -29,14 +29,14 @@ class cwp_gutenberg_forms_Page {
 
 	public function cwp_gutenberg_forms_content() {
 	?>
-       
 	   <div class="cwp-gf-settings-wrap">
     <div class="components-panel">
         <div class="components-panel__body is-opened">
             <div class="components-panel__header">
                 <h2>Getting Started with <strong>Gutenberg Forms</strong><code>1.2.0</code></h2>
-                <p>Congratulations! You've just added awesome Gutenberg blocks. Check more information about the plugin below. ACF Blocks is built on top of ACF Pro, please make sure you have ACF Pro plugin installed & activated to use ACF Blocks Free.</p>
-                <iframe width="650" height="380" src="https://www.youtube.com/embed/zupr0fl_qAw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <p><strong>Congratulations!</strong> You've just added the Next Generation WordPress Form Builder. Watch a quick video about the plugin below. This is a native Gutenberg Form Builder which allows you to create forms easily like you create any Gutenberg content. All form fields are Gutenberg blocks. You may also use any other Gutenberg blocks inside your Form block for adding images and other content.</p>
+                <iframe width="650" height="380" src="https://www.youtube.com/embed/pdcOPAtgzAk" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
+                <p><strong>Start Creating Beautiful Forms in WordPress the easiest way.</strong></p>
                 <div class="cwp_gf_admin_btn_wrap">
                     <a href="https://github.com/munirkamal/gutenberg-forms" target="__blank" class="cwp-gf_admin_button">Github</a>
 					<a href="https://wordpress.org/support/plugin/forms-gutenberg/" target="__blank" class="cwp-gf_admin_button">Support</a>

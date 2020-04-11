@@ -37,12 +37,13 @@ function PreviewBlock(props) {
 
     return (
         <Card className="cwp_preview_block">
-            <CardMedia className="cwp-media">
-                <img src={screenshot} />
-            </CardMedia>
             <div className="foot">
                 <Button isPrimary target="__blank" onClick={apply_template}>Insert Form</Button>
             </div>
+            <CardMedia className="cwp-media">
+                <img src={screenshot} />
+            </CardMedia>
+
         </Card>
     )
 }
