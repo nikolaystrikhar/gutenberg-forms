@@ -848,7 +848,8 @@
 		max-width: 100%;
 		width: 90%;
 		height: 100%;
-		overflow: hidden;
+		overflow-x: hidden;
+		overflow-y: scroll;
 
 		& .components-modal__header {
 			padding: 0 37px 0px 40px !important;
@@ -902,12 +903,9 @@
 			}
 
 			&.cpt {
-				overflow-y: scroll;
-
 				& .cwp-empty {
 					@include empty();
 				}
-
 			}
 
 
