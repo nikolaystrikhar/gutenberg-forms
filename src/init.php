@@ -48,7 +48,8 @@ function gutenberg_forms_cwp_block_assets()
 			'pluginDirUrl'  => plugin_dir_url(__DIR__),
 			'site_url'		=> get_bloginfo('url'),
 			'cwp-cpt-forms' => get_forms_cpt_data(),
-			'primary-color'	=> get_user_option( 'admin_color' )
+			'primary-color'	=> get_user_option( 'admin_color' ),
+			'new_form_url'	=> admin_url('post-new.php?post_type=cwp_gf_forms')
 		]
 	);
 

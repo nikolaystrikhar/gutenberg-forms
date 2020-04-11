@@ -16,67 +16,40 @@ function Sidebar(props) {
 
     const [catagories, setCatagories] = useState([]);
 
-    const getActiveCol = c => {
-        if (props.columns === c) {
-            return {
-                isPrimary: true
-            };
-        }
-
-        return {
-            isDefault: true
-        };
-    };
-
     useEffect(() => {
 
         getCatagories()
-            .then((catags) => setCatagories(catags))
+            .then((catags) => {
+                setCatagories(catags);
+
+                if (catags[0]) {
+
+                    const first_catagory = catags[0];
+                    props.applyCatagory(first_catagory);
+                }
+
+            })
             .catch(err => console.error(err));
 
     }, []);
 
+
+    // Disabling the insertion of saved form when the user is in cpt
     const { isCpt } = props;
 
     return (
         <div className="cwp__sidebar">
             <div className="cwp__panel_main">
-                <Panel>
-                    <div className="cwp__view">
-                        <PanelRow>
-                            <span>View</span>
-                            <ButtonGroup>
-                                <Button
-                                    {...getActiveCol(2)}
-                                    onClick={() => props.setColumns(2)}
-                                >
-                                    2
-								</Button>
-                                <Button
-                                    {...getActiveCol(3)}
-                                    onClick={() => props.setColumns(3)}
-                                >
-                                    3
-								</Button>
-                                <Button
-                                    {...getActiveCol(4)}
-                                    onClick={() => props.setColumns(4)}
-                                >
-                                    4
-								</Button>
-                            </ButtonGroup>
-                        </PanelRow>
-                    </div>
-                </Panel>
                 <MenuGroup>
                     <MenuItem
+                        icon="admin-post"
                         disabled={isCpt}
                         onClick={() => props.applyCatagory('Saved Forms')}
                         isSelected={false}
-                        isPrimary={props.currentCatagory === 'Saved Forms'}
+                        isDefault={props.currentCatagory === 'Saved Forms'}
                         initialOpen={false}
                     >
-                        My Forms
+                        Saved Forms
                     </MenuItem>
                 </MenuGroup>
 
@@ -84,10 +57,9 @@ function Sidebar(props) {
                     <MenuGroup>
                         {catagories.map(c => (
                             <MenuItem
-
                                 onClick={() => props.applyCatagory(c)}
                                 isSelected={true}
-                                isPrimary={props.currentCatagory === c}
+                                isDefault={props.currentCatagory === c}
                                 initialOpen={false}
                             >
                                 {c}

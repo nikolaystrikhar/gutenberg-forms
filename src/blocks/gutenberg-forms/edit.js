@@ -3,7 +3,7 @@ import Inspector from "./Inspector";
 import TemplateBuilder from "./components/templateBuilder";
 import Introduction from "./components/introduction";
 import { isEmpty, get } from "lodash";
-import { getFormTemplates, detect_similar_forms, selectTitle, GetTitle } from "../../block/functions/index";
+import { getFormTemplates, detect_similar_forms } from "../../block/functions/index";
 import { getThemeStyling } from "../../block/misc/helper";
 import { TEXT_DOMAIN } from "../../block/constants";
 import { withDispatch } from "@wordpress/data";
@@ -31,6 +31,7 @@ function edit(props) {
 	const formId = id && "form-".concat(id.split("-")[1]);
 
 	useEffect(() => {
+
 
 		if (id === '' || detect_similar_forms(props.clientId)) {
 			props.setAttributes({ id: "submit-" + props.clientId });

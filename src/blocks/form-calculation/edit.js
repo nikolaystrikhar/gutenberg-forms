@@ -19,7 +19,7 @@ import {
 	get_admin_id
 } from "../../block/misc/helper";
 import { set, clone, isEmpty } from "lodash";
-import { getSiblings } from "../../block/functions/index";
+import { getSiblings, detect_similar_forms } from "../../block/functions/index";
 import ConditionalLogic from "../../block/components/condition";
 import FormulaBuilder from "../../block/components/formulaBuilder";
 import { TEXT_DOMAIN } from "../../block/constants";
@@ -60,7 +60,7 @@ function edit(props) {
 
 
 	const getRootData = () => {
-		if (field_name === "") {
+		if (field_name === "" || detect_similar_forms(props.clientId)) {
 
 			const newFieldName = getFieldName("calculation", props.clientId);
 

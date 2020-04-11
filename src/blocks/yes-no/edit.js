@@ -15,6 +15,7 @@ import {
 	get_admin_id
 } from "../../block/misc/helper";
 import { TEXT_DOMAIN } from "../../block/constants/index"
+import { detect_similar_forms } from "../../block/functions";
 
 
 const { __ } = wp.i18n;
@@ -53,7 +54,7 @@ function edit(props) {
 	} = props.attributes;
 
 	const getRootData = () => {
-		if (field_name === "") {
+		if (field_name === "" || detect_similar_forms(props.clientId)) {
 
 			const newFieldName = getFieldName("yes_no", props.clientId)
 

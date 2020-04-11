@@ -24,6 +24,7 @@ import {
 } from "../../block/misc/helper";
 import Bulk_Add from "../components/bulk_add";
 import { TEXT_DOMAIN } from "../../block/constants";
+import { detect_similar_forms } from "../../block/functions";
 
 const { RichText } = wp.blockEditor;
 const { __ } = wp.i18n;
@@ -55,7 +56,8 @@ function edit(props) {
 	let checkboxContainer = useRef();
 
 	const getRootData = () => {
-		if (field_name === "") {
+
+		if (field_name === "" || detect_similar_forms(props.clientId)) {
 
 			const newFieldName = getFieldName('checkbox', props.clientId);
 

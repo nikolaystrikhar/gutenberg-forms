@@ -1,28 +1,34 @@
-import React, { useState, useEffect } from 'react'
+import React, { useState, useEffect, Fragment } from 'react'
 import { Modal, Button, Spinner } from "@wordpress/components"
 import Sidebar from "./components/sidebar"
 import Header from "./components/header"
 import PreviewBlock from './components/preview_block'
 import PostTypeBlock from './components/PostTypeBlock'
-import { isEqual } from 'lodash'
+import Templates from "./components/templates"
+import { isEqual, isEmpty } from 'lodash'
 import { getTemplates } from '../../../block/api'
+import Empty from './components/Empty'
 
 
 function Settings({ onClose, status, clientId, cpt }) {
 
-    const [columns, setColumns] = useState(3);
     const [catagory, setCatagory] = useState('Hero');
     const [data, setData] = useState([]);
     const [loading, setLoading] = useState(false);
 
+    const [templates, setTemplates] = useState([]);
+    const [currentTemplate, setCurrentTemplate] = useState({});
 
     useEffect(() => {
+
+        setLoading(true);
 
         getTemplates()
             .then(templates => {
 
-                console.log(data);
-                setData(templates)
+                setData(templates);
+
+                setLoading(false);
 
             })
             .catch(err => {
@@ -31,24 +37,48 @@ function Settings({ onClose, status, clientId, cpt }) {
 
             })
 
-    }, [])
+    }, []);
+
+    const handleCatagory = (c) => {
+
+        setCatagory(c);
+
+        if (!isEqual(c, 'Saved Forms')) {
+
+            const catagoryTemplates = data.filter(v => {
+                return isEqual(v.fields.Category, c);
+            });
+
+            setTemplates(catagoryTemplates);
+
+            if (catagoryTemplates[0]) {
+                setCurrentTemplate(catagoryTemplates[0]);
+            }
+
+        }
+
+
+    }
 
     const saved_forms = cwpGlobal["cwp-cpt-forms"];
 
+    // const templates = data.map((data, index) => {
+    //     return <PreviewBlock onSelect={onClose} clientId={clientId} key={index} data={data} />
+    // });
 
-    const templates = data.map((data, index) => {
-        return <PreviewBlock onSelect={onClose} clientId={clientId} key={index} data={data} />
-    });
-
-    const post_types = saved_forms.map((form, index) => {
+    const post_types = !isEmpty(saved_forms) ? saved_forms.map((form, index) => {
         return <PostTypeBlock onSelect={onClose} clientId={clientId} key={index} form={form} />
-    });
+    }) : <Empty message="No Saved Forms!" />
+
+    const currentPreview = <PreviewBlock onSelect={onClose} clientId={clientId} data={currentTemplate} />
+
+    const wrapperClass = isEqual(catagory, 'Saved Forms') ? 'cpt' : 'templates';
 
     return (
         <div className="cwp-settings_modal">
             {
                 status && <Modal
-                    title="Insert Form"
+                    title="Insert a Saved Form or Choose from Templates"
                     className="cwp_lib_modal"
                     onRequestClose={onClose}
                 >
@@ -56,19 +86,26 @@ function Settings({ onClose, status, clientId, cpt }) {
                         <Sidebar
                             isCpt={cpt}
                             currentCatagory={catagory}
-                            applyCatagory={(c) => setCatagory(c)}
-                            columns={columns}
-                            setColumns={c => setColumns(c)}
+                            applyCatagory={(c) => handleCatagory(c)}
                         />
-                        <div className="cwp__data__wrapper">
-                            <Header currentCatagory={catagory} />
+                        <div className={`cwp__data__wrapper ${wrapperClass}`}>
+
                             {
                                 !loading ? (
-                                    <div className="cwp__data" data-cols={columns}>
+                                    <Fragment>
                                         {
-                                            isEqual(catagory, 'Saved Forms') ? post_types : templates
+                                            !isEqual(catagory, 'Saved Forms') && <Templates
+                                                onSelect={(template) => setCurrentTemplate(template)}
+                                                currentTemplate={currentTemplate}
+                                                templates={templates}
+                                            />
                                         }
-                                    </div>
+                                        <div className="cwp__data">
+                                            {
+                                                isEqual(catagory, 'Saved Forms') ? post_types : currentPreview
+                                            }
+                                        </div>
+                                    </Fragment>
                                 ) : (
                                         <div className="cwp_loader">
                                             <Spinner />

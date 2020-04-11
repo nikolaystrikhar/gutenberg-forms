@@ -19,7 +19,7 @@ import {
 
 
 import { clone, pullAt, set, assign } from "lodash";
-import { getRootMessages } from "../../block/functions/index";
+import { getRootMessages, detect_similar_forms } from "../../block/functions/index";
 import ConditionalLogic from "../../block/components/condition";
 import Bulk_Add from "../components/bulk_add";
 import { TEXT_DOMAIN } from "../../block/constants/index"
@@ -55,7 +55,7 @@ function edit(props) {
 	const selectContainer = useRef();
 
 	const getRootData = () => {
-		if (field_name === "") {
+		if (field_name === "" || detect_similar_forms(props.clientId)) {
 
 
 			const newFieldName = getFieldName("select", props.clientId)

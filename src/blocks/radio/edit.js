@@ -24,7 +24,7 @@ import { TEXT_DOMAIN } from "../../block/constants/index"
 
 
 import { clone, pullAt, isEqual, has, set, assign } from "lodash";
-import { getRootMessages } from "../../block/functions/index";
+import { getRootMessages, detect_similar_forms } from "../../block/functions/index";
 
 const { RichText } = wp.blockEditor;
 const { __ } = wp.i18n;
@@ -58,7 +58,7 @@ function edit(props) {
 	});
 
 	const getRootData = () => {
-		if (field_name === "") {
+		if (field_name === "" || detect_similar_forms(props.clientId)) {
 
 
 			const newFieldName = getFieldName("radio", props.clientId)

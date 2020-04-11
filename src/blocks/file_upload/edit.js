@@ -15,7 +15,7 @@ import {
 	extract_admin_id,
 	get_admin_id
 } from "../../block/misc/helper";
-import { getRootMessages, getRootFormBlock } from "../../block/functions/index";
+import { getRootMessages, getRootFormBlock, detect_similar_forms } from "../../block/functions/index";
 import ConditionalLogic from "../../block/components/condition";
 
 import { clone, set, assign, isEqual } from "lodash";
@@ -72,7 +72,7 @@ function edit(props) {
 	}, [])
 
 	const setRootData = () => {
-		if (field_name === "") {
+		if (field_name === "" || detect_similar_forms(props.clientId)) {
 
 
 			const newFieldName = getFieldName("file_upload", props.clientId);

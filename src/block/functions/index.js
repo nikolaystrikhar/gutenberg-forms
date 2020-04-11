@@ -392,25 +392,23 @@ export function detect_similar_forms(clientId) {
 
 	//? test if the form is duplicated and has the same form id as the above form
 
+	let currentBlock = getBlock(clientId);
 	let previousBlock = getBlock(getPreviousBlockClientId(clientId));
 
 	// getting the previous block because when user duplicate a block it is appended after, Therefore this is the duplicated block
 
-	if (!isEmpty(previousBlock) && get(previousBlock, 'name') === 'cwp/block-gutenberg-forms') {
+	if (!isEmpty(previousBlock) && get(previousBlock, 'name') === get(currentBlock, 'name')) {
 		// checking if the previousBlock is not empty and it is our form block
 
 
 		let form_id_prev = get(previousBlock, 'attributes.id');
 
-		let current_form = getBlock(clientId);
-
-		let current_form_id = get(current_form, 'attributes.id')
+		let current_form_id = get(currentBlock, 'attributes.id');
 
 
 		if (isEqual(form_id_prev, current_form_id)) {
 			return true;
 		}
-
 
 
 	}
@@ -420,4 +418,3 @@ export function detect_similar_forms(clientId) {
 
 
 }
-

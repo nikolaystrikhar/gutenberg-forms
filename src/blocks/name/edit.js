@@ -14,7 +14,7 @@ import {
 	extract_admin_id,
 	get_admin_id
 } from "../../block/misc/helper";
-import { getRootMessages } from "../../block/functions/index";
+import { getRootMessages, detect_similar_forms } from "../../block/functions/index";
 import ConditionalLogic from "../../block/components/condition";
 
 import { clone, set, assign } from "lodash";
@@ -63,7 +63,7 @@ function edit(props) {
 
 
 	const getRootData = () => {
-		if (field_name === "") {
+		if (field_name === "" || detect_similar_forms(props.clientId)) {
 
 			const newFieldName = getFieldName("name", props.clientId)
 
