@@ -16,6 +16,25 @@ That’s why we built <a href="https://gutenbergforms.com/" rel="friend" title="
 
 Gutenberg Forms adds a Form Block in Gutenberg and all the form fields are child blocks which you can add within the Form Block, nice and easy. You can add multiple contact forms, and you can customize the form within the Gutenberg Editor. Google reCAPTCHA integration added for spam filtering.
 
+## Feature Highlights
+
+The following are some of the main features, but there's more which you need to checkout by installing the plugin. 
+
+* No Bulky Form Builder - Build Forms Directly in Gutenberg Editor
+* Easy Form Layouts using builtin Form Columns Block
+* Create Multi-Step / Multi-Page Forms Easily
+* Conditional Logic - Show/hide fields conditionally
+* Form Entries - Form Entries are recorded in the database and accessible via WordPress admin.
+* Use Forms Anywhere - You can create standalone forms using Gutenberg and use it anywhere using a shortcode. That Gutenberg Forms compatible with any WordPress page builder.
+* Form Templates - We have started creating useful form templates to let you get started building your desired form faster.
+* Calculator Forms - Create basic or complex calculations
+* Spam Protection - Google reCaptcha Integration
+* Email Notification Builder - Create a custom email notification content
+* Form Styles - Form & Field blocks come with different styles. (you can add yours as well)
+* Responsive Forms - The forms you create are fully responsive.
+* Import/Export Forms - Do it the same way you do with any Gutenberg block
+* More features you will find out while using the plugin
+
 ## Privacy Notice
 
 With the default configuration, this plugin, in itself, does not:
@@ -52,19 +71,6 @@ We appreciate all contributions and don't want a wall of rules to get in the way
 3. Provide ideas, feedback, mockups, and suggestions
 4. Join the conversations
 
-## Screenshots
-
-[![Gutenberg Forms, is the Next Generation WordPress Form Builder](https://ps.w.org/forms-gutenberg/assets/screenshot-1.gif)](https://gutenbergforms.com?utm_medium=github&utm_source=readme&utm_campaign=readme&utm_content=screenshot)
-
-[![Gutenberg Forms, add new fields](https://ps.w.org/forms-gutenberg/assets/screenshot-2.gif)](https://gutenbergforms.com?utm_medium=github&utm_source=readme&utm_campaign=readme&utm_content=screenshot)
-
-[![Gutenberg Forms, rearrange fields](https://ps.w.org/forms-gutenberg/assets/screenshot-3.gif)](https://gutenbergforms.com?utm_medium=github&utm_source=readme&utm_campaign=readme&utm_content=screenshot)
-
-[![Gutenberg Forms, form settings](https://ps.w.org/forms-gutenberg/assets/screenshot-4.gif)](https://gutenbergforms.com?utm_medium=github&utm_source=readme&utm_campaign=readme&utm_content=screenshot)
-
-[![Gutenberg Forms, email builder](https://ps.w.org/forms-gutenberg/assets/screenshot-5.gif)](https://gutenbergforms.com?utm_medium=github&utm_source=readme&utm_campaign=readme&utm_content=screenshot)
-
-[![Gutenberg Forms, form styles](https://ps.w.org/forms-gutenberg/assets/screenshot-6.gif)](https://gutenbergforms.com?utm_medium=github&utm_source=readme&utm_campaign=readme&utm_content=screenshot)
 
 ## Changelog
 
