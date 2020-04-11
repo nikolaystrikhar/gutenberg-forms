@@ -68,7 +68,6 @@ function gutenberg_forms_cwp_block_assets()
 //! Our custom post type function
 function cwp_form_post_type() {
 
-	
 	require_once plugin_dir_path( __DIR__ ) . 'submissions/entries.php';
 	require_once plugin_dir_path( __DIR__ ) . 'forms-cpt/index.php';
 

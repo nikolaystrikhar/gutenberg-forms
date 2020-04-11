@@ -1,7 +1,7 @@
 <?php 
 
 
-require_once WP_PLUGIN_DIR . '/gutenberg-forms/markdown/table.php';
+require_once plugin_dir_path( plugin_dir_path( __DIR__ ) ) . '/markdown/table.php';
 
 
 function fields() {

@@ -32,7 +32,7 @@ class Form {
                 ),
                 'template_lock' => 'all'
             )
-        );
+        ); 
 
         // registering short_code for reusable gutenberg form block through short_code
         register_form_shortcode( self::post_type );
