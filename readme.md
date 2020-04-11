@@ -70,6 +70,14 @@ We appreciate all contributions and don't want a wall of rules to get in the way
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
+= 1.2.0 = (11 Apr 2020) 
+- New: Now form entries are recorded in database
+- New: forms CPT - Create forms and use anywhere using shortcode
+- New: Templates Library - Start creating forms quickly with ready to use templates    
+- Added: Bulk Add Option for select, radio and checkbox fields
+- Fixed: Bugs
+- Improved: Code
+
 = 1.1.0 = (28 Mar 2020)
 - Added: Multi Step feature
 - Added: File Upload Field

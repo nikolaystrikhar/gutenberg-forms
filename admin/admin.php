@@ -21,7 +21,7 @@ class cwp_gutenberg_forms_Page {
         $icon_url = 'dashicons-feedback';
         
 		add_menu_page($page_title, $menu_title, $capability, $slug, $callback, $icon_url, 25);
-        add_submenu_page('gutenberg_forms', 'Form', 'Forms', 'manage_options', 'edit.php?post_type=cwp_gf_forms'); 
+        add_submenu_page('gutenberg_forms', 'Form', 'Forms', 'manage_options',  'edit.php?post_type=cwp_gf_forms'); 
         add_submenu_page('gutenberg_forms', 'Entry', 'Entries', 'manage_options', 'edit.php?post_type=cwp_gf_entries'); 
 		
     }
@@ -38,7 +38,8 @@ class cwp_gutenberg_forms_Page {
                 <p>Congratulations! You've just added awesome Gutenberg blocks. Check more information about the plugin below. ACF Blocks is built on top of ACF Pro, please make sure you have ACF Pro plugin installed & activated to use ACF Blocks Free.</p>
                 <iframe width="650" height="380" src="https://www.youtube.com/embed/zupr0fl_qAw" frameborder="0" allow="accelerometer; autoplay; encrypted-media; gyroscope; picture-in-picture" allowfullscreen></iframe>
                 <div class="cwp_gf_admin_btn_wrap">
-					<a href="https://github.com/munirkamal/gutenberg-forms" target="__blank" class="cwp-gf_admin_button">Github</a>
+                    <a href="https://github.com/munirkamal/gutenberg-forms" target="__blank" class="cwp-gf_admin_button">Github</a>
+					<a href="https://wordpress.org/support/plugin/forms-gutenberg/" target="__blank" class="cwp-gf_admin_button">Support</a>
 				</div>
             </div>
         </div>
