@@ -4,7 +4,8 @@
 
 [Gutenberg Forms](https://wordpress.org/plugins/forms-gutenberg/) is the Next Generation WordPress Form Builder. Build forms directly within Gutenberg editor live. Add & arrange form fields like blocks.
 
-[![Gutenberg Forms, is the Next Generation WordPress Form Builder](https://ps.w.org/forms-gutenberg/assets/banner-1544x500.png)](https://wordpress.org/plugins/forms-gutenberg/)
+[![Gutenberg Forms, is the Next Generation WordPress Form Builder](https://ps.w.org/forms-gutenberg/assets/banner-1544x500.png?rev=2281577)](https://wordpress.org/plugins/forms-gutenberg/)
+
 
 ## Description
 
