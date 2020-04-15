@@ -143,3 +143,25 @@ function get_forms_cpt_data () {
 	return $form_cpt;
 
 }
+
+function merge_fields_with_ids( $fields )  {
+
+	$merged_fields = '';
+
+	foreach( $fields as $key => $value ) {
+
+		$field_value = $value['field_value'];
+		$id = array_key_exists('admin_id', $value['decoded_entry']) ?  $value['decoded_entry']['admin_id'] : NULL;
+
+		if ( !empty( $id ) and !empty( $field_value ) ) {
+
+			$merged_fields .= "$id: $field_value \n";
+
+		}
+
+	}
+
+	return $merged_fields;
+
+
+}

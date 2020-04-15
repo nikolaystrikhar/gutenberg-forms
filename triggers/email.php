@@ -262,10 +262,12 @@ class Email {
         foreach( $fields as $field => $field_value ) {
 
             $field_name = "{{".$field_value['field_type']."-".$field_value['field_data_id']."}}";
-
+            
             if ($field_name !== "{{-}}") {
                 $data[$field_name] = $field_value['field_value'];
             }
+
+            $data['{{all_data}}'] = merge_fields_with_ids( $fields );
 
         }
 
@@ -368,7 +370,6 @@ class Email {
             if ($this->validator->isEmpty($headers)) {
                 wp_mail($template['email'],$mail_subject,$mail_body , null, $this->attachments);
             } else {
-
                 wp_mail($template['email'],$mail_subject,$mail_body , $headers, $this->attachments);
             }
 
@@ -377,10 +378,8 @@ class Email {
 
         } else {
             if ($this->validator->isEmpty($headers)) {
-
                 wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body, null, $this->attachments);
             } else {
-
                 wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , $headers , $this->attachments);
             }
             Entries::post( $newEntry );

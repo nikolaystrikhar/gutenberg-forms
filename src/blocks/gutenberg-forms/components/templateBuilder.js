@@ -43,14 +43,11 @@ function TemplateBuilder(prop) {
 
 	useEffect(() => {
 		if (isEmpty(subject) && isEmpty(body)) {
-			const fields = serializeFields(child_fields).map(v => {
-				return '{{' + v.field_id + '}}';
-			});
 
 			props.setAttributes({
 				template: JSON.stringify({
 					subject: 'New Form Submission',
-					body: ` Form Data: \n ${fields.join('\n')} `,
+					body: `{{all_data}}`,
 				}),
 			});
 		}
@@ -100,6 +97,16 @@ function TemplateBuilder(prop) {
 					{({ onClose }) => (
 						<Fragment>
 							<MenuGroup>
+								<MenuItem
+									info="Insert All fields"
+									icon='clipboard'
+									onClick={() => {
+										onClose();
+										addFieldId('{{all_data}}');
+									}}
+								>
+									<span draggable={true}>All Data</span>
+								</MenuItem>
 								{map(serializeFields(child_fields), field => {
 									const { fieldName, field_id, blockName } = field;
 
@@ -115,6 +122,7 @@ function TemplateBuilder(prop) {
 										</MenuItem>
 									);
 								})}
+
 							</MenuGroup>
 						</Fragment>
 					)}

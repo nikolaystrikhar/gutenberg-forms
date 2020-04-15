@@ -97,7 +97,10 @@ const attributes = {
 }
 
 registerBlockType("cwp/block-gutenberg-forms", {
-	supports: fieldSupport,
+	supports: {
+		...fieldSupport,
+		reusable: false
+	},
 	title: __("Gutenberg Forms"),
 	icon: __("feedback"),
 	category: "common",
