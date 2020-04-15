@@ -234,14 +234,26 @@ export function changeChildValue(slug, clientId, attrs, type, messages) {
 
 export function getRootMessages(clientId, blockName) {
 	const rootBlock = getRootFormBlock(clientId);
+	const currentBlock = getBlock(clientId);
 
 
-	if (rootBlock.name !== "cwp/block-gutenberg-forms") return [{}];
+	if (rootBlock.name !== "cwp/block-gutenberg-forms" || isEmpty(currentBlock)) return [{}];
 
 	let { messages } = rootBlock.attributes;
-	const defaultMessage = messages.find(v => v.fieldName === blockName);
 
-	return defaultMessage;
+	const rootMessage = messages.find(v => v.fieldName === blockName);
+	const defaultMessage = defaultFieldMessages.find(field => isEqual(field.fieldName, blockName));
+
+	const currentMessages = get(currentBlock, 'attributes.messages');
+
+	const messages_not_changed = isEqual(omit(currentMessages, ['fieldName']), omit(defaultMessage, ['fieldName']));
+
+	if (messages_not_changed) {
+		return rootMessage;
+	} else {
+		return currentMessages;
+	}
+
 }
 
 export function getChildAttributes(clientId) {
