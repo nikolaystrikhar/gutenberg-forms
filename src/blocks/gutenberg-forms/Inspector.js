@@ -17,9 +17,11 @@ import MappedMessages from "./components/messages";
 import { changeChildValue } from "../../block/functions/index";
 import { basicColorScheme } from "../../block/misc/helper";
 import { TEXT_DOMAIN } from "../../block/constants";
+import TemplateBuilder from "./components/templateBuilder";
 
 const { InspectorControls } = wp.blockEditor;
 const { __ } = wp.i18n;
+
 
 
 function Inspector(prop) {
@@ -132,6 +134,7 @@ function Inspector(prop) {
 					/>
 				</div>
 			</PanelBody>
+
 			<PanelBody initialOpen={true} title={__("General", TEXT_DOMAIN)}>
 				<TextControl
 					label={__("Form Label", TEXT_DOMAIN)}
@@ -238,6 +241,9 @@ function Inspector(prop) {
 						</PanelRow>
 					</div>
 				}
+			</PanelBody>
+			<PanelBody title={__("Email Notification", TEXT_DOMAIN)}>
+				<TemplateBuilder clientId={props.clientId} data={props} />
 			</PanelBody>
 			<PanelBody initialOpen={false} title="reCAPTCHA v2">
 				<div className="cwp-option">

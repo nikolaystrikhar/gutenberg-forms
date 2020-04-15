@@ -1,15 +1,12 @@
 import React, { useEffect, Fragment } from "react";
 import Inspector from "./Inspector";
-import TemplateBuilder from "./components/templateBuilder";
 import Introduction from "./components/introduction";
 import { isEmpty, get } from "lodash";
 import { getFormTemplates, detect_similar_forms } from "../../block/functions/index";
 import { getThemeStyling } from "../../block/misc/helper";
-import { TEXT_DOMAIN } from "../../block/constants";
 import { withDispatch } from "@wordpress/data";
 
-const { InnerBlocks, RichText, BlockControls, BlockIcon } = wp.blockEditor;
-const { Button, Toolbar, Tooltip } = wp.components;
+const { InnerBlocks, RichText } = wp.blockEditor;
 
 const { compose } = wp.compose;
 const { __ } = wp.i18n;
@@ -61,22 +58,7 @@ function edit(props) {
 
 	return [
 		isEmpty(formType) ? null : <Inspector data={props} />,
-		<BlockControls>
-			<Toolbar>
-				<Tooltip text={__(templateBuilder ? 'Form Builder' : "Email Builder", TEXT_DOMAIN)}>
-					<Button
-						onClick={() => {
-							props.setAttributes({ templateBuilder: !templateBuilder });
-						}}
-					>
-						<BlockIcon
-							icon={templateBuilder ? "feedback" : "email"}
-							showColors
-						/>
-					</Button>
-				</Tooltip>
-			</Toolbar>
-		</BlockControls>,
+		null,
 		<Fragment>
 			{
 				isEmpty(formType) ?
@@ -101,11 +83,6 @@ function edit(props) {
 									</button>
 								</div>
 							)}
-						</div>
-						<div className={`cwp-form ${showEditor}`}>
-							<div className="cwp-editor">
-								<TemplateBuilder clientId={props.clientId} data={props} />
-							</div>
 						</div>
 						<div
 							dangerouslySetInnerHTML={{ __html: getThemeStyling(theme, formId) }}

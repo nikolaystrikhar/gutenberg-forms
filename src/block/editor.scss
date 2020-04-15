@@ -5,6 +5,19 @@
 
 @include settings_modal();
 
+.cwp-template-builder {
+	display:block;
+
+	& .cwp_data_drop {
+		display: flex;
+		justify-content: space-between;
+
+		& span {
+			margin: auto 0;
+		}
+	}
+}
+
 .cwp-intro {
 	
 	& div.types {
@@ -39,10 +52,6 @@
 		& .cwp-editor {
 			display: none;
 		}
-	}
-
-	& .cwp-template-builder {
-		@include templateBuilder();
 	}
 
 	& .cwp-form-col-main {
