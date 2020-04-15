@@ -39,7 +39,7 @@ class Entries {
                 'public'             => false,
                 'publicly_queryable' => false,
                 'show_ui'            => true,
-                'show_in_menu'       => 'edit.php?post_type=cwp_gf_entries',
+                'show_in_menu'       => false,
                 'query_var'          => true,
                 'rewrite'            => false,
                 'capability_type'    => 'post',

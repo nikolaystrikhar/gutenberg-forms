@@ -20,7 +20,7 @@ class Form {
             array(
                 'labels' => $post_type_labels,
                 'description'        => __( 'For storing forms', self::text_domain ),
-                'show_in_menu'       => 'edit.php?post_type='. self::post_type,
+                'show_in_menu'       => false,
                 'menu_icon' => 'dashicons-feedback',
                 'public' => true,
                 'show_in_rest' => true,
