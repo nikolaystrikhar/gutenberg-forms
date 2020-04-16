@@ -31,7 +31,7 @@ function edit(props) {
 				</Notice>
 			)}
 			<fieldset style={groupStyling} className="cwp-form-group">
-				<RichText tag="legend" onChange={handleLabel} value={label} />
+				<RichText placeholder={__("Add a label", TEXT_DOMAIN)} tag="legend" onChange={handleLabel} value={label} />
 				<div className="cwp-group-fields">
 					<InnerBlocks />
 				</div>

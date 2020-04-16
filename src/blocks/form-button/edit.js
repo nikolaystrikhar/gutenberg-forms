@@ -165,6 +165,7 @@ function edit(props) {
 		</BlockControls >, ,
 		<button style={buttonStyling} className={props.className}>
 			<RichText
+				placeholder={__("Add a label", TEXT_DOMAIN)}
 				tag="span"
 				value={label}
 				onChange={label => props.setAttributes({ label })}

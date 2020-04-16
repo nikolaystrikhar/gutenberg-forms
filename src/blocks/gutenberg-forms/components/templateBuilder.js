@@ -55,6 +55,9 @@ function TemplateBuilder(prop) {
 
 	const [currentForm, setCurrentForm] = useState('subject');
 
+	//? getting the logged in user email address with the help of localize script
+	const adminEmail = !isEmpty(cwpGlobal.admin_email) ? cwpGlobal.admin_email : "";
+
 	const addFieldId = name => {
 		const $txt = $(
 			currentForm === 'subject' ? subjectArea.current : bodyArea.current
@@ -102,13 +105,15 @@ function TemplateBuilder(prop) {
 									icon='clipboard'
 									onClick={() => {
 										onClose();
-										addFieldId('{{all_data}}');
+										addFieldId('all_data');
 									}}
 								>
 									<span draggable={true}>All Data</span>
 								</MenuItem>
 								{map(serializeFields(child_fields), field => {
 									const { fieldName, field_id, blockName } = field;
+
+									const field_label = isEmpty(fieldName) ? field_id : fieldName;
 
 									return (
 										<MenuItem
@@ -118,7 +123,7 @@ function TemplateBuilder(prop) {
 												addFieldId(field_id);
 											}}
 										>
-											<span draggable={true}>{fieldName.toLowerCase()}</span>
+											<span draggable={true}>{field_label.toLowerCase()}</span>
 										</MenuItem>
 									);
 								})}
@@ -131,19 +136,22 @@ function TemplateBuilder(prop) {
 
 			<div className="cwp-builder-field">
 				<TextControl
-					label={__("to", TEXT_DOMAIN)}
+					label={__("From", TEXT_DOMAIN)}
+					value={fromEmail}
+					placeholder={__("Name, Email", TEXT_DOMAIN)}
+					onChange={fromEmail => props.setAttributes({ fromEmail })}
+				/>
+			</div>
+
+			<div className="cwp-builder-field">
+				<TextControl
+					label={__("To", TEXT_DOMAIN)}
 					value={email}
+					placeholder={adminEmail}
 					onChange={email => props.setAttributes({ email: email })}
 				/>
 			</div>
 
-			{/*<div className="cwp-builder-field">*/}
-			{/*	<label>From</label>*/}
-			{/*	<input*/}
-			{/*		value={ fromEmail }*/}
-			{/*		onChange={ e => props.setAttributes( { fromEmail: e.target.value } ) }*/}
-			{/*	/>*/}
-			{/*</div>*/}
 			<div ref={subjectArea}>
 				<TextControl
 					label={__("Subject", TEXT_DOMAIN)}

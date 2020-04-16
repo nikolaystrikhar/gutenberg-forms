@@ -87,9 +87,7 @@ class Email {
                 if (array_key_exists('fromEmail' ,$attributes)) {
                     $from_email = $attributes['fromEmail'];
 
-                    if ($this->validator->isEmail($from_email)) {
-                        $decoded_template['fromEmail'] = $from_email;
-                    }
+                    $decoded_template['fromEmail'] = $from_email;
                 } else {
                     $decoded_template['fromEmail'] = "";
                 }
@@ -329,6 +327,34 @@ class Email {
 
     }
 
+    public function extract_from_details( $from ) {
+        // the fromEmail from the backend comes at this pattern "Name, Email" ( comma separated )
+        
+        $details = explode( ',' , trim( $from )  );
+
+
+        // checking if the from contains both
+        if ( sizeof( $details ) === 2 ) {
+
+
+            $email = trim($details[1]);
+            $name = trim($details[0]);
+
+            if ( ! $this->validator->isEmail( $email ) ) {
+                return false;
+            }
+            
+
+            return array(
+                'email' => $email,
+                'name'  => $name
+            );
+
+        } else {
+            return false;
+        }
+    }
+
     public function sendMail( $fields ) {
 
         $template = $this->get_templates($_POST['submit'])[0];
@@ -343,12 +369,17 @@ class Email {
         $mail_body = $this->with_fields($fields, $template[0]['body']);
         $headers = '';
 
-        if ( $this->validator->isEmpty( $fromEmail ) === false ) {
-            $headers .= "From: $fromEmail";
+        if ( !empty($fromEmail) and $this->validator->isEmpty( $fromEmail ) === false and $this->extract_from_details( $fromEmail ) ) {
+
+            $from_details = $this->extract_from_details( $fromEmail );
+
+            $from_name = $from_details['name'];
+            $from_email = $from_details['email'];
+
+            $headers .= "From: $from_name <$from_email>";
         }
 
         $post = $_POST;
-
         
 
         if ($this->has_captcha( $post )) {

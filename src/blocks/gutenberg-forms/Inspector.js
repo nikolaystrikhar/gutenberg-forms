@@ -183,17 +183,6 @@ function Inspector(prop) {
 						</div>
 					</Fragment>
 				)}
-				<div className="cwp-option">
-					<PanelRow>
-						<h3>{__("Email Notification Builder", TEXT_DOMAIN)}</h3>
-						<FormToggle
-							checked={templateBuilder}
-							onChange={s =>
-								props.setAttributes({ templateBuilder: !templateBuilder })
-							}
-						/>
-					</PanelRow>
-				</div>
 				<div className="cwp-option column">
 					<h3>{__("Confirmation Type", TEXT_DOMAIN)}</h3>
 					<div className="cwp-column">

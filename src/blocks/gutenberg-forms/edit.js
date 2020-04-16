@@ -5,6 +5,7 @@ import { isEmpty, get } from "lodash";
 import { getFormTemplates, detect_similar_forms } from "../../block/functions/index";
 import { getThemeStyling } from "../../block/misc/helper";
 import { withDispatch } from "@wordpress/data";
+import { TEXT_DOMAIN } from "../../block/constants";
 
 const { InnerBlocks, RichText } = wp.blockEditor;
 
@@ -76,6 +77,7 @@ function edit(props) {
 								<div className={`cwp-submit ${alignment}`}>
 									<button className="cwp-submit-btn cwp-default-submit-btn">
 										<RichText
+											placeholder={__("Add a label", TEXT_DOMAIN)}
 											tag="span"
 											value={submitLabel}
 											onChange={handleButtonLabel}

@@ -198,7 +198,7 @@ function edit(props) {
 				<FormulaBuilder data={props} />
 			) : (
 					<div className="cwp-field-set">
-						<RichText tag="label" value={label} onChange={handleLabel} />
+						<RichText placeholder={__("Add a label", TEXT_DOMAIN)} tag="label" value={label} onChange={handleLabel} />
 						<div className="cwp-result-wrap">
 							{!isEmpty(prefix) && <span style={styling}>{prefix}</span>}
 							<span className="cwp-calc-result" style={styling}>

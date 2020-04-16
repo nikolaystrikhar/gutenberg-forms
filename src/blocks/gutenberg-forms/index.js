@@ -7,6 +7,10 @@ import { defaultFieldMessages } from '../../block/functions';
 import { fieldSupport } from '../../constants';
 import { deprecated } from "./deprecated";
 
+
+
+
+
 const attributes = {
 	submitLabel: {
 		type: "string",

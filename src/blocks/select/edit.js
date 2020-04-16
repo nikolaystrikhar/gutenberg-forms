@@ -341,7 +341,7 @@ function edit(props) {
 
 					<div className="cwp-select-set" ref={selectContainer}>
 						<div className="cwp-label-wrap">
-							<RichText tag="label" value={label} onChange={handleLabel} />
+							<RichText placeholder={__("Add a label", TEXT_DOMAIN)} tag="label" value={label} onChange={handleLabel} />
 							{!props.isSelected && isRequired && !enableCondition && (
 								<div className="cwp-required cwp-noticed">
 									<h3>{requiredLabel}</h3>
