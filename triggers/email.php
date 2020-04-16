@@ -405,6 +405,7 @@ class Email {
             }
 
             Entries::post( $newEntry );
+            do_action('gutenberg_form_submit', $newEntry);
             $this->attempt_success($template);
 
         } else {
@@ -414,6 +415,7 @@ class Email {
                 wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , $headers , $this->attachments);
             }
             Entries::post( $newEntry );
+            do_action('gutenberg_form_submit', $newEntry);
             $this->attempt_success($template);
         }
     }
