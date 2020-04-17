@@ -78,12 +78,13 @@ function Settings({ onClose, status, clientId, cpt }) {
         <div className="cwp-settings_modal">
             {
                 status && <Modal
-                    title="Insert a Saved Form or Choose from Templates"
+                    title="Insert a Saved Form or choose from a template."
                     className="cwp_lib_modal"
                     onRequestClose={onClose}
                 >
                     <div className="cwp__lib">
                         <Sidebar
+                            data={data}
                             isCpt={cpt}
                             currentCatagory={catagory}
                             applyCatagory={(c) => handleCatagory(c)}
