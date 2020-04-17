@@ -4,7 +4,7 @@ const MiniCssExtractPlugin = require('mini-css-extract-plugin');
 
 module.exports = {
     mode: NODE_ENV,
-    entry: './src/dashboard/index.js',
+    entry: './dashboard/index.js',
     output: {
         path: __dirname,
         filename: './dist/dashboard/build.js'
@@ -27,7 +27,8 @@ module.exports = {
                             ]
                         ]
                     }
-                }, 'eslint-loader'],
+                },
+                ],
                 exclude: /node_modules/
             },
             {

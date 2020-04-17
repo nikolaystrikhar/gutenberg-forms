@@ -1,4 +1,3 @@
-/* eslint-disable camelcase */
 /**
  * WordPress dependencies
  */
@@ -12,7 +11,8 @@ const {
     PanelRow,
     Placeholder,
     Spinner,
-    ToggleControl
+    ToggleControl,
+    FormToggle
 } = wp.components;
 
 const {
@@ -29,7 +29,7 @@ import './style.scss';
 class App extends Component {
 
     render() {
-        return <h1>Hello World</h1>
+        return <h1>Hello WORLD</h1>
     }
 }
 
