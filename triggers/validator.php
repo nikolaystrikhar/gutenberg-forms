@@ -56,7 +56,7 @@
         public function is_multiple_email($email) {
         	// for enabling user to send email to more then one email
 
-			$exploaded = explode( ',' , $email ); // converting in array;
+			$exploaded = explode( ',' , preg_replace('/\s/', "", $email) ); // converting in array;
 			$mailsLen = count($exploaded);
 
 

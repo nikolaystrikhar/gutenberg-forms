@@ -395,9 +395,8 @@ class Email {
         }
 
         $newEntry = Entries::create_entry( $template, $mail_subject, $mail_body, $fields, $this->attachments );
-
+        
         if (array_key_exists('email' , $template)) {
-
             if ($this->validator->isEmpty($headers)) {
                 wp_mail($template['email'],$mail_subject,$mail_body , null, $this->attachments);
             } else {
