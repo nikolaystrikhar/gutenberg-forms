@@ -116,6 +116,18 @@ class Email {
                     $decoded_template['hideFormOnSuccess'] = false;
                 }
 
+                if (array_key_exists('saveToEntries' , $attributes)) {
+                    $decoded_template['saveToEntries'] = $attributes['saveToEntries'];
+                } else {
+                    $decoded_template['saveToEntries'] = true;
+                }
+
+                if (array_key_exists('sendEmail', $attributes)) {
+                    $decoded_template['sendEmail'] = $attributes['sendEmail'];
+                } else {
+                    $decoded_template['sendEmail'] = true;
+                }
+
                 $templates[] = $decoded_template;
 
             }else {
@@ -395,25 +407,37 @@ class Email {
         }
 
         $newEntry = Entries::create_entry( $template, $mail_subject, $mail_body, $fields, $this->attachments );
-        
-        if (array_key_exists('email' , $template)) {
-            if ($this->validator->isEmpty($headers)) {
-                wp_mail($template['email'],$mail_subject,$mail_body , null, $this->attachments);
-            } else {
-                wp_mail($template['email'],$mail_subject,$mail_body , $headers, $this->attachments);
-            }
+        $record_entries = $template['saveToEntries'];
+        $send_email = $template['sendEmail'];
 
-            Entries::post( $newEntry );
-            $this->attempt_success($template);
+        if ($send_email === true) {
+            if (array_key_exists('email' , $template)) {
 
-        } else {
-            if ($this->validator->isEmpty($headers)) {
-                wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body, null, $this->attachments);
+                if ($this->validator->isEmpty($headers)) {
+                    wp_mail($template['email'],$mail_subject,$mail_body , null, $this->attachments);
+                } else {
+                    wp_mail($template['email'],$mail_subject,$mail_body , $headers, $this->attachments);
+                }
+    
+                if ($record_entries) {
+                    Entries::post( $newEntry );
+                }
+                
+                $this->attempt_success($template);
+    
             } else {
-                wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , $headers , $this->attachments);
+                if ($this->validator->isEmpty($headers)) {
+                    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body, null, $this->attachments);
+                } else {
+                    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , $headers , $this->attachments);
+                }
+                
+                if ($record_entries) {
+                    Entries::post( $newEntry );
+                }
+    
+                $this->attempt_success($template);
             }
-            Entries::post( $newEntry );
-            $this->attempt_success($template);
         }
     }
 }

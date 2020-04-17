@@ -97,6 +97,14 @@ const attributes = {
 	formLabel: {
 		type: "string",
 		default: ""
+	},
+	saveToEntries: {
+		type: "boolean",
+		default: true
+	},
+	sendEmail: {
+		type: "boolean",
+		default: true
 	}
 }
 

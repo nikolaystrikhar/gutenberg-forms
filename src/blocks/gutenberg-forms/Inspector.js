@@ -41,7 +41,9 @@ function Inspector(prop) {
 		recaptcha: { siteKey, clientSecret },
 		hideFormOnSuccess,
 		formLabel,
-		cpt
+		cpt,
+		saveToEntries,
+		sendEmail
 	} = props.attributes;
 
 	const handleAlignment = aln => {
@@ -141,6 +143,18 @@ function Inspector(prop) {
 					value={formLabel}
 					onChange={formLabel => props.setAttributes({ formLabel })}
 				/>
+
+
+
+				<div className="cwp-option">
+					<PanelRow>
+						<h3>{__("Record Entries", TEXT_DOMAIN)}</h3>
+						<FormToggle
+							checked={saveToEntries}
+							onChange={() => props.setAttributes({ saveToEntries: !saveToEntries })}
+						/>
+					</PanelRow>
+				</div>
 				{
 					formType !== "multiStep" && <div className="cwp-option">
 						<PanelRow>
@@ -232,7 +246,18 @@ function Inspector(prop) {
 				}
 			</PanelBody>
 			<PanelBody title={__("Email Notification", TEXT_DOMAIN)}>
-				<TemplateBuilder clientId={props.clientId} data={props} />
+				<div className="cwp-option">
+					<PanelRow>
+						<h3>{__("Send Email Notification", TEXT_DOMAIN)}</h3>
+						<FormToggle
+							checked={sendEmail}
+							onChange={() => props.setAttributes({ sendEmail: !sendEmail })}
+						/>
+					</PanelRow>
+				</div>
+				{
+					sendEmail && <TemplateBuilder clientId={props.clientId} data={props} />
+				}
 			</PanelBody>
 			<PanelBody initialOpen={false} title="reCAPTCHA v2">
 				<div className="cwp-option">

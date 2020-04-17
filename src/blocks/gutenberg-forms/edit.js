@@ -23,7 +23,7 @@ function edit(props) {
 		theme,
 		formType,
 		cpt,
-		formLabel
+		formLabel,
 	} = props.attributes;
 
 	const formId = id && "form-".concat(id.split("-")[1]);
