@@ -10,9 +10,12 @@ import {
 } from "@wordpress/components";
 import { getCatagories } from '../../../../block/api'
 import { TEXT_DOMAIN } from "../../../../block/constants";
+import { isEqual } from "lodash"
 const { __ } = wp.i18n;
 
 function Sidebar(props) {
+
+    const { data } = props;
 
     const [catagories, setCatagories] = useState([]);
 
@@ -53,10 +56,15 @@ function Sidebar(props) {
                     </MenuItem>
                 </MenuGroup>
 
-                <PanelBody title={__("Catagories", TEXT_DOMAIN)}>
+                <PanelBody title={__("Categories", TEXT_DOMAIN)}>
                     <MenuGroup>
-                        {catagories.map(c => (
-                            <MenuItem
+                        {catagories.map(c => {
+
+                            const catagory_data = data.filter(v => {
+                                return isEqual(v.fields.Category, c);
+                            });
+
+                            return catagory_data.length !== 0 && <MenuItem
                                 onClick={() => props.applyCatagory(c)}
                                 isSelected={true}
                                 isDefault={props.currentCatagory === c}
@@ -64,11 +72,11 @@ function Sidebar(props) {
                             >
                                 {c}
                             </MenuItem>
-                        ))}
+                        })}
                     </MenuGroup>
                 </PanelBody>
             </div>
-        </div>
+        </div >
     );
 }
 

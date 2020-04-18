@@ -79,14 +79,6 @@ function cwp_form_post_type() {
 	Entries::register_post_type(); //? creating a post_type for our form entries
 	$dashboard = new Dashboard(); //? creating and registering plugin dashboard
 
-
-	// add_action('gutenberg_form_submit', function( $entry ) {
-
-	// 	$api_key = "20d1adf61219161794db38dae14f9b8f-us20";
-
-	// 	var_dump($entry);
-	// });
-
 }
 
 
