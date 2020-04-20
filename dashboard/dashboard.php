@@ -8,33 +8,113 @@ class Dashboard {
     const page_title = 'Dashboard';
     const capability = 'manage_options';
     const slug = 'cwp_gf_dashboard';
-    const option_group = "gutenberg_forms_options";
+    const settings_group = "gutenberg_forms_setting";
+
 
     public function __construct() {
+        
         add_action( 'admin_menu', array( $this, 'register' ) );
-        add_action('init' , array($this, 'register_settings'));
+
+        // var_dump( file_get_contents( plugin_dir_path( __DIR__ ) . 'integrations/mailchimp/guide/guide.html'  )  );
 
         $this->mail_chimp = new MailChimp();
+        $this->settings = array(
+            'integrations' => array(
+                'mailchimp' => array(
+                    'title' => 'Mail Chimp',
+                    'guide' => $this->get_guide_content( 'mailchimp'  ),
+                    'description' => 'Bring new life to your lists with upgraded Mailchimp signup forms for WordPress! Easy to build and customize with no code required. Link to lists and interest groups!',
+                    'banner' => 'https://us20.admin.mailchimp.com/release/1.1.132c826603d26483f97297c92082b7e461f3c8cb4/images/brand_assets/logos/mc-freddie-dark.svg',
+                    'fields' => array(
+                        'api_key' =>  array(
+                            'label' => 'Api Key',
+                            'default' => '',
+                            'type' => 'string'
+                        )
+                    ),
+                    'required_fields' => array(
+                        
+                        'FNAME' => array(
+                            'label' => 'First Name'
+                        ),
+                        'LNAME' => array(
+                            'label' => 'Last Name'
+                        ),
+                        'PHONE' => array(
+                            'label' => 'Phone'
+                        ),
+                        'ADDRESS' => array(
+                            'label' => 'Address'
+                        ),
+                        'BIRTHDAY' => array(
+                            'label' => 'Birthday'
+                        )
+                    )
+                )
+            )
+    
+        );
+    }
 
+    public function get_guide_content( $integration ) {
+        $guide = plugin_dir_path( __DIR__ ) . 'integrations/'. $integration .'/guide/guide.html';
+
+        return file_get_contents( $guide  );
     }
 
     public function register_settings() {
-        register_setting (
-            'cwp_settings',
-            'test',
-            array(
-                'type'         => 'string',
-                'show_in_rest' => true,
-                'default'      => 'hello World',
-            )
-        ); 
+
+
+        foreach ( $this->settings['integrations'] as $integration => $details ) {
+
+            $enable_integration = "cwp__enable__" . $integration;
+
+            register_setting (
+                self::settings_group,
+                $enable_integration,
+                array(
+                    'type'         => 'boolean',
+                    'show_in_rest' => true,
+                    'default'      => false,
+                )
+            );
+
+            $is_enabled =  get_option( $enable_integration ) === "1" ? true : false;
+
+            $this->settings['integrations'][ $integration ][ 'enable' ] = $is_enabled;
+
+            foreach ( $details['fields'] as $field => $initialValue ) {
+
+                $field_group = "cwp__" . $integration  . '__' . $field;
+
+                register_setting (
+                    self::settings_group,
+                    $field_group,
+                    array(
+                        'type'         => $initialValue['type'],
+                        'show_in_rest' => true,
+                        'default'      =>  $initialValue['default'],
+                    )
+                );
+            
+                //SETTING CURRENT_VALUE
+                $this->settings['integrations'][ $integration  ]['fields'][ $field ]['value'] = get_option( $field_group  );
+                
+            }
+
+        }
+
+        
+
     }
 
     public function register() {
 
         //assets 
+
+        //currently embedding dashboard after creating in another plugin due to conflicts of our script with webpack
         
-        $production = false;
+        $production = true;
 
         if ($production) {
 		
@@ -53,11 +133,6 @@ class Dashboard {
     
         }
 
-
-        
-
-        
-
         add_submenu_page(
             self::parent_slug, 
             self::page_title, 
@@ -68,72 +143,14 @@ class Dashboard {
             1
         );
 
-    
-
-        $settings = array(
-
-            'integrations' => array(
-                'mailchimp' => array(
-                    'title' => 'Mail Chimp',
-                    'description' => 'Bring new life to your lists with upgraded Mailchimp signup forms for WordPress! Easy to build and customize with no code required. Link to lists and interest groups!',
-                    'banner' => 'http://gutenbergforms.local/wp-content/plugins/ninja-forms/assets/img/add-ons/mail-chimp.png',
-                    'fields' => array(
-                        'api_key' =>  array(
-                            'label' => 'Api Key',
-                            'default' => '',
-                            'type' => 'string'
-                        ),
-                        'private_key' =>  array(
-                            'label' => 'Private Key',
-                            'default' => '',
-                            'type' => 'string'
-                        )
-                    )
-                )
-            )
-
-        );
-
-
-        foreach ( $settings['integrations'] as $integration => $details ) {
-
-            $enable_integration = "cwp__enable__" . $integration;
-
-            register_setting (
-                'options',
-                $enable_integration,
-                array(
-                    'type'         => 'boolean',
-                    'show_in_rest' => true,
-                    'default'      => false,
-                )
-            );
-
-            foreach ( $details['fields'] as $field => $initialValue ) {
-
-                $field_group = "cwp__" . $integration  . '__' . $field;
-
-                register_setting (
-                    'options',
-                    $field_group,
-                    array(
-                        'type'         => $initialValue['type'],
-                        'show_in_rest' => true,
-                        'default'      =>  $initialValue['default'],
-                    )
-                ); 
-                
-            }
-
-        }
-
         wp_localize_script(
             'cwp_dashboard_script',
             'cwp_global',
             [
-                'settings' => $settings
+                'settings' => $this->settings
             ]
         );
+
 
     }
 

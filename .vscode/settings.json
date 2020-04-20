@@ -2,5 +2,6 @@
     "editor.fontFamily": "Consolas, 'Courier New', monospace  ",
     "editor.fontLigatures": true,
     "editor.fontSize": 20,
-    "editor.formatOnSave": true
+    "editor.formatOnSave": true,
+    "editor.cursorStyle": "block"
 }

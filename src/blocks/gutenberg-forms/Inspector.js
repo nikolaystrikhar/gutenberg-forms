@@ -18,11 +18,10 @@ import { changeChildValue } from "../../block/functions/index";
 import { basicColorScheme } from "../../block/misc/helper";
 import { TEXT_DOMAIN } from "../../block/constants";
 import TemplateBuilder from "./components/templateBuilder";
+import Integrations from "./components/Integrations";
 
 const { InspectorControls } = wp.blockEditor;
 const { __ } = wp.i18n;
-
-
 
 function Inspector(prop) {
 	const props = prop.data;
@@ -259,7 +258,7 @@ function Inspector(prop) {
 					sendEmail && <TemplateBuilder clientId={props.clientId} data={props} />
 				}
 			</PanelBody>
-			<PanelBody initialOpen={false} title="reCAPTCHA v2">
+			<PanelBody initialOpen={false} title={__("reCAPTCHA v2", TEXT_DOMAIN)}>
 				<div className="cwp-option">
 					<p>
 						{__("reCAPTCHA requires a Site and Private API key. Sign up for a free", TEXT_DOMAIN)}
@@ -304,7 +303,7 @@ function Inspector(prop) {
 					</div>
 				)}
 			</PanelBody>
-			<PanelBody initialOpen={false} title="Messages">
+			<PanelBody initialOpen={false} title={__("Messages", TEXT_DOMAIN)}>
 				<div className="cwp-option">
 					<p>
 						<Icon icon="info" /> {
@@ -314,6 +313,7 @@ function Inspector(prop) {
 				</div>
 				<MappedMessages val={messages} onChange={handleMessagesChange} />
 			</PanelBody>
+			<Integrations clientId={props.clientId} />
 		</InspectorControls>
 	);
 }

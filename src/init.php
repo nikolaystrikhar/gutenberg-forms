@@ -11,6 +11,13 @@ if (!defined('ABSPATH')) {
 function gutenberg_forms_cwp_block_assets()
 {
 
+	require_once plugin_dir_path( __DIR__ ) . 'dashboard/dashboard.php';
+
+
+	$dashboard = new Dashboard(); //? creating and registering plugin dashboard
+
+	$dashboard->register_settings();
+
 	wp_register_style(
 		'gutenberg_forms-cwp-style-css',
 		plugins_url('dist/blocks.style.build.css', dirname(__FILE__)),
@@ -52,7 +59,8 @@ function gutenberg_forms_cwp_block_assets()
 			'cwp-cpt-forms' => get_forms_cpt_data(),
 			'primary-color'	=> get_user_option( 'admin_color' ),
 			'new_form_url'	=> admin_url('post-new.php?post_type=cwp_gf_forms'),
-			'admin_email'	=> get_bloginfo('admin_email')
+			'admin_email'	=> get_bloginfo('admin_email'),
+			'settings' => $dashboard->settings
 		]
 	);
 
@@ -73,11 +81,11 @@ function cwp_form_post_type() {
 
 	require_once plugin_dir_path( __DIR__ ) . 'submissions/entries.php';
 	require_once plugin_dir_path( __DIR__ ) . 'forms-cpt/index.php';
-	require_once plugin_dir_path( __DIR__ ) . 'dashboard/dashboard.php';
 
 	Form::register_post_type(); //? creating a post_type for forms
 	Entries::register_post_type(); //? creating a post_type for our form entries
-	$dashboard = new Dashboard(); //? creating and registering plugin dashboard
+
+	
 
 }
 
@@ -120,6 +128,8 @@ function cwpgutenbergforms_set_script_translations()
 //custom_postype for our gutenberg-forms;
 
 require_once( plugin_dir_path( __DIR__ ) . '/admin/admin.php' );
+
+
 add_action('init', 'cwpgutenbergforms_set_script_translations');
 add_action('init', 'cwp_gutenberg_forms_messages_meta');
 add_action('wp_head', 'submitter');
