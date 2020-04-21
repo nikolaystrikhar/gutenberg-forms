@@ -313,7 +313,7 @@ function Inspector(prop) {
 				</div>
 				<MappedMessages val={messages} onChange={handleMessagesChange} />
 			</PanelBody>
-			<Integrations clientId={props.clientId} />
+			<Integrations data={props} clientId={props.clientId} />
 		</InspectorControls>
 	);
 }

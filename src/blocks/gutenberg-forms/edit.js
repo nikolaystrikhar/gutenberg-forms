@@ -24,12 +24,12 @@ function edit(props) {
 		formType,
 		cpt,
 		formLabel,
+		integrations
 	} = props.attributes;
 
 	const formId = id && "form-".concat(id.split("-")[1]);
 
 	useEffect(() => {
-
 
 		if (id === '' || detect_similar_forms(props.clientId)) {
 			props.setAttributes({ id: "submit-" + props.clientId });

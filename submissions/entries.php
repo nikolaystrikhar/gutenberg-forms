@@ -295,7 +295,11 @@ class Entries {
             }
 
         }
-        
+
+        if (array_key_exists('integrations', $template)) {
+            $new_entry['integrations'] = $template['integrations']; 
+        }
+         
 
         if ( array_key_exists('email', $template) ) {
              // this means the email is provided

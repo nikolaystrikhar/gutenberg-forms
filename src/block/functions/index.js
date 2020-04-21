@@ -1,5 +1,5 @@
 import { strip_tags, extract_id } from "../misc/helper";
-import { each, has, omit, isEqual, clone, assign, isEmpty, get } from "lodash";
+import { each, has, omit, isEqual, clone, assign, isEmpty, get, map } from "lodash";
 
 import formStepSave from "../../blocks/form-step/save";
 import formStepEdit from "../../blocks/form-step/edit";
@@ -430,3 +430,4 @@ export function detect_similar_forms(clientId) {
 
 
 }
+

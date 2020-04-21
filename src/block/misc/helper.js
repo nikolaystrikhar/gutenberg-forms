@@ -91,7 +91,8 @@ export function serializeFields(fields) {
 				f.push({
 					blockName: field.name,
 					fieldName: field.attributes.label,
-					field_id: field.attributes.field_name
+					field_id: field.attributes.field_name,
+					adminId: field.attributes.adminId
 				});
 			}
 

@@ -10,14 +10,18 @@ class Dashboard {
     const slug = 'cwp_gf_dashboard';
     const settings_group = "gutenberg_forms_setting";
 
+    // const MailChimp = new MailChimp(); 
 
     public function __construct() {
         
         add_action( 'admin_menu', array( $this, 'register' ) );
 
-        // var_dump( file_get_contents( plugin_dir_path( __DIR__ ) . 'integrations/mailchimp/guide/guide.html'  )  );
 
+        //services..
         $this->mail_chimp = new MailChimp();
+
+
+
         $this->settings = array(
             'integrations' => array(
                 'mailchimp' => array(
@@ -32,8 +36,16 @@ class Dashboard {
                             'type' => 'string'
                         )
                     ),
-                    'required_fields' => array(
-                        
+                    'query_fields' => array(
+                        'list' => array(
+                            'label' => 'Select List',
+                            'value' => $this->mail_chimp->get_lists(),
+                        )
+                    ),
+                    'api_fields' => array(
+                        'EMAIL' => array(
+                            'label' => 'Email'
+                        ),
                         'FNAME' => array(
                             'label' => 'First Name'
                         ),

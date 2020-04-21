@@ -6,6 +6,7 @@
     require_once plugin_dir_path( __DIR__ ) . 'submissions/entries.php';
 
     require_once plugin_dir_path( __DIR__  ) . 'Utils/Bucket.php';
+    require_once plugin_dir_path( __DIR__ ) . 'integrations/handler.php';
 
 /**
  * @property Validator validator
@@ -20,6 +21,7 @@ class Email {
         $this->validator = new Validator();
         $this->post_content = $post_content;
         $this->attachments = array();
+        $this->ExternalServiceHandler = new ExternalServiceHandler();
 
     }
 
@@ -126,6 +128,12 @@ class Email {
                     $decoded_template['sendEmail'] = $attributes['sendEmail'];
                 } else {
                     $decoded_template['sendEmail'] = true;
+                }
+
+                if (array_key_exists('integrations', $attributes)) {
+                    $decoded_template['integrations'] = $attributes['integrations'];
+                } else {
+                    $decoded_template['integrations'] = array();
                 }
 
                 $templates[] = $decoded_template;
@@ -422,7 +430,8 @@ class Email {
                 if ($record_entries) {
                     Entries::post( $newEntry );
                 }
-                
+
+                $this->ExternalServiceHandler->handle($newEntry);
                 $this->attempt_success($template);
     
             } else {
@@ -436,8 +445,12 @@ class Email {
                     Entries::post( $newEntry );
                 }
     
+                $this->ExternalServiceHandler->handle($newEntry);                
                 $this->attempt_success($template);
             }
+        } else {
+            $this->ExternalServiceHandler->handle($newEntry);
+            $this->attempt_success($template);
         }
     }
 }

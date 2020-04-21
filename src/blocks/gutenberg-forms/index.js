@@ -7,10 +7,6 @@ import { defaultFieldMessages } from '../../block/functions';
 import { fieldSupport } from '../../constants';
 import { deprecated } from "./deprecated";
 
-
-
-
-
 const attributes = {
 	submitLabel: {
 		type: "string",
@@ -105,6 +101,12 @@ const attributes = {
 	sendEmail: {
 		type: "boolean",
 		default: true
+	},
+	integrations: {
+		type: "object",
+		default: {
+
+		}
 	}
 }
 

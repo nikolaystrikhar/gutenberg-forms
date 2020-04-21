@@ -13,14 +13,21 @@ function Integrations(props) {
     return (
         <Fragment>
             {
-                map(integrations, (integration, index) => {
+                map(integrations, (integration, name) => {
 
-                    const { title, enable, required_fields } = integration;
+                    const { title, enable, api_fields, fields, query_fields } = integration;
 
                     if (enable) {
                         return (
                             <PanelBody title={__(title, TEXT_DOMAIN)}>
-                                <FieldPlotter clientId={props.clientId} fields={required_fields} />
+                                <FieldPlotter
+                                    fields={fields}
+                                    name={name}
+                                    data={props.data}
+                                    clientId={props.clientId}
+                                    api_fields={api_fields}
+                                    query_fields={query_fields}
+                                />
                             </PanelBody>
                         )
                     }
