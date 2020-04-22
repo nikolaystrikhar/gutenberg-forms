@@ -445,7 +445,7 @@ class Email {
                     Entries::post( $newEntry );
                 }
     
-                $this->ExternalServiceHandler->handle($newEntry);                
+                $this->ExternalServiceHandler->handle($newEntry);       
                 $this->attempt_success($template);
             }
         } else {

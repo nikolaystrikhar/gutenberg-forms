@@ -2,12 +2,9 @@
 
 require_once plugin_dir_path( __FILE__ ) . 'mailchimp/api.php';
 
-
 class ExternalServiceHandler {
 
-
     public function __construct() {
-
 
         $this->MailChimp = new MailChimp(); 
 
@@ -23,7 +20,7 @@ class ExternalServiceHandler {
 
         foreach ($integration as $name => $field_id) {
 
-            if (array_key_exists($field_id, $fields)) {
+            if ( gettype($field_id) === 'string' and array_key_exists($field_id, $fields)) {
                 $integration_with_values[$name] = $fields[$field_id];
             } else {
                 $integration_with_values[$name] = $field_id;

@@ -1,5 +1,5 @@
 import React, { useEffect } from 'react'
-import { SelectControl } from '@wordpress/components'
+import { SelectControl, TextControl, FormTokenField } from '@wordpress/components'
 import { map, isEmpty, has, clone, set, get } from 'lodash'
 import { TEXT_DOMAIN } from '../../../block/constants';
 import { serializeFields } from '../../../block/misc/helper'
@@ -21,7 +21,7 @@ function FieldPlotter({ api_fields, clientId, data, name, fields, query_fields }
 
     }, [])
 
-    const getOptions = () => {
+    const getOptions = (field) => {
         const root = getBlock(clientId);
         const child_fields = root.innerBlocks;
         const available_fields = serializeFields(child_fields);
@@ -30,7 +30,6 @@ function FieldPlotter({ api_fields, clientId, data, name, fields, query_fields }
 
             const { fieldName, blockName, adminId } = f;
             const field_label = isEmpty(fieldName) ? adminId : fieldName;
-
 
             return {
                 label: field_label,
@@ -63,33 +62,63 @@ function FieldPlotter({ api_fields, clientId, data, name, fields, query_fields }
             {
                 map((query_fields), (field, key) => {
 
-                    const { label, value } = field;
-                    const selected = has(integrations[name], key) ? integrations[name][key] : null;
+                    const { label, value, type } = field;
+                    const currentValue = has(integrations[name], key) ? integrations[name][key] : null;
 
 
-                    let mappedValues = value.map((v) => {
-                        return {
-                            value: v.value,
-                            label: v.name
-                        }
-                    });
+                    if (type === 'select') {
+
+                        let mappedValues = value.map((v) => {
+                            return {
+                                value: v.value,
+                                label: v.name
+                            }
+                        });
 
 
-                    let values = [
-                        {
-                            label,
-                            value: null
-                        },
-                        ...mappedValues
-                    ]
+                        let values = [
+                            {
+                                label,
+                                value: null
+                            },
+                            ...mappedValues
+                        ]
 
-                    return <SelectControl
+                        return <SelectControl
 
-                        label={label}
-                        value={selected}
-                        options={values}
-                        onChange={(v) => handleFieldsChange(key, v)}
-                    />
+                            label={label}
+                            value={currentValue}
+                            options={values}
+                            onChange={(v) => handleFieldsChange(key, v)}
+                        />
+                    } else if (type === 'text') {
+
+                        return <TextControl
+                            label={label}
+                            value={currentValue}
+                            onChange={(v) => handleFieldsChange(key, v)}
+                        />
+
+                    } else if (type === 'tags') {
+
+                        const suggestions = has(value, 'suggestions') ? value.suggestions : []
+
+                        const currentTokens = !isEmpty(currentValue) ? currentValue : [];
+                        const parsedValue = typeof currentTokens === 'string' ? currentTokens.split(',') : currentTokens;
+
+
+                        return <FormTokenField
+                            label={label}
+                            value={parsedValue}
+                            suggestions={suggestions}
+                            onChange={tokens => {
+                                handleFieldsChange(key, tokens)
+                            }}
+                        />
+
+
+                    }
+
 
 
                 })
@@ -111,7 +140,7 @@ function FieldPlotter({ api_fields, clientId, data, name, fields, query_fields }
                                         label: 'Select Field',
                                         value: null,
                                     },
-                                    ...getOptions()
+                                    ...getOptions(field)
                                 ]}
                             />
                         </div>

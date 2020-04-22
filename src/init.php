@@ -61,6 +61,7 @@ function gutenberg_forms_cwp_block_assets()
 			'new_form_url'	=> admin_url('post-new.php?post_type=cwp_gf_forms'),
 			'admin_email'	=> get_bloginfo('admin_email'),
 			'settings' => $dashboard->settings
+			
 		]
 	);
 

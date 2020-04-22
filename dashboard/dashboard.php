@@ -16,11 +16,38 @@ class Dashboard {
         
         add_action( 'admin_menu', array( $this, 'register' ) );
 
-
         //services..
         $this->mail_chimp = new MailChimp();
+        $this->informations = array(
+            
+            'cards' => array(
+                array(
+                    'title' => 'Need And Expert Support',
+                    'description'   => 'Sunny',
+                    'media'     => array(
+                        'type' => 'img',
+                        'src'  => 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRpmgRHxFKVxi9E6kyE3rOcmIo1IywM6qly-uOKeRaYKm59RuLv&usqp=CAU'
+                    ),
+                    'action'    => array(
+                        'link' => 'https://www.google.com/',
+                        'label' => 'Contact Us'
+                    ) 
+                ),
+                array(
+                    'title' => 'Need And Expert Support 2',
+                    'description'   => 'It is a long established fact that a reader will be distracted by the readable content of a page when looking at its layout. The point of using Lorem Ipsum is that it has a more-or-less normal distribution of letters, as opposed to using , making it look like readable English. Many desktop publishing packages and web page editors now use Lorem Ipsum as',
+                    'media'     => array(
+                        'type' => 'img',
+                        'src'  => 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcTMncDgvMswtacs8aylNlw2Gt5h_BnCaEBI8ZNF3TKYvjuL-9Cm&usqp=CAU'
+                    ),
+                    'action'    => array(
+                        'link' => 'https://www.google.com/',
+                        'label' => 'Contact Us'
+                    ) 
+                )
+            )
 
-
+        );
 
         $this->settings = array(
             'integrations' => array(
@@ -40,6 +67,12 @@ class Dashboard {
                         'list' => array(
                             'label' => 'Select List',
                             'value' => $this->mail_chimp->get_lists(),
+                            'type'  => 'select'
+                        ),
+                        'tags' => array(
+                            'label' => 'Tags',
+                            'type'  => 'tags',
+                            'value' => []
                         )
                     ),
                     'api_fields' => array(
@@ -55,17 +88,27 @@ class Dashboard {
                         'PHONE' => array(
                             'label' => 'Phone'
                         ),
-                        'ADDRESS' => array(
-                            'label' => 'Address'
+                        'ADDRESS_1' => array(
+                            'label' => 'Address 1'
                         ),
-                        'BIRTHDAY' => array(
-                            'label' => 'Birthday'
+                        'STATE' => array(
+                            'label' => 'State'
+                        ),
+                        'ZIP' => array(
+                            'label' => 'Zip Code'
+                        ),
+                        'COUNTRY' => array(
+                            'label' => 'Country'
+                        ),
+                        'CITY'  => array(
+                            'label' => 'City'
                         )
                     )
                 )
             )
-    
         );
+
+
     }
 
     public function get_guide_content( $integration ) {
@@ -159,7 +202,8 @@ class Dashboard {
             'cwp_dashboard_script',
             'cwp_global',
             [
-                'settings' => $this->settings
+                'settings' => $this->settings,
+                'informations' => $this->informations
             ]
         );
 

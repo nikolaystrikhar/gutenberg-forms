@@ -29,9 +29,8 @@ class MailChimp {
 
         $lists_names = array();
 
-
         if (!empty($data) and property_exists($data, 'lists')) {
-            
+
             foreach ($data->lists as $key => $list ) {
 
                 $list_data = array(
@@ -85,18 +84,53 @@ class MailChimp {
         $memberId = md5(strtolower($entry['EMAIL']));
         $dataCenter = substr($apiKey,strpos($apiKey,'-')+1);
         $url = 'https://' . $dataCenter . '.api.mailchimp.com/3.0/lists/' . $listId . '/members/' . $memberId;
-    
+        
+        $tags = [];
+
+        $address = array(
+            'addr1' => $this->get_value($entry, 'ADDRESS_1'),
+            'zip'   => $this->get_value($entry, 'ZIP'),
+            'country' => $this->get_value($entry, 'COUNTRY'),
+            'city'    => $this->get_value($entry, 'CITY'),
+            'state'   => $this->get_value($entry, 'STATE')
+        );
+
+        $merge_fields = [];
+
+        if (!$this->is_address_null($address)) {
+        
+            $merge_fields['ADDRESS'] = $address;
+        }
+
+        if ($this->has_field($entry, 'FNAME')) {
+            $merge_fields['FNAME'] = $entry['FNAME'];
+        }
+
+        if ($this->has_field($entry, 'LNAME')) {
+            $merge_fields['LNAME'] = $entry['LNAME'];
+        }
+
+        if ($this->has_field($entry, 'PHONE')) {
+            $merge_fields['PHONE'] = $entry['PHONE'];
+        }
+
+        if ( array_key_exists('tags', $entry) ) {
+
+            if (count($entry['tags']) !== 0) {
+
+                $tags = $entry['tags'];
+
+            }
+
+        }
+
         $json = json_encode([
             'email_address' => $entry['EMAIL'],
             'status'        => 'subscribed', // "subscribed","unsubscribed","cleaned","pending"
-            'merge_fields'  => [
-                'FNAME'     => $entry['FNAME'],
-                'LNAME'     => $entry['LNAME'],
-                'address'   => $entry['ADDRESS'],
-                'birthday'  => $entry['BIRTHDAY'],
-                'phone'     => $entry['PHONE']
-            ]
+            'merge_fields'  => $merge_fields,
+            'tags'          => $tags
         ]);
+
     
         $ch = curl_init($url);
     
@@ -112,12 +146,64 @@ class MailChimp {
         $httpCode = curl_getinfo($ch, CURLINFO_HTTP_CODE);
         curl_close($ch);
     
-        return $httpCode;
+        // return $httpCode;
+    }
+    public function is_address_null($address) {
+
+        $res = true;
+
+        foreach( $address as $key => $value  ) {
+
+            if ($value !== 'null') {
+                $res = false;
+            }
+
+        }
+
+        return $res;
+
+
+    }
+
+    public function get_value($data , $value) {
+        
+        
+
+        if (array_key_exists( $value , $data)) {
+            
+            $v = $data[$value];
+
+            if ($v === '' || is_null($v)) {
+                return 'null';
+            } else {
+                return $v;
+            }
+        } else {
+            return 'null';
+        }
+        
+       
+    }
+
+    public function has_field($submission, $field) {
+
+        if (array_key_exists($field,$submission) and $submission[$field] !== '' and !is_null($submission[$field] !== '')) {
+
+            return true; 
+
+        } else { 
+            return false;
+         }
+
     }
 
     public function post( $submission ) {
 
-        $this->add_subscriber($submission);
+        $enabled = get_option('cwp__enable__mailchimp') === '1' ? true : false;
+                
+        if ($enabled and array_key_exists('list', $submission ) and  array_key_exists('EMAIL', $submission )  ) {
+            $this->add_subscriber($submission);
+        }
 
 
     }
