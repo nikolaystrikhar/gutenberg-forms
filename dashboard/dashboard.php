@@ -18,20 +18,15 @@ class Dashboard {
 
         //services..
         $this->mail_chimp = new MailChimp();
+
         $this->informations = array(
-            
             'cards' => array(
                 array(
-                    'title' => 'Need And Expert Support',
-                    'description'   => 'Sunny',
-                    'media'     => array(
-                        'type' => 'img',
-                        'src'  => 'https://encrypted-tbn0.gstatic.com/images?q=tbn%3AANd9GcRpmgRHxFKVxi9E6kyE3rOcmIo1IywM6qly-uOKeRaYKm59RuLv&usqp=CAU'
-                    ),
+                    'title' => 'Found A Bug?',
                     'action'    => array(
-                        'link' => 'https://www.google.com/',
-                        'label' => 'Contact Us'
-                    ) 
+                        'link' => 'https://github.com/munirkamal/gutenberg-forms',
+                        'label' => 'Report On Github'
+                    )
                 ),
                 array(
                     'title' => 'Need And Expert Support 2',
@@ -44,10 +39,42 @@ class Dashboard {
                         'link' => 'https://www.google.com/',
                         'label' => 'Contact Us'
                     ) 
-                )
+                ),
             )
-
         );
+
+        $total_forms = wp_count_posts('cwp_gf_forms')->publish;
+        $total_entries = wp_count_posts('cwp_gf_entries')->publish;
+
+        if ($total_entries !== 0) {
+           $this->informations['cards'][] =  array(
+            'title' => 'Total Form Entries',
+            'media' => array(
+                'type' => 'counter',
+                'src'  => $total_entries,
+            ),
+            'action' => array(
+                'label' => 'View Entries',
+                'link' => get_bloginfo('url') . '/wp-admin/edit.php?post_type=cwp_gf_entries'
+            )
+        );
+        }
+
+
+        if ($total_forms !== 0) {
+            $this->informations['cards'][] = array(
+                'title' => 'Total Saved Forms',
+                'media' => array(
+                    'type' => 'counter',
+                    'src'  => $total_forms,
+                ),
+                'action' => array(
+                    'label' => 'View Forms',
+                    'link' =>  get_bloginfo('url') . '/wp-admin/edit.php?post_type=cwp_gf_forms'
+                )
+            );
+        }
+
 
         $this->settings = array(
             'integrations' => array(
