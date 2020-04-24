@@ -11,6 +11,8 @@
  * Text Domain: cwp-gutenberg-forms
  */
 
+
+
 if ( ! defined( 'ABSPATH' ) ) {
 	exit;
 }
@@ -18,5 +20,7 @@ if ( ! defined( 'ABSPATH' ) ) {
 add_action( 'admin_enqueue_scripts', function () {
 	wp_enqueue_style( 'cwp_gf_admin_css', plugin_dir_url( __FILE__ ) . '/admin/admin.css', false, '1.0.0' );
 });
+
+
 
 require_once plugin_dir_path( __FILE__ ) . 'src/init.php';

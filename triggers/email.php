@@ -118,22 +118,19 @@ class Email {
                     $decoded_template['hideFormOnSuccess'] = false;
                 }
 
-                if (array_key_exists('saveToEntries' , $attributes)) {
-                    $decoded_template['saveToEntries'] = $attributes['saveToEntries'];
-                } else {
-                    $decoded_template['saveToEntries'] = true;
-                }
-
-                if (array_key_exists('sendEmail', $attributes)) {
-                    $decoded_template['sendEmail'] = $attributes['sendEmail'];
-                } else {
-                    $decoded_template['sendEmail'] = true;
-                }
-
                 if (array_key_exists('integrations', $attributes)) {
                     $decoded_template['integrations'] = $attributes['integrations'];
                 } else {
                     $decoded_template['integrations'] = array();
+                }
+
+                if (array_key_exists('actions', $attributes)){
+                    $decoded_template['actions'] = $attributes['actions'];
+                } else {
+                    $decoded_template['actions'] = array(
+                        'Record Entries', 
+                        'Email Notification'
+                    );
                 }
 
                 $templates[] = $decoded_template;
@@ -415,8 +412,9 @@ class Email {
         }
 
         $newEntry = Entries::create_entry( $template, $mail_subject, $mail_body, $fields, $this->attachments );
-        $record_entries = $template['saveToEntries'];
-        $send_email = $template['sendEmail'];
+        $record_entries = in_array('Record Entries', $template['actions']);
+        $send_email = in_array( 'Email Notification', $template['actions']);
+
 
         if ($send_email === true) {
             if (array_key_exists('email' , $template)) {

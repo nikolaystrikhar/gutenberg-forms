@@ -9,6 +9,7 @@ const { __ } = wp.i18n;
 function Integrations(props) {
 
     const { integrations } = cwpGlobal.settings;
+    const { actions } = props.data.attributes;
 
     return (
         <Fragment>
@@ -17,7 +18,7 @@ function Integrations(props) {
 
                     const { title, enable, api_fields, fields, query_fields } = integration;
 
-                    if (enable) {
+                    if (enable && actions.includes(title)) {
                         return (
                             <PanelBody title={__(title, TEXT_DOMAIN)}>
                                 <FieldPlotter

@@ -1,6 +1,7 @@
 import React from "react";
 import { getThemeStyling } from "../../block/misc/helper";
 import { isEmpty } from "lodash";
+import { hasProtection, getProtection } from "../../block/functions";
 const { InnerBlocks } = wp.blockEditor;
 
 function save(props) {
@@ -11,20 +12,22 @@ function save(props) {
 		id,
 		successType,
 		successMessage,
-		recaptcha,
 		theme,
-		recaptcha: { siteKey },
 		formType,
 		encryption,
 		hideFormOnSuccess,
-		formLabel
+		formLabel,
+		spamProtections
 	} = props.attributes;
+
+	const recaptchaEnable = hasProtection("ReCaptcha v2", spamProtections);
+	const recaptcha = getProtection('ReCaptcha v2', spamProtections);
 
 	const captcha_p = `
 
 			var onloadCallback = function(token) {
 				grecaptcha.render('${id + "g-render"}', {
-				  'sitekey' : '${siteKey}'
+				  'sitekey' : '${recaptchaEnable && recaptcha.fields.site_key}'
 				});
 			  };
 
@@ -41,16 +44,18 @@ function save(props) {
 		return {};
 	}
 
+
+
 	return (
 		<div>
 			<div className="cwp-form" data-formtype={formType} id={formId}>
 				<form method="POST" id={id} {...getEncryption()} data-formid={id}>
 					<InnerBlocks.Content />
-					{recaptcha.enable && (
+					{recaptchaEnable && (
 						<div
 							class="g-recaptcha"
 							id={id + "g-render"}
-							data-sitekey={siteKey}
+							data-sitekey={recaptchaEnable && recaptcha.fields.site_key}
 						></div>
 					)}
 					<div style={{ display: 'none' }}>
@@ -89,13 +94,13 @@ function save(props) {
 						</div>
 					</div>
 				)}
-				{recaptcha.enable && (
+				{recaptchaEnable && (
 					<div id={id + "-captcha"} className="cwp-danger-captcha cwp-hidden">
 						Incorrect Captcha!
 					</div>
 				)}
 			</div>
-			{recaptcha.enable && (
+			{recaptchaEnable && (
 				<div id="cwp-protected">
 					<script
 						src="https://www.google.com/recaptcha/api.js"
@@ -108,7 +113,7 @@ function save(props) {
 						defer
 					></script>
 					<script
-						src={`https://www.google.com/recaptcha/api.js?render=${siteKey}`}
+						src={`https://www.google.com/recaptcha/api.js?render=${recaptchaEnable && recaptcha.fields.site_key}`}
 					></script>
 					<script dangerouslySetInnerHTML={{ __html: captcha_p }}></script>
 				</div>

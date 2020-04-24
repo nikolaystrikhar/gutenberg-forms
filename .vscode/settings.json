@@ -3,5 +3,6 @@
     "editor.fontLigatures": true,
     "editor.fontSize": 20,
     "editor.formatOnSave": true,
-    "editor.cursorStyle": "block"
+    "editor.cursorStyle": "block",
+    "editor.formatOnType": true
 }

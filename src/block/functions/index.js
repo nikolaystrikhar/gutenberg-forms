@@ -431,3 +431,90 @@ export function detect_similar_forms(clientId) {
 
 }
 
+export function get_form_actions() {
+
+	const actions = [
+		'Record Entries',
+		'Email Notification'
+	];
+
+	each(cwpGlobal.settings.integrations, (integration, key) => {
+
+		if (integration.enable && integration.type === 'autoResponder') {
+			actions.push(integration.title);
+		}
+
+	});
+
+
+	return actions;
+}
+
+
+export function get_spam_protectors() {
+
+	const protectors = [];
+
+	each(cwpGlobal.settings.integrations, (integration, key) => {
+
+		if (integration.enable && integration.type === 'spamProtection') {
+			protectors.push({
+				title: integration.title,
+				fields: integration.fields
+			});
+		}
+
+	});
+
+
+	return protectors;
+}
+
+export function hasObject(array, object) {
+
+	let res = false;
+
+	array.forEach((i) => {
+
+
+		if (isEqual(i, object)) {
+			res = true;
+		}
+	})
+
+
+	return res;
+
+}
+
+export function hasProtection(name, pr) {
+
+	let res = false;
+
+	pr.forEach((protection) => {
+
+		if (isEqual(protection.title, name)) {
+			res = true;
+		}
+
+	})
+
+	return res;
+
+}
+
+export function getProtection(name, pr) {
+
+	let res;
+
+	pr.forEach((protection) => {
+
+		if (isEqual(protection.title, name)) {
+			res = protection;
+		}
+
+	})
+
+	return res;
+
+}

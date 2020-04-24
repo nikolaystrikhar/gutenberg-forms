@@ -10,11 +10,12 @@ import {
 	TextControl,
 	TextareaControl,
 	FormToggle,
-	Notice
+	Notice,
+	FormTokenField
 } from "@wordpress/components";
-import { set, clone } from "lodash";
+import { set, clone, isEqual } from "lodash";
 import MappedMessages from "./components/messages";
-import { changeChildValue } from "../../block/functions/index";
+import { changeChildValue, get_form_actions, get_spam_protectors, hasObject } from "../../block/functions/index";
 import { basicColorScheme } from "../../block/misc/helper";
 import { TEXT_DOMAIN } from "../../block/constants";
 import TemplateBuilder from "./components/templateBuilder";
@@ -42,7 +43,9 @@ function Inspector(prop) {
 		formLabel,
 		cpt,
 		saveToEntries,
-		sendEmail
+		sendEmail,
+		actions,
+		spamProtections
 	} = props.attributes;
 
 	const handleAlignment = aln => {
@@ -106,6 +109,27 @@ function Inspector(prop) {
 
 		props.setAttributes({ theme: themeStyling });
 	};
+
+	const handleProtection = (protection) => {
+
+		const enabled = hasObject(spamProtections, protection)
+
+		if (enabled === false) {
+
+			const newProtections = clone(spamProtections);
+			newProtections.push(protection)
+			props.setAttributes({ spamProtections: newProtections })
+
+
+		} else {
+			const newProtections = clone(spamProtections);
+			let disabled = newProtections.filter(p => !isEqual(p, protection));
+
+			props.setAttributes({ spamProtections: disabled })
+
+		}
+
+	}
 
 	return (
 		<InspectorControls>
@@ -256,6 +280,34 @@ function Inspector(prop) {
 				</div>
 				{
 					sendEmail && <TemplateBuilder clientId={props.clientId} data={props} />
+				}
+			</PanelBody>
+			<PanelBody
+				title={__('Form Action', TEXT_DOMAIN)}
+			>
+				<FormTokenField
+					value={actions}
+					onChange={(actions) => props.setAttributes({ actions })}
+					suggestions={get_form_actions()}
+				/>
+			</PanelBody>
+			<PanelBody title={__('Spam Protection', TEXT_DOMAIN)}>
+				{
+					get_spam_protectors().map((protection) => {
+
+						const isEnabled = hasObject(spamProtections, protection);
+
+						return <div className="cwp-option">
+							<PanelRow>
+								<h3>{protection.title}</h3>
+								<FormToggle
+									value={isEnabled}
+									checked={isEnabled}
+									onChange={() => handleProtection(protection)}
+								/>
+							</PanelRow>
+						</div>
+					})
 				}
 			</PanelBody>
 			<PanelBody initialOpen={false} title={__("reCAPTCHA v2", TEXT_DOMAIN)}>

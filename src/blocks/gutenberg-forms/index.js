@@ -94,19 +94,17 @@ const attributes = {
 		type: "string",
 		default: ""
 	},
-	saveToEntries: {
-		type: "boolean",
-		default: true
-	},
-	sendEmail: {
-		type: "boolean",
-		default: true
-	},
 	integrations: {
 		type: "object",
-		default: {
-
-		}
+		default: {}
+	},
+	actions: {
+		type: 'array',
+		default: ['Record Entries', 'Email Notification']
+	},
+	spamProtections: {
+		type: 'array',
+		default: []
 	}
 }
 
