@@ -1,7 +1,5 @@
 <?php
 
-require_once plugin_dir_path( __DIR__ ) . 'integrations/mailchimp/api.php';
-
 class Dashboard {
 
     const parent_slug = 'gutenberg_forms';
@@ -17,7 +15,6 @@ class Dashboard {
         add_action( 'admin_menu', array( $this, 'register' ) );
 
         //services..
-        $this->mail_chimp = new MailChimp();
 
         $this->informations = array(
             'cards' => array(
@@ -147,62 +144,6 @@ class Dashboard {
 
         $this->settings = array(
             'integrations' => array(
-                'mailchimp' => array(
-                    'title' => 'Mail Chimp',
-                    'is_pro'  => true,
-                    'type'  => 'autoResponder',
-                    'guide' => $this->get_guide_content( 'mailchimp'  ),
-                    'description' => 'Bring new life to your lists with upgraded Mailchimp signup forms for WordPress! Easy to build and customize with no code required. Link to lists and interest groups!',
-                    'banner' => 'https://us20.admin.mailchimp.com/release/1.1.132c826603d26483f97297c92082b7e461f3c8cb4/images/brand_assets/logos/mc-freddie-dark.svg',
-                    'fields' => array(
-                        'api_key' =>  array(
-                            'label' => 'Api Key',
-                            'default' => '',
-                            'type' => 'string',
-                        )
-                    ),
-                    'query_fields' => array(
-                        'list' => array(
-                            'label' => 'Select List',
-                            'value' => $this->mail_chimp->get_lists(),
-                            'type'  => 'select'
-                        ),
-                        'tags' => array(
-                            'label' => 'Tags',
-                            'type'  => 'tags',
-                            'value' => []
-                        )
-                    ),
-                    'api_fields' => array(
-                        'EMAIL' => array(
-                            'label' => 'Email'
-                        ),
-                        'FNAME' => array(
-                            'label' => 'First Name'
-                        ),
-                        'LNAME' => array(
-                            'label' => 'Last Name'
-                        ),
-                        'PHONE' => array(
-                            'label' => 'Phone'
-                        ),
-                        'ADDRESS_1' => array(
-                            'label' => 'Address 1'
-                        ),
-                        'STATE' => array(
-                            'label' => 'State'
-                        ),
-                        'ZIP' => array(
-                            'label' => 'Zip Code'
-                        ),
-                        'COUNTRY' => array(
-                            'label' => 'Country'
-                        ),
-                        'CITY'  => array(
-                            'label' => 'City'
-                        )
-                    )
-                ),
                 'recaptcha' => array(
                     'title' => 'ReCaptcha v2',
                     'is_pro'  => false,
@@ -222,9 +163,11 @@ class Dashboard {
                             'type' => 'string'
                         )
                     ),
-                )
-             )
+                ),
+            )
         );
+
+        $this->settings['integrations'] = apply_filters('gutenberg_forms_integrations', $this->settings['integrations'] );
 
 
     }
@@ -299,26 +242,50 @@ class Dashboard {
         //assets 
 
         //currently embedding dashboard after creating in another plugin due to conflicts of our script with webpack
+
         
-        $production = true;
 
-        if ($production) {
-		
-            $js = "http://gutenbergforms.local/wp-content/plugins/my-awesome-plugin-master/build/build.js";
-            $css = "http://gutenbergforms.local/wp-content/plugins/my-awesome-plugin-master/build/build.css";
+        add_action('admin_enqueue_scripts', function($suffix) {
+
+            // $current_suffix = self::parent_slug . '_page_' . self::slug;
+
+           
+
+            if ($suffix === 'gutenberg-forms_page_gutenberg_forms_dashboard') {
+                
+                 $production = true;
+
+
+                if ($production) {
+            
+                    $js = "http://gutenbergforms.local/wp-content/plugins/my-awesome-plugin-master/build/build.js";
+                    $css = "http://gutenbergforms.local/wp-content/plugins/my-awesome-plugin-master/build/build.css";
+                
+                    wp_enqueue_script( 'cwp_dashboard_script', $js, array( 'wp-api', 'wp-i18n', 'wp-components', 'wp-element' ), 'cwp_dashboard', true );
+                    wp_enqueue_style( 'cwp_dashboard_stype', $css, array( 'wp-components' ) );
+            
+                
+                } else {
         
-            wp_enqueue_script( 'cwp_dashboard_script', $js, array( 'wp-api', 'wp-i18n', 'wp-components', 'wp-element' ), 'cwp_dashboard', true );
-            wp_enqueue_style( 'cwp_dashboard_stype', $css, array( 'wp-components' ) );
-    
         
-        } else {
+                    wp_enqueue_script( 'cwp_dashboard_script', plugins_url( '/', __DIR__ ) . '/dist/dashboard/build.js', array( 'wp-api', 'wp-i18n', 'wp-components', 'wp-element' ), 'cwp_dashboard', true );
+                    wp_enqueue_style( 'cwp_dashboard_stype', plugins_url( '/', __DIR__ ) . '/dist/dashboard/build.css', array( 'wp-components' ) );
+            
+                }
+            }
+            wp_localize_script(
+                'cwp_dashboard_script',
+                'cwp_global',
+                [
+                    'settings' => $this->settings,
+                    'informations' => $this->informations
+                ]
+            );
+
+        });
 
 
-            wp_enqueue_script( 'cwp_dashboard_script', plugins_url( '/', __DIR__ ) . '/dist/dashboard/build.js', array( 'wp-api', 'wp-i18n', 'wp-components', 'wp-element' ), 'cwp_dashboard', true );
-            wp_enqueue_style( 'cwp_dashboard_stype', plugins_url( '/', __DIR__ ) . '/dist/dashboard/build.css', array( 'wp-components' ) );
-    
-        }
-
+        
         add_submenu_page(
             self::parent_slug, 
             self::page_title, 
@@ -329,14 +296,8 @@ class Dashboard {
             1
         );
 
-        wp_localize_script(
-            'cwp_dashboard_script',
-            'cwp_global',
-            [
-                'settings' => $this->settings,
-                'informations' => $this->informations
-            ]
-        );
+       
+
 
 
     }

@@ -86,7 +86,6 @@ function cwp_form_post_type() {
 	Form::register_post_type(); //? creating a post_type for forms
 	Entries::register_post_type(); //? creating a post_type for our form entries
 
-	
 
 }
 

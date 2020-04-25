@@ -1,14 +1,6 @@
 <?php
 
-require_once plugin_dir_path( __FILE__ ) . 'mailchimp/api.php';
-
 class ExternalServiceHandler {
-
-    public function __construct() {
-
-        $this->MailChimp = new MailChimp(); 
-
-    }
 
 
     public static function parse_entry( $entry, $integration ) {
@@ -40,12 +32,11 @@ class ExternalServiceHandler {
             
             $parsed_entry = $this->parse_entry($entry, $integration);
 
-            switch ( $name ) {
 
-                case 'mailchimp':
-                    $this->MailChimp->post( $parsed_entry );
-
-            }
+            add_action(
+                'gutenberg_forms_submission__' . $name,
+                $parsed_entry
+            );
 
         }
 
