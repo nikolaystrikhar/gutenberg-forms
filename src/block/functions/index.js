@@ -82,6 +82,7 @@ export const getFieldTransform = (attrs, field) => {
 const layoutBlocks = ["cwp/form-column", "cwp/column", "cwp/form-group", "cwp/form-step"]; //blocks that will be ignored while serializing...
 const miscBlocks = ["cwp/form-button"];
 
+
 export const defaultFieldMessages = [
 	{
 		fieldName: "name",
@@ -516,5 +517,38 @@ export function getProtection(name, pr) {
 	})
 
 	return res;
+
+}
+
+export function getGlobalMessages() {
+	const globalMessages = cwpGlobal.generalSettings.messages;
+	const defaultValidationMessages = defaultFieldMessages.map((v => {
+
+		if (has(v, 'invalid')) {
+			return {
+				...v,
+				invalid: globalMessages[v.fieldName]['value']
+			}
+		}
+
+		if (has(v, 'invalidName')) {
+			return {
+				...v,
+				invalidName: globalMessages[v.fieldName]['value']
+			}
+		}
+
+		if (has(v, 'invalidEmail')) {
+			return {
+				...v,
+				invalidEmail: globalMessages[v.fieldName]['value']
+			}
+		}
+
+		return v;
+
+	}));
+
+	return defaultValidationMessages;
 
 }

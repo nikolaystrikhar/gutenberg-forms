@@ -32,8 +32,7 @@ class ExternalServiceHandler {
             
             $parsed_entry = $this->parse_entry($entry, $integration);
 
-
-            add_action(
+            do_action(
                 'gutenberg_forms_submission__' . $name,
                 $parsed_entry
             );

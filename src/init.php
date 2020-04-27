@@ -60,7 +60,8 @@ function gutenberg_forms_cwp_block_assets()
 			'primary-color'	=> get_user_option( 'admin_color' ),
 			'new_form_url'	=> admin_url('post-new.php?post_type=cwp_gf_forms'),
 			'admin_email'	=> get_bloginfo('admin_email'),
-			'settings' => $dashboard->settings
+			'settings' => $dashboard->settings,
+			'generalSettings' => json_decode(get_option('cwp_gutenberg_forms_general_settings'), JSON_PRETTY_PRINT)
 			
 		]
 	);

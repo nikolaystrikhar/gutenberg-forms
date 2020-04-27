@@ -3,9 +3,11 @@ const { registerBlockType } = wp.blocks;
 
 import mainEdit from "./edit";
 import mainSave from "./save";
-import { defaultFieldMessages } from '../../block/functions';
+import { getGlobalMessages } from '../../block/functions';
 import { fieldSupport } from '../../constants';
 import { deprecated } from "./deprecated";
+
+
 
 const attributes = {
 	submitLabel: {
@@ -54,17 +56,9 @@ const attributes = {
 		type: "string",
 		default: "The form has been submitted Successfully!"
 	},
-	recaptcha: {
-		type: "object",
-		default: {
-			enable: false,
-			siteKey: "",
-			clientSecret: ""
-		}
-	},
 	messages: {
 		type: "array",
-		default: defaultFieldMessages
+		default: getGlobalMessages()
 	},
 	theme: {
 		type: "object",

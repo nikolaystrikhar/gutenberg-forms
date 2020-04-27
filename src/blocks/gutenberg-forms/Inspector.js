@@ -13,7 +13,7 @@ import {
 	Notice,
 	FormTokenField
 } from "@wordpress/components";
-import { set, clone, isEqual } from "lodash";
+import { set, clone, isEqual, isEmpty } from "lodash";
 import MappedMessages from "./components/messages";
 import { changeChildValue, get_form_actions, get_spam_protectors, hasObject } from "../../block/functions/index";
 import { basicColorScheme } from "../../block/misc/helper";
@@ -35,10 +35,8 @@ function Inspector(prop) {
 		messages,
 		successMessage,
 		templateBuilder,
-		recaptcha,
 		theme,
 		formType,
-		recaptcha: { siteKey, clientSecret },
 		hideFormOnSuccess,
 		formLabel,
 		cpt,
@@ -268,20 +266,16 @@ function Inspector(prop) {
 					</div>
 				}
 			</PanelBody>
-			<PanelBody title={__("Email Notification", TEXT_DOMAIN)}>
-				<div className="cwp-option">
-					<PanelRow>
-						<h3>{__("Send Email Notification", TEXT_DOMAIN)}</h3>
-						<FormToggle
-							checked={sendEmail}
-							onChange={() => props.setAttributes({ sendEmail: !sendEmail })}
-						/>
-					</PanelRow>
-				</div>
-				{
-					sendEmail && <TemplateBuilder clientId={props.clientId} data={props} />
-				}
-			</PanelBody>
+
+			{
+				actions.includes('Email Notification') && (
+					<PanelBody title={__("Email Notification", TEXT_DOMAIN)}>
+						<TemplateBuilder clientId={props.clientId} data={props} />
+					</PanelBody>
+				)
+			}
+
+
 			<PanelBody
 				title={__('Form Action', TEXT_DOMAIN)}
 			>
@@ -291,70 +285,31 @@ function Inspector(prop) {
 					suggestions={get_form_actions()}
 				/>
 			</PanelBody>
-			<PanelBody title={__('Spam Protection', TEXT_DOMAIN)}>
-				{
-					get_spam_protectors().map((protection) => {
 
-						const isEnabled = hasObject(spamProtections, protection);
+			{
+				!isEmpty(get_spam_protectors()) && <PanelBody title={__('Spam Protection', TEXT_DOMAIN)}>
+					{
+						get_spam_protectors().map((protection) => {
 
-						return <div className="cwp-option">
-							<PanelRow>
-								<h3>{protection.title}</h3>
-								<FormToggle
-									value={isEnabled}
-									checked={isEnabled}
-									onChange={() => handleProtection(protection)}
-								/>
-							</PanelRow>
-						</div>
-					})
-				}
-			</PanelBody>
-			<PanelBody initialOpen={false} title={__("reCAPTCHA v2", TEXT_DOMAIN)}>
-				<div className="cwp-option">
-					<p>
-						{__("reCAPTCHA requires a Site and Private API key. Sign up for a free", TEXT_DOMAIN)}
-						<a href="https://www.google.com/recaptcha" target="__blank">
-							{__("reCAPTCHA key", TEXT_DOMAIN)}
-						</a>
-						.
-					</p>
-				</div>
-				<div className="cwp-option">
-					<PanelRow>
-						<h3>Enable</h3>
-						<FormToggle
-							checked={recaptcha.enable}
-							onChange={s => handleCaptcha(!recaptcha.enable, "enable")}
-						/>
-					</PanelRow>
-				</div>
-				{recaptcha.enable && (
-					<Fragment>
-						<div className="cwp-option">
-							<TextControl
-								label="Site Key"
-								value={siteKey}
-								onChange={v => handleCaptcha(v, "siteKey")}
-							/>
-						</div>
-						<div className="cwp-option">
-							<TextControl
-								label="Client Secret"
-								value={clientSecret}
-								onChange={v => handleCaptcha(v, "clientSecret")}
-							/>
-						</div>
-					</Fragment>
-				)}
-				{recaptcha.enable && (
-					<div className="cwp-option">
-						<p>
-							<Icon icon="info" /> {__("Will only work & show on front-end.", TEXT_DOMAIN)}
-						</p>
-					</div>
-				)}
-			</PanelBody>
+							const isEnabled = hasObject(spamProtections, protection);
+
+							return <div className="cwp-option">
+								<PanelRow>
+									<h3>{protection.title}</h3>
+									<FormToggle
+										value={isEnabled}
+										checked={isEnabled}
+										onChange={() => handleProtection(protection)}
+									/>
+								</PanelRow>
+							</div>
+						})
+					}
+				</PanelBody>
+			}
+
+
+
 			<PanelBody initialOpen={false} title={__("Messages", TEXT_DOMAIN)}>
 				<div className="cwp-option">
 					<p>
