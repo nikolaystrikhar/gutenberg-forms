@@ -1,11 +1,8 @@
 <?php
     require_once plugin_dir_path( __DIR__ ) . 'triggers/validator.php';
     require_once plugin_dir_path( __DIR__ ) . 'triggers/functions.php';
-
-
     require_once plugin_dir_path( __DIR__ ) . 'submissions/entries.php';
-
-    require_once plugin_dir_path( __DIR__  ) . 'Utils/Bucket.php';
+    require_once plugin_dir_path( __DIR__ ) . 'Utils/Bucket.php';
     require_once plugin_dir_path( __DIR__ ) . 'integrations/handler.php';
 
 /**
@@ -62,11 +59,6 @@ class Email {
                 $decoded_template = array();
 
                 $attributes = $block['attrs'];
-
-                if (array_key_exists('recaptcha' , $attributes)) {
-                    $decoded_template['recaptcha'] = $attributes['recaptcha'];
-                }
-
 
                 if (array_key_exists('template' , $attributes)) {
                     $decoded_template[] = json_decode($attributes['template'], JSON_PRETTY_PRINT);
@@ -150,7 +142,9 @@ class Email {
         } else return false;
     }
 
-    private function execute_captchas($user_response , $secretKey) {
+    private function execute_captchas($user_response) {
+
+        $secretKey = get_option('cwp__recaptcha__client_secret');
 
         if ($secretKey === "") {
             return false;
@@ -158,7 +152,6 @@ class Email {
         if ($user_response === "") {
             return false;
         }
-
 
         $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secretKey.'&response='.$user_response);
 
@@ -400,7 +393,7 @@ class Email {
         
 
         if ($this->has_captcha( $post )) {
-            $captcha_success = $this->execute_captchas($post['g-recaptcha-response'], $template['recaptcha']['clientSecret']);
+            $captcha_success = $this->execute_captchas($post['g-recaptcha-response']);
 
             if (!$captcha_success) {
                 $captcha_danger = $_POST['submit']."-captcha";

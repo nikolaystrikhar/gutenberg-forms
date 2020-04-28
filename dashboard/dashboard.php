@@ -2,13 +2,10 @@
 
 class Dashboard {
 
-    const parent_slug = 'gutenberg_forms';
     const page_title = 'Dashboard';
     const capability = 'manage_options';
-    const slug = 'gutenberg_forms_dashboard';
+    const slug = 'gutenberg_forms';
     const settings_group = "gutenberg_forms_setting";
-
-    // const MailChimp = new MailChimp(); 
 
     public function __construct() {
         
@@ -96,7 +93,7 @@ class Dashboard {
                 array(
                     'title' => 'How to use?',
                     'action'    => array(
-                        'link' => 'https://wordpress.org/support/plugin/forms-gutenberg/reviews/#new-post',
+                        'link' => 'http://docs.gutenbergforms.com/',
                         'label' => 'Read Docs'
                     ),
                     'media' => array(
@@ -229,17 +226,6 @@ class Dashboard {
             )
         );
 
-        register_setting(
-            self::settings_group,
-            'cwp_gutenberg_forms_general_settings_text',
-            array(
-                'type' => 'string',
-                'show_in_rest' => true,
-                'default' => 'hello World'
-            )
-        );
-
-
 
         $this->general = get_option('cwp_gutenberg_forms_general_settings');
 
@@ -247,7 +233,6 @@ class Dashboard {
         foreach ( $this->settings['integrations'] as $integration => $details ) {
 
             $enable_integration = "cwp__enable__" . $integration;
-            $authenticate_integration = "cwp__authenticate__" . $integration;
 
             register_setting (
                 self::settings_group,
@@ -259,21 +244,8 @@ class Dashboard {
                 )
             );
 
-            register_setting (
-                self::settings_group,
-                $authenticate_integration,
-                array(
-                    'type'         => 'boolean',
-                    'show_in_rest' => true,
-                    'default'      => false,
-                )
-            );
-
             $is_enabled =  get_option( $enable_integration ) === "1" ? true : false;
-            $is_authenticated = get_option( $authenticate_integration ) === '1' ? true : false;
-
             $this->settings['integrations'][ $integration ][ 'enable' ] = $is_enabled;
-            $this->settings['integrations'][ $integration ][ 'authenticated' ] = $is_authenticated;
 
             foreach ( $details['fields'] as $field => $initialValue ) {
 
@@ -290,7 +262,7 @@ class Dashboard {
                 );
             
                 //SETTING CURRENT_VALUE
-                $this->settings['integrations'][ $integration  ]['fields'][ $field ]['value'] = get_option( $field_group  );
+                $this->settings['integrations'][ $integration ]['fields'][ $field ]['value'] = get_option( $field_group );
                 
             }
 
@@ -308,13 +280,10 @@ class Dashboard {
 
         add_action('admin_enqueue_scripts', function($suffix) {
 
-            // $current_suffix = self::parent_slug . '_page_' . self::slug;
 
-           
-
-            if ($suffix === 'gutenberg-forms_page_gutenberg_forms_dashboard') {
+            if ($suffix === 'toplevel_page_gutenberg_forms') {
                 
-                 $production = true;
+                 $production = false;
 
 
                 if ($production) {
@@ -347,21 +316,19 @@ class Dashboard {
 
         });
 
-
-        
-        add_submenu_page(
-            self::parent_slug, 
+        add_menu_page(
             self::page_title, 
-            self::page_title, 
+            'Gutenberg Forms', 
             self::capability, 
             self::slug, 
-            array($this, 'page_content'),
-            1
+            array($this, 'page_content'), 
+            'dashicons-feedback', 
+            25
         );
 
-       
 
-
+        add_submenu_page(self::slug, 'Form', 'Forms', 'manage_options',  'edit.php?post_type=cwp_gf_forms'); 
+        add_submenu_page(self::slug, 'Entry', 'Entries', 'manage_options', 'edit.php?post_type=cwp_gf_entries'); 
 
     }
 

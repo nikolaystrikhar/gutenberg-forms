@@ -128,8 +128,6 @@ function cwpgutenbergforms_set_script_translations()
 
 //custom_postype for our gutenberg-forms;
 
-require_once( plugin_dir_path( __DIR__ ) . '/admin/admin.php' );
-
 
 add_action('init', 'cwpgutenbergforms_set_script_translations');
 add_action('init', 'cwp_gutenberg_forms_messages_meta');

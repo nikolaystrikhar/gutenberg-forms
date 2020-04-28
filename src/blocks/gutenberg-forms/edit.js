@@ -2,7 +2,7 @@ import React, { useEffect, Fragment } from "react";
 import Inspector from "./Inspector";
 import Introduction from "./components/introduction";
 import { isEmpty, get } from "lodash";
-import { getFormTemplates, detect_similar_forms } from "../../block/functions/index";
+import { getFormTemplates, detect_similar_forms, getProtection } from "../../block/functions/index";
 import { getThemeStyling } from "../../block/misc/helper";
 import { withDispatch } from "@wordpress/data";
 import { TEXT_DOMAIN } from "../../block/constants";
@@ -24,7 +24,7 @@ function edit(props) {
 		formType,
 		cpt,
 		formLabel,
-		integrations
+		integrations,
 	} = props.attributes;
 
 	const formId = id && "form-".concat(id.split("-")[1]);
@@ -38,6 +38,7 @@ function edit(props) {
 		if (formLabel === "") {
 			props.setAttributes({ formLabel: "Gutenberg Form" })
 		}
+
 
 	}, []);
 

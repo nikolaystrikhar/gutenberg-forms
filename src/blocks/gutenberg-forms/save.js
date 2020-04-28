@@ -27,7 +27,7 @@ function save(props) {
 
 			var onloadCallback = function(token) {
 				grecaptcha.render('${id + "g-render"}', {
-				  'sitekey' : '${recaptchaEnable && recaptcha.fields.site_key}'
+				  'sitekey' : '${recaptchaEnable && recaptcha.fields.site_key.value}'
 				});
 			  };
 
@@ -55,7 +55,7 @@ function save(props) {
 						<div
 							class="g-recaptcha"
 							id={id + "g-render"}
-							data-sitekey={recaptchaEnable && recaptcha.fields.site_key}
+							data-sitekey={recaptchaEnable && recaptcha.fields.site_key.value}
 						></div>
 					)}
 					<div style={{ display: 'none' }}>
@@ -113,7 +113,7 @@ function save(props) {
 						defer
 					></script>
 					<script
-						src={`https://www.google.com/recaptcha/api.js?render=${recaptchaEnable && recaptcha.fields.site_key}`}
+						src={`https://www.google.com/recaptcha/api.js?render=${recaptchaEnable && recaptcha.fields.site_key.value}`}
 					></script>
 					<script dangerouslySetInnerHTML={{ __html: captcha_p }}></script>
 				</div>

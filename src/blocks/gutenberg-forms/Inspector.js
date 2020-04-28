@@ -166,16 +166,6 @@ function Inspector(prop) {
 				/>
 
 
-
-				<div className="cwp-option">
-					<PanelRow>
-						<h3>{__("Record Entries", TEXT_DOMAIN)}</h3>
-						<FormToggle
-							checked={saveToEntries}
-							onChange={() => props.setAttributes({ saveToEntries: !saveToEntries })}
-						/>
-					</PanelRow>
-				</div>
 				{
 					formType !== "multiStep" && <div className="cwp-option">
 						<PanelRow>

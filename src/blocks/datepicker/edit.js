@@ -5,7 +5,8 @@ import {
 	PanelRow,
 	PanelBody,
 	TextControl,
-	SelectControl
+	SelectControl,
+	Icon
 } from "@wordpress/components";
 import {
 	getFieldName,

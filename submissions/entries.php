@@ -263,9 +263,10 @@ class Entries {
         foreach ( $fields as $field_key => $field_value ) {
 
             $is_hidden_field = Validator::is_hidden_data_field( $field_value['field_id'] );
+            $is_recaptcha_field = $field_value['field_id'] === 'g-recaptcha-response';
 
 
-            if ($field_value['field_type'] === 'file_upload') {
+            if ($field_value['field_type'] === 'file_upload' and !$is_recaptcha_field) {
 
                 $parse_entry = get_value_and_name($field_value);
 
@@ -274,7 +275,7 @@ class Entries {
 
                 $new_entry['fields'][ $parse_entry['admin_id'] ] = $filename;
 
-            } else if ( $is_hidden_field ) {
+            } else if ( $is_hidden_field and !$is_recaptcha_field ) {
 
                 
 
@@ -289,7 +290,7 @@ class Entries {
                 }
 
 
-            } else if (!$is_hidden_field) {
+            } else if (!$is_hidden_field and !$is_recaptcha_field) {
                 $parse_entry = get_value_and_name($field_value);
                 $new_entry['fields'][ $parse_entry['admin_id'] ] = $parse_entry['value']; 
             }
