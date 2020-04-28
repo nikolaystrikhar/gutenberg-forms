@@ -3,7 +3,7 @@ Contributors: munirkamal
 Tags: wordpress form,  gutenberg form, contact form, gutenberg block, contact form plugin, forms, form builder, custom form, contact button, contact me, custom contact form, form manager, form, forms builder, forms creator, captcha, recaptcha, Akismet, email form, web form, feedback form, email submit form, message form, contact form block, wordpress form plugin
 Requires at least: 4.8
 Tested up to: 5.4
-Stable tag: 1.2.0
+Stable tag: 1.3.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -82,6 +82,16 @@ You may also get involved with the development via Github:
 
 == Changelog ==
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
+
+= 1.3.0 = (28 Apr 2020)
+- Improved: Email Notification Builder is moved in the sidebar
+- Added: Admin Page Using Gutenberg Components
+- Improved: Google ReCaptcha settings added in admin page
+- Added: Default validation Messages in admin page
+- Added: From Field in the Email Notification Builder
+- Added: All Data tag in the Email Notification Builder
+- Fixed: File Upload Bugs
+- Added: Form Actions - Now you can enable/disable any action like form entries, email notification etc
 
 = 1.2.0 = (11 Apr 2020) 
 - New: Now form entries are recorded in database

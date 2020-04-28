@@ -77,6 +77,16 @@ We appreciate all contributions and don't want a wall of rules to get in the way
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
+= 1.3.0 = (28 Apr 2020)
+- Improved: Email Notification Builder is moved in the sidebar
+- Added: Admin Page Using Gutenberg Components
+- Improved: Google ReCaptcha settings added in admin page
+- Added: Default validation Messages in admin page
+- Added: From Field in the Email Notification Builder
+- Added: All Data tag in the Email Notification Builder
+- Fixed: File Upload Bugs
+- Added: Form Actions - Now you can enable/disable any action like form entries, email notification etc
+
 = 1.2.0 = (11 Apr 2020) 
 - New: Now form entries are recorded in database
 - New: forms CPT - Create forms and use anywhere using shortcode
