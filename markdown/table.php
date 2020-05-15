@@ -25,7 +25,7 @@ function Table( $t, $first_capital = false, $preformat = false ) {
 
     echo "<table class='widefat message-fields striped'>";
         echo "<tbody>";
-    
+     
         foreach ($t as $heading => $value) {
 
             $table_heading = $first_capital ? ucfirst($heading) : $heading;
