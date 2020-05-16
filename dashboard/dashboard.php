@@ -288,8 +288,8 @@ class Dashboard {
 
                 if ($production) {
             
-                    $js = "http://gutenbergforms.local/wp-content/plugins/my-awesome-plugin-master/build/build.js";
-                    $css = "http://gutenbergforms.local/wp-content/plugins/my-awesome-plugin-master/build/build.css";
+                    $js = "http://localhost:8080/gutenbergforms/wp-content/plugins/gutenberghub-dashboard/build/build.js";
+                    $css = "http://localhost:8080/gutenbergforms/wp-content/plugins/gutenberghub-dashboard/build/build.css";
                 
                     wp_enqueue_script( 'cwp_dashboard_script', $js, array( 'wp-api', 'wp-i18n', 'wp-components', 'wp-element' ), 'cwp_dashboard', true );
                     wp_enqueue_style( 'cwp_dashboard_stype', $css, array( 'wp-components' ) );

@@ -5,6 +5,12 @@
 
 @include settings_modal();
 
+.cwp-fields-plotter {
+	& .components-notice {
+		margin: 10px 0px !important;
+	} 
+}
+
 .cwp-template-builder {
 	display:block;
 

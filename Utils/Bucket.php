@@ -7,7 +7,6 @@
 
 class Bucket {
 
-
     const plugin_upload_dir = 'gutenberg-forms-uploads';
     const plugin_upload_path = WP_CONTENT_DIR . '/uploads' . '/' . self::plugin_upload_dir;
     

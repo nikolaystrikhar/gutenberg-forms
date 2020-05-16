@@ -1,6 +1,6 @@
-import React, { useEffect } from 'react'
-import { SelectControl, TextControl, FormTokenField } from '@wordpress/components'
-import { map, isEmpty, has, clone, set, get } from 'lodash'
+import React, { useEffect, useState } from 'react'
+import { SelectControl, TextControl, FormTokenField, Notice } from '@wordpress/components'
+import { map, isEmpty, has, clone, set, get, isEqual, each } from 'lodash'
 import { TEXT_DOMAIN } from '../../../block/constants';
 import { serializeFields } from '../../../block/misc/helper'
 
@@ -9,8 +9,11 @@ const { __ } = wp.i18n;
 const { getBlock } = wp.data.select('core/block-editor');
 
 function FieldPlotter({ api_fields, clientId, data, name, fields, query_fields }) {
+
+
     const { integrations } = data.attributes;
 
+    const [error, setError] = useState('');
 
     useEffect(() => {
 
@@ -31,18 +34,70 @@ function FieldPlotter({ api_fields, clientId, data, name, fields, query_fields }
             const { fieldName, blockName, adminId } = f;
             const field_label = isEmpty(fieldName) ? adminId : fieldName;
 
-            return {
+            const option = {
                 label: field_label,
-                value: get(adminId, 'value')
+                value: get(adminId, 'value'),
+                blockName
             }
 
+            return option
         });
+
+        const hasRestriction = has(field, 'restriction'); // checking for field restrictions..
+
+        if (hasRestriction && !isEmpty(get(field, 'restriction'))) {
+
+            const inRestrictionOptions = options.filter(option => isEqual(option.blockName, get(field, 'restriction')));
+
+
+            return inRestrictionOptions;
+
+        }
 
         return options;
 
     }
 
+    const isFieldEmpty = (v, label = null) => {
+
+        if (isEmpty(label)) {
+            return isEqual('Select Field', v) || isEmpty(v);
+        }
+
+        return isEqual('Select Field', v) || isEmpty(v) || isEqual(label, v)
+
+    }
+
+    const testErrors = (updatedOptions) => {
+
+        const f = Object.assign({}, api_fields, query_fields);
+
+        let has_err = false;
+
+        each(updatedOptions, (option, key) => {
+
+            const hasKey = has(f, key);
+            const isFieldRequired = get(get(f, key), 'required');
+
+            const field_label = get(get(f, key), 'label');
+            const fieldEmpty = isFieldEmpty(option, field_label);
+
+            if (hasKey && isFieldRequired === true && fieldEmpty) {
+                // this means a required field is not filled
+                has_err = true;
+            }
+
+        });
+
+        return has_err;
+
+        // each(newI, (value, key)) 
+
+    }
+
     const handleFieldsChange = (key, val) => {
+
+        console.log(key, val);
 
         // not mutating the original attribute
         const newIntegrations = clone(integrations);
@@ -55,16 +110,38 @@ function FieldPlotter({ api_fields, clientId, data, name, fields, query_fields }
 
         data.setAttributes({ integrations: newIntegrations });
 
+        if (testErrors(get(newIntegrations, name))) {
+            setError(__('Please Map All Required Fields', TEXT_DOMAIN));
+        } else {
+            setError('');
+        }
+
     }
 
     return (
         <div className="cwp-fields-plotter">
             {
+                !isEmpty(error) && (
+                    <Notice status="error" isDismissible={false}>
+                        {error}
+                    </Notice>
+                )
+            }
+            {
                 map((query_fields), (field, key) => {
 
                     const { label, value, type } = field;
                     const currentValue = has(integrations[name], key) ? integrations[name][key] : null;
-
+                    const field_label = (
+                        <span>
+                            {
+                                label
+                            }
+                            {
+                                has(field, 'required') && get(field, 'required') == true && <strong color="red">{" "}(Req)</strong>
+                            }
+                        </span>
+                    )
 
                     if (type === 'select') {
 
@@ -79,14 +156,13 @@ function FieldPlotter({ api_fields, clientId, data, name, fields, query_fields }
                         let values = [
                             {
                                 label,
-                                value: null
+                                value: '',
                             },
                             ...mappedValues
                         ]
 
                         return <SelectControl
-
-                            label={label}
+                            label={__(field_label, TEXT_DOMAIN)}
                             value={currentValue}
                             options={values}
                             onChange={(v) => handleFieldsChange(key, v)}
@@ -94,7 +170,7 @@ function FieldPlotter({ api_fields, clientId, data, name, fields, query_fields }
                     } else if (type === 'text') {
 
                         return <TextControl
-                            label={label}
+                            label={__(label, TEXT_DOMAIN)}
                             value={currentValue}
                             onChange={(v) => handleFieldsChange(key, v)}
                         />
@@ -108,7 +184,7 @@ function FieldPlotter({ api_fields, clientId, data, name, fields, query_fields }
 
 
                         return <FormTokenField
-                            label={label}
+                            label={__(field_label, TEXT_DOMAIN)}
                             value={parsedValue}
                             suggestions={suggestions}
                             onChange={tokens => {
@@ -128,17 +204,27 @@ function FieldPlotter({ api_fields, clientId, data, name, fields, query_fields }
 
                     const { label } = field;
                     const value = has(integrations[name], key) ? integrations[name][key] : null;
+                    const field_label = (
+                        <span>
+                            {
+                                label
+                            }
+                            {
+                                has(field, 'required') && get(field, 'required') == true && <strong color="red">{" "}(Req)</strong>
+                            }
+                        </span>
+                    )
 
                     return (
                         <div className="cwp_field_plot">
                             <SelectControl
                                 onChange={(val) => handleFieldsChange(key, val)}
-                                label={label}
+                                label={__(field_label, TEXT_DOMAIN)}
                                 value={value}
                                 options={[
                                     {
                                         label: 'Select Field',
-                                        value: null,
+                                        value: '',
                                     },
                                     ...getOptions(field)
                                 ]}
