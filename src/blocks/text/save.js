@@ -63,6 +63,7 @@ function save(props) {
 					id={id}
 					aria-label={strip_tags(label)}
 					name={id}
+					type="text"
 					data-errors={errors}
 					data-rule="false"
 					data-cwp-field

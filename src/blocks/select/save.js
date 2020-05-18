@@ -48,7 +48,6 @@ function save(props) {
 				)}
 				<select
 					name={id}
-					type="select"
 					id={id}
 					data-rule="false"
 					value={label}

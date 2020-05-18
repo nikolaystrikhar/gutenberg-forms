@@ -62,6 +62,7 @@ function save(props) {
 					data-cwp-field
 					data-errors={errors}
 					name={id}
+					type="tel"
 					data-phone="true"
 					data-rule="false"
 					placeholder={phone}
