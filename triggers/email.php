@@ -418,10 +418,6 @@ class Email {
                     wp_mail($template['email'],$mail_subject,$mail_body , $headers, $this->attachments);
                 }
     
-                if ($record_entries) {
-                    Entries::post( $newEntry );
-                }
-
                 $this->ExternalServiceHandler->handle($newEntry);
                 $this->attempt_success($template);
     
@@ -442,6 +438,15 @@ class Email {
         } else {
             $this->ExternalServiceHandler->handle($newEntry);
             $this->attempt_success($template);
+
+
+            if ($record_entries) {
+
+                Entries::post( $newEntry );
+
+            }
+
+
         }
     }
 }
