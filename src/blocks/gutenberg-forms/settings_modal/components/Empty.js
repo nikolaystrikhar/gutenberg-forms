@@ -11,7 +11,7 @@ function Empty({ message }) {
             <div className="placeholder">
                 <h1>{message}</h1>
                 <img src="https://dl.airtable.com/.attachmentThumbnails/bdc2fb6125e03d2979babf9ec54b10d3/27d0500c" />
-                <Button href={new_form_url} target="__blank" isPrimary={true}>
+                <Button href={new_form_url} isPrimary={true}>
                     Create Form
                 </Button>
             </div>

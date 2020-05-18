@@ -776,14 +776,18 @@
 }
 
 @mixin empty() {
+
 	& .placeholder {
 		width: 80%;
 		margin: auto;
+		display: flex;
+		flex-direction: column;
+		align-items: center;
 
 		text-align: center;
 
 		& img {
-			width: 100%;
+			width: 60%;
 			height: 100%;
 		}
 
