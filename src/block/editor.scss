@@ -14,6 +14,13 @@
 .cwp-template-builder {
 	display:block;
 
+	& .to-field {
+		display: flex;
+		justify-content: space-between;
+		margin: 10px 0px;
+		align-items: center;
+	}
+
 	& .cwp_data_drop {
 		display: flex;
 		justify-content: space-between;

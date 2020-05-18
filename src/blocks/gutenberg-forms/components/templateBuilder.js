@@ -8,6 +8,7 @@ import {
 	Icon,
 	Button,
 	TextControl,
+	ButtonGroup,
 	TextareaControl
 } from '@wordpress/components';
 import { getFieldIcon, serializeFields } from '../../../block/misc/helper';
@@ -21,7 +22,11 @@ function TemplateBuilder(prop) {
 	const props = prop.data;
 
 	const { clientId } = props,
-		{ template, email, fromEmail, templateBuilder } = props.attributes;
+		{ template, email, fromEmail, templateBuilder, cc, bcc } = props.attributes;
+
+
+
+	const [emailType, setEmailType] = useState('to');
 
 	const root = getBlock(props.clientId);
 
@@ -92,6 +97,44 @@ function TemplateBuilder(prop) {
 		}
 	};
 
+	const getActiveEmailType = (t) => {
+
+		if (emailType === t) {
+			return {
+				isPrimary: true
+			}
+		}
+
+		return {
+			isDefault: true
+		}
+
+	}
+
+	const getEmailTypeInput = () => {
+		switch (emailType) {
+
+			case 'to':
+				return <TextControl
+					value={email}
+					placeholder={adminEmail}
+					onChange={email => props.setAttributes({ email })}
+				/>
+			case 'bcc':
+				return <TextControl
+					value={bcc}
+					placeholder={'BCC..'}
+					onChange={bcc => props.setAttributes({ bcc })}
+				/>
+			case 'cc':
+				return <TextControl
+					value={cc}
+					placeholder={'CC..'}
+					onChange={cc => props.setAttributes({ cc })}
+				/>
+		}
+	}
+
 	return (
 		<div className="cwp-template-builder">
 			<div className="cwp_data_drop">
@@ -144,12 +187,35 @@ function TemplateBuilder(prop) {
 			</div>
 
 			<div className="cwp-builder-field">
-				<TextControl
-					label={__("To", TEXT_DOMAIN)}
-					value={email}
-					placeholder={adminEmail}
-					onChange={email => props.setAttributes({ email: email })}
-				/>
+				<div className="to-field">
+					<span>{__("To", TEXT_DOMAIN)}</span>
+					<ButtonGroup>
+						<Button
+							{...getActiveEmailType('to')}
+							onClick={() => setEmailType('to')}
+							isSmall
+						>
+							TO
+						</Button>
+						<Button
+							isSmall
+							onClick={() => setEmailType('cc')}
+							{...getActiveEmailType('cc')}
+						>
+							CC
+						</Button>
+						<Button
+							isSmall
+							onClick={() => setEmailType('bcc')}
+							{...getActiveEmailType('bcc')}
+						>
+							BCC
+						</Button>
+					</ButtonGroup>
+				</div>
+				{
+					getEmailTypeInput()
+				}
 			</div>
 
 			<div ref={subjectArea}>

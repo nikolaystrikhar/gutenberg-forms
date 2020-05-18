@@ -2,9 +2,18 @@
 
     class Validator {
 
-        public function isEmpty($string) {
+        public function isEmpty($value) {
 
-            $len = strlen(trim($string));
+            if (gettype($value) === 'array') {
+               
+                $len = sizeof($value);
+
+                if ($len === 0) return true;
+                return false;
+
+            }
+
+            $len = strlen(trim($value));
 
             if ( $len === 0 ) return true;
 

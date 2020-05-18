@@ -125,6 +125,18 @@ class Email {
                     );
                 }
 
+                if (array_key_exists('cc', $attributes) and $this->validator->isEmail( $attributes['cc']  )) {
+                    $decoded_template['cc'] = $attributes['cc'];
+                } else {
+                    $decoded_template['cc'] = '';
+                }
+
+            if (array_key_exists('bcc', $attributes) and $this->validator->isEmail( $attributes['bcc'] )) {
+                    $decoded_template['bcc'] = $attributes['bcc'];
+                } else {
+                    $decoded_template['bcc'] = '';
+                }
+
                 $templates[] = $decoded_template;
 
             }else {
@@ -377,7 +389,10 @@ class Email {
 
         $mail_subject = $this->with_fields($fields, $template[0]['subject']);
         $mail_body = $this->with_fields($fields, $template[0]['body']);
-        $headers = '';
+        $headers = [];
+
+        $CC = $template['cc'];
+        $BCC = $template['bcc'];
 
         if ( !empty($fromEmail) and $this->validator->isEmpty( $fromEmail ) === false and $this->extract_from_details( $fromEmail ) ) {
 
@@ -386,8 +401,22 @@ class Email {
             $from_name = $from_details['name'];
             $from_email = $from_details['email'];
 
-            $headers .= "From: $from_name <$from_email>";
+            $headers[] = "From: $from_name <$from_email>";
         }
+
+        if (!$this->validator->isEmpty( $CC )) {
+
+            $headers[] = 'Cc: ' . $CC;
+
+        }
+
+        if (!$this->validator->isEmpty( $BCC )) {
+
+            $headers[] = 'Bcc: ' . $BCC;
+
+        }
+
+        var_dump( $headers );
 
         $post = $_POST;
         
@@ -407,7 +436,6 @@ class Email {
         $newEntry = Entries::create_entry( $template, $mail_subject, $mail_body, $fields, $this->attachments );
         $record_entries = in_array('Record Entries', $template['actions']);
         $send_email = in_array( 'Email Notification', $template['actions']);
-
 
         if ($send_email === true) {
             if (array_key_exists('email' , $template)) {
@@ -436,6 +464,8 @@ class Email {
                 $this->attempt_success($template);
             }
         } else {
+
+
             $this->ExternalServiceHandler->handle($newEntry);
             $this->attempt_success($template);
 

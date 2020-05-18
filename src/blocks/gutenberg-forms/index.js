@@ -38,6 +38,14 @@ const attributes = {
 		type: "string",
 		default: ""
 	},
+	cc: {
+		type: "string",
+		default: ""
+	},
+	bcc: {
+		type: "string",
+		default: ""
+	},
 	fromEmail: {
 		type: "string",
 		default: ""

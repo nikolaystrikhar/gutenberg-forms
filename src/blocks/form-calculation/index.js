@@ -70,6 +70,10 @@ registerBlockType("cwp/form-calculation", {
 				default: "",
 				value: ""
 			}
+		},
+		decimalPlaces: {
+			type: "number",
+			default: 0
 		}
 	},
 	supports: {

@@ -1,3 +1,4 @@
+
 jQuery(function ($) {
 	/*!
 	 * Pikaday
@@ -1627,6 +1628,7 @@ jQuery(function ($) {
 			// let fields = formula.match(/[(number)\-\d\w]+/g);
 			const f = formula.match(/[{{]+[\/number\-\d\w]+[}}]+/g);
 			const fields = f.map(v => v.substring(2, v.length - 2));
+			const deciPlaces = Number($(this).data('deci'));
 
 			const self = $(this),
 				t = this;
@@ -1652,8 +1654,11 @@ jQuery(function ($) {
 							return mapObj[matched];
 						});
 
-						self.find("input").val(eval(expression));
-						self.find(".cwp-calc-result").html(eval(expression));
+						const result = eval(expression).toFixed(deciPlaces);
+
+
+						self.find("input").val(result);
+						self.find(".cwp-calc-result").html(result);
 					});
 				});
 				fields.forEach(field => {
@@ -1666,8 +1671,11 @@ jQuery(function ($) {
 						return mapObj[matched];
 					});
 
-					self.find("input").val(eval(expression));
-					self.find(".cwp-calc-result").html(eval(expression));
+					const result = eval(expression).toFixed(deciPlaces);
+
+
+					self.find("input").val(result);
+					self.find(".cwp-calc-result").html(result);
 				});
 
 				const target = $(this)
@@ -1689,7 +1697,7 @@ jQuery(function ($) {
 
 	$().ready(function () {
 
-		$('.cwp-form').each(function(){ 
+		$('.cwp-form').each(function () {
 
 			let formRoot = $(this).find('form');
 
@@ -1697,9 +1705,9 @@ jQuery(function ($) {
 
 			if (resubmit_btn.length) {
 
-				resubmit_btn.click(function() {
+				resubmit_btn.click(function () {
 					$(this).parent().parent().parent().css('display', 'none');
-					formRoot.css('display' , 'block');
+					formRoot.css('display', 'block');
 				});
 
 			}

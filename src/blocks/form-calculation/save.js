@@ -13,7 +13,8 @@ function save(props) {
 		enableCondition,
 		prefix,
 		postfix,
-		styling
+		styling,
+		decimalPlaces
 	} = props.attributes;
 
 	const getLabel = () => {
@@ -46,6 +47,7 @@ function save(props) {
 	return (
 		<div
 			className="cwp-calculation cwp-field"
+			data-deci={decimalPlaces}
 			{...getCalculation()}
 			{...getCondition()}
 		>

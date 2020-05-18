@@ -47,7 +47,8 @@ function edit(props) {
 		formulaBuilder,
 		postfix,
 		prefix,
-		adminId
+		adminId,
+		decimalPlaces
 	} = props.attributes;
 
 	const setStyling = (style, styleName) => {
@@ -145,6 +146,15 @@ function edit(props) {
 								}
 							/>
 						</PanelRow>
+					</div>
+					<div className="cwp-option">
+						<RangeControl
+							value={decimalPlaces}
+							min={0}
+							max={10}
+							label={__("Decimal Places", TEXT_DOMAIN)}
+							onChange={decimalPlaces => props.setAttributes({ decimalPlaces })}
+						/>
 					</div>
 				</PanelBody>
 				<PanelBody title={__("Condition", TEXT_DOMAIN)}>
