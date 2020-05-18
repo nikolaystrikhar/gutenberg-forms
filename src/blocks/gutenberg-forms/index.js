@@ -105,6 +105,12 @@ const attributes = {
 	spamProtections: {
 		type: 'array',
 		default: []
+	},
+	buttonStyling: {
+		type: 'object',
+		default: {
+			backgroundColor: 'white'
+		}
 	}
 }
 

@@ -43,7 +43,8 @@ function Inspector(prop) {
 		saveToEntries,
 		sendEmail,
 		actions,
-		spamProtections
+		spamProtections,
+		buttonStyling
 	} = props.attributes;
 
 	const handleAlignment = aln => {
@@ -85,10 +86,6 @@ function Inspector(prop) {
 			};
 	};
 
-	const handleCaptcha = (v, t) => {
-		props.setAttributes({ recaptcha: { ...recaptcha, [t]: v } });
-	};
-
 	const handleMessagesChange = (t, v, i, fieldName) => {
 		let newMessages = clone(messages);
 
@@ -126,6 +123,16 @@ function Inspector(prop) {
 			props.setAttributes({ spamProtections: disabled })
 
 		}
+
+	}
+
+	const handleButtonStyling = (v, t) => {
+
+		const newStyling = clone(buttonStyling);
+
+		set(newStyling, t, v);
+
+		props.setAttributes({ buttonStyling: newStyling })
 
 	}
 
@@ -255,6 +262,18 @@ function Inspector(prop) {
 						</PanelRow>
 					</div>
 				}
+				<div className="cwp-option">
+					<PanelRow>
+						<h3>
+							{__('Button Background Color', TEXT_DOMAIN)}
+							<ColorPalette
+								value={buttonStyling.backgroundColor}
+								onChange={newbg => handleButtonStyling(newbg, 'backgroundColor')}
+								colors={basicColorScheme}
+							/>
+						</h3>
+					</PanelRow>
+				</div>
 			</PanelBody>
 
 			{

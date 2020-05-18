@@ -17,7 +17,8 @@ function save(props) {
 		encryption,
 		hideFormOnSuccess,
 		formLabel,
-		spamProtections
+		spamProtections,
+		buttonStyling
 	} = props.attributes;
 
 	const recaptchaEnable = hasProtection("ReCaptcha v2", spamProtections);
@@ -73,6 +74,7 @@ function save(props) {
 					{!buttonSetting.disable && (
 						<div className={`cwp-submit ${alignment}`}>
 							<button
+								style={buttonStyling}
 								name="submit"
 								value={id}
 								type="submit"

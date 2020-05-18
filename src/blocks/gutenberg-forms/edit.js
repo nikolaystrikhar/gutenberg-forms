@@ -25,6 +25,7 @@ function edit(props) {
 		cpt,
 		formLabel,
 		integrations,
+		buttonStyling
 	} = props.attributes;
 
 	const formId = id && "form-".concat(id.split("-")[1]);
@@ -76,7 +77,7 @@ function edit(props) {
 							/>
 							{!buttonSetting.disable && (
 								<div className={`cwp-submit ${alignment}`}>
-									<button className="cwp-submit-btn cwp-default-submit-btn">
+									<button style={buttonStyling} className="cwp-submit-btn cwp-default-submit-btn">
 										<RichText
 											placeholder={__("Add a label", TEXT_DOMAIN)}
 											tag="span"
