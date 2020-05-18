@@ -6,8 +6,7 @@ import { getFormTemplates, detect_similar_forms, getProtection } from "../../blo
 import { getThemeStyling } from "../../block/misc/helper";
 import { withDispatch } from "@wordpress/data";
 import { TEXT_DOMAIN } from "../../block/constants";
-
-const { InnerBlocks, RichText } = wp.blockEditor;
+import { InnerBlocks, RichText } from '@wordpress/block-editor'
 
 const { compose } = wp.compose;
 const { __ } = wp.i18n;
