@@ -163,6 +163,16 @@ function Inspector(prop) {
 						onChange={color => handleStyling(color, "fieldBackgroundColor")}
 					/>
 				</div>
+				<div className="cwp-option">
+					<h3 className="cwp-heading">
+						{__('Button Background Color', TEXT_DOMAIN)}
+					</h3>
+					<ColorPalette
+						value={buttonStyling.backgroundColor}
+						onChange={newbg => handleButtonStyling(newbg, 'backgroundColor')}
+						colors={basicColorScheme}
+					/>
+				</div>
 			</PanelBody>
 
 			<PanelBody initialOpen={true} title={__("General", TEXT_DOMAIN)}>
@@ -262,18 +272,7 @@ function Inspector(prop) {
 						</PanelRow>
 					</div>
 				}
-				<div className="cwp-option">
-					<PanelRow>
-						<h3>
-							{__('Button Background Color', TEXT_DOMAIN)}
-							<ColorPalette
-								value={buttonStyling.backgroundColor}
-								onChange={newbg => handleButtonStyling(newbg, 'backgroundColor')}
-								colors={basicColorScheme}
-							/>
-						</h3>
-					</PanelRow>
-				</div>
+
 			</PanelBody>
 
 			{

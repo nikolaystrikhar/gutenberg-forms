@@ -83,6 +83,11 @@ You may also get involved with the development via Github:
 == Changelog ==
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
+= 1.4.0 = (22 May 2020)
+- Added: Mailpoet Integration ( Separate addon )
+- Fixed: Bugs
+- Improved: Code
+
 = 1.3.0 = (28 Apr 2020)
 - Improved: Email Notification Builder is moved in the sidebar
 - Added: Admin Page Using Gutenberg Components
