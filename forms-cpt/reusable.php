@@ -18,7 +18,6 @@ function short_code_callback($atts) {
             'id' => '',
 	), $atts));
 
-    // var_dump( get_post( $id )->post_title );
 	$content = get_block( $id );
 	
 	return $content;

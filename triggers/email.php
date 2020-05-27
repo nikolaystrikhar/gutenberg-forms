@@ -416,10 +416,7 @@ class Email {
 
         }
 
-        var_dump( $headers );
-
         $post = $_POST;
-        
 
         if ($this->has_captcha( $post )) {
             $captcha_success = $this->execute_captchas($post['g-recaptcha-response']);

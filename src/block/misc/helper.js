@@ -193,17 +193,14 @@ export function getThemeStyling(theme, id) {
 			`
 			: ``
 		}
-		
-		
 
 		${
-		!isEmpty(fieldBackgroundColor) && !isEmpty(accentColor)
-			? `#${id}.cwp-form .cwp-default-submit-btn {
+		!isEmpty(accentColor) ? `
+			#${id}.cwp-form .cwp-default-submit-btn {
 				color: ${accentColor} !important;
-				background-color: ${fieldBackgroundColor} !important;
 				border: 1px solid ${accentColor};
-			}`
-			: ``
+			}
+		` : ``
 		}
 
 		#${id}.cwp-form .cwp-field.cwp-number .cwp-field-set .cwp-range-set input[type="range"] {
@@ -212,8 +209,8 @@ export function getThemeStyling(theme, id) {
 
 
 		${
-		!isEmpty(fieldBackgroundColor) &&
-			!isEmpty(textColor) &&
+		!isEmpty(fieldBackgroundColor) ||
+			!isEmpty(textColor) ||
 			!isEmpty(accentColor)
 			? `#${id}.cwp-form .cwp-field [data-cwp-field], 
 			#${id}.cwp-form .cwp-field .cwp-field-set input, 

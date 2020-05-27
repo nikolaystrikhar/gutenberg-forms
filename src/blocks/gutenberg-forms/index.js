@@ -69,7 +69,7 @@ const attributes = {
 	theme: {
 		type: "object",
 		default: {
-			accentColor: "",
+			accentColor: "rgb(49, 49, 49)",
 			textColor: "",
 			fieldBackgroundColor: ""
 		}
