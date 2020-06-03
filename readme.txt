@@ -3,7 +3,7 @@ Contributors: munirkamal
 Tags: wordpress form,  gutenberg form, contact form, gutenberg block, contact form plugin, forms, form builder, custom form, contact button, contact me, custom contact form, form manager, form, forms builder, forms creator, captcha, recaptcha, Akismet, email form, web form, feedback form, email submit form, message form, contact form block, wordpress form plugin
 Requires at least: 4.8
 Tested up to: 5.4
-Stable tag: 1.3.0
+Stable tag: 1.4.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -38,6 +38,15 @@ The following are some of the main features, but there's more which you need to 
 * Responsive Forms - The forms you create are fully responsive.
 * Import/Export Forms - Do it the same way you do with any Gutenberg block
 * More features you will find out while using the plugin
+
+= Add-ons & Integrations =
+
+**MailPoet Add-on**
+Our first add-on has been released. It is for MailPoet plugin that lets you connect Gutenberg Forms with MailPoet to send leads to your MailPoet list.
+
+Read More & Install it, it's also **FREE**.
+[https://wordpress.org/plugins/guten-forms-mailpoet/](https://wordpress.org/plugins/guten-forms-mailpoet/)
+
 
 = Get involved with the Development =
 
@@ -83,7 +92,7 @@ You may also get involved with the development via Github:
 == Changelog ==
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
-= 1.4.0 = (22 May 2020)
+= 1.4.0 = (03 June 2020)
 - Added: Mailpoet Integration ( Separate addon )
 - Fixed: Bugs
 - Improved: Code
