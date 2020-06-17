@@ -36,6 +36,10 @@ The following are some of the main features, but there's more which you need to 
 * Import/Export Forms - Do it the same way you do with any Gutenberg block
 * More features you will find out while using the plugin
 
+## Add-ons & Integrations
+
+- MailPoet Addon ([https://github.com/CakeWP/gutenberg-forms-mailpoet](https://github.com/CakeWP/gutenberg-forms-mailpoet))
+
 ## Privacy Notice
 
 With the default configuration, this plugin, in itself, does not:
@@ -77,7 +81,7 @@ We appreciate all contributions and don't want a wall of rules to get in the way
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
-= 1.4.0 = (22 May 2020)
+= 1.4.0 = (03 June 2020)
 - Added: Mailpoet Integration ( Separate addon )
 - Fixed: Bugs
 - Improved: Code
