@@ -6,7 +6,6 @@ import textSave from "./save";
 import { getFieldTransform } from '../../block/functions';
 import { fieldParents, myAttrs } from '../../constants';
 
-
 registerBlockType("cwp/text", {
 	title: __("Text"),
 	icon: "text",

@@ -39,7 +39,6 @@ function edit(props) {
 			props.setAttributes({ formLabel: "Gutenberg Form" })
 		}
 
-
 	}, []);
 
 

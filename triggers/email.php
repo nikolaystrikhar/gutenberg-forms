@@ -1,9 +1,9 @@
 <?php
-    require_once plugin_dir_path( __DIR__ ) . 'triggers/validator.php';
-    require_once plugin_dir_path( __DIR__ ) . 'triggers/functions.php';
-    require_once plugin_dir_path( __DIR__ ) . 'submissions/entries.php';
-    require_once plugin_dir_path( __DIR__ ) . 'Utils/Bucket.php';
-    require_once plugin_dir_path( __DIR__ ) . 'integrations/handler.php';
+require_once plugin_dir_path(__DIR__) . 'triggers/validator.php';
+require_once plugin_dir_path(__DIR__) . 'triggers/functions.php';
+require_once plugin_dir_path(__DIR__) . 'submissions/entries.php';
+require_once plugin_dir_path(__DIR__) . 'Utils/Bucket.php';
+require_once plugin_dir_path(__DIR__) . 'integrations/handler.php';
 
 /**
  * @property Validator validator
@@ -11,33 +11,34 @@
  * @property array attachments
  */
 
-class Email {
+class Email
+{
 
-    public function __construct($post_content) {
+    public function __construct($post_content)
+    {
 
         $this->validator = new Validator();
         $this->post_content = $post_content;
         $this->attachments = array();
         $this->ExternalServiceHandler = new ExternalServiceHandler();
-
     }
 
-    public function is_fields_valid( $f ) {
+    public function is_fields_valid($f)
+    {
 
         $len = count($f);
 
-        if ( $len === 0 ) {
+        if ($len === 0) {
             return false;
         } else {
             $v = true;
 
-            foreach ( $f as $field_id => $field_value ) {
+            foreach ($f as $field_id => $field_value) {
 
-                if ( !$field_value[ 'is_valid' ] ) {
+                if (!$field_value['is_valid']) {
                     $v = false;
                     break;
                 } else continue;
-
             }
 
             return $v;
@@ -45,7 +46,8 @@ class Email {
     }
 
 
-    private function get_templates($id, $blocks = null) {
+    private function get_templates($id, $blocks = null)
+    {
 
         if (is_null($blocks)) {
             $blocks = $this->post_content;
@@ -53,14 +55,14 @@ class Email {
 
         $templates = array();
 
-        foreach( $blocks as $f => $block ) {
-            if ( $block['blockName'] === "cwp/block-gutenberg-forms" && $block['attrs']['id'] === $id ) {
+        foreach ($blocks as $f => $block) {
+            if ($block['blockName'] === "cwp/block-gutenberg-forms" && $block['attrs']['id'] === $id) {
 
                 $decoded_template = array();
 
                 $attributes = $block['attrs'];
 
-                if (array_key_exists('template' , $attributes)) {
+                if (array_key_exists('template', $attributes)) {
                     $decoded_template[] = json_decode($attributes['template'], JSON_PRETTY_PRINT);
                 } else {
 
@@ -70,7 +72,7 @@ class Email {
                     );
                 }
 
-                if (array_key_exists('email' ,$attributes)) {
+                if (array_key_exists('email', $attributes)) {
                     $user_email = $attributes['email'];
 
 
@@ -78,7 +80,7 @@ class Email {
                         $decoded_template['email'] = $user_email;
                     }
                 }
-                if (array_key_exists('fromEmail' ,$attributes)) {
+                if (array_key_exists('fromEmail', $attributes)) {
                     $from_email = $attributes['fromEmail'];
 
                     $decoded_template['fromEmail'] = $from_email;
@@ -86,25 +88,25 @@ class Email {
                     $decoded_template['fromEmail'] = "";
                 }
 
-                if (array_key_exists('successType' , $attributes)) {
+                if (array_key_exists('successType', $attributes)) {
                     $decoded_template['successType'] = $attributes['successType'];
                 } else {
                     $decoded_template['successType'] = "message";
                 }
 
-                if (array_key_exists('successURL' , $attributes)) {
+                if (array_key_exists('successURL', $attributes)) {
                     $decoded_template['successURL'] = $attributes['successURL'];
                 } else {
                     $decoded_template['successURL'] = "";
                 }
 
-                if (array_key_exists('successMessage' , $attributes)) {
+                if (array_key_exists('successMessage', $attributes)) {
                     $decoded_template['successMessage'] = $attributes['successMessage'];
                 } else {
                     $decoded_template['successMessage'] = "The form has been submitted Successfully!";
                 }
 
-                if (array_key_exists('hideFormOnSuccess' , $attributes)) {
+                if (array_key_exists('hideFormOnSuccess', $attributes)) {
                     $decoded_template['hideFormOnSuccess'] = $attributes['hideFormOnSuccess'];
                 } else {
                     $decoded_template['hideFormOnSuccess'] = false;
@@ -116,45 +118,45 @@ class Email {
                     $decoded_template['integrations'] = array();
                 }
 
-                if (array_key_exists('actions', $attributes)){
+                if (array_key_exists('actions', $attributes)) {
                     $decoded_template['actions'] = $attributes['actions'];
                 } else {
                     $decoded_template['actions'] = array(
-                        'Record Entries', 
+                        'Record Entries',
                         'Email Notification'
                     );
                 }
 
-                if (array_key_exists('cc', $attributes) and $this->validator->isEmail( $attributes['cc']  )) {
+                if (array_key_exists('cc', $attributes) and $this->validator->isEmail($attributes['cc'])) {
                     $decoded_template['cc'] = $attributes['cc'];
                 } else {
                     $decoded_template['cc'] = '';
                 }
 
-            if (array_key_exists('bcc', $attributes) and $this->validator->isEmail( $attributes['bcc'] )) {
+                if (array_key_exists('bcc', $attributes) and $this->validator->isEmail($attributes['bcc'])) {
                     $decoded_template['bcc'] = $attributes['bcc'];
                 } else {
                     $decoded_template['bcc'] = '';
                 }
 
                 $templates[] = $decoded_template;
-
-            }else {
+            } else {
                 $templates += $this->get_templates($id, $block['innerBlocks']);
             }
-
         }
 
         return $templates;
     }
 
-    private function has_captcha($post){
-        if (array_key_exists('g-recaptcha-response' , $post)) {
+    private function has_captcha($post)
+    {
+        if (array_key_exists('g-recaptcha-response', $post)) {
             return true;
         } else return false;
     }
 
-    private function execute_captchas($user_response) {
+    private function execute_captchas($user_response)
+    {
 
         $secretKey = get_option('cwp__recaptcha__client_secret');
 
@@ -165,24 +167,25 @@ class Email {
             return false;
         }
 
-        $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret='.$secretKey.'&response='.$user_response);
+        $verifyResponse = file_get_contents('https://www.google.com/recaptcha/api/siteverify?secret=' . $secretKey . '&response=' . $user_response);
 
         $response = json_decode($verifyResponse, true);
 
-        if (array_key_exists('success' , $response) ) {
+        if (array_key_exists('success', $response)) {
             return $response['success'];
         }
 
         return false;
     }
 
-    public function init() {
+    public function init()
+    {
 
         $arranged_fields = array();
 
         $post = $_POST;
 
-        $post_without_submit = array_remove_keys($_POST,['submit']);
+        $post_without_submit = array_remove_keys($_POST, ['submit']);
 
         if (count($_FILES) !== 0) {
             foreach ($_FILES as $file_id => $file_meta) {
@@ -192,18 +195,18 @@ class Email {
             }
         }
 
-        foreach ( $post_without_submit as $field_id => $field_value ) {
-            $exploded_id = explode( "__", $field_id );
+        foreach ($post_without_submit as $field_id => $field_value) {
+            $exploded_id = explode("__", $field_id);
 
-            $field_type = end( $exploded_id ); //type of th e field i.e email,name etc;
-
-
-            $f_DECODED = $this->validator->decode( $field_type );
+            $field_type = end($exploded_id); //type of th e field i.e email,name etc;
 
 
-            $type = array_key_exists('type' , $this->validator->decode( $field_type )) ? $this->validator->decode( $field_type )['type'] : "";
+            $f_DECODED = $this->validator->decode($field_type);
 
-            $is_valid = $this->validator->validate( $type, $field_value, $field_type );
+
+            $type = array_key_exists('type', $this->validator->decode($field_type)) ? $this->validator->decode($field_type)['type'] : "";
+
+            $is_valid = $this->validator->validate($type, $field_value, $field_type);
 
             $id = end($f_DECODED);
 
@@ -212,8 +215,8 @@ class Email {
             $sanitized_field_value = NULL;
 
             if (is_array($field_value)) {
-                $sanitized_field_value = join("," , $field_value);
-            } else if ( $id === 'upload' ) {
+                $sanitized_field_value = join(",", $field_value);
+            } else if ($id === 'upload') {
                 $sanitized_field_value = $field_value;
             } else {
                 $sanitized_field_value = $sanitizedValue;
@@ -222,10 +225,10 @@ class Email {
             $arranged_data = array(
                 'field_data_id' => $id,
                 'field_value' => $sanitized_field_value,
-                'is_valid'    => $field_id === "g-recaptcha-response" ? true: $is_valid,
+                'is_valid'    => $field_id === "g-recaptcha-response" ? true : $is_valid,
                 'field_id'    => $field_id,
                 'field_type'  =>  $type,
-                'decoded_entry' =>  $this->validator->decode( $field_type )
+                'decoded_entry' =>  $this->validator->decode($field_type)
             );
 
             if ($type === 'file_upload') {
@@ -241,23 +244,21 @@ class Email {
 
                 $is_allowed = $this->validator->test_file_formats($ext, $parsed_alloweds);
 
-                
 
-                if( $is_allowed ) {
-                    
-                    $created_file = Bucket::upload( $tmp_name, $ext );
+
+                if ($is_allowed) {
+
+                    $created_file = Bucket::upload($tmp_name, $ext);
 
                     $arranged_data['file_name'] = $created_file['filename'];
 
                     $this->attachments[] = $created_file['path'];
-
                 } else {
                     $arranged_data['is_valid'] = false;
                 }
-
             }
 
-            if ( $this->validator->is_hidden_data_field($field_id) ) {
+            if ($this->validator->is_hidden_data_field($field_id)) {
 
                 $arranged_data['is_valid'] = true;
             }
@@ -266,38 +267,37 @@ class Email {
         }
 
 
-        if ( $this->is_fields_valid( $arranged_fields ) ) {
+        if ($this->is_fields_valid($arranged_fields)) {
             // check if all the fields are valid;
-            $this->sendMail( $arranged_fields );
+            $this->sendMail($arranged_fields);
         }
-
     }
 
 
-    private function with_fields( $fields, $target ) {
+    private function with_fields($fields, $target)
+    {
 
         $result = $target;
         $data = array();
 
-        foreach( $fields as $field => $field_value ) {
+        foreach ($fields as $field => $field_value) {
 
-            $field_name = "{{".$field_value['field_type']."-".$field_value['field_data_id']."}}";
-            
+            $field_name = "{{" . $field_value['field_type'] . "-" . $field_value['field_data_id'] . "}}";
+
             if ($field_name !== "{{-}}") {
                 $data[$field_name] = $field_value['field_value'];
             }
 
-            $data['{{all_data}}'] = merge_fields_with_ids( $fields );
-
+            $data['{{all_data}}'] = merge_fields_with_ids($fields);
         }
 
         $replaced_str = strtr($target, $data);
 
         return $replaced_str;
-
     }
 
-    private function url_success($url) {
+    private function url_success($url)
+    {
 
         if ($this->validator->isURL($url)) {
             $string = '<script type="text/javascript">';
@@ -306,10 +306,10 @@ class Email {
 
             echo $string;
         }
-
     }
 
-    private function message_success( $message, $hideFormOnSuccess ) {
+    private function message_success($message, $hideFormOnSuccess)
+    {
 
 
         $message_id = $_POST['submit'];
@@ -319,17 +319,17 @@ class Email {
 
 
         if ($hideFormOnSuccess === true) {
-            $css .= "\n [data-formid=".$message_id."] { display: none; }";
+            $css .= "\n [data-formid=" . $message_id . "] { display: none; }";
         }
 
         $hidden_style = "<style> $css </style>";
 
 
         echo $hidden_style;
-
     }
 
-    private function attempt_success( $template ) {
+    private function attempt_success($template)
+    {
 
         /**
          * @var string $successType
@@ -341,43 +341,43 @@ class Email {
         if (!isset($template)) return;
         extract($template);
 
-        if ( $successType === "url" ) {
+        if ($successType === "url") {
             $this->url_success($successURL);
         } else if ($successType === "message") {
-            $this->message_success( $successMessage, $hideFormOnSuccess );
+            $this->message_success($successMessage, $hideFormOnSuccess);
         }
-
     }
 
-    public function extract_from_details( $from ) {
+    public function extract_from_details($from)
+    {
         // the fromEmail from the backend comes at this pattern "Name, Email" ( comma separated )
-        
-        $details = explode( ',' , trim( $from )  );
+
+        $details = explode(',', trim($from));
 
 
         // checking if the from contains both
-        if ( sizeof( $details ) === 2 ) {
+        if (sizeof($details) === 2) {
 
 
             $email = trim($details[1]);
             $name = trim($details[0]);
 
-            if ( ! $this->validator->isEmail( $email ) ) {
+            if (!$this->validator->isEmail($email)) {
                 return false;
             }
-            
+
 
             return array(
                 'email' => $email,
                 'name'  => $name
             );
-
         } else {
             return false;
         }
     }
 
-    public function sendMail( $fields ) {
+    public function sendMail($fields)
+    {
 
         $template = $this->get_templates($_POST['submit'])[0];
 
@@ -394,9 +394,9 @@ class Email {
         $CC = $template['cc'];
         $BCC = $template['bcc'];
 
-        if ( !empty($fromEmail) and $this->validator->isEmpty( $fromEmail ) === false and $this->extract_from_details( $fromEmail ) ) {
+        if (!empty($fromEmail) and $this->validator->isEmpty($fromEmail) === false and $this->extract_from_details($fromEmail)) {
 
-            $from_details = $this->extract_from_details( $fromEmail );
+            $from_details = $this->extract_from_details($fromEmail);
 
             $from_name = $from_details['name'];
             $from_email = $from_details['email'];
@@ -404,25 +404,23 @@ class Email {
             $headers[] = "From: $from_name <$from_email>";
         }
 
-        if (!$this->validator->isEmpty( $CC )) {
+        if (!$this->validator->isEmpty($CC)) {
 
             $headers[] = 'Cc: ' . $CC;
-
         }
 
-        if (!$this->validator->isEmpty( $BCC )) {
+        if (!$this->validator->isEmpty($BCC)) {
 
             $headers[] = 'Bcc: ' . $BCC;
-
         }
 
         $post = $_POST;
 
-        if ($this->has_captcha( $post )) {
+        if ($this->has_captcha($post)) {
             $captcha_success = $this->execute_captchas($post['g-recaptcha-response']);
 
             if (!$captcha_success) {
-                $captcha_danger = $_POST['submit']."-captcha";
+                $captcha_danger = $_POST['submit'] . "-captcha";
 
                 echo "<style> .cwp-danger-captcha#$captcha_danger { display:block !important } </style>";
 
@@ -430,34 +428,33 @@ class Email {
             }
         }
 
-        $newEntry = Entries::create_entry( $template, $mail_subject, $mail_body, $fields, $this->attachments );
+        $newEntry = Entries::create_entry($template, $mail_subject, $mail_body, $fields, $this->attachments);
         $record_entries = in_array('Record Entries', $template['actions']);
-        $send_email = in_array( 'Email Notification', $template['actions']);
+        $send_email = in_array('Email Notification', $template['actions']);
 
         if ($send_email === true) {
-            if (array_key_exists('email' , $template)) {
+            if (array_key_exists('email', $template)) {
 
                 if ($this->validator->isEmpty($headers)) {
-                    wp_mail($template['email'],$mail_subject,$mail_body , null, $this->attachments);
+                    wp_mail($template['email'], $mail_subject, $mail_body, null, $this->attachments);
                 } else {
-                    wp_mail($template['email'],$mail_subject,$mail_body , $headers, $this->attachments);
+                    wp_mail($template['email'], $mail_subject, $mail_body, $headers, $this->attachments);
                 }
-    
+
                 $this->ExternalServiceHandler->handle($newEntry);
                 $this->attempt_success($template);
-    
             } else {
                 if ($this->validator->isEmpty($headers)) {
-                    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body, null, $this->attachments);
+                    wp_mail(get_bloginfo('admin_email'), $mail_subject, $mail_body, null, $this->attachments);
                 } else {
-                    wp_mail(get_bloginfo('admin_email'),$mail_subject,$mail_body , $headers , $this->attachments);
+                    wp_mail(get_bloginfo('admin_email'), $mail_subject, $mail_body, $headers, $this->attachments);
                 }
-                
+
                 if ($record_entries) {
-                    Entries::post( $newEntry );
+                    Entries::post($newEntry);
                 }
-    
-                $this->ExternalServiceHandler->handle($newEntry);       
+
+                $this->ExternalServiceHandler->handle($newEntry);
                 $this->attempt_success($template);
             }
         } else {
@@ -469,11 +466,8 @@ class Email {
 
             if ($record_entries) {
 
-                Entries::post( $newEntry );
-
+                Entries::post($newEntry);
             }
-
-
         }
     }
 }

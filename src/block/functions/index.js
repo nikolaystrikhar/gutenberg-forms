@@ -1,5 +1,5 @@
 import { strip_tags, extract_id } from "../misc/helper";
-import { each, has, omit, isEqual, clone, assign, isEmpty, get, map } from "lodash";
+import { each, has, omit, isEqual, clone, assign, isEmpty, get, map, isArray, toString } from "lodash";
 
 import formStepSave from "../../blocks/form-step/save";
 import formStepEdit from "../../blocks/form-step/edit";
@@ -550,5 +550,25 @@ export function getGlobalMessages() {
 	}));
 
 	return defaultValidationMessages;
+
+}
+
+// will get post url from the post id from the cwpGlobal variable
+
+export function getPostUrl(id) {
+
+	const posts = get(window, 'cwpGlobal.cwp-cpt-forms');
+	const filteredPost = isArray(posts) ? posts.filter(post => isEqual(toString(post.ID), id)) : false;
+
+	const requiredPost = isArray(filteredPost) ? filteredPost[0] : false;
+
+	if (!requiredPost) {
+		return '';
+	} else {
+		const url = get(requiredPost, 'post_edit_url');
+		const editUrl = url.concat("&action=edit");
+		return editUrl;
+	}
+
 
 }

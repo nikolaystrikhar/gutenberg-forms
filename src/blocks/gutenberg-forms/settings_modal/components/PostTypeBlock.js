@@ -6,20 +6,19 @@ const { replaceBlock } = wp.data.dispatch("core/block-editor");
 
 function PostTypeBlock(props) {
 
-    const { form: { post_title, post_content, ID } } = props;
-
-    const form_short_code = `[gutenberg_form id="${ID}"]`
+    const { form: { post_title, ID } } = props;
 
     const apply_template = () => {
         replaceBlock(
             props.clientId,
             createBlock(
-                'core/shortcode',
+                'cwp/reusable-form',
                 {
-                    text: form_short_code
+                    formId: ID.toString()
                 }
             )
         );
+
         props.onSelect();
     }
 

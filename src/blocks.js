@@ -39,3 +39,4 @@ import './blocks/text/index.js';
 import './blocks/website/index.js';
 import './blocks/yes-no/index.js';
 import './blocks/file_upload/index.js';
+import './blocks/reusable_forms/index.js';

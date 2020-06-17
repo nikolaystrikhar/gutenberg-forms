@@ -5,6 +5,10 @@
 
 @include settings_modal();
 
+.cwp-gutenberg-forms-reusable {
+	@include reusable_form();
+}
+
 .cwp-fields-plotter {
 	& .components-notice {
 		margin: 10px 0px !important;

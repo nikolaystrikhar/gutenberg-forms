@@ -118,6 +118,7 @@ function edit(props) {
 		}
 
 		getRootData();
+
 	}, []);
 
 	useEffect(() => getRootData(), [props]);
