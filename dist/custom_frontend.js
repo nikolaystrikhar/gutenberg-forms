@@ -1,4 +1,3 @@
-
 jQuery(function ($) {
 	/*!
 	 * Pikaday
@@ -15,7 +14,7 @@ jQuery(function ($) {
 			// Load moment.js as an optional dependency
 			try {
 				moment = require("moment");
-			} catch (e) { }
+			} catch (e) {}
 			module.exports = factory(moment);
 		} else if (typeof define === "function" && define.amd) {
 			// AMD. Register as an anonymous module.
@@ -24,7 +23,7 @@ jQuery(function ($) {
 				var id = "moment";
 				try {
 					moment = req(id);
-				} catch (e) { }
+				} catch (e) {}
 				return factory(moment);
 			});
 		} else {
@@ -100,7 +99,7 @@ jQuery(function ($) {
 					30,
 					31,
 					30,
-					31
+					31,
 				][month];
 			},
 			setToStartOfDay = function (date) {
@@ -270,7 +269,7 @@ jQuery(function ($) {
 						"September",
 						"October",
 						"November",
-						"December"
+						"December",
 					],
 					weekdays: [
 						"Sunday",
@@ -279,9 +278,9 @@ jQuery(function ($) {
 						"Wednesday",
 						"Thursday",
 						"Friday",
-						"Saturday"
+						"Saturday",
 					],
-					weekdaysShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"]
+					weekdaysShort: ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"],
 				},
 
 				// Theme Classname
@@ -297,7 +296,7 @@ jQuery(function ($) {
 				onDraw: null,
 
 				// Enable keyboard input
-				keyboardInput: true
+				keyboardInput: true,
 			},
 			/**
 			 * templating functions to abstract HTML rendering
@@ -396,10 +395,10 @@ jQuery(function ($) {
 				for (i = 0; i < 7; i++) {
 					arr.push(
 						'<th scope="col"><abbr title="' +
-						renderDayName(opts, i) +
-						'">' +
-						renderDayName(opts, i, true) +
-						"</abbr></th>"
+							renderDayName(opts, i) +
+							'">' +
+							renderDayName(opts, i, true) +
+							"</abbr></th>"
 					);
 				}
 				return (
@@ -427,16 +426,16 @@ jQuery(function ($) {
 				for (arr = [], i = 0; i < 12; i++) {
 					arr.push(
 						'<option value="' +
-						(year === refYear ? i - c : 12 + i - c) +
-						'"' +
-						(i === month ? ' selected="selected"' : "") +
-						((isMinYear && i < opts.minMonth) ||
+							(year === refYear ? i - c : 12 + i - c) +
+							'"' +
+							(i === month ? ' selected="selected"' : "") +
+							((isMinYear && i < opts.minMonth) ||
 							(isMaxYear && i > opts.maxMonth)
-							? 'disabled="disabled"'
-							: "") +
-						">" +
-						opts.i18n.months[i] +
-						"</option>"
+								? 'disabled="disabled"'
+								: "") +
+							">" +
+							opts.i18n.months[i] +
+							"</option>"
 					);
 				}
 
@@ -459,12 +458,12 @@ jQuery(function ($) {
 					if (i >= opts.minYear) {
 						arr.push(
 							'<option value="' +
-							i +
-							'"' +
-							(i === year ? ' selected="selected"' : "") +
-							">" +
-							i +
-							"</option>"
+								i +
+								'"' +
+								(i === year ? ' selected="selected"' : "") +
+								">" +
+								i +
+								"</option>"
 						);
 					}
 				}
@@ -906,10 +905,10 @@ jQuery(function ($) {
 
 				if (this.calendars) {
 					var firstVisibleDate = new Date(
-						this.calendars[0].year,
-						this.calendars[0].month,
-						1
-					),
+							this.calendars[0].year,
+							this.calendars[0].month,
+							1
+						),
 						lastVisibleDate = new Date(
 							this.calendars[this.calendars.length - 1].year,
 							this.calendars[this.calendars.length - 1].month,
@@ -928,8 +927,8 @@ jQuery(function ($) {
 					this.calendars = [
 						{
 							month: date.getMonth(),
-							year: date.getFullYear()
-						}
+							year: date.getFullYear(),
+						},
 					];
 					if (this._o.mainCalendar === "right") {
 						this.calendars[0].month += 1 - this._o.numberOfMonths;
@@ -959,7 +958,7 @@ jQuery(function ($) {
 				for (var c = 1; c < this._o.numberOfMonths; c++) {
 					this.calendars[c] = adjustCalendar({
 						month: this.calendars[0].month + c,
-						year: this.calendars[0].year
+						year: this.calendars[0].year,
 					});
 				}
 				this.draw();
@@ -1275,7 +1274,7 @@ jQuery(function ($) {
 						showDaysInNextAndPreviousMonths:
 							opts.showDaysInNextAndPreviousMonths,
 						enableSelectionDaysInNextAndPreviousMonths:
-							opts.enableSelectionDaysInNextAndPreviousMonths
+							opts.enableSelectionDaysInNextAndPreviousMonths,
 					};
 
 					if (opts.pickWholeWeek && isSelected) {
@@ -1359,7 +1358,7 @@ jQuery(function ($) {
 				if (this.el.parentNode) {
 					this.el.parentNode.removeChild(this.el);
 				}
-			}
+			},
 		};
 
 		$(".cwp-form form").each(function () {
@@ -1385,7 +1384,7 @@ jQuery(function ($) {
 							} else {
 								return `${year}/${month}/${day}`;
 							}
-						}
+						},
 					});
 					datePicker.setMinDate(new Date("Thu Jan 1 1920"));
 				});
@@ -1412,7 +1411,7 @@ jQuery(function ($) {
 				fieldName: field_id[0],
 				field: field_id[field_id.length - 1],
 				operand: cond.condition,
-				value: cond.value
+				value: cond.value,
 			};
 		}
 
@@ -1444,9 +1443,7 @@ jQuery(function ($) {
 				condition["elem"] = $(this);
 
 				t.fields.each(function () {
-					let target = $(this)
-						.attr("id")
-						.startsWith(condition["field"]);
+					let target = $(this).attr("id").startsWith(condition["field"]);
 					if (
 						target &&
 						t.buildCondition(
@@ -1463,9 +1460,7 @@ jQuery(function ($) {
 
 				t.fields.each(function () {
 					$(this).on("input", function () {
-						let target = $(this)
-							.attr("id")
-							.startsWith(condition["field"]);
+						let target = $(this).attr("id").startsWith(condition["field"]);
 
 						let fieldValue;
 
@@ -1476,8 +1471,10 @@ jQuery(function ($) {
 								.each(function () {
 									fieldValue.push($(this).val());
 								});
-						} else if ($(this).attr('type') === 'file') {
-							fieldValue = $(this).val().replace(/C:\\fakepath\\/i, '');
+						} else if ($(this).attr("type") === "file") {
+							fieldValue = $(this)
+								.val()
+								.replace(/C:\\fakepath\\/i, "");
 						} else {
 							fieldValue = $(this).val();
 						}
@@ -1512,28 +1509,28 @@ jQuery(function ($) {
 	class MultiStepForm {
 		constructor(target) {
 			this.target = $(target);
-			this.steps = this.target.find(".cwp-form-step")
+			this.steps = this.target.find(".cwp-form-step");
 
 			this.init();
 		}
 
 		init() {
 			// displaying the first step by default;
-			this.steps.eq(0).addClass('cwp-active-step');
+			this.steps.eq(0).addClass("cwp-active-step");
 			this.handleEvents();
 		}
 
 		checkValidity(fields) {
-
 			let validity = true;
 
 			fields.each(function () {
-				const _is_field_valid_ = $(this).find('[data-cwp-field]')[0].checkValidity();
+				const _is_field_valid_ = $(this)
+					.find("[data-cwp-field]")[0]
+					.checkValidity();
 
 				if (!_is_field_valid_) {
 					validity = false;
 				}
-
 			});
 
 			return validity;
@@ -1541,7 +1538,7 @@ jQuery(function ($) {
 
 		reportValidity(fields) {
 			fields.each(function () {
-				$(this).find('[data-cwp-field]')[0].reportValidity();
+				$(this).find("[data-cwp-field]")[0].reportValidity();
 			});
 		}
 
@@ -1550,15 +1547,12 @@ jQuery(function ($) {
 			const t = this;
 
 			steps.each(function () {
-
 				const self = $(this);
-				const triggers_in_this_step = $(this).find('.multistep-trigger');
-				const fields_in_this_step = $(this).find('.cwp-field');
-
-
+				const triggers_in_this_step = $(this).find(".multistep-trigger");
+				const fields_in_this_step = $(this).find(".cwp-field");
 
 				triggers_in_this_step.each(function () {
-					const trigger = $(this).data('trigger');
+					const trigger = $(this).data("trigger");
 
 					$(this).click(function (e) {
 						e.preventDefault();
@@ -1568,19 +1562,95 @@ jQuery(function ($) {
 						}
 
 						if (trigger === "next" && t.checkValidity(fields_in_this_step)) {
-							t.steps.removeClass('cwp-active-step');
-							self.next().addClass('cwp-active-step');
+							t.steps.removeClass("cwp-active-step");
+							self.next().addClass("cwp-active-step");
 						} else if (trigger === "previous") {
-							t.steps.removeClass('cwp-active-step');
-							self.prev().addClass('cwp-active-step');
+							t.steps.removeClass("cwp-active-step");
+							self.prev().addClass("cwp-active-step");
 						}
 					});
-
-				})
-
-
+				});
 			});
+		}
+	}
 
+	class AutoPopulate {
+		constructor(form) {
+			this.form = form;
+			this.populate();
+		}
+
+		getParameterByName(name) {
+			let url = window.location.href;
+			name = name.replace(/[\[\]]/g, "\\$&");
+			var regex = new RegExp("[?&]" + name + "(=([^&#]*)|&|#|$)"),
+				results = regex.exec(url);
+			if (!results) return null;
+			if (!results[2]) return "";
+			return decodeURIComponent(results[2].replace(/\+/g, " "));
+		}
+
+		decodeCheckboxName(name) {
+			let separated = name.split("__");
+			let uriWithGroup = separated[1];
+			const withoutGroup = uriWithGroup.split("[]")[0];
+
+			return withoutGroup;
+		}
+
+		getDecodedFieldId(name, type) {
+			let value;
+
+			if (type === "checkbox") {
+				value = this.decodeCheckboxName(name);
+			} else {
+				value = name.split("__")[1];
+			}
+
+			const decoded = window.atob(decodeURIComponent(value));
+			const params = decoded.split("-");
+			const field_id = params[params.length - 1];
+
+			return field_id;
+		}
+
+		populate() {
+			const fields = this.form.find("[data-cwp-field]");
+			const t = this;
+			fields.each(function () {
+				const type = $(this).attr("type");
+
+				const name = $(this).attr("name");
+				const field_id = t.getDecodedFieldId(name, type);
+				const queryValue = t.getParameterByName(field_id);
+
+				if (type === "checkbox" && field_id !== null) {
+					$(this)
+						.parents(".cwp-checkbox")
+						.find(`input[type="checkbox"]`)
+						.each(() => {
+							const value = $(this).val();
+							const checkboxesValues = queryValue.split(",");
+
+							if (checkboxesValues.includes(value)) {
+								$(this).attr("checked", true);
+							}
+						});
+				} else if (type === "radio" && field_id !== null) {
+					$(this)
+						.parents(".cwp-radio")
+						.find(`input[type="radio"]`)
+						.each(() => {
+							const value = $(this).val();
+
+							if (value === queryValue) {
+								$(this).attr("checked", true);
+							}
+						});
+				} else if (field_id !== null) {
+					$(this).val(queryValue);
+				}
+			});
 		}
 	}
 
@@ -1601,7 +1671,7 @@ jQuery(function ($) {
 	function getMapObject(fields, data) {
 		let res = {};
 
-		fields.forEach(f => {
+		fields.forEach((f) => {
 			let breaked = f.split("-");
 
 			let fieldName;
@@ -1627,24 +1697,22 @@ jQuery(function ($) {
 			let formula = $(this).attr("data-cwp-calculation");
 			// let fields = formula.match(/[(number)\-\d\w]+/g);
 			const f = formula.match(/[{{]+[\/number\-\d\w]+[}}]+/g);
-			const fields = f.map(v => v.substring(2, v.length - 2));
-			const deciPlaces = Number($(this).data('deci'));
+			const fields = f.map((v) => v.substring(2, v.length - 2));
+			const deciPlaces = Number($(this).data("deci"));
 
 			const self = $(this),
 				t = this;
 
 			form.find("[data-cwp-field]").each(function () {
 				$(this).on("input", function () {
-					const target = $(this)
-						.attr("id")
-						.substring(0, 6);
+					const target = $(this).attr("id").substring(0, 6);
 					var replace = `number-${target}`;
 
 					if (fields.includes(replace)) {
 						self.attr(`data-${replace}`, $(this).val());
 					}
 
-					fields.forEach(field => {
+					fields.forEach((field) => {
 						let expression = formula;
 						let regExp = getRegex(fields);
 
@@ -1656,12 +1724,11 @@ jQuery(function ($) {
 
 						const result = eval(expression).toFixed(deciPlaces);
 
-
 						self.find("input").val(result);
 						self.find(".cwp-calc-result").html(result);
 					});
 				});
-				fields.forEach(field => {
+				fields.forEach((field) => {
 					let expression = formula;
 					let regExp = getRegex(fields);
 
@@ -1673,14 +1740,11 @@ jQuery(function ($) {
 
 					const result = eval(expression).toFixed(deciPlaces);
 
-
 					self.find("input").val(result);
 					self.find(".cwp-calc-result").html(result);
 				});
 
-				const target = $(this)
-					.attr("id")
-					.substring(0, 6);
+				const target = $(this).attr("id").substring(0, 6);
 				var replace = `number-${target}`;
 
 				if (fields.includes(replace)) {
@@ -1693,42 +1757,35 @@ jQuery(function ($) {
 		});
 	}
 
-
-
 	$().ready(function () {
+		$(".cwp-form").each(function () {
+			const populator = new AutoPopulate($(this));
+		});
 
-		$('.cwp-form').each(function () {
+		$(".cwp-form").each(function () {
+			let formRoot = $(this).find("form");
 
-			let formRoot = $(this).find('form');
-
-			let resubmit_btn = $(this).find('.cwp-add_another_submission button')
+			let resubmit_btn = $(this).find(".cwp-add_another_submission button");
 
 			if (resubmit_btn.length) {
-
 				resubmit_btn.click(function () {
-					$(this).parent().parent().parent().css('display', 'none');
-					formRoot.css('display', 'block');
+					$(this).parent().parent().parent().css("display", "none");
+					formRoot.css("display", "block");
 				});
-
 			}
-
 		});
 
 		$(".cwp-form form").each(function () {
+			// for auto population
+
 			$(this)
 				.find(".cwp-yes-no input[type='checkbox']")
 				.change(function () {
 					if ($(this).prop("checked")) {
 						$(this).val("yes");
-						$(this)
-							.parent()
-							.find('input[type="hidden"]')
-							.val("yes");
+						$(this).parent().find('input[type="hidden"]').val("yes");
 					} else {
-						$(this)
-							.parent()
-							.find('input[type="hidden"]')
-							.val("no");
+						$(this).parent().find('input[type="hidden"]').val("no");
 						$(this).val("no");
 					}
 				});
@@ -1739,11 +1796,7 @@ jQuery(function ($) {
 				);
 
 				required_checkboxes.each(function (index) {
-					if (
-						$(this)
-							.find("input:checkbox")
-							.filter(":checked").length < 1
-					) {
+					if ($(this).find("input:checkbox").filter(":checked").length < 1) {
 						e.preventDefault();
 
 						let errMessage = $(this).data("errors");
@@ -1756,30 +1809,24 @@ jQuery(function ($) {
                       </div>
 					  <div>
 					  ${
-								errMessage.empty.trim().length === 0
-									? "Please select atleast one checkbox!"
-									: errMessage.empty
-								}
+							errMessage.empty.trim().length === 0
+								? "Please select atleast one checkbox!"
+								: errMessage.empty
+						}
                         
                       </div>
                     </div>
                   `);
 						}
 					} else if ($(this).find(".cwp-warning").length) {
-						$(this)
-							.find(".cwp-warning")
-							.remove();
+						$(this).find(".cwp-warning").remove();
 					}
 				});
 
 				let required_radios = $(this).find(".cwp-radio-set.required-radio");
 
 				required_radios.each(function (index) {
-					if (
-						$(this)
-							.find("input:radio")
-							.filter(":checked").length < 1
-					) {
+					if ($(this).find("input:radio").filter(":checked").length < 1) {
 						let errMessage = $(this).data("errors");
 
 						e.preventDefault();
@@ -1792,18 +1839,16 @@ jQuery(function ($) {
                         </div>
                         <div>
 						${
-								errMessage.empty.trim().length === 0
-									? "Please select radio!"
-									: errMessage.empty
-								}
+							errMessage.empty.trim().length === 0
+								? "Please select radio!"
+								: errMessage.empty
+						}
                         </div>
                       </div>
                     `);
 						}
 					} else if ($(this).find(".cwp-warning").length) {
-						$(this)
-							.find(".cwp-warning")
-							.remove();
+						$(this).find(".cwp-warning").remove();
 					}
 				});
 			});
@@ -1813,11 +1858,11 @@ jQuery(function ($) {
 			let condition = new Conditional(this);
 			const self = this;
 
-			this.querySelectorAll(".cwp-reset_btn").forEach(resetBtn => {
-				resetBtn.onclick = e => {
+			this.querySelectorAll(".cwp-reset_btn").forEach((resetBtn) => {
+				resetBtn.onclick = (e) => {
 					e.preventDefault();
 
-					self.querySelectorAll("[data-cwp-field]").forEach(v => {
+					self.querySelectorAll("[data-cwp-field]").forEach((v) => {
 						v.value = "";
 					});
 				};
@@ -1844,19 +1889,18 @@ jQuery(function ($) {
 			}
 		});
 
-		$('.cwp-form').each(function () {
-			if ($(this).data('formtype') === 'multiStep') {
+		$(".cwp-form").each(function () {
+			if ($(this).data("formtype") === "multiStep") {
 				const multiStepForm = new MultiStepForm(this);
 			}
-		})
+		});
 	});
 });
-
 
 document.addEventListener("DOMContentLoaded", function () {
 	var elements = document.querySelectorAll(".cwp-form [data-cwp-field]");
 
-	elements.forEach(elem => {
+	elements.forEach((elem) => {
 		elem.oninvalid = function (e) {
 			if (e.target.dataset.errors) {
 				const validityText = JSON.parse(e.target.dataset.errors);

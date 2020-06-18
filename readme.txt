@@ -92,6 +92,11 @@ You may also get involved with the development via Github:
 == Changelog ==
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
+= 1.5.0 = () 
+- Added: Dynamically populate field values
+- Added: Server side preview for saved forms
+- Fixed: Bugs
+
 = 1.4.0 = (03 June 2020)
 - Added: Mailpoet Integration ( Separate addon )
 - Fixed: Bugs

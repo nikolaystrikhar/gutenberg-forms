@@ -179,7 +179,6 @@ class Email
     }
 
     // check if the post method is invoked by the gutenberg form block
-
     private function is_gutenberg_form_submission( $post ) {
 
         return array_key_exists( 'gf_form_id', $post );

@@ -6,7 +6,6 @@
 
 [![Gutenberg Forms, is the Next Generation WordPress Form Builder](https://ps.w.org/forms-gutenberg/assets/banner-1544x500.png?rev=2281577)](https://wordpress.org/plugins/forms-gutenberg/)
 
-
 ## Description
 
 **WordPress Form Builder Plugin - Gutenberg Forms**
@@ -19,22 +18,22 @@ Gutenberg Forms adds a Form Block in Gutenberg and all the form fields are child
 
 ## Feature Highlights
 
-The following are some of the main features, but there's more which you need to checkout by installing the plugin. 
+The following are some of the main features, but there's more which you need to checkout by installing the plugin.
 
-* No Bulky Form Builder - Build Forms Directly in Gutenberg Editor
-* Easy Form Layouts using builtin Form Columns Block
-* Create Multi-Step / Multi-Page Forms Easily
-* Conditional Logic - Show/hide fields conditionally
-* Form Entries - Form Entries are recorded in the database and accessible via WordPress admin.
-* Use Forms Anywhere - You can create standalone forms using Gutenberg and use it anywhere using a shortcode. That Gutenberg Forms compatible with any WordPress page builder.
-* Form Templates - We have started creating useful form templates to let you get started building your desired form faster.
-* Calculator Forms - Create basic or complex calculations
-* Spam Protection - Google reCaptcha Integration
-* Email Notification Builder - Create a custom email notification content
-* Form Styles - Form & Field blocks come with different styles. (you can add yours as well)
-* Responsive Forms - The forms you create are fully responsive.
-* Import/Export Forms - Do it the same way you do with any Gutenberg block
-* More features you will find out while using the plugin
+- No Bulky Form Builder - Build Forms Directly in Gutenberg Editor
+- Easy Form Layouts using builtin Form Columns Block
+- Create Multi-Step / Multi-Page Forms Easily
+- Conditional Logic - Show/hide fields conditionally
+- Form Entries - Form Entries are recorded in the database and accessible via WordPress admin.
+- Use Forms Anywhere - You can create standalone forms using Gutenberg and use it anywhere using a shortcode. That Gutenberg Forms compatible with any WordPress page builder.
+- Form Templates - We have started creating useful form templates to let you get started building your desired form faster.
+- Calculator Forms - Create basic or complex calculations
+- Spam Protection - Google reCaptcha Integration
+- Email Notification Builder - Create a custom email notification content
+- Form Styles - Form & Field blocks come with different styles. (you can add yours as well)
+- Responsive Forms - The forms you create are fully responsive.
+- Import/Export Forms - Do it the same way you do with any Gutenberg block
+- More features you will find out while using the plugin
 
 ## Add-ons & Integrations
 
@@ -76,17 +75,24 @@ We appreciate all contributions and don't want a wall of rules to get in the way
 3. Provide ideas, feedback, mockups, and suggestions
 4. Join the conversations
 
-
 ## Changelog
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
+= 1.5.0 = ()
+
+- Added: Dynamically populate field values
+- Added: Server side preview for saved forms
+- Fixed: Bugs
+
 = 1.4.0 = (03 June 2020)
+
 - Added: Mailpoet Integration ( Separate addon )
 - Fixed: Bugs
 - Improved: Code
 
 = 1.3.0 = (28 Apr 2020)
+
 - Improved: Email Notification Builder is moved in the sidebar
 - Added: Admin Page Using Gutenberg Components
 - Improved: Google ReCaptcha settings added in admin page
@@ -96,15 +102,17 @@ For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 - Fixed: File Upload Bugs
 - Added: Form Actions - Now you can enable/disable any action like form entries, email notification etc
 
-= 1.2.0 = (11 Apr 2020) 
+= 1.2.0 = (11 Apr 2020)
+
 - New: Now form entries are recorded in database
 - New: forms CPT - Create forms and use anywhere using shortcode
-- New: Templates Library - Start creating forms quickly with ready to use templates    
+- New: Templates Library - Start creating forms quickly with ready to use templates
 - Added: Bulk Add Option for select, radio and checkbox fields
 - Fixed: Bugs
 - Improved: Code
 
 = 1.1.0 = (28 Mar 2020)
+
 - Added: Multi Step feature
 - Added: File Upload Field
 - Fixed: Bugs
@@ -119,7 +127,7 @@ Thanks to All the Contributors: https://github.com/munirkamal/gutenberg-forms/gr
 = 1.0.9 = (21 Mar 2020)
 
 - Fixed: Bugs
-- Improved: Code 
+- Improved: Code
 
 = 1.0.8 = (7 Mar 2020)
 

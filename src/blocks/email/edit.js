@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from 'react';
+import React, { useEffect, Fragment } from "react";
 import {
 	FormToggle,
 	Toolbar,
@@ -6,7 +6,7 @@ import {
 	PanelBody,
 	TextControl,
 	Icon,
-} from '@wordpress/components';
+} from "@wordpress/components";
 
 import {
 	getFieldName,
@@ -14,22 +14,21 @@ import {
 	getEncodedData,
 	extract_admin_id,
 	get_admin_id,
-} from '../../block/misc/helper';
+} from "../../block/misc/helper";
 
-import { clone, set, assign } from 'lodash';
-import { getRootMessages, detect_similar_forms } from '../../block/functions/index';
-import ConditionalLogic from '../../block/components/condition';
-import { TEXT_DOMAIN } from '../../block/constants';
+import { clone, set, assign } from "lodash";
+import {
+	getRootMessages,
+	detect_similar_forms,
+} from "../../block/functions/index";
+import ConditionalLogic from "../../block/components/condition";
+import { TEXT_DOMAIN } from "../../block/constants";
 const { __ } = wp.i18n;
 
-const {
-	InspectorControls,
-	BlockControls,
-	RichText,
-} = wp.blockEditor;
+const { InspectorControls, BlockControls, RichText } = wp.blockEditor;
 
 function edit(props) {
-	const handleChange = e => {
+	const handleChange = (e) => {
 		const email = e.target.value;
 
 		props.setAttributes({ email });
@@ -41,7 +40,7 @@ function edit(props) {
 		props.setAttributes({ isRequired: !isRequired });
 	};
 
-	const handleLabel = label => {
+	const handleLabel = (label) => {
 		props.setAttributes({ label });
 	};
 
@@ -56,42 +55,49 @@ function edit(props) {
 		messages,
 		condition,
 		enableCondition,
-		adminId
+		adminId,
 	} = props.attributes;
 
 	const getRootData = () => {
-		if (field_name === '' || detect_similar_forms(props.clientId)) {
-
-
-			const newFieldName = getFieldName('email', props.clientId);
+		if (field_name === "" || detect_similar_forms(props.clientId)) {
+			const newFieldName = getFieldName("email", props.clientId);
 
 			props.setAttributes({
 				field_name: newFieldName,
 				adminId: {
-					value: extract_admin_id(newFieldName, 'email'),
-					default: extract_admin_id(newFieldName, 'email')
-				}
+					value: extract_admin_id(newFieldName, "email"),
+					default: extract_admin_id(newFieldName, "email"),
+				},
 			});
 
 			props.setAttributes({
 				id:
 					props.clientId +
-					'__' +
-					getEncodedData('email', props.clientId, isRequired, get_admin_id(adminId)),
+					"__" +
+					getEncodedData(
+						"email",
+						props.clientId,
+						isRequired,
+						get_admin_id(adminId)
+					),
 			});
-		} else if (field_name !== '') {
+		} else if (field_name !== "") {
 			props.setAttributes({
 				id:
 					extract_id(field_name) +
-					'__' +
-					getEncodedData('email', extract_id(field_name), isRequired, get_admin_id(adminId)),
+					"__" +
+					getEncodedData(
+						"email",
+						extract_id(field_name),
+						isRequired,
+						get_admin_id(adminId)
+					),
 			});
 		}
-
 	};
 
 	useEffect(() => {
-		const rootMessages = getRootMessages(props.clientId, 'email');
+		const rootMessages = getRootMessages(props.clientId, "email");
 
 		if (rootMessages) {
 			const newMessages = clone(messages);
@@ -118,16 +124,15 @@ function edit(props) {
 		props.setAttributes({
 			adminId: {
 				...adminId,
-				value: id.replace(/\s|-/g, "_")
-			}
-		})
-	}
+				value: id.replace(/\s|-/g, "_"),
+			},
+		});
+	};
 
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
-				<PanelBody title={__('Field Settings', TEXT_DOMAIN)} initialOpen={true}>
-
+				<PanelBody title={__("Field Settings", TEXT_DOMAIN)} initialOpen={true}>
 					<div className="cwp-option">
 						<TextControl
 							placeholder={adminId.default}
@@ -139,7 +144,7 @@ function edit(props) {
 
 					{!enableCondition ? (
 						<PanelRow>
-							<h3 className="cwp-heading">{__('Required', TEXT_DOMAIN)}</h3>
+							<h3 className="cwp-heading">{__("Required", TEXT_DOMAIN)}</h3>
 							<FormToggle
 								label="Required"
 								checked={isRequired}
@@ -147,18 +152,24 @@ function edit(props) {
 							/>
 						</PanelRow>
 					) : (
-							<div className="cwp-option">
-								<p>
-									<Icon icon="info" /> {__('You cannot set a conditional field required!', TEXT_DOMAIN)}
-								</p>
-							</div>
-						)}
+						<div className="cwp-option">
+							<p>
+								<Icon icon="info" />{" "}
+								{__(
+									"You cannot set a conditional field required!",
+									TEXT_DOMAIN
+								)}
+							</p>
+						</div>
+					)}
 					{isRequired && (
 						<Fragment>
 							<div className="cwp-option">
-								<h3 className="cwp-heading">{__('Required Text', TEXT_DOMAIN)}</h3>
+								<h3 className="cwp-heading">
+									{__("Required Text", TEXT_DOMAIN)}
+								</h3>
 								<TextControl
-									onChange={label =>
+									onChange={(label) =>
 										props.setAttributes({ requiredLabel: label })
 									}
 									value={requiredLabel}
@@ -166,32 +177,36 @@ function edit(props) {
 							</div>
 						</Fragment>
 					)}
-
 				</PanelBody>
-				<PanelBody title={__('Messages', TEXT_DOMAIN)}>
+				<PanelBody title={__("Messages", TEXT_DOMAIN)}>
 					{isRequired && (
 						<div className="cwp-option">
-							<h3 className="cwp-heading">{__('Required Error', TEXT_DOMAIN)}</h3>
+							<h3 className="cwp-heading">
+								{__("Required Error", TEXT_DOMAIN)}
+							</h3>
 							<TextControl
-								onChange={label => setMessages('empty', label)}
+								onChange={(label) => setMessages("empty", label)}
 								value={empty}
 							/>
 						</div>
 					)}
 					<div className="cwp-option">
-						<h3 className="cwp-heading">{__('Invalid Email Error', TEXT_DOMAIN)}</h3>
+						<h3 className="cwp-heading">
+							{__("Invalid Email Error", TEXT_DOMAIN)}
+						</h3>
 						<TextControl
-							onChange={v => setMessages('invalidEmail', v)}
+							onChange={(v) => setMessages("invalidEmail", v)}
 							value={invalidEmail}
 						/>
 					</div>
 					<div className="cwp-option">
 						<p>
-							<Icon icon="info" /> {__('Use {{value}} to insert field value!', TEXT_DOMAIN)}
+							<Icon icon="info" />{" "}
+							{__("Use {{value}} to insert field value!", TEXT_DOMAIN)}
 						</p>
 					</div>
 				</PanelBody>
-				<PanelBody title={__('Condition', TEXT_DOMAIN)}>
+				<PanelBody title={__("Condition", TEXT_DOMAIN)}>
 					<ConditionalLogic
 						condition={condition}
 						set={props.setAttributes}
@@ -205,14 +220,19 @@ function edit(props) {
 		<div className={`cwp-email cwp-field ${props.className}`}>
 			{!!props.isSelected && !enableCondition && (
 				<div className="cwp-required">
-					<h3>{__('Required', TEXT_DOMAIN)}</h3>
+					<h3>{__("Required", TEXT_DOMAIN)}</h3>
 					<FormToggle checked={isRequired} onChange={handleRequired} />
 				</div>
 			)}
 
 			<div className="cwp-field-set">
 				<div className="cwp-label-wrap">
-					<RichText placeholder={__("Add a label", TEXT_DOMAIN)} tag="label" value={label} onChange={handleLabel} />
+					<RichText
+						placeholder={__("Add a label", TEXT_DOMAIN)}
+						tag="label"
+						value={label}
+						onChange={handleLabel}
+					/>
 					{!props.isSelected && isRequired && !enableCondition && (
 						<div className="cwp-required cwp-noticed">
 							<h3>{requiredLabel}</h3>
