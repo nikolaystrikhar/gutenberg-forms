@@ -73,6 +73,7 @@ function gutenberg_forms_cwp_block_assets()
 			'editor_script' => 'gutenberg_forms-cwp-block-js',
 			'script'		=> 'gutenberg-forms-custom-js',
 			'editor_style'  => 'gutenberg_forms-cwp-block-editor-css',
+			
 		)
 	);
 }

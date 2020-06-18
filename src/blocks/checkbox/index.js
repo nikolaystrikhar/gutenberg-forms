@@ -1,14 +1,12 @@
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
-
-import { fieldParents, myAttrs } from '../../constants.js';
-import { getFieldTransform } from '../../block/functions';
-import checkboxEdit from './edit.js';
-import checkboxSave from './save.js';
-
+import { fieldParents, myAttrs } from "../../constants.js";
+import { getFieldTransform } from "../../block/functions";
+import checkboxEdit from "./edit.js";
+import checkboxSave from "./save.js";
 
 registerBlockType("cwp/checkbox", {
-	title: __("checkbox"),
+	title: __("Checkbox"),
 	icon: "yes",
 	category: "common",
 	keywords: [__("gutenberg-forms"), __("forms"), __("checkbox")],
@@ -17,75 +15,74 @@ registerBlockType("cwp/checkbox", {
 	attributes: {
 		isRequired: {
 			type: "boolean",
-			default: false
+			default: false,
 		},
 		options: {
 			type: "array",
 			default: [
 				{
-					label: "Option 1"
-				}
-			]
+					label: "Option 1",
+				},
+			],
 		},
 		enableCondition: {
 			type: "boolean",
-			default: false
+			default: false,
 		},
 		label: {
 			type: "string",
-			default: "Choose One"
+			default: "Choose One",
 		},
 		id: {
 			type: "string",
-			default: ""
+			default: "",
 		},
 		field_name: {
 			type: "string",
-			default: ""
+			default: "",
 		},
 		messages: {
 			type: "object",
 			default: {
-				empty: "Please select atleast one checkbox!"
-			}
+				empty: "Please select atleast one checkbox!",
+			},
 		},
 		condition: {
 			type: "object",
 			default: {
 				field: null,
 				condition: "===",
-				value: ""
-			}
+				value: "",
+			},
 		},
 		requiredLabel: {
 			type: "string",
-			default: "*"
+			default: "*",
 		},
 		fieldStyle: {
 			type: "string",
-			default: "block"
+			default: "block",
 		},
 		bulkAdd: {
 			type: "boolean",
-			default: false
+			default: false,
 		},
 		adminId: {
 			type: "object",
 			default: {
 				default: "",
-				value: ""
-			}
-		}
+				value: "",
+			},
+		},
 	},
 	transforms: {
 		from: [
 			{
 				type: "block",
-				blocks: myAttrs.map(block => "cwp/".concat(block)),
-				transform: a => getFieldTransform(a, "checkbox")
-			}
-		]
+				blocks: myAttrs.map((block) => "cwp/".concat(block)),
+				transform: (a) => getFieldTransform(a, "checkbox"),
+			},
+		],
 	},
-	parent: fieldParents
+	parent: fieldParents,
 });
-

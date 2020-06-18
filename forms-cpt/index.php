@@ -14,6 +14,7 @@ class Form
 
     public static function register_server_side_rendering()
     {
+
         register_block_type(
             'cwp/gutenberg-forms-preview',
             array(
@@ -24,7 +25,7 @@ class Form
 
                     $post_id = $block_attributes['post_id'];
 
-                    if (empty($post_id)) {
+                    if (empty($post_id) or empty(get_post($post_id))) {
                         return "<p>Form not found!</p>";
                     } else {
 

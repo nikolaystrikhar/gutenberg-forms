@@ -178,6 +178,14 @@ class Email
         return false;
     }
 
+    // check if the post method is invoked by the gutenberg form block
+
+    private function is_gutenberg_form_submission( $post ) {
+
+        return array_key_exists( 'gf_form_id', $post );
+
+    }
+
     public function init()
     {
 
@@ -186,6 +194,10 @@ class Email
         $post = $_POST;
 
         $post_without_submit = array_remove_keys($_POST, ['submit']);
+
+        if (!$this->is_gutenberg_form_submission( $post )) {
+            return;
+        }
 
         if (count($_FILES) !== 0) {
             foreach ($_FILES as $file_id => $file_meta) {
@@ -202,7 +214,6 @@ class Email
 
 
             $f_DECODED = $this->validator->decode($field_type);
-
 
             $type = array_key_exists('type', $this->validator->decode($field_type)) ? $this->validator->decode($field_type)['type'] : "";
 
@@ -243,8 +254,6 @@ class Email
                 $ext = pathinfo($file_name, PATHINFO_EXTENSION);
 
                 $is_allowed = $this->validator->test_file_formats($ext, $parsed_alloweds);
-
-
 
                 if ($is_allowed) {
 

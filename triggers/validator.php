@@ -125,6 +125,8 @@
 
         public function decode($t) {
 
+
+
             $dV = explode('-', base64_decode(urldecode($t)));
 
             if (count($dV) === 1) {

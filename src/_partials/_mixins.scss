@@ -1,8 +1,6 @@
 @import "./variables";
 @import "./pre_mixins";
 
-
-
 @mixin normalize_button() {
 	border: none;
 	outline: none;
@@ -101,9 +99,6 @@
 
 @mixin checkbox-field($preview_type) {
 	@if $preview_type == "backend" {
-
-		
-
 		& .cwp-checkbox-option {
 			display: flex;
 			margin: 10px 0px;
@@ -128,7 +123,6 @@
 		& button {
 			margin: 0px 5px;
 		}
-		
 	} @else {
 		& label {
 			& .cwp-checkbox-image {
@@ -387,7 +381,6 @@
 	}
 }
 
-
 @mixin getSelectiveStyling($icon, $type) {
 	& input[type="#{$type}"] {
 		opacity: 0;
@@ -426,7 +419,6 @@
 }
 
 @mixin successMessage() {
-	
 	border-left: 2px solid green;
 	padding: 20px 20px;
 	background: #00800030;
@@ -437,8 +429,8 @@
 
 		& span {
 			display: flex;
-    		flex-direction: column;
-    		justify-content: center;
+			flex-direction: column;
+			justify-content: center;
 		}
 	}
 }
@@ -668,49 +660,64 @@
 }
 
 @mixin divider() {
-
 	& .divider {
-		display: table; 
-		font-size: 24px; 
-		text-align: center; 
-		width: 75%; 						/* divider width */
-		margin: 40px auto;	
+		display: table;
+		font-size: 24px;
+		text-align: center;
+		width: 75%; /* divider width */
+		margin: 40px auto;
 
 		& span {
-			display: table-cell; position: relative;
+			display: table-cell;
+			position: relative;
 			font-size: 16px;
 
 			&:first-child {
-				background-image: -webkit-gradient(linear, 0 0, 0 100%, from(transparent), to(#000));
-		background-image: -webkit-linear-gradient(180deg, transparent, #000);
-		background-image: -moz-linear-gradient(180deg, transparent, #000);
-		background-image: -o-linear-gradient(180deg, transparent, #000);
-		background-image: linear-gradient(90deg, transparent, #000);
+				background-image: -webkit-gradient(
+					linear,
+					0 0,
+					0 100%,
+					from(transparent),
+					to(#000)
+				);
+				background-image: -webkit-linear-gradient(180deg, transparent, #000);
+				background-image: -moz-linear-gradient(180deg, transparent, #000);
+				background-image: -o-linear-gradient(180deg, transparent, #000);
+				background-image: linear-gradient(90deg, transparent, #000);
 			}
 		}
 
-		& span:first-child, & span:last-child {
+		& span:first-child,
+		& span:last-child {
 			width: 50%;
-			top: 13px;							/* adjust vertical align */
-			-moz-background-size: 100% 2px; 	/* line width */
-			background-size: 100% 2px; 			/* line width */
+			top: 13px; /* adjust vertical align */
+			-moz-background-size: 100% 2px; /* line width */
+			background-size: 100% 2px; /* line width */
 			background-position: 0 0, 0 100%;
 			background-repeat: no-repeat;
 		}
 
 		& span:nth-child(2) {
-			color: #000; padding: 0px 5px; width: auto; white-space: nowrap;
+			color: #000;
+			padding: 0px 5px;
+			width: auto;
+			white-space: nowrap;
 		}
-		& span:last-child {				/* color changes in here */
-			background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#000), to(transparent));
+		& span:last-child {
+			/* color changes in here */
+			background-image: -webkit-gradient(
+				linear,
+				0 0,
+				0 100%,
+				from(#000),
+				to(transparent)
+			);
 			background-image: -webkit-linear-gradient(180deg, #000, transparent);
 			background-image: -moz-linear-gradient(180deg, #000, transparent);
 			background-image: -o-linear-gradient(180deg, #000, transparent);
 			background-image: linear-gradient(90deg, #000, transparent);
 		}
 	}
-
-
 }
 
 @mixin sidebar() {
@@ -721,14 +728,12 @@
 	border-right: 1px solid #eee;
 
 	& .sidebar__panel_main {
-
 		& button {
 			&.is-primary {
 				color: #fff !important;
 			}
 		}
 	}
-
 
 	& .cwp__view {
 		margin: 10px 0px;
@@ -737,7 +742,6 @@
 		& .center {
 			text-align: center;
 		}
-
 	}
 }
 
@@ -745,38 +749,35 @@
 	&::-webkit-scrollbar {
 		width: 5px;
 	}
-	  
+
 	&::-webkit-scrollbar-track {
-	background: transparent; 
+		background: transparent;
 	}
-	
+
 	&::-webkit-scrollbar-thumb {
-	background: transparent; 
+		background: transparent;
 	}
-	
+
 	&::-webkit-scrollbar-thumb:hover {
-	background: transparent; 
+		background: transparent;
 	}
 
 	&:hover {
-
 		&::-webkit-scrollbar-track {
-			background: #eee; 
+			background: #eee;
 		}
 
 		&::-webkit-scrollbar-thumb {
-			background: #ccc; 
+			background: #ccc;
 		}
-			
+
 		&::-webkit-scrollbar-thumb:hover {
-			background: #ccc; 
+			background: #ccc;
 		}
 	}
-
 }
 
 @mixin empty() {
-
 	& .placeholder {
 		width: 80%;
 		margin: auto;
@@ -790,7 +791,6 @@
 			width: 60%;
 			height: 100%;
 		}
-
 	}
 }
 
@@ -833,7 +833,6 @@
 			width: 100%;
 			position: relative;
 			padding: 20px;
-			
 
 			&.templates {
 				display: grid;
@@ -848,9 +847,7 @@
 						overflow-y: scroll;
 						@include scrollbar();
 					}
-
 				}
-
 			}
 
 			&.cpt {
@@ -858,7 +855,6 @@
 					@include empty();
 				}
 			}
-
 
 			& .cwp-post-type {
 				margin: 20px 0px;
@@ -899,9 +895,7 @@
 			}
 
 			& .cwp__data {
-
 				margin: 0px 0px 100px 0px;
-
 
 				& .cwp_preview_block {
 					height: 500px;
@@ -911,17 +905,14 @@
 						overflow-y: scroll;
 
 						@include scrollbar();
-
 					}
 
 					& .foot {
-
 						& button {
 							width: 100%;
 							border-radius: 0px;
 							justify-content: center;
 						}
-
 					}
 				}
 			}
@@ -933,36 +924,33 @@
 
 		& .cwp__content {
 			overflow-y: scroll;
-
 		}
-
 	}
-
-	
-
 }
 
 @mixin reusable_form() {
 	position: relative;
 	padding: 20px;
 	.cwp-reusable-intro {
-
 		.content {
-
 			width: 100%;
 			display: flex;
-			
+
 			.cwp-reusable-select {
 				width: 40%;
+				margin-right: 5px;
+
+				select {
+					min-height: 30px;
+				}
 			}
 
 			button {
-				padding: 14px 14px !important;
+				padding: 0px 14px !important;
+				min-height: 30px;
 			}
-
 		}
-		
-	}	
+	}
 	.cwp-rendered-content {
 		pointer-events: none !important;
 	}

@@ -2,21 +2,24 @@
 @import "../_partials/variables";
 @import "../_partials/mixins";
 
-
 @include settings_modal();
 
 .cwp-gutenberg-forms-reusable {
 	@include reusable_form();
 }
+.cwp-reusable-edit-url {
+	width: 100%;
+	text-align: right;
+}
 
 .cwp-fields-plotter {
 	& .components-notice {
 		margin: 10px 0px !important;
-	} 
+	}
 }
 
 .cwp-template-builder {
-	display:block;
+	display: block;
 
 	& .to-field {
 		display: flex;
@@ -36,14 +39,11 @@
 }
 
 .cwp-intro {
-	
 	& div.types {
-
 		& button {
 			margin: 0px 10px;
 		}
 	}
-
 }
 
 .cwp-form {
@@ -217,7 +217,6 @@
 }
 
 .cwp-option {
-	
 	margin: 20px 0px !important;
 
 	&.column {
