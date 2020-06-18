@@ -3,13 +3,13 @@ const { registerBlockType } = wp.blocks;
 
 import numberEdit from "./edit.js";
 import numberSave from "./save.js";
-import { getFieldTransform } from '../../block/functions';
-import { fieldParents, myAttrs } from '../../constants';
-
+import { getFieldTransform } from "../../block/functions";
+import { fieldParents, myAttrs } from "../../constants";
+import Icon from "../../block/Icon.js";
 
 registerBlockType("cwp/number", {
 	title: __("Number"),
-	icon: "screenoptions",
+	icon: __(<Icon icon="number" />),
 	category: "common",
 	keywords: [__("gutenberg-forms"), __("forms"), __("number")],
 	edit: numberEdit,
@@ -17,84 +17,83 @@ registerBlockType("cwp/number", {
 	attributes: {
 		enableCondition: {
 			type: "boolean",
-			default: false
+			default: false,
 		},
 		number: {
 			type: "string",
-			default: ""
+			default: "",
 		},
 		isRequired: {
 			type: "boolean",
-			default: false
+			default: false,
 		},
 		label: {
 			type: "string",
-			default: "Enter Number:"
+			default: "Enter Number:",
 		},
 		id: {
 			type: "string",
-			default: ""
+			default: "",
 		},
 		field_name: {
 			type: "string",
-			default: ""
+			default: "",
 		},
 		isRange: {
 			type: "boolean",
-			default: false
+			default: false,
 		},
 		steps: {
 			type: "number",
-			default: 1
+			default: 1,
 		},
 		rangeMax: {
 			type: "number",
-			default: 100
+			default: 100,
 		},
 		rangeMin: {
 			type: "number",
-			default: 0
+			default: 0,
 		},
 		requiredLabel: {
 			type: "string",
-			default: "*"
+			default: "*",
 		},
 		errorValidityText: {
 			type: "string",
-			default: "Please fill out this field!"
+			default: "Please fill out this field!",
 		},
 		condition: {
 			type: "object",
 			default: {
 				field: null,
 				condition: "===",
-				value: ""
-			}
+				value: "",
+			},
 		},
 		messages: {
 			type: "object",
 			default: {
 				empty: "Please fill out this field!",
-				invalid: "The number {{value}} is not in range!"
-			}
+				invalid: "The number {{value}} is not in range!",
+			},
 		},
 		adminId: {
 			type: "object",
 			default: {
 				default: "",
-				value: ""
-			}
-		}
-
+				value: "",
+			},
+		},
 	},
 	transforms: {
 		from: [
 			{
 				type: "block",
-				blocks: myAttrs.map(block => "cwp/".concat(block)),
-				transform: a => getFieldTransform(a, "number")
-			}
-		]
+				blocks: myAttrs.map((block) => "cwp/".concat(block)),
+				transform: (a) => getFieldTransform(a, "number"),
+			},
+		],
 	},
-	parent: fieldParents
+	parent: fieldParents,
 });

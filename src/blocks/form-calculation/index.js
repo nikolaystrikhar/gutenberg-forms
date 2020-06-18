@@ -3,12 +3,12 @@ const { registerBlockType } = wp.blocks;
 
 import calculationEdit from "./edit.js";
 import calculationSave from "./save.js";
-import { fieldParents } from '../../constants';
-
+import { fieldParents } from "../../constants";
+import Icon from "../../block/Icon.js";
 
 registerBlockType("cwp/form-calculation", {
 	title: __("Calculation"),
-	icon: "media-document",
+	icon: __(<Icon icon="calculation" />),
 	category: "common",
 	keywords: [__("gutenberg-forms"), __("forms"), __("calculation")],
 	edit: calculationEdit,
@@ -16,69 +16,69 @@ registerBlockType("cwp/form-calculation", {
 	attributes: {
 		formulaBuilder: {
 			type: "boolean",
-			default: true
+			default: true,
 		},
 		calculation: {
 			type: "string",
-			default: ""
+			default: "",
 		},
 		label: {
 			type: "string",
-			default: "Total"
+			default: "Total",
 		},
 		id: {
 			type: "string",
-			default: ""
+			default: "",
 		},
 		field_name: {
 			type: "string",
-			default: ""
+			default: "",
 		},
 		formula: {
 			type: "string",
-			default: ""
+			default: "",
 		},
 		condition: {
 			type: "object",
 			default: {
 				field: null,
 				condition: "===",
-				value: ""
-			}
+				value: "",
+			},
 		},
 		styling: {
 			type: "object",
 			default: {
-				fontSize: 40
-			}
+				fontSize: 40,
+			},
 		},
 		enableCondition: {
 			type: "boolean",
-			default: false
+			default: false,
 		},
 		postfix: {
 			type: "string",
-			default: ""
+			default: "",
 		},
 		prefix: {
 			type: "string",
-			default: ""
+			default: "",
 		},
 		adminId: {
 			type: "object",
 			default: {
 				default: "",
-				value: ""
-			}
+				value: "",
+			},
 		},
 		decimalPlaces: {
 			type: "number",
-			default: 0
-		}
+			default: 0,
+		},
 	},
 	supports: {
 		align: true,
-		align: ["wide", "full", "center"]
+		align: ["wide", "full", "center"],
 	},
-	parent: fieldParents
+	parent: fieldParents,
 });
