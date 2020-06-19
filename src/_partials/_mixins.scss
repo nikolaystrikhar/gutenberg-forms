@@ -955,3 +955,100 @@
 		pointer-events: none !important;
 	}
 }
+
+@mixin hidden-field() {
+	display: flex;
+
+	.cwp-tag-opener {
+		margin-left: 5px;
+	}
+
+	@include field();
+}
+
+@mixin basic_scrollbar() {
+	&::-webkit-scrollbar {
+		width: 5px;
+	}
+
+	/* Track */
+	&::-webkit-scrollbar-track {
+		border-radius: 0px;
+		background-color: #ccc;
+	}
+
+	/* Handle */
+	&::-webkit-scrollbar-thumb {
+		background: grey;
+		border-radius: 10px;
+	}
+
+	/* Handle on hover */
+	&::-webkit-scrollbar-thumb:hover {
+		background: grey;
+	}
+}
+
+@mixin tag_selector() {
+	padding: 5px;
+
+	.cwp-tag-selector-content {
+		.cwp-tag-search {
+			padding: 10px 10px 0px 10px;
+		}
+		div[role="tablist"] {
+			background-color: #eee;
+		}
+
+		.ep-filtered-tags {
+			height: 250px;
+			overflow-y: scroll;
+			padding: 10px;
+			@include basic_scrollbar();
+
+			.cwp-not-found {
+				height: 100%;
+				background-color: #eee;
+				display: flex;
+				flex-direction: column;
+				justify-content: center;
+				align-items: center;
+			}
+
+			.ep-filtered-group {
+				background-color: #eee;
+				padding: 10px 5px;
+			}
+		}
+
+		.cwp-tags {
+			padding: 10px;
+
+			.cwp-tagList {
+				&:not(.no-styling) {
+					height: 250px;
+					overflow-y: scroll;
+				}
+
+				.cwp-tag-option {
+					display: flex;
+					justify-content: space-between;
+				}
+
+				@include basic_scrollbar();
+			}
+
+			.cwp-active-tag-panel {
+				border-bottom: 1px solid;
+			}
+
+			.cwp-tag-button {
+				border-radius: 0px !important;
+			}
+		}
+	}
+
+	.components-popover__content {
+		min-width: 320px !important;
+	}
+}

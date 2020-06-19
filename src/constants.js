@@ -7,7 +7,7 @@ export const fieldParents = [
 
 export const fieldSupport = {
 	align: true,
-	align: ["wide", "full", "center"]
+	align: ["wide", "full", "center"],
 };
 
 export const myAttrs = [
@@ -23,5 +23,6 @@ export const myAttrs = [
 	"select",
 	"number",
 	"yes-no",
-	"file-upload"
+	"file-upload",
+	"hidden",
 ];

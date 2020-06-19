@@ -1,4 +1,4 @@
-import { isEmpty } from "lodash";
+import { isEmpty, isEqual, isArray } from "lodash";
 const { getBlock } = wp.data.select("core/block-editor");
 
 export function getFieldName(field, id) {
@@ -17,7 +17,7 @@ export function extract_admin_id(id, type) {
 	let exploded = extract_id(id);
 
 	let admin_id = type + "_" + exploded;
-	return admin_id
+	return admin_id;
 }
 
 export function getEncodedData(f, id, isRequired, adminId, extra = null) {
@@ -27,10 +27,11 @@ export function getEncodedData(f, id, isRequired, adminId, extra = null) {
 		);
 	} else {
 		return encodeURIComponent(
-			window.btoa(`--${getFieldName(f, id)}-${isRequired}-${f}-${adminId}-${extra}`)
+			window.btoa(
+				`--${getFieldName(f, id)}-${isRequired}-${f}-${adminId}-${extra}`
+			)
 		);
 	}
-
 }
 
 export function get_admin_id(adminId) {
@@ -71,32 +72,42 @@ export function getFieldIcon(name) {
 			return "no";
 		case "form-calculation":
 			return "media-document";
-		case 'file-upload':
+		case "file-upload":
 			return "media-document";
+		case "hidden":
+			return "hidden";
 		default:
 			return;
 	}
 }
 
-const layoutBlocks = ["cwp/form-column", "cwp/column", "cwp/form-group", "cwp/form-step"]; //blocks that will be ignored while serializing...
-const misc_blocks = ['cwp/form-button', 'cwp/file-upload'];
+const layoutBlocks = [
+	"cwp/form-column",
+	"cwp/column",
+	"cwp/form-group",
+	"cwp/form-step",
+]; //blocks that will be ignored while serializing...
+const misc_blocks = ["cwp/form-button", "cwp/file-upload"];
 
-export function serializeFields(fields) {
+export function serializeFields(fields, omitClientId = "") {
 	let f = [];
 
-	fields.forEach(field => {
-		if (field.name.startsWith("cwp/") && !layoutBlocks.includes(field.name)) {
+	if (!isArray(fields)) return [];
 
+	fields.forEach((field) => {
+		if (
+			field.name.startsWith("cwp/") &&
+			!layoutBlocks.includes(field.name) &&
+			!isEqual(omitClientId, field.clientId)
+		) {
 			if (!misc_blocks.includes(field.name)) {
 				f.push({
 					blockName: field.name,
 					fieldName: field.attributes.label,
 					field_id: field.attributes.field_name,
-					adminId: field.attributes.adminId
+					adminId: field.attributes.adminId,
 				});
 			}
-
-
 		} else if (layoutBlocks.includes(field.name)) {
 			f.push(...serializeFields(field.innerBlocks));
 		}
@@ -114,55 +125,55 @@ export function strip_tags(str) {
 export const basicColorScheme = [
 	{
 		color: "rgb(247, 141, 167)",
-		name: "Pale Pink"
+		name: "Pale Pink",
 	},
 	{
 		name: "Vivid red",
-		color: "rgb(207, 46, 46)"
+		color: "rgb(207, 46, 46)",
 	},
 	{
 		name: "Luminous vivid orange",
-		color: "rgb(255, 105, 0)"
+		color: "rgb(255, 105, 0)",
 	},
 	{
 		color: "rgb(252, 185, 0)",
-		name: "Luminous vivid amber"
+		name: "Luminous vivid amber",
 	},
 	{
 		color: "rgb(123, 220, 181)",
-		name: "Light green cyan"
+		name: "Light green cyan",
 	},
 	{
 		color: "rgb(0, 208, 132)",
-		name: "Vivid green cyan"
+		name: "Vivid green cyan",
 	},
 	{
 		color: "rgb(142, 209, 252)",
-		name: "Pale cyan blue"
+		name: "Pale cyan blue",
 	},
 	{
 		color: "rgb(6, 147, 227)",
-		name: "Vivid cyan blue"
+		name: "Vivid cyan blue",
 	},
 	{
 		color: "rgb(155, 81, 224)",
-		name: "Vivid purple"
+		name: "Vivid purple",
 	},
 	{
 		color: "rgb(238, 238, 238)",
-		name: "Very light gray"
+		name: "Very light gray",
 	},
 	{
 		color: "rgb(171, 184, 195)",
-		name: "Cyan bluish gray"
+		name: "Cyan bluish gray",
 	},
 	{
 		color: "rgb(49, 49, 49)",
-		name: "Very dark gray"
-	}
+		name: "Very dark gray",
+	},
 ];
 
-export const firstCapital = str => {
+export const firstCapital = (str) => {
 	let c = str.substring(0, 1).toUpperCase();
 
 	return c.concat(str.substring(1, str.length));
@@ -174,33 +185,35 @@ export function getThemeStyling(theme, id) {
 	return `<style>
 
 		${
-		!isEmpty(fieldBackgroundColor)
-			? `#${id}.cwp-form .cwp-field.cwp-yes-no .cwp-field-set .cwp-switch input:checked + .cwp-slider {
+			!isEmpty(fieldBackgroundColor)
+				? `#${id}.cwp-form .cwp-field.cwp-yes-no .cwp-field-set .cwp-switch input:checked + .cwp-slider {
 			background-color: ${fieldBackgroundColor} !important;
 		}`
-			: ``
+				: ``
 		}
 
 
 		${
-		!isEmpty(textColor)
-			? `#${id}.cwp-form .cwp-field label {
+			!isEmpty(textColor)
+				? `#${id}.cwp-form .cwp-field label {
 				color: ${textColor} !important;
 			}
 			#${id}.cwp-form .cwp-field .rich-text {
 				color: ${textColor} !important;
 			}
 			`
-			: ``
+				: ``
 		}
 
 		${
-		!isEmpty(accentColor) ? `
+			!isEmpty(accentColor)
+				? `
 			#${id}.cwp-form .cwp-default-submit-btn {
 				color: ${accentColor} !important;
 				border: 1px solid ${accentColor};
 			}
-		` : ``
+		`
+				: ``
 		}
 
 		#${id}.cwp-form .cwp-field.cwp-number .cwp-field-set .cwp-range-set input[type="range"] {
@@ -209,10 +222,10 @@ export function getThemeStyling(theme, id) {
 
 
 		${
-		!isEmpty(fieldBackgroundColor) ||
+			!isEmpty(fieldBackgroundColor) ||
 			!isEmpty(textColor) ||
 			!isEmpty(accentColor)
-			? `#${id}.cwp-form .cwp-field [data-cwp-field], 
+				? `#${id}.cwp-form .cwp-field [data-cwp-field], 
 			#${id}.cwp-form .cwp-field .cwp-field-set input, 
 			#${id}.cwp-form .cwp-field .cwp-field-set textarea  {
 	
@@ -231,7 +244,7 @@ export function getThemeStyling(theme, id) {
 				z-index: 1;
 			}
 			`
-			: ``
+				: ``
 		}
 
 		#${id}.cwp-form .cwp-field.is-style-button .cwp-checkbox-set input[type="checkbox"] + label,

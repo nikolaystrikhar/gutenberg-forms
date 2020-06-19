@@ -221,7 +221,7 @@ class Email
             $id = end($f_DECODED);
 
             $sanitizedValue = $this->validator->sanitizedValue($type, $field_value);
-
+            
             $sanitized_field_value = NULL;
 
             if (is_array($field_value)) {
@@ -274,6 +274,9 @@ class Email
             $arranged_fields[] = $arranged_data;
         }
 
+        print "<pre>";
+            print_r($arranged_fields);
+        print "</pre>";
 
         if ($this->is_fields_valid($arranged_fields)) {
             // check if all the fields are valid;
@@ -435,6 +438,10 @@ class Email
                 return;
             }
         }
+
+        print "<pre>";
+            print_r($mail_body);
+        print "</pre>";
 
         $newEntry = Entries::create_entry($template, $mail_subject, $mail_body, $fields, $this->attachments);
         $record_entries = in_array('Record Entries', $template['actions']);

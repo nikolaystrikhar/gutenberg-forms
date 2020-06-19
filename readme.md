@@ -83,6 +83,7 @@ For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
 - Added: Dynamically populate field values
 - Added: Server side preview for saved forms
+- Added: Hidden field with merge tag inserter (UNDER-PROGRESS)
 - Fixed: Bugs
 
 = 1.4.0 = (03 June 2020)

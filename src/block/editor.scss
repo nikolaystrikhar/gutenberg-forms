@@ -4,6 +4,10 @@
 
 @include settings_modal();
 
+.cwp-tag-selector {
+	@include tag_selector();
+}
+
 .cwp-gutenberg-forms-reusable {
 	@include reusable_form();
 }
@@ -178,6 +182,10 @@
 			}
 		}
 		@include bulk_add();
+
+		&.cwp-hidden {
+			@include hidden-field();
+		}
 
 		& .cwp-checkbox-set {
 			@include checkbox-field("backend");

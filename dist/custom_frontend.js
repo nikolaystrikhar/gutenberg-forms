@@ -1598,9 +1598,15 @@ jQuery(function ($) {
 			return withoutGroup;
 		}
 
-		getDecodedFieldId(name, type) {
+		getDecodedFieldId(name, type, self) {
 			let value;
 
+			if (type === "range") {
+				const parent = $(self)
+					.parents(".cwp-range-set")
+					.find("input[type='number']");
+				name = parent.attr("name");
+			}
 			if (type === "checkbox") {
 				value = this.decodeCheckboxName(name);
 			} else {
@@ -1621,7 +1627,7 @@ jQuery(function ($) {
 				const type = $(this).attr("type");
 
 				const name = $(this).attr("name");
-				const field_id = t.getDecodedFieldId(name, type);
+				const field_id = t.getDecodedFieldId(name, type, this);
 				const queryValue = t.getParameterByName(field_id);
 
 				if (type === "checkbox" && field_id !== null) {
@@ -1647,7 +1653,7 @@ jQuery(function ($) {
 								$(this).attr("checked", true);
 							}
 						});
-				} else if (field_id !== null && type !== "file") {
+				} else if (field_id !== null && type !== "file" && type !== "hidden") {
 					$(this).val(queryValue);
 				}
 			});

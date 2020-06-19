@@ -1,10 +1,22 @@
-import { strip_tags, extract_id } from "../misc/helper";
-import { each, has, omit, isEqual, clone, assign, isEmpty, get, map, isArray, toString } from "lodash";
+import { strip_tags, extract_id, serializeFields } from "../misc/helper";
+import {
+	each,
+	has,
+	omit,
+	isEqual,
+	clone,
+	assign,
+	isEmpty,
+	get,
+	map,
+	isArray,
+	toString,
+} from "lodash";
 
 import formStepSave from "../../blocks/form-step/save";
 import formStepEdit from "../../blocks/form-step/edit";
-import $ from 'jquery'
-const { getPostType } = wp.data.select('core');
+import $ from "jquery";
+const { getPostType } = wp.data.select("core");
 const { createBlock, registerBlockType } = wp.blocks;
 const { __ } = wp.i18n;
 
@@ -12,7 +24,7 @@ const {
 	getBlock,
 	getBlockRootClientId,
 	getBlockHierarchyRootClientId,
-	getPreviousBlockClientId
+	getPreviousBlockClientId,
 } = wp.data.select("core/block-editor");
 const { updateBlockAttributes } = wp.data.dispatch("core/block-editor");
 const { withSelect } = wp.data;
@@ -31,28 +43,27 @@ export const myAttrs = [
 	"text",
 	"select",
 	"number",
-	"file-upload"
+	"file-upload",
 ];
 
 export function getAllowedBlocks(type) {
-	const prefixed = myAttrs.map(slug => "cwp/" + slug); // ["cwp/email" , .....];
+	const prefixed = myAttrs.map((slug) => "cwp/" + slug); // ["cwp/email" , .....];
 
 	if (type === "multiStep") {
 		prefixed.push("cwp/form-step");
 	}
 
 	return prefixed;
-
 }
 
 //?custom-function for fields_transformation purpose;
 export const getFieldTransform = (attrs, field) => {
-	const matchedKey = myAttrs.find(prop => prop in attrs);
+	const matchedKey = myAttrs.find((prop) => prop in attrs);
 	const fieldBlock = "cwp/".concat(field);
 
 	const config = {
 		isRequired: attrs.isRequired,
-		[field]: attrs[matchedKey]
+		[field]: attrs[matchedKey],
 	};
 
 	if (has(attrs, "condition")) {
@@ -79,63 +90,67 @@ export const getFieldTransform = (attrs, field) => {
 	return createBlock(fieldBlock, config);
 };
 
-const layoutBlocks = ["cwp/form-column", "cwp/column", "cwp/form-group", "cwp/form-step"]; //blocks that will be ignored while serializing...
+const layoutBlocks = [
+	"cwp/form-column",
+	"cwp/column",
+	"cwp/form-group",
+	"cwp/form-step",
+]; //blocks that will be ignored while serializing...
 const miscBlocks = ["cwp/form-button"];
-
 
 export const defaultFieldMessages = [
 	{
 		fieldName: "name",
 		empty: "Please fill out this field!",
-		invalidName: "The name {{value}} is not valid!"
+		invalidName: "The name {{value}} is not valid!",
 	},
 	{
 		fieldName: "email",
 		empty: "Please fill out this field!",
-		invalidEmail: "The email {{value}} is not valid!"
+		invalidEmail: "The email {{value}} is not valid!",
 	},
 	{
 		fieldName: "text",
 		empty: "Please fill out this field!",
-		invalid: "The text {{value}} is not valid!"
+		invalid: "The text {{value}} is not valid!",
 	},
 	{
 		fieldName: "message",
 		empty: "Please fill out this field!",
-		invalid: "The message {{value}} is not valid!"
+		invalid: "The message {{value}} is not valid!",
 	},
 	{
 		fieldName: "checkbox",
-		empty: "Please select atleast one checkbox!"
+		empty: "Please select atleast one checkbox!",
 	},
 	{
 		fieldName: "radio",
-		empty: "Please select radio!"
+		empty: "Please select radio!",
 	},
 	{
 		fieldName: "phone",
 		empty: "Please fill out this field!",
-		invalid: "The phone {{value}} is not valid!"
+		invalid: "The phone {{value}} is not valid!",
 	},
 	{
 		fieldName: "website",
 		empty: "Please fill out this field!",
-		invalid: "The website {{value}} is not valid!"
+		invalid: "The website {{value}} is not valid!",
 	},
 	{
 		fieldName: "select",
-		empty: "Please select option!"
+		empty: "Please select option!",
 	},
 	{
 		fieldName: "number",
 		empty: "Please fill out this field!",
-		invalid: "The number {{value}} is not in range!"
+		invalid: "The number {{value}} is not in range!",
 	},
 	{
 		fieldName: "file-upload",
 		empty: "Please select a file",
-		invalid: "The file {{value}} is not valid!"
-	}
+		invalid: "The file {{value}} is not valid!",
+	},
 ];
 
 /**
@@ -147,7 +162,7 @@ export const defaultFieldMessages = [
 export function getRootFormBlock(clientId, asRoot = false) {
 	//this functions will return the root form through which the given field is nested
 	//excepting all of the cases;
-	const rootId = asRoot ? clientId : getBlockHierarchyRootClientId(clientId)
+	const rootId = asRoot ? clientId : getBlockHierarchyRootClientId(clientId);
 	const rootBlock = getBlock(rootId); //getting the root block;
 
 	if (isEmpty(rootBlock)) return {}; // null exception
@@ -176,18 +191,14 @@ export function getRootFormBlock(clientId, asRoot = false) {
 			rootForm = childBlock;
 
 			break;
-
-		} else if (has(childBlock, 'innerBlocks')) {
+		} else if (has(childBlock, "innerBlocks")) {
 			// Try to find the form block within this child. Make sure it's treated as the search root.
 			let nestedSearch = getRootFormBlock(childBlock.clientId, true);
 
 			if (!isEmpty(nestedSearch)) {
 				rootForm = nestedSearch;
 			}
-
-
 		}
-
 	}
 
 	return rootForm;
@@ -198,9 +209,9 @@ function isDefaultValues(blockAttrs, type, fName, messages) {
 
 	if (!has(blockAttrs, "messages")) return;
 
-	let defaultMessage = messages.find(v => v.fieldName === fName);
+	let defaultMessage = messages.find((v) => v.fieldName === fName);
 
-	let statics = defaultFieldMessages.find(v => v.fieldName === fName);
+	let statics = defaultFieldMessages.find((v) => v.fieldName === fName);
 
 	if (statics[type] === blockAttrs.messages[type]) {
 		return true;
@@ -216,7 +227,7 @@ export function changeChildValue(slug, clientId, attrs, type, messages) {
 
 	if (!has(block, "innerBlocks")) return;
 
-	block.innerBlocks.forEach(b => {
+	block.innerBlocks.forEach((b) => {
 		const targetBlock = b.name === slug;
 
 		if (targetBlock) {
@@ -237,24 +248,28 @@ export function getRootMessages(clientId, blockName) {
 	const rootBlock = getRootFormBlock(clientId);
 	const currentBlock = getBlock(clientId);
 
-
-	if (rootBlock.name !== "cwp/block-gutenberg-forms" || isEmpty(currentBlock)) return [{}];
+	if (rootBlock.name !== "cwp/block-gutenberg-forms" || isEmpty(currentBlock))
+		return [{}];
 
 	let { messages } = rootBlock.attributes;
 
-	const rootMessage = messages.find(v => v.fieldName === blockName);
-	const defaultMessage = defaultFieldMessages.find(field => isEqual(field.fieldName, blockName));
+	const rootMessage = messages.find((v) => v.fieldName === blockName);
+	const defaultMessage = defaultFieldMessages.find((field) =>
+		isEqual(field.fieldName, blockName)
+	);
 
-	const currentMessages = get(currentBlock, 'attributes.messages');
+	const currentMessages = get(currentBlock, "attributes.messages");
 
-	const messages_not_changed = isEqual(omit(currentMessages, ['fieldName']), omit(defaultMessage, ['fieldName']));
+	const messages_not_changed = isEqual(
+		omit(currentMessages, ["fieldName"]),
+		omit(defaultMessage, ["fieldName"])
+	);
 
 	if (messages_not_changed) {
 		return rootMessage;
 	} else {
 		return currentMessages;
 	}
-
 }
 
 export function getChildAttributes(clientId) {
@@ -263,8 +278,7 @@ export function getChildAttributes(clientId) {
 
 	if (!has(rootBlock, "innerBlocks")) return childAttrs;
 
-	rootBlock.innerBlocks.forEach(v => {
-
+	rootBlock.innerBlocks.forEach((v) => {
 		if (layoutBlocks.includes(v.name)) {
 			//which means field are nested even more!
 			childAttrs.push(...getChildAttributes(v.clientId));
@@ -275,7 +289,6 @@ export function getChildAttributes(clientId) {
 
 	return childAttrs;
 }
-
 
 export function getSiblings(clientId, slug = null) {
 	const rootBlock = getRootFormBlock(clientId); //i.e = gutenberg-forms;
@@ -290,7 +303,7 @@ export function getSiblings(clientId, slug = null) {
 
 	let siblingValues = [];
 
-	rootBlock.innerBlocks.forEach(v => {
+	rootBlock.innerBlocks.forEach((v) => {
 		const breaked = v.name.split("/");
 
 		const conditions = {
@@ -298,7 +311,7 @@ export function getSiblings(clientId, slug = null) {
 			isFieldBlock: myAttrs.includes(breaked[breaked.length - 1]), //ensuring that it is a gutenberg-form field;
 			isLayoutBlock: layoutBlocks.includes(v.name), //ensuring that it is not a layout block
 			currentBlock: v.clientId === clientId, //ensuring that this is not the block
-			miscBlocks: miscBlocks.includes(v.name)
+			miscBlocks: miscBlocks.includes(v.name),
 		};
 
 		if (
@@ -319,7 +332,6 @@ export function getSiblings(clientId, slug = null) {
 		}
 	});
 
-
 	return siblingValues;
 }
 
@@ -331,7 +343,7 @@ export function isChildFieldsRequired(clientId) {
 	const childs = getChildAttributes(clientId);
 	let res = false;
 
-	childs.forEach(child => {
+	childs.forEach((child) => {
 		if (child.isRequired) {
 			res = true;
 		}
@@ -343,13 +355,12 @@ export function isChildFieldsRequired(clientId) {
 export function detectSimilarFields(clientId, field_id) {
 	//this will detect the similar id across fields
 
-
 	const root = getBlock(getBlockRootClientId(clientId));
 	let result = false;
 
 	if (!has(root, "innerBlocks")) return;
 
-	root.innerBlocks.forEach(block => {
+	root.innerBlocks.forEach((block) => {
 		let { attributes } = block;
 
 		if (layoutBlocks.includes(block.name)) {
@@ -370,39 +381,39 @@ export function detectSimilarFields(clientId, field_id) {
 }
 
 export function getFormTemplates(type) {
-
 	const commonTemplate = [
 		["cwp/name", {}],
 		["cwp/email", {}],
-		["cwp/message", {}]
-	]
+		["cwp/message", {}],
+	];
 
-	if (type === 'standard') {
-		return commonTemplate
+	if (type === "standard") {
+		return commonTemplate;
 	}
 
-	if (type === 'multiStep') {
-
+	if (type === "multiStep") {
 		return [
-			['cwp/form-step', {}, [
-				['cwp/name', {}],
-				['cwp/form-button', { action: 'next', label: 'Next' }]
-			]
+			[
+				"cwp/form-step",
+				{},
+				[
+					["cwp/name", {}],
+					["cwp/form-button", { action: "next", label: "Next" }],
+				],
 			],
-			['cwp/form-step', {}, [
-				['cwp/email', {}],
-				['cwp/form-button', { action: 'previous', label: 'Previous' }]
-			]
-			]
-		]
-
+			[
+				"cwp/form-step",
+				{},
+				[
+					["cwp/email", {}],
+					["cwp/form-button", { action: "previous", label: "Previous" }],
+				],
+			],
+		];
 	}
-
 }
 
-
 export function detect_similar_forms(clientId) {
-
 	//? test if the form is duplicated and has the same form id as the above form
 
 	let currentBlock = getBlock(clientId);
@@ -410,165 +421,246 @@ export function detect_similar_forms(clientId) {
 
 	// getting the previous block because when user duplicate a block it is appended after, Therefore this is the duplicated block
 
-	if (!isEmpty(previousBlock) && get(previousBlock, 'name') === get(currentBlock, 'name')) {
+	if (
+		!isEmpty(previousBlock) &&
+		get(previousBlock, "name") === get(currentBlock, "name")
+	) {
 		// checking if the previousBlock is not empty and it is our form block
 
+		let form_id_prev = get(previousBlock, "attributes.id");
 
-		let form_id_prev = get(previousBlock, 'attributes.id');
-
-		let current_form_id = get(currentBlock, 'attributes.id');
-
+		let current_form_id = get(currentBlock, "attributes.id");
 
 		if (isEqual(form_id_prev, current_form_id)) {
 			return true;
 		}
-
-
 	}
 
-
 	return false;
-
-
 }
 
 export function get_form_actions() {
-
-	const actions = [
-		'Record Entries',
-		'Email Notification'
-	];
+	const actions = ["Record Entries", "Email Notification"];
 
 	each(cwpGlobal.settings.integrations, (integration, key) => {
-
-		if (integration.enable && integration.type === 'autoResponder') {
+		if (integration.enable && integration.type === "autoResponder") {
 			actions.push(integration.title);
 		}
-
 	});
-
 
 	return actions;
 }
 
-
 export function get_spam_protectors() {
-
 	const protectors = [];
 
 	each(cwpGlobal.settings.integrations, (integration, key) => {
-
-		if (integration.enable && integration.type === 'spamProtection') {
+		if (integration.enable && integration.type === "spamProtection") {
 			protectors.push({
 				title: integration.title,
-				fields: integration.fields
+				fields: integration.fields,
 			});
 		}
-
 	});
-
 
 	return protectors;
 }
 
 export function hasObject(array, object) {
-
 	let res = false;
 
 	array.forEach((i) => {
-
-
 		if (isEqual(i, object)) {
 			res = true;
 		}
-	})
-
+	});
 
 	return res;
-
 }
 
 export function hasProtection(name, pr) {
-
 	let res = false;
 
 	pr.forEach((protection) => {
-
 		if (isEqual(protection.title, name)) {
 			res = true;
 		}
-
-	})
+	});
 
 	return res;
-
 }
 
 export function getProtection(name, pr) {
-
 	let res;
 
 	pr.forEach((protection) => {
-
 		if (isEqual(protection.title, name)) {
 			res = protection;
 		}
-
-	})
+	});
 
 	return res;
-
 }
 
 export function getGlobalMessages() {
 	const globalMessages = cwpGlobal.generalSettings.messages;
-	const defaultValidationMessages = defaultFieldMessages.map((v => {
-
-		if (has(v, 'invalid')) {
+	const defaultValidationMessages = defaultFieldMessages.map((v) => {
+		if (has(v, "invalid")) {
 			return {
 				...v,
-				invalid: globalMessages[v.fieldName]['value']
-			}
+				invalid: globalMessages[v.fieldName]["value"],
+			};
 		}
 
-		if (has(v, 'invalidName')) {
+		if (has(v, "invalidName")) {
 			return {
 				...v,
-				invalidName: globalMessages[v.fieldName]['value']
-			}
+				invalidName: globalMessages[v.fieldName]["value"],
+			};
 		}
 
-		if (has(v, 'invalidEmail')) {
+		if (has(v, "invalidEmail")) {
 			return {
 				...v,
-				invalidEmail: globalMessages[v.fieldName]['value']
-			}
+				invalidEmail: globalMessages[v.fieldName]["value"],
+			};
 		}
 
 		return v;
-
-	}));
+	});
 
 	return defaultValidationMessages;
-
 }
 
 // will get post url from the post id from the cwpGlobal variable
 
 export function getPostUrl(id) {
-
-	const posts = get(window, 'cwpGlobal.cwp-cpt-forms');
-	const filteredPost = isArray(posts) ? posts.filter(post => isEqual(toString(post.ID), id)) : false;
+	const posts = get(window, "cwpGlobal.cwp-cpt-forms");
+	const filteredPost = isArray(posts)
+		? posts.filter((post) => isEqual(toString(post.ID), id))
+		: false;
 
 	const requiredPost = isArray(filteredPost) ? filteredPost[0] : false;
 
 	if (!requiredPost) {
-		return '';
+		return "";
 	} else {
-		const url = get(requiredPost, 'post_edit_url');
+		const url = get(requiredPost, "post_edit_url");
 		const editUrl = url.concat("&action=edit");
 		return editUrl;
 	}
+}
 
+export function getFieldsTags(clientId, root = false) {
+	const rootBlock = root ? getBlock(clientId) : getRootFormBlock(clientId);
+	const child_fields = get(rootBlock, "innerBlocks");
 
+	const fields = serializeFields(child_fields, clientId);
+
+	return fields;
+}
+
+export function getWordpressTags() {
+	const tags = [
+		{
+			title: "Post ID",
+			tag: `{{wp:post_id}}`,
+		},
+		{
+			title: "Post Title",
+			tag: `{{wp:post_title}}`,
+		},
+		{
+			title: "Post URL",
+			tag: `{{wp:post_url}}`,
+		},
+		{
+			title: "Post Author",
+			tag: `{{wp:post_author}}`,
+		},
+		{
+			title: "Post Author Email",
+			tag: `{{wp:post_author_email}}`,
+		},
+		{
+			title: "Post Meta",
+			tag: `{{post_meta:YOUR_META_KEY}}`,
+		},
+		{
+			title: "User ID",
+			tag: `{{wp:user_id}}`,
+		},
+		{
+			title: "User First Name",
+			tag: `{{wp:user_first_name}}`,
+		},
+		{
+			title: "User Last Name",
+			tag: `{{wp:user_last_name}}`,
+		},
+		{
+			title: "User Display Name",
+			tag: `{{wp:user_display_name}}`,
+		},
+		{
+			title: "User Username",
+			tag: `{{wp:user_username}}`,
+		},
+		{
+			title: "User Email",
+			tag: `{{wp:user_email}}`,
+		},
+		{
+			title: "User URL",
+			tag: `{{wp:user_url}}`,
+		},
+		{
+			title: "User Meta",
+			tag: `{{user_meta:YOUR_META_KEY}}`,
+		},
+		{
+			title: "Site Title",
+			tag: `{{wp:site_title}}`,
+		},
+		{
+			title: "Site URL",
+			tag: `{{wp:site_url}}`,
+		},
+		{
+			title: "Admin Email",
+			tag: `{{wp:admin_email}}`,
+		},
+	];
+
+	return tags;
+}
+
+export function getFormTags() {
+	const tags = [
+		{
+			title: "Form ID",
+			tag: `{{form:form_id}}`,
+		},
+		{
+			title: "Form Label",
+			tag: `{{form:form_label}}`,
+		},
+	];
+
+	return tags;
+}
+
+export function getOtherTags() {
+	const tags = [
+		{
+			title: "Date",
+			tag: `{{other:date}}`,
+		},
+		{
+			title: "Time",
+			tag: `{{other:time}}`,
+		},
+	];
+
+	return tags;
 }
