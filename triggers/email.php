@@ -323,7 +323,7 @@ class Email
         $message_id = $_POST['submit'];
 
 
-        $css = "#$message_id { display: block }";
+        $css = "div#$message_id { display: block }";
 
 
         if ($hideFormOnSuccess === true) {

@@ -201,14 +201,14 @@ function edit(props) {
 							max={10000}
 							value={rangeMax}
 							onChange={(m) => props.setAttributes({ rangeMax: m })}
-							label="Range Max"
+							label={__("Range Max", TEXT_DOMAIN)}
 						/>
 						<RangeControl
 							min={0}
 							value={rangeMin}
 							max={10000}
 							onChange={(m) => props.setAttributes({ rangeMin: m })}
-							label="Range Min"
+							label={__("Range Min", TEXT_DOMAIN)}
 						/>
 					</div>
 				</PanelBody>

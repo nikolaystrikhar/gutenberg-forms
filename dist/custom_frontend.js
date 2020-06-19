@@ -1647,7 +1647,7 @@ jQuery(function ($) {
 								$(this).attr("checked", true);
 							}
 						});
-				} else if (field_id !== null) {
+				} else if (field_id !== null && type !== "file") {
 					$(this).val(queryValue);
 				}
 			});
