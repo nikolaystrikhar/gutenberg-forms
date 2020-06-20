@@ -4,6 +4,7 @@ import {
 	getWordpressTags,
 	getFormTags,
 	getOtherTags,
+	getMetaTags,
 } from "../functions";
 import TagList from "./tagList";
 import { get, isEmpty } from "lodash";
@@ -40,6 +41,13 @@ function SearchTags(props) {
 			return title.toLowerCase().search(search.toLowerCase()) !== -1;
 		});
 
+		const metaTags = getMetaTags();
+		const filteredMetaTags = metaTags.filter((field) => {
+			const title = get(field, "title");
+
+			return title.toLowerCase().search(search.toLowerCase()) !== -1;
+		});
+
 		return [
 			{
 				list: "fields",
@@ -61,6 +69,11 @@ function SearchTags(props) {
 				label: "Other Tags",
 				data: filteredOtherTags,
 			},
+			{
+				list: "meta",
+				label: "Meta",
+				data: filteredMetaTags,
+			},
 		];
 	};
 
@@ -74,7 +87,7 @@ function SearchTags(props) {
 			}
 		});
 
-		const notFound = emptyGroups.length === 4;
+		const notFound = emptyGroups.length === 5;
 
 		return notFound;
 	};

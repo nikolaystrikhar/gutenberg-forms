@@ -26,6 +26,9 @@ const {
 	getBlockHierarchyRootClientId,
 	getPreviousBlockClientId,
 } = wp.data.select("core/block-editor");
+
+const { getEditedPostAttribute } = wp.data.select("core/editor");
+
 const { updateBlockAttributes } = wp.data.dispatch("core/block-editor");
 const { withSelect } = wp.data;
 
@@ -560,6 +563,22 @@ export function getFieldsTags(clientId, root = false) {
 	return fields;
 }
 
+export function getMetaTags() {
+	let meta = getEditedPostAttribute("meta");
+	let metaTags = [];
+
+	each(meta, (_, key) => {
+		const tag = {
+			title: key,
+			tag: `{{post_meta:${key}}}`,
+		};
+
+		metaTags.push(tag);
+	});
+
+	return metaTags;
+}
+
 export function getWordpressTags() {
 	const tags = [
 		{
@@ -582,10 +601,10 @@ export function getWordpressTags() {
 			title: "Post Author Email",
 			tag: `{{wp:post_author_email}}`, // done
 		},
-		{
-			title: "Post Meta",
-			tag: `{{post_meta:YOUR_META_KEY}}`, // later
-		},
+		// {
+		// 	title: "Post Meta",
+		// 	tag: `{{post_meta:YOUR_META_KEY}}`, // later
+		// },
 		{
 			title: "User ID",
 			tag: `{{wp:user_id}}`, // done
@@ -613,10 +632,6 @@ export function getWordpressTags() {
 		{
 			title: "User URL",
 			tag: `{{wp:user_url}}`, // done
-		},
-		{
-			title: "User Meta",
-			tag: `{{user_meta:YOUR_META_KEY}}`, // later
 		},
 		{
 			title: "Site Title",

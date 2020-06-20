@@ -28,6 +28,11 @@ function TagSelector(props) {
 			className: "cwp-tag-button",
 		},
 		{
+			name: "meta",
+			title: "Meta",
+			className: "cwp-tag-button",
+		},
+		{
 			name: "other",
 			title: "Other",
 			className: "cwp-tag-button",

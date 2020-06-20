@@ -22,7 +22,7 @@ const { __ } = wp.i18n;
 
 function edit(props) {
 	const { field_name, adminId, value } = props.attributes;
-	const { setAttributes } = props;
+	const { setAttributes, isSelected } = props;
 
 	const [selector, setSelector] = useState(false);
 	const hiddenField = useRef();
@@ -125,9 +125,10 @@ function edit(props) {
 					className="cwp-tag-opener"
 					icon="list-view"
 					isDefault
+					label={__("Add Dynamic Data", TEXT_DOMAIN)}
 					onClick={() => setSelector(!selector)}
 				/>
-				{selector && (
+				{selector && isSelected && (
 					<Popover position="bottom center" className="cwp-tag-selector">
 						<TagSelector {...props} insertTag={insertTag} />
 					</Popover>

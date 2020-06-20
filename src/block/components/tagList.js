@@ -5,6 +5,7 @@ import {
 	getWordpressTags,
 	getFormTags,
 	getOtherTags,
+	getMetaTags,
 } from "../functions";
 import { get, isEmpty, has } from "lodash";
 
@@ -12,17 +13,19 @@ function TagList(props) {
 	const { onSelect, data } = props;
 
 	const mapList = (list) => {
-		return list.map((tag, index) => {
-			const title = get(tag, "title");
-			const Tag = get(tag, "tag");
+		return !isEmpty(list)
+			? list.map((tag, index) => {
+					const title = get(tag, "title");
+					const Tag = get(tag, "tag");
 
-			return (
-				<MenuItem className="cwp-tag-option" onClick={() => onSelect(Tag)}>
-					<strong>{title}</strong>
-					<span>{Tag}</span>
-				</MenuItem>
-			);
-		});
+					return (
+						<MenuItem className="cwp-tag-option" onClick={() => onSelect(Tag)}>
+							<strong>{title}</strong>
+							<span>{Tag}</span>
+						</MenuItem>
+					);
+			  })
+			: null;
 	};
 
 	const getList = () => {
@@ -52,6 +55,9 @@ function TagList(props) {
 			case "form":
 				const formTags = isEmpty(data) ? getFormTags() : data;
 				return mapList(formTags);
+			case "meta":
+				const metaTags = isEmpty(data) ? getMetaTags() : data;
+				return mapList(metaTags);
 			case "other":
 				const otherTags = isEmpty(data) ? getOtherTags() : data;
 				return mapList(otherTags);
@@ -61,9 +67,17 @@ function TagList(props) {
 	const noStyling = has(props, "noStyling");
 	const classes = noStyling ? "no-styling" : "";
 
+	const listToMap = getList();
+
 	return (
 		<div className={`cwp-tagList ${classes}`}>
-			<MenuGroup>{getList()}</MenuGroup>
+			{!isEmpty(listToMap) ? (
+				<MenuGroup>{listToMap}</MenuGroup>
+			) : (
+				<div className="cwp-empty-list">
+					<h3>No Tags Found!</h3>
+				</div>
+			)}
 		</div>
 	);
 }

@@ -51,6 +51,10 @@ class gforms_TagHandler {
         $post_author =  get_the_author_meta('display_name', $post->post_author);
         $post_author_email = get_the_author_meta('email', $post->post_author);
 
+        $meta = get_post_meta($post->ID);
+
+  
+
         $user_id = get_current_user_id();
         $user = wp_get_current_user();
 
@@ -76,6 +80,15 @@ class gforms_TagHandler {
         );
 
         $data = $this->add_field_data( $data );
+
+        foreach ($meta as $key => $value) {
+
+            $value = get_post_meta( $post->ID, $key, true );
+            $tag = "{{post_meta:{$key}}}";
+
+            $data[$tag] = $value;
+
+        }
 
         $this->data = $data;
 

@@ -1030,6 +1030,16 @@
 					overflow-y: scroll;
 				}
 
+				.cwp-empty-list {
+					background-color: #eee;
+					display: flex;
+					height: 100%;
+					justify-content: center;
+					flex-direction: column;
+					align-items: center;
+					margin: 10px 0px 0px 0px;
+				}
+
 				.cwp-tag-option {
 					display: flex;
 					justify-content: space-between;
