@@ -563,7 +563,7 @@ export function getFieldsTags(clientId, root = false) {
 	return [
 		{
 			fieldName: "All Data",
-			field_id: "{{all_data}}",
+			field_id: "all_data",
 		},
 		...fields,
 	];

@@ -159,47 +159,11 @@ function TemplateBuilder(prop) {
 						onClick={() => setSelector(!selector)}
 					/>
 					{selector && isSelected && (
-						<Popover position="bottom center" className="cwp-tag-selector">
+						<Popover position="top center" className="cwp-tag-selector">
 							<TagSelector {...props} insertTag={addFieldId} />
 						</Popover>
 					)}
 				</div>
-
-				{/* <DropdownMenu icon="list-view" label="Add Field Data">
-					{({ onClose }) => (
-						<Fragment>
-							<MenuGroup>
-								<MenuItem
-									info="Insert All fields"
-									icon="clipboard"
-									onClick={() => {
-										onClose();
-										addFieldId("all_data");
-									}}
-								>
-									<span draggable={true}>All Data</span>
-								</MenuItem>
-								{map(serializeFields(child_fields), (field) => {
-									const { fieldName, field_id, blockName } = field;
-
-									const field_label = isEmpty(fieldName) ? field_id : fieldName;
-
-									return (
-										<MenuItem
-											icon={getFieldIcon(blockName)}
-											onClick={() => {
-												onClose();
-												addFieldId(field_id);
-											}}
-										>
-											<span draggable={true}>{field_label.toLowerCase()}</span>
-										</MenuItem>
-									);
-								})}
-							</MenuGroup>
-						</Fragment>
-					)}
-				</DropdownMenu> */}
 			</div>
 
 			<div className="cwp-builder-field">
