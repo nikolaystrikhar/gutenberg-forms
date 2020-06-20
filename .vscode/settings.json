@@ -22,5 +22,9 @@
 	"intelephense.diagnostics.undefinedVariables": false,
 	"intelephense.diagnostics.undefinedTypes": false,
 	"intelephense.diagnostics.unusedSymbols": false,
-	"cSpell.words": ["wordpress"]
+	"cSpell.words": [
+		"bloginfo",
+		"gforms",
+		"wordpress"
+	]
 }

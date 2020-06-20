@@ -4,12 +4,15 @@ require_once plugin_dir_path(__DIR__) . 'triggers/functions.php';
 require_once plugin_dir_path(__DIR__) . 'submissions/entries.php';
 require_once plugin_dir_path(__DIR__) . 'Utils/Bucket.php';
 require_once plugin_dir_path(__DIR__) . 'integrations/handler.php';
+require_once plugin_dir_path( __DIR__ ) . 'tagsHandler/tagHandler.php';
 
 /**
  * @property Validator validator
  * @property wp_post_content post_content
  * @property array attachments
  */
+
+
 
 class Email
 {
@@ -21,6 +24,7 @@ class Email
         $this->post_content = $post_content;
         $this->attachments = array();
         $this->ExternalServiceHandler = new ExternalServiceHandler();
+        
     }
 
     public function is_fields_valid($f)
@@ -264,7 +268,8 @@ class Email
                 } else {
                     $arranged_data['is_valid'] = false;
                 }
-            }
+            } 
+
 
             if ($this->validator->is_hidden_data_field($field_id)) {
 
@@ -274,9 +279,7 @@ class Email
             $arranged_fields[] = $arranged_data;
         }
 
-        print "<pre>";
-            print_r($arranged_fields);
-        print "</pre>";
+        $arranged_fields = gforms_add_dynamic_values($arranged_fields); // adding dynamic values
 
         if ($this->is_fields_valid($arranged_fields)) {
             // check if all the fields are valid;
@@ -438,10 +441,6 @@ class Email
                 return;
             }
         }
-
-        print "<pre>";
-            print_r($mail_body);
-        print "</pre>";
 
         $newEntry = Entries::create_entry($template, $mail_subject, $mail_body, $fields, $this->attachments);
         $record_entries = in_array('Record Entries', $template['actions']);

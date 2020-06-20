@@ -564,71 +564,71 @@ export function getWordpressTags() {
 	const tags = [
 		{
 			title: "Post ID",
-			tag: `{{wp:post_id}}`,
+			tag: `{{wp:post_id}}`, // done
 		},
 		{
 			title: "Post Title",
-			tag: `{{wp:post_title}}`,
+			tag: `{{wp:post_title}}`, // done
 		},
 		{
 			title: "Post URL",
-			tag: `{{wp:post_url}}`,
+			tag: `{{wp:post_url}}`, // done
 		},
 		{
 			title: "Post Author",
-			tag: `{{wp:post_author}}`,
+			tag: `{{wp:post_author}}`, // done
 		},
 		{
 			title: "Post Author Email",
-			tag: `{{wp:post_author_email}}`,
+			tag: `{{wp:post_author_email}}`, // done
 		},
 		{
 			title: "Post Meta",
-			tag: `{{post_meta:YOUR_META_KEY}}`,
+			tag: `{{post_meta:YOUR_META_KEY}}`, // later
 		},
 		{
 			title: "User ID",
-			tag: `{{wp:user_id}}`,
+			tag: `{{wp:user_id}}`, // done
 		},
 		{
 			title: "User First Name",
-			tag: `{{wp:user_first_name}}`,
+			tag: `{{wp:user_first_name}}`, // done
 		},
 		{
 			title: "User Last Name",
-			tag: `{{wp:user_last_name}}`,
+			tag: `{{wp:user_last_name}}`, // done
 		},
 		{
 			title: "User Display Name",
-			tag: `{{wp:user_display_name}}`,
+			tag: `{{wp:user_display_name}}`, // done
 		},
 		{
 			title: "User Username",
-			tag: `{{wp:user_username}}`,
+			tag: `{{wp:user_username}}`, // done
 		},
 		{
 			title: "User Email",
-			tag: `{{wp:user_email}}`,
+			tag: `{{wp:user_email}}`, // done
 		},
 		{
 			title: "User URL",
-			tag: `{{wp:user_url}}`,
+			tag: `{{wp:user_url}}`, // done
 		},
 		{
 			title: "User Meta",
-			tag: `{{user_meta:YOUR_META_KEY}}`,
+			tag: `{{user_meta:YOUR_META_KEY}}`, // later
 		},
 		{
 			title: "Site Title",
-			tag: `{{wp:site_title}}`,
+			tag: `{{wp:site_title}}`, // done
 		},
 		{
 			title: "Site URL",
-			tag: `{{wp:site_url}}`,
+			tag: `{{wp:site_url}}`, // done
 		},
 		{
 			title: "Admin Email",
-			tag: `{{wp:admin_email}}`,
+			tag: `{{wp:admin_email}}`, // done
 		},
 	];
 
@@ -639,11 +639,11 @@ export function getFormTags() {
 	const tags = [
 		{
 			title: "Form ID",
-			tag: `{{form:form_id}}`,
+			tag: `{{form:form_id}}`, // done
 		},
 		{
 			title: "Form Label",
-			tag: `{{form:form_label}}`,
+			tag: `{{form:form_label}}`, // done
 		},
 	];
 
@@ -654,11 +654,11 @@ export function getOtherTags() {
 	const tags = [
 		{
 			title: "Date",
-			tag: `{{other:date}}`,
+			tag: `{{other:date}}`, // done
 		},
 		{
 			title: "Time",
-			tag: `{{other:time}}`,
+			tag: `{{other:time}}`, // done
 		},
 	];
 

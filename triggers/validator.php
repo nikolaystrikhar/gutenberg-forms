@@ -145,8 +145,6 @@
                 'field_id'    => $dV[3],
             );
 
-
-
         }
 
         public function isNumber($num) {
@@ -179,7 +177,7 @@
         }
 
         public function test_file_formats($ext, $allowed) {
-            $allowed_defaults =  array(
+            $allowed_defaults = array(
                 "jpg",
                 "jpeg",
                 "png",
