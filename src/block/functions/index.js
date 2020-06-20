@@ -560,7 +560,13 @@ export function getFieldsTags(clientId, root = false) {
 
 	const fields = serializeFields(child_fields, clientId);
 
-	return fields;
+	return [
+		{
+			fieldName: "All Data",
+			field_id: "{{all_data}}",
+		},
+		...fields,
+	];
 }
 
 export function getMetaTags() {
@@ -674,6 +680,10 @@ export function getOtherTags() {
 		{
 			title: "Time",
 			tag: `{{other:time}}`, // done
+		},
+		{
+			title: "Query",
+			tag: `{{query:YOUR_URL_QUERY}}`,
 		},
 	];
 

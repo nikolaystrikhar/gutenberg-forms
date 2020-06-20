@@ -19,7 +19,7 @@ registerBlockType("cwp/hidden", {
 		},
 		label: {
 			type: "string",
-			default: "Email",
+			default: "Hidden",
 		},
 		id: {
 			type: "string",

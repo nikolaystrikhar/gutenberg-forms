@@ -1,10 +1,11 @@
 <?php
 
+require_once plugin_dir_path( __DIR__ ) . 'triggers/functions.php';
+
 /**
  * TagHandler 
  * This class will handle the tag manipulation & insertion of dynamic content
  */
-
 
 class gforms_TagHandler {
 
@@ -43,6 +44,28 @@ class gforms_TagHandler {
 
     }
 
+    public function get_query_params() : array {
+        
+        $query_string = $_SERVER['QUERY_STRING'];
+        parse_str($query_string, $output);
+
+        $unique_query = array_unique($output);
+        $params = [];
+
+
+        foreach ( $unique_query as $key => $value ) {
+
+            $tag = "{{query:$key}}";
+
+            $params[ $tag ] = $value;
+
+        }
+
+        return $params;
+            
+
+    }
+
     public function get_data() {
 
         $post = get_post( get_the_ID() );
@@ -52,7 +75,6 @@ class gforms_TagHandler {
         $post_author_email = get_the_author_meta('email', $post->post_author);
 
         $meta = get_post_meta($post->ID);
-
   
 
         $user_id = get_current_user_id();
@@ -76,10 +98,12 @@ class gforms_TagHandler {
             '{{wp:site_title}}' => get_bloginfo( 'name' ),
             '{{wp:admin_email}}' => get_bloginfo('admin_email'),
             '{{other:date}}' => date("Y/m/d"),
-            '{{other:time}}' => date("h:i:sa")
+            '{{other:time}}' => date("h:i:sa"),
+            '{{all_data}}' => merge_fields_with_ids( $this->fields )
         );
 
         $data = $this->add_field_data( $data );
+        $data += $this->get_query_params();
 
         foreach ($meta as $key => $value) {
 

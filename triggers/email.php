@@ -287,29 +287,6 @@ class Email
         }
     }
 
-
-    private function with_fields($fields, $target)
-    {
-
-        $result = $target;
-        $data = array();
-
-        foreach ($fields as $field => $field_value) {
-
-            $field_name = "{{" . $field_value['field_type'] . "-" . $field_value['field_data_id'] . "}}";
-
-            if ($field_name !== "{{-}}") {
-                $data[$field_name] = $field_value['field_value'];
-            }
-
-            $data['{{all_data}}'] = merge_fields_with_ids($fields);
-        }
-
-        $replaced_str = strtr($target, $data);
-
-        return $replaced_str;
-    }
-
     private function url_success($url)
     {
 
@@ -394,6 +371,7 @@ class Email
     {
 
         $template = $this->get_templates($_POST['submit'])[0];
+        $tagHandler = new gforms_TagHandler( $fields );
 
         /**
          * @var string $fromEmail
@@ -401,8 +379,8 @@ class Email
 
         isset($template) && extract($template);
 
-        $mail_subject = $this->with_fields($fields, $template[0]['subject']);
-        $mail_body = $this->with_fields($fields, $template[0]['body']);
+        $mail_subject = $tagHandler->merge($template[0]['subject']);
+        $mail_body = $tagHandler->merge($template[0]['body']);
         $headers = [];
 
         $CC = $template['cc'];

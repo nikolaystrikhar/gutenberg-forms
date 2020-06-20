@@ -27,7 +27,7 @@ function edit(props) {
 	const [selector, setSelector] = useState(false);
 	const hiddenField = useRef();
 
-	useEffect(() => {
+	const setData = () => {
 		if (field_name === "" || detect_similar_forms(props.clientId)) {
 			const newFieldName = getFieldName("hidden", props.clientId);
 
@@ -63,7 +63,13 @@ function edit(props) {
 					),
 			});
 		}
+	};
+
+	useEffect(() => {
+		setData();
 	}, []);
+
+	useEffect(() => setData(), [props]);
 
 	const handleChange = (event) => {
 		const { value } = event.target;
@@ -98,6 +104,8 @@ function edit(props) {
 		});
 	};
 
+	const icon = selector && isSelected ? "no-alt" : "list-view";
+
 	return [
 		<InspectorControls>
 			<PanelBody initialOpen={true} title={__("Field Settings", TEXT_DOMAIN)}>
@@ -123,7 +131,7 @@ function edit(props) {
 			<div>
 				<IconButton
 					className="cwp-tag-opener"
-					icon="list-view"
+					icon={icon}
 					isDefault
 					label={__("Add Dynamic Data", TEXT_DOMAIN)}
 					onClick={() => setSelector(!selector)}
