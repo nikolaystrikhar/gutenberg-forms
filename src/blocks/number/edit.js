@@ -199,12 +199,14 @@ function edit(props) {
 						<RangeControl
 							min={0}
 							max={10000}
+							step={0.01}
 							value={rangeMax}
 							onChange={(m) => props.setAttributes({ rangeMax: m })}
 							label={__("Range Max", TEXT_DOMAIN)}
 						/>
 						<RangeControl
 							min={0}
+							step={0.01}
 							value={rangeMin}
 							max={10000}
 							onChange={(m) => props.setAttributes({ rangeMin: m })}
