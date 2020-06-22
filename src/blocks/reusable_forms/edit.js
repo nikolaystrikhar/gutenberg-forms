@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import Introduction from "./components/introduction";
 import { isEmpty, get, has } from "lodash";
 import ServerSideRender from "@wordpress/server-side-render";
@@ -62,7 +62,7 @@ function edit(props) {
 			) : (
 				<div className="cwp-rendered-content">
 					<ServerSideRender
-						block="cwp/gutenberg-forms-preview"
+						block="cwp/gutenbergformspreview"
 						attributes={{
 							post_id: formId,
 						}}
