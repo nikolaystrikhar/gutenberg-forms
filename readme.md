@@ -79,11 +79,11 @@ We appreciate all contributions and don't want a wall of rules to get in the way
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
-= 1.5.0 = ()
+= 1.5.0 = (22 June 2020)
 
 - Added: Dynamically populate field values
 - Added: Server side preview for saved forms
-- Added: Hidden field with merge tag inserter (UNDER-PROGRESS)
+- Added: Hidden field with merge tag inserter
 - Fixed: Bugs
 
 = 1.4.0 = (03 June 2020)

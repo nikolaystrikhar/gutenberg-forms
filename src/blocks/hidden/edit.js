@@ -132,7 +132,6 @@ function edit(props) {
 				<IconButton
 					className="cwp-tag-opener"
 					icon={icon}
-					isDefault
 					label={__("Add Dynamic Data", TEXT_DOMAIN)}
 					onClick={() => setSelector(!selector)}
 				/>

@@ -76,7 +76,6 @@ function gutenberg_forms_cwp_block_assets()
 		)
 	);
 	
-
 	//? for server side rendering of the block instead of shortcode...
 	register_block_type(
 		'cwp/gutenbergformspreview',

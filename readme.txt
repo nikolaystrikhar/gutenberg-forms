@@ -92,7 +92,7 @@ You may also get involved with the development via Github:
 == Changelog ==
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
-= 1.5.0 = () 
+= 1.5.0 = (22 June 2020)
 - Added: Dynamically populate field values
 - Added: Server side preview for saved forms
 - Added: Hidden field with merge tag inserter (UNDER-PROGRESS)

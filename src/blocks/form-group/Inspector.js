@@ -4,7 +4,7 @@ import {
 	PanelBody,
 	ColorPalette,
 	RangeControl,
-	Notice
+	Notice,
 } from "@wordpress/components";
 import { basicColorScheme } from "../../block/misc/helper";
 import { set, clone } from "lodash";
@@ -20,15 +20,20 @@ function Inspector(prop) {
 	const props = prop.data,
 		{
 			styling,
-			styling: { backgroundColor, color, padding, borderColor, borderWidth, borderRadius },
+			styling: {
+				backgroundColor,
+				color,
+				padding,
+				borderColor,
+				borderWidth,
+				borderRadius,
+			},
 			condition,
-			enableCondition
+			enableCondition,
 		} = props.attributes;
 
 	const handleStyling = (style, key) => {
 		const groupStyling = clone(styling);
-
-		console.log(style, key);
 
 		set(groupStyling, key, style); //changing the color;
 
@@ -39,9 +44,10 @@ function Inspector(prop) {
 		<InspectorControls>
 			{isChildFieldsRequired(props.clientId) && enableCondition && (
 				<Notice status="error" isDismissible={false}>
-					{
-						__("Do not have a required fields inside a conditional group.", TEXT_DOMAIN)
-					}
+					{__(
+						"Do not have a required fields inside a conditional group.",
+						TEXT_DOMAIN
+					)}
 				</Notice>
 			)}
 			<PanelBody title={__("Styling")}>
@@ -50,7 +56,7 @@ function Inspector(prop) {
 					<ColorPalette
 						colors={basicColorScheme}
 						value={backgroundColor}
-						onChange={color => handleStyling(color, "backgroundColor")}
+						onChange={(color) => handleStyling(color, "backgroundColor")}
 					/>
 				</div>
 				<div className="cwp-option">
@@ -58,7 +64,7 @@ function Inspector(prop) {
 					<ColorPalette
 						colors={basicColorScheme}
 						value={color}
-						onChange={color => handleStyling(color, "color")}
+						onChange={(color) => handleStyling(color, "color")}
 					/>
 				</div>
 
@@ -67,33 +73,39 @@ function Inspector(prop) {
 					<ColorPalette
 						colors={basicColorScheme}
 						value={borderColor}
-						onChange={color => handleStyling(color, "borderColor")}
+						onChange={(color) => handleStyling(color, "borderColor")}
 					/>
 				</div>
 				<div className="cwp-option">
-					<h3 className="cwp-heading">{__("Border Width [px]", TEXT_DOMAIN)}</h3>
+					<h3 className="cwp-heading">
+						{__("Border Width [px]", TEXT_DOMAIN)}
+					</h3>
 					<RangeControl
 						value={borderWidth}
 						min={0}
 						max={20}
-						onChange={borderWidth => handleStyling(borderWidth, "borderWidth")}
+						onChange={(borderWidth) =>
+							handleStyling(borderWidth, "borderWidth")
+						}
 					/>
 				</div>
 				<div className="cwp-option">
-					<h3 className="cwp-heading">{__("Border Radius [px]", TEXT_DOMAIN)}</h3>
+					<h3 className="cwp-heading">
+						{__("Border Radius [px]", TEXT_DOMAIN)}
+					</h3>
 					<RangeControl
 						value={borderRadius}
 						min={0}
 						max={100}
 						initialPosition={0}
-						onChange={value => handleStyling(value, "borderRadius")}
+						onChange={(value) => handleStyling(value, "borderRadius")}
 					/>
 				</div>
 				<div className="cwp-option">
 					<RangeControl
 						value={padding}
 						label={__("Padding", TEXT_DOMAIN)}
-						onChange={padd => handleStyling(padd, "padding")}
+						onChange={(padd) => handleStyling(padd, "padding")}
 					/>
 				</div>
 			</PanelBody>
