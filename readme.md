@@ -27,6 +27,8 @@ The following are some of the main features, but there's more which you need to 
 - Form Entries - Form Entries are recorded in the database and accessible via WordPress admin.
 - Use Forms Anywhere - You can create standalone forms using Gutenberg and use it anywhere using a shortcode. That Gutenberg Forms compatible with any WordPress page builder.
 - Form Templates - We have started creating useful form templates to let you get started building your desired form faster.
+- Dynamically populate field values via URL parameters.
+- Hidden field type with dynamic value tags.
 - Calculator Forms - Create basic or complex calculations
 - Spam Protection - Google reCaptcha Integration
 - Email Notification Builder - Create a custom email notification content
@@ -39,18 +41,6 @@ The following are some of the main features, but there's more which you need to 
 
 - MailPoet Addon ([https://github.com/CakeWP/gutenberg-forms-mailpoet](https://github.com/CakeWP/gutenberg-forms-mailpoet))
 
-## Privacy Notice
-
-With the default configuration, this plugin, in itself, does not:
-
-- track users by stealth;
-- write any user personal data to the database (as of now);
-- send any data to external servers;
-- use cookies.
-
-If you activate certain features in this plugin, the contact form submitter's personal data, including their IP address, may be sent to the service provider. Thus, confirming the provider's privacy policy is recommended. These features include:
-
-- reCAPTCHA ([Google](https://policies.google.com/?hl=en))
 
 ## Connect
 
@@ -79,7 +69,7 @@ We appreciate all contributions and don't want a wall of rules to get in the way
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
-= 1.5.0 = (22 June 2020)
+= 1.5.0 = (23 June 2020)
 
 - Added: Dynamically populate field values
 - Added: Server side preview for saved forms

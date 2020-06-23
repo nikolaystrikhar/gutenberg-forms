@@ -3,7 +3,7 @@ Contributors: munirkamal
 Tags: wordpress form,  gutenberg form, contact form, gutenberg block, contact form plugin, forms, form builder, custom form, contact button, contact me, custom contact form, form manager, form, forms builder, forms creator, captcha, recaptcha, Akismet, email form, web form, feedback form, email submit form, message form, contact form block, wordpress form plugin
 Requires at least: 4.8
 Tested up to: 5.4
-Stable tag: 1.4.0
+Stable tag: 1.5.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -24,20 +24,22 @@ Gutenberg Forms adds a Form Block in Gutenberg and all the form fields are child
 
 The following are some of the main features, but there's more which you need to checkout by installing the plugin. 
 
-* No Bulky Form Builder - Build Forms Directly in Gutenberg Editor
-* Easy Form Layouts using builtin Form Columns Block
-* Create Multi-Step / Multi-Page Forms Easily
-* Conditional Logic - Show/hide fields conditionally
+* No Bulky Form Builder - Build Forms Directly in Gutenberg Editor.
+* Easy Form Layouts using builtin Form Columns Block.
+* Create Multi-Step / Multi-Page Forms Easily.
+* Conditional Logic - Show/hide fields conditionally.
 * Form Entries - Form Entries are recorded in the database and accessible via WordPress admin.
 * Use Forms Anywhere - You can create standalone forms using Gutenberg and use it anywhere using a shortcode. That Gutenberg Forms compatible with any WordPress page builder.
 * Form Templates - We have started creating useful form templates to let you get started building your desired form faster.
-* Calculator Forms - Create basic or complex calculations
-* Spam Protection - Google reCaptcha Integration
-* Email Notification Builder - Create a custom email notification content
-* Form Styles - Form & Field blocks come with different styles. (you can add yours as well)
+* Calculator Forms - Create basic or complex calculations.
+* Dynamically populate field values via URL parameters.
+* Hidden field type with dynamic value tags.
+* Spam Protection - Google reCaptcha Integration.
+* Email Notification Builder - Create a custom email notification content.
+* Form Styles - Form & Field blocks come with different styles. (you can add yours as well).
 * Responsive Forms - The forms you create are fully responsive.
-* Import/Export Forms - Do it the same way you do with any Gutenberg block
-* More features you will find out while using the plugin
+* Import/Export Forms - Do it the same way you do with any Gutenberg block.
+* More features you will find out while using the plugin.
 
 = Add-ons & Integrations =
 
@@ -54,18 +56,6 @@ This is a new plugin and I am committed to making it one of the best Form Builde
 
 [https://github.com/munirkamal/gutenberg-forms](https://github.com/munirkamal/gutenberg-forms)
 
-= Privacy Notice =
-
-With the default configuration, this plugin, in itself, does not:
-
-* track users by stealth;
-* write any user personal data to the database (as of now);
-* send any data to external servers;
-* use cookies.
-
-If you activate certain features in this plugin, the contact form submitter's personal data, including their IP address, may be sent to the service provider. Thus, confirming the provider's privacy policy is recommended. These features include:
-
-* reCAPTCHA ([Google](https://policies.google.com/?hl=en))
 
 == Installation ==
 
@@ -92,7 +82,7 @@ You may also get involved with the development via Github:
 == Changelog ==
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
-= 1.5.0 = (22 June 2020)
+= 1.5.0 = (23 June 2020)
 - Added: Dynamically populate field values
 - Added: Server side preview for saved forms
 - Added: Hidden field with merge tag inserter (UNDER-PROGRESS)
