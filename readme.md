@@ -69,6 +69,8 @@ We appreciate all contributions and don't want a wall of rules to get in the way
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
+= 1.6.0 = ()
+
 = 1.5.0 = (23 June 2020)
 
 - Added: Dynamically populate field values
