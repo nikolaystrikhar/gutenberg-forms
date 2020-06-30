@@ -1636,7 +1636,8 @@ jQuery(function ($) {
 						.find(`input[type="checkbox"]`)
 						.each(() => {
 							const value = $(this).val();
-							const checkboxesValues = queryValue.split(",");
+							const checkboxesValues =
+								queryValue !== null ? queryValue.split(",") : "";
 
 							if (checkboxesValues.includes(value)) {
 								$(this).attr("checked", true);
