@@ -1,10 +1,9 @@
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 
-import { fieldParents } from '../../constants';
+import { fieldParents } from "../../constants";
 import formButtonEdit from "./edit.js";
 import formButtonSave from "./save.js";
-
 
 registerBlockType("cwp/form-button", {
 	title: __("Form Button"),
@@ -28,15 +27,15 @@ registerBlockType("cwp/form-button", {
 	attributes: {
 		label: {
 			type: "string",
-			default: "Submit"
+			default: "Submit",
 		},
 		parentId: {
 			type: "string",
-			default: ""
+			default: "",
 		},
 		action: {
 			default: "submit",
-			type: "string"
+			type: "string",
 		},
 		styling: {
 			type: "object",
@@ -44,13 +43,13 @@ registerBlockType("cwp/form-button", {
 				backgroundColor: "rgb(238, 238, 238)",
 				color: "rgb(49, 49, 49)",
 				padding: 25,
-				borderRadius: 0
-			}
-		}
+				borderRadius: 0,
+			},
+		},
 	},
 	supports: {
 		align: true,
-		align: ["wide", "full", "center"]
+		align: ["wide", "full", "center", "left", "right"],
 	},
-	parent: fieldParents
+	parent: fieldParents,
 });

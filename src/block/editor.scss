@@ -51,6 +51,10 @@
 }
 
 .cwp-form {
+	.cwp-gutenberg-form.cwp-progress-bar {
+		@include Progressbar("backend");
+	}
+
 	& .wp-block-cwp-form-button {
 		@include normalize_button();
 	}

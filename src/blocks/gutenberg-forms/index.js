@@ -3,121 +3,125 @@ const { registerBlockType } = wp.blocks;
 
 import mainEdit from "./edit";
 import mainSave from "./save";
-import { getGlobalMessages } from '../../block/functions';
-import { fieldSupport } from '../../constants';
+import { getGlobalMessages } from "../../block/functions";
+import { fieldSupport } from "../../constants";
 import { deprecated } from "./deprecated";
 
 const attributes = {
 	submitLabel: {
 		type: "string",
-		default: "Submit"
+		default: "Submit",
 	},
 	buttonSetting: {
 		type: "object",
 		default: {
 			disable: false,
-			alignment: "justify-start"
-		}
+			alignment: "justify-start",
+		},
 	},
 	id: {
 		type: "string",
-		default: ""
+		default: "",
 	},
 	templateBuilder: {
 		type: "boolean",
-		default: false
+		default: false,
 	},
 	template: {
 		type: "string",
 		default: JSON.stringify({
 			subject: "",
-			body: ""
-		})
+			body: "",
+		}),
 	},
 	email: {
 		type: "string",
-		default: ""
+		default: "",
 	},
 	cc: {
 		type: "string",
-		default: ""
+		default: "",
 	},
 	bcc: {
 		type: "string",
-		default: ""
+		default: "",
 	},
 	fromEmail: {
 		type: "string",
-		default: ""
+		default: "",
 	},
 	successURL: {
 		type: "string",
-		default: ""
+		default: "",
 	},
 	successType: {
 		type: "string",
-		default: "message"
+		default: "message",
 	},
 	successMessage: {
 		type: "string",
-		default: "The form has been submitted Successfully!"
+		default: "The form has been submitted Successfully!",
 	},
 	messages: {
 		type: "array",
-		default: getGlobalMessages()
+		default: getGlobalMessages(),
 	},
 	theme: {
 		type: "object",
 		default: {
 			accentColor: "rgb(49, 49, 49)",
 			textColor: "",
-			fieldBackgroundColor: ""
-		}
+			fieldBackgroundColor: "",
+		},
 	},
 	formType: {
 		type: "string",
-		default: ""
+		default: "",
 	},
 	encryption: {
 		type: "string",
-		default: ""
+		default: "",
 	},
 	hideFormOnSuccess: {
 		type: "boolean",
-		default: false
+		default: false,
 	},
 	cpt: {
 		type: "boolean",
-		default: false
+		default: false,
 	},
 	formLabel: {
 		type: "string",
-		default: ""
+		default: "",
 	},
 	integrations: {
 		type: "object",
-		default: {}
+		default: {},
 	},
 	actions: {
-		type: 'array',
-		default: ['Record Entries', 'Email Notification']
+		type: "array",
+		default: ["Record Entries", "Email Notification"],
 	},
 	spamProtections: {
-		type: 'array',
-		default: []
+		type: "array",
+		default: [],
 	},
 	buttonStyling: {
-		type: 'object',
+		type: "object",
 		default: {
-			backgroundColor: 'white'
-		}
-	}
-}
+			backgroundColor: "white",
+		},
+	},
+	multiStepEffect: {
+		type: "string",
+		default: "cwp-noEffect-step",
+	},
+};
 
 registerBlockType("cwp/block-gutenberg-forms", {
 	supports: {
 		...fieldSupport,
-		reusable: false
+		reusable: false,
 	},
 	title: __("Gutenberg Forms"),
 	icon: __("feedback"),
@@ -125,5 +129,5 @@ registerBlockType("cwp/block-gutenberg-forms", {
 	keywords: [__("gutenberg-forms"), __("forms")],
 	attributes,
 	edit: mainEdit,
-	save: mainSave
+	save: mainSave,
 });

@@ -13,10 +13,15 @@ registerBlockType("cwp/form-step", {
 		__("forms"),
 		__("form-step"),
 		__("step"),
-		__("multistep")
+		__("multistep"),
 	],
 	edit: stepFormEdit,
 	save: stepFormSave,
-	attributes: {},
-	parent: ["cwp/block-gutenberg-forms"]
+	attributes: {
+		label: {
+			type: "string",
+			default: "Form Step",
+		},
+	},
+	parent: ["cwp/block-gutenberg-forms"],
 });

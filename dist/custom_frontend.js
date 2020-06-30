@@ -1506,18 +1506,103 @@ jQuery(function ($) {
 		}
 	}
 
+	class ProgressBar {
+		constructor(bars) {
+			this.bars = bars;
+		}
+
+		set(perc, animate = false) {
+			const percentage = String(perc).concat("%");
+
+			const { bars } = this;
+
+			bars.each(function () {
+				const fill = $(this).find(".bar-fill");
+
+				if (animate) {
+					fill.animate(
+						{
+							width: percentage,
+						},
+						{
+							duration: 2000,
+							step: function (now) {
+								const percentageIndicator = fill.find(".percentage-indicator");
+
+								if (percentageIndicator.length) {
+									percentageIndicator.html(Math.floor(now) + "%");
+								}
+							},
+						}
+					);
+				} else {
+					fill.css("width", percentage);
+				}
+			});
+		}
+	}
+
 	class MultiStepForm {
 		constructor(target) {
 			this.target = $(target);
 			this.steps = this.target.find(".cwp-form-step");
+			this.bars = this.target.find(".cwp-gutenberg-form.cwp-progress-bar");
+			this.progressBarHandler = new ProgressBar(this.bars);
 
 			this.init();
 		}
 
 		init() {
+			const { steps } = this;
+			//initializing progress bars
+
 			// displaying the first step by default;
-			this.steps.eq(0).addClass("cwp-active-step");
+			steps.eq(0).addClass("cwp-active-step");
 			this.handleEvents();
+			this.handleProgress();
+			this.handleDisability(); // disabling triggers that are invalid
+		}
+
+		handleDisability() {
+			const { target, steps } = this;
+
+			const triggers = target.find(".multistep-trigger");
+
+			triggers.each(function () {
+				const rootStep = $(this).parents(".cwp-form-step");
+				const currentStep = target.find(".cwp-active-step");
+				const currentStepIndex = steps.index(currentStep) + 1;
+				const totalSteps = steps.length;
+
+				if (rootStep.length) {
+					const hasNextStep = rootStep.next().hasClass("cwp-form-step");
+					const hasPrevStep = rootStep.prev().hasClass("cwp-form-step");
+
+					if (!hasNextStep) {
+						rootStep.find('[data-trigger="next"]').css("opacity", ".5");
+					} else {
+						rootStep.find('[data-trigger="next"]').css("opacity", "1");
+					}
+
+					if (!hasPrevStep) {
+						rootStep.find('[data-trigger="previous"]').css("opacity", ".5");
+					} else {
+						rootStep.find('[data-trigger="previous"]').css("opacity", "1");
+					}
+				} else {
+					if (totalSteps === currentStepIndex) {
+						target.find('[data-trigger="next"]').css("opacity", ".5");
+					} else {
+						target.find('[data-trigger="next"]').css("opacity", "1");
+					}
+
+					if (currentStepIndex === 1) {
+						target.find('[data-trigger="previous"]').css("opacity", ".5");
+					} else {
+						target.find('[data-trigger="previous"]').css("opacity", "1");
+					}
+				}
+			});
 		}
 
 		checkValidity(fields) {
@@ -1542,33 +1627,76 @@ jQuery(function ($) {
 			});
 		}
 
+		handleProgress() {
+			const { target, steps } = this;
+			const totalSteps = steps.length;
+			const currentStep = target.find(".cwp-active-step");
+			const currentStepIndex = steps.index(currentStep) + 1;
+
+			const currentPercentage = Math.floor(
+				(currentStepIndex / totalSteps) * 100
+			);
+
+			this.progressBarHandler.set(currentPercentage, true);
+		}
+
+		next() {
+			const { target, steps } = this;
+			const currentActiveStep = target.find(".cwp-active-step");
+			const currentFields = currentActiveStep.find(".cwp-field");
+			const hasNextStep = currentActiveStep.next().hasClass("cwp-form-step");
+
+			if (!this.checkValidity(currentFields)) {
+				this.reportValidity(currentFields);
+				return;
+			}
+
+			if (!hasNextStep) {
+				return;
+			}
+
+			steps.removeClass("cwp-active-step");
+			currentActiveStep.next().addClass("cwp-active-step");
+			this.handleProgress();
+			this.handleDisability();
+		}
+
+		prev() {
+			const { target, steps } = this;
+			const currentActiveStep = target.find(".cwp-active-step");
+			const currentFields = currentActiveStep.find(".cwp-field");
+			const hasPrevStep = currentActiveStep.prev().hasClass("cwp-form-step");
+
+			if (!this.checkValidity(currentFields)) {
+				this.reportValidity(currentFields);
+				return;
+			}
+
+			if (!hasPrevStep) {
+				return;
+			}
+
+			steps.removeClass("cwp-active-step");
+			currentActiveStep.prev().addClass("cwp-active-step");
+			this.handleProgress();
+			this.handleDisability();
+		}
+
 		handleEvents() {
-			const { steps } = this;
+			const { target } = this;
 			const t = this;
 
-			steps.each(function () {
-				const self = $(this);
-				const triggers_in_this_step = $(this).find(".multistep-trigger");
-				const fields_in_this_step = $(this).find(".cwp-field");
+			target.find(".multistep-trigger").each(function () {
+				const trigger = $(this).data("trigger");
 
-				triggers_in_this_step.each(function () {
-					const trigger = $(this).data("trigger");
+				$(this).click(function (e) {
+					e.preventDefault();
 
-					$(this).click(function (e) {
-						e.preventDefault();
-
-						if (!t.checkValidity(fields_in_this_step)) {
-							t.reportValidity(fields_in_this_step);
-						}
-
-						if (trigger === "next" && t.checkValidity(fields_in_this_step)) {
-							t.steps.removeClass("cwp-active-step");
-							self.next().addClass("cwp-active-step");
-						} else if (trigger === "previous") {
-							t.steps.removeClass("cwp-active-step");
-							self.prev().addClass("cwp-active-step");
-						}
-					});
+					if (trigger === "next") {
+						t.next();
+					} else if (trigger === "previous") {
+						t.prev();
+					}
 				});
 			});
 		}

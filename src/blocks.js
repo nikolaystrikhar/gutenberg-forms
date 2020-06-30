@@ -41,3 +41,4 @@ import "./blocks/yes-no/index.js";
 import "./blocks/file_upload/index.js";
 import "./blocks/hidden/index.js";
 import "./blocks/reusable_forms/index.js";
+import "./blocks/progress/index.js";

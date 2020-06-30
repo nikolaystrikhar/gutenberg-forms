@@ -45,19 +45,61 @@ html {
 	}
 
 	& .cwp-form {
+		.cwp-gutenberg-form.cwp-progress-bar {
+			@include Progressbar("frontend");
+		}
 
-		&[data-formtype="multiStep"] {
+		&[data-formtype="multiStep"].cwp-fade-step {
 			& .cwp-form-step {
-				display:none;
+				&:not(cwp-active-step) {
+					opacity: 0;
+					visibility: hidden;
+					padding: 0px;
+					border: none;
+					height: 0px;
+				}
+
+				&.cwp-active-step {
+					transition: 0.5s opacity;
+
+					opacity: 1 !important;
+					height: 100%;
+					visibility: visible;
+				}
+			}
+		}
+
+		&[data-formtype="multiStep"].cwp-slide-step {
+			& .cwp-form-step {
+				&:not(cwp-active-step) {
+					opacity: 0;
+					visibility: hidden;
+					padding: 0px;
+					border: none;
+					height: 0px;
+					transform: translateX(100%%);
+				}
+
+				&.cwp-active-step {
+					transition: 0.5s transform;
+					opacity: 1 !important;
+					height: 100%;
+					visibility: visible;
+					transform: translateX(0%);
+				}
+			}
+		}
+
+		&[data-formtype="multiStep"].cwp-noEffect-step {
+			& .cwp-form-step {
+				display: none;
 				padding: 0px;
 				border: none;
 
 				&.cwp-active-step {
-					display:block;
+					display: block;
 				}
-			}	
-
-
+			}
 		}
 
 		& .wp-block-cwp-form-button {

@@ -1063,3 +1063,23 @@
 		min-width: 320px !important;
 	}
 }
+
+@mixin Progressbar($viewPage) {
+	.bar-fill {
+		@if ($viewPage == "backend") {
+			width: 50%;
+		} @else {
+			width: 0%;
+		}
+
+		height: 100%;
+		display: flex;
+		align-items: center;
+		justify-content: flex-end;
+
+		span {
+			color: #fff;
+			padding: 0px 10px;
+		}
+	}
+}

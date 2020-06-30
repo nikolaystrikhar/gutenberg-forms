@@ -11,11 +11,18 @@ import {
 	TextareaControl,
 	FormToggle,
 	Notice,
-	FormTokenField
+	FormTokenField,
+	SelectControl,
 } from "@wordpress/components";
 import { set, clone, isEqual, isEmpty } from "lodash";
 import MappedMessages from "./components/messages";
-import { changeChildValue, get_form_actions, get_spam_protectors, hasObject } from "../../block/functions/index";
+import {
+	changeChildValue,
+	get_form_actions,
+	get_spam_protectors,
+	hasObject,
+	getRootFormBlock,
+} from "../../block/functions/index";
 import { basicColorScheme } from "../../block/misc/helper";
 import { TEXT_DOMAIN } from "../../block/constants";
 import TemplateBuilder from "./components/templateBuilder";
@@ -44,26 +51,27 @@ function Inspector(prop) {
 		sendEmail,
 		actions,
 		spamProtections,
-		buttonStyling
+		buttonStyling,
+		multiStepEffect,
 	} = props.attributes;
 
-	const handleAlignment = aln => {
+	const handleAlignment = (aln) => {
 		props.setAttributes({
 			buttonSetting: {
 				...buttonSetting,
-				alignment: aln
-			}
+				alignment: aln,
+			},
 		});
 	};
 
-	const getAlignmentProps = aln => {
+	const getAlignmentProps = (aln) => {
 		if (buttonSetting.alignment === aln)
 			return {
-				isPrimary: true
+				isPrimary: true,
 			};
 
 		return {
-			isDefault: true
+			isDefault: true,
 		};
 	};
 
@@ -71,19 +79,19 @@ function Inspector(prop) {
 		props.setAttributes({
 			buttonSetting: {
 				...buttonSetting,
-				[t]: v
-			}
+				[t]: v,
+			},
 		});
 	};
 
-	const getSuccess = t => {
+	const getSuccess = (t) => {
 		return successType === t
 			? {
-				isPrimary: true
-			}
+					isPrimary: true,
+			  }
 			: {
-				isDefault: true
-			};
+					isDefault: true,
+			  };
 	};
 
 	const handleMessagesChange = (t, v, i, fieldName) => {
@@ -91,7 +99,7 @@ function Inspector(prop) {
 
 		newMessages[i] = {
 			...newMessages[i],
-			[t]: v
+			[t]: v,
 		};
 		props.setAttributes({ messages: newMessages });
 		changeChildValue(fieldName, props.clientId, newMessages[i], t, messages);
@@ -106,35 +114,42 @@ function Inspector(prop) {
 	};
 
 	const handleProtection = (protection) => {
-
-		const enabled = hasObject(spamProtections, protection)
+		const enabled = hasObject(spamProtections, protection);
 
 		if (enabled === false) {
-
 			const newProtections = clone(spamProtections);
-			newProtections.push(protection)
-			props.setAttributes({ spamProtections: newProtections })
-
-
+			newProtections.push(protection);
+			props.setAttributes({ spamProtections: newProtections });
 		} else {
 			const newProtections = clone(spamProtections);
-			let disabled = newProtections.filter(p => !isEqual(p, protection));
+			let disabled = newProtections.filter((p) => !isEqual(p, protection));
 
-			props.setAttributes({ spamProtections: disabled })
-
+			props.setAttributes({ spamProtections: disabled });
 		}
-
-	}
+	};
 
 	const handleButtonStyling = (v, t) => {
-
 		const newStyling = clone(buttonStyling);
 
 		set(newStyling, t, v);
 
-		props.setAttributes({ buttonStyling: newStyling })
+		props.setAttributes({ buttonStyling: newStyling });
+	};
 
-	}
+	const multiStepEffects = [
+		{
+			label: "No Effect",
+			value: "cwp-noEffect-step",
+		},
+		{
+			label: "Fade",
+			value: "cwp-fade-step",
+		},
+		{
+			label: "Slide",
+			value: "cwp-slide-step",
+		},
+	];
 
 	return (
 		<InspectorControls>
@@ -144,7 +159,7 @@ function Inspector(prop) {
 					<ColorPalette
 						colors={basicColorScheme}
 						value={theme.accentColor}
-						onChange={color => handleStyling(color, "accentColor")}
+						onChange={(color) => handleStyling(color, "accentColor")}
 					/>
 				</div>
 				<div className="cwp-option">
@@ -152,24 +167,26 @@ function Inspector(prop) {
 					<ColorPalette
 						colors={basicColorScheme}
 						value={theme.textColor}
-						onChange={color => handleStyling(color, "textColor")}
-					/>
-				</div>
-				<div className="cwp-option">
-					<h3 className="cwp-heading">{__("Field Background Color", TEXT_DOMAIN)}</h3>
-					<ColorPalette
-						colors={basicColorScheme}
-						value={theme.fieldBackgroundColor}
-						onChange={color => handleStyling(color, "fieldBackgroundColor")}
+						onChange={(color) => handleStyling(color, "textColor")}
 					/>
 				</div>
 				<div className="cwp-option">
 					<h3 className="cwp-heading">
-						{__('Button Background Color', TEXT_DOMAIN)}
+						{__("Field Background Color", TEXT_DOMAIN)}
+					</h3>
+					<ColorPalette
+						colors={basicColorScheme}
+						value={theme.fieldBackgroundColor}
+						onChange={(color) => handleStyling(color, "fieldBackgroundColor")}
+					/>
+				</div>
+				<div className="cwp-option">
+					<h3 className="cwp-heading">
+						{__("Button Background Color", TEXT_DOMAIN)}
 					</h3>
 					<ColorPalette
 						value={buttonStyling.backgroundColor}
-						onChange={newbg => handleButtonStyling(newbg, 'backgroundColor')}
+						onChange={(newbg) => handleButtonStyling(newbg, "backgroundColor")}
 						colors={basicColorScheme}
 					/>
 				</div>
@@ -179,12 +196,11 @@ function Inspector(prop) {
 				<TextControl
 					label={__("Form Label", TEXT_DOMAIN)}
 					value={formLabel}
-					onChange={formLabel => props.setAttributes({ formLabel })}
+					onChange={(formLabel) => props.setAttributes({ formLabel })}
 				/>
 
-
-				{
-					formType !== "multiStep" && <div className="cwp-option">
+				{formType !== "multiStep" && (
+					<div className="cwp-option">
 						<PanelRow>
 							<h3>{__("Disable Submit Button", TEXT_DOMAIN)}</h3>
 							<FormToggle
@@ -195,11 +211,23 @@ function Inspector(prop) {
 							/>
 						</PanelRow>
 					</div>
-				}
+				)}
+				{formType === "multiStep" && (
+					<SelectControl
+						label={__("Effect", TEXT_DOMAIN)}
+						value={multiStepEffect}
+						options={multiStepEffects}
+						onChange={(multiStepEffect) =>
+							props.setAttributes({ multiStepEffect })
+						}
+					/>
+				)}
 				{!buttonSetting.disable && (
 					<Fragment>
 						<div className="cwp-option column">
-							<h3 className="cwp-heading">{__("Button Alignment", TEXT_DOMAIN)}</h3>
+							<h3 className="cwp-heading">
+								{__("Button Alignment", TEXT_DOMAIN)}
+							</h3>
 							<div className="cwp-column">
 								<ButtonGroup>
 									<Button
@@ -249,44 +277,40 @@ function Inspector(prop) {
 						<TextControl
 							label={__("Success Url (Redirect)", TEXT_DOMAIN)}
 							value={successURL}
-							onChange={successURL => props.setAttributes({ successURL })}
+							onChange={(successURL) => props.setAttributes({ successURL })}
 						/>
 					) : (
-							<TextareaControl
-								label={__("Success Message", TEXT_DOMAIN)}
-								value={successMessage}
-								onChange={successMessage =>
-									props.setAttributes({ successMessage })
-								}
-							/>
-						)}
+						<TextareaControl
+							label={__("Success Message", TEXT_DOMAIN)}
+							value={successMessage}
+							onChange={(successMessage) =>
+								props.setAttributes({ successMessage })
+							}
+						/>
+					)}
 				</div>
-				{
-					successType === "message" && <div className="cwp-option">
+				{successType === "message" && (
+					<div className="cwp-option">
 						<PanelRow>
 							<h3>{__("Hide Form On Success", TEXT_DOMAIN)}</h3>
 							<FormToggle
 								checked={hideFormOnSuccess}
-								onChange={() => props.setAttributes({ hideFormOnSuccess: !hideFormOnSuccess })}
+								onChange={() =>
+									props.setAttributes({ hideFormOnSuccess: !hideFormOnSuccess })
+								}
 							/>
 						</PanelRow>
 					</div>
-				}
-
+				)}
 			</PanelBody>
 
-			{
-				actions.includes('Email Notification') && (
-					<PanelBody title={__("Email Notification", TEXT_DOMAIN)}>
-						<TemplateBuilder clientId={props.clientId} data={props} />
-					</PanelBody>
-				)
-			}
+			{actions.includes("Email Notification") && (
+				<PanelBody title={__("Email Notification", TEXT_DOMAIN)}>
+					<TemplateBuilder clientId={props.clientId} data={props} />
+				</PanelBody>
+			)}
 
-
-			<PanelBody
-				title={__('Form Action', TEXT_DOMAIN)}
-			>
+			<PanelBody title={__("Form Action", TEXT_DOMAIN)}>
 				<FormTokenField
 					value={actions}
 					onChange={(actions) => props.setAttributes({ actions })}
@@ -294,14 +318,13 @@ function Inspector(prop) {
 				/>
 			</PanelBody>
 
-			{
-				!isEmpty(get_spam_protectors()) && <PanelBody title={__('Spam Protection', TEXT_DOMAIN)}>
-					{
-						get_spam_protectors().map((protection) => {
+			{!isEmpty(get_spam_protectors()) && (
+				<PanelBody title={__("Spam Protection", TEXT_DOMAIN)}>
+					{get_spam_protectors().map((protection) => {
+						const isEnabled = hasObject(spamProtections, protection);
 
-							const isEnabled = hasObject(spamProtections, protection);
-
-							return <div className="cwp-option">
+						return (
+							<div className="cwp-option">
 								<PanelRow>
 									<h3>{protection.title}</h3>
 									<FormToggle
@@ -311,19 +334,19 @@ function Inspector(prop) {
 									/>
 								</PanelRow>
 							</div>
-						})
-					}
+						);
+					})}
 				</PanelBody>
-			}
-
-
+			)}
 
 			<PanelBody initialOpen={false} title={__("Messages", TEXT_DOMAIN)}>
 				<div className="cwp-option">
 					<p>
-						<Icon icon="info" /> {
-							__("You can edit validations messages used for various field types here. Use {{ value }} to insert field value.", TEXT_DOMAIN)
-						}
+						<Icon icon="info" />{" "}
+						{__(
+							"You can edit validations messages used for various field types here. Use {{ value }} to insert field value.",
+							TEXT_DOMAIN
+						)}
 					</p>
 				</div>
 				<MappedMessages val={messages} onChange={handleMessagesChange} />

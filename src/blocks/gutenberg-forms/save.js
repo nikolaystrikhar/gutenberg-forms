@@ -18,11 +18,12 @@ function save(props) {
 		hideFormOnSuccess,
 		formLabel,
 		spamProtections,
-		buttonStyling
+		buttonStyling,
+		multiStepEffect,
 	} = props.attributes;
 
 	const recaptchaEnable = hasProtection("ReCaptcha v2", spamProtections);
-	const recaptcha = getProtection('ReCaptcha v2', spamProtections);
+	const recaptcha = getProtection("ReCaptcha v2", spamProtections);
 
 	const captcha_p = `
 
@@ -38,18 +39,20 @@ function save(props) {
 	const getEncryption = () => {
 		if (!isEmpty(encryption)) {
 			return {
-				enctype: encryption
-			}
+				enctype: encryption,
+			};
 		}
 
 		return {};
-	}
-
-
+	};
 
 	return (
 		<div>
-			<div className="cwp-form" data-formtype={formType} id={formId}>
+			<div
+				className={`cwp-form ${multiStepEffect}`}
+				data-formtype={formType}
+				id={formId}
+			>
 				<form method="POST" id={id} {...getEncryption()} data-formid={id}>
 					<InnerBlocks.Content />
 					{recaptchaEnable && (
@@ -59,17 +62,9 @@ function save(props) {
 							data-sitekey={recaptchaEnable && recaptcha.fields.site_key.value}
 						></div>
 					)}
-					<div style={{ display: 'none' }}>
-						<input
-							type="hidden"
-							name="gf_form_label"
-							value={formLabel}
-						/>
-						<input
-							type="hidden"
-							name="gf_form_id"
-							value={formId}
-						/>
+					<div style={{ display: "none" }}>
+						<input type="hidden" name="gf_form_label" value={formLabel} />
+						<input type="hidden" name="gf_form_id" value={formId} />
 					</div>
 					{!buttonSetting.disable && (
 						<div className={`cwp-submit ${alignment}`}>
@@ -88,11 +83,11 @@ function save(props) {
 					<div id={id} className="cwp-success cwp-hidden">
 						<div className="wrapper">
 							<span>{successMessage}</span>
-							{
-								hideFormOnSuccess && <div className="cwp-add_another_submission">
+							{hideFormOnSuccess && (
+								<div className="cwp-add_another_submission">
 									<button>Another Submission</button>
 								</div>
-							}
+							)}
 						</div>
 					</div>
 				)}
@@ -115,7 +110,9 @@ function save(props) {
 						defer
 					></script>
 					<script
-						src={`https://www.google.com/recaptcha/api.js?render=${recaptchaEnable && recaptcha.fields.site_key.value}`}
+						src={`https://www.google.com/recaptcha/api.js?render=${
+							recaptchaEnable && recaptcha.fields.site_key.value
+						}`}
 					></script>
 					<script dangerouslySetInnerHTML={{ __html: captcha_p }}></script>
 				</div>
