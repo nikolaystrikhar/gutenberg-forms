@@ -13,9 +13,6 @@ import {
 	toString,
 } from "lodash";
 
-import formStepSave from "../../blocks/form-step/save";
-import formStepEdit from "../../blocks/form-step/edit";
-import $ from "jquery";
 const { getPostType } = wp.data.select("core");
 const { createBlock, registerBlockType } = wp.blocks;
 const { __ } = wp.i18n;
@@ -29,7 +26,11 @@ const {
 
 const { getEditedPostAttribute } = wp.data.select("core/editor");
 
-const { updateBlockAttributes } = wp.data.dispatch("core/block-editor");
+const {
+	updateBlockAttributes,
+	replaceInnerBlocks,
+	selectBlock,
+} = wp.data.dispatch("core/block-editor");
 const { withSelect } = wp.data;
 
 const radio_enabled_fields = ["select", "radio", "checkbox"]; //fields that support multiple
@@ -688,4 +689,50 @@ export function getOtherTags() {
 	];
 
 	return tags;
+}
+
+/**
+ *
+ * @param {The template of blocks} innerBlocksTemplate
+ */
+
+const createBlocksFromInnerBlocksTemplate = (innerBlocksTemplate) => {
+	return map(innerBlocksTemplate, ([name, attributes, innerBlocks = []]) =>
+		createBlock(
+			name,
+			attributes,
+			createBlocksFromInnerBlocksTemplate(innerBlocks)
+		)
+	);
+};
+
+/**
+ *
+ * @param {clientId of the target block} clientId
+ * @param {slug of the block that will be appended} slug
+ * @param {attributes of the block that will be appended} attributes
+ *
+ */
+
+export function addInnerBlock(clientId, slug, attributes = {}) {
+	const currentBlock = getBlock(clientId); // target block
+	const currentInnerBlocks = get(currentBlock, "innerBlocks"); // inner blocks of the block where new block will be appended
+
+	if (isEmpty(currentBlock)) return; // checking if the required block is available
+
+	const blockTemplate = [
+		[
+			slug, // block name/slug
+			attributes, // block attribute
+			[], // block innerBlocks
+		],
+	];
+
+	const blockToAppend = createBlocksFromInnerBlocksTemplate(blockTemplate); // creating block from the template
+
+	currentInnerBlocks.push(...blockToAppend); // pushing the required innerBlock to the blockInnerBlocks
+
+	replaceInnerBlocks(clientId, currentInnerBlocks); // finally replacing the inner blocks in the editor
+
+	selectBlock(clientId); // selecting the block
 }

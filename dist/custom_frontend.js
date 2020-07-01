@@ -1518,6 +1518,7 @@ jQuery(function ($) {
 
 			bars.each(function () {
 				const fill = $(this).find(".bar-fill");
+				const percentageIndicator = fill.find(".percentage-indicator");
 
 				if (animate) {
 					fill.animate(
@@ -1527,8 +1528,6 @@ jQuery(function ($) {
 						{
 							duration: 2000,
 							step: function (now) {
-								const percentageIndicator = fill.find(".percentage-indicator");
-
 								if (percentageIndicator.length) {
 									percentageIndicator.html(Math.floor(now) + "%");
 								}
@@ -1536,7 +1535,12 @@ jQuery(function ($) {
 						}
 					);
 				} else {
+					fill.stop(true, true); // for stopping the ongoing animation
 					fill.css("width", percentage);
+
+					if (percentageIndicator.length) {
+						percentageIndicator.html(percentage);
+					}
 				}
 			});
 		}
@@ -1627,7 +1631,7 @@ jQuery(function ($) {
 			});
 		}
 
-		handleProgress() {
+		handleProgress(animate = true) {
 			const { target, steps } = this;
 			const totalSteps = steps.length;
 			const currentStep = target.find(".cwp-active-step");
@@ -1637,7 +1641,7 @@ jQuery(function ($) {
 				(currentStepIndex / totalSteps) * 100
 			);
 
-			this.progressBarHandler.set(currentPercentage, true);
+			this.progressBarHandler.set(currentPercentage, animate);
 		}
 
 		next() {
@@ -1645,6 +1649,8 @@ jQuery(function ($) {
 			const currentActiveStep = target.find(".cwp-active-step");
 			const currentFields = currentActiveStep.find(".cwp-field");
 			const hasNextStep = currentActiveStep.next().hasClass("cwp-form-step");
+
+			const hasSlideAnimation = target.hasClass("cwp-slide-step");
 
 			if (!this.checkValidity(currentFields)) {
 				this.reportValidity(currentFields);
@@ -1655,8 +1661,9 @@ jQuery(function ($) {
 				return;
 			}
 
-			steps.removeClass("cwp-active-step");
-			currentActiveStep.next().addClass("cwp-active-step");
+			steps.removeClass("cwp-active-step from-next");
+			currentActiveStep.next().addClass("cwp-active-step from-next");
+
 			this.handleProgress();
 			this.handleDisability();
 		}
@@ -1676,9 +1683,9 @@ jQuery(function ($) {
 				return;
 			}
 
-			steps.removeClass("cwp-active-step");
-			currentActiveStep.prev().addClass("cwp-active-step");
-			this.handleProgress();
+			steps.removeClass("cwp-active-step from-before");
+			currentActiveStep.prev().addClass("cwp-active-step from-before");
+			this.handleProgress(false);
 			this.handleDisability();
 		}
 

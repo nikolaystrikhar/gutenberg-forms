@@ -256,3 +256,21 @@
 		}
 	}
 }
+
+.cwp-step-appender {
+	display: flex;
+	align-items: stretch;
+	.add_btn {
+		flex: 1;
+		display: flex;
+		align-items: center;
+		flex-direction: row;
+		justify-content: center;
+		cursor: pointer;
+		user-select: none;
+
+		span {
+			margin: 0px 5px 0px 0px;
+		}
+	}
+}

@@ -4,10 +4,11 @@ const { registerBlockType } = wp.blocks;
 import progressEdit from "./edit.js";
 import progressSave from "./save.js";
 import { fieldParents } from "../../constants";
+import Icon from "../../block/Icon";
 
 registerBlockType("cwp/progress", {
 	title: __("Progress Bar"),
-	icon: "email",
+	icon: __(<Icon icon="progress" />),
 	category: "common",
 	keywords: [__("gutenberg-forms"), __("progress"), __("bar")],
 	edit: progressEdit,

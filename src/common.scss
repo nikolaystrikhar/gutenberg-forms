@@ -2,6 +2,38 @@
 @import "./_partials/mixins";
 @import "../src/block/lib/datePicker.scss";
 
+@keyframes slideInLeft {
+	0% {
+		transform: translate3d(-30%, 0, 0);
+		opacity: 0;
+		visibility: visible;
+	}
+	to {
+		opacity: 1;
+		transform: translateZ(0);
+	}
+}
+@keyframes slideInRight {
+	0% {
+		transform: translate3d(30%, 0, 0);
+		opacity: 0;
+		visibility: visible;
+	}
+	to {
+		opacity: 1;
+		transform: translateZ(0);
+	}
+}
+
+@keyframes fadeOut {
+	from {
+		opacity: 0;
+	}
+	to {
+		opacity: 1;
+	}
+}
+
 html {
 	scroll-behavior: smooth;
 }
@@ -61,7 +93,6 @@ html {
 
 				&.cwp-active-step {
 					transition: 0.5s opacity;
-
 					opacity: 1 !important;
 					height: 100%;
 					visibility: visible;
@@ -77,15 +108,21 @@ html {
 					padding: 0px;
 					border: none;
 					height: 0px;
-					transform: translateX(100%%);
 				}
 
 				&.cwp-active-step {
 					transition: 0.5s transform;
-					opacity: 1 !important;
+					opacity: 1;
 					height: 100%;
 					visibility: visible;
-					transform: translateX(0%);
+
+					&.from-before {
+						animation: slideInLeft 1s;
+					}
+
+					&.from-next {
+						animation: slideInRight 1s;
+					}
 				}
 			}
 		}

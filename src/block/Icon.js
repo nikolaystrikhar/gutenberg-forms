@@ -179,6 +179,19 @@ function Icon(props) {
 				</g>
 			</svg>
 		),
+		progress: () => (
+			<svg
+				xmlns="http://www.w3.org/2000/svg"
+				xmlnsXlink="http://www.w3.org/1999/xlink"
+				version="1.1"
+				width={16}
+				height={16}
+				viewBox="0 0 16 16"
+			>
+				<path fill="#444444" d="M0 5v6h16v-6h-16zM15 10h-14v-4h14v4z" />
+				<path fill="#444444" d="M2 7h7v2h-7v-2z" />
+			</svg>
+		),
 	});
 
 	let RequiredIcon = icons[props.icon];
