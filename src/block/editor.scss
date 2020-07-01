@@ -87,9 +87,20 @@
 		}
 	}
 
-	& .cwp-form-step {
-		& .step-divider {
-			@include divider();
+	& .cwp-form-steps-wrapper {
+		.cwp-form-steps-labels {
+			display: flex;
+			flex-direction: row;
+			flex-wrap: wrap;
+			.cwp-step-label-root {
+				margin: 10px 10px;
+				a {
+					padding: 10px;
+					&.is-active-step {
+						border: 1px solid #ccc;
+					}
+				}
+			}
 		}
 	}
 

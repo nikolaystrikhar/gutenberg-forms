@@ -1,11 +1,11 @@
 const { registerBlockType } = wp.blocks;
 const { __ } = wp.i18n;
 
-import stepFormEdit from "./edit";
-import stepFormSave from "./save";
+import stepsEdit from "./edit";
+import stepsSave from "./save";
 
-registerBlockType("cwp/form-step", {
-	title: __("Form Step"),
+registerBlockType("cwp/form-steps", {
+	title: __("Form Steps"),
 	icon: "editor-ol-rtl",
 	category: "common",
 	keywords: [
@@ -15,12 +15,12 @@ registerBlockType("cwp/form-step", {
 		__("step"),
 		__("multistep"),
 	],
-	edit: stepFormEdit,
-	save: stepFormSave,
+	edit: stepsEdit,
+	save: stepsSave,
 	attributes: {
-		label: {
-			type: "string",
-			default: "Form Step",
+		currentStep: {
+			type: "number",
+			default: 0,
 		},
 	},
 	parent: ["cwp/block-gutenberg-forms"],

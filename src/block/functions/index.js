@@ -396,24 +396,7 @@ export function getFormTemplates(type) {
 	}
 
 	if (type === "multiStep") {
-		return [
-			[
-				"cwp/form-step",
-				{},
-				[
-					["cwp/name", {}],
-					["cwp/form-button", { action: "next", label: "Next" }],
-				],
-			],
-			[
-				"cwp/form-step",
-				{},
-				[
-					["cwp/email", {}],
-					["cwp/form-button", { action: "previous", label: "Previous" }],
-				],
-			],
-		];
+		return [["cwp/form-steps", {}, [["cwp/form-step", {}]]]];
 	}
 }
 
@@ -735,4 +718,37 @@ export function addInnerBlock(clientId, slug, attributes = {}) {
 	replaceInnerBlocks(clientId, currentInnerBlocks); // finally replacing the inner blocks in the editor
 
 	selectBlock(clientId); // selecting the block
+}
+
+/**
+ * Will get the child attributes in a linear way (will not get the attributes recursively from each innerBlock)
+ * @param {The client id of the root block} clientId
+ * @param {If provided will only return single attribute matching the name} attribute
+ */
+
+export function getLinearChildAttributes(clientId, attribute = "") {
+	const rootBlock = getBlock(clientId); // target block
+	const innerBlocks = get(rootBlock, "innerBlocks");
+
+	// some safety checks
+	if (isEmpty(rootBlock)) return false;
+	// when no inner blocks are available
+	if (isEmpty(innerBlocks)) return [];
+
+	const requiredData = map(innerBlocks, (childBlock, index) => {
+		const childId = get(childBlock, "clientId"),
+			blockAttributes = get(childBlock, "attributes"),
+			requiredAttributes = isEmpty(attribute)
+				? blockAttributes
+				: {
+						[attribute]: get(blockAttributes, attribute),
+				  }; // returning all child attributes if no specific attribute is required.
+
+		return {
+			clientId: childId, // client id of the child block
+			attributes: requiredAttributes, // required attributes
+		};
+	});
+
+	return requiredData;
 }

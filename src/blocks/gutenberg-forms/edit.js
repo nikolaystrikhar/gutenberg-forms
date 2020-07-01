@@ -5,14 +5,11 @@ import { isEmpty, get } from "lodash";
 import {
 	getFormTemplates,
 	detect_similar_forms,
-	getProtection,
-	addInnerBlock,
 } from "../../block/functions/index";
 import { getThemeStyling } from "../../block/misc/helper";
 import { withDispatch } from "@wordpress/data";
 import { TEXT_DOMAIN } from "../../block/constants";
 import { InnerBlocks, RichText } from "@wordpress/block-editor";
-import { Icon } from "@wordpress/components";
 
 const { compose } = wp.compose;
 const { __ } = wp.i18n;
@@ -74,19 +71,7 @@ function edit(props) {
 						<InnerBlocks
 							template={getFormTemplates(formType)}
 							templateLock={false}
-							renderAppender={() => (
-								<div className="cwp-step-appender">
-									<div
-										onClick={() =>
-											addInnerBlock(props.clientId, "cwp/form-step")
-										}
-										className="add_btn components-dropdown block-editor-inserter block-editor-button-block-appender"
-									>
-										<span>Add New Step</span> <Icon icon="plus-alt" />
-									</div>
-									<InnerBlocks.ButtonBlockAppender />
-								</div>
-							)}
+							renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
 						/>
 						{!buttonSetting.disable && (
 							<div className={`cwp-submit ${alignment}`}>

@@ -1,9 +1,9 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { InnerBlocks } from "@wordpress/block-editor";
-import { getRootFormBlock } from "../../../src/block/functions/index";
+import { getRootFormBlock } from "../../../../block/functions/index";
 import { isEmpty, get } from "lodash";
 import { Notice, TextControl, PanelBody } from "@wordpress/components";
-import { TEXT_DOMAIN } from "../../block/constants";
+import { TEXT_DOMAIN } from "../../../../block/constants";
 
 const { InspectorControls } = wp.blockEditor;
 const { __ } = wp.i18n;
@@ -45,13 +45,6 @@ function edit(props) {
 				</Notice>
 			) : (
 				<Fragment>
-					<span className="step-divider start">
-						<div class="divider">
-							<span></span>
-							<span>Step Start</span>
-							<span></span>
-						</div>
-					</span>
 					<InnerBlocks
 						templateLock={false}
 						renderAppender={() => <InnerBlocks.ButtonBlockAppender />}

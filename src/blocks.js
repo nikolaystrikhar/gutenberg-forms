@@ -28,7 +28,6 @@ import "./blocks/form-button/index.js";
 import "./blocks/form-calculation/index.js";
 import "./blocks/form-column/index.js";
 import "./blocks/form-group/index.js";
-import "./blocks/form-step/index.js";
 import "./blocks/message/index.js";
 import "./blocks/name/index.js";
 import "./blocks/number/index.js";
@@ -42,3 +41,6 @@ import "./blocks/file_upload/index.js";
 import "./blocks/hidden/index.js";
 import "./blocks/reusable_forms/index.js";
 import "./blocks/progress/index.js";
+
+import "./blocks/form-steps/root/index.js";
+import "./blocks/form-steps/childs/form-step/index.js";
