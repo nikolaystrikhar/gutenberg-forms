@@ -1526,7 +1526,7 @@ jQuery(function ($) {
 							width: percentage,
 						},
 						{
-							duration: 2000,
+							duration: 1000,
 							step: function (now) {
 								if (percentageIndicator.length) {
 									percentageIndicator.html(Math.floor(now) + "%");
