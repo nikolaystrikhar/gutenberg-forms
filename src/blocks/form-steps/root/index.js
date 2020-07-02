@@ -22,6 +22,10 @@ registerBlockType("cwp/form-steps", {
 			type: "number",
 			default: 0,
 		},
+		multiStepEffect: {
+			type: "string",
+			default: "cwp-noEffect-step",
+		},
 	},
 	parent: ["cwp/block-gutenberg-forms"],
 });

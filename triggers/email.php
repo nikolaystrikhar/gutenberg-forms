@@ -57,9 +57,11 @@ class Email
             $blocks = $this->post_content;
         }
 
+
         $templates = array();
 
         foreach ($blocks as $f => $block) {
+            
             if ($block['blockName'] === "cwp/block-gutenberg-forms" && $block['attrs']['id'] === $id) {
 
                 $decoded_template = array();
@@ -142,13 +144,13 @@ class Email
                 } else {
                     $decoded_template['bcc'] = '';
                 }
-
                 $templates[] = $decoded_template;
             } else {
                 $templates += $this->get_templates($id, $block['innerBlocks']);
             }
         }
 
+        
         return $templates;
     }
 

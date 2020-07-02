@@ -92,10 +92,12 @@
 			display: flex;
 			flex-direction: row;
 			flex-wrap: wrap;
+			align-items: center;
 			.cwp-step-label-root {
 				margin: 10px 10px;
 				a {
-					padding: 10px;
+					padding: 6px;
+					cursor: pointer;
 					&.is-active-step {
 						border: 1px solid #ccc;
 					}

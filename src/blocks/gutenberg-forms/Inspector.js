@@ -52,7 +52,6 @@ function Inspector(prop) {
 		actions,
 		spamProtections,
 		buttonStyling,
-		multiStepEffect,
 	} = props.attributes;
 
 	const handleAlignment = (aln) => {
@@ -136,21 +135,6 @@ function Inspector(prop) {
 		props.setAttributes({ buttonStyling: newStyling });
 	};
 
-	const multiStepEffects = [
-		{
-			label: "No Effect",
-			value: "cwp-noEffect-step",
-		},
-		{
-			label: "Fade",
-			value: "cwp-fade-step",
-		},
-		{
-			label: "Slide",
-			value: "cwp-slide-step",
-		},
-	];
-
 	return (
 		<InspectorControls>
 			<PanelBody initialOpen={false} title={__("Form Design", TEXT_DOMAIN)}>
@@ -211,16 +195,6 @@ function Inspector(prop) {
 							/>
 						</PanelRow>
 					</div>
-				)}
-				{formType === "multiStep" && (
-					<SelectControl
-						label={__("Effect", TEXT_DOMAIN)}
-						value={multiStepEffect}
-						options={multiStepEffects}
-						onChange={(multiStepEffect) =>
-							props.setAttributes({ multiStepEffect })
-						}
-					/>
 				)}
 				{!buttonSetting.disable && (
 					<Fragment>

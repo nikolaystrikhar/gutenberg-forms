@@ -124,8 +124,11 @@ class gforms_TagHandler {
      * @argument string $input - The input of the string that will be manipulated using tags to insert dynamic data
      */
 
-    public function merge( string $input ) {
+    public function merge( $input ) {
 
+        if (empty($input) or is_null($input) or gettype($input) !== 'string') {
+            return $input;
+        } 
 
         return strtr( $input, $this->data );
 
@@ -147,7 +150,7 @@ function gforms_add_dynamic_values( array $fields ) : array {
         if ($field['field_type'] === 'hidden') {
 
             $value = $field['field_value'];
-            $with_dynamic_data = $tagHandler->merge( $value );
+            $with_dynamic_data = $tagHandler->merge( $value );;
 
             $fields[$key]['field_value'] = $with_dynamic_data;
 

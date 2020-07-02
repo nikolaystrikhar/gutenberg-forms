@@ -19,7 +19,6 @@ function save(props) {
 		formLabel,
 		spamProtections,
 		buttonStyling,
-		multiStepEffect,
 	} = props.attributes;
 
 	const recaptchaEnable = hasProtection("ReCaptcha v2", spamProtections);
@@ -48,11 +47,7 @@ function save(props) {
 
 	return (
 		<div>
-			<div
-				className={`cwp-form ${multiStepEffect}`}
-				data-formtype={formType}
-				id={formId}
-			>
+			<div className="cwp-form" data-formtype={formType} id={formId}>
 				<form method="POST" id={id} {...getEncryption()} data-formid={id}>
 					<InnerBlocks.Content />
 					{recaptchaEnable && (

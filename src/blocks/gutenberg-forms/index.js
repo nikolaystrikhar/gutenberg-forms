@@ -112,10 +112,6 @@ const attributes = {
 			backgroundColor: "white",
 		},
 	},
-	multiStepEffect: {
-		type: "string",
-		default: "cwp-noEffect-step",
-	},
 };
 
 registerBlockType("cwp/block-gutenberg-forms", {

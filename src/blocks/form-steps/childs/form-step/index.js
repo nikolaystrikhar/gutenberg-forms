@@ -22,6 +22,10 @@ registerBlockType("cwp/form-step", {
 			type: "string",
 			default: "Form Step",
 		},
+		hideStep: {
+			type: "boolean",
+			default: false,
+		},
 	},
 	parent: ["cwp/form-steps"],
 });

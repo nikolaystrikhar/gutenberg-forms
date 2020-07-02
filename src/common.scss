@@ -81,7 +81,7 @@ html {
 			@include Progressbar("frontend");
 		}
 
-		&[data-formtype="multiStep"].cwp-fade-step {
+		.cwp-fade-step {
 			& .cwp-form-step {
 				&:not(cwp-active-step) {
 					opacity: 0;
@@ -100,7 +100,7 @@ html {
 			}
 		}
 
-		&[data-formtype="multiStep"].cwp-slide-step {
+		.cwp-slide-step {
 			& .cwp-form-step {
 				&:not(cwp-active-step) {
 					opacity: 0;
@@ -127,7 +127,7 @@ html {
 			}
 		}
 
-		&[data-formtype="multiStep"].cwp-noEffect-step {
+		.cwp-noEffect-step {
 			& .cwp-form-step {
 				display: none;
 				padding: 0px;

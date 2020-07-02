@@ -2,9 +2,11 @@ import React from "react";
 
 const { InnerBlocks } = wp.editor;
 
-function save() {
+function save(props) {
+	const { multiStepEffect } = props.attributes;
+
 	return (
-		<div className="cwp-form-steps-wrapper">
+		<div className={`cwp-form-steps-wrapper ${multiStepEffect}`}>
 			<InnerBlocks.Content />
 		</div>
 	);

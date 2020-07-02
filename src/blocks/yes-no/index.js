@@ -1,13 +1,15 @@
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 
-import { fieldParents } from '../../constants';
+import { fieldParents } from "../../constants";
 import yesNoEdit from "./edit.js";
 import yesNoSave from "./save.js";
+import Icon from "../../block/Icon";
+import { TEXT_DOMAIN } from "../../block/constants";
 
 registerBlockType("cwp/yes-no", {
 	title: __("Yes / No"),
-	icon: "no",
+	icon: __(<Icon icon="switch" />, TEXT_DOMAIN),
 	category: "common",
 	keywords: [__("gutenberg-forms"), __("forms"), __("yes-no")],
 	edit: yesNoEdit,
@@ -15,51 +17,51 @@ registerBlockType("cwp/yes-no", {
 	attributes: {
 		yes_no: {
 			type: "boolean",
-			defaut: false
+			defaut: false,
 		},
 		requiredLabel: {
 			type: "string",
-			default: "*"
+			default: "*",
 		},
 		isRequired: {
 			type: "boolean",
-			default: false
+			default: false,
 		},
 		label: {
 			type: "string",
-			default: "Yes Or No?"
+			default: "Yes Or No?",
 		},
 		id: {
 			type: "string",
-			default: ""
+			default: "",
 		},
 		field_name: {
 			type: "string",
-			default: ""
+			default: "",
 		},
 		errorValidityText: {
 			type: "string",
-			default: "Please fill out this field!"
+			default: "Please fill out this field!",
 		},
 		enableCondition: {
 			type: "boolean",
-			default: false
+			default: false,
 		},
 		condition: {
 			type: "object",
 			default: {
 				field: null,
 				condition: "===",
-				value: ""
-			}
+				value: "",
+			},
 		},
 		adminId: {
 			type: "object",
 			default: {
 				default: "",
-				value: ""
-			}
-		}
+				value: "",
+			},
+		},
 	},
-	parent: fieldParents
+	parent: fieldParents,
 });

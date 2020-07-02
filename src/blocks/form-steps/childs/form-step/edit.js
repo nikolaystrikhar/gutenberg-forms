@@ -12,7 +12,7 @@ function edit(props) {
 	const [disabled, setDisabled] = useState(false);
 
 	const { setAttributes } = props;
-	const { label } = props.attributes;
+	const { label, hideStep } = props.attributes;
 
 	useEffect(() => {
 		const root = getRootFormBlock(props.clientId);
@@ -44,12 +44,12 @@ function edit(props) {
 					This is to be used only within the Multi-Step Form.
 				</Notice>
 			) : (
-				<Fragment>
-					<InnerBlocks
-						templateLock={false}
-						renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
-					/>
-				</Fragment>
+				<div
+					className="cwp-add-step-appender"
+					style={{ display: hideStep ? "none" : "block" }}
+				>
+					<InnerBlocks template={[["core/paragraph", {}]]} />
+				</div>
 			)}
 		</div>,
 	];
