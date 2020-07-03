@@ -5,37 +5,16 @@ import hiddenEdit from "./edit.js";
 import hiddenSave from "./save.js";
 import { fieldParents } from "../../constants";
 
+import blockData from "./block.json";
+const { attributes,title } = blockData;
+
 registerBlockType("cwp/hidden", {
-	title: __("Hidden"),
+	title: __(title),
 	icon: "hidden",
 	category: "common",
 	keywords: [__("gutenberg-forms"), __("forms"), __("hidden"), __("field")],
 	edit: hiddenEdit,
 	save: hiddenSave,
-	attributes: {
-		value: {
-			type: "string",
-			default: "",
-		},
-		label: {
-			type: "string",
-			default: "Hidden",
-		},
-		id: {
-			type: "string",
-			default: "",
-		},
-		field_name: {
-			type: "string",
-			default: "",
-		},
-		adminId: {
-			type: "object",
-			default: {
-				default: "",
-				value: "",
-			},
-		},
-	},
+	attributes,
 	parent: fieldParents,
 });

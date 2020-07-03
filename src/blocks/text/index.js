@@ -3,89 +3,27 @@ const { registerBlockType } = wp.blocks;
 
 import textEdit from "./edit";
 import textSave from "./save";
-import { getFieldTransform } from '../../block/functions';
-import { fieldParents, myAttrs } from '../../constants';
+import { getFieldTransform } from "../../block/functions";
+import { fieldParents, myAttrs } from "../../constants";
+import blockData from "./block.json";
+const { attributes, title } = blockData;
 
 registerBlockType("cwp/text", {
-	title: __("Text"),
+	title: __(title),
 	icon: "text",
 	category: "common",
 	keywords: [__("gutenberg-forms"), __("forms"), __("text")],
 	edit: textEdit,
 	save: textSave,
-	attributes: {
-		enableCondition: {
-			type: "boolean",
-			default: false
-		},
-		text: {
-			type: "string",
-			default: ""
-		},
-		isRequired: {
-			type: "boolean",
-			default: false
-		},
-		label: {
-			type: "string",
-			default: "Text"
-		},
-		id: {
-			type: "string",
-			default: ""
-		},
-		field_name: {
-			type: "string",
-			default: ""
-		},
-		messages: {
-			type: "object",
-			default: {
-				empty: "Please fill out this field!",
-				invalid: "The text {{value}} is not valid!"
-			}
-		},
-		pattern: {
-			type: "string",
-			default: ""
-		},
-		minimumLength: {
-			type: "number",
-			default: 0,
-		},
-		maximumLength: {
-			type: "number",
-			default: 100,
-		},
-		condition: {
-			type: "object",
-			default: {
-				field: null,
-				condition: "===",
-				value: ""
-			}
-		},
-		requiredLabel: {
-			type: "string",
-			default: "*"
-		},
-
-		adminId: {
-			type: "object",
-			default: {
-				default: "",
-				value: ""
-			}
-		}
-	},
+	attributes,
 	transforms: {
 		from: [
 			{
 				type: "block",
-				blocks: myAttrs.map(block => "cwp/".concat(block)),
-				transform: a => getFieldTransform(a, "text")
-			}
-		]
+				blocks: myAttrs.map((block) => "cwp/".concat(block)),
+				transform: (a) => getFieldTransform(a, "text"),
+			},
+		],
 	},
-	parent: fieldParents
+	parent: fieldParents,
 });

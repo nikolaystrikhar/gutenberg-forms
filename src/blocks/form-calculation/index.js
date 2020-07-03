@@ -6,76 +6,17 @@ import calculationSave from "./save.js";
 import { fieldParents } from "../../constants";
 import Icon from "../../block/Icon.js";
 
+import blockData from "./block.json";
+const { attributes, title } = blockData;
+
 registerBlockType("cwp/form-calculation", {
-	title: __("Calculation"),
+	title: __(title),
 	icon: __(<Icon icon="calculation" />),
 	category: "common",
 	keywords: [__("gutenberg-forms"), __("forms"), __("calculation")],
 	edit: calculationEdit,
 	save: calculationSave,
-	attributes: {
-		formulaBuilder: {
-			type: "boolean",
-			default: true,
-		},
-		calculation: {
-			type: "string",
-			default: "",
-		},
-		label: {
-			type: "string",
-			default: "Total",
-		},
-		id: {
-			type: "string",
-			default: "",
-		},
-		field_name: {
-			type: "string",
-			default: "",
-		},
-		formula: {
-			type: "string",
-			default: "",
-		},
-		condition: {
-			type: "object",
-			default: {
-				field: null,
-				condition: "===",
-				value: "",
-			},
-		},
-		styling: {
-			type: "object",
-			default: {
-				fontSize: 40,
-			},
-		},
-		enableCondition: {
-			type: "boolean",
-			default: false,
-		},
-		postfix: {
-			type: "string",
-			default: "",
-		},
-		prefix: {
-			type: "string",
-			default: "",
-		},
-		adminId: {
-			type: "object",
-			default: {
-				default: "",
-				value: "",
-			},
-		},
-		decimalPlaces: {
-			type: "number",
-			default: 0,
-		},
-	},
+	attributes,
 	supports: {
 		align: true,
 		align: ["wide", "full", "center"],

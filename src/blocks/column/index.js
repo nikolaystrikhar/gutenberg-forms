@@ -4,20 +4,24 @@ const { registerBlockType } = wp.blocks;
 import columnEdit from "./edit.js";
 import columnSave from "./save.js";
 
+import blockData from "./block.json";
+
 // Child block for the form-column block for creating layouts
 
+const { title, attributes } = blockData;
+
 registerBlockType("cwp/column", {
-	title: __("Column"),
+	title: __(title),
 	icon: "editor-table",
 	category: "common",
 	keywords: [
 		__("gutenberg-forms"),
 		__("forms"),
 		__("form-column"),
-		__("column")
+		__("column"),
 	],
 	edit: columnEdit,
 	save: columnSave,
-	attributes: {},
-	parent: ["cwp/form-column"]
+	attributes,
+	parent: ["cwp/form-column"],
 });

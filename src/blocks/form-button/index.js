@@ -5,8 +5,11 @@ import { fieldParents } from "../../constants";
 import formButtonEdit from "./edit.js";
 import formButtonSave from "./save.js";
 
+import blockData from "./block.json";
+const { title, attributes } = blockData;
+
 registerBlockType("cwp/form-button", {
-	title: __("Form Button"),
+	title: __(title),
 	icon: __(
 		<svg
 			width="24"
@@ -24,32 +27,6 @@ registerBlockType("cwp/form-button", {
 	keywords: [__("gutenberg-forms"), __("forms"), __("button")],
 	edit: formButtonEdit,
 	save: formButtonSave,
-	attributes: {
-		label: {
-			type: "string",
-			default: "Submit",
-		},
-		parentId: {
-			type: "string",
-			default: "",
-		},
-		action: {
-			default: "submit",
-			type: "string",
-		},
-		styling: {
-			type: "object",
-			default: {
-				backgroundColor: "rgb(238, 238, 238)",
-				color: "rgb(49, 49, 49)",
-				padding: 25,
-				borderRadius: 0,
-			},
-		},
-	},
-	supports: {
-		align: true,
-		align: ["wide", "full", "center", "left", "right"],
-	},
+	attributes,
 	parent: fieldParents,
 });

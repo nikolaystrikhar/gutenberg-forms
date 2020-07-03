@@ -1,5 +1,4 @@
 import React from "react";
-import { ResizableBox } from "@wordpress/components";
 import { InnerBlocks } from "@wordpress/block-editor";
 
 function edit(props) {

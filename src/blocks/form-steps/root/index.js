@@ -4,10 +4,16 @@ const { __ } = wp.i18n;
 import stepsEdit from "./edit";
 import stepsSave from "./save";
 
+import blockData from "./block.json";
+const { title, attributes } = blockData;
+
 registerBlockType("cwp/form-steps", {
-	title: __("Form Steps"),
+	title: __(title),
 	icon: "editor-ol-rtl",
 	category: "common",
+	supports: {
+		inserter: false,
+	},
 	keywords: [
 		__("gutenberg-forms"),
 		__("forms"),
@@ -17,15 +23,6 @@ registerBlockType("cwp/form-steps", {
 	],
 	edit: stepsEdit,
 	save: stepsSave,
-	attributes: {
-		currentStep: {
-			type: "number",
-			default: 0,
-		},
-		multiStepEffect: {
-			type: "string",
-			default: "cwp-noEffect-step",
-		},
-	},
+	attributes,
 	parent: ["cwp/block-gutenberg-forms"],
 });

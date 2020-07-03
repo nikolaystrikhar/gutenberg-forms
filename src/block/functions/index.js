@@ -679,7 +679,7 @@ export function getOtherTags() {
  * @param {The template of blocks} innerBlocksTemplate
  */
 
-const createBlocksFromInnerBlocksTemplate = (innerBlocksTemplate) => {
+export const createBlocksFromInnerBlocksTemplate = (innerBlocksTemplate) => {
 	return map(innerBlocksTemplate, ([name, attributes, innerBlocks = []]) =>
 		createBlock(
 			name,

@@ -4,8 +4,11 @@ const { __ } = wp.i18n;
 import stepFormEdit from "./edit";
 import stepFormSave from "./save";
 
+import blockData from "./block.json";
+const { attributes, title } = blockData;
+
 registerBlockType("cwp/form-step", {
-	title: __("Step"),
+	title: __(title),
 	icon: "editor-ol-rtl",
 	category: "common",
 	keywords: [
@@ -17,15 +20,6 @@ registerBlockType("cwp/form-step", {
 	],
 	edit: stepFormEdit,
 	save: stepFormSave,
-	attributes: {
-		label: {
-			type: "string",
-			default: "Form Step",
-		},
-		hideStep: {
-			type: "boolean",
-			default: false,
-		},
-	},
+	attributes,
 	parent: ["cwp/form-steps"],
 });

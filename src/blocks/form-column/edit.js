@@ -4,14 +4,14 @@ import {
 	RangeControl,
 	PanelBody,
 	FormToggle,
-	PanelRow
+	PanelRow,
+	ResizableBox,
 } from "@wordpress/components";
 import Introduction from "./components/introduction";
 import { createBlock } from "@wordpress/blocks";
-import { map } from "lodash";
+import { map, omitBy } from "lodash";
 import { TEXT_DOMAIN } from "../../block/constants";
 const { __ } = wp.i18n;
-
 
 const { replaceInnerBlocks, selectBlock } = wp.data.dispatch(
 	"core/block-editor"
@@ -32,15 +32,31 @@ function edit(props) {
 		return template;
 	};
 
-	const handleColumns = cols => {
-		setAttributes({ columns: cols });
+	const handleChange = (c) => {
+		const currentInnerBlocks = getBlock(props.clientId).innerBlocks;
+
+		if (c > currentInnerBlocks.length - 1) {
+			for (let i = columns; i < c; ++i) {
+				currentInnerBlocks.push(
+					...createBlocksFromInnerBlocksTemplate([["cwp/column", {}]])
+				);
+			}
+			replaceInnerBlocks(props.clientId, currentInnerBlocks);
+			selectBlock(props.clientId);
+		} else {
+			currentInnerBlocks.pop();
+			replaceInnerBlocks(props.clientId, currentInnerBlocks);
+			selectBlock(props.clientId);
+		}
+
+		props.setAttributes({ columns: c });
 	};
 
-	const handleSelect = cols => {
+	const handleSelect = (cols) => {
 		setAttributes({ columns: cols, intro: true });
 	};
 
-	const createBlocksFromInnerBlocksTemplate = innerBlocksTemplate => {
+	const createBlocksFromInnerBlocksTemplate = (innerBlocksTemplate) => {
 		return map(innerBlocksTemplate, ([name, attributes, innerBlocks = []]) =>
 			createBlock(
 				name,
@@ -52,33 +68,16 @@ function edit(props) {
 
 	return [
 		<InspectorControls>
-			<PanelBody icon={__("layout", TEXT_DOMAIN)} title={__("Layout Settings", TEXT_DOMAIN)}>
+			<PanelBody
+				icon={__("layout", TEXT_DOMAIN)}
+				title={__("Layout Settings", TEXT_DOMAIN)}
+			>
 				<div className="cwp-option">
 					<RangeControl
 						label={__("Columns", TEXT_DOMAIN)}
 						max={6}
 						min={2}
-						onChange={c => {
-							props.setAttributes({ columns: c });
-
-							const currentInnerBlocks = getBlock(props.clientId).innerBlocks;
-
-							if (c > currentInnerBlocks.length - 1) {
-								for (let i = columns; i < c; ++i) {
-									currentInnerBlocks.push(
-										...createBlocksFromInnerBlocksTemplate([
-											["cwp/column", {}]
-										])
-									);
-								}
-								replaceInnerBlocks(props.clientId, currentInnerBlocks);
-								selectBlock(props.clientId);
-							} else {
-								currentInnerBlocks.pop();
-								replaceInnerBlocks(props.clientId, currentInnerBlocks);
-								selectBlock(props.clientId);
-							}
-						}}
+						onChange={handleChange}
 						value={columns}
 					/>
 				</div>
@@ -98,14 +97,14 @@ function edit(props) {
 			{!intro ? (
 				<Introduction onSelect={handleSelect} />
 			) : (
-					<InnerBlocks
-						templateLock={"insert"}
-						renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
-						template={getTemplates()}
-						templateInsertUpdatesSelection={true}
-					/>
-				)}
-		</div>
+				<InnerBlocks
+					templateLock={"insert"}
+					renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
+					template={getTemplates()}
+					templateInsertUpdatesSelection={true}
+				/>
+			)}
+		</div>,
 	];
 }
 

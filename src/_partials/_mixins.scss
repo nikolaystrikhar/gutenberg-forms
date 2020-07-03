@@ -286,8 +286,13 @@
 @mixin column() {
 	& .cwp-col {
 		& .block-list-appender {
-			width: 90% !important;
+			width: 100% !important;
 			margin: auto;
+
+			button {
+				width: 100% !important;
+				margin: 0 !important;
+			}
 		}
 
 		& .editor-block-list__layout {
@@ -311,6 +316,10 @@
 				& .block-editor-block-list__layout {
 					display: flex;
 					flex-direction: column !important;
+
+					& [data-block] {
+						width: 100%;
+					}
 				}
 
 				& .cwp-radios-set,
@@ -338,7 +347,7 @@
 
 					& div:nth-child(1) {
 						& button.components-button {
-							width: 90% !important;
+							width: 100% !important;
 							margin: auto;
 						}
 					}

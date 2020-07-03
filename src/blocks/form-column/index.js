@@ -1,39 +1,29 @@
 const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 
-import formColumnEdit from './edit.js';
-import formColumnSave from './save.js';
-import { fieldParents } from '../../constants';
+import formColumnEdit from "./edit.js";
+import formColumnSave from "./save.js";
+import { fieldParents } from "../../constants";
+
+import blockData from "./block.json";
+const { attributes, title } = blockData;
 
 registerBlockType("cwp/form-column", {
-	title: __("Form Column"),
+	title: __(title),
 	icon: "editor-table",
 	category: "common",
 	keywords: [
 		__("gutenberg-forms"),
 		__("forms"),
 		__("form-column"),
-		__("column")
+		__("column"),
 	],
 	edit: formColumnEdit,
 	save: formColumnSave,
-	attributes: {
-		columns: {
-			type: "number",
-			default: 3
-		},
-		intro: {
-			type: "boolean",
-			default: false
-		},
-		stack: {
-			type: "boolean",
-			default: true
-		}
-	},
+	attributes,
 	supports: {
 		align: true,
-		align: ["wide", "full", "center"]
+		align: ["wide", "full", "center"],
 	},
-	parent: fieldParents
+	parent: fieldParents,
 });

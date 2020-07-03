@@ -1,0 +1,13 @@
+{
+	"title": "Step",
+	"attributes": {
+		"label": {
+			"type": "string",
+			"default": "Form Step"
+		},
+		"hideStep": {
+			"type": "boolean",
+			"default": false
+		}
+	}
+}

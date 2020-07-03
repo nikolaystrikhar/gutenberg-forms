@@ -1,0 +1,9 @@
+{
+	"title": "Reusable Form",
+	"attributes": {
+		"formId": {
+			"type": "string",
+			"default": ""
+		}
+	}
+}

@@ -2,6 +2,7 @@ import React, { useEffect, useState } from "react";
 import {
 	getLinearChildAttributes,
 	addInnerBlock,
+	createBlocksFromInnerBlocksTemplate,
 } from "../../../block/functions";
 import { map, get, isEqual, each } from "lodash";
 import {
@@ -23,8 +24,16 @@ function edit(props) {
 	const [childAttributes, updateChildAttributes] = useState([]), // initializing child attributes state
 		[step, setStep] = useState(0),
 		[blocksLoaded, setBlockLoaded] = useState(false),
-		{ clientId, attributes, setAttributes } = props,
+		{ clientId, attributes, setAttributes, onRemove } = props,
 		{ currentStep, multiStepEffect } = attributes;
+
+	useEffect(() => {
+		const block = createBlocksFromInnerBlocksTemplate([["cwp/form-steps", {}]]);
+
+		return () => {
+			props.insertBlocksAfter(...block);
+		};
+	}, []);
 
 	const refreshAttributes = () => {
 		const updatedChildAttributes = getLinearChildAttributes(clientId, "label"); // getting the label of all the child steps

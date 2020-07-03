@@ -7,61 +7,16 @@ import yesNoSave from "./save.js";
 import Icon from "../../block/Icon";
 import { TEXT_DOMAIN } from "../../block/constants";
 
+import blockData from "./block.json";
+const { attributes, title } = blockData;
+
 registerBlockType("cwp/yes-no", {
-	title: __("Yes / No"),
+	title: __(title),
 	icon: __(<Icon icon="switch" />, TEXT_DOMAIN),
 	category: "common",
 	keywords: [__("gutenberg-forms"), __("forms"), __("yes-no")],
 	edit: yesNoEdit,
 	save: yesNoSave,
-	attributes: {
-		yes_no: {
-			type: "boolean",
-			defaut: false,
-		},
-		requiredLabel: {
-			type: "string",
-			default: "*",
-		},
-		isRequired: {
-			type: "boolean",
-			default: false,
-		},
-		label: {
-			type: "string",
-			default: "Yes Or No?",
-		},
-		id: {
-			type: "string",
-			default: "",
-		},
-		field_name: {
-			type: "string",
-			default: "",
-		},
-		errorValidityText: {
-			type: "string",
-			default: "Please fill out this field!",
-		},
-		enableCondition: {
-			type: "boolean",
-			default: false,
-		},
-		condition: {
-			type: "object",
-			default: {
-				field: null,
-				condition: "===",
-				value: "",
-			},
-		},
-		adminId: {
-			type: "object",
-			default: {
-				default: "",
-				value: "",
-			},
-		},
-	},
+	attributes,
 	parent: fieldParents,
 });
