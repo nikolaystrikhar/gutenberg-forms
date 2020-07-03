@@ -3,7 +3,7 @@ import {
 	Button,
 	DropdownMenu,
 	MenuGroup,
-	MenuItem
+	MenuItem,
 } from "@wordpress/components";
 import { getSiblings } from "../functions";
 import { getFieldIcon } from "../misc/helper";
@@ -18,7 +18,7 @@ function FormulaBuilder(prop) {
 	const { clientId } = props,
 		{ formula } = props.attributes;
 
-	const addFieldId = name => {
+	const addFieldId = (name) => {
 		var $txt = $(area.current);
 		var caretPos = $txt[0].selectionStart;
 		var textAreaTxt = $txt.val();
@@ -32,6 +32,10 @@ function FormulaBuilder(prop) {
 		props.setAttributes({ formula: val });
 	};
 
+	useEffect(() => {
+		console.log(getSiblings(clientId, "cwp/number"));
+	}, []);
+
 	return (
 		<div className="cwp-form-calc-builder">
 			<div className="cwp-form-available-fields">
@@ -40,7 +44,7 @@ function FormulaBuilder(prop) {
 					{({ onClose }) => (
 						<Fragment>
 							<MenuGroup>
-								{map(getSiblings(clientId, "cwp/number"), field => {
+								{map(getSiblings(clientId, "cwp/number"), (field) => {
 									const { field_name, label } = field;
 
 									return (
@@ -65,7 +69,7 @@ function FormulaBuilder(prop) {
 			</div>
 			<textarea
 				value={formula}
-				onChange={e => props.setAttributes({ formula: e.target.value })}
+				onChange={(e) => props.setAttributes({ formula: e.target.value })}
 				ref={area}
 			></textarea>
 		</div>

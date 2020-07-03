@@ -1613,11 +1613,16 @@ jQuery(function ($) {
 			let validity = true;
 
 			fields.each(function () {
-				const _is_field_valid_ = $(this)
-					.find("[data-cwp-field]")[0]
-					.checkValidity();
+				const __field = $(this).find("[data-cwp-field]");
+				let __is_field_valid_ = false;
 
-				if (!_is_field_valid_) {
+				if (!__field.length) {
+					__is_field_valid_ = false;
+				} else {
+					__is_field_valid_ = __field[0].checkValidity();
+				}
+
+				if (!__is_field_valid_) {
 					validity = false;
 				}
 			});
@@ -1627,7 +1632,11 @@ jQuery(function ($) {
 
 		reportValidity(fields) {
 			fields.each(function () {
-				$(this).find("[data-cwp-field]")[0].reportValidity();
+				const field = $(this).find("[data-cwp-field]");
+
+				if (field.length) {
+					field[0].reportValidity();
+				}
 			});
 		}
 
@@ -1837,6 +1846,11 @@ jQuery(function ($) {
 	function applyCalculation(form) {
 		form.find(".cwp-field.cwp-calculation").each(function () {
 			let formula = $(this).attr("data-cwp-calculation");
+
+			if (!formula) {
+				return;
+			}
+
 			// let fields = formula.match(/[(number)\-\d\w]+/g);
 			const f = formula.match(/[{{]+[\/number\-\d\w]+[}}]+/g);
 			const fields = f.map((v) => v.substring(2, v.length - 2));

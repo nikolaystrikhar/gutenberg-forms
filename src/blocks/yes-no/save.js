@@ -35,7 +35,9 @@ function save(props) {
 						readOnly
 					/>
 					<input
+						name={id}
 						required={isRequired}
+						data-cwp-field
 						aria-label={strip_tags(label)}
 						type="checkbox"
 						checked={yes_no}

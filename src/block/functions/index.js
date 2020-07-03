@@ -99,6 +99,7 @@ const layoutBlocks = [
 	"cwp/column",
 	"cwp/form-group",
 	"cwp/form-step",
+	"cwp/form-steps",
 ]; //blocks that will be ignored while serializing...
 const miscBlocks = ["cwp/form-button"];
 
@@ -276,23 +277,36 @@ export function getRootMessages(clientId, blockName) {
 	}
 }
 
-export function getChildAttributes(clientId) {
+/**
+ *
+ * @param {The client id of the root block} clientId
+ * @param {Filter the child attribute according to their block slug} slug
+ */
+
+export function getChildAttributes(clientId, slug = null) {
 	const rootBlock = getBlock(clientId); //i.e = gutenberg-forms;
 	let childAttrs = [];
 
 	if (!has(rootBlock, "innerBlocks")) return childAttrs;
 
 	rootBlock.innerBlocks.forEach((v) => {
+		const doesSlugMatch = isEmpty(slug) ? true : isEqual(v.name, slug);
+
 		if (layoutBlocks.includes(v.name)) {
 			//which means field are nested even more!
-			childAttrs.push(...getChildAttributes(v.clientId));
-		} else if (has(v, "attributes")) {
+			childAttrs.push(...getChildAttributes(v.clientId, slug)); //? recursion :)
+		} else if (has(v, "attributes") && doesSlugMatch) {
 			childAttrs.push(v["attributes"]);
 		}
 	});
 
 	return childAttrs;
 }
+
+/**
+ * @param {Client if of the block which sibling will be returned} clientId
+ * @param {filter the siblings by thier slugs} slug
+ */
 
 export function getSiblings(clientId, slug = null) {
 	const rootBlock = getRootFormBlock(clientId); //i.e = gutenberg-forms;
@@ -332,7 +346,7 @@ export function getSiblings(clientId, slug = null) {
 				siblingValues.push(v.attributes);
 			}
 		} else if (conditions.isLayoutBlock) {
-			siblingValues.push(...getChildAttributes(v.clientId)); //getting inner fields in layout blocks
+			siblingValues.push(...getChildAttributes(v.clientId, slug)); //getting inner fields in layout blocks with slug filter
 		}
 	});
 
