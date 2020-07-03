@@ -336,8 +336,9 @@
 			}
 
 			& [data-type="cwp/column"] {
-				width: 50%;
+				width: 100%;
 				transform-origin: center center;
+				flex: 1 1 auto;
 				margin: 0px 10px;
 
 				& .cwp-col_inserter {
