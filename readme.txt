@@ -1,6 +1,6 @@
 === WordPress Form Builder Plugin - Gutenberg Forms ===
 Contributors: munirkamal
-Tags: wordpress form,  gutenberg form, contact form, gutenberg block, contact form plugin, forms, form builder, custom form, contact button, contact me, custom contact form, form manager, form, forms builder, forms creator, captcha, recaptcha, Akismet, email form, web form, feedback form, email submit form, message form, contact form block, wordpress form plugin
+Tags: wordpress form,  gutenberg form, contact form, subscribe form, multi-step form, gutenberg block, contact form plugin, forms, form builder, custom form, contact button, contact me, custom contact form, form manager, form, forms builder, forms creator, captcha, recaptcha, Akismet, email form, web form, feedback form, email submit form, message form, contact form block, wordpress form plugin
 Requires at least: 4.8
 Tested up to: 5.4
 Stable tag: 1.6.0
@@ -12,7 +12,7 @@ The Next Generation WordPress Form Builder. Build forms directly within Gutenber
 
 == Description ==
 
-= WordPress Form Builder Plugin - Gutenberg Forms =
+**WordPress Form Builder Plugin - Gutenberg Forms**
 
 Existing form plugins do not allow you to build your forms within Gutenberg Editor. They offer mostly custom made form builder which was a great feature earlier. But with the Gutenberg editor, you should be able to build your forms directly in the Gutenberg editor.
 
@@ -20,7 +20,7 @@ That’s why we built <a href="https://gutenbergforms.com/" rel="friend" title="
 
 Gutenberg Forms adds a Form Block in Gutenberg and all the form fields are child blocks which you can add within the Form Block, nice and easy. You can add multiple contact forms, and you can customize the form within the Gutenberg Editor. Google reCAPTCHA integration added for spam filtering.
 
-= Feature Highlights =
+## Feature Highlights
 
 The following are some of the main features, but there's more which you need to checkout by installing the plugin. 
 
@@ -41,7 +41,7 @@ The following are some of the main features, but there's more which you need to 
 * Import/Export Forms - Do it the same way you do with any Gutenberg block.
 * More features you will find out while using the plugin.
 
-= Add-ons & Integrations =
+## Add-ons & Integrations
 
 **MailPoet Add-on**
 Our first add-on has been released. It is for MailPoet plugin that lets you connect Gutenberg Forms with MailPoet to send leads to your MailPoet list.
@@ -49,6 +49,11 @@ Our first add-on has been released. It is for MailPoet plugin that lets you conn
 Read More & Install it, it's also **FREE**.
 [https://wordpress.org/plugins/guten-forms-mailpoet/](https://wordpress.org/plugins/guten-forms-mailpoet/)
 
+## Share Your Feedback & Suggestions 👏
+
+Your feedback, ideas and suggestions would be really helpful in adding & improving the features that you need. We have set up a tool to collect your feedback and prioritize the features based on votes. 
+
+[https://gutenbergforms.feedy.app/feedback/](https://gutenbergforms.feedy.app/feedback/)
 
 = Get involved with the Development =
 
