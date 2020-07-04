@@ -283,7 +283,7 @@ class Dashboard
 
                 // for testing purpose...
 
-                $production = true;
+                $production = false;
 
                 if ($production) {
                     $js = "http://localhost:8080/gutenbergforms/wp-content/plugins/gutenberghub-dashboard/build/build.js";
