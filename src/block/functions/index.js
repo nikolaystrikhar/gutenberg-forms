@@ -766,3 +766,19 @@ export function getLinearChildAttributes(clientId, attribute = "") {
 
 	return requiredData;
 }
+
+/**
+ * This will return true if the given block will have inner blocks
+ * @param {The client if of the block} clientId
+ */
+
+export function hasChildBlocks(clientId) {
+	const currentBlock = getBlock(clientId);
+	const innerBlocks = get(currentBlock, "innerBlocks");
+
+	if (isEmpty(innerBlocks)) {
+		return false;
+	}
+
+	return true;
+}

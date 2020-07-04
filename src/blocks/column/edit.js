@@ -1,6 +1,7 @@
 import React from "react";
 import { RangeControl, PanelBody } from "@wordpress/components";
 import { TEXT_DOMAIN } from "../../block/constants/index";
+import { hasChildBlocks } from "../../block/functions";
 
 const { InspectorControls, InnerBlocks } = wp.blockEditor;
 const { __ } = wp.i18n;
@@ -15,7 +16,8 @@ function edit(props) {
 		const currentBlockElement = $(currentBlockId);
 
 		if (key === "width" && currentBlockElement.length) {
-			currentBlockElement.css("flex-basis", String(value).concat("%")); // updating the dom width
+			const widthInPercentage = String(value).concat("%");
+			currentBlockElement.css("flex-basis", widthInPercentage); // updating the dom width
 		}
 
 		setAttributes({
@@ -23,19 +25,16 @@ function edit(props) {
 		});
 	};
 
-	const columnStyling = {
-		flexBasis: String(width).concat("%"),
-	};
-
 	return [
 		<div className="cwp-col">
 			<InnerBlocks
 				templateLock={false}
-				style={{
-					backgroundColor: "red",
-				}}
 				className="cwp-col_inserter"
-				renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
+				renderAppender={() => {
+					return hasChildBlocks(clientId) ? (
+						<InnerBlocks.ButtonBlockAppender />
+					) : undefined;
+				}}
 			/>
 		</div>,
 		null,
@@ -47,7 +46,6 @@ function edit(props) {
 				>
 					<RangeControl
 						value={width}
-						allowReset
 						label={__("Width (%)", TEXT_DOMAIN)}
 						onChange={(newWidth) => updateAttribute("width", newWidth)}
 					/>
