@@ -3,7 +3,7 @@ Contributors: munirkamal
 Tags: wordpress form,  gutenberg form, contact form, gutenberg block, contact form plugin, forms, form builder, custom form, contact button, contact me, custom contact form, form manager, form, forms builder, forms creator, captcha, recaptcha, Akismet, email form, web form, feedback form, email submit form, message form, contact form block, wordpress form plugin
 Requires at least: 4.8
 Tested up to: 5.4
-Stable tag: 1.5.0
+Stable tag: 1.6.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -56,6 +56,9 @@ This is a new plugin and I am committed to making it one of the best Form Builde
 
 [https://github.com/munirkamal/gutenberg-forms](https://github.com/munirkamal/gutenberg-forms)
 
+== Upgrade Notice ==
+
+This update may break Multi-Step forms. We have redone the functionality to make it super easier.
 
 == Installation ==
 
@@ -81,6 +84,11 @@ You may also get involved with the development via Github:
 
 == Changelog ==
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
+
+= 1.6.0 = (04 July 2020)
+- Improved: Multi step form creation
+- Added: Progress Bar for multi step form
+- Fixed: Bugs 
 
 = 1.5.0 = (23 June 2020)
 - Added: Dynamically populate field values

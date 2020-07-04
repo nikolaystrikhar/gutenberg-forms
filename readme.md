@@ -41,7 +41,6 @@ The following are some of the main features, but there's more which you need to 
 
 - MailPoet Addon ([https://github.com/CakeWP/gutenberg-forms-mailpoet](https://github.com/CakeWP/gutenberg-forms-mailpoet))
 
-
 ## Connect
 
 - [Download on WordPress.org](https://wordpress.org/plugins/forms-gutenberg/)
@@ -69,7 +68,11 @@ We appreciate all contributions and don't want a wall of rules to get in the way
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
-= 1.6.0 = ()
+= 1.6.0 = (04 July 2020)
+
+- Improved: Multi step form creation
+- Added: Progress Bar for multi step form
+- Fixed: Bugs
 
 = 1.5.0 = (23 June 2020)
 
