@@ -30,11 +30,11 @@ function edit(props) {
 			<InnerBlocks
 				templateLock={false}
 				className="cwp-col_inserter"
-				renderAppender={() => {
-					return hasChildBlocks(clientId) ? (
-						<InnerBlocks.ButtonBlockAppender />
-					) : undefined;
-				}}
+				renderAppender={
+					hasChildBlocks(clientId)
+						? undefined
+						: () => <InnerBlocks.ButtonBlockAppender />
+				}
 			/>
 		</div>,
 		null,

@@ -18,6 +18,8 @@ function gutenberg_forms_cwp_block_assets()
 
 	$dashboard->register_settings();
 
+	wp_enqueue_script( 'gutenberg_forms_icons_lib', 'https://code.iconify.design/1/1.0.7/iconify.min.js');
+		
 	wp_register_style(
 		'gutenberg_forms-cwp-style-css',
 		plugins_url('dist/blocks.style.build.css', dirname(__FILE__)),

@@ -769,7 +769,7 @@ export function getLinearChildAttributes(clientId, attribute = "") {
 
 /**
  * This will return true if the given block will have inner blocks
- * @param {The client if of the block} clientId
+ * @param {The clientId of the block} clientId
  */
 
 export function hasChildBlocks(clientId) {

@@ -1032,3 +1032,30 @@
 		}
 	}
 }
+
+@mixin IconPicker() {
+	.icon-settings {
+		width: 100%;
+		display: flex;
+		justify-content: space-between;
+		align-items: center;
+	}
+
+	.cwp-icon-list {
+		.cwp-icon-list-wrapper {
+			display: grid;
+			grid-template-columns: repeat(7, 1fr);
+			grid-gap: 6px;
+
+			.cwp-icon-block {
+				text-align: center;
+				padding: 14px 0px;
+				background-color: #eee;
+
+				&:hover {
+					background-color: #ccc;
+				}
+			}
+		}
+	}
+}

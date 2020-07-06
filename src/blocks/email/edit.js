@@ -23,6 +23,7 @@ import {
 } from "../../block/functions/index";
 import ConditionalLogic from "../../block/components/condition";
 import { TEXT_DOMAIN } from "../../block/constants";
+
 const { __ } = wp.i18n;
 
 const { InspectorControls, BlockControls, RichText } = wp.blockEditor;

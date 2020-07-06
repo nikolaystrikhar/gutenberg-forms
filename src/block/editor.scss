@@ -287,3 +287,21 @@
 		}
 	}
 }
+
+.cwp-icon-picker__component {
+	@include IconPicker();
+}
+
+.cwp-icon-picker__component__popup {
+	&.is-expanded {
+		& .components-popover__content {
+			overflow-y: scroll !important;
+		}
+	}
+
+	.components-popover__content {
+		min-width: 500px;
+		padding: 30px;
+		@include scrollbar();
+	}
+}
