@@ -44,9 +44,3 @@ import "./blocks/progress/index.js";
 
 import "./blocks/form-steps/root/index.js";
 import "./blocks/form-steps/childs/form-step/index.js";
-
-/**
- * Block Formats
- */
-
-import "./block/formats/index.js";
