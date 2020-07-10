@@ -67,14 +67,20 @@ function gutenberg_forms_cwp_block_assets()
 		]
 	);
 
+
+	$files = array(
+		'style'         => 'gutenberg_forms-cwp-style-css',
+		'editor_script' => 'gutenberg_forms-cwp-block-js',
+		'editor_style'  => 'gutenberg_forms-cwp-block-editor-css',
+	);
+
+	if (!is_admin()) {
+		$files['script'] = 'gutenberg-forms-custom-js'; 
+	}
+
 	register_block_type(
 		'cwp/block-gutenberg-forms',
-		array(
-			'style'         => 'gutenberg_forms-cwp-style-css',
-			'editor_script' => 'gutenberg_forms-cwp-block-js',
-			'script'		=> 'gutenberg-forms-custom-js',
-			'editor_style'  => 'gutenberg_forms-cwp-block-editor-css',
-		)
+		$files
 	);
 	
 	//? for server side rendering of the block instead of shortcode...
