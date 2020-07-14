@@ -2,7 +2,11 @@
 
 class ExternalServiceHandler {
 
-    public static function is_field_id ( string $name ) {
+    public static function is_field_id ( $name ) {
+
+        if (is_array($name)) {
+            return false;
+        }
 
         $res = false;
         $breaked = explode('_', $name);

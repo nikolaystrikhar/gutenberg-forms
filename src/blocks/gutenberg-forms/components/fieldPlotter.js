@@ -42,7 +42,9 @@ function FieldPlotter({
 				blockName = get(f, "blockName"),
 				adminId = get(f, "adminId");
 
-			const field_label = isEmpty(fieldName) ? adminId : fieldName;
+			const field_label = isEmpty(fieldName)
+				? get(adminId, "value")
+				: fieldName;
 
 			const option = {
 				label: field_label,

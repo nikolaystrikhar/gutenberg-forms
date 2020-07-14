@@ -169,3 +169,26 @@ function merge_fields_with_ids($fields)
 
 	return $merged_fields;
 }
+
+function get_all_plugins_data() {
+
+	$plugins_list = get_plugins();
+	$data = [];
+
+	foreach ($plugins_list as $key => $plugin ) {
+
+		$plugin_data = [];
+
+		if (array_key_exists( 'TextDomain', $plugin )) {
+			$plugin_data['textdomain'] = $plugin['TextDomain'];
+		}
+
+		$plugin_data['script'] = $key;
+
+		$data[] = $plugin_data;
+
+	}
+
+	return $data;
+	
+}
