@@ -41,6 +41,11 @@ The following are some of the main features, but there's more which you need to 
 
 - MailPoet Addon ([https://github.com/CakeWP/gutenberg-forms-mailpoet](https://github.com/CakeWP/gutenberg-forms-mailpoet))
 
+## Share Your Feedback & Suggestions 👏
+
+Your feedback, ideas and suggestions would be really helpful in adding & improving the features that you need. We have set up a tool to collect your feedback and prioritize the features based on votes. 
+[https://gutenbergforms.feedy.app/feedback/](https://gutenbergforms.feedy.app/feedback/)
+
 ## Connect
 
 - [Download on WordPress.org](https://wordpress.org/plugins/forms-gutenberg/)
