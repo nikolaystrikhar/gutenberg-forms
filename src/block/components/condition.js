@@ -3,7 +3,7 @@ import {
 	SelectControl,
 	TextControl,
 	FormToggle,
-	PanelRow
+	PanelRow,
 } from "@wordpress/components";
 import { getSiblings } from "../functions";
 import { has, set, clone, isEmpty } from "lodash";
@@ -15,7 +15,11 @@ function Condition(props) {
 	useEffect(() => {
 		let first_field = getOptions()[1];
 
-		if (!isEmpty(first_field) && has(first_field, "value") && isEmpty(condition.value)) {
+		if (
+			!isEmpty(first_field) &&
+			has(first_field, "value") &&
+			isEmpty(condition.value)
+		) {
 			handleConditionChange(first_field.value, "field");
 		}
 	}, []);
@@ -25,13 +29,13 @@ function Condition(props) {
 			{
 				value: null,
 				disabled: true,
-				label: "Select Field"
-			}
+				label: "Select Field",
+			},
 		];
 
 		// function getSiblings( clientId ) => return the relatives of the particular field inside a parent/root block
 
-		getSiblings(clientId).forEach(sibling => {
+		getSiblings(clientId).forEach((sibling) => {
 			if (!has(sibling, "label") && !has(sibling, "field_name")) return;
 			const { label, field_name } = sibling; //destructuring the label attribute from the sibling field..
 
@@ -53,12 +57,12 @@ function Condition(props) {
 	let operators = [
 		{
 			value: "===",
-			label: "Is Equal To"
+			label: "Is Equal To",
 		},
 		{
 			value: "!==",
-			label: "Not Equal To"
-		}
+			label: "Not Equal To",
+		},
 	];
 
 	const getValueType = () => {
@@ -69,7 +73,9 @@ function Condition(props) {
 
 		const siblings = getSiblings(clientId);
 
-		let currentSibling = siblings.filter(v => v.field_name === condition.field),
+		let currentSibling = siblings.filter(
+				(v) => v.field_name === condition.field
+			),
 			selectOptions;
 
 		if (
@@ -78,10 +84,10 @@ function Condition(props) {
 			fieldName === "checkbox"
 		) {
 			if (has(currentSibling[0], "options")) {
-				selectOptions = currentSibling[0].options.map(v => {
+				selectOptions = currentSibling[0].options.map((v) => {
 					return {
 						...v,
-						value: v.label
+						value: v.label,
 					};
 				});
 			}
@@ -92,7 +98,7 @@ function Condition(props) {
 				return (
 					<SelectControl
 						value={condition.value}
-						onChange={val => {
+						onChange={(val) => {
 							handleConditionChange(val, "value");
 						}}
 						options={selectOptions}
@@ -103,7 +109,7 @@ function Condition(props) {
 					<SelectControl
 						multiple
 						value={condition.value}
-						onChange={val => {
+						onChange={(val) => {
 							handleConditionChange(val, "value");
 						}}
 						options={selectOptions}
@@ -113,7 +119,7 @@ function Condition(props) {
 				return (
 					<SelectControl
 						value={condition.value}
-						onChange={val => {
+						onChange={(val) => {
 							handleConditionChange(val, "value");
 						}}
 						options={selectOptions}
@@ -124,7 +130,7 @@ function Condition(props) {
 					<TextControl
 						value={condition.value}
 						placeholder="value"
-						onChange={val => handleConditionChange(val, "value")}
+						onChange={(val) => handleConditionChange(val, "value")}
 					/>
 				);
 		}
@@ -142,7 +148,7 @@ function Condition(props) {
 								props.set({ isRequired: false });
 							}
 							props.set({
-								enableCondition: !props.useCondition
+								enableCondition: !props.useCondition,
 							});
 						}}
 					/>
@@ -155,12 +161,12 @@ function Condition(props) {
 					<SelectControl
 						value={condition.field}
 						options={getOptions()}
-						onChange={field => {
+						onChange={(field) => {
 							handleConditionChange(field, "field");
 						}}
 					/>
 					<SelectControl
-						onChange={operator => {
+						onChange={(operator) => {
 							handleConditionChange(operator, "condition");
 						}}
 						value={condition.condition}

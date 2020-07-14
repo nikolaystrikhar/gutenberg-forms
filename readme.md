@@ -68,6 +68,12 @@ We appreciate all contributions and don't want a wall of rules to get in the way
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
+= 1.7.0 = (14 July 2020)
+
+- Added: Option to adjust width in Form Columns
+- Improved: Dashboard & Add-on Management
+- Fixed: Bugs
+
 = 1.6.0 = (04 July 2020)
 
 - Improved: Multi step form creation

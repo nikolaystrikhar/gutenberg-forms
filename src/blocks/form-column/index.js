@@ -1,5 +1,5 @@
 const { __ } = wp.i18n;
-const { registerBlockType } = wp.blocks;
+const { registerBlockType, createBlock } = wp.blocks;
 
 import formColumnEdit from "./edit.js";
 import formColumnSave from "./save.js";

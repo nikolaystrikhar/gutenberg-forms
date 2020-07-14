@@ -58,6 +58,5 @@
 	},
 	"terminal.integrated.cursorStyle": "line",
 	"terminal.integrated.fontFamily": "Operator Mono Light",
-	"terminal.integrated.fontSize": 20,
-	"editor.cursorStyle": "block"
+	"terminal.integrated.fontSize": 20
 }

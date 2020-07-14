@@ -38,8 +38,13 @@ function FieldPlotter({
 		const available_fields = serializeFields(child_fields);
 
 		let options = available_fields.map((f, i) => {
-			const { fieldName, blockName, adminId } = f;
-			const field_label = isEmpty(fieldName) ? adminId : fieldName;
+			const fieldName = get(f, "fieldName"),
+				blockName = get(f, "blockName"),
+				adminId = get(f, "adminId");
+
+			const field_label = isEmpty(fieldName)
+				? get(adminId, "value")
+				: fieldName;
 
 			const option = {
 				label: field_label,
@@ -56,7 +61,6 @@ function FieldPlotter({
 			const inRestrictionOptions = options.filter((option) =>
 				isEqual(option.blockName, get(field, "restriction"))
 			);
-
 			return inRestrictionOptions;
 		}
 
@@ -90,8 +94,6 @@ function FieldPlotter({
 		});
 
 		return has_err;
-
-		// each(newI, (value, key))
 	};
 
 	const handleFieldsChange = (key, val) => {
@@ -190,9 +192,13 @@ function FieldPlotter({
 			})}
 			{map(api_fields, (field, key) => {
 				const { label } = field;
+
 				const value = has(integrations[name], key)
 					? integrations[name][key]
 					: null;
+
+				const defaultValue = has(field, "default") ? field.default : "";
+
 				const field_label = (
 					<span>
 						{label}
@@ -211,7 +217,7 @@ function FieldPlotter({
 							options={[
 								{
 									label: "Select Field",
-									value: "",
+									value: defaultValue,
 								},
 								...getOptions(field),
 							]}

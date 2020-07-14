@@ -3,7 +3,7 @@ Contributors: munirkamal
 Tags: wordpress form,  gutenberg form, contact form, gutenberg block, contact form plugin, forms, form builder, custom form, contact button, contact me, custom contact form, form manager, form, forms builder, forms creator, captcha, recaptcha, Akismet, email form, web form, feedback form, email submit form, message form, contact form block, wordpress form plugin
 Requires at least: 4.8
 Tested up to: 5.4
-Stable tag: 1.6.0
+Stable tag: 1.7.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -84,6 +84,11 @@ You may also get involved with the development via Github:
 
 == Changelog ==
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
+
+= 1.7.0 = (14 July 2020)
+- Added: Option to adjust width in Form Columns
+- Improved: Dashboard & Add-on Management
+- Fixed: Bugs
 
 = 1.6.0 = (04 July 2020)
 - Improved: Multi step form creation

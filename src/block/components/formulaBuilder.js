@@ -32,10 +32,6 @@ function FormulaBuilder(prop) {
 		props.setAttributes({ formula: val });
 	};
 
-	useEffect(() => {
-		console.log(getSiblings(clientId, "cwp/number"));
-	}, []);
-
 	return (
 		<div className="cwp-form-calc-builder">
 			<div className="cwp-form-available-fields">
