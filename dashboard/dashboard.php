@@ -350,7 +350,17 @@ class Dashboard
             );
 
             $is_enabled =  get_option($enable_integration) === "1" ? true : false;
+            
+            if (
+                array_key_exists('is_disabled', $details)  and 
+                $details['is_disabled']  === true
+                ) {
+                    update_option($enable_integration, false); 
+                    // disabling the integration if it is disabled and has errors
+            }
+            
             $this->settings['integrations'][$integration]['enable'] = $is_enabled;
+
 
             foreach ($details['fields'] as $field => $initialValue) {
 

@@ -23,7 +23,7 @@ class ExternalServiceHandler {
                 'select',
                 'text',
                 'website',
-                'yes_no'
+                'yes_no',
         ];
 
         if (array_key_exists(0 , $breaked) and in_array( $breaked[0], $fields )) {
