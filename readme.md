@@ -41,6 +41,9 @@ The following are some of the main features, but there's more which you need to 
 
 - MailPoet Addon ([https://github.com/CakeWP/gutenberg-forms-mailpoet](https://github.com/CakeWP/gutenberg-forms-mailpoet))
 
+- Mailchimp Addon ([https://github.com/CakeWP/gutenberg-forms-mailchimp-addon](https://github.com/CakeWP/gutenberg-forms-mailchimp-addon))
+
+
 ## Share Your Feedback & Suggestions 👏
 
 Your feedback, ideas and suggestions would be really helpful in adding & improving the features that you need. We have set up a tool to collect your feedback and prioritize the features based on votes. 
@@ -73,8 +76,8 @@ We appreciate all contributions and don't want a wall of rules to get in the way
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
-= 1.7.0 = (14 July 2020)
-
+= 1.7.0 = (15 July 2020)
+- Added: Mailchimp Integration
 - Added: Option to adjust width in Form Columns
 - Improved: Dashboard & Add-on Management
 - Fixed: Bugs

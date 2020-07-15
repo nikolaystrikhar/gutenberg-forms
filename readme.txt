@@ -46,8 +46,14 @@ The following are some of the main features, but there's more which you need to 
 **MailPoet Add-on**
 Our first add-on has been released. It is for MailPoet plugin that lets you connect Gutenberg Forms with MailPoet to send leads to your MailPoet list.
 
-Read More & Install it, it's also **FREE**.
+Read More & Install it, it's **FREE**.
 [https://wordpress.org/plugins/guten-forms-mailpoet/](https://wordpress.org/plugins/guten-forms-mailpoet/)
+
+**Mailchimp Add-on**
+Mailchimp integration is ready as an add-on. Mailchimp add-on lets you connect your Mailchimp account with Gutenberg Forms to send leads to your selected list.
+
+Read More & Install it, it's **FREE**.
+[https://wordpress.org/plugins/guten-forms-mailchimp/](https://wordpress.org/plugins/guten-forms-mailchimp/)
 
 ## Share Your Feedback & Suggestions 👏
 
@@ -90,7 +96,8 @@ You may also get involved with the development via Github:
 == Changelog ==
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
-= 1.7.0 = (14 July 2020)
+= 1.7.0 = (15 July 2020)
+- Added: Mailchimp Integration
 - Added: Option to adjust width in Form Columns
 - Improved: Dashboard & Add-on Management
 - Fixed: Bugs
