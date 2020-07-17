@@ -1,5 +1,7 @@
 import blockData from "../block.json";
 import { getGlobalMessages } from "../../../block/functions";
+import save from "./save";
+import edit from "./edit";
 
 const blockAttributes = {
 	...blockData.attributes,
@@ -19,5 +21,7 @@ const blockAttributes = {
 export const deprecation = [
 	{
 		attributes: blockAttributes,
+		edit,
+		save,
 	},
 ];
