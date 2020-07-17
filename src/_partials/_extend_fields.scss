@@ -1,0 +1,62 @@
+/**
+
+* This file contains all the @mixins scss / css of elements
+* that will extend fields
+* Like Prefix, Suffix etc
+
+**/
+
+@mixin InputElement() {
+	/**
+
+        This mixin will be applied to both input element ( prefix & suffix ) 
+        @params {$type} can either be prefix or suffix
+
+    **/
+	display: table-cell;
+	padding: 0px 15px;
+	width: 1%;
+}
+
+@mixin Suffix() {
+	@include InputElement();
+
+	&.outside {
+		border-top: 1px solid;
+		border-bottom: 1px solid;
+		border-right: 1px solid;
+		border-left: none !important;
+	}
+
+	&.inside {
+		border: none !important;
+		position: absolute;
+		top: 0;
+		right: 0;
+		height: 100%;
+		display: flex;
+		align-items: center;
+		width: auto !important;
+	}
+}
+
+@mixin Prefix() {
+	@include InputElement();
+
+	&.outside {
+		border-top: 1px solid;
+		border-bottom: 1px solid;
+		border-left: 1px solid;
+		border-right: none !important;
+	}
+
+	&.inside {
+		border: none !important;
+		position: absolute;
+		top: 0;
+		left: 0;
+		height: 100%;
+		display: flex;
+		align-items: center;
+	}
+}

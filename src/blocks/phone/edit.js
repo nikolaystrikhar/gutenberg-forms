@@ -5,32 +5,34 @@ import {
 	PanelRow,
 	PanelBody,
 	TextControl,
-	Icon
+	Icon,
 } from "@wordpress/components";
 import {
 	getFieldName,
 	extract_id,
 	getEncodedData,
 	extract_admin_id,
-	get_admin_id
+	get_admin_id,
 } from "../../block/misc/helper";
 
 import { clone, set, assign } from "lodash";
-import { getRootMessages, detect_similar_forms } from "../../block/functions/index";
+import {
+	getRootMessages,
+	detect_similar_forms,
+} from "../../block/functions/index";
 import ConditionalLogic from "../../block/components/condition";
-import { TEXT_DOMAIN } from "../../block/constants/index"
+import { TEXT_DOMAIN } from "../../block/constants/index";
 const { __ } = wp.i18n;
-
 
 const {
 	InspectorControls,
 	BlockControls,
 	BlockIcon,
-	RichText
+	RichText,
 } = wp.blockEditor;
 
 function edit(props) {
-	const handleChange = e => {
+	const handleChange = (e) => {
 		let phone = e.target.value;
 
 		props.setAttributes({ phone });
@@ -42,7 +44,7 @@ function edit(props) {
 		props.setAttributes({ isRequired: !isRequired });
 	};
 
-	const handleLabel = label => {
+	const handleLabel = (label) => {
 		props.setAttributes({ label });
 	};
 
@@ -58,36 +60,45 @@ function edit(props) {
 		pattern,
 		condition,
 		enableCondition,
-		adminId
+		adminId,
 	} = props.attributes;
 
 	const getRootData = () => {
 		if (field_name === "" || detect_similar_forms(props.clientId)) {
-
-			const newFieldName = getFieldName("phone", props.clientId)
+			const newFieldName = getFieldName("phone", props.clientId);
 
 			props.setAttributes({
 				field_name: newFieldName,
 				adminId: {
-					value: extract_admin_id(newFieldName, 'phone'),
-					default: extract_admin_id(newFieldName, 'phone')
-				}
+					value: extract_admin_id(newFieldName, "phone"),
+					default: extract_admin_id(newFieldName, "phone"),
+				},
 			});
 			props.setAttributes({
 				id:
 					props.clientId +
 					"__" +
-					getEncodedData("phone", props.clientId, isRequired, get_admin_id(adminId))
+					getEncodedData(
+						"phone",
+						props.clientId,
+						isRequired,
+						get_admin_id(adminId)
+					),
 			});
 		} else if (field_name !== "") {
 			props.setAttributes({
 				id:
 					extract_id(field_name) +
 					"__" +
-					getEncodedData("phone", extract_id(field_name), isRequired, get_admin_id(adminId))
+					getEncodedData(
+						"phone",
+						extract_id(field_name),
+						isRequired,
+						get_admin_id(adminId)
+					),
 			});
 		}
-	}
+	};
 
 	useEffect(() => {
 		let rootMessages = getRootMessages(props.clientId, "phone");
@@ -113,22 +124,19 @@ function edit(props) {
 		props.setAttributes({ messages: newMessages });
 	};
 
-
 	const handleAdminId = (id) => {
 		props.setAttributes({
 			adminId: {
 				...adminId,
-				value: id.replace(/\s|-/g, "_")
-			}
-		})
-	}
-
+				value: id.replace(/\s|-/g, "_"),
+			},
+		});
+	};
 
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
 				<PanelBody title={__("Field Settings", TEXT_DOMAIN)} initialOpen={true}>
-
 					<div className="cwp-option">
 						<TextControl
 							placeholder={adminId.default}
@@ -148,17 +156,23 @@ function edit(props) {
 							/>
 						</PanelRow>
 					) : (
-							<div className="cwp-option">
-								<p>
-									<Icon icon="info" /> {__("You cannot set a conditional field required!", TEXT_DOMAIN)}
-								</p>
-							</div>
-						)}
+						<div className="cwp-option">
+							<p>
+								<Icon icon="info" />{" "}
+								{__(
+									"You cannot set a conditional field required!",
+									TEXT_DOMAIN
+								)}
+							</p>
+						</div>
+					)}
 					{isRequired && (
 						<div className="cwp-option">
-							<h3 className="cwp-heading">{__("Required Text", TEXT_DOMAIN)}</h3>
+							<h3 className="cwp-heading">
+								{__("Required Text", TEXT_DOMAIN)}
+							</h3>
 							<TextControl
-								onChange={label =>
+								onChange={(label) =>
 									props.setAttributes({ requiredLabel: label })
 								}
 								value={requiredLabel}
@@ -178,23 +192,28 @@ function edit(props) {
 				<PanelBody title={__("Messages", TEXT_DOMAIN)}>
 					{isRequired && (
 						<div className="cwp-option">
-							<h3 className="cwp-heading">{__("Required Error", TEXT_DOMAIN)}</h3>
+							<h3 className="cwp-heading">
+								{__("Required Error", TEXT_DOMAIN)}
+							</h3>
 							<TextControl
-								onChange={label => setMessages("empty", label)}
+								onChange={(label) => setMessages("empty", label)}
 								value={empty}
 							/>
 						</div>
 					)}
 					<div className="cwp-option">
-						<h3 className="cwp-heading">{__("Invalid Message Error", TEXT_DOMAIN)}</h3>
+						<h3 className="cwp-heading">
+							{__("Invalid Message Error", TEXT_DOMAIN)}
+						</h3>
 						<TextControl
-							onChange={v => setMessages("invalid", v)}
+							onChange={(v) => setMessages("invalid", v)}
 							value={invalid}
 						/>
 					</div>
 					<div className="cwp-option">
 						<p>
-							<Icon icon="info" /> {__("Use {{value}} to insert field value!", TEXT_DOMAIN)}
+							<Icon icon="info" />{" "}
+							{__("Use {{value}} to insert field value!", TEXT_DOMAIN)}
 						</p>
 					</div>
 				</PanelBody>
@@ -202,7 +221,7 @@ function edit(props) {
 					<div className="cwp-option">
 						<TextControl
 							label={__("Pattern (RegExp)", TEXT_DOMAIN)}
-							onChange={pattern => props.setAttributes({ pattern })}
+							onChange={(pattern) => props.setAttributes({ pattern })}
 							value={pattern}
 						/>
 					</div>
@@ -220,7 +239,12 @@ function edit(props) {
 
 			<div className="cwp-field-set">
 				<div className="cwp-label-wrap">
-					<RichText placeholder={__("Add a label", TEXT_DOMAIN)} tag="label" value={label} onChange={handleLabel} />
+					<RichText
+						placeholder={__("Add a label", TEXT_DOMAIN)}
+						tag="label"
+						value={label}
+						onChange={handleLabel}
+					/>
 					{!props.isSelected && isRequired && !enableCondition && (
 						<div className="cwp-required cwp-noticed">
 							<h3>{requiredLabel}</h3>
@@ -229,7 +253,7 @@ function edit(props) {
 				</div>
 				<input value={phone} onChange={handleChange} />
 			</div>
-		</div>
+		</div>,
 	];
 }
 

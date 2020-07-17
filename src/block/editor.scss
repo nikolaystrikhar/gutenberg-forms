@@ -1,6 +1,7 @@
 @import "../_partials/pre_mixins";
 @import "../_partials/variables";
 @import "../_partials/mixins";
+@import "../_partials/extend_fields";
 
 @include settings_modal();
 
@@ -107,6 +108,14 @@
 	}
 
 	& .cwp-field {
+		.cwp-suffix {
+			@include Suffix();
+		}
+
+		.cwp-prefix {
+			@include Prefix();
+		}
+
 		&.is-style-inline {
 			& .cwp-field-set,
 			& .cwp-radio-set-preview,
@@ -151,6 +160,12 @@
 		}
 
 		& .cwp-field-set {
+			.cwp-field-with-elements {
+				display: table;
+				width: 100%;
+				position: relative;
+			}
+
 			& .cwp-label-wrap {
 				display: flex;
 				flex-direction: row;

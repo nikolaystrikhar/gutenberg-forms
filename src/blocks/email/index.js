@@ -10,6 +10,8 @@ import blockData from "./block.json";
 
 const { title, attributes } = blockData;
 
+import { deprecation } from "./deprecated/deprecation";
+
 registerBlockType("cwp/email", {
 	title: __(title),
 	icon: "email",
@@ -26,6 +28,7 @@ registerBlockType("cwp/email", {
 			},
 		],
 	},
+	deprecated: deprecation,
 	attributes,
 	parent: fieldParents,
 });

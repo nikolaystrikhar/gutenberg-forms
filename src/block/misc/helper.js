@@ -227,13 +227,41 @@ export function getThemeStyling(theme, id) {
 			!isEmpty(accentColor)
 				? `#${id}.cwp-form .cwp-field [data-cwp-field], 
 			#${id}.cwp-form .cwp-field .cwp-field-set input, 
-			#${id}.cwp-form .cwp-field .cwp-field-set textarea  {
+			#${id}.cwp-form .cwp-field .cwp-field-set textarea
+			  {
 	
 				border: 1px solid ${accentColor};
 				background-color: ${fieldBackgroundColor} !important;
 				color: ${textColor} !important;
 	
 			}
+
+				${
+					!isEmpty(accentColor)
+						? `
+
+					#${id}.cwp-form .cwp-field .cwp-field-set .cwp-prefix,  
+					#${id}.cwp-form .cwp-field .cwp-field-set .cwp-suffix {
+						border: 1px solid ${accentColor};
+					}
+
+				`
+						: ``
+				} 
+
+				${
+					!isEmpty(textColor)
+						? `
+					
+							#${id}.cwp-form .cwp-field .cwp-field-set .cwp-prefix,  
+							#${id}.cwp-form .cwp-field .cwp-field-set .cwp-suffix {
+								color: ${textColor} !important;
+							}
+			`
+						: ``
+				}
+
+			
 			
 			#${id}.cwp-form .cwp-field.is-style-button .cwp-checkbox-set input[type="checkbox"]:checked + label,
 			#${id}.cwp-form .cwp-field.is-style-button .cwp-radio-set input[type="radio"]:checked + label,

@@ -1,6 +1,7 @@
 @import "./_partials/variables";
 @import "./_partials/mixins";
 @import "../src/block/lib/datePicker.scss";
+@import "./_partials/extend_fields";
 
 @keyframes slideInLeft {
 	0% {
@@ -173,6 +174,20 @@ html {
 		}
 
 		& .cwp-field {
+			.cwp-field-with-elements {
+				display: table;
+				width: 100%;
+				position: relative;
+			}
+
+			.cwp-suffix {
+				@include Suffix();
+			}
+
+			.cwp-prefix {
+				@include Prefix();
+			}
+
 			& .cwp-range-set {
 				display: flex;
 				flex-direction: row;
