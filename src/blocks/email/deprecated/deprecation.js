@@ -14,7 +14,7 @@ const newAttributes = omit(attributes, ["prefix", "suffix"]); // for testing pur
 
 export const deprecation = [
 	{
-		newAttributes,
+		attributes: newAttributes,
 		save,
 		edit,
 	},
