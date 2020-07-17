@@ -10,7 +10,7 @@ import {
 	getFormTemplates,
 	detect_similar_forms,
 } from "../../../block/functions/index";
-import { getDeprecatedThemeStyling as getThemeStyling } from "../../../block/misc/helper";
+import { getDeprecatedThemeStyling } from "../../../block/misc/helper";
 import { withDispatch } from "@wordpress/data";
 import { TEXT_DOMAIN } from "../../../block/constants";
 import { InnerBlocks, RichText } from "@wordpress/block-editor";
@@ -94,7 +94,9 @@ function edit(props) {
 						)}
 					</div>
 					<div
-						dangerouslySetInnerHTML={{ __html: getThemeStyling(theme, formId) }}
+						dangerouslySetInnerHTML={{
+							__html: getDeprecatedThemeStyling(theme, formId),
+						}}
 					></div>
 				</Fragment>
 			)}

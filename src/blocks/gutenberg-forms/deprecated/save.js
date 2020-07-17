@@ -3,7 +3,7 @@
  */
 
 import React from "react";
-import { getDeprecatedThemeStyling as getThemeStyling } from "../../../block/misc/helper";
+import { getDeprecatedThemeStyling } from "../../../block/misc/helper";
 import { isEmpty } from "lodash";
 import { hasProtection, getProtection } from "../../../block/functions";
 const { InnerBlocks } = wp.blockEditor;
@@ -115,7 +115,9 @@ function save(props) {
 				</div>
 			)}
 			<div
-				dangerouslySetInnerHTML={{ __html: getThemeStyling(theme, formId) }}
+				dangerouslySetInnerHTML={{
+					__html: getDeprecatedThemeStyling(theme, formId),
+				}}
 			></div>
 		</div>
 	);
