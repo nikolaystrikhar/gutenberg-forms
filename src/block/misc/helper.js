@@ -287,3 +287,73 @@ export function getThemeStyling(theme, id) {
 
 	</style>`;
 }
+
+export function getDeprecatedThemeStyling(theme, id) {
+	const { accentColor, textColor, fieldBackgroundColor } = theme;
+
+	return `<style>
+		${
+			!isEmpty(fieldBackgroundColor)
+				? `#${id}.cwp-form .cwp-field.cwp-yes-no .cwp-field-set .cwp-switch input:checked + .cwp-slider {
+			background-color: ${fieldBackgroundColor} !important;
+		}`
+				: ``
+		}
+		${
+			!isEmpty(textColor)
+				? `#${id}.cwp-form .cwp-field label {
+				color: ${textColor} !important;
+			}
+			#${id}.cwp-form .cwp-field .rich-text {
+				color: ${textColor} !important;
+			}
+			`
+				: ``
+		}
+		${
+			!isEmpty(accentColor)
+				? `
+			#${id}.cwp-form .cwp-default-submit-btn {
+				color: ${accentColor} !important;
+				border: 1px solid ${accentColor};
+			}
+		`
+				: ``
+		}
+		#${id}.cwp-form .cwp-field.cwp-number .cwp-field-set .cwp-range-set input[type="range"] {
+			border:none !important;
+		}
+		${
+			!isEmpty(fieldBackgroundColor) ||
+			!isEmpty(textColor) ||
+			!isEmpty(accentColor)
+				? `#${id}.cwp-form .cwp-field [data-cwp-field], 
+			#${id}.cwp-form .cwp-field .cwp-field-set input, 
+			#${id}.cwp-form .cwp-field .cwp-field-set textarea  {
+	
+				border: 1px solid ${accentColor};
+				background-color: ${fieldBackgroundColor} !important;
+				color: ${textColor} !important;
+	
+			}
+			
+			#${id}.cwp-form .cwp-field.is-style-button .cwp-checkbox-set input[type="checkbox"]:checked + label,
+			#${id}.cwp-form .cwp-field.is-style-button .cwp-radio-set input[type="radio"]:checked + label,
+			#${id}.cwp-form .cwp-field.is-style-button .cwp-radios-set input[type="radio"]:checked + label  {
+				background-color: ${fieldBackgroundColor};
+				color: ${accentColor} !important;
+				border-color: 1px solid ${accentColor};
+				z-index: 1;
+			}
+			`
+				: ``
+		}
+		#${id}.cwp-form .cwp-field.is-style-button .cwp-checkbox-set input[type="checkbox"] + label,
+		#${id}.cwp-form .cwp-field.is-style-button .cwp-radio-set input[type="radio"] + label,
+		#${id}.cwp-form .cwp-field.is-style-button .cwp-radios-set input[type="radio"] + label {
+			cursor: pointer;
+			width: 100%;
+		}
+		
+	</style>`;
+}
