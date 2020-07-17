@@ -4,15 +4,17 @@
  */
 
 import blockData from "../block.json";
+import edit from "./edit";
+import save from "./save";
+import { omit } from "lodash";
 
 const { attributes, title } = blockData;
 
-import edit from "./edit";
-import save from "./save";
+const newAttributes = omit(attributes, ["prefix", "suffix"]); // for testing purpose
 
 export const deprecation = [
 	{
-		attributes,
+		newAttributes,
 		save,
 		edit,
 	},
