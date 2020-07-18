@@ -5,6 +5,7 @@ import nameEdit from "./edit.js";
 import nameSave from "./save.js";
 import { getFieldTransform } from "../../block/functions";
 import { fieldParents, myAttrs } from "../../constants";
+import { deprecated } from "./deprecated/deprecated";
 
 import blockData from "./block.json";
 const { attributes, title } = blockData;
@@ -16,6 +17,7 @@ registerBlockType("cwp/name", {
 	keywords: [__("gutenberg-forms"), __("forms"), __("name")],
 	edit: nameEdit,
 	save: nameSave,
+	deprecated,
 	attributes,
 	transforms: {
 		from: [

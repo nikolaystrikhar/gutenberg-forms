@@ -1,3 +1,9 @@
+/***
+ *
+ * ! DEPRECATED EDIT VERSION
+ *
+ */
+
 import React, { useEffect } from "react";
 import {
 	FormToggle,
@@ -5,6 +11,7 @@ import {
 	PanelRow,
 	PanelBody,
 	TextControl,
+	SelectControl,
 	Icon,
 } from "@wordpress/components";
 import {
@@ -13,31 +20,25 @@ import {
 	getEncodedData,
 	extract_admin_id,
 	get_admin_id,
-} from "../../block/misc/helper";
+} from "../../../block/misc/helper";
+import DatePicker from "../../../block/components/datepicker";
+import { clone, set } from "lodash";
+import ConditionalLogic from "../../../block/components/condition";
+import { TEXT_DOMAIN } from "../../../block/constants";
 
-import { set, clone, assign } from "lodash";
-import {
-	getRootMessages,
-	detect_similar_forms,
-} from "../../block/functions/index";
-import ConditionalLogic from "../../block/components/condition";
-import { TEXT_DOMAIN } from "../../block/constants/index";
-import Prefix from "../components/prefix";
-import Suffix from "../components/suffix";
-
-const { __ } = wp.i18n;
 const {
 	InspectorControls,
 	BlockControls,
 	BlockIcon,
 	RichText,
 } = wp.blockEditor;
+const { __ } = wp.i18n;
 
 function edit(props) {
 	const handleChange = (e) => {
-		let website = e.target.value;
+		let placeholder = e.target.value;
 
-		props.setAttributes({ website });
+		props.setAttributes({ placeholder });
 	};
 
 	const handleRequired = () => {
@@ -49,32 +50,33 @@ function edit(props) {
 	const handleLabel = (label) => {
 		props.setAttributes({ label });
 	};
+	const inputField = React.useRef();
 
 	const {
-		website,
+		placeholder,
 		isRequired,
 		label,
 		id,
 		field_name,
 		requiredLabel,
-		messages: { invalid, empty },
+		type,
+		messages: { empty },
 		messages,
+		format,
 		condition,
 		enableCondition,
 		adminId,
-		prefix,
-		suffix,
 	} = props.attributes;
 
 	const getRootData = () => {
-		if (field_name === "" || detect_similar_forms(props.clientId)) {
-			const newFieldName = getFieldName("website", props.clientId);
+		if (field_name === "") {
+			const newFieldName = getFieldName("datePicker", props.clientId);
 
 			props.setAttributes({
 				field_name: newFieldName,
 				adminId: {
-					value: extract_admin_id(newFieldName, "website"),
-					default: extract_admin_id(newFieldName, "website"),
+					value: extract_admin_id(newFieldName, "datePicker"),
+					default: extract_admin_id(newFieldName, "datePicker"),
 				},
 			});
 			props.setAttributes({
@@ -82,7 +84,7 @@ function edit(props) {
 					props.clientId +
 					"__" +
 					getEncodedData(
-						"website",
+						"datePicker",
 						props.clientId,
 						isRequired,
 						get_admin_id(adminId)
@@ -94,7 +96,7 @@ function edit(props) {
 					extract_id(field_name) +
 					"__" +
 					getEncodedData(
-						"website",
+						"datePicker",
 						extract_id(field_name),
 						isRequired,
 						get_admin_id(adminId)
@@ -104,20 +106,33 @@ function edit(props) {
 	};
 
 	useEffect(() => {
-		let rootMessages = getRootMessages(props.clientId, "website");
-
-		if (rootMessages) {
-			const newMessages = clone(messages);
-
-			assign(newMessages, rootMessages);
-
-			props.setAttributes({ messages: newMessages });
-		}
-
 		getRootData();
 	}, []);
 
 	useEffect(() => getRootData(), [props]);
+
+	const getTypeActive = (t) => {
+		if (type === t) {
+			return {
+				isDefault: true,
+			};
+		}
+
+		return {
+			isPrimary: true,
+		};
+	};
+
+	let getFieldType = () => {
+		switch (type) {
+			case "both":
+				return "datetime-local";
+			case "time":
+				return "time";
+			case "date":
+				return "date";
+		}
+	};
 
 	const setMessages = (type, m) => {
 		let newMessages = clone(messages);
@@ -136,22 +151,6 @@ function edit(props) {
 		});
 	};
 
-	const handleInputElementChange = (type, property, value) => {
-		const newSuffix = clone(suffix);
-		const newPrefix = clone(prefix);
-
-		switch (type) {
-			case "suffix":
-				set(newSuffix, property, value);
-				props.setAttributes({ suffix: newSuffix });
-
-				break;
-			case "prefix":
-				set(newPrefix, property, value);
-				props.setAttributes({ prefix: newPrefix });
-		}
-	};
-
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
@@ -165,37 +164,11 @@ function edit(props) {
 						/>
 					</div>
 
-					<div className="cwp-option">
-						<PanelRow>
-							<h3 className="cwp-heading">{__("Prefix", TEXT_DOMAIN)}</h3>
-							<FormToggle
-								label="Prefix"
-								checked={prefix.enable}
-								onChange={() =>
-									handleInputElementChange("prefix", "enable", !prefix.enable)
-								}
-							/>
-						</PanelRow>
-					</div>
-
-					<div className="cwp-option">
-						<PanelRow>
-							<h3 className="cwp-heading">{__("Suffix", TEXT_DOMAIN)}</h3>
-							<FormToggle
-								label="Suffix"
-								checked={suffix.enable}
-								onChange={() =>
-									handleInputElementChange("suffix", "enable", !suffix.enable)
-								}
-							/>
-						</PanelRow>
-					</div>
-
 					{!enableCondition ? (
 						<PanelRow>
 							<h3 className="cwp-heading">{__("Required", TEXT_DOMAIN)}</h3>
 							<FormToggle
-								label="Required"
+								label={__("Required", TEXT_DOMAIN)}
 								checked={isRequired}
 								onChange={handleRequired}
 							/>
@@ -224,8 +197,31 @@ function edit(props) {
 							/>
 						</div>
 					)}
+					<div className="cwp-option">
+						<SelectControl
+							label={__("Format", TEXT_DOMAIN)}
+							value={format}
+							options={[
+								{
+									label: __("Day Month Year", TEXT_DOMAIN),
+									value: "DD/MM/YYYY",
+								},
+								{
+									label: __("Month Day Year", TEXT_DOMAIN),
+									value: "MM/DD/YYYY",
+								},
+								{
+									label: __("Year Month Day", TEXT_DOMAIN),
+									value: "YYYY/MM/DD",
+								},
+							]}
+							onChange={(format) => {
+								props.setAttributes({ format });
+							}}
+						/>
+					</div>
 				</PanelBody>
-				<PanelBody title={__("Condition", TEXT_DOMAIN)}>
+				<PanelBody title="Condition">
 					<ConditionalLogic
 						condition={condition}
 						set={props.setAttributes}
@@ -233,8 +229,8 @@ function edit(props) {
 						useCondition={props.attributes.enableCondition}
 					/>
 				</PanelBody>
-				<PanelBody title={__("Messages", TEXT_DOMAIN)}>
-					{isRequired && (
+				{isRequired && (
+					<PanelBody title="Messages">
 						<div className="cwp-option">
 							<h3 className="cwp-heading">
 								{__("Required Error", TEXT_DOMAIN)}
@@ -244,27 +240,12 @@ function edit(props) {
 								value={empty}
 							/>
 						</div>
-					)}
-					<div className="cwp-option">
-						<h3 className="cwp-heading">
-							{__("Invalid Message Error", TEXT_DOMAIN)}
-						</h3>
-						<TextControl
-							onChange={(v) => setMessages("invalid", v)}
-							value={invalid}
-						/>
-					</div>
-					<div className="cwp-option">
-						<p>
-							<Icon icon="info" />{" "}
-							{__("Use {{value}} to insert field value!", TEXT_DOMAIN)}
-						</p>
-					</div>
-				</PanelBody>
+					</PanelBody>
+				)}
 			</InspectorControls>
 		),
 		!!props.isSelected && <BlockControls></BlockControls>,
-		<div className={`cwp-website cwp-field ${props.className}`}>
+		<div className={`cwp-field cwp-datepicker ${props.className}`}>
 			{!!props.isSelected && !enableCondition && (
 				<div className="cwp-required">
 					<h3>{__("Required", TEXT_DOMAIN)}</h3>
@@ -286,33 +267,30 @@ function edit(props) {
 						</div>
 					)}
 				</div>
-				<div className="cwp-field-with-elements">
-					{prefix.enable && (
-						<Prefix prefix={prefix}>
-							<RichText
-								placeholder={__("Prefix", TEXT_DOMAIN)}
-								tag="span"
-								value={prefix.content}
-								onChange={(newContent) =>
-									handleInputElementChange("prefix", "content", newContent)
-								}
-							/>
-						</Prefix>
-					)}
-					<input value={website} onChange={handleChange} />
-					{suffix.enable && (
-						<Suffix suffix={suffix}>
-							<RichText
-								placeholder={__("Suffix", TEXT_DOMAIN)}
-								tag="span"
-								value={suffix.content}
-								onChange={(newContent) =>
-									handleInputElementChange("suffix", "content", newContent)
-								}
-							/>
-						</Suffix>
-					)}
-				</div>
+				{format === "DD/MM/YYYY" && (
+					<DatePicker
+						format={format}
+						value={placeholder}
+						onChange={handleChange}
+						setAttributes={props.setAttributes}
+					/>
+				)}
+				{format === "MM/DD/YYYY" && (
+					<DatePicker
+						format={format}
+						value={placeholder}
+						onChange={handleChange}
+						setAttributes={props.setAttributes}
+					/>
+				)}
+				{format === "YYYY/MM/DD" && (
+					<DatePicker
+						setAttributes={props.setAttributes}
+						format={format}
+						value={placeholder}
+						onChange={handleChange}
+					/>
+				)}
 			</div>
 		</div>,
 	];

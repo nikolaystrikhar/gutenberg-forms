@@ -1,26 +1,30 @@
+/**
+ *
+ * ! DEPRECATED SAVE VERSION
+ *
+ */
+
 import React from "react";
 import { isEmpty } from "lodash";
-import { strip_tags } from "../../block/misc/helper";
-import { stringifyCondition } from "../../block/functions";
-import Prefix from "../components/prefix";
-import Suffix from "../components/suffix";
+import { strip_tags } from "../../../block/misc/helper";
+import { stringifyCondition } from "../../../block/functions";
 
 function save(props) {
 	const {
-		website,
+		name,
 		isRequired,
 		label,
 		id,
 		requiredLabel,
-		messages: { invalid, empty },
-		messages,
+		messages: { empty, invalidName },
+		pattern,
 		condition,
-		prefix,
-		suffix,
+		enableCondition,
 	} = props.attributes;
 
 	const getLabel = () => {
 		const { label, isRequired } = props.attributes;
+
 		let required = !isEmpty(requiredLabel)
 			? `<abbr title="required" aria-label="required">${requiredLabel}</abbr>`
 			: "";
@@ -30,10 +34,16 @@ function save(props) {
 
 		return label;
 	};
+
 	let errors = JSON.stringify({
-		mismatch: invalid,
+		mismatch: invalidName,
 		empty,
 	});
+
+	let getPattern = () => {
+		return isEmpty(pattern) ? {} : { pattern };
+	};
+
 	const getCondition = () => {
 		if (props.attributes.enableCondition && !isEmpty(condition.field)) {
 			//verifying the condition
@@ -44,8 +54,9 @@ function save(props) {
 
 		return {};
 	};
+
 	return (
-		<div className="cwp-website cwp-field" {...getCondition()}>
+		<div className="cwp-name cwp-field" {...getCondition()}>
 			<div className="cwp-field-set">
 				{!isEmpty(label) && (
 					<label
@@ -53,31 +64,18 @@ function save(props) {
 						dangerouslySetInnerHTML={{ __html: getLabel() }}
 					></label>
 				)}
-				<div className="cwp-field-with-elements">
-					{prefix.enable && (
-						<Prefix prefix={prefix}>
-							<span dangerouslySetInnerHTML={{ __html: prefix.content }}></span>
-						</Prefix>
-					)}
-
-					<input
-						id={id}
-						aria-label={strip_tags(label)}
-						data-cwp-field
-						required={isRequired}
-						type="url"
-						data-errors={errors}
-						name={id}
-						type="url"
-						placeholder={website}
-					/>
-
-					{suffix.enable && (
-						<Suffix suffix={suffix}>
-							<span dangerouslySetInnerHTML={{ __html: suffix.content }}></span>
-						</Suffix>
-					)}
-				</div>
+				<input
+					id={id}
+					aria-label={strip_tags(label)}
+					data-cwp-field
+					{...getPattern()}
+					name={id}
+					title={invalidName}
+					data-errors={errors}
+					data-rule="false"
+					placeholder={name}
+					required={isRequired}
+				/>
 			</div>
 		</div>
 	);

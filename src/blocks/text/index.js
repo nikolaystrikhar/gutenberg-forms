@@ -6,6 +6,8 @@ import textSave from "./save";
 import { getFieldTransform } from "../../block/functions";
 import { fieldParents, myAttrs } from "../../constants";
 import blockData from "./block.json";
+import { deprecated } from "./deprecated/deprecated";
+
 const { attributes, title } = blockData;
 
 registerBlockType("cwp/text", {
@@ -16,6 +18,7 @@ registerBlockType("cwp/text", {
 	edit: textEdit,
 	save: textSave,
 	attributes,
+	deprecated,
 	transforms: {
 		from: [
 			{

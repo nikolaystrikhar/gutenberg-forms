@@ -7,6 +7,8 @@ import { getFieldTransform } from "../../block/functions";
 import { fieldParents, myAttrs } from "../../constants";
 
 import blockData from "./block.json";
+import { deprecated } from "./deprecated/deprected";
+
 const { attributes, title } = blockData;
 
 registerBlockType("cwp/phone", {
@@ -17,6 +19,7 @@ registerBlockType("cwp/phone", {
 	edit: phoneEdit,
 	save: phoneSave,
 	attributes,
+	deprecated,
 	transforms: {
 		from: [
 			{

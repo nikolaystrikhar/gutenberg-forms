@@ -5,6 +5,7 @@ import { getFieldTransform } from "../../block/functions";
 import { fieldParents, myAttrs } from "../../constants";
 import datePickerEdit from "./edit.js";
 import datePickerSave from "./save.js";
+import { deprecated } from "./deprecated/deprecated";
 
 import blockData from "./block.json";
 
@@ -18,6 +19,7 @@ registerBlockType("cwp/datepicker", {
 	edit: datePickerEdit,
 	save: datePickerSave,
 	attributes,
+	deprecated,
 	transforms: {
 		from: [
 			{

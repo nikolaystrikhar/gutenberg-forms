@@ -7,6 +7,7 @@ import { getFieldTransform } from "../../block/functions";
 import { fieldParents, myAttrs } from "../../constants";
 
 import blockData from "./block.json";
+import { deprecated } from "./deprecated/deprecated";
 const { attributes, title } = blockData;
 
 registerBlockType("cwp/website", {
@@ -16,6 +17,7 @@ registerBlockType("cwp/website", {
 	keywords: [__("gutenberg-forms"), __("forms"), __("website")],
 	edit: websiteEdit,
 	save: websiteSave,
+	deprecated,
 	attributes,
 	transforms: {
 		from: [

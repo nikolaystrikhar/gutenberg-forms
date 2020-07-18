@@ -1,9 +1,13 @@
+/**
+ *
+ * ! DEPRECTED SAVE VERSION
+ *
+ */
+
 import React from "react";
 import { isEmpty } from "lodash";
-import { strip_tags } from "../../block/misc/helper";
-import { stringifyCondition } from "../../block/functions";
-import Prefix from "../components/prefix";
-import Suffix from "../components/suffix";
+import { strip_tags } from "../../../block/misc/helper";
+import { stringifyCondition } from "../../../block/functions";
 
 function save(props) {
 	const {
@@ -15,8 +19,6 @@ function save(props) {
 		messages: { invalid, empty },
 		messages,
 		condition,
-		prefix,
-		suffix,
 	} = props.attributes;
 
 	const getLabel = () => {
@@ -53,31 +55,17 @@ function save(props) {
 						dangerouslySetInnerHTML={{ __html: getLabel() }}
 					></label>
 				)}
-				<div className="cwp-field-with-elements">
-					{prefix.enable && (
-						<Prefix prefix={prefix}>
-							<span dangerouslySetInnerHTML={{ __html: prefix.content }}></span>
-						</Prefix>
-					)}
-
-					<input
-						id={id}
-						aria-label={strip_tags(label)}
-						data-cwp-field
-						required={isRequired}
-						type="url"
-						data-errors={errors}
-						name={id}
-						type="url"
-						placeholder={website}
-					/>
-
-					{suffix.enable && (
-						<Suffix suffix={suffix}>
-							<span dangerouslySetInnerHTML={{ __html: suffix.content }}></span>
-						</Suffix>
-					)}
-				</div>
+				<input
+					id={id}
+					aria-label={strip_tags(label)}
+					data-cwp-field
+					required={isRequired}
+					type="url"
+					data-errors={errors}
+					name={id}
+					type="url"
+					placeholder={website}
+				/>
 			</div>
 		</div>
 	);

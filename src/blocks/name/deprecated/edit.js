@@ -1,4 +1,10 @@
-import React, { useEffect } from "react";
+/**
+ *
+ * ! DEPRECATED EDIT VERSION
+ *
+ */
+
+import React, { useEffect, Fragment } from "react";
 import {
 	FormToggle,
 	Toolbar,
@@ -13,19 +19,17 @@ import {
 	getEncodedData,
 	extract_admin_id,
 	get_admin_id,
-} from "../../block/misc/helper";
-
-import { set, clone, assign } from "lodash";
+} from "../../../block/misc/helper";
 import {
 	getRootMessages,
 	detect_similar_forms,
-} from "../../block/functions/index";
-import ConditionalLogic from "../../block/components/condition";
-import { TEXT_DOMAIN } from "../../block/constants/index";
-import Prefix from "../components/prefix";
-import Suffix from "../components/suffix";
+} from "../../../block/functions/index";
+import ConditionalLogic from "../../../block/components/condition";
 
+import { clone, set, assign } from "lodash";
+import { TEXT_DOMAIN } from "../../../block/constants/index";
 const { __ } = wp.i18n;
+
 const {
 	InspectorControls,
 	BlockControls,
@@ -35,9 +39,9 @@ const {
 
 function edit(props) {
 	const handleChange = (e) => {
-		let website = e.target.value;
+		let name = e.target.value;
 
-		props.setAttributes({ website });
+		props.setAttributes({ name });
 	};
 
 	const handleRequired = () => {
@@ -51,30 +55,29 @@ function edit(props) {
 	};
 
 	const {
-		website,
+		name,
 		isRequired,
 		label,
 		id,
 		field_name,
 		requiredLabel,
-		messages: { invalid, empty },
+		messages: { empty, invalidName },
 		messages,
+		pattern,
 		condition,
 		enableCondition,
 		adminId,
-		prefix,
-		suffix,
 	} = props.attributes;
 
 	const getRootData = () => {
 		if (field_name === "" || detect_similar_forms(props.clientId)) {
-			const newFieldName = getFieldName("website", props.clientId);
+			const newFieldName = getFieldName("name", props.clientId);
 
 			props.setAttributes({
 				field_name: newFieldName,
 				adminId: {
-					value: extract_admin_id(newFieldName, "website"),
-					default: extract_admin_id(newFieldName, "website"),
+					value: extract_admin_id(newFieldName, "name"),
+					default: extract_admin_id(newFieldName, "name"),
 				},
 			});
 			props.setAttributes({
@@ -82,7 +85,7 @@ function edit(props) {
 					props.clientId +
 					"__" +
 					getEncodedData(
-						"website",
+						"name",
 						props.clientId,
 						isRequired,
 						get_admin_id(adminId)
@@ -94,7 +97,7 @@ function edit(props) {
 					extract_id(field_name) +
 					"__" +
 					getEncodedData(
-						"website",
+						"name",
 						extract_id(field_name),
 						isRequired,
 						get_admin_id(adminId)
@@ -104,7 +107,7 @@ function edit(props) {
 	};
 
 	useEffect(() => {
-		let rootMessages = getRootMessages(props.clientId, "website");
+		let rootMessages = getRootMessages(props.clientId, "name");
 
 		if (rootMessages) {
 			const newMessages = clone(messages);
@@ -136,22 +139,6 @@ function edit(props) {
 		});
 	};
 
-	const handleInputElementChange = (type, property, value) => {
-		const newSuffix = clone(suffix);
-		const newPrefix = clone(prefix);
-
-		switch (type) {
-			case "suffix":
-				set(newSuffix, property, value);
-				props.setAttributes({ suffix: newSuffix });
-
-				break;
-			case "prefix":
-				set(newPrefix, property, value);
-				props.setAttributes({ prefix: newPrefix });
-		}
-	};
-
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
@@ -163,32 +150,6 @@ function edit(props) {
 							value={adminId.value}
 							onChange={handleAdminId}
 						/>
-					</div>
-
-					<div className="cwp-option">
-						<PanelRow>
-							<h3 className="cwp-heading">{__("Prefix", TEXT_DOMAIN)}</h3>
-							<FormToggle
-								label="Prefix"
-								checked={prefix.enable}
-								onChange={() =>
-									handleInputElementChange("prefix", "enable", !prefix.enable)
-								}
-							/>
-						</PanelRow>
-					</div>
-
-					<div className="cwp-option">
-						<PanelRow>
-							<h3 className="cwp-heading">{__("Suffix", TEXT_DOMAIN)}</h3>
-							<FormToggle
-								label="Suffix"
-								checked={suffix.enable}
-								onChange={() =>
-									handleInputElementChange("suffix", "enable", !suffix.enable)
-								}
-							/>
-						</PanelRow>
 					</div>
 
 					{!enableCondition ? (
@@ -212,17 +173,19 @@ function edit(props) {
 						</div>
 					)}
 					{isRequired && (
-						<div className="cwp-option">
-							<h3 className="cwp-heading">
-								{__("Required Text", TEXT_DOMAIN)}
-							</h3>
-							<TextControl
-								onChange={(label) =>
-									props.setAttributes({ requiredLabel: label })
-								}
-								value={requiredLabel}
-							/>
-						</div>
+						<Fragment>
+							<div className="cwp-option">
+								<h3 className="cwp-heading">
+									{__("Required Text", TEXT_DOMAIN)}
+								</h3>
+								<TextControl
+									onChange={(label) =>
+										props.setAttributes({ requiredLabel: label })
+									}
+									value={requiredLabel}
+								/>
+							</div>
+						</Fragment>
 					)}
 				</PanelBody>
 				<PanelBody title={__("Condition", TEXT_DOMAIN)}>
@@ -247,11 +210,11 @@ function edit(props) {
 					)}
 					<div className="cwp-option">
 						<h3 className="cwp-heading">
-							{__("Invalid Message Error", TEXT_DOMAIN)}
+							{__("Invalid Name Error", TEXT_DOMAIN)}
 						</h3>
 						<TextControl
-							onChange={(v) => setMessages("invalid", v)}
-							value={invalid}
+							onChange={(v) => setMessages("invalidName", v)}
+							value={invalidName}
 						/>
 					</div>
 					<div className="cwp-option">
@@ -261,17 +224,25 @@ function edit(props) {
 						</p>
 					</div>
 				</PanelBody>
+				<PanelBody title={__("Validation", TEXT_DOMAIN)}>
+					<div className="cwp-option">
+						<TextControl
+							label={__("Pattern (RegExp)", TEXT_DOMAIN)}
+							onChange={(pattern) => props.setAttributes({ pattern })}
+							value={pattern}
+						/>
+					</div>
+				</PanelBody>
 			</InspectorControls>
 		),
 		!!props.isSelected && <BlockControls></BlockControls>,
-		<div className={`cwp-website cwp-field ${props.className}`}>
+		<div className={`cwp-name cwp-field ${props.className}`}>
 			{!!props.isSelected && !enableCondition && (
 				<div className="cwp-required">
 					<h3>{__("Required", TEXT_DOMAIN)}</h3>
 					<FormToggle checked={isRequired} onChange={handleRequired} />
 				</div>
 			)}
-
 			<div className="cwp-field-set">
 				<div className="cwp-label-wrap">
 					<RichText
@@ -286,33 +257,7 @@ function edit(props) {
 						</div>
 					)}
 				</div>
-				<div className="cwp-field-with-elements">
-					{prefix.enable && (
-						<Prefix prefix={prefix}>
-							<RichText
-								placeholder={__("Prefix", TEXT_DOMAIN)}
-								tag="span"
-								value={prefix.content}
-								onChange={(newContent) =>
-									handleInputElementChange("prefix", "content", newContent)
-								}
-							/>
-						</Prefix>
-					)}
-					<input value={website} onChange={handleChange} />
-					{suffix.enable && (
-						<Suffix suffix={suffix}>
-							<RichText
-								placeholder={__("Suffix", TEXT_DOMAIN)}
-								tag="span"
-								value={suffix.content}
-								onChange={(newContent) =>
-									handleInputElementChange("suffix", "content", newContent)
-								}
-							/>
-						</Suffix>
-					)}
-				</div>
+				<input value={name} onChange={handleChange} />
 			</div>
 		</div>,
 	];

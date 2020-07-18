@@ -63,6 +63,22 @@
 				"default": "",
 				"value": ""
 			}
+		},
+		"prefix": {
+			"type": "object",
+			"default": {
+				"enable": false,
+				"content": "",
+				"position": "outside"
+			}
+		},
+		"suffix": {
+			"type": "object",
+			"default": {
+				"enable": false,
+				"content": "",
+				"position": "outside"
+			}
 		}
 	}
 }
