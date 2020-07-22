@@ -1,6 +1,12 @@
+/**
+ *
+ * ! DEPRECATED SAVE VERSION
+ *
+ */
+
 import React from "react";
 import { isEmpty } from "lodash";
-import { stringifyCondition } from "../../block/functions";
+import { stringifyCondition } from "../../../block/functions";
 
 function save(props) {
 	const {
@@ -55,14 +61,11 @@ function save(props) {
 					data-errors={errors}
 					required={isRequired}
 				>
+					<option value="" disabled selected>
+						Select your option
+					</option>
 					{options.map((s, index) => {
-						const isSelected = index === 0 ? { selected: true } : {};
-
-						return (
-							<option value={s.label} {...isSelected}>
-								{s.label}
-							</option>
-						);
+						return <option value={s.label}>{s.label}</option>;
 					})}
 				</select>
 			</div>

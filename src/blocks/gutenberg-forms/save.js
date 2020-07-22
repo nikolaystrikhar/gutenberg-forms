@@ -1,6 +1,6 @@
 import React from "react";
 import { getThemeStyling } from "../../block/misc/helper";
-import { isEmpty } from "lodash";
+import { isEmpty, get } from "lodash";
 import { hasProtection, getProtection } from "../../block/functions";
 const { InnerBlocks } = wp.blockEditor;
 
@@ -19,10 +19,13 @@ function save(props) {
 		formLabel,
 		spamProtections,
 		buttonStyling,
+		messages,
 	} = props.attributes;
 
 	const recaptchaEnable = hasProtection("ReCaptcha v2", spamProtections);
 	const recaptcha = getProtection("ReCaptcha v2", spamProtections);
+	const spamMessage = get(messages, "spam.value");
+	const errorMessage = get(messages, "error.value");
 
 	const captcha_p = `
 
@@ -86,6 +89,14 @@ function save(props) {
 						</div>
 					</div>
 				)}
+
+				<div data-id={id} className="cwp-hidden spam">
+					{spamMessage}
+				</div>
+				<div data-id={id} className="cwp-hidden error">
+					{errorMessage}
+				</div>
+
 				{recaptchaEnable && (
 					<div id={id + "-captcha"} className="cwp-danger-captcha cwp-hidden">
 						Incorrect Captcha!

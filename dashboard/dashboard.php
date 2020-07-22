@@ -283,8 +283,17 @@ class Dashboard
     public function register_settings()
     {
 
+
         $general_settings = array(
             'messages' => array(
+                'spam'  => array(
+                    'label' => 'Spam',
+                    'value' => 'There was an error trying to send your message. Please try again later.',
+                ),
+                'error'  => array(
+                    'label' => 'Error',
+                    'value' => 'There was an error trying to send your message. Please try again later.',
+                ),
                 'name' => array(
                     'label' => 'Name',
                     'value' => 'The name {{value}} is not valid!'
@@ -331,9 +340,27 @@ class Dashboard
             )
         );
 
+        $saved_general_settings = get_option('cwp_gutenberg_forms_general_settings');
+        $new_messages = array();
 
-        $this->general = get_option('cwp_gutenberg_forms_general_settings');
 
+        if (array_key_exists( 'messages', json_decode($saved_general_settings, true) )) {
+
+
+            # merging updated message
+            $new_messages = array_merge($general_settings['messages'], json_decode($saved_general_settings, true)['messages']); 
+
+        }
+
+        $new_general_settings = array();
+
+        $new_general_settings['messages'] = $new_messages;
+        $new_general_settings_json = json_encode( $new_general_settings, JSON_PRETTY_PRINT );
+
+
+        update_option( 'cwp_gutenberg_forms_general_settings', $new_general_settings_json);
+
+        $this->general = $new_general_settings_json;
 
         foreach ($this->settings['integrations'] as $integration => $details) {
 
@@ -396,7 +423,7 @@ class Dashboard
 
                 // for testing purpose...
 
-                $production = false;
+                $production = true;
 
                 if ($production) {
                     $js = "http://localhost:8080/gutenbergforms/wp-content/plugins/gutenberghub-dashboard/build/build.js";

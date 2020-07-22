@@ -1,3 +1,9 @@
+/**
+ *
+ * ! DEPRECATED EDIT VERSION
+ *
+ */
+
 import React, { useState, useEffect, useRef, Fragment } from "react";
 import {
 	FormToggle,
@@ -15,16 +21,16 @@ import {
 	strip_tags,
 	extract_admin_id,
 	get_admin_id,
-} from "../../block/misc/helper";
+} from "../../../block/misc/helper";
 
 import { clone, pullAt, set, assign } from "lodash";
 import {
 	getRootMessages,
 	detect_similar_forms,
-} from "../../block/functions/index";
-import ConditionalLogic from "../../block/components/condition";
-import Bulk_Add from "../components/bulk_add";
-import { TEXT_DOMAIN } from "../../block/constants/index";
+} from "../../../block/functions/index";
+import ConditionalLogic from "../../../block/components/condition";
+import Bulk_Add from "../../components/bulk_add";
+import { TEXT_DOMAIN } from "../../../block/constants/index";
 
 const { __ } = wp.i18n;
 const { InspectorControls, BlockControls, BlockIcon } = wp.blockEditor;
@@ -259,6 +265,9 @@ function edit(props) {
 	const SelectView = () => {
 		return (
 			<select data-cwp-field>
+				<option value="" disabled selected>
+					Select your option
+				</option>
 				{select.map((s, index) => {
 					return <option value={s.label}>{s.label}</option>;
 				})}

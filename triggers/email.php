@@ -321,6 +321,24 @@ class Email
         echo $hidden_style;
     }
 
+    private function message_error( $message, $response ) {    
+
+        $message_id = $_POST['submit'];
+
+        $status_styling = get_message_style_according_to_status($response['status']);
+
+        $css = "div#$message_id { display: block; $status_styling }";
+
+        if ($hideFormOnSuccess === true) {
+            $css .= "\n [data-formid=" . $message_id . "] { display: none; }";
+        }
+
+        $hidden_style = "<style> $css </style>";
+
+        echo $hidden_style;
+
+    }
+
     private function attempt_success($template)
     {
 
@@ -425,6 +443,18 @@ class Email
         $newEntry = Entries::create_entry($template, $mail_subject, $mail_body, $fields, $this->attachments);
         $record_entries = in_array('Record Entries', $template['actions']);
         $send_email = in_array('Email Notification', $template['actions']);
+
+        # checking if the integrations are satisfied with the given entry
+        $integrations_response = $this->ExternalServiceHandler::test( $newEntry );
+
+        if ( gettype($integrations_response) === 'array' and $integrations_response['can_proceed'] === false ) {
+
+            $this->message_error( $template, $integrations_response );
+
+            return; # exiting the sendMail function if the integrations are unsatisfied
+
+        }
+
 
         if ($send_email === true) {
             if (array_key_exists('email', $template)) {

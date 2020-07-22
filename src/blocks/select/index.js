@@ -7,6 +7,7 @@ import selectEdit from "./edit.js";
 import selectSave from "./save.js";
 
 import blockData from "./block.json";
+import { deprecated } from "./deprecated/deprecated";
 const { attributes, title } = blockData;
 
 registerBlockType("cwp/select", {
@@ -16,6 +17,7 @@ registerBlockType("cwp/select", {
 	keywords: [__("gutenberg-forms"), __("forms"), __("select")],
 	edit: selectEdit,
 	save: selectSave,
+	deprecated,
 	attributes,
 	transforms: {
 		from: [

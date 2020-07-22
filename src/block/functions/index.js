@@ -505,6 +505,7 @@ export function getProtection(name, pr) {
 
 export function getGlobalMessages() {
 	const globalMessages = cwpGlobal.generalSettings.messages;
+
 	const defaultValidationMessages = defaultFieldMessages.map((v) => {
 		if (has(v, "invalid")) {
 			return {
