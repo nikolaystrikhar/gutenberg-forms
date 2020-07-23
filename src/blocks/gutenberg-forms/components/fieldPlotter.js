@@ -5,7 +5,18 @@ import {
 	FormTokenField,
 	Notice,
 } from "@wordpress/components";
-import { map, isEmpty, has, clone, set, get, isEqual, each } from "lodash";
+import {
+	map,
+	isEmpty,
+	has,
+	clone,
+	set,
+	get,
+	isEqual,
+	each,
+	includes,
+	omit,
+} from "lodash";
 import { TEXT_DOMAIN } from "../../../block/constants";
 import { serializeFields } from "../../../block/misc/helper";
 
@@ -19,9 +30,10 @@ function FieldPlotter({
 	data,
 	name,
 	fields,
+	title,
 	query_fields,
 }) {
-	const { integrations } = data.attributes;
+	const { integrations, actions } = data.attributes;
 
 	const [error, setError] = useState("");
 

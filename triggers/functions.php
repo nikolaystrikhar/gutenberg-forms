@@ -192,16 +192,3 @@ function get_all_plugins_data() {
 	return $data;
 	
 }
-
-function get_message_style_according_to_status( $status ) {
-
-	if ($status === "spam") {
-		return 'background-color: #ffa5007d; border-left: 2px solid orange; color #fff;';
-	} else if ($status === "error") {
-		return 'background-color: #ff000073; border-left: 2px solid red; color #fff;';
-	} else {
-		return 'background-color: #00800030; border-left: 2px solid green; color #000;';
-
-	}
-
-}

@@ -292,6 +292,14 @@ html {
 			padding: 12px 12px;
 			color: #fff;
 		}
+
+		& .cwp-hidden.spam {
+			@include Alert(orange);
+		}
+
+		& .cwp-hidden.error {
+			@include Alert(red);
+		}
 	}
 
 	.cwp-warning {

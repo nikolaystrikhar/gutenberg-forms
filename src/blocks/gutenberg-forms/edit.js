@@ -6,6 +6,7 @@ import {
 	getFormTemplates,
 	detect_similar_forms,
 	getGlobalMessages,
+	get_submission_message,
 } from "../../block/functions/index";
 import { getThemeStyling } from "../../block/misc/helper";
 import { withDispatch } from "@wordpress/data";
@@ -34,8 +35,6 @@ function edit(props) {
 	const formId = id && "form-".concat(id.split("-")[1]);
 
 	useEffect(() => {
-		console.log(props.attributes.messages);
-
 		if (id === "" || detect_similar_forms(props.clientId)) {
 			props.setAttributes({ id: "submit-" + props.clientId });
 		}

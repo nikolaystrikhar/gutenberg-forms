@@ -321,18 +321,17 @@ class Email
         echo $hidden_style;
     }
 
-    private function message_error( $message, $response ) {    
-
+    private function message_error( $message, $response ) {
+        
         $message_id = $_POST['submit'];
+        $status = "";
 
-        $status_styling = get_message_style_according_to_status($response['status']);
-
-        $css = "div#$message_id { display: block; $status_styling }";
-
-        if ($hideFormOnSuccess === true) {
-            $css .= "\n [data-formid=" . $message_id . "] { display: none; }";
+        if (array_key_exists('status', $response)) {
+            $status = $response['status'];
         }
+        
 
+        $css = "div[data-id='$message_id'].$status { display: block !important; }";
         $hidden_style = "<style> $css </style>";
 
         echo $hidden_style;

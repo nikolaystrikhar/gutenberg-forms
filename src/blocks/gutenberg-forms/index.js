@@ -3,11 +3,17 @@ const { registerBlockType } = wp.blocks;
 
 import mainEdit from "./edit";
 import mainSave from "./save";
-import { getGlobalMessages } from "../../block/functions";
+import {
+	getGlobalMessages,
+	get_submission_message,
+} from "../../block/functions";
 import { fieldSupport } from "../../constants";
 import { deprecation } from "./deprecated/deprecated";
+import { get } from "lodash";
 
 import blockData from "./block.json";
+
+const { error, spam } = get_submission_message();
 
 const blockAttributes = {
 	...blockData.attributes,
@@ -21,6 +27,14 @@ const blockAttributes = {
 			subject: "",
 			body: "",
 		}),
+	},
+	spamMessage: {
+		type: "string",
+		default: get(spam, "value"),
+	},
+	errorMessage: {
+		type: "string",
+		default: get(error, "value"),
 	},
 };
 

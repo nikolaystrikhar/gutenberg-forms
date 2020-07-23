@@ -1,7 +1,11 @@
 import React from "react";
 import { getThemeStyling } from "../../block/misc/helper";
 import { isEmpty, get } from "lodash";
-import { hasProtection, getProtection } from "../../block/functions";
+import {
+	hasProtection,
+	getProtection,
+	get_submission_message,
+} from "../../block/functions";
 const { InnerBlocks } = wp.blockEditor;
 
 function save(props) {
@@ -20,12 +24,14 @@ function save(props) {
 		spamProtections,
 		buttonStyling,
 		messages,
+		spamMessage,
+		errorMessage,
 	} = props.attributes;
 
 	const recaptchaEnable = hasProtection("ReCaptcha v2", spamProtections);
 	const recaptcha = getProtection("ReCaptcha v2", spamProtections);
-	const spamMessage = get(messages, "spam.value");
-	const errorMessage = get(messages, "error.value");
+
+	const { error, spam } = get_submission_message();
 
 	const captcha_p = `
 

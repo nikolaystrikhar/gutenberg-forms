@@ -14,7 +14,7 @@ import {
 	FormTokenField,
 	SelectControl,
 } from "@wordpress/components";
-import { set, clone, isEqual, isEmpty } from "lodash";
+import { set, clone, isEqual, isEmpty, get, map, includes } from "lodash";
 import MappedMessages from "./components/messages";
 import {
 	changeChildValue,
@@ -52,6 +52,8 @@ function Inspector(prop) {
 		actions,
 		spamProtections,
 		buttonStyling,
+		spamMessage,
+		errorMessage,
 	} = props.attributes;
 
 	const handleAlignment = (aln) => {
@@ -133,6 +135,28 @@ function Inspector(prop) {
 		set(newStyling, t, v);
 
 		props.setAttributes({ buttonStyling: newStyling });
+	};
+
+	const handleActions = (actions) => {
+		// only update actions of integrations that are available
+		const globalIntegrations = get(window, "cwpGlobal.settings.integrations");
+		const integrations_titles = map(globalIntegrations, "title");
+		let isCurrentActionSupported = true;
+
+		actions.forEach((action) => {
+			const exceptionalCases = ["Record Entries", "Email Notification"];
+
+			if (
+				!includes(integrations_titles, action) &&
+				!includes(exceptionalCases, action)
+			) {
+				isCurrentActionSupported = false;
+			}
+		});
+
+		if (isCurrentActionSupported) {
+			props.setAttributes({ actions });
+		}
 	};
 
 	return (
@@ -254,13 +278,27 @@ function Inspector(prop) {
 							onChange={(successURL) => props.setAttributes({ successURL })}
 						/>
 					) : (
-						<TextareaControl
-							label={__("Success Message", TEXT_DOMAIN)}
-							value={successMessage}
-							onChange={(successMessage) =>
-								props.setAttributes({ successMessage })
-							}
-						/>
+						<Fragment>
+							<TextareaControl
+								label={__("Success Message", TEXT_DOMAIN)}
+								value={successMessage}
+								onChange={(successMessage) =>
+									props.setAttributes({ successMessage })
+								}
+							/>
+							<TextareaControl
+								label={__("Spam Message", TEXT_DOMAIN)}
+								value={spamMessage}
+								onChange={(spamMessage) => props.setAttributes({ spamMessage })}
+							/>
+							<TextareaControl
+								label={__("Error Message", TEXT_DOMAIN)}
+								value={errorMessage}
+								onChange={(errorMessage) =>
+									props.setAttributes({ errorMessage })
+								}
+							/>
+						</Fragment>
 					)}
 				</div>
 				{successType === "message" && (
@@ -287,7 +325,7 @@ function Inspector(prop) {
 			<PanelBody title={__("Form Action", TEXT_DOMAIN)}>
 				<FormTokenField
 					value={actions}
-					onChange={(actions) => props.setAttributes({ actions })}
+					onChange={handleActions}
 					suggestions={get_form_actions()}
 				/>
 			</PanelBody>

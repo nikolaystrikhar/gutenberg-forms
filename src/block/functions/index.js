@@ -783,3 +783,18 @@ export function hasChildBlocks(clientId) {
 
 	return true;
 }
+
+/**
+ * This will return the submission messages default from the backend panel
+ */
+
+export function get_submission_message() {
+	const messages = get(window, "cwpGlobal.generalSettings.messages");
+	const spam = get(messages, "spam");
+	const error = get(messages, "error");
+
+	return {
+		spam,
+		error,
+	};
+}
