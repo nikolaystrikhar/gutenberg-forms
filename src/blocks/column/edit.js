@@ -1,53 +1,54 @@
-import React from "react";
-import { RangeControl, PanelBody } from "@wordpress/components";
-import { TEXT_DOMAIN } from "../../block/constants/index";
-import { hasChildBlocks } from "../../block/functions";
+import React from 'react';
+import { RangeControl, PanelBody } from '@wordpress/components';
+import { TEXT_DOMAIN } from '../../block/constants/index';
+import { hasChildBlocks } from '../../block/functions';
 
 const { InspectorControls, InnerBlocks } = wp.blockEditor;
 const { __ } = wp.i18n;
 const $ = jQuery;
 
-function edit(props) {
+function edit( props ) {
 	const { width } = props.attributes;
-	const { attributes, setAttributes, clientId } = props;
+	const { setAttributes, clientId } = props;
 
-	const updateAttribute = (key, value) => {
-		const currentBlockId = "#block-".concat(clientId);
-		const currentBlockElement = $(currentBlockId);
+	const updateAttribute = ( key, value ) => {
+		const currentBlockId = '#block-'.concat( clientId );
+		const currentBlockElement = $( currentBlockId );
 
-		if (key === "width" && currentBlockElement.length) {
-			const widthInPercentage = String(value).concat("%");
-			currentBlockElement.css("flex-basis", widthInPercentage); // updating the dom width
+		if ( key === 'width' && currentBlockElement.length ) {
+			const widthInPercentage = String( value ).concat( '%' );
+			currentBlockElement.css( 'flex-basis', widthInPercentage ); // updating the dom width
 		}
 
-		setAttributes({
-			[key]: value,
-		});
+		setAttributes( {
+			[ key ]: value,
+		} );
 	};
 
 	return [
+		// eslint-disable-next-line react/jsx-key
 		<div className="cwp-col">
 			<InnerBlocks
-				templateLock={false}
+				templateLock={ false }
 				className="cwp-col_inserter"
 				renderAppender={
-					hasChildBlocks(clientId)
-						? undefined
-						: () => <InnerBlocks.ButtonBlockAppender />
+					hasChildBlocks( clientId ) ?
+						undefined :
+						() => <InnerBlocks.ButtonBlockAppender />
 				}
 			/>
 		</div>,
 		null,
-		!!props.isSelected && (
+		!! props.isSelected && (
 			<InspectorControls>
 				<PanelBody
-					initialOpen={true}
-					title={__("Column Settings", TEXT_DOMAIN)}
+					initialOpen={ true }
+					title={ __( 'Column Settings', TEXT_DOMAIN ) }
 				>
 					<RangeControl
-						value={width}
-						label={__("Width (%)", TEXT_DOMAIN)}
-						onChange={(newWidth) => updateAttribute("width", newWidth)}
+						value={ width }
+						label={ __( 'Width (%)', TEXT_DOMAIN ) }
+						onChange={ ( newWidth ) => updateAttribute( 'width', newWidth ) }
 					/>
 				</PanelBody>
 			</InspectorControls>

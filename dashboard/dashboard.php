@@ -1,8 +1,8 @@
 <?php
 
 require_once plugin_dir_path(__DIR__) . 'triggers/functions.php';
-$path = preg_replace('/wp-content(?!.*wp-content).*/','',__DIR__);
-include($path.'wp-load.php');
+$path = preg_replace('/wp-content(?!.*wp-content).*/', '', __DIR__);
+include($path . 'wp-load.php');
 require_once(ABSPATH . 'wp-admin/includes/plugin-install.php');
 require_once(ABSPATH . 'wp-admin/includes/file.php');
 require_once(ABSPATH . 'wp-admin/includes/misc.php');
@@ -23,7 +23,7 @@ class Dashboard
         $this->on_initialized();
 
         add_action('admin_menu', array($this, 'register'));
-        add_action( 'wp_ajax_cwp_gf_install_plugin', array($this, 'install_plugin') ); // install plugn ajax
+        add_action('wp_ajax_cwp_gf_install_plugin', array($this, 'install_plugin')); // install plugn ajax
 
 
         //services..
@@ -182,57 +182,59 @@ class Dashboard
         $this->settings['integrations'] = apply_filters('gutenberg_forms_integrations', $this->settings['integrations']);
     }
 
-    public function on_initialized() {
+    public function on_initialized()
+    {
 
-        $activate_plugin_key = 'cwp-activate-plugin-script'; 
+        $activate_plugin_key = 'cwp-activate-plugin-script';
 
         if (array_key_exists($activate_plugin_key, $_POST)) {
-            
-            $plugin_script = $_POST[$activate_plugin_key];
-    
-            $this->plugin_activation($plugin_script); // activating the plugin
-    
-        } 
 
+            $plugin_script = $_POST[$activate_plugin_key];
+
+            $this->plugin_activation($plugin_script); // activating the plugin
+
+        }
     }
 
-    public function plugin_activation( $plugin ) {
+    public function plugin_activation($plugin)
+    {
 
 
         $plugin_script = "";
-        foreach (get_plugins() as $key => $plugin_data ) {
+        foreach (get_plugins() as $key => $plugin_data) {
 
-            if (array_key_exists( 'TextDomain', $plugin_data ) and $plugin_data['TextDomain'] === $plugin) {
+            if (array_key_exists('TextDomain', $plugin_data) and $plugin_data['TextDomain'] === $plugin) {
                 $plugin_script = $key; # plugin script
             }
-
         }
 
-        if( ! function_exists('activate_plugin') ) {
+        if (!function_exists('activate_plugin')) {
             require_once ABSPATH . 'wp-admin/includes/plugin.php';
         }
-    
-        if( ! is_plugin_active( $plugin_script ) ) {
-            activate_plugin( $plugin_script );
+
+        if (!is_plugin_active($plugin_script)) {
+            activate_plugin($plugin_script);
         }
     }
 
 
-    public function install_plugin() {
-        if ( ! current_user_can('install_plugins') )
-        wp_die( __( 'Sorry, you are not allowed to install plugins on this site.', 'framework' ) );
+    public function install_plugin()
+    {
+        if (!current_user_can('install_plugins'))
+            wp_die(__('Sorry, you are not allowed to install plugins on this site.', 'framework'));
 
         $plugin = $_POST["plugin"];
 
-    
+
         // Include required libs for installation
-        require_once( ABSPATH . 'wp-admin/includes/plugin-install.php' );
-        require_once( ABSPATH . 'wp-admin/includes/class-wp-upgrader.php' );
-        require_once( ABSPATH . 'wp-admin/includes/class-wp-ajax-upgrader-skin.php' );
-        require_once( ABSPATH . 'wp-admin/includes/class-plugin-upgrader.php' );
+        require_once(ABSPATH . 'wp-admin/includes/plugin-install.php');
+        require_once(ABSPATH . 'wp-admin/includes/class-wp-upgrader.php');
+        require_once(ABSPATH . 'wp-admin/includes/class-wp-ajax-upgrader-skin.php');
+        require_once(ABSPATH . 'wp-admin/includes/class-plugin-upgrader.php');
 
         // Get Plugin Info
-        $api = plugins_api( 'plugin_information',
+        $api = plugins_api(
+            'plugin_information',
             array(
                 'slug' => $plugin,
                 'fields' => array(
@@ -253,15 +255,15 @@ class Dashboard
         );
 
         $skin     = new WP_Ajax_Upgrader_Skin();
-        $upgrader = new Plugin_Upgrader( $skin );
+        $upgrader = new Plugin_Upgrader($skin);
         $upgrader->install($api->download_link);
 
-        if($api->name){
+        if ($api->name) {
             $status = 'success';
-            $msg = $api->name .' successfully installed.';
+            $msg = $api->name . ' successfully installed.';
         } else {
             $status = 'failed';
-            $msg = 'There was an error installing '. $api->name .'.';
+            $msg = 'There was an error installing ' . $api->name . '.';
         }
 
         $json = array(
@@ -344,21 +346,20 @@ class Dashboard
         $new_messages = array();
 
 
-        if (array_key_exists( 'messages', json_decode($saved_general_settings, true) )) {
+        if (array_key_exists('messages', json_decode($saved_general_settings, true))) {
 
 
             # merging updated message
-            $new_messages = array_merge($general_settings['messages'], json_decode($saved_general_settings, true)['messages']); 
-
+            $new_messages = array_merge($general_settings['messages'], json_decode($saved_general_settings, true)['messages']);
         }
 
         $new_general_settings = array();
 
         $new_general_settings['messages'] = $new_messages;
-        $new_general_settings_json = json_encode( $new_general_settings, JSON_PRETTY_PRINT );
+        $new_general_settings_json = json_encode($new_general_settings, JSON_PRETTY_PRINT);
 
 
-        update_option( 'cwp_gutenberg_forms_general_settings', $new_general_settings_json);
+        update_option('cwp_gutenberg_forms_general_settings', $new_general_settings_json);
 
         $this->general = $new_general_settings_json;
 
@@ -377,15 +378,15 @@ class Dashboard
             );
 
             $is_enabled =  get_option($enable_integration) === "1" ? true : false;
-            
+
             if (
-                array_key_exists('is_disabled', $details)  and 
+                array_key_exists('is_disabled', $details)  and
                 $details['is_disabled']  === true
-                ) {
-                    update_option($enable_integration, false); 
-                    // disabling the integration if it is disabled and has errors
+            ) {
+                update_option($enable_integration, false);
+                // disabling the integration if it is disabled and has errors
             }
-            
+
             $this->settings['integrations'][$integration]['enable'] = $is_enabled;
 
 
@@ -423,7 +424,7 @@ class Dashboard
 
                 // for testing purpose...
 
-                $production = true;
+                $production = false;
 
                 if ($production) {
                     $js = "http://localhost:8080/gutenbergforms/wp-content/plugins/gutenberghub-dashboard/build/build.js";
@@ -431,7 +432,7 @@ class Dashboard
                     wp_enqueue_script('cwp_dashboard_script', $js, array('wp-api', 'wp-i18n', 'wp-components', 'wp-element'), uniqid(), true);
                     wp_enqueue_style('cwp_dashboard_stype', $css, array('wp-components'));
                 } else {
-                    wp_enqueue_script('cwp_dashboard_script', plugins_url('/', __DIR__) . '/dist/dashboard/build.js', array('wp-api', 'wp-i18n', 'wp-components', 'wp-element'), 'cwp_dashboard', true);
+                    wp_enqueue_script('cwp_dashboard_script', plugins_url('/', __DIR__) . '/dist/dashboard/build.js', array('wp-api', 'wp-i18n', 'wp-components', 'wp-element'), uniqid(), true);
                     wp_enqueue_style('cwp_dashboard_stype', plugins_url('/', __DIR__) . '/dist/dashboard/build.css', array('wp-components'));
                 }
             }
