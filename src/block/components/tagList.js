@@ -1,4 +1,4 @@
-import React from "react";
+import React, { useEffect } from "react";
 import { MenuGroup, MenuItem } from "@wordpress/components";
 import {
 	getFieldsTags,
@@ -39,6 +39,7 @@ function TagList(props) {
 
 				return fieldsTagList.map((field, index) => {
 					const id = get(field, "field_id");
+
 					const label = get(field, "fieldName");
 					const tag = `{{${id}}}`;
 

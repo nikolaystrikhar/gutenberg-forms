@@ -553,6 +553,14 @@ export function getPostUrl(id) {
 	}
 }
 
+/**
+ * Will return available field tags
+ * 
+ * @param {string} clientId client-id of the current child block in gutenberg-forms 
+ * @param {boolean} root if the current block is the gutenberg forms (root) 
+ * @return {array} list of tags available
+ */
+
 export function getFieldsTags(clientId, root = false) {
 	const rootBlock = root ? getBlock(clientId) : getRootFormBlock(clientId);
 	const child_fields = get(rootBlock, "innerBlocks");
