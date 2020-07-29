@@ -158,6 +158,9 @@ function cwpgutenbergforms_set_script_translations()
 	wp_set_script_translations('gutenberg_forms-cwp-block-js', 'cwp-gutenberg-forms');
 }
 
+function test(): string {
+	return 'testing';
+}
 
 //custom_posttype for our gutenberg-forms;
 
