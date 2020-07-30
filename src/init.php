@@ -115,6 +115,8 @@ function cwp_form_post_type()
 
 	require_once plugin_dir_path(__DIR__) . 'submissions/entries.php';
 	require_once plugin_dir_path(__DIR__) . 'forms-cpt/index.php';
+	require_once plugin_dir_path(__DIR__) . 'controllers/index.php';
+
 
 	Form::register_post_type(); //? creating a post_type for forms
 	Entries::register_post_type(); //? creating a post_type for our form entries

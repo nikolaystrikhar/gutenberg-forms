@@ -424,28 +424,33 @@ class Dashboard
 
                 // for testing purpose...
 
-                $production = false;
+                $production = true;
 
                 if ($production) {
                     $js = "http://localhost:8080/gutenbergforms/wp-content/plugins/gutenberghub-dashboard/build/build.js";
                     $css = "http://localhost:8080/gutenbergforms/wp-content/plugins/gutenberghub-dashboard/build/build.css";
                     wp_enqueue_script('cwp_dashboard_script', $js, array('wp-api', 'wp-i18n', 'wp-components', 'wp-element'), uniqid(), true);
-                    wp_enqueue_style('cwp_dashboard_stype', $css, array('wp-components'));
+                    wp_enqueue_style('cwp_dashboard_stype', $css, array(), uniqid());
                 } else {
                     wp_enqueue_script('cwp_dashboard_script', plugins_url('/', __DIR__) . '/dist/dashboard/build.js', array('wp-api', 'wp-i18n', 'wp-components', 'wp-element'), uniqid(), true);
                     wp_enqueue_style('cwp_dashboard_stype', plugins_url('/', __DIR__) . '/dist/dashboard/build.css', array('wp-components'));
                 }
+
+                # some grid library
+
+                wp_enqueue_style('cwp_dashboard_grid', plugins_url('/', __DIR__) . '/dist/grid.min.css', array(), '');
             }
 
             wp_localize_script(
                 'cwp_dashboard_script',
                 'cwp_global',
                 [
-                    'settings' => $this->settings,
-                    'informations' => $this->informations,
-                    'general' => json_decode($this->general, JSON_PRETTY_PRINT),
+                    'settings'          => $this->settings,
+                    'informations'      => $this->informations,
+                    'general'           => json_decode($this->general, JSON_PRETTY_PRINT),
                     'installed_plugins' => get_all_plugins_data(),
-                    'ajax_url' => admin_url('admin-ajax.php')
+                    'ajax_url'          => admin_url('admin-ajax.php'),
+                    'rest_url'          => get_rest_url()
                 ]
             );
         });
