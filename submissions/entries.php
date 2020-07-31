@@ -50,6 +50,7 @@ class Entries
                 'hierarchical'       => false,
                 'menu_position'      => null,
                 'supports'           => false,
+                'show_in_rest'      => true
             )
         );
 

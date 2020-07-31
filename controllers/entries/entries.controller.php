@@ -3,6 +3,7 @@
 /**
  * - This controller does not meant to replicate the rest api functionality
  * - Using this entries controller only for the formatted entries such as fetching the formatted entries data for displaying charts and complex filtration
+ *    & also to register extra fields in the rest api 
  * - To simply get the entries, REST API V3 is used 
  */
 
@@ -61,6 +62,52 @@ class cwp_gf_Entries_Controller extends WP_REST_Controller
         ));
     }
 
+    public function register_fields()
+    {
+
+        $meta_keys_to_register = [
+
+            'status', # post_type will be concatenated
+            'template',
+            'extra',
+            'fields',
+
+
+        ];
+
+        foreach ($meta_keys_to_register as $meta_key) {
+            register_rest_field(
+                self::post_type,
+                'entry_' . $meta_key,
+                array(
+                    'get_callback'    => function ($post_object) use ($meta_key) {
+                        return $this->get_meta_from_post($post_object, $meta_key . '__' . self::post_type);
+                    },
+                    'schema'          => null,
+                )
+            );
+        }
+    }
+
+    /**
+     * Will post meta data
+     * @param REST_API_ARRAY
+     * @param string $key meta key
+     * @return metadata 
+     */
+
+    public function get_meta_from_post($object, $key)
+    {
+        //get the id of the post object array
+        $post_id = $object['id'];
+
+        $metadata = get_post_meta($post_id, $key, true);
+
+        if (!$metadata) return "";
+
+        return $metadata;
+    }
+
     /**
      * Getting the required schema for bar chart.
      *
@@ -83,16 +130,22 @@ class cwp_gf_Entries_Controller extends WP_REST_Controller
             'type'                 => 'object',
             // In JSON Schema you can specify object properties in the properties attribute.
             'properties'           => array(
-                // 'id' => array(
-                //     'description'  => esc_html__('Unique identifier for the object.', 'my-textdomain'),
-                //     'type'         => 'integer',
-                //     'context'      => array('view', 'edit', 'embed'),
-                //     'readonly'     => true,
-                // ),
                 'data' => array(
                     'description'  => esc_html__('Data for the bar chart.', 'my-textdomain'),
                     'type'         => 'array',
                 ),
+                'forms' => array(
+                    'type'          => 'array',
+                    'description'   => esc_html__('All Available forms in last period.', 'my-textdomain')
+                ),
+                'labels'    => array(
+                    'type'          => 'array',
+                    'description'   => esc_html__('All Available forms labels last period.', 'my-textdomain')
+                ),
+                'highest_form_entry'    => array(
+                    'type'          => 'integer',
+                    'description'   => esc_html__('Highest entry recorded in last period.', 'my-textdomain')
+                )
             ),
         );
 
