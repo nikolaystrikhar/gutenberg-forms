@@ -435,10 +435,6 @@ class Dashboard
                     wp_enqueue_script('cwp_dashboard_script', plugins_url('/', __DIR__) . '/dist/dashboard/build.js', array('wp-api', 'wp-i18n', 'wp-components', 'wp-element'), uniqid(), true);
                     wp_enqueue_style('cwp_dashboard_stype', plugins_url('/', __DIR__) . '/dist/dashboard/build.css', array('wp-components'));
                 }
-
-                # some grid library
-
-                wp_enqueue_style('cwp_dashboard_grid', plugins_url('/', __DIR__) . '/dist/grid.min.css', array(), '');
             }
 
             wp_localize_script(

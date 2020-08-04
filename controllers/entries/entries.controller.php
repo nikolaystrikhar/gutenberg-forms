@@ -62,6 +62,10 @@ class cwp_gf_Entries_Controller extends WP_REST_Controller
         ));
     }
 
+    /**
+     * Registering all necessary rest fields
+     */
+
     public function register_fields()
     {
 
@@ -87,6 +91,27 @@ class cwp_gf_Entries_Controller extends WP_REST_Controller
                 )
             );
         }
+    }
+
+    /**
+     * Registering all necessary filters
+     * @param array $args - Provided by the rest_cwp_gf_entries_query filter (1st param)
+     * @param array $request - Provided by the rest_cwp_gf_entries_query filter (2nd param)
+     */
+
+    public function register_filters($args, $request)
+    {
+        # handling entries filter based on entry status  
+
+        if (isset($request['entry_status'])) :
+            $args += array(
+                'meta_key'   => 'status__cwp_gf_entries',
+                'meta_value' => $request['entry_status'],
+                'meta_query' => $request['meta_query'],
+            );
+        endif;
+
+        return $args;
     }
 
     /**

@@ -24,6 +24,5 @@ class Meta
         # misc meta data
 
         add_meta_box("status__$post_type", esc_html__('Status', $post_type), 'status', $post_type, 'normal', 'high');
-        add_meta_box("notes__$post_type", esc_html__('Notes', $post_type), 'notes', $post_type, 'normal', 'high');
     }
 }
