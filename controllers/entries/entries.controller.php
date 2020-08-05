@@ -111,6 +111,16 @@ class cwp_gf_Entries_Controller extends WP_REST_Controller
             );
         endif;
 
+        if (isset($request['form_id'])) :
+
+            $args += array(
+                'meta_key'      => 'extra__cwp_gf_entries',
+                'meta_value'    => $request['form_id'],
+                'compare' => 'EXISTS',
+            );
+
+        endif;
+
         return $args;
     }
 

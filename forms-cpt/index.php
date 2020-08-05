@@ -3,6 +3,7 @@
 
 require_once plugin_dir_path(__DIR__) . 'triggers/functions.php';
 require_once plugin_dir_path(__DIR__) . 'forms-cpt/reusable.php';
+require_once plugin_dir_path(__DIR__) . 'ajax/index.php';
 
 
 class Form
