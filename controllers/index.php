@@ -13,3 +13,7 @@ add_action('rest_api_init', function () use ($entries_controller) {
     $entries_controller->register_routes();
     $entries_controller->register_fields();
 });
+add_filter('rest_query_vars', function ($vars) {
+    $vars[] = 'meta_query';
+    return $vars;
+});

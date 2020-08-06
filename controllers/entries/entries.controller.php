@@ -102,24 +102,47 @@ class cwp_gf_Entries_Controller extends WP_REST_Controller
     public function register_filters($args, $request)
     {
         # handling entries filter based on entry status  
+        $has_status_filter = isset($request['entry_status']);
+        $has_form_filter = isset($request['form_id']);
 
-        if (isset($request['entry_status'])) :
+        if ($has_status_filter and $has_form_filter) {
+            $args += array(
+                'meta_query' => array(
+                    'relation'  => 'AND',
+                    array(
+                        array(
+                            'key'   => 'status__cwp_gf_entries',
+                            'value' => $request['entry_status'],
+                            'compare'  => '='
+                        ),
+                        array(
+                            'key'      => 'form_id__cwp_gf_entries',
+                            'value'    => $request['form_id'],
+                            'compare' => '=',
+                        )
+                    )
+                )
+            );
+        }
+
+
+        if ($has_status_filter and !$has_form_filter) {
             $args += array(
                 'meta_key'   => 'status__cwp_gf_entries',
                 'meta_value' => $request['entry_status'],
-                'meta_query' => $request['meta_query'],
+                'meta_compare'  => '='
             );
-        endif;
+        }
 
-        if (isset($request['form_id'])) :
 
+        if ($has_form_filter and !$has_status_filter) {
             $args += array(
-                'meta_key'      => 'extra__cwp_gf_entries',
+                'meta_key'      => 'form_id__cwp_gf_entries',
                 'meta_value'    => $request['form_id'],
-                'compare' => 'EXISTS',
+                'meta_compare' => '=',
             );
+        }
 
-        endif;
 
         return $args;
     }
