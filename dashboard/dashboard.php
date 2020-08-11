@@ -463,7 +463,7 @@ class Dashboard
 
 
         add_submenu_page(self::slug, 'Form', 'Forms', 'manage_options',  'edit.php?post_type=cwp_gf_forms');
-        add_submenu_page(self::slug, 'Entry', 'Entries', 'manage_options', 'edit.php?post_type=cwp_gf_entries');
+        add_submenu_page(self::slug, 'Entry', 'Entries', 'manage_options', 'admin.php?page=gutenberg_forms#/entries');
     }
 
     public function page_content()

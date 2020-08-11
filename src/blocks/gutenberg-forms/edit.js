@@ -38,10 +38,6 @@ function edit(props) {
 		if (id === "" || detect_similar_forms(props.clientId)) {
 			props.setAttributes({ id: "submit-" + props.clientId });
 		}
-
-		if (formLabel === "") {
-			props.setAttributes({ formLabel: "Gutenberg Form" });
-		}
 	}, []);
 
 	const handleButtonLabel = (label) => {

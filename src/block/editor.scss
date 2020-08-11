@@ -44,9 +44,14 @@
 }
 
 .cwp-intro {
-	& div.types {
-		& button {
-			margin: 0px 10px;
+	.content {
+		display: flex;
+		flex-direction: column;
+		& div.types {
+			& button,
+			span {
+				margin: 0px 10px 0px 0px;
+			}
 		}
 	}
 }

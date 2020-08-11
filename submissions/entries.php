@@ -1,6 +1,5 @@
 <?php
 
-require_once plugin_dir_path(__DIR__) . 'submissions/meta.php';
 require_once plugin_dir_path(__DIR__) . 'triggers/functions.php';
 require_once plugin_dir_path(__DIR__) . 'triggers/validator.php';
 
@@ -41,7 +40,7 @@ class Entries
                 'description'        => __('For storing entries', self::text_domain),
                 'public'             => false,
                 'publicly_queryable' => false,
-                'show_ui'            => true,
+                'show_ui'            => false,
                 'show_in_menu'       => false,
                 'query_var'          => true,
                 'rewrite'            => false,
@@ -53,115 +52,6 @@ class Entries
                 'show_in_rest'      => true
             )
         );
-
-        // registering meta boxes and fields for entries cpt when the hook is ready
-        if (function_exists('add_meta_box')) {
-            Meta::register_meta_boxes(self::post_type);
-        }
-
-        // registering and creating custom columns for entries cpt
-        //? set_custom_entries_columns -> functions.php
-        add_filter('manage_' . self::post_type . '_posts_columns', 'manage_entries_columns_headers', 100);
-        add_filter('manage_' . self::post_type . '_posts_custom_column', 'get_custom_entries_columns', 100, 2);
-        add_filter('manage_edit-' . self::post_type . '_sortable_columns', 'manage_entries_sortable_columns_headers');
-
-        add_action('restrict_manage_posts', function () {
-
-            global $wpdb;
-
-            $post = get_post(get_the_ID());
-
-
-            //only add filter to post type you want
-            if ($post and $post->post_type === self::post_type) {
-
-                $forms = array();
-
-                $entries = get_posts(
-                    array(
-                        'post_type' => self::post_type
-                    )
-                );
-
-
-                foreach ($entries as $entry) {
-
-                    $entry_meta = get_post_meta(
-                        $entry->ID,
-                        'extra__' . self::post_type
-                    );
-
-                    $forms[$entry_meta[0]['form_id']] = $entry_meta[0]['form_label'];
-                }
-
-                # give a unique name in the select field
-?>
-                <select name="admin_filter_channel">
-                    <option value="-1">All Channels</option>
-
-                    <?php
-                    $current_v = isset($_GET['admin_filter_channel']) ? $_GET['admin_filter_channel'] : '';
-
-                    foreach ($forms as $form_id => $form_label) {
-
-                        printf(
-                            '<option value="%s"%s>%s</option>',
-                            $form_id,
-                            $form_label == $current_v ? ' selected="selected"' : '',
-                            $form_label
-                        );
-                    }
-                    ?>
-                </select>
-<?php
-            }
-        });
-
-        add_filter('parse_query', function ($query) {
-
-            global $pagenow;
-
-            $post_type = (isset($_GET['post_type'])) ? $_GET['post_type'] : 'post';
-
-
-            if (is_admin() and $post_type == self::post_type and $pagenow == 'edit.php' and isset($_GET['admin_filter_channel']) and !empty($_GET['admin_filter_channel'])) {
-
-                $qv = &$query->query_vars;
-                $qv['meta_query'] = array();
-
-                $channel = $_GET['admin_filter_channel'];
-
-                $qv['meta_query'][] = array(
-
-                    'field' => 'form_id__' . self::post_type,
-                    'value' => $channel,
-                    'compare' => '=',
-                );
-            }
-        });
-
-        add_filter('post_row_actions', function ($actions, $post) {
-
-
-            // check if the current post_type is yours
-            if (is_admin() and $post->post_type === self::post_type) {
-
-
-                $post_meta = get_post_meta(
-                    $post->ID,
-                    'extra__' . self::post_type
-                );
-
-                $post_url = $post_meta[0]['url'];
-                $form_specific_post_url = $post_url . '#' . $post_meta[0]['form_id'];
-
-                $actions['preview_form'] = '<a target="__blank" href="' . $form_specific_post_url . '">Preview Form</a>';
-
-                return $actions;
-            }
-
-            return $actions;
-        }, 10, 2);
     }
 
     public static function post($entry = '')

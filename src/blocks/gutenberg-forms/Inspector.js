@@ -202,6 +202,7 @@ function Inspector(prop) {
 
 			<PanelBody initialOpen={true} title={__("General", TEXT_DOMAIN)}>
 				<TextControl
+					disabled
 					label={__("Form Label", TEXT_DOMAIN)}
 					value={formLabel}
 					onChange={(formLabel) => props.setAttributes({ formLabel })}

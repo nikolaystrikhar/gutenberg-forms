@@ -23,14 +23,15 @@ function gutenberg_forms_cwp_block_assets()
 		'gutenberg_forms-cwp-style-css',
 		plugins_url('dist/blocks.style.build.css', dirname(__FILE__)),
 		is_admin() ? array('wp-editor') : null,
-		null
+		"updated",
+		'all'
 	);
 
 	wp_register_script(
 		'gutenberg_forms-cwp-block-js',
 		plugins_url('/dist/blocks.build.js', dirname(__FILE__)),
 		array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor'),
-		'updated', # version
+		'new', # version
 		true
 	);
 
@@ -47,7 +48,8 @@ function gutenberg_forms_cwp_block_assets()
 		'gutenberg_forms-cwp-block-editor-css',
 		plugins_url('dist/blocks.editor.build.css', dirname(__FILE__)),
 		array('wp-edit-blocks'),
-		null
+		"updated",
+		'all'
 	);
 
 	wp_localize_script(

@@ -63,38 +63,6 @@ function generate_post_type_labels($name, $singular, $plural, $text_domain)
 	);
 }
 
-function manage_entries_columns_headers($defaults)
-{
-
-	$headers = array();
-
-	$headers['channel'] = 'Channel';
-	$headers['date'] = $defaults['date'];
-
-	return $headers;
-}
-
-function get_custom_entries_columns($column_name, $post_id)
-{
-
-	$post = get_post($post_id);
-	$preview_entry = get_edit_post_link($post->ID);
-
-
-	switch ($column_name) {
-
-		case 'channel':
-			echo '<a href="' . $preview_entry . '">' . $post->post_title . '</a>';
-	}
-}
-
-function manage_entries_sortable_columns_headers($columns)
-{
-
-	$columns['channel'] = 'Channel';
-
-	return $columns;
-}
 
 function manage_form_columns_headers($defaults)
 {
@@ -110,11 +78,6 @@ function manage_form_columns_headers($defaults)
 
 function get_custom_form_columns($column_name, $post_id)
 {
-
-
-
-
-
 
 
 	$short_code_style =  'font-family: monospace;background-color: #eee; width: 100%; background: transparent; border: none; height: 30px; padding: 0px 4px;';
@@ -170,25 +133,24 @@ function merge_fields_with_ids($fields)
 	return $merged_fields;
 }
 
-function get_all_plugins_data() {
+function get_all_plugins_data()
+{
 
 	$plugins_list = get_plugins();
 	$data = [];
 
-	foreach ($plugins_list as $key => $plugin ) {
+	foreach ($plugins_list as $key => $plugin) {
 
 		$plugin_data = [];
 
-		if (array_key_exists( 'TextDomain', $plugin )) {
+		if (array_key_exists('TextDomain', $plugin)) {
 			$plugin_data['textdomain'] = $plugin['TextDomain'];
 		}
 
 		$plugin_data['script'] = $key;
 
 		$data[] = $plugin_data;
-
 	}
 
 	return $data;
-	
 }
