@@ -230,8 +230,8 @@ class cwp_gf_Entries_Controller extends WP_REST_Controller
         for ($day = 1; $day <= $period; ++$day) {
 
 
-            $required_day = $day + 1;
-            $time = '-' . (string)$required_day . ' days';
+            $required_day = $day - 1;
+            $time = '-' . $required_day . ' days';
             $forms_in_this_day = [];
             $date = date('Y-m-d', strtotime($time));
 
