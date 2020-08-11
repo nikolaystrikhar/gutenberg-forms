@@ -43,6 +43,8 @@ The following are some of the main features, but there's more which you need to 
 
 - Mailchimp Addon ([https://github.com/CakeWP/gutenberg-forms-mailchimp-addon](https://github.com/CakeWP/gutenberg-forms-mailchimp-addon))
 
+- Akismet Addon ([https://github.com/CakeWP/gutenberg-forms-akismet-addon](https://github.com/CakeWP/gutenberg-forms-akismet-addon))
+
 ## Share Your Feedback & Suggestions 👏
 
 Your feedback, ideas and suggestions would be really helpful in adding & improving the features that you need. We have set up a tool to collect your feedback and prioritize the features based on votes.
@@ -74,6 +76,11 @@ We appreciate all contributions and don't want a wall of rules to get in the way
 ## Changelog
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
+
+= 1.9.0 = (11 Aug 2020)
+
+- Improved: Form Entries Screen
+- New: Chart Added for Form Entries
 
 = 1.8.0 = (24 July 2020)
 
