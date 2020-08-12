@@ -4,7 +4,7 @@ require_once plugin_dir_path(__DIR__) . 'triggers/functions.php';
 require_once plugin_dir_path(__DIR__) . 'submissions/entries.php';
 require_once plugin_dir_path(__DIR__) . 'Utils/Bucket.php';
 require_once plugin_dir_path(__DIR__) . 'integrations/handler.php';
-require_once plugin_dir_path( __DIR__ ) . 'tagsHandler/tagHandler.php';
+require_once plugin_dir_path(__DIR__) . 'tagsHandler/tagHandler.php';
 
 /**
  * @property Validator validator
@@ -24,7 +24,6 @@ class Email
         $this->post_content = $post_content;
         $this->attachments = array();
         $this->ExternalServiceHandler = new ExternalServiceHandler();
-        
     }
 
     public function is_fields_valid($f)
@@ -61,7 +60,7 @@ class Email
         $templates = array();
 
         foreach ($blocks as $f => $block) {
-            
+
             if ($block['blockName'] === "cwp/block-gutenberg-forms" && $block['attrs']['id'] === $id) {
 
                 $decoded_template = array();
@@ -150,7 +149,7 @@ class Email
             }
         }
 
-        
+
         return $templates;
     }
 
@@ -185,10 +184,10 @@ class Email
     }
 
     // check if the post method is invoked by the gutenberg form block
-    private function is_gutenberg_form_submission( $post ) {
+    private function is_gutenberg_form_submission($post)
+    {
 
-        return array_key_exists( 'gf_form_id', $post );
-
+        return array_key_exists('gf_form_id', $post);
     }
 
     public function init()
@@ -200,7 +199,7 @@ class Email
 
         $post_without_submit = array_remove_keys($_POST, ['submit']);
 
-        if (!$this->is_gutenberg_form_submission( $post )) {
+        if (!$this->is_gutenberg_form_submission($post)) {
             return;
         }
 
@@ -227,7 +226,7 @@ class Email
             $id = end($f_DECODED);
 
             $sanitizedValue = $this->validator->sanitizedValue($type, $field_value);
-            
+
             $sanitized_field_value = NULL;
 
             if (is_array($field_value)) {
@@ -270,7 +269,7 @@ class Email
                 } else {
                     $arranged_data['is_valid'] = false;
                 }
-            } 
+            }
 
 
             if ($this->validator->is_hidden_data_field($field_id)) {
@@ -321,21 +320,21 @@ class Email
         echo $hidden_style;
     }
 
-    private function message_error( $message, $response ) {
-        
+    private function message_error($message, $response)
+    {
+
         $message_id = $_POST['submit'];
         $status = "";
 
         if (array_key_exists('status', $response)) {
             $status = $response['status'];
         }
-        
+
 
         $css = "div[data-id='$message_id'].$status { display: block !important; }";
         $hidden_style = "<style> $css </style>";
 
         echo $hidden_style;
-
     }
 
     private function attempt_success($template)
@@ -390,7 +389,7 @@ class Email
     {
 
         $template = $this->get_templates($_POST['submit'])[0];
-        $tagHandler = new gforms_TagHandler( $fields );
+        $tagHandler = new gforms_TagHandler($fields);
 
         /**
          * @var string $fromEmail
@@ -401,6 +400,7 @@ class Email
         $mail_subject = $tagHandler->merge($template[0]['subject']);
         $mail_body = $tagHandler->merge($template[0]['body']);
         $headers = [];
+
 
         $CC = $template['cc'];
         $BCC = $template['bcc'];
@@ -444,11 +444,11 @@ class Email
         $send_email = in_array('Email Notification', $template['actions']);
 
         # checking if the integrations are satisfied with the given entry
-        $integrations_response = $this->ExternalServiceHandler::test( $newEntry );
+        $integrations_response = $this->ExternalServiceHandler::test($newEntry);
 
-        if ( gettype($integrations_response) === 'array' and $integrations_response['can_proceed'] === false ) {
+        if (gettype($integrations_response) === 'array' and $integrations_response['can_proceed'] === false) {
 
-            $this->message_error( $template, $integrations_response );
+            $this->message_error($template, $integrations_response);
 
             return; # exiting the sendMail function if the integrations are unsatisfied
 

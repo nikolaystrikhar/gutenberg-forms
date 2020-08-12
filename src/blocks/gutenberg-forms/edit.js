@@ -69,7 +69,7 @@ function edit(props) {
 						<InnerBlocks
 							template={getFormTemplates(formType)}
 							templateLock={false}
-							renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
+							renderAppender={() => null}
 						/>
 						{!buttonSetting.disable && (
 							<div className={`cwp-submit ${alignment}`}>
