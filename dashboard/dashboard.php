@@ -432,8 +432,8 @@ class Dashboard
                     wp_enqueue_script('cwp_dashboard_script', $js, array('wp-api', 'wp-i18n', 'wp-components', 'wp-element'), uniqid(), true);
                     wp_enqueue_style('cwp_dashboard_stype', $css, array(), uniqid());
                 } else {
-                    wp_enqueue_script('cwp_dashboard_script', plugins_url('/', __DIR__) . '/dist/dashboard/build.js', array('wp-api', 'wp-i18n', 'wp-components', 'wp-element'), uniqid(), true);
-                    wp_enqueue_style('cwp_dashboard_stype', plugins_url('/', __DIR__) . '/dist/dashboard/build.css', array('wp-components'));
+                    wp_enqueue_script('cwp_dashboard_script', plugins_url('/', __DIR__) . '/dist/dashboard/build.js', array('wp-api', 'wp-i18n', 'wp-components', 'wp-element'), 'updated', true);
+                    wp_enqueue_style('cwp_dashboard_stype', plugins_url('/', __DIR__) . '/dist/dashboard/build.css', array('wp-components'), 'updated');
                 }
             }
 
