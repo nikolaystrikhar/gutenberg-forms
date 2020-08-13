@@ -154,3 +154,22 @@ function get_all_plugins_data()
 
 	return $data;
 }
+
+
+/**
+ * Will replace the following entities to their corresponding html element
+ * &#10; => \n [new line] => <br />
+ * &#13; => \n [new row] => <br />
+ * @param string $str 
+ */
+
+function replace_line_break_entities($str)
+{
+	$without_special_chars = strtr($str, [
+		'&#10;' => "\n",
+		'&#13;' => "\n",
+	]);
+
+	$with_html = nl2br($without_special_chars);
+	return $with_html;
+}

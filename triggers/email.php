@@ -401,6 +401,11 @@ class Email
         $mail_body = $tagHandler->merge($template[0]['body']);
         $headers = [];
 
+        $headers[] = 'Content-Type: text/html; charset=UTF-8';
+
+        # line breaks can be parsed and used in the gf forms email body
+
+        $mail_body = replace_line_break_entities($mail_body);
 
         $CC = $template['cc'];
         $BCC = $template['bcc'];
