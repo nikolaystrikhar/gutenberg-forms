@@ -81,6 +81,8 @@ For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
 - Improved: Form Entries Screen
 - New: Chart Added for Form Entries
+- Fixed: Email Incoding issue for Message field type
+- Fixed: Bugs
 
 = 1.8.0 = (24 July 2020)
 
