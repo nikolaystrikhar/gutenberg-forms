@@ -110,6 +110,8 @@ For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 = 1.9.0 = (11 Aug 2020)
 - Improved: Form Entries Screen
 - New: Chart Added for Form Entries
+- Fixed: Email Incoding issue for Message field type
+- Fixed: Bugs
 
 = 1.8.0 = (25 July 2020)
 - New: Akismet Addon Released
