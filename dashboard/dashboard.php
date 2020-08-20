@@ -23,10 +23,10 @@ class Dashboard
         $this->on_initialized();
 
         add_action('admin_menu', array($this, 'register'));
-        add_action('wp_ajax_cwp_gf_install_plugin', array($this, 'install_plugin')); // install plugn ajax
+        add_action('wp_ajax_cwp_gf_install_plugin', array($this, 'install_plugin')); // install plugin ajax
 
 
-        //services..
+        // services..
 
         $this->informations = array(
             'cards' => array(
@@ -424,21 +424,21 @@ class Dashboard
 
                 // for testing purpose...
 
-                $production = false;
+                $production = true;
 
                 if ($production) {
                     $js = "http://localhost:8080/gutenbergforms/wp-content/plugins/gutenberghub-dashboard/build/build.js";
                     $css = "http://localhost:8080/gutenbergforms/wp-content/plugins/gutenberghub-dashboard/build/build.css";
-                    wp_enqueue_script('cwp_dashboard_script', $js, array('wp-api', 'wp-i18n', 'wp-components', 'wp-element'), uniqid(), true);
-                    wp_enqueue_style('cwp_dashboard_stype', $css, array(), uniqid());
+                    wp_enqueue_script('cwp_gf_dashboard_script', $js, array('wp-api', 'wp-i18n', 'wp-components', 'wp-element'), uniqid(), true);
+                    wp_enqueue_style('cwp_gf_dashboard_style', $css, array(), uniqid());
                 } else {
-                    wp_enqueue_script('cwp_dashboard_script', plugins_url('/', __DIR__) . '/dist/dashboard/build.js', array('wp-api', 'wp-i18n', 'wp-components', 'wp-element'), 'updated', true);
-                    wp_enqueue_style('cwp_dashboard_stype', plugins_url('/', __DIR__) . '/dist/dashboard/build.css', array('wp-components'), 'updated');
+                    wp_enqueue_script('cwp_gf_dashboard_script', plugins_url('/', __DIR__) . '/dist/dashboard/build.js', array('wp-api', 'wp-i18n', 'wp-components', 'wp-element'), 'updated', true);
+                    wp_enqueue_style('cwp_gf_dashboard_style', plugins_url('/', __DIR__) . '/dist/dashboard/build.css', array('wp-components'), 'updated');
                 }
             }
 
             wp_localize_script(
-                'cwp_dashboard_script',
+                'cwp_gf_dashboard_script',
                 'cwp_global',
                 [
                     'settings'          => $this->settings,

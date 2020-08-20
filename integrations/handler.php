@@ -1,5 +1,9 @@
 <?php
 
+/**
+ * All Integrations hooks will be called from here.
+ */
+
 class ExternalServiceHandler
 {
 
@@ -100,6 +104,9 @@ class ExternalServiceHandler
     {
 
         $integrations = $entry['integrations'];
+
+        print_r($integrations);
+
         $integrations_response = self::test($entry);
 
         if (gettype($integrations_response) === 'array' and $integrations_response['can_proceed'] === false) return;

@@ -555,9 +555,9 @@ export function getPostUrl(id) {
 
 /**
  * Will return available field tags
- * 
- * @param {string} clientId client-id of the current child block in gutenberg-forms 
- * @param {boolean} root if the current block is the gutenberg forms (root) 
+ *
+ * @param {string} clientId client-id of the current child block in gutenberg-forms
+ * @param {boolean} root if the current block is the gutenberg forms (root)
  * @return {array} list of tags available
  */
 
