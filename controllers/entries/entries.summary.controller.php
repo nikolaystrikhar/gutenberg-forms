@@ -26,6 +26,61 @@ class cwp_gf_Entries_Summary_Controller extends WP_REST_Controller
             ),
 
         ));
+
+        register_rest_route($this->namespace, 'summary/field', array(
+
+            array(
+                'methods'   => 'GET',
+                'callback'  => array($this, 'get_field_summary'),
+            ),
+
+        ));
+    }
+
+
+    # Will return summary of single gutenberg form field
+    public function get_field_summary($request)
+    {
+        $field_id = $request['field_id'];
+        $form_id = $request['form_id'];
+        $per_page = $request['per_page'];
+        $page = $request['page'];
+
+        $field_responses = [];
+        $args = [
+            'post_type'      => self::post_type,
+            'posts_per_page' => $per_page,
+            'paged'           => $page,
+            'meta_key'       => 'form_id__' . self::post_type,
+            'meta_value'     => $form_id,
+        ];
+
+        $entries = get_posts($args);
+
+        # deleting some un-used arguments for wp_query 
+
+        unset($args['paged']);
+        unset($args['posts_per_page']);
+
+        $entries_query = new WP_Query($args);
+        $total_entries = $entries_query->found_posts;
+
+        foreach ($entries as $key => $entry) :
+
+            $fields_meta_key = 'fields__' . self::post_type;
+            $fields = get_post_meta($entry->ID, $fields_meta_key, true);
+
+            $required_field = array_key_exists($field_id, $fields) ? $fields[$field_id] : null;
+
+            if (!is_null($required_field))
+                $field_responses[] = $required_field;
+
+        endforeach;
+
+        return [
+            'response'      => $field_responses,
+            'total_entries' => $total_entries,
+        ];
     }
 
     # Will return form fields
