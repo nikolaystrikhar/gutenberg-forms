@@ -1,5 +1,7 @@
 <?php
 
+require_once plugin_dir_path(__FILE__) . 'entries.summary.controller.php';
+
 /**
  * - This controller does not meant to replicate the rest api functionality
  * - Using this entries controller only for the formatted entries such as fetching the formatted entries data for displaying charts and complex filtration
@@ -22,7 +24,6 @@ class cwp_gf_Entries_Controller extends WP_REST_Controller
 
     /**
      * Checking some permissions.
-     *
      * @param WP_REST_Request $request Current request.
      */
 
@@ -46,6 +47,11 @@ class cwp_gf_Entries_Controller extends WP_REST_Controller
      */
     public function register_routes()
     {
+
+        # for handling entries summary
+
+        $cwp_gf_entries_summary_controller = new cwp_gf_Entries_Summary_Controller();
+        $cwp_gf_entries_summary_controller->register_routes();
 
         # registering a readable endpoint for entries
 
@@ -75,7 +81,7 @@ class cwp_gf_Entries_Controller extends WP_REST_Controller
             'template',
             'extra',
             'fields',
-
+            'field_types'
 
         ];
 
@@ -168,7 +174,6 @@ class cwp_gf_Entries_Controller extends WP_REST_Controller
 
     /**
      * Getting the required schema for bar chart.
-     *
      * @param WP_REST_Request $request Current request.
      */
 

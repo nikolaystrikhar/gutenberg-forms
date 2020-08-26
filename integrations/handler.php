@@ -1,11 +1,32 @@
 <?php
 
+require_once plugin_dir_path(__DIR__) . 'dashboard/dashboard.php';
 /**
  * All Integrations hooks will be called from here.
  */
 
-class ExternalServiceHandler
+class  ExternalServiceHandler
 {
+
+    /**
+     * Will return the integration matching the current slug
+     * @param string $slug 
+     * @return array $integration 
+     */
+
+    public static function get($slug)
+    {
+        $dashboard = new Dashboard();
+        $settings = $dashboard->settings;
+        $all_integrations = array_key_exists('integrations', $settings) ? $settings['integrations'] : [];
+        $required_integration_details = [];
+
+        if (array_key_exists($slug, $all_integrations)) {
+            $required_integration_details = $all_integrations[$slug];
+        }
+
+        return $required_integration_details;
+    }
 
     public static function is_field_id($name)
     {
@@ -105,8 +126,6 @@ class ExternalServiceHandler
 
         $integrations = $entry['integrations'];
 
-        print_r($integrations);
-
         $integrations_response = self::test($entry);
 
         if (gettype($integrations_response) === 'array' and $integrations_response['can_proceed'] === false) return;
@@ -114,6 +133,34 @@ class ExternalServiceHandler
         foreach ($integrations as $name => $integration) {
 
             $parsed_entry = $this->parse_entry($entry, $integration);
+            $integration_details = self::get($name);
+
+            # Some integrations can add an option in their config
+            # to include all available fields 
+            # without field mapping
+
+            $include_all_fields_in_entry = array_key_exists('include_all_fields', $integration_details) ? $integration_details['include_all_fields'] : false;
+            $include_extra_in_entry = array_key_exists('include_extra', $integration_details) ? $integration_details['include_extra'] : false;
+
+
+            if ($include_all_fields_in_entry and !$include_extra_in_entry) :
+                $parsed_entry = $entry['fields']; # replacing field mapped entry with all available fields
+            endif;
+
+            if ($include_all_fields_in_entry and $include_extra_in_entry) :
+
+                $parsed_entry = $entry;
+
+            endif;
+
+            if (!$include_all_fields_in_entry and $include_extra_in_entry) :
+
+                $new_entry = $entry;
+                $new_entry['fields'] = $parsed_entry;
+
+                $parsed_entry = $new_entry;
+
+            endif;
 
             # finally proceeding
             do_action(

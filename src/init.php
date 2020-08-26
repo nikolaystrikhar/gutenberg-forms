@@ -1,6 +1,5 @@
 <?php
 
-
 require_once plugin_dir_path(__DIR__) . 'triggers/functions.php';
 
 
@@ -13,9 +12,7 @@ function gutenberg_forms_cwp_block_assets()
 
 	require_once plugin_dir_path(__DIR__) . 'dashboard/dashboard.php';
 
-
-	$dashboard = new Dashboard(); //? creating and registering plugin dashboard
-
+	$dashboard = new Dashboard(); //? creating and registering plugin dashboard 
 	$dashboard->register_settings();
 
 

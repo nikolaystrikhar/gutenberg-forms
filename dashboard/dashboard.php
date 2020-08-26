@@ -1,5 +1,6 @@
 <?php
 
+
 require_once plugin_dir_path(__DIR__) . 'triggers/functions.php';
 $path = preg_replace('/wp-content(?!.*wp-content).*/', '', __DIR__);
 include($path . 'wp-load.php');
@@ -8,7 +9,6 @@ require_once(ABSPATH . 'wp-admin/includes/file.php');
 require_once(ABSPATH . 'wp-admin/includes/misc.php');
 require_once(ABSPATH . 'wp-admin/includes/plugin.php');
 require_once(ABSPATH . 'wp-admin/includes/class-wp-upgrader.php');
-
 
 class Dashboard
 {

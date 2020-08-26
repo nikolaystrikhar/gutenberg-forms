@@ -79,7 +79,11 @@ class Entries
         $new_entry->template = $entry['template'];
         $new_entry->fields = $entry['fields'];
         $new_entry->form_id = $post_meta['form_id'];
+        $new_entry->field_types = [];
 
+        if (array_key_exists('field_types',  $entry)) :
+            $new_entry->field_types = $entry['field_types'];
+        endif;
 
         $current_post = get_post(get_the_ID());
 
@@ -128,6 +132,7 @@ class Entries
             $form_id_meta_key = "form_id__" . self::post_type;
             $status_meta_key = "status__" . self::post_type;
             $notes_meta_key = "notes__" . self::post_type;
+            $field_types_meta_key = "field_types__" . self::post_type;
 
             update_post_meta($post_id, $template_meta_key, $new_entry->template);
             update_post_meta($post_id, $fields_meta_key, $new_entry->fields);
@@ -135,16 +140,14 @@ class Entries
             update_post_meta($post_id, $form_id_meta_key, $new_entry->form_id);
             update_post_meta($post_id, $status_meta_key, $new_entry->status);
             update_post_meta($post_id, $notes_meta_key, $new_entry->notes);
+            update_post_meta($post_id, $field_types_meta_key, $new_entry->field_types);
         }
     }
 
     public static function create_entry($template, $subject, $body, $fields, $attachments = NULL)
     {
 
-
-
         $new_entry = array();
-
 
         $new_entry['template'] = array(
             'subject' => $subject,
@@ -152,16 +155,26 @@ class Entries
         );
 
         $new_entry['fields'] = array();
+        $new_entry['field_types'] = array();
+
         $new_entry['post_meta'] = array(
             'title' => '',
-            'form_id' => ''
+            'form_id' => '',
+            'post_id'   => get_the_ID(),
+            'site_url' => get_bloginfo('url'),
+            'admin_url' => admin_url('admin.php?page=gutenberg_forms')
         );
+
 
         foreach ($fields as $field_key => $field_value) {
 
             $is_hidden_field = Validator::is_hidden_data_field($field_value['field_id']);
             $is_recaptcha_field = $field_value['field_id'] === 'g-recaptcha-response';
+            $parse_entry = get_value_and_name($field_value);
+            $field_admin_id = $parse_entry['admin_id'];
+            $field_type = $field_value['field_type'];
 
+            $new_entry['field_types'][$field_admin_id] = $field_type;
 
             if ($field_value['field_type'] === 'file_upload' and !$is_recaptcha_field) {
 
