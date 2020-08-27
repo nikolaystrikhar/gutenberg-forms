@@ -57,14 +57,6 @@ class cwp_gf_Entries_Summary_Controller extends WP_REST_Controller
 
         $entries = get_posts($args);
 
-        # deleting some un-used arguments for wp_query 
-
-        unset($args['paged']);
-        unset($args['posts_per_page']);
-
-        $entries_query = new WP_Query($args);
-        $total_entries = $entries_query->found_posts;
-
         foreach ($entries as $key => $entry) :
 
             $fields_meta_key = 'fields__' . self::post_type;
@@ -77,9 +69,19 @@ class cwp_gf_Entries_Summary_Controller extends WP_REST_Controller
 
         endforeach;
 
+        # deleting some un-used arguments for wp_query 
+
+        unset($args['paged']);
+        unset($args['posts_per_page']);
+
+        $entries_query = new WP_Query($args);
+        $total_entries = $entries_query->found_posts;
+
+
         return [
             'response'      => $field_responses,
             'total_entries' => $total_entries,
+
         ];
     }
 
@@ -100,7 +102,7 @@ class cwp_gf_Entries_Summary_Controller extends WP_REST_Controller
 
         $data = [
             'fields' => [],
-            'types'  => []
+            'types'  => [],
         ];
 
         # including meta keys
@@ -110,14 +112,15 @@ class cwp_gf_Entries_Summary_Controller extends WP_REST_Controller
             $post_id = $entry->ID;
             $form_fields = get_post_meta($post_id, $fields_meta_key, true);
             $field_types = get_post_meta($post_id, $field_type_meta_key, true);
+            $final_field_types = $field_types === "" ? [] : $field_types;
 
             foreach ($form_fields as $field_name => $field) :
 
                 if (!in_array($field_name, $data['fields'])) {
                     $data['fields'][] = $field_name;
 
-                    if (array_key_exists($field_name, $field_types) and !in_array($field_name, $data['types'])) {
-                        $data['types'][$field_name] = $field_types[$field_name];
+                    if (array_key_exists($field_name, $final_field_types) and !in_array($field_name, $data['types'])) {
+                        $data['types'][$field_name] = $final_field_types[$field_name];
                     }
                 }
 
