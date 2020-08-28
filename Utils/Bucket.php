@@ -1,7 +1,5 @@
 <?php
 
-namespace GutenbergForms\Media;
-
 /**
  * Handles the uploads and various function that includes multimedia
  */
