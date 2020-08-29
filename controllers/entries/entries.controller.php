@@ -124,8 +124,9 @@ class cwp_gf_Entries_Controller extends WP_REST_Controller
                         array(
                             'key'      => 'form_id__cwp_gf_entries',
                             'value'    => $request['form_id'],
-                            'compare' => '=',
-                        )
+                            'compare'  => '=',
+                        ),
+
                     )
                 )
             );
