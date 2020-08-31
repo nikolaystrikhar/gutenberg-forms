@@ -110,6 +110,11 @@ class cwp_gf_Entries_Controller extends WP_REST_Controller
         # handling entries filter based on entry status  
         $has_status_filter = isset($request['entry_status']);
         $has_form_filter = isset($request['form_id']);
+        $has_slug_filter = isset($request['post_slug']);
+
+        if ($has_slug_filter) {
+            $args['name'] = $request['post_slug'];
+        }
 
         if ($has_status_filter and $has_form_filter) {
             $args += array(
@@ -126,7 +131,6 @@ class cwp_gf_Entries_Controller extends WP_REST_Controller
                             'value'    => $request['form_id'],
                             'compare'  => '=',
                         ),
-
                     )
                 )
             );

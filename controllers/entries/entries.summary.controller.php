@@ -68,7 +68,6 @@ class cwp_gf_Entries_Summary_Controller extends WP_REST_Controller
             ]
         ];
 
-
         $entries = get_posts($args);
         $visual_info = [];
 
@@ -81,7 +80,10 @@ class cwp_gf_Entries_Summary_Controller extends WP_REST_Controller
             $required_field = array_key_exists($field_id, $fields) ? $fields[$field_id] : null;
 
             if (!is_null($required_field) and $required_field !== '') {
-                $field_responses[] = $required_field;
+                $field_responses[] = [
+                    'value'     => $required_field,
+                    'post_slug' => $entry->post_name
+                ];
             }
 
 

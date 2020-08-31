@@ -50,16 +50,14 @@ function save(props) {
 					name={id}
 					id={id}
 					data-rule="false"
-					value={label}
+					// value={label}
 					data-cwp-field
 					data-errors={errors}
 					required={isRequired}
 				>
 					{options.map((s, index) => {
-						const isSelected = index === 0 ? { selected: true } : {};
-
 						return (
-							<option value={s.label} {...isSelected}>
+							<option selected={index === 0} value={s.label}>
 								{s.label}
 							</option>
 						);

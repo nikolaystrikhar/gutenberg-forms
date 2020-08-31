@@ -424,7 +424,7 @@ class Dashboard
 
                 // for testing purpose...
 
-                $production = true;
+                $production = false;
 
                 if ($production) {
                     $js = "http://localhost:8080/gutenbergforms/wp-content/plugins/gutenberghub-dashboard/build/build.js";
@@ -432,8 +432,8 @@ class Dashboard
                     wp_enqueue_script('cwp_gf_dashboard_script', $js, array('wp-api', 'wp-i18n', 'wp-components', 'wp-element'), uniqid(), true);
                     wp_enqueue_style('cwp_gf_dashboard_style', $css, array(), uniqid());
                 } else {
-                    wp_enqueue_script('cwp_gf_dashboard_script', plugins_url('/', __DIR__) . '/dist/dashboard/build.js', array('wp-api', 'wp-i18n', 'wp-components', 'wp-element'), 'updated', true);
-                    wp_enqueue_style('cwp_gf_dashboard_style', plugins_url('/', __DIR__) . '/dist/dashboard/build.css', array('wp-components'), 'updated');
+                    wp_enqueue_script('cwp_gf_dashboard_script', plugins_url('/', __DIR__) . '/dist/dashboard/build.js', array('wp-api', 'wp-i18n', 'wp-components', 'wp-element'), 'latest', true);
+                    wp_enqueue_style('cwp_gf_dashboard_style', plugins_url('/', __DIR__) . '/dist/dashboard/build.css', array('wp-components'), 'latest');
                 }
             }
 

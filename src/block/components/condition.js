@@ -6,7 +6,7 @@ import {
 	PanelRow,
 } from "@wordpress/components";
 import { getSiblings } from "../functions";
-import { has, set, clone, isEmpty } from "lodash";
+import { has, set, clone, isEmpty, get } from "lodash";
 
 function Condition(props) {
 	let currentField = props.fieldName,
@@ -28,7 +28,6 @@ function Condition(props) {
 		let fields = [
 			{
 				value: null,
-				disabled: true,
 				label: "Select Field",
 			},
 		];
@@ -84,12 +83,19 @@ function Condition(props) {
 			fieldName === "checkbox"
 		) {
 			if (has(currentSibling[0], "options")) {
-				selectOptions = currentSibling[0].options.map((v) => {
+				const generatedOptions = currentSibling[0].options.map((v) => {
 					return {
 						...v,
 						value: v.label,
 					};
 				});
+
+				generatedOptions.unshift({
+					label: "Select Value",
+					value: "",
+				});
+
+				selectOptions = generatedOptions;
 			}
 		}
 
@@ -104,6 +110,7 @@ function Condition(props) {
 						options={selectOptions}
 					/>
 				);
+
 			case "checkbox":
 				return (
 					<SelectControl
@@ -115,6 +122,7 @@ function Condition(props) {
 						options={selectOptions}
 					/>
 				);
+
 			case "select":
 				return (
 					<SelectControl
@@ -125,7 +133,8 @@ function Condition(props) {
 						options={selectOptions}
 					/>
 				);
-			default:
+
+			default: {
 				return (
 					<TextControl
 						value={condition.value}
@@ -133,6 +142,7 @@ function Condition(props) {
 						onChange={(val) => handleConditionChange(val, "value")}
 					/>
 				);
+			}
 		}
 	};
 

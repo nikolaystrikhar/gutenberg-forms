@@ -1798,7 +1798,12 @@ jQuery(function ($) {
 								$(this).attr("checked", true);
 							}
 						});
-				} else if (field_id !== null && type !== "file" && type !== "hidden") {
+				} else if (
+					field_id !== null &&
+					type !== "file" &&
+					type !== "hidden" &&
+					queryValue !== null
+				) {
 					$(this).val(queryValue);
 				}
 			});

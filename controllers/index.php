@@ -14,6 +14,11 @@ add_action('rest_api_init', function () use ($entries_controller) {
     $entries_controller->register_fields();
 });
 add_filter('rest_query_vars', function ($vars) {
+
+    $extra_filters = array('post', 'post__in', 'type', 'id');
+
     $vars[] = 'meta_query';
+    $vars = array_merge($vars, $extra_filters);
+
     return $vars;
 });

@@ -107,6 +107,11 @@ You may also get involved with the development via Github:
 == Changelog ==
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
+= 2.0.0 = (31 Aug 2020)
+- New: Form Summary Screen (Beta)
+- Fixed: Bugs
+- Improved: Code
+
 = 1.9.0 = (11 Aug 2020)
 - Improved: Form Entries Screen
 - New: Chart Added for Form Entries
