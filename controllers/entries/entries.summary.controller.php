@@ -48,7 +48,7 @@ class cwp_gf_Entries_Summary_Controller extends WP_REST_Controller
         $current_field_type = $request['field_type'];
 
         $field_responses = [];
-        $total_field_responses = 1;
+        $total_field_responses = 0;
         $args = [
             'post_type'         => self::post_type,
             'posts_per_page'    => $per_page,
