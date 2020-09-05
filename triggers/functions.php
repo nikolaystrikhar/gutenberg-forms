@@ -173,3 +173,28 @@ function replace_line_break_entities($str)
 	$with_html = nl2br($without_special_chars);
 	return $with_html;
 }
+
+/**
+ * 
+ * @param array keys
+ * @param array arr
+ * Will order the given array with the given key order
+ * 
+ */
+
+function cwp_gf_order_by($keys, $arr)
+{
+	$ordered_arr = [];
+
+	foreach ($keys as $key) :
+
+		if (!array_key_exists($key, $arr)) {
+			$ordered_arr[$key] = "";
+		} else {
+			$ordered_arr[$key] = $arr[$key];
+		}
+
+	endforeach;
+
+	return $ordered_arr;
+}

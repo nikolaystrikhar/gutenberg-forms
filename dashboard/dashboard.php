@@ -2,6 +2,8 @@
 
 
 require_once plugin_dir_path(__DIR__) . 'triggers/functions.php';
+require_once plugin_dir_path(__DIR__) . 'export/index.php';
+
 $path = preg_replace('/wp-content(?!.*wp-content).*/', '', __DIR__);
 include($path . 'wp-load.php');
 require_once(ABSPATH . 'wp-admin/includes/plugin-install.php');
@@ -194,6 +196,31 @@ class Dashboard
             $this->plugin_activation($plugin_script); // activating the plugin
 
         }
+
+        $this->handle_exports();
+    }
+
+    public function handle_exports()
+    {
+
+        $is_export_request = isset($_POST['cwp-gutenberg_forms_entries-export-form-id']) and isset($_POST['cwp-gutenberg_forms_entries-export-format']);
+
+        if ($is_export_request) {
+
+            $export_form_id = $_POST['cwp-gutenberg_forms_entries-export-form-id'];
+            $export_format = $_POST['cwp-gutenberg_forms_entries-export-format'];
+
+            $args = [];
+
+            $args['meta_query'] = [
+                [
+                    'key' => 'form_id__cwp_gf_entries',
+                    'value' => $export_form_id,
+                    'compare' => '='
+                ]
+            ];
+            cwp_gf_Entries_export_handler::export($export_format, $args);
+        }
     }
 
     public function plugin_activation($plugin)
@@ -216,7 +243,6 @@ class Dashboard
             activate_plugin($plugin_script);
         }
     }
-
 
     public function install_plugin()
     {
@@ -280,7 +306,6 @@ class Dashboard
 
         return file_get_contents($guide);
     }
-
 
     public function register_settings()
     {
@@ -424,7 +449,7 @@ class Dashboard
 
                 // for testing purpose...
 
-                $production = false;
+                $production = true;
 
                 if ($production) {
                     $js = "http://localhost:8080/gutenbergforms/wp-content/plugins/gutenberghub-dashboard/build/build.js";

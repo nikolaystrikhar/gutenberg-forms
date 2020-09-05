@@ -1,8 +1,7 @@
 {
-	"editor.fontFamily": "Operator Mono Regular",
+	"editor.fontFamily": "Operator Mono Regular, Fira Code",
 	"editor.fontLigatures": true,
 	"editor.fontSize": 20,
-	"editor.formatOnSave": true,
 	"editor.formatOnType": true,
 	"intelephense.compatibility.correctForArrayAccessArrayAndTraversableArrayUnionTypes": false,
 	"intelephense.compatibility.correctForBaseClassStaticUnionTypes": false,
@@ -56,8 +55,14 @@
 			}
 		]
 	},
-	"terminal.integrated.cursorStyle": "line",
 	"terminal.integrated.fontFamily": "Operator Mono Light",
 	"terminal.integrated.fontSize": 20,
-	"editor.cursorStyle": "block"
+	"editor.cursorStyle": "line",
+	"editor.lineHeight": 35,
+	"workbench.colorCustomizations": {
+		"[Dracula]": {
+			"editorCursor.background": "#000",
+			"editorCursor.foreground": "#00ff26"
+		}
+	}
 }
