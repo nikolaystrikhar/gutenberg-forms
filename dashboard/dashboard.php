@@ -135,7 +135,7 @@ class Dashboard
                 ),
                 'action' => array(
                     'label' => 'View Entries',
-                    'link' => get_bloginfo('url') . '/wp-admin/edit.php?post_type=cwp_gf_entries'
+                    'link' => get_bloginfo('url') . '/wp-admin/admin.php?page=gutenberg_forms#/entries'
                 )
             );
         }
