@@ -1,6 +1,5 @@
 <?php
 
-
 require_once plugin_dir_path(__DIR__) . './triggers/functions.php';
 
 
@@ -75,8 +74,9 @@ class cwp_gf_Entries_export_handler
         $args['post_type'] = self::post_type;
         $args['posts_per_page'] = -1; # for returning all posts
 
-        if (!self::is_permitted())
+        if (!self::is_permitted()) :
             wp_die('Permission Issue');
+        endif;
 
         $entries = get_posts($args);
         $response_json = [];
