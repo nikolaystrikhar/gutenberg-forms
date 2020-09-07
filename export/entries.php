@@ -9,7 +9,7 @@ require_once plugin_dir_path(__DIR__) . './triggers/functions.php';
 
 class cwp_gf_Entries_export_handler
 {
-    const supported_formats = ['csv', 'json', 'xlsv'];
+    const supported_formats = ['csv', 'json', 'xls'];
     const post_type = "cwp_gf_entries";
     const fields_meta_key = 'fields__' . self::post_type;
     const extra_info_meta_key = 'extra__' . self::post_type;
@@ -22,7 +22,10 @@ class cwp_gf_Entries_export_handler
     {
 
         // Check if we are in wordpress admin
-        if (!is_admin()) return true; # testing...
+        if (!is_admin()) {
+            return false;
+        }
+
 
         return true;
     }
@@ -115,18 +118,19 @@ class cwp_gf_Entries_export_handler
      * 
      */
 
-    public static function csv_export($args = [])
+    public static function excel_export($args = [], $format)
     {
 
         $args['post_type'] = self::post_type;
         $args['posts_per_page'] = -1; # for returning all posts
 
-        if (!self::is_permitted())
+        if (!self::is_permitted()) :
             wp_die(__('Permission Issue'));
+        endif;
 
         ob_start();
 
-        $file_name = 'guten-form-entries-' . '-' . time() . '.csv';
+        $file_name = 'gutenberg-form-entries-' . '-' . time() . ".$format";
         $headers = [];
         $rows = [];
 
@@ -137,7 +141,6 @@ class cwp_gf_Entries_export_handler
             $fields = get_post_meta($entry->ID, 'fields__' . self::post_type, true);
 
             $escaped_fields = self::escaped($fields);
-            $rows[] = cwp_gf_order_by($headers, $escaped_fields);
 
             foreach ($fields as $field_name => $field_value) :
 
@@ -149,13 +152,15 @@ class cwp_gf_Entries_export_handler
 
             endforeach;
 
+            $rows[] = cwp_gf_order_by($headers, $escaped_fields);
+
         endforeach;
 
         $fh = @fopen('php://output', 'w');
         fprintf($fh, chr(0xEF) . chr(0xBB) . chr(0xBF));
         header('Cache-Control: must-revalidate, post-check=0, pre-check=0');
         header('Content-Description: File Transfer');
-        header('Content-type: text/csv');
+        header("Content-type: text/$format");
         header("Content-Disposition: attachment; filename={$file_name}");
         header('Expires: 0');
         header('Pragma: public');
@@ -184,11 +189,16 @@ class cwp_gf_Entries_export_handler
         switch ($format):
 
             case 'csv':
-                self::csv_export($args);
+                self::excel_export($args, 'csv');
+                break;
+
+            case 'xls':
+                self::excel_export($args, 'xls');
                 break;
 
             case 'json':
                 self::json_export($args);
+
 
         endswitch;
     }
