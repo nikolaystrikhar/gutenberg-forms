@@ -70,8 +70,6 @@ class  ExternalServiceHandler
 
         foreach ($integration as $name => $field_id) {
 
-
-
             if (gettype($field_id) === 'string' and array_key_exists($field_id, $fields)) {
                 $integration_with_values[$name] = $fields[$field_id];
             } else if (self::is_field_id($field_id)) {
@@ -141,7 +139,7 @@ class  ExternalServiceHandler
 
             $include_all_fields_in_entry = array_key_exists('include_all_fields', $integration_details) ? $integration_details['include_all_fields'] : false;
             $include_extra_in_entry = array_key_exists('include_extra', $integration_details) ? $integration_details['include_extra'] : false;
-
+            $include_extended_data = array_key_exists('include_extended_data', $integration_details) ? $integration_details['include_extended_data'] : false;
 
             if ($include_all_fields_in_entry and !$include_extra_in_entry) :
                 $parsed_entry = $entry['fields']; # replacing field mapped entry with all available fields
@@ -161,6 +159,10 @@ class  ExternalServiceHandler
                 $parsed_entry = $new_entry;
 
             endif;
+
+            if ($include_extended_data) {
+                $parsed_entry['extended_data'] = $entry['extended_data'];
+            }
 
             # finally proceeding
             do_action(

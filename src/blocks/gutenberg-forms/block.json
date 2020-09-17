@@ -94,6 +94,10 @@
 			"default": {
 				"backgroundColor": "white"
 			}
+		},
+		"extendedData": {
+			"type": "object",
+			"default": {}
 		}
 	}
 }

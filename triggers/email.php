@@ -143,6 +143,13 @@ class Email
                 } else {
                     $decoded_template['bcc'] = '';
                 }
+
+                if (array_key_exists('extendedData', $attributes)) {
+                    $decoded_template['extendedData'] = $attributes['extendedData'];
+                } else {
+                    $decoded_template['extendedData'] = [];
+                }
+
                 $templates[] = $decoded_template;
             } else {
                 $templates += $this->get_templates($id, $block['innerBlocks']);
@@ -390,6 +397,7 @@ class Email
 
         $template = $this->get_templates($_POST['submit'])[0];
         $tagHandler = new gforms_TagHandler($fields);
+
 
         /**
          * @var string $fromEmail
