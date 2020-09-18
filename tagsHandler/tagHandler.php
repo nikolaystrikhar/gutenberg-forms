@@ -79,24 +79,24 @@ class gforms_TagHandler
 
 
         $data = array(
-            '{{wp:post_id}}'    => $post->ID,
-            '{{wp:post_title}}' => $post->post_title,
-            '{{wp:post_url}}'   => $post_url,
-            '{{wp:post_author}}' => $post_author,
-            '{{wp:post_author_email}}' => $post_author_email,
-            '{{wp:user_id}}' => $user_id,
-            '{{wp:user_first_name}}' => get_user_meta($user_id, 'first_name', true),
-            '{{wp:user_last_name}}' => get_user_meta($user_id, 'last_name', true),
-            '{{wp:user_display_name}}' => $user->display_name,
-            '{{wp:user_username}}' => $user->user_login,
-            '{{wp:user_email}}' => $user->user_email,
-            '{{wp:user_url}}' => $user->user_url,
-            '{{wp:site_url}}' => get_site_url(),
-            '{{wp:site_title}}' => get_bloginfo('name'),
-            '{{wp:admin_email}}' => get_bloginfo('admin_email'),
-            '{{other:date}}' => date("Y/m/d"),
-            '{{other:time}}' => date("h:i:sa"),
-            '{{all_data}}' => merge_fields_with_ids($this->fields)
+            '{{wp:post_id}}'            => $post->ID,
+            '{{wp:post_title}}'         => $post->post_title,
+            '{{wp:post_url}}'           => $post_url,
+            '{{wp:post_author}}'        => $post_author,
+            '{{wp:post_author_email}}'  => $post_author_email,
+            '{{wp:user_id}}'            => $user_id,
+            '{{wp:user_first_name}}'    => get_user_meta($user_id, 'first_name', true),
+            '{{wp:user_last_name}}'     => get_user_meta($user_id, 'last_name', true),
+            '{{wp:user_display_name}}'  => $user->display_name,
+            '{{wp:user_username}}'      => $user->user_login,
+            '{{wp:user_email}}'         => $user->user_email,
+            '{{wp:user_url}}'           => $user->user_url,
+            '{{wp:site_url}}'           => get_site_url(),
+            '{{wp:site_title}}'         => get_bloginfo('name'),
+            '{{wp:admin_email}}'        => get_bloginfo('admin_email'),
+            '{{other:date}}'            => date("Y/m/d"),
+            '{{other:time}}'            => date("h:i:sa"),
+            '{{all_data}}'              => merge_fields_with_ids($this->fields)
         );
 
         $data = $this->add_field_data($data);
@@ -132,10 +132,10 @@ class gforms_TagHandler
 
 /**
  * gforms_add_dynamic_values will add dynamic values to all hidden fields
- * array $fields 
+ * @param array $fields
  */
 
-function gforms_add_dynamic_values(array $fields): array
+function gforms_add_dynamic_values($fields)
 {
 
     $tagHandler = new gforms_TagHandler($fields);
@@ -145,7 +145,7 @@ function gforms_add_dynamic_values(array $fields): array
         if ($field['field_type'] === 'hidden') {
 
             $value = $field['field_value'];
-            $with_dynamic_data = $tagHandler->merge($value);;
+            $with_dynamic_data = $tagHandler->merge($value);
 
             $fields[$key]['field_value'] = $with_dynamic_data;
         }

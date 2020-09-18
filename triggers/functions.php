@@ -122,7 +122,7 @@ function merge_fields_with_ids($fields)
 	foreach ($fields as $key => $value) {
 
 		$field_value = $value['field_value'];
-		$id = array_key_exists('admin_id', $value['decoded_entry']) ?  $value['decoded_entry']['admin_id'] : NULL;
+		$id = array_key_exists('admin_id', $value['decoded_entry']) ? $value['decoded_entry']['admin_id'] : NULL;
 
 		if (!empty($id) and !empty($field_value)) {
 

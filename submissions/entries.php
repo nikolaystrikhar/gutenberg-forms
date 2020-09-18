@@ -165,7 +165,8 @@ class Entries
             'admin_url' => admin_url('admin.php?page=gutenberg_forms')
         );
 
-        $new_entry['extended_data'] = $template['extendedData'];
+        $new_entry['extended_data']     = $template['extendedData'];
+        $new_entry['extended_fields']   =  $fields;
 
         foreach ($fields as $field_key => $field_value) {
 

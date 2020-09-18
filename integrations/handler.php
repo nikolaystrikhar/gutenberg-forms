@@ -1,6 +1,7 @@
 <?php
 
 require_once plugin_dir_path(__DIR__) . 'dashboard/dashboard.php';
+require_once plugin_dir_path(__DIR__) . 'tagsHandler/tagHandler.php';
 /**
  * All Integrations hooks will be called from here.
  */
@@ -140,6 +141,7 @@ class  ExternalServiceHandler
             $include_all_fields_in_entry = array_key_exists('include_all_fields', $integration_details) ? $integration_details['include_all_fields'] : false;
             $include_extra_in_entry = array_key_exists('include_extra', $integration_details) ? $integration_details['include_extra'] : false;
             $include_extended_data = array_key_exists('include_extended_data', $integration_details) ? $integration_details['include_extended_data'] : false;
+            $include_extended_fields = array_key_exists('include_extended_fields', $integration_details) ? $integration_details['include_extended_fields'] : false;
 
             if ($include_all_fields_in_entry and !$include_extra_in_entry) :
                 $parsed_entry = $entry['fields']; # replacing field mapped entry with all available fields
@@ -162,6 +164,10 @@ class  ExternalServiceHandler
 
             if ($include_extended_data) {
                 $parsed_entry['extended_data'] = $entry['extended_data'];
+            }
+
+            if ($include_extended_fields) {
+                $parsed_entry['extended_fields'] = $entry['extended_fields'];
             }
 
             # finally proceeding
