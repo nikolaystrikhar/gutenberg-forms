@@ -1,5 +1,4 @@
 {
-	"editor.fontFamily": "Operator Mono Regular, Fira Code",
 	"editor.fontLigatures": true,
 	"editor.fontSize": 20,
 	"editor.formatOnType": true,
@@ -21,7 +20,13 @@
 	"intelephense.diagnostics.undefinedVariables": false,
 	"intelephense.diagnostics.undefinedTypes": false,
 	"intelephense.diagnostics.unusedSymbols": false,
-	"cSpell.words": ["bloginfo", "gforms", "wordpress"],
+	"cSpell.words": [
+		"bloginfo",
+		"endforeach",
+		"gforms",
+		"recaptcha",
+		"wordpress"
+	],
 	"editor.tokenColorCustomizations": {
 		"textMateRules": [
 			{
@@ -64,5 +69,6 @@
 			"editorCursor.background": "#000",
 			"editorCursor.foreground": "#00ff26"
 		}
-	}
+	},
+	"editor.fontFamily": "Operator Mono Regular"
 }

@@ -71,6 +71,9 @@ function gutenberg_forms_cwp_block_assets()
 		'style'         => 'gutenberg_forms-cwp-style-css',
 		'editor_script' => 'gutenberg_forms-cwp-block-js',
 		'editor_style'  => 'gutenberg_forms-cwp-block-editor-css',
+		'assets_callback' => function ($attributes) {
+			var_dump($attributes);
+		}
 	);
 
 	if (!is_admin()) {
@@ -124,6 +127,24 @@ function cwp_form_post_type()
 
 require_once plugin_dir_path(__DIR__) . 'triggers/email.php';
 
+add_action('wp_head', function () {
+
+	require_once plugin_dir_path(__DIR__) . 'assets/index.assets.php';
+
+	global $post;
+
+	if (!empty($post)) {
+		$post = get_post($post->ID);
+
+		$parsed_blocks = parse_blocks(do_shortcode($post->post_content));
+
+		if (!empty($parsed_blocks)) {
+			$assets_holder = new cwp_gf_AssetsHandler($parsed_blocks); # for enqueuing conditional block assets
+			$assets_holder->enqueue();
+		}
+	}
+});
+
 function submitter()
 {
 
@@ -137,6 +158,7 @@ function submitter()
 		if (!empty($parsed_blocks)) {
 
 			$email_apply = new Email($parsed_blocks);
+
 			$email_apply->init();
 		}
 	}

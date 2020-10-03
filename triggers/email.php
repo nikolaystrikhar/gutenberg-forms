@@ -158,7 +158,6 @@ class Email
             }
         }
 
-
         return $templates;
     }
 

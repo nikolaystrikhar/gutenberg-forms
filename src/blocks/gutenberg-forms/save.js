@@ -32,16 +32,6 @@ function save(props) {
 	const recaptcha = getProtection("ReCaptcha v2", spamProtections);
 
 	const { error, spam } = get_submission_message();
-
-	const captcha_p = `
-
-			var onloadCallback = function(token) {
-				grecaptcha.render('${id + "g-render"}', {
-				  'sitekey' : '${recaptchaEnable && recaptcha.fields.site_key.value}'
-				});
-			  };
-
-	`;
 	const formId = id && "form-".concat(id.split("-")[1]);
 
 	const getEncryption = () => {
@@ -56,7 +46,13 @@ function save(props) {
 
 	return (
 		<div>
-			<div className="cwp-form" data-formtype={formType} id={formId}>
+			<div
+				className="cwp-form"
+				data-formtype={formType}
+				id={formId}
+				data-recaptchaEnable={recaptchaEnable}
+				data-siteKey={recaptchaEnable ? recaptcha.fields.site_key.value : ""}
+			>
 				<form method="POST" id={id} {...getEncryption()} data-formid={id}>
 					<InnerBlocks.Content />
 					{recaptchaEnable && (
@@ -109,26 +105,7 @@ function save(props) {
 					</div>
 				)}
 			</div>
-			{recaptchaEnable && (
-				<div id="cwp-protected">
-					<script
-						src="https://www.google.com/recaptcha/api.js"
-						async
-						defer
-					></script>
-					<script
-						src="https://www.google.com/recaptcha/api.js?onload=onloadCallback&render=explicit"
-						async
-						defer
-					></script>
-					<script
-						src={`https://www.google.com/recaptcha/api.js?render=${
-							recaptchaEnable && recaptcha.fields.site_key.value
-						}`}
-					></script>
-					<script dangerouslySetInnerHTML={{ __html: captcha_p }}></script>
-				</div>
-			)}
+
 			<div
 				dangerouslySetInnerHTML={{ __html: getThemeStyling(theme, formId) }}
 			></div>
