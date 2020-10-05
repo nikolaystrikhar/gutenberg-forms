@@ -448,7 +448,7 @@ class Dashboard
 
                 // for testing purpose...
 
-                $production = true;
+                $production = false;
 
                 if ($production) {
 
