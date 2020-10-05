@@ -28,8 +28,10 @@ import ConditionalLogic from "../../../block/components/condition";
 
 import { clone, set, assign } from "lodash";
 import { TEXT_DOMAIN } from "../../../block/constants/index";
-const { __ } = wp.i18n;
+import Prefix from "../../components/prefix";
+import Suffix from "../../components/suffix";
 
+const { __ } = wp.i18n;
 const {
 	InspectorControls,
 	BlockControls,
@@ -67,6 +69,8 @@ function edit(props) {
 		condition,
 		enableCondition,
 		adminId,
+		prefix,
+		suffix,
 	} = props.attributes;
 
 	const getRootData = () => {
@@ -139,6 +143,22 @@ function edit(props) {
 		});
 	};
 
+	const handleInputElementChange = (type, property, value) => {
+		const newSuffix = clone(suffix);
+		const newPrefix = clone(prefix);
+
+		switch (type) {
+			case "suffix":
+				set(newSuffix, property, value);
+				props.setAttributes({ suffix: newSuffix });
+
+				break;
+			case "prefix":
+				set(newPrefix, property, value);
+				props.setAttributes({ prefix: newPrefix });
+		}
+	};
+
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
@@ -150,6 +170,32 @@ function edit(props) {
 							value={adminId.value}
 							onChange={handleAdminId}
 						/>
+					</div>
+
+					<div className="cwp-option">
+						<PanelRow>
+							<h3 className="cwp-heading">{__("Prefix", TEXT_DOMAIN)}</h3>
+							<FormToggle
+								label="Prefix"
+								checked={prefix.enable}
+								onChange={() =>
+									handleInputElementChange("prefix", "enable", !prefix.enable)
+								}
+							/>
+						</PanelRow>
+					</div>
+
+					<div className="cwp-option">
+						<PanelRow>
+							<h3 className="cwp-heading">{__("Suffix", TEXT_DOMAIN)}</h3>
+							<FormToggle
+								label="Suffix"
+								checked={suffix.enable}
+								onChange={() =>
+									handleInputElementChange("suffix", "enable", !suffix.enable)
+								}
+							/>
+						</PanelRow>
 					</div>
 
 					{!enableCondition ? (
@@ -257,7 +303,33 @@ function edit(props) {
 						</div>
 					)}
 				</div>
-				<input value={name} onChange={handleChange} />
+				<div className="cwp-field-with-elements">
+					{prefix.enable && (
+						<Prefix prefix={prefix}>
+							<RichText
+								placeholder={__("Prefix", TEXT_DOMAIN)}
+								tag="span"
+								value={prefix.content}
+								onChange={(newContent) =>
+									handleInputElementChange("prefix", "content", newContent)
+								}
+							/>
+						</Prefix>
+					)}
+					<input value={name} onChange={handleChange} />
+					{suffix.enable && (
+						<Suffix suffix={suffix}>
+							<RichText
+								placeholder={__("Suffix", TEXT_DOMAIN)}
+								tag="span"
+								value={suffix.content}
+								onChange={(newContent) =>
+									handleInputElementChange("suffix", "content", newContent)
+								}
+							/>
+						</Suffix>
+					)}
+				</div>
 			</div>
 		</div>,
 	];

@@ -9,8 +9,10 @@ import { isEmpty, get } from "lodash";
 import {
 	getFormTemplates,
 	detect_similar_forms,
+	getGlobalMessages,
+	get_submission_message,
 } from "../../../block/functions/index";
-import { getDeprecatedThemeStyling } from "../../../block/misc/helper";
+import { getThemeStyling } from "../../../block/misc/helper";
 import { withDispatch } from "@wordpress/data";
 import { TEXT_DOMAIN } from "../../../block/constants";
 import { InnerBlocks, RichText } from "@wordpress/block-editor";
@@ -39,10 +41,6 @@ function edit(props) {
 	useEffect(() => {
 		if (id === "" || detect_similar_forms(props.clientId)) {
 			props.setAttributes({ id: "submit-" + props.clientId });
-		}
-
-		if (formLabel === "") {
-			props.setAttributes({ formLabel: "Gutenberg Form" });
 		}
 	}, []);
 
@@ -75,7 +73,7 @@ function edit(props) {
 						<InnerBlocks
 							template={getFormTemplates(formType)}
 							templateLock={false}
-							renderAppender={() => <InnerBlocks.ButtonBlockAppender />}
+							renderAppender={() => null}
 						/>
 						{!buttonSetting.disable && (
 							<div className={`cwp-submit ${alignment}`}>
@@ -94,9 +92,7 @@ function edit(props) {
 						)}
 					</div>
 					<div
-						dangerouslySetInnerHTML={{
-							__html: getDeprecatedThemeStyling(theme, formId),
-						}}
+						dangerouslySetInnerHTML={{ __html: getThemeStyling(theme, formId) }}
 					></div>
 				</Fragment>
 			)}

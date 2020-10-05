@@ -3,9 +3,13 @@
  */
 
 import React from "react";
-import { getDeprecatedThemeStyling } from "../../../block/misc/helper";
-import { isEmpty } from "lodash";
-import { hasProtection, getProtection } from "../../../block/functions";
+import { getThemeStyling } from "../../../block/misc/helper";
+import { isEmpty, get } from "lodash";
+import {
+	hasProtection,
+	getProtection,
+	get_submission_message,
+} from "../../../block/functions";
 const { InnerBlocks } = wp.blockEditor;
 
 function save(props) {
@@ -23,10 +27,15 @@ function save(props) {
 		formLabel,
 		spamProtections,
 		buttonStyling,
+		messages,
+		spamMessage,
+		errorMessage,
 	} = props.attributes;
 
 	const recaptchaEnable = hasProtection("ReCaptcha v2", spamProtections);
 	const recaptcha = getProtection("ReCaptcha v2", spamProtections);
+
+	const { error, spam } = get_submission_message();
 
 	const captcha_p = `
 			var onloadCallback = function(token) {
@@ -88,6 +97,14 @@ function save(props) {
 						</div>
 					</div>
 				)}
+
+				<div data-id={id} className="cwp-hidden spam">
+					{spamMessage}
+				</div>
+				<div data-id={id} className="cwp-hidden error">
+					{errorMessage}
+				</div>
+
 				{recaptchaEnable && (
 					<div id={id + "-captcha"} className="cwp-danger-captcha cwp-hidden">
 						Incorrect Captcha!
@@ -115,9 +132,7 @@ function save(props) {
 				</div>
 			)}
 			<div
-				dangerouslySetInnerHTML={{
-					__html: getDeprecatedThemeStyling(theme, formId),
-				}}
+				dangerouslySetInnerHTML={{ __html: getThemeStyling(theme, formId) }}
 			></div>
 		</div>
 	);
