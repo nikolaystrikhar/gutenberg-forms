@@ -76,6 +76,7 @@ function save(props) {
 						name={id}
 						title={invalidName}
 						data-errors={errors}
+						type="text"
 						data-rule="false"
 						placeholder={name}
 						required={isRequired}

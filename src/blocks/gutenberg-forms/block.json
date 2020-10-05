@@ -99,5 +99,51 @@
 			"type": "object",
 			"default": {}
 		}
+	},
+	"example": {
+		"attributes": {
+			"submitLabel": "Submit",
+			"buttonSetting": {
+				"disable": false,
+				"alignment": "justify-end"
+			},
+			"id": "submit-8a700842-159e-4b57-9bba-f7949f89f073",
+			"templateBuilder": false,
+			"email": "",
+			"cc": "",
+			"bcc": "",
+			"fromEmail": "",
+			"successURL": "",
+			"successType": "message",
+			"successMessage": "The form has been submitted Successfully!",
+			"theme": {
+				"accentColor": "rgb(49, 49, 49)",
+				"textColor": "",
+				"fieldBackgroundColor": ""
+			},
+			"formType": "standard",
+			"encryption": "",
+			"hideFormOnSuccess": false,
+			"formLabel": "Gutenberg Form - form-8a700842",
+			"integrations": {},
+			"spamProtections": [],
+			"template": "{\"subject\":\"New Form Submission\",\"body\":\"{{all_data}}\"}",
+			"spamMessage": "There was an error trying to send your message. Please try again later.",
+			"errorMessage": "There was an error trying to send your message. Please try again later."
+		},
+		"innerBlocks": [
+			{
+				"name": "cwp/name",
+				"attributes": {}
+			},
+			{
+				"name": "cwp/email",
+				"attributes": {}
+			},
+			{
+				"name": "cwp/message",
+				"attributes": {}
+			}
+		]
 	}
 }

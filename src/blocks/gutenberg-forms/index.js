@@ -47,6 +47,7 @@ registerBlockType("cwp/block-gutenberg-forms", {
 	icon: __("feedback"),
 	category: "common",
 	keywords: [__("gutenberg-forms"), __("forms")],
+	example: blockData.example,
 	attributes: blockAttributes,
 	deprecated: deprecation,
 	edit: mainEdit,

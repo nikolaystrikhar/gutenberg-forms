@@ -62,7 +62,7 @@
 	},
 	"terminal.integrated.fontFamily": "Operator Mono Light",
 	"terminal.integrated.fontSize": 20,
-	"editor.cursorStyle": "line",
+	"editor.cursorStyle": "block",
 	"editor.lineHeight": 35,
 	"workbench.colorCustomizations": {
 		"[Dracula]": {
