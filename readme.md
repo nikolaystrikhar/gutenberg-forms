@@ -77,6 +77,11 @@ We appreciate all contributions and don't want a wall of rules to get in the way
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
+= 2.0.1 = (5 Oct 2020)
+
+- New: Export Entries Feature
+- Fixed: Bugs Reported by users
+
 = 2.0.0 = (31 Aug 2020)
 
 - New: Form Summary Screen (Beta)

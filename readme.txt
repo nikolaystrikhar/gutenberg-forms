@@ -107,6 +107,10 @@ You may also get involved with the development via Github:
 == Changelog ==
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
+= 2.0.1 = (5 Oct 2020)
+- New: Export Entries Feature
+- Fixed: Bugs Reported by users
+
 = 2.0.0 = (31 Aug 2020)
 - New: Form Summary Screen (Beta)
 - Fixed: Bugs
