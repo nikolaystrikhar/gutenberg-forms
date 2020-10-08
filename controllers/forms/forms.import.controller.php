@@ -1,5 +1,7 @@
 <?php
 
+require_once plugin_dir_path(__FILE__) . 'import-managers/cf7.forms.import.php';
+
 /**
  * - This controller is used for handling imports of forms from 3rd party plugins
  * - into gutenberg forms
@@ -9,23 +11,23 @@
 class cwp_gf_Forms_Import_controller
 {
 
-    const supported_plugins = [
-        'contact-form-7' => [
-            'description' => 'Import your existing forms and the relevant plugin settings from the Contact Form 7.',
-            'icon'        => 'email',
-            'cpt'         => 'wpcf7_contact_form'
-        ]
-    ];
-
     public function __construct($namespace)
     {
         $this->namespace = $namespace;
+        $this->supported_plugins = [
+            'contact-form-7' => [
+                'description' => 'Import your existing forms and the relevant plugin settings from the Contact Form 7.',
+                'icon'        => 'email',
+                'cpt'         => 'wpcf7_contact_form',
+                'manager'     => new cwp_gf_cf7_import_manager()
+            ]
+        ];
     }
 
     public function register_routes()
     {
 
-        $supported_plugins = self::supported_plugins;
+        $supported_plugins = $this->supported_plugins;
 
         # for getting the list of forms plugins available and supported to import their forms
 
@@ -67,9 +69,23 @@ class cwp_gf_Forms_Import_controller
      * Will import the form from the selected 3rd party plugin
      */
 
-    public function import_forms()
+    public function import_forms($request)
     {
-        return [];
+        $post_ids       = $request->get_param('post_ids');
+        $plugin         = $request->get_param('plugin');
+        $import_type    = $request->get_param('type'); # can either be ["selective", "all"] 
+        # import manager
+        $import_manager;
+
+        if (array_key_exists($plugin, $this->supported_plugins))
+            $import_manager = $this->supported_plugins[$plugin]['manager'];
+
+        if (empty($import_manager))
+            return [];
+
+        $import_result = $import_type === 'selective' ? $import_manager->import_selective($post_ids) : $import_manager->import_all();
+
+        return $import_result;
     }
 
     /**
@@ -131,14 +147,14 @@ class cwp_gf_Forms_Import_controller
 
 
             $plugin_text_domain = array_key_exists('TextDomain', $installed_plugin) ? $installed_plugin['TextDomain'] : '';
-            $is_plugin_conversion_supported = array_key_exists($plugin_text_domain, self::supported_plugins);
+            $is_plugin_conversion_supported = array_key_exists($plugin_text_domain, $this->supported_plugins);
             $is_plugin_active = is_plugin_active($plugin_script);
 
 
             if ($is_plugin_conversion_supported and $is_plugin_active) {
 
                 // merging default details
-                $list[] = array_merge($installed_plugin, self::supported_plugins[$plugin_text_domain]);;
+                $list[] = array_merge($installed_plugin, $this->supported_plugins[$plugin_text_domain]);;
             }
         }
 

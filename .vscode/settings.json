@@ -1,6 +1,6 @@
 {
 	"editor.fontLigatures": true,
-	"editor.fontSize": 20,
+	"editor.fontSize": 18,
 	"editor.formatOnType": true,
 	"intelephense.compatibility.correctForArrayAccessArrayAndTraversableArrayUnionTypes": false,
 	"intelephense.compatibility.correctForBaseClassStaticUnionTypes": false,
@@ -21,39 +21,33 @@
 	"intelephense.diagnostics.undefinedTypes": false,
 	"intelephense.diagnostics.unusedSymbols": false,
 	"cSpell.words": [
+		"Elementsbytagname",
 		"bloginfo",
 		"endforeach",
 		"gforms",
 		"recaptcha",
-		"wordpress"
+		"wordpress",
+		"wpcf"
 	],
 	"editor.tokenColorCustomizations": {
 		"textMateRules": [
 			{
 				"scope": [
-					//following will be in italic (=FlottFlott)
 					"comment",
 					"entity.name.type.class", //class names
 					"keyword", //import, export, return…
 					"constant", //String, Number, Boolean…, this, super
 					"storage.modifier", //static keyword
 					"storage.type.class.js", //class keyword
-					"class"
+					"class",
+					"variable.language.this.php"
 				],
 				"settings": {
-					"fontStyle": "italic"
+					"fontStyle": "bold"
 				}
 			},
 			{
-				"scope": [
-					//following will be excluded from italics (VSCode has some defaults for italics)
-					"invalid",
-					"keyword.operator",
-					"constant.numeric.css",
-					"keyword.other.unit.px.css",
-					"constant.numeric.decimal.js",
-					"constant.numeric.json"
-				],
+				"scope": [],
 				"settings": {
 					"fontStyle": ""
 				}
@@ -69,5 +63,5 @@
 			"editorCursor.foreground": "#00ff26"
 		}
 	},
-	"editor.fontFamily": "Operator Mono Regular"
+	"editor.fontFamily": "Fira Code Regular"
 }
