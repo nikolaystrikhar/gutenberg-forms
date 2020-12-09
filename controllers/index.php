@@ -12,9 +12,9 @@ $forms_controller = new cwp_gf_Forms_controller();
 
 add_filter('rest_cwp_gf_entries_query', array($entries_controller, 'register_filters'), 10, 2);
 add_action('rest_api_init', function () use ($entries_controller, $forms_controller) {
+
     $entries_controller->register_routes();
     $entries_controller->register_fields();
-
     $forms_controller->register_routes();
 });
 add_filter('rest_query_vars', function ($vars) {

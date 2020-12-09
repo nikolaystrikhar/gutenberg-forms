@@ -77,6 +77,10 @@ We appreciate all contributions and don't want a wall of rules to get in the way
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
+= 2.0.2 = (9 Dec 2020)
+
+- Fixed: Recaptcha Bug
+
 = 2.0.1 = (5 Oct 2020)
 
 - New: Export Entries Feature

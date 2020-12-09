@@ -447,8 +447,7 @@ class Dashboard
             if ($suffix === 'toplevel_page_gutenberg_forms') {
 
                 // for testing purpose...
-
-                $production = true;
+                $production = false;
 
                 if ($production) {
 

@@ -2,8 +2,8 @@
 Contributors: munirkamal
 Tags: wordpress form,  gutenberg form, contact form, subscribe form, multi-step form, gutenberg block, contact form plugin, forms, form builder, custom form, contact button, contact me, custom contact form, form manager, form, forms builder, forms creator, captcha, recaptcha, Akismet, email form, web form, feedback form, email submit form, message form, contact form block, wordpress form plugin
 Requires at least: 5.0
-Tested up to: 5.5
-Stable tag: 2.0.1
+Tested up to: 5.6
+Stable tag: 2.0.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
