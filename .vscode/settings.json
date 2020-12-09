@@ -1,6 +1,6 @@
 {
 	"editor.fontLigatures": true,
-	"editor.fontSize": 18,
+	"editor.fontSize": 17,
 	"editor.formatOnType": true,
 	"intelephense.compatibility.correctForArrayAccessArrayAndTraversableArrayUnionTypes": false,
 	"intelephense.compatibility.correctForBaseClassStaticUnionTypes": false,
