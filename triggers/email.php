@@ -487,9 +487,6 @@ class Email
                     wp_mail(get_bloginfo('admin_email'), $mail_subject, $mail_body, $headers, $this->attachments);
                 }
 
-                if ($record_entries) {
-                    Entries::post($newEntry);
-                }
 
                 $this->ExternalServiceHandler->handle($newEntry);
                 $this->attempt_success($template);
@@ -501,10 +498,11 @@ class Email
             $this->attempt_success($template);
 
 
-            if ($record_entries) {
+        }
+		
+		if ($record_entries) {
 
-                Entries::post($newEntry);
-            }
+	        Entries::post($newEntry);
         }
     }
 }
