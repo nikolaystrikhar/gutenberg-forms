@@ -1,5 +1,4 @@
 <?php
-
 /**
  * Plugin Name: Gutenberg Forms
  * Plugin URI: https://www.gutenbergforms.com
