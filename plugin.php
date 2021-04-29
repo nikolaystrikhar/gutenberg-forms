@@ -1,5 +1,5 @@
 <?php
-/**
+/*
  * Plugin Name: Gutenberg Forms
  * Plugin URI: https://www.gutenbergforms.com
  * Description: The Next Generation WordPress Form Builder. Build forms directly within Gutenberg editor live. Add & arrange form fields like blocks.
