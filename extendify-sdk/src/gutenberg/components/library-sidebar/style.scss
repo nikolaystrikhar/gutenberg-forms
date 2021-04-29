@@ -1,0 +1,44 @@
+.etfy-templates-library-sidebar {
+    width: 30%;
+    height: 75vh;
+    top: 90px;
+    overflow-y: auto;
+    overflow-x: hidden;
+    position: sticky;
+    padding: 0px $grid-unit-20 0px 1px;
+
+    @include breakpoint(medium) {
+        height: 100%;
+        padding-right: 0px;
+    }
+
+    .etfy-templates-library-sidebar__wrapper {
+        position: sticky;
+    }
+
+    @include breakpoint(medium) {
+        width: 100%;
+    }
+
+    .etfy-templates-library-top__area {
+        position: sticky;
+        top: 0px;
+        background-color: $white;
+    }
+
+    .etfy-divider {
+        margin: $grid-unit-30 0;
+    }
+
+    .block-editor-inserter__search {
+        padding: 0px;
+        padding-top: $grid-unit-05;
+        svg {
+            height: 100%;
+        }
+
+        .block-editor-inserter__search-icon {
+            right: 10px !important;
+        }
+    }
+}

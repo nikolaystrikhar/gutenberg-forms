@@ -77,6 +77,10 @@ We appreciate all contributions and don't want a wall of rules to get in the way
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
+= 2.1.0 = (29 Apr 2021)
+
+- New: Access to the Extendify template and pattern library
+
 = 2.0.2 = (9 Dec 2020)
 
 - Fixed: Recaptcha Bug

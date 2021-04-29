@@ -1,0 +1,62 @@
+/**
+*
+*   SCSS Utility for creating breakpoints inline
+*
+*   @example 
+*   .class {
+        ...css
+        @include breakpoint(large) {
+            display:block;
+        }
+    }
+*
+**/
+
+@mixin breakpoint($class) {
+    @if $class == huge {
+        @media (max-width: $break-huge) {
+            @content;
+        }
+    } @else if $class == wide {
+        @media (max-width: $break-wide) {
+            @content;
+        }
+    } @else if $class == xlarge {
+        @media (max-width: $break-xlarge) {
+            @content;
+        }
+    } @else if $class == large {
+        @media (max-width: $break-large) {
+            @content;
+        }
+    } @else if $class == medium {
+        @media (max-width: $break-medium) {
+            @content;
+        }
+    } @else if $class == small {
+        @media (max-width: $break-small) {
+            @content;
+        }
+    } @else if $class == mobile {
+        @media (max-width: $break-mobile) {
+            @content;
+        }
+    } @else if $class == zoomed-in {
+        @media (max-width: $break-zoomed-in) {
+            @content;
+        }
+    } @else {
+        @warn "Breakpoint mixin supports: wide, xlarge, large, medium, small, mobile, zoomed-in";
+    }
+}
+
+@mixin successButton() {
+    background-color: $alert-green;
+    color: $white;
+    outline: $white;
+
+    &:focus {
+        color: $white;
+        box-shadow: none !important;
+    }
+}

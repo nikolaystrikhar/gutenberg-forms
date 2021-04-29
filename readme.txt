@@ -2,8 +2,8 @@
 Contributors: munirkamal
 Tags: wordpress form,  gutenberg form, contact form, subscribe form, multi-step form, gutenberg block, contact form plugin, forms, form builder, custom form, contact button, contact me, custom contact form, form manager, form, forms builder, forms creator, captcha, recaptcha, Akismet, email form, web form, feedback form, email submit form, message form, contact form block, wordpress form plugin
 Requires at least: 5.0
-Tested up to: 5.6
-Stable tag: 2.0.2
+Tested up to: 5.7
+Stable tag: 2.1.0
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -78,6 +78,25 @@ This is a new plugin and I am committed to making it one of the best Form Builde
 
 [https://github.com/munirkamal/gutenberg-forms](https://github.com/munirkamal/gutenberg-forms)
 
+## Template and Pattern Library
+
+Gutenberg Forms now includes access to the Extendify template and pattern library that can be accessed by clicking the "Library" button in the menu bar of the editor. We provide a variety of templates and patterns to serve different use cases and are adding more templates every week.
+Note: Templates and patterns rely on blocks and styling applied by the Editor Plus plugin. The Editor Plus plugin is required when importing a template or pattern. If you uninstall Editor Plus, the templates and patterns will still display on your site, but the styling may be affected. Additionally, stock images included in the templates are hosted on GutenbergHub.com. We recommend replacing the images or adding them to your media library directly.
+
+## Privacy
+Gutenberg Forms uses a custom API to fetch templates and patterns from the Extendify template and pattern library. To improve the service and stability we store logs which may contain the following:
+
+* browser type
+* referring site
+* date and time of request
+* category selection or search term
+* anonymized IP address
+
+API requests are only made when a user clicks on the Library button.
+
+For more details on our privacy policy: https://gutenbergforms.com/privacy-policy/
+For more details on our terms of service: https://gutenbergforms.com/terms-of-service/
+
 == Upgrade Notice ==
 
 This update may break Multi-Step forms. We have redone the functionality to make it super easier.
@@ -106,6 +125,9 @@ You may also get involved with the development via Github:
 
 == Changelog ==
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
+
+= 2.1.0 = (29 Apr 2021)
+- New: Access to the Extendify template and pattern library
 
 = 2.0.1 = (5 Oct 2020)
 - New: Export Entries Feature

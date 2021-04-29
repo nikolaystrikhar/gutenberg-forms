@@ -1,0 +1,27 @@
+.etfy-template-main {
+    &:focus {
+        box-shadow: 0 0 0 1.5px var(--wp-admin-theme-color);
+    }
+
+    .etfy-template {
+        cursor: pointer;
+        .etfy-template-header {
+            display: flex;
+            flex-direction: row;
+            justify-content: space-between;
+        }
+
+        .etfy-template-media {
+            background-size: cover;
+            min-height: 315px;
+        }
+
+        &.etfy-type-pattern {
+            .etfy-template-media {
+                background-repeat: no-repeat;
+                background-position-y: 50%;
+                background-size: contain;
+            }
+        }
+    }
+}

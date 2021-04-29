@@ -1,0 +1,10 @@
+.etfy-templates-library-sidebar-menu {
+    .etfy-selected-category {
+        background-color: $gray-100;
+        .etfy-menu-item {
+            &:hover {
+                box-shadow: 0 0 0 1.5px var(--wp-admin-theme-color) inset;
+            }
+        }
+    }
+}

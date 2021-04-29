@@ -1,0 +1,49 @@
+.etfy-templates-library-content-root {
+    width: 70%;
+    height: 100%;
+    display: block;
+    margin-bottom: $grid-unit-40;
+
+    @include breakpoint(medium) {
+        width: 100%;
+    }
+
+    .etfy-templates-description--small {
+        display: none;
+        h3 {
+            span {
+                margin: 0 $grid-unit-10;
+            }
+        }
+
+        @include breakpoint(medium) {
+            display: block;
+        }
+    }
+
+    & .etfy-templates-library-content.etfy-templates-library-grid {
+        display: grid;
+        grid-template-columns: repeat(2, 1fr);
+        column-gap: $grid-unit-30;
+        row-gap: $grid-unit-50;
+
+        @include breakpoint(medium) {
+            grid-template-columns: 1fr;
+            column-gap: $grid-unit-20;
+        }
+    }
+
+    &.etfy-templates-loading {
+        position: relative;
+        padding: calc(#{$grid-unit-60} * 2) 0px;
+        height: 50vh;
+        min-height: 50vh;
+
+        .etfy-loading {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            transform: translate(-50%, -50%);
+        }
+    }
+}

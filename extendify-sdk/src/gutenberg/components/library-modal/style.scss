@@ -1,0 +1,66 @@
+.etfy-templates-library-modal-root {
+    height: 100%;
+
+    .etfy-back-button {
+        cursor: pointer;
+        text-decoration: none;
+        color: #000;
+        display: none;
+        margin-right: $grid-unit-20;
+
+        @include breakpoint(medium) {
+            display: block;
+        }
+    }
+
+    .components-modal__content {
+        max-width: 100%;
+        width: 1500px;
+
+        .etfy-templates-library-modal {
+            display: flex;
+            flex-direction: row;
+            margin-top: $grid-unit-40;
+
+            & > div:not(:first-child) {
+                margin-left: $grid-unit-60;
+            }
+
+            @include breakpoint(small) {
+                flex-direction: column;
+
+                & > div:not(:first-child) {
+                    margin-left: 0;
+                }
+            }
+        }
+    }
+}
+
+.etfy-screen-single-template {
+    .etfy-back-button {
+        display: block;
+    }
+}
+
+.etfy-screen-menu {
+    .etfy-back-button {
+        @include breakpoint(medium) {
+            display: none;
+        }
+    }
+    .etfy-templates-library-content-root {
+        @include breakpoint(medium) {
+            display: none;
+        }
+    }
+}
+
+.etfy-screen-templates,
+.etfy-screen-single-template {
+    .etfy-templates-library-sidebar {
+        @include breakpoint(medium) {
+            display: none;
+        }
+    }
+}
