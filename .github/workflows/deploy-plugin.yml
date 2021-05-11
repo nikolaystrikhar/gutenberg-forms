@@ -9,9 +9,29 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Checkout code
-        uses: actions/checkout@master
-      - name: Removing sdk headers
-        run: sed --in-place '2,9d' extendify-sdk/extendify-sdk.php
+        uses: actions/checkout@v1
+      - name: Using Node version ${{ matrix.node-version }}
+        uses: actions/setup-node@v1
+        with:
+          node-version: ${{ matrix.node-version }}
+      - name: npm install, build dev version
+        run: |
+          npm ci
+          npm run build
+
+      - name: clone extendify sdk
+        env:
+          ACCESS_TOKEN: ${{ secrets.ACCESS_TOKEN }}
+        run: |
+          git clone https://${{ secrets.ACCESS_TOKEN }}:x-oauth-basic@github.com/gutenberghub/extendify-templates-library.git
+
+      - name: rename sdk directory
+        run: |
+          mv extendify-templates-library extendify-templates-sdk
+
+      - name: remove sdk plugin headers
+        run: sed --in-place '2,9d' extendify-templates-sdk/extendify-sdk.php
+
       - name: WordPress Plugin Deploy
         uses: 10up/action-wordpress-plugin-deploy@stable
         env:
