@@ -34,4 +34,4 @@ jobs:
         run: sed --in-place '2,9d' extendify-templates-sdk/extendify-sdk.php
 
       - name: testing
-        run: ls -la
+        run: cat extendify-templates-sdk/extendify-sdk.php
