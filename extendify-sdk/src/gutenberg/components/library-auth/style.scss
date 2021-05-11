@@ -1,0 +1,24 @@
+.etfy-auth-api-form {
+    margin-bottom: $grid-unit-40;
+
+    .etfy-auth-field {
+        margin-bottom: $grid-unit-20;
+    }
+}
+
+.etfy-library-auth__header {
+    display: inline-block;
+    margin-bottom: $grid-unit-30;
+    
+    .etfy-upgrade__btn {
+        margin-right: $grid-unit-10;
+    }
+
+    .etfy-upgrade__btn {
+        @include successButton();
+    }
+    .etfy-add-key__btn {
+        background-color: $gray-200;
+        border: 1px solid $gray-300;
+    }
+}

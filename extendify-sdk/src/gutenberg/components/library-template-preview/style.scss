@@ -1,0 +1,71 @@
+.etfy-template-preview {
+    display: flex;
+    flex-direction: row;
+    
+    & > div:not(:first-child) {
+        margin: 0px 0px 0px $grid-unit-40;
+    }
+    
+    @include breakpoint(small) {
+        flex-direction: column-reverse;
+
+        & > div:not(:first-child) {
+            margin: 0px 0px $grid-unit-40 0px;
+        }
+    }
+
+    .etfy-template-media {
+        width: 60%;
+
+        img {
+            /**FLUID IMAGE**/
+            width: 100%;
+            height: 100%;
+        }
+
+        @include breakpoint(small) {
+            width: 100%;
+        }
+    }
+
+    .etfy-template-details {
+        width: 40%;
+        top: 80px;
+        position: sticky;
+        height: 100%;
+
+        @include breakpoint(small) {
+            width: 100%;
+            display: flex;
+            flex-direction: row-reverse;
+            justify-content: space-between;
+            align-items: center;
+            position: relative;
+            top: 0px;
+        }
+
+        .etfy-template-title {
+            margin: $grid-unit-40 0px;
+
+            @include breakpoint(small) {
+                margin: $grid-unit-20 0px;
+            }
+        }
+
+        .etfy-template-category {
+            margin-right: $grid-unit-05;
+        }
+
+
+        .etfy-upgrade-btn {
+            background-color: $gray-200;
+            border: 1px solid $gray-300;
+        }
+    }
+    hr {
+        margin: $grid-unit-20 0;
+    }
+    .etfy-template-required-plugins {
+
+    }
+}

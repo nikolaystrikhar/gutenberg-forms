@@ -1,0 +1,46 @@
+/**
+*
+*   Wordpress Base Styling
+*
+**/
+
+@import 'node_modules/@wordpress/base-styles/colors';
+@import 'node_modules/@wordpress/base-styles/variables';
+@import 'node_modules/@wordpress/base-styles/mixins';
+@import 'node_modules/@wordpress/base-styles/breakpoints';
+@import 'node_modules/@wordpress/base-styles/animations';
+@import 'node_modules/@wordpress/base-styles/z-index';
+
+/**
+*
+*   SCSS Partials
+*
+**/
+
+@import './gutenberg/scss/variables';
+@import './gutenberg/scss/mixins';
+
+/**
+*
+*   Components
+*
+**/
+
+@import './gutenberg/components/library-modal/style.scss';
+@import './gutenberg/components/library-content/style.scss';
+@import './gutenberg/components/library-template/style.scss';
+@import './gutenberg/components/library-sidebar/style.scss';
+@import './gutenberg/components/library-sidebar-section/style.scss';
+@import './gutenberg/components/library-template-preview/style.scss';
+@import './gutenberg/components/library-load-more/style.scss';
+@import './gutenberg/components/library-not-found/style.scss';
+@import './gutenberg/components/library-imports-counter/style.scss';
+@import './gutenberg/components/library-auth/style.scss';
+
+/**
+*
+*   Plugins
+*
+**/
+
+@import './gutenberg/plugins/more-menu-btn/style.scss';
