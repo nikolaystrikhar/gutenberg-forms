@@ -77,6 +77,10 @@ We appreciate all contributions and don't want a wall of rules to get in the way
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
+= 2.1.2 = (11 May 2021)
+
+- Fixed: minor bug in previous release
+
 = 2.1.1 = (11 May 2021)
 
 - Fixed: Bugs
