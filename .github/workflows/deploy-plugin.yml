@@ -1,8 +1,9 @@
 name: Deploy to WordPress.org
-on:
-  push:
-    tags:
-      - "*"
+# on:
+#   push:
+#     tags:
+#       - "*"
+on: workflow_dispatch
 jobs:
   tag:
     name: New tag
@@ -32,9 +33,5 @@ jobs:
       - name: remove sdk plugin headers
         run: sed --in-place '2,9d' extendify-templates-sdk/extendify-sdk.php
 
-      - name: WordPress Plugin Deploy
-        uses: 10up/action-wordpress-plugin-deploy@stable
-        env:
-          SVN_PASSWORD: ${{ secrets.SVN_PASSWORD }}
-          SVN_USERNAME: ${{ secrets.SVN_USERNAME }}
-          SLUG: forms-gutenberg
+      - name: testing
+        run: ls -la
