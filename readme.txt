@@ -127,7 +127,7 @@ You may also get involved with the development via Github:
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
 = 2.1.4 = (25 May 2021)
-- Improved: Template library improvement
+- Improved: Template library SDK
 
 = 2.1.3 = (11 May 2021)
 - Fixed: minor bug in previous release  
