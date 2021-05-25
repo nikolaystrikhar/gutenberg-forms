@@ -113,6 +113,13 @@ const actions = {
             imports: newImports,
         }
     },
+
+    setEntryPoint(entryPoint) {
+        return {
+            type: 'SET_ENTRY_POINT',
+            entryPoint: entryPoint,
+        }
+    },
 }
 
 export default actions

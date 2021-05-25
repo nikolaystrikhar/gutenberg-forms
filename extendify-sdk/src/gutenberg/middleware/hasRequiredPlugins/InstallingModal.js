@@ -2,7 +2,7 @@ import { __ } from '@wordpress/i18n'
 import {
     Modal, Button, Notice,
 } from '@wordpress/components'
-import { TEXT_DOMAIN } from '../../global'
+import { TEXT_DOMAIN } from '../../config'
 import {
     useEffect, useState, render,
 } from '@wordpress/element'

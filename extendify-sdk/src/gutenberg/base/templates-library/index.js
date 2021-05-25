@@ -4,7 +4,7 @@ import { dispatch, select } from '@wordpress/data'
 import { __ } from '@wordpress/i18n'
 import { hydrateTemplateLibrary, injectTemplate } from '../../functions'
 
-window.wp.domReady(() => {
+document.getElementById('editor') && window.wp.domReady(() => {
     // Hydrate the state with the user's last state pre-reload
     const stateHydration = JSON.parse(window.sessionStorage.getItem('extendify-sdk-reload-session'))
     stateHydration && maybeHydrateAndInsertPendingTemplate(stateHydration)

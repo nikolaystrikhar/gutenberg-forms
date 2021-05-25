@@ -15,7 +15,7 @@ import { compose } from '@wordpress/compose'
  *
  */
 
-import { TEXT_DOMAIN } from '../../global/'
+import { TEXT_DOMAIN } from '../../config'
 
 function LibraryImportsCounter({ maxImports, currentImports }) {
     return (

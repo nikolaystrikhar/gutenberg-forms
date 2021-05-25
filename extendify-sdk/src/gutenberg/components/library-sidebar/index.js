@@ -21,7 +21,7 @@ import {
  *
  */
 
-import { TEXT_DOMAIN } from '../../global'
+import { TEXT_DOMAIN } from '../../config'
 import Search from '../library-search/index'
 import SidebarSection from '../library-sidebar-section/index'
 import { search } from '../../functions/index'

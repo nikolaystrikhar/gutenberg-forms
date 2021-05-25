@@ -6,7 +6,7 @@
 
 import { compose, withState } from '@wordpress/compose'
 import { __ } from '@wordpress/i18n'
-import { TEXT_DOMAIN } from '../../global/index'
+import { TEXT_DOMAIN } from '../../config'
 import { withSelect, withDispatch } from '@wordpress/data'
 import { Button } from '@wordpress/components'
 import {

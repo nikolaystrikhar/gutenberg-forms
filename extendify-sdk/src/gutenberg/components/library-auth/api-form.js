@@ -16,7 +16,7 @@ import { isEmpty, isEqual } from 'lodash'
  *
  */
 
-import { TEXT_DOMAIN } from '../../global'
+import { TEXT_DOMAIN } from '../../config'
 import classnames from 'classnames'
 
 function ApiForm({ apiKey, setState, setApiKey, loading, error, onSuccess, onError }) {
@@ -27,14 +27,14 @@ function ApiForm({ apiKey, setState, setApiKey, loading, error, onSuccess, onErr
         if (isEmpty(apiKey)) return
 
         setState({
-            loading: true, error: false, 
+            loading: true, error: false,
         })
 
         // faking an api request
         setTimeout(() => {
             if (isEqual(fakeKey, apiKey)) {
                 setState({
-                    loading: false, error: false, 
+                    loading: false, error: false,
                 })
 
                 setApiKey(apiKey)
@@ -44,7 +44,7 @@ function ApiForm({ apiKey, setState, setApiKey, loading, error, onSuccess, onErr
                 onSuccess()
             } else {
                 setState({
-                    loading: false, error: true, 
+                    loading: false, error: true,
                 })
                 onError()
             }
@@ -60,7 +60,7 @@ function ApiForm({ apiKey, setState, setApiKey, loading, error, onSuccess, onErr
                 })}
                 value={apiKey}
                 onChange={(newApiKey) => setState({
-                    apiKey: newApiKey, 
+                    apiKey: newApiKey,
                 })}
                 placeholder={__('API Key', TEXT_DOMAIN)}
             />

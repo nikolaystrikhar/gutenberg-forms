@@ -1,6 +1,6 @@
 import { Button, withNotices } from '@wordpress/components'
 import { __ } from '@wordpress/i18n'
-import { TEXT_DOMAIN } from '../../global'
+import { TEXT_DOMAIN } from '../../config'
 import { withState, compose } from '@wordpress/compose'
 import { withSelect } from '@wordpress/data'
 import ImportsCounter from '../library-imports-counter'

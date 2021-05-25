@@ -1,74 +1,25 @@
-/**
- *
- * Main Templates Library Reducer
- *
- */
-
 export const initialState = {
-
-    /**
-     * Weather to preview the library or not
-     */
-
     previewStatus: false,
-
-    /***
-     * Templates Data
-     */
+    entryPoint: '',
     templates: {
         loading: false,
         error: false,
         records: [],
         offset: '',
     },
-
-    /**
-     * Available Template Types
-     */
-
     templateTypes: ['pattern', 'template'],
-
-    /**
-     * Currently applied templates library filters
-     */
-
     templateFilters: {
         categories: [],
-        type: 'template',
+        type: 'pattern',
         search: '',
     },
-
-    /**
-     * Template that is currently being previewed
-     */
     currentPreviewTemplate: {},
-
-    /**
-     * current screen can be
-     * used for navigating in smaller viewport
-     * [ "menu", "templates", "single-template" ]
-     */
     currentScreen: 'menu',
-
     reloadRequirements: {
         required: false,
         insertCurrentTemplate: false,
     },
-
-    /**
-     *
-     * Library Api key
-     *
-     */
-
     apiKey: localStorage.getItem('etfy_library__key') ?? '',
-
-    /**
-     *
-     * For Import Counting
-     *
-     */
-
     maxImports: 3,
     currentImports: localStorage.getItem('etfy__library_imports_left') ?? 3,
 }
@@ -158,6 +109,13 @@ export default function (state = initialState, action) {
             return {
                 ...state,
                 currentImports: action.imports,
+            }
+        }
+
+        case 'SET_ENTRY_POINT': {
+            return {
+                ...state,
+                entryPoint: action.entryPoint,
             }
         }
 

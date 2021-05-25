@@ -18,7 +18,7 @@ import {
  * Custom Imports
  *
  */
-import { TEXT_DOMAIN } from '../../global'
+import { TEXT_DOMAIN } from '../../config'
 import TemplatesLibraryContent from '../library-content/index'
 import TemplatesLibrarySidebar from '../library-sidebar/index'
 import { Templates } from '../../api'

@@ -1,7 +1,7 @@
 import { __ } from '@wordpress/i18n'
-import { TEXT_DOMAIN } from '../../global'
+import { TEXT_DOMAIN } from '../../config'
 import {
-    Modal, Button, ButtonGroup, 
+    Modal, Button, ButtonGroup,
 } from '@wordpress/components'
 import { useState } from '@wordpress/element'
 import { dispatch, select } from '@wordpress/data'
@@ -26,7 +26,7 @@ export const ReloadRequiredModal = () => {
         <>
             <Modal title={__('Reload required', TEXT_DOMAIN)} isDismissible={false}>
                 <p style={{
-                    maxWidth: '400px', 
+                    maxWidth: '400px',
                 }}>
                     {__('Just one more thing! We need to reload the page to continue.', TEXT_DOMAIN)}
                 </p>
@@ -35,7 +35,7 @@ export const ReloadRequiredModal = () => {
                         {__('Reload page', TEXT_DOMAIN)}
                     </Button>
                     <Button isSecondary onClick={saveChanges} isBusy={isSaving} style={{
-                        margin: '0 4px', 
+                        margin: '0 4px',
                     }}>
                         {__('Save changes', TEXT_DOMAIN)}
                     </Button>

@@ -2,7 +2,6 @@ import axios from 'axios'
 import Templates from './Templates'
 import Plugins from './Plugins'
 import Categories from './Categories'
-import { mapValues } from 'lodash'
 
 const Axios = axios.create({
     baseURL: window.extendifySdkData.root,
@@ -26,15 +25,11 @@ function handleErrors(error) {
 }
 
 function addDefaults(request) {
-    const { getCurrentImports } = window.wp.data.select('extendify-templates/data')
-    if (request.params) {
-        request.params.remaining_imports = getCurrentImports()
+    const { getCurrentImports, getEntryPoint } = window.wp.data.select('extendify-templates/data')
+    if (request.data) {
+        request.data.remaining_imports = getCurrentImports()
+        request.data.entry_point = getEntryPoint()
     }
-    return request
-}
-
-function escapeParams(request) {
-    request.params = mapValues(request.params, encodeURIComponent)
     return request
 }
 
@@ -57,7 +52,7 @@ Axios.interceptors.response.use((response) => checkForSoftError(findResponse(res
     (error) => handleErrors(error))
 
 // TODO: setup a pipe function instead of this nested pattern
-Axios.interceptors.request.use((request) => checkDevMode(escapeParams(addDefaults(request))),
+Axios.interceptors.request.use((request) => checkDevMode(addDefaults(request)),
     (error) => error)
 
 export {

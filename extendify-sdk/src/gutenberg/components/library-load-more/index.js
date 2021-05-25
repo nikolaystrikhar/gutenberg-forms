@@ -17,7 +17,7 @@ import { __ } from '@wordpress/i18n'
  */
 
 import { Templates as TemplatesApi } from '../../api'
-import { TEXT_DOMAIN } from '../../global/index'
+import { TEXT_DOMAIN } from '../../config'
 
 function LoadMoreFilter({ getTemplates, filters, loading, setTemplates, setState }) {
     const loadMore = () => {

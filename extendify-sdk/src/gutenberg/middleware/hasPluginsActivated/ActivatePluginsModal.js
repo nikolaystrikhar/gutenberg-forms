@@ -1,5 +1,5 @@
 import { __, sprintf } from '@wordpress/i18n'
-import { TEXT_DOMAIN } from '../../global'
+import { TEXT_DOMAIN } from '../../config'
 import TemplatesLibraryModal from '../../components/library-modal/index'
 import { dispatch, select } from '@wordpress/data'
 import {
