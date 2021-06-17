@@ -26,11 +26,6 @@ class TemplateController
     public static function index($request)
     {
         $response = Http::post('/airtable-data', $request->get_params());
-
-        if (!isset($response['records']) || empty($response['records'])) {
-            return new \WP_Error('nothing_found', \__('Templates not found. Please try again later', 'extendify-sdk'), ['status' => 404]);
-        }
-
         return new \WP_REST_Response($response);
     }
 
@@ -43,11 +38,6 @@ class TemplateController
     public static function single($request)
     {
         $response = Http::post('/airtable-data', $request->get_params());
-
-        if (!isset($response['records']) || empty($response['records'])) {
-            return new \WP_Error('nothing_found', \__('Templates not found. Please try again later', 'extendify-sdk'), ['status' => 404]);
-        }
-
         return new \WP_REST_Response($response);
     }
 }

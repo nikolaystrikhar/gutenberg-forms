@@ -42,12 +42,12 @@ if ($extendifysdkSdk) {
 }
 
 // If Editor Plus is installed, next default to that.
-$extendifysdkEditorPlus = extendifysdkCheckPluginInstalled('editorplus');
+$extendifysdkEditorPlus = extendifysdkCheckPluginInstalled('editor_plus');
 if ($extendifysdkEditorPlus) {
     // Only if it's deactivated.
     if (is_plugin_active($extendifysdkEditorPlus)) {
         // Only if we aren't currently inside Editor Plus.
-        if (strpos(basename(__DIR__), 'editorplus') === -1) {
+        if (strpos(basename(dirname(__DIR__)), 'editorplus') === false) {
             return false;
         }
     }

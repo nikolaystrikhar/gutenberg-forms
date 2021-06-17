@@ -77,6 +77,10 @@ We appreciate all contributions and don't want a wall of rules to get in the way
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
+= 2.1.5 = (17 Jun 2021)
+
+- New: Improved Template library SDK
+
 = 2.1.4 = (25 May 2021)
 
 - Improved: Template library SDK

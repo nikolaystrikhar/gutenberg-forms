@@ -3,6 +3,7 @@ module.exports = {
         browser: true,
         es2021: true,
         jest: true,
+        node: true,
     },
     extends: ['eslint:recommended', 'plugin:react/recommended', 'plugin:react-hooks/recommended'],
     parserOptions: {
@@ -23,6 +24,15 @@ module.exports = {
         'no-constant-condition': ['error', {
             checkLoops: false,
         }],
+        'no-multi-spaces': ['error'],
+        semi: ['error', 'never'],
+        'space-in-parens': ['error', 'never'],
+        'space-unary-ops': [
+            2, {
+                words: true,
+                nonwords: false,
+                overrides: {},
+            }],
         'space-before-function-paren': [
             'error',
             {

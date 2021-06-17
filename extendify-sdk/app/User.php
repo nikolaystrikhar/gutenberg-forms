@@ -84,6 +84,37 @@ class User
     }
 
     /**
+     * Returns the application state for he current user
+     * Use it like User::data('ID') to get the user id
+     *
+     * @return string - JSON representation of the current state
+     */
+    private function stateHandler()
+    {
+        $state = \get_user_meta($this->user->ID, $this->key . 'user_data');
+
+        // Add some state boilerplate code for the first load.
+        if (!isset($state[0])) {
+            $state[0] = '{}';
+        }
+
+        $userData = json_decode($state[0], true);
+        if (!isset($userData['version'])) {
+            $userData['version'] = 0;
+        }
+
+        // Get the current default number of imports allowed.
+        if (!isset($userData['state']['allowedImports'])) {
+            $currentImports = Http::get('/max-free-imports');
+            $userData['state']['allowedImports'] = is_numeric($currentImports) && $currentImports > 0 ? $currentImports : 3;
+        }
+
+        $userData['state']['uuid'] = self::data('uuid');
+
+        return \wp_json_encode($userData);
+    }
+
+    /**
      * Allows to dynamically setup the user with uuid
      * Use it like User::data('ID') to get the user id
      *
