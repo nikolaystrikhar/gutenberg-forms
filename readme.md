@@ -77,6 +77,11 @@ We appreciate all contributions and don't want a wall of rules to get in the way
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
+= 2.1.7 = (29 Jun 2021)
+
+- New: Toggle to enable/disable Extendify library
+- Improved: Updates to the pattern and template library
+
 = 2.1.6 = (17 Jun 2021)
 
 - Fixed: Bugs
