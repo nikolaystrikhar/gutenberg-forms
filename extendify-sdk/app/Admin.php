@@ -6,6 +6,7 @@
 namespace Extendify\ExtendifySdk;
 
 use Extendify\ExtendifySdk\App;
+use Extendify\ExtendifySdk\User;
 
 /**
  * This class handles any file loading for the admin area.
@@ -94,6 +95,7 @@ class Admin
             [
                 'root' => \esc_url_raw(rest_url(APP::$slug . '/' . APP::$apiVersion)),
                 'nonce' => \wp_create_nonce('wp_rest'),
+                'user' => json_decode(User::data('extendifysdk_user_data'), true),
             ]
         );
         \wp_enqueue_script(App::$slug . '-scripts');

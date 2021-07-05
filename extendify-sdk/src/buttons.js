@@ -30,6 +30,10 @@ window._wpLoadBlockEditor && window.wp.data.subscribe(() => {
         if (!useUserStore.getState().enabled) {
             return
         }
+        // Redundant extra check added because of a bug where the above check wasn't working
+        if (window.extendifySdkData?.user && !window.extendifySdkData?.user?.state?.enabled) {
+            return
+        }
         if (document.getElementById('extendify-templates-inserter-btn')) {
             return
         }
@@ -45,6 +49,10 @@ window._wpLoadBlockEditor && window.wp.data.subscribe(() => {
 window._wpLoadBlockEditor && window.wp.data.subscribe(() => {
     setTimeout(() => {
         if (!useUserStore.getState().enabled) {
+            return
+        }
+        // Redundant extra check added because of a bug where the above check wasn't working
+        if (window.extendifySdkData?.user && !window.extendifySdkData?.user?.state?.enabled) {
             return
         }
         if (!document.querySelector('[id$=patterns-view]')) {
@@ -93,7 +101,8 @@ const LibraryEnableDisable = () => <PluginSidebarMoreMenuItem
         useUserStore.setState({
             enabled: !useUserStore.getState().enabled,
         })
-        requestAnimationFrame(() => location.reload())
+        // Added a 500ms delay to make sure the network save was successful
+        setTimeout(() => location.reload(), 500)
     }}
     icon={<></>}
 >
