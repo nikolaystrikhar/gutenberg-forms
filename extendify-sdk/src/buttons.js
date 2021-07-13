@@ -2,12 +2,15 @@ import { __ } from '@wordpress/i18n'
 import { renderToString } from '@wordpress/element'
 import { registerPlugin } from '@wordpress/plugins'
 import { openModal } from './util/general'
-import { useUserStore } from './state/User'
 import { PluginSidebarMoreMenuItem } from '@wordpress/edit-post'
+import { User } from './api/User'
 
 const openLibrary = (event) => {
     openModal(event.target.closest('[data-extendify-identifier]')?.dataset?.extendifyIdentifier)
 }
+
+// This returns true if the user object is null (Library never opened), or if it's enabled in the user settings
+const isLibraryEnabled = () => window.extendifySdkData.user === null || window.extendifySdkData?.user?.state?.enabled
 
 const mainButton = <div id="extendify-templates-inserter">
     <button
@@ -27,11 +30,8 @@ const mainButton = <div id="extendify-templates-inserter">
 // Add the MAIN button when Gutenberg is available and ready
 window._wpLoadBlockEditor && window.wp.data.subscribe(() => {
     setTimeout(() => {
-        if (!useUserStore.getState().enabled) {
-            return
-        }
         // Redundant extra check added because of a bug where the above check wasn't working
-        if (window.extendifySdkData?.user && !window.extendifySdkData?.user?.state?.enabled) {
+        if (!isLibraryEnabled()) {
             return
         }
         if (document.getElementById('extendify-templates-inserter-btn')) {
@@ -48,11 +48,8 @@ window._wpLoadBlockEditor && window.wp.data.subscribe(() => {
 // The CTA button inside patterns
 window._wpLoadBlockEditor && window.wp.data.subscribe(() => {
     setTimeout(() => {
-        if (!useUserStore.getState().enabled) {
-            return
-        }
         // Redundant extra check added because of a bug where the above check wasn't working
-        if (window.extendifySdkData?.user && !window.extendifySdkData?.user?.state?.enabled) {
+        if (!isLibraryEnabled()) {
             return
         }
         if (!document.querySelector('[id$=patterns-view]')) {
@@ -76,7 +73,7 @@ window._wpLoadBlockEditor && window.wp.data.subscribe(() => {
 })
 
 // The right dropdown side menu
-const SideMenuButton = () => useUserStore.getState().enabled && <PluginSidebarMoreMenuItem
+const SideMenuButton = () => <PluginSidebarMoreMenuItem
     data-extendify-identifier="sidebar-button"
     onClick={openLibrary}
     icon={
@@ -90,27 +87,29 @@ const SideMenuButton = () => useUserStore.getState().enabled && <PluginSidebarMo
 >
     {__('Library', 'extendify-sdk')}
 </PluginSidebarMoreMenuItem>
-window._wpLoadBlockEditor && registerPlugin('extendify-temps-more-menu-trigger', {
+window._wpLoadBlockEditor && isLibraryEnabled() && registerPlugin('extendify-temps-more-menu-trigger', {
     render: SideMenuButton,
 })
 
-// Everything above this line will be enabled or disabled based on the
-// users "enabled" state, which is controlled by another button here
+// This will add a button to enable or disable the library button
 const LibraryEnableDisable = () => <PluginSidebarMoreMenuItem
-    onClick={() => {
-        useUserStore.setState({
-            enabled: !useUserStore.getState().enabled,
-        })
-        // Added a 500ms delay to make sure the network save was successful
-        setTimeout(() => location.reload(), 500)
+    onClick={async () => {
+        // This works even when the Library hasn't been opened yet
+        // because User.getData() will build a barebones User object
+        let userData = await User.getData()
+        userData = JSON.parse(userData)
+        userData.state.enabled = !isLibraryEnabled()
+        await User.setData(JSON.stringify(Object.assign({}, userData)))
+        location.reload()
     }}
     icon={<></>}
 >
-    {useUserStore.getState().enabled
+    {isLibraryEnabled()
         ? __('Disable Extendify', 'extendify-sdk')
         : __('Enable Extendify', 'extendify-sdk')}
 </PluginSidebarMoreMenuItem>
 
+// Load this button always, which is used to enable or disable
 window._wpLoadBlockEditor && registerPlugin('extendify-settings-enable-disable', {
     render: LibraryEnableDisable,
 })
