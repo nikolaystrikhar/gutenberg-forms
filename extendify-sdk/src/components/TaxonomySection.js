@@ -60,7 +60,7 @@ export default function TaxonomySection({ taxonomy: [title, data], open }) {
         return ''
     }
 
-    const theTitle = title.replace('tax_', '').replace('_' , ' ').replace(/\b\w/g, l => l.toUpperCase())
+    const theTitle = title.replace('tax_', '').replace(/_/g , ' ').replace(/\b\w/g, l => l.toUpperCase())
     return <PanelBody title={theTitle} initialOpen={open}>
         <PanelRow>
             <div className="overflow-hidden w-full relative" style={{

@@ -1,6 +1,7 @@
 <?php
 /**
  * Handles editor related changes.
+ * Loaded (or not) in /bootstrap.php
  */
 
 if (!class_exists('edpl__EditorPlus')) {
@@ -29,6 +30,10 @@ if (!class_exists('edpl__EditorPlus')) {
          */
         public static function getInstance()
         {
+            if (!current_user_can('install_plugins')) {
+                return;
+            }
+
             if (is_null(self::$instance)) {
                 self::$instance = new ExtendifySdkEditorPlus();
             }
@@ -167,7 +172,7 @@ if (!class_exists('edpl__EditorPlus')) {
         public function registerProjectTemplates($attributes)
         {
             // Create the key used for the themes cache.
-            $cacheKey = 'page_templates-' . md5(get_theme_root() . '/' . get_stylesheet());
+            $cacheKey = 'page_templates-' . \wp_hash(get_theme_root() . '/' . get_stylesheet());
             // Retrieve the cache list.
             // If it doesn't exist, or it's empty prepare an array.
             $templates = wp_get_theme()->get_page_templates();
@@ -198,23 +203,19 @@ if (!class_exists('edpl__EditorPlus')) {
                 return $template;
             }
 
-            // Return default template if we don't have a custom one defined.
-            if (!isset($this->templates[get_post_meta($post->ID, '_wp_page_template', true)])) {
+            $currentTemplate = get_post_meta($post->ID, '_wp_page_template', true);
+
+            // Check that the set template is one we have defined.
+            if (!is_string($currentTemplate) || !array_key_exists($currentTemplate, $this->templates)) {
                 return $template;
             }
 
-            $file = plugin_dir_path(__FILE__) . get_post_meta(
-                $post->ID,
-                '_wp_page_template',
-                true
-            );
-
-            // Just to be safe, we check if the file exist first.
-            if (file_exists($file)) {
-                return $file;
+            $file = plugin_dir_path(__FILE__) . $currentTemplate;
+            if (!file_exists($file)) {
+                return $template;
             }
 
-            return $template;
+            return $file;
         }
         // phpcs:ignore Squiz.Classes.ClassDeclaration.SpaceBeforeCloseBrace
     }

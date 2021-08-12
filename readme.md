@@ -77,6 +77,10 @@ We appreciate all contributions and don't want a wall of rules to get in the way
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
+= 2.2.0 = (12 Aug 2021)
+
+- Improve: Templates Library
+
 = 2.1.9 = (13 July 2021)
 
 - Improve: Templates Library

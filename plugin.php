@@ -5,7 +5,7 @@
  * Description: The Next Generation WordPress Form Builder. Build forms directly within Gutenberg editor live. Add & arrange form fields like blocks.
  * Author: munirkamal
  * Author URI: https://cakewp.com/
- * Version: 2.1.9
+ * Version: 2.2.0
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain: cwp-gutenberg-forms
@@ -16,6 +16,10 @@ if (!defined('ABSPATH')) {
 	exit;
 }
 
-require_once plugin_dir_path(__FILE__) . 'extendify-sdk/loader.php';
+if (is_readable(dirname(__FILE__) . '/extendify-sdk/loader.php')) {
+    $GLOBALS['extendifySdkSourcePlugin'] = 'Gutenberg Forms';
+	require_once plugin_dir_path(__FILE__) . 'extendify-sdk/loader.php';
+}
+
 
 require_once plugin_dir_path(__FILE__) . 'src/init.php';

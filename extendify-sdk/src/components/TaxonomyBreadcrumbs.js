@@ -2,11 +2,15 @@ import { useTemplatesStore } from '../state/Templates'
 
 export default function TaxonomyBreadcrumbs() {
     const searchParams = useTemplatesStore(state => state.searchParams)
-    const formatTitle = (title) => title.replace('tax_', '').replace('_' , ' ').replace(/\b\w/g, l => l.toUpperCase())
+    const formatTitle = (title) => title.replace('tax_', '').replace(/_/g , ' ').replace(/\b\w/g, l => l.toUpperCase())
     return <div className="hidden sm:flex items-start flex-col lg:flex-row -mt-2 lg:-mx-2 mb-4 lg:divide-x-2 lg:leading-none">
         {Object.entries(searchParams.taxonomies).map((tax) => {
             // Special exception for page templates
             if (searchParams.type === 'template' && tax[0] === 'tax_pattern_types') {
+                return ''
+            }
+            // Special exception for plugins (like metaslider) that won't have full page templates
+            if (searchParams.type === 'template' && tax[0] === 'tax_features') {
                 return ''
             }
             // Special exception for page types
