@@ -9,10 +9,12 @@ import Welcome from '../pages/Welcome'
 import useBeacon from '../hooks/useBeacon'
 import { useGlobalStore } from '../state/GlobalState'
 import { useUserStore } from '../state/User'
+import { General as GeneralApi } from '../api/General'
 
 export default function MainWindow() {
     const containerRef = useRef(null)
     const open = useGlobalStore(state => state.open)
+    const metaData = useGlobalStore(state => state.metaData)
     const setOpen = useGlobalStore(state => state.setOpen)
     const currentPage = useGlobalStore(state => state.currentPage)
     const hasClickedThroughWelcomePage = useUserStore(state => state.hasClickedThroughWelcomePage)
@@ -23,6 +25,13 @@ export default function MainWindow() {
             currentPage: 'content',
         })
     }, [hasClickedThroughWelcomePage])
+
+    useEffect(() => {
+        if (!open || Object.keys(metaData).length) {
+            return
+        }
+        GeneralApi.metaData().then((data) => useGlobalStore.setState({ metaData: data }))
+    }, [open, metaData])
 
     return (
         <Transition.Root show={open} as={Fragment}>

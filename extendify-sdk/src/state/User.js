@@ -8,10 +8,13 @@ const storage = {
 }
 
 export const useUserStore = create(persist((set, get) => ({
+    email: '',
     apiKey: '',
     imports: 0,
     uuid: '',
-    email: '',
+    registration: {
+        email: '',
+    },
     allowedImports: 0,
     entryPoint: 'not-set',
     enabled: true,

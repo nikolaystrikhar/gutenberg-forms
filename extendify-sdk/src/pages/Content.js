@@ -1,7 +1,7 @@
 import { useTemplatesStore } from '../state/Templates'
 import Filtering from '../components/Filtering'
-import TemplatesList from '../components/TemplatesList'
-import TemplatesSingle from '../components/TemplatesSingle'
+import TemplatesList from './TemplatesList'
+import TemplatesSingle from './TemplatesSingle'
 import HasSidebar from '../layout/HasSidebar'
 import TypeSelect from '../components/TypeSelect'
 import { __ } from '@wordpress/i18n'
@@ -31,7 +31,7 @@ export default function Content({ className }) {
                     {/* TODO: we may want to inject this as a portal so it can directly share state with Filtering.js */}
                     <TaxonomyBreadcrumbs/>
                     <div className="relative h-full z-30 bg-white">
-                        <div className="absolute z-20 inset-0 lg:static h-screen overflow-y-auto pt-4 sm:pt-0 px-6 sm:pl-0 sm:pr-8">
+                        <div className="absolute z-20 inset-0 lg:static h-screen overflow-y-auto pt-4 sm:pt-0 px-6 sm:pl-0 sm:pr-8 pb-40">
                             <TemplatesList templates={templates}/>
                         </div>
                     </div>

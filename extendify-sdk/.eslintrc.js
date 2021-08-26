@@ -20,7 +20,7 @@ module.exports = {
         'require-await': 'error',
         quotes: ['error', 'single'],
         'comma-dangle': ['error', 'always-multiline'],
-        'multiline-ternary': ['error', 'always'],
+        'multiline-ternary': ['error', 'always-multiline'],
         'array-element-newline': ['error', 'consistent'],
         'no-constant-condition': ['error', {
             checkLoops: false,
@@ -50,7 +50,9 @@ module.exports = {
             },
         ],
         'quote-props': ['error', 'as-needed'],
-        'object-curly-spacing': ['error', 'always'],
+        'object-curly-spacing': ['error', 'always', {
+            objectsInObjects: false,
+        }],
         'no-multiple-empty-lines': [
             'error',
             {
@@ -69,14 +71,13 @@ module.exports = {
             'error',
             {
                 ObjectExpression: {
-                    minProperties: 1,
+                    consistent: true, multiline: true, minProperties: 3,
                 },
                 ObjectPattern: {
-                    multiline: true,
+                    consistent: true, multiline: true,
                 },
                 ImportDeclaration: {
-                    multiline: true,
-                    minProperties: 3,
+                    multiline: true, minProperties: 3,
                 },
                 ExportDeclaration: {
                     multiline: true,

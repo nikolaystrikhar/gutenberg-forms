@@ -8,6 +8,7 @@
  **/
 
 module.exports = {
+    // mode: 'jit',
     purge: ['src/**/*'],
     important: '.extendify-sdk',
     darkMode: false,
@@ -28,6 +29,9 @@ module.exports = {
         extend: {
             minWidth: {
                 md2: '960px',
+            },
+            minHeight: {
+                60: '15rem',
             },
             fontSize: {
                 '3xl': ['2rem', '2.5rem'],
@@ -74,7 +78,7 @@ module.exports = {
     },
     variants: {
         extend: {
-            borderWidth: ['group-hover', 'hover'],
+            borderWidth: ['group-hover', 'hover', 'focus'],
             backgroundColor: ['active'],
             textColor: ['active'],
         },

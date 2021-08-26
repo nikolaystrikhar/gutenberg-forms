@@ -37,6 +37,21 @@ export const Templates = {
         })
         return templates
     },
+    related(
+        template, queryType, wantedType,
+    ) {
+        return api.post('related', {
+            pageSize: 4,
+            query_type: queryType,
+            wanted_type: wantedType,
+            categories: template?.fields?.tax_categories,
+            pattern_types: template?.fields?.tax_pattern_types,
+            style: template?.fields?.tax_style,
+            type: template?.fields?.type,
+            template_id: template?.id,
+        })
+    },
+
     // TODO: Refactor this later to combine the following three
     maybeImport(template) {
         return api.post(`templates/${template.id}`, {

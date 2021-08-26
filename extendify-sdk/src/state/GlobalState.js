@@ -3,6 +3,7 @@ import { useTemplatesStore } from './Templates'
 
 export const useGlobalStore = create((set) => ({
     open: false,
+    metaData: {},
     currentPage: 'welcome',
     setOpen: (value) => {
         set({

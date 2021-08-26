@@ -1,9 +1,6 @@
 import { useEffect } from '@wordpress/element'
 
 export default function useBeacon(show) {
-    console.log({
-        show,
-    })
     const showBeacon = () => {
         const container = document.getElementById('beacon-container')
         if (container) {
