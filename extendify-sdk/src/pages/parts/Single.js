@@ -1,19 +1,19 @@
-import { ImportButton } from '../components/ImportButton'
+import { ImportButton } from '../../components/ImportButton'
 import { __ } from '@wordpress/i18n'
 import classNames from 'classnames'
-import { useUserStore } from '../state/User'
+import { useUserStore } from '../../state/User'
 import { ExternalLink } from '@wordpress/components'
 import {
     useEffect, useState, useCallback,
 } from '@wordpress/element'
-import { Templates as TemplatesApi } from '../api/Templates'
-import TaxonomyList from '../components/TaxonomyList'
-import { useIsMounted } from '../hooks/helpers'
-import { useTemplatesStore } from '../state/Templates'
+import { Templates as TemplatesApi } from '../../api/Templates'
+import TaxonomyList from '../../components/TaxonomyList'
+import { useIsMounted } from '../../hooks/helpers'
+import { useTemplatesStore } from '../../state/Templates'
 
 const relatedMap = new Map()
 
-export default function TemplateSingle({ template }) {
+export default function Single({ template }) {
     const {
         tax_categories: categories,
         required_plugins: requiredPlugins,

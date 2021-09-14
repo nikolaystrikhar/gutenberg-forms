@@ -10,7 +10,7 @@ import { useGlobalStore } from '../state/GlobalState'
 import { __, sprintf } from '@wordpress/i18n'
 import { Templates as TemplatesApi } from '../api/Templates'
 import { render } from '@wordpress/element'
-import ExtendifyLibrary from '../layout/ExtendifyLibrary'
+import ExtendifyLibrary from '../ExtendifyLibrary'
 
 const canImportMiddleware = Middleware(['NeedsRegistrationModal', 'hasRequiredPlugins', 'hasPluginsActivated'])
 export function ImportButton({ template }) {

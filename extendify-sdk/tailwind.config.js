@@ -71,7 +71,7 @@ module.exports = {
                 },
             },
             zIndex: {
-                high: '1000000',
+                high: '99999',
                 max: '2147483647', // Highest the browser allows - don't block WP re-auth modal though
             },
         },
@@ -83,7 +83,9 @@ module.exports = {
             textColor: ['active'],
         },
     },
-    plugins: [],
+    plugins: [
+        require('@tailwindcss/aspect-ratio'),
+    ],
     corePlugins: {
         preflight: false,
         container: false,

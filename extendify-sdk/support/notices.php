@@ -53,6 +53,7 @@ add_action(
         <div style="margin:5px -5px 0 0;">
             <button
                 style="max-width:15px;border:0;background:0;color: #7b7b7b;white-space:nowrap;cursor: pointer;padding: 0"
+                type="button"
                 title="<?php esc_attr_e('Dismiss notice', 'extendify-sdk'); ?>"
                 aria-label="<?php esc_attr_e('Dismiss Extendify notice', 'extendify-sdk'); ?>"
                 onclick="jQuery('#<?php echo esc_attr($extendifySdkNoticesKey); ?>').remove();jQuery.post(window.ajaxurl, {action: 'handle_<?php echo esc_attr($extendifySdkNoticesKey); ?>', _wpnonce: '<?php echo esc_attr($extendifySdkNoticesNonce); ?>' });">
@@ -71,7 +72,7 @@ add_action(
 add_action(
     'wp_ajax_handle_' . $extendifySdkNoticesKey,
     function () use ($extendifySdkNoticesKey) {
-        if (!isset($_POST['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wpnonce'], $extendifySdkNoticesKey)))) {
+        if (!isset($_POST['_wpnonce']) || !wp_verify_nonce(sanitize_text_field(wp_unslash($_POST['_wpnonce'])), $extendifySdkNoticesKey)) {
             wp_send_json_error(
                 ['message' => esc_html__('The security check failed. Please refresh the page and try again.', 'extendify-sdk')],
                 401

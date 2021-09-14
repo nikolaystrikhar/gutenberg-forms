@@ -1,7 +1,7 @@
 import { __, sprintf } from '@wordpress/i18n'
 import { Modal, Button } from '@wordpress/components'
 import { render } from '@wordpress/element'
-import ExtendifyLibrary from '../layout/ExtendifyLibrary'
+import ExtendifyLibrary from '../ExtendifyLibrary'
 import { useWantedTemplateStore } from '../state/Importing'
 import { getPluginDescription } from '../util/general'
 

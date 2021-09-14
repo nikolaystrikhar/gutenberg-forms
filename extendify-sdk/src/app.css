@@ -10,6 +10,9 @@
 .extendify-sdk .button-focus {
     @apply focus:ring-2 focus:ring-wp-theme-500 ring-offset-1 outline-none;
 }
+.extendify-sdk .button-focus-big-green {
+    @apply focus:ring-4 focus:ring-offset-4 focus:ring-extendify-main outline-none;
+}
 .extendify-sdk select.button-focus,
 .extendify-sdk input.button-focus {
     @apply focus:border-transparent focus:outline-none;
@@ -43,7 +46,7 @@
     @apply text-gray-600;
 }
 .extendify-special-input:focus ~ label {
-    @apply -top-3;
+    @apply -top-4;
     @apply text-xs;
-    @apply text-wp-theme-500;
+    @apply text-extendify-main;
 }

@@ -1,5 +1,5 @@
 import { __, sprintf } from '@wordpress/i18n'
-import ExtendifyLibrary from '../../layout/ExtendifyLibrary'
+import ExtendifyLibrary from '../../ExtendifyLibrary'
 import {
     Modal, Button, ButtonGroup,
 } from '@wordpress/components'

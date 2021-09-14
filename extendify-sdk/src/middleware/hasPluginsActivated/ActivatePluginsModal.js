@@ -4,7 +4,7 @@ import {
 } from '@wordpress/components'
 import { render } from '@wordpress/element'
 import ActivatingModal from './ActivatingModal'
-import ExtendifyLibrary from '../../layout/ExtendifyLibrary'
+import ExtendifyLibrary from '../../ExtendifyLibrary'
 import { useWantedTemplateStore } from '../../state/Importing'
 import { getPluginDescription } from '../../util/general'
 import { useUserStore } from '../../state/User'

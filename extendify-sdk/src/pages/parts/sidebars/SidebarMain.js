@@ -1,40 +1,21 @@
-import { useTemplatesStore } from '../state/Templates'
+import { useTemplatesStore } from '../../../state/Templates'
 // import { SelectControl } from '@wordpress/components'
 import { __ } from '@wordpress/i18n'
 import { debounce } from 'lodash'
-import {
-    useEffect, useState, useCallback,
-} from '@wordpress/element'
-import { Taxonomies as TaxonomiesApi } from '../api/Taxonomies'
+import { useState } from '@wordpress/element'
 import { Panel } from '@wordpress/components'
-import TaxonomySection from './TaxonomySection'
+import TaxonomySection from '../../../components/TaxonomySection'
+import { useTaxonomyStore } from '../../../state/Taxonomies'
 
-export default function Filtering() {
+export default function SidebarMain() {
     const updateSearchParams = useTemplatesStore(state => state.updateSearchParams)
-    const setupDefaultTaxonomies = useTemplatesStore(state => state.setupDefaultTaxonomies)
+    const taxonomies = useTaxonomyStore(state => state.taxonomies)
     const searchParams = useTemplatesStore(state => state.searchParams)
     const searchInputUpdate = debounce((value) => updateSearchParams({
         taxonomies: {},
         search: value,
     }), 500)
     const [searchValue, setSearchValue] = useState(searchParams?.search ?? '')
-    const [taxonomies, setTaxonomies] = useState({})
-    const fetchTaxonomies = useCallback(async () => {
-        let tax = await TaxonomiesApi.get()
-        // Only allow items that have the 'tax_' prefix
-        tax = Object.keys(tax)
-            .filter((t) => t.startsWith('tax_'))
-            .reduce((taxFiltered, key) => {
-                taxFiltered[key] = tax[key]
-                return taxFiltered
-            }, {})
-        setupDefaultTaxonomies(tax)
-        setTaxonomies(tax)
-    }, [setupDefaultTaxonomies])
-
-    useEffect(() => {
-        fetchTaxonomies()
-    }, [fetchTaxonomies])
 
     return <>
         <div className="mt-px bg-white mb-6 mx-6 pt-6 lg:mx-0 lg:pt-0">
@@ -59,10 +40,9 @@ export default function Filtering() {
         </div>
         <div className="mt-px flex-grow hidden overflow-y-auto pb-32 pr-2 pt-px sm:block">
             <Panel>
-                {Object.entries(taxonomies).map((taxonomy, index) => {
+                {Object.entries(taxonomies).map((taxonomy) => {
                     return <TaxonomySection
-                        key={index}
-                        open={false}
+                        key={taxonomy[0]}
                         taxonomy={taxonomy} />
                 })}
             </Panel>
