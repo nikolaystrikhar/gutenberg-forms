@@ -14,7 +14,6 @@ import {
 } from "../../../block/functions/index";
 import { getThemeStyling } from "../../../block/misc/helper";
 import { withDispatch } from "@wordpress/data";
-import { TEXT_DOMAIN } from "../../../block/constants";
 import { InnerBlocks, RichText } from "@wordpress/block-editor";
 
 const { compose } = wp.compose;
@@ -82,7 +81,7 @@ function edit(props) {
 									className="cwp-submit-btn cwp-default-submit-btn"
 								>
 									<RichText
-										placeholder={__("Add a label", TEXT_DOMAIN)}
+										placeholder={__("Add a label", "cwp-gutenberg-forms")}
 										tag="span"
 										value={submitLabel}
 										onChange={handleButtonLabel}

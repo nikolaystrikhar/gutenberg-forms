@@ -12,7 +12,6 @@ import {
 	SelectControl,
 	PanelBody,
 } from "@wordpress/components";
-import { TEXT_DOMAIN } from "../../../block/constants";
 import Toolbar from "./toolbar";
 import Icon from "../../../block/Icon";
 
@@ -121,7 +120,7 @@ function edit(props) {
 								key={index}
 								formattingControls={[]}
 								value={label}
-								placeholder={__("Form Step", TEXT_DOMAIN)}
+								placeholder={__("Form Step", "cwp-gutenberg-forms")}
 								onChange={
 									(newLabel) =>
 										updateBlockAttributes(blockId, { label: newLabel }) // updating the form step label
@@ -132,7 +131,7 @@ function edit(props) {
 				})}
 				{blocksLoaded && (
 					<IconButton
-						icon={__(<Icon icon="addOutline" />, TEXT_DOMAIN)}
+						icon={__(<Icon icon="addOutline" />, "cwp-gutenberg-forms")}
 						onClick={addStep}
 					/>
 				)}
@@ -140,10 +139,10 @@ function edit(props) {
 			{!blocksLoaded ? (
 				<Placeholder
 					icon="editor-help"
-					label={__("No Steps Found!", TEXT_DOMAIN)}
+					label={__("No Steps Found!", "cwp-gutenberg-forms")}
 					instructions={__(
 						"Please add some steps to create a multistep form",
-						TEXT_DOMAIN
+						"cwp-gutenberg-forms"
 					)}
 				>
 					<Button isPrimary onClick={addStep}>
@@ -167,9 +166,9 @@ function edit(props) {
 			setStep={setStep}
 		/>, // toolbar controls
 		<InspectorControls>
-			<PanelBody title={__("Settings", TEXT_DOMAIN)}>
+			<PanelBody title={__("Settings", "cwp-gutenberg-forms")}>
 				<SelectControl
-					label={__("Effect", TEXT_DOMAIN)}
+					label={__("Effect", "cwp-gutenberg-forms")}
 					value={multiStepEffect}
 					options={multiStepEffects}
 					onChange={(multiStepEffect) => setAttributes({ multiStepEffect })}

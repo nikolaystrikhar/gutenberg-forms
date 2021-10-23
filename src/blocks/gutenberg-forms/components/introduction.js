@@ -1,7 +1,6 @@
 import React, { useState, Fragment } from "react";
 import { Button, Placeholder, TextControl } from "@wordpress/components";
 import SettingsModal from "../settings_modal/modal";
-import { TEXT_DOMAIN } from "../../../block/constants";
 const { __ } = wp.i18n;
 
 function Introduction(props) {
@@ -28,16 +27,16 @@ function Introduction(props) {
 			/>
 			<Placeholder
 				icon="feedback"
-				label={__("Gutenberg Forms", TEXT_DOMAIN)}
+				label={__("Gutenberg Forms", "cwp-gutenberg-forms")}
 				instructions={__(
 					"Type a label for this form and select an option to get started.",
-					TEXT_DOMAIN
+					"cwp-gutenberg-forms"
 				)}
 			>
 				<div className="content">
 					<TextControl
 						value={formLabel}
-						placeholder={__("Type form label here...", TEXT_DOMAIN)}
+						placeholder={__("Type form label here...", "cwp-gutenberg-forms")}
 						onChange={(formLabel) => setAttributes({ formLabel })}
 					/>
 

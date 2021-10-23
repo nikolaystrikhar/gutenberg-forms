@@ -30,7 +30,6 @@ import {
 } from "../../../block/functions/index";
 import ConditionalLogic from "../../../block/components/condition";
 import Bulk_Add from "../../components/bulk_add";
-import { TEXT_DOMAIN } from "../../../block/constants/index";
 
 const { __ } = wp.i18n;
 const { InspectorControls, BlockControls, BlockIcon } = wp.blockEditor;
@@ -277,11 +276,11 @@ function edit(props) {
 
 	return [
 		<InspectorControls>
-			<PanelBody title={__("Field Settings", TEXT_DOMAIN)} initialOpen={true}>
+			<PanelBody title={__("Field Settings", "cwp-gutenberg-forms")} initialOpen={true}>
 				<div className="cwp-option">
 					<TextControl
 						placeholder={adminId.default}
-						label={__("Field ID", TEXT_DOMAIN)}
+						label={__("Field ID", "cwp-gutenberg-forms")}
 						value={adminId.value}
 						onChange={handleAdminId}
 					/>
@@ -289,9 +288,9 @@ function edit(props) {
 
 				{!enableCondition ? (
 					<PanelRow>
-						<h3 className="cwp-heading">{__("Required", TEXT_DOMAIN)}</h3>
+						<h3 className="cwp-heading">{__("Required", "cwp-gutenberg-forms")}</h3>
 						<FormToggle
-							label={__("Required", TEXT_DOMAIN)}
+							label={__("Required", "cwp-gutenberg-forms")}
 							checked={isRequired}
 							onChange={handleRequired}
 						/>
@@ -300,13 +299,13 @@ function edit(props) {
 					<div className="cwp-option">
 						<p>
 							<Icon icon="info" />{" "}
-							{__("You cannot set a conditional field required!", TEXT_DOMAIN)}
+							{__("You cannot set a conditional field required!", "cwp-gutenberg-forms")}
 						</p>
 					</div>
 				)}
 				{isRequired && (
 					<div className="cwp-option">
-						<h3 className="cwp-heading">{__("Required Text", TEXT_DOMAIN)}</h3>
+						<h3 className="cwp-heading">{__("Required Text", "cwp-gutenberg-forms")}</h3>
 						<TextControl
 							onChange={(label) =>
 								props.setAttributes({ requiredLabel: label })
@@ -316,7 +315,7 @@ function edit(props) {
 					</div>
 				)}
 			</PanelBody>
-			<PanelBody title={__("Condition", TEXT_DOMAIN)}>
+			<PanelBody title={__("Condition", "cwp-gutenberg-forms")}>
 				<ConditionalLogic
 					condition={condition}
 					set={props.setAttributes}
@@ -325,9 +324,9 @@ function edit(props) {
 				/>
 			</PanelBody>
 			{isRequired && (
-				<PanelBody title={__("Messages", TEXT_DOMAIN)}>
+				<PanelBody title={__("Messages", "cwp-gutenberg-forms")}>
 					<div className="cwp-option">
-						<h3 className="cwp-heading">{__("Required Error", TEXT_DOMAIN)}</h3>
+						<h3 className="cwp-heading">{__("Required Error", "cwp-gutenberg-forms")}</h3>
 						<TextControl
 							onChange={(label) => setMessages("empty", label)}
 							value={empty}
@@ -348,7 +347,7 @@ function edit(props) {
 				<Fragment>
 					{!!props.isSelected && !enableCondition && (
 						<div className="cwp-required">
-							<h3>{__("Required", TEXT_DOMAIN)}</h3>
+							<h3>{__("Required", "cwp-gutenberg-forms")}</h3>
 							<FormToggle checked={isRequired} onChange={handleRequired} />
 						</div>
 					)}
@@ -356,7 +355,7 @@ function edit(props) {
 					<div className="cwp-select-set" ref={selectContainer}>
 						<div className="cwp-label-wrap">
 							<RichText
-								placeholder={__("Add a label", TEXT_DOMAIN)}
+								placeholder={__("Add a label", "cwp-gutenberg-forms")}
 								tag="label"
 								value={label}
 								onChange={handleLabel}
@@ -372,18 +371,18 @@ function edit(props) {
 							<div className="cwp-select-controls">
 								<div>
 									<Button isDefault onClick={addSelect}>
-										{__("Add Option", TEXT_DOMAIN)}
+										{__("Add Option", "cwp-gutenberg-forms")}
 									</Button>
 									<Button
 										isDefault
 										onClick={() => props.setAttributes({ bulkAdd: true })}
 									>
-										{__("Bulk Add", TEXT_DOMAIN)}
+										{__("Bulk Add", "cwp-gutenberg-forms")}
 									</Button>
 								</div>
 								<div>
 									<Button onClick={clearAll}>
-										{__("Clear All", TEXT_DOMAIN)}
+										{__("Clear All", "cwp-gutenberg-forms")}
 									</Button>
 								</div>
 							</div>

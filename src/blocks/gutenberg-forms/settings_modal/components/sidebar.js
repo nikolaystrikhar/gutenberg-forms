@@ -9,7 +9,6 @@ import {
     Button
 } from "@wordpress/components";
 import { getCatagories } from '../../../../block/api'
-import { TEXT_DOMAIN } from "../../../../block/constants";
 import { isEqual } from "lodash"
 const { __ } = wp.i18n;
 
@@ -56,7 +55,7 @@ function Sidebar(props) {
                     </MenuItem>
                 </MenuGroup>
 
-                <PanelBody title={__("Categories", TEXT_DOMAIN)}>
+                <PanelBody title={__("Categories", "cwp-gutenberg-forms")}>
                     <MenuGroup>
                         {catagories.map(c => {
 

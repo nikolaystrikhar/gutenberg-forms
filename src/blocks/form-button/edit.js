@@ -18,7 +18,6 @@ import {
 } from "../../block/misc/helper";
 import { clone, set, get } from "lodash";
 import { getRootFormBlock } from "../../block/functions/index";
-import { TEXT_DOMAIN } from "../../block/constants";
 const { RichText, InspectorControls, BlockControls } = wp.blockEditor;
 const { __ } = wp.i18n;
 
@@ -66,11 +65,11 @@ function edit(props) {
 
 		let actions = [
 			{
-				label: __("Reset", TEXT_DOMAIN),
+				label: __("Reset", "cwp-gutenberg-forms"),
 				value: "reset",
 			},
 			{
-				label: __("Submit", TEXT_DOMAIN),
+				label: __("Submit", "cwp-gutenberg-forms"),
 				value: "submit",
 			},
 		];
@@ -79,11 +78,11 @@ function edit(props) {
 			actions.push(
 				...[
 					{
-						label: __("Next", TEXT_DOMAIN),
+						label: __("Next", "cwp-gutenberg-forms"),
 						value: "next",
 					},
 					{
-						label: __("Previous", TEXT_DOMAIN),
+						label: __("Previous", "cwp-gutenberg-forms"),
 						value: "previous",
 					},
 				]
@@ -93,11 +92,11 @@ function edit(props) {
 		return actions;
 	};
 
-	let actionLabel = __(<span>{__("Action", TEXT_DOMAIN)}</span>);
+	let actionLabel = __(<span>{__("Action", "cwp-gutenberg-forms")}</span>);
 
 	return [
 		<InspectorControls>
-			<PanelBody title={__("Settings", TEXT_DOMAIN)}>
+			<PanelBody title={__("Settings", "cwp-gutenberg-forms")}>
 				<div className="cwp-option column">
 					<h3>Action</h3>
 					<div className="cwp-column">
@@ -109,9 +108,9 @@ function edit(props) {
 					</div>
 				</div>
 			</PanelBody>
-			<PanelBody title={__("Colors", TEXT_DOMAIN)}>
+			<PanelBody title={__("Colors", "cwp-gutenberg-forms")}>
 				<div className="cwp-option">
-					<h3 className="cwp-heading">{__("Background Color", TEXT_DOMAIN)}</h3>
+					<h3 className="cwp-heading">{__("Background Color", "cwp-gutenberg-forms")}</h3>
 					<ColorPalette
 						colors={basicColorScheme}
 						value={backgroundColor}
@@ -119,7 +118,7 @@ function edit(props) {
 					/>
 				</div>
 				<div className="cwp-option">
-					<h3 className="cwp-heading">{__("Color", TEXT_DOMAIN)}</h3>
+					<h3 className="cwp-heading">{__("Color", "cwp-gutenberg-forms")}</h3>
 					<ColorPalette
 						colors={basicColorScheme}
 						value={color}
@@ -130,7 +129,7 @@ function edit(props) {
 					<RangeControl
 						min={0}
 						max={100}
-						label={__("Padding", TEXT_DOMAIN)}
+						label={__("Padding", "cwp-gutenberg-forms")}
 						value={padding}
 						onChange={(p) => handleStyling(p, "padding")}
 					/>
@@ -139,7 +138,7 @@ function edit(props) {
 					<RangeControl
 						min={0}
 						max={100}
-						label={__("Border Radius", TEXT_DOMAIN)}
+						label={__("Border Radius", "cwp-gutenberg-forms")}
 						value={borderRadius}
 						onChange={(p) => handleStyling(p, "borderRadius")}
 					/>
@@ -149,8 +148,8 @@ function edit(props) {
 		<BlockControls>
 			<Toolbar>
 				<DropdownMenu
-					label={__("Select Action", TEXT_DOMAIN)}
-					menuLabel={__("Action", TEXT_DOMAIN)}
+					label={__("Select Action", "cwp-gutenberg-forms")}
+					menuLabel={__("Action", "cwp-gutenberg-forms")}
 					icon={actionLabel}
 				>
 					{() => (
@@ -180,7 +179,7 @@ function edit(props) {
 		,
 		<button style={buttonStyling} className={props.className}>
 			<RichText
-				placeholder={__("Add a label", TEXT_DOMAIN)}
+				placeholder={__("Add a label", "cwp-gutenberg-forms")}
 				tag="span"
 				value={label}
 				onChange={(label) => props.setAttributes({ label })}

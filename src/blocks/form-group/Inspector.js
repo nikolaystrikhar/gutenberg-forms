@@ -10,7 +10,6 @@ import { basicColorScheme } from "../../block/misc/helper";
 import { set, clone } from "lodash";
 import ConditionalLogic from "../../block/components/condition";
 import { isChildFieldsRequired } from "../../block/functions";
-import { TEXT_DOMAIN } from "../../block/constants";
 
 const { InspectorControls } = wp.blockEditor;
 
@@ -46,13 +45,13 @@ function Inspector(prop) {
 				<Notice status="error" isDismissible={false}>
 					{__(
 						"Do not have a required fields inside a conditional group.",
-						TEXT_DOMAIN
+						"cwp-gutenberg-forms"
 					)}
 				</Notice>
 			)}
 			<PanelBody title={__("Styling")}>
 				<div className="cwp-option">
-					<h3 className="cwp-heading">{__("Background Color", TEXT_DOMAIN)}</h3>
+					<h3 className="cwp-heading">{__("Background Color", "cwp-gutenberg-forms")}</h3>
 					<ColorPalette
 						colors={basicColorScheme}
 						value={backgroundColor}
@@ -60,7 +59,7 @@ function Inspector(prop) {
 					/>
 				</div>
 				<div className="cwp-option">
-					<h3 className="cwp-heading">{__("Color", TEXT_DOMAIN)}</h3>
+					<h3 className="cwp-heading">{__("Color", "cwp-gutenberg-forms")}</h3>
 					<ColorPalette
 						colors={basicColorScheme}
 						value={color}
@@ -69,7 +68,7 @@ function Inspector(prop) {
 				</div>
 
 				<div className="cwp-option">
-					<h3 className="cwp-heading">{__("Border Color", TEXT_DOMAIN)}</h3>
+					<h3 className="cwp-heading">{__("Border Color", "cwp-gutenberg-forms")}</h3>
 					<ColorPalette
 						colors={basicColorScheme}
 						value={borderColor}
@@ -78,7 +77,7 @@ function Inspector(prop) {
 				</div>
 				<div className="cwp-option">
 					<h3 className="cwp-heading">
-						{__("Border Width [px]", TEXT_DOMAIN)}
+						{__("Border Width [px]", "cwp-gutenberg-forms")}
 					</h3>
 					<RangeControl
 						value={borderWidth}
@@ -91,7 +90,7 @@ function Inspector(prop) {
 				</div>
 				<div className="cwp-option">
 					<h3 className="cwp-heading">
-						{__("Border Radius [px]", TEXT_DOMAIN)}
+						{__("Border Radius [px]", "cwp-gutenberg-forms")}
 					</h3>
 					<RangeControl
 						value={borderRadius}
@@ -104,12 +103,12 @@ function Inspector(prop) {
 				<div className="cwp-option">
 					<RangeControl
 						value={padding}
-						label={__("Padding", TEXT_DOMAIN)}
+						label={__("Padding", "cwp-gutenberg-forms")}
 						onChange={(padd) => handleStyling(padd, "padding")}
 					/>
 				</div>
 			</PanelBody>
-			<PanelBody title={__("Condition", TEXT_DOMAIN)}>
+			<PanelBody title={__("Condition", "cwp-gutenberg-forms")}>
 				<ConditionalLogic
 					condition={condition}
 					set={props.setAttributes}

@@ -24,7 +24,6 @@ import {
 	getRootFormBlock,
 } from "../../block/functions/index";
 import { basicColorScheme } from "../../block/misc/helper";
-import { TEXT_DOMAIN } from "../../block/constants";
 import TemplateBuilder from "./components/templateBuilder";
 import Integrations from "./components/Integrations";
 
@@ -161,9 +160,9 @@ function Inspector(prop) {
 
 	return (
 		<InspectorControls>
-			<PanelBody initialOpen={false} title={__("Form Design", TEXT_DOMAIN)}>
+			<PanelBody initialOpen={false} title={__("Form Design", "cwp-gutenberg-forms")}>
 				<div className="cwp-option">
-					<h3 className="cwp-heading">{__("Accent Color", TEXT_DOMAIN)}</h3>
+					<h3 className="cwp-heading">{__("Accent Color", "cwp-gutenberg-forms")}</h3>
 					<ColorPalette
 						colors={basicColorScheme}
 						value={theme.accentColor}
@@ -171,7 +170,7 @@ function Inspector(prop) {
 					/>
 				</div>
 				<div className="cwp-option">
-					<h3 className="cwp-heading">{__("Text Color", TEXT_DOMAIN)}</h3>
+					<h3 className="cwp-heading">{__("Text Color", "cwp-gutenberg-forms")}</h3>
 					<ColorPalette
 						colors={basicColorScheme}
 						value={theme.textColor}
@@ -180,7 +179,7 @@ function Inspector(prop) {
 				</div>
 				<div className="cwp-option">
 					<h3 className="cwp-heading">
-						{__("Field Background Color", TEXT_DOMAIN)}
+						{__("Field Background Color", "cwp-gutenberg-forms")}
 					</h3>
 					<ColorPalette
 						colors={basicColorScheme}
@@ -190,7 +189,7 @@ function Inspector(prop) {
 				</div>
 				<div className="cwp-option">
 					<h3 className="cwp-heading">
-						{__("Button Background Color", TEXT_DOMAIN)}
+						{__("Button Background Color", "cwp-gutenberg-forms")}
 					</h3>
 					<ColorPalette
 						value={buttonStyling.backgroundColor}
@@ -200,10 +199,10 @@ function Inspector(prop) {
 				</div>
 			</PanelBody>
 
-			<PanelBody initialOpen={true} title={__("General", TEXT_DOMAIN)}>
+			<PanelBody initialOpen={true} title={__("General", "cwp-gutenberg-forms")}>
 				<TextControl
 					disabled
-					label={__("Form Label", TEXT_DOMAIN)}
+					label={__("Form Label", "cwp-gutenberg-forms")}
 					value={formLabel}
 					onChange={(formLabel) => props.setAttributes({ formLabel })}
 				/>
@@ -211,7 +210,7 @@ function Inspector(prop) {
 				{formType !== "multiStep" && (
 					<div className="cwp-option">
 						<PanelRow>
-							<h3>{__("Disable Submit Button", TEXT_DOMAIN)}</h3>
+							<h3>{__("Disable Submit Button", "cwp-gutenberg-forms")}</h3>
 							<FormToggle
 								checked={buttonSetting.disable}
 								onChange={() =>
@@ -225,7 +224,7 @@ function Inspector(prop) {
 					<Fragment>
 						<div className="cwp-option column">
 							<h3 className="cwp-heading">
-								{__("Button Alignment", TEXT_DOMAIN)}
+								{__("Button Alignment", "cwp-gutenberg-forms")}
 							</h3>
 							<div className="cwp-column">
 								<ButtonGroup>
@@ -253,20 +252,20 @@ function Inspector(prop) {
 					</Fragment>
 				)}
 				<div className="cwp-option column">
-					<h3>{__("Confirmation Type", TEXT_DOMAIN)}</h3>
+					<h3>{__("Confirmation Type", "cwp-gutenberg-forms")}</h3>
 					<div className="cwp-column">
 						<ButtonGroup>
 							<Button
 								{...getSuccess("url")}
 								onClick={() => props.setAttributes({ successType: "url" })}
 							>
-								{__("URL", TEXT_DOMAIN)}
+								{__("URL", "cwp-gutenberg-forms")}
 							</Button>
 							<Button
 								{...getSuccess("message")}
 								onClick={() => props.setAttributes({ successType: "message" })}
 							>
-								{__("Message", TEXT_DOMAIN)}
+								{__("Message", "cwp-gutenberg-forms")}
 							</Button>
 						</ButtonGroup>
 					</div>
@@ -274,26 +273,26 @@ function Inspector(prop) {
 				<div className="cwp-option">
 					{successType === "url" ? (
 						<TextControl
-							label={__("Success Url (Redirect)", TEXT_DOMAIN)}
+							label={__("Success Url (Redirect)", "cwp-gutenberg-forms")}
 							value={successURL}
 							onChange={(successURL) => props.setAttributes({ successURL })}
 						/>
 					) : (
 						<Fragment>
 							<TextareaControl
-								label={__("Success Message", TEXT_DOMAIN)}
+								label={__("Success Message", "cwp-gutenberg-forms")}
 								value={successMessage}
 								onChange={(successMessage) =>
 									props.setAttributes({ successMessage })
 								}
 							/>
 							<TextareaControl
-								label={__("Spam Message", TEXT_DOMAIN)}
+								label={__("Spam Message", "cwp-gutenberg-forms")}
 								value={spamMessage}
 								onChange={(spamMessage) => props.setAttributes({ spamMessage })}
 							/>
 							<TextareaControl
-								label={__("Error Message", TEXT_DOMAIN)}
+								label={__("Error Message", "cwp-gutenberg-forms")}
 								value={errorMessage}
 								onChange={(errorMessage) =>
 									props.setAttributes({ errorMessage })
@@ -305,7 +304,7 @@ function Inspector(prop) {
 				{successType === "message" && (
 					<div className="cwp-option">
 						<PanelRow>
-							<h3>{__("Hide Form On Success", TEXT_DOMAIN)}</h3>
+							<h3>{__("Hide Form On Success", "cwp-gutenberg-forms")}</h3>
 							<FormToggle
 								checked={hideFormOnSuccess}
 								onChange={() =>
@@ -318,12 +317,12 @@ function Inspector(prop) {
 			</PanelBody>
 
 			{actions.includes("Email Notification") && (
-				<PanelBody title={__("Email Notification", TEXT_DOMAIN)}>
+				<PanelBody title={__("Email Notification", "cwp-gutenberg-forms")}>
 					<TemplateBuilder clientId={props.clientId} data={props} />
 				</PanelBody>
 			)}
 
-			<PanelBody title={__("Form Action", TEXT_DOMAIN)}>
+			<PanelBody title={__("Form Action", "cwp-gutenberg-forms")}>
 				<FormTokenField
 					value={actions}
 					onChange={handleActions}
@@ -332,7 +331,7 @@ function Inspector(prop) {
 			</PanelBody>
 
 			{!isEmpty(get_spam_protectors()) && (
-				<PanelBody title={__("Spam Protection", TEXT_DOMAIN)}>
+				<PanelBody title={__("Spam Protection", "cwp-gutenberg-forms")}>
 					{get_spam_protectors().map((protection) => {
 						const isEnabled = hasObject(spamProtections, protection);
 
@@ -352,13 +351,13 @@ function Inspector(prop) {
 				</PanelBody>
 			)}
 
-			<PanelBody initialOpen={false} title={__("Messages", TEXT_DOMAIN)}>
+			<PanelBody initialOpen={false} title={__("Messages", "cwp-gutenberg-forms")}>
 				<div className="cwp-option">
 					<p>
 						<Icon icon="info" />{" "}
 						{__(
 							"You can edit validations messages used for various field types here. Use {{ value }} to insert field value.",
-							TEXT_DOMAIN
+							"cwp-gutenberg-forms"
 						)}
 					</p>
 				</div>

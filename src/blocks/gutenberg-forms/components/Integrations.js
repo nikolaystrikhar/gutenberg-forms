@@ -1,5 +1,4 @@
 import React, { Fragment, useEffect } from "react";
-import { TEXT_DOMAIN } from "../../../block/constants";
 import FieldPlotter from "./fieldPlotter";
 import { get, isEqual, map, each, includes, clone, omit, set } from "lodash";
 
@@ -60,7 +59,7 @@ function Integrations(props) {
 					!include_all_fields
 				) {
 					return (
-						<PanelBody title={__(title, TEXT_DOMAIN)}>
+						<PanelBody title={__(title, "cwp-gutenberg-forms")}>
 							<FieldPlotter
 								fields={fields}
 								title={title}

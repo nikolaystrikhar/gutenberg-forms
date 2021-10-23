@@ -3,7 +3,6 @@ import { InnerBlocks } from "@wordpress/block-editor";
 import { getRootFormBlock } from "../../../../block/functions/index";
 import { isEmpty, get } from "lodash";
 import { Notice, TextControl, PanelBody } from "@wordpress/components";
-import { TEXT_DOMAIN } from "../../../../block/constants";
 
 const { InspectorControls } = wp.blockEditor;
 const { __ } = wp.i18n;
@@ -27,10 +26,10 @@ function edit(props) {
 	return [
 		props.isSelected && !disabled && (
 			<InspectorControls>
-				<PanelBody initialOpen={true} title={__("Step Settings", TEXT_DOMAIN)}>
+				<PanelBody initialOpen={true} title={__("Step Settings", "cwp-gutenberg-forms")}>
 					<TextControl
-						placeholder={__("Form Step", TEXT_DOMAIN)}
-						label={__("Label", TEXT_DOMAIN)}
+						placeholder={__("Form Step", "cwp-gutenberg-forms")}
+						label={__("Label", "cwp-gutenberg-forms")}
 						value={label}
 						onChange={(label) => setAttributes({ label })}
 					/>

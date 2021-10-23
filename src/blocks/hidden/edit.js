@@ -1,5 +1,4 @@
 import React, { useEffect, useState, useRef } from "react";
-import { TEXT_DOMAIN } from "../../block/constants";
 import {
 	getFieldName,
 	extract_admin_id,
@@ -108,11 +107,11 @@ function edit(props) {
 
 	return [
 		<InspectorControls>
-			<PanelBody initialOpen={true} title={__("Field Settings", TEXT_DOMAIN)}>
+			<PanelBody initialOpen={true} title={__("Field Settings", "cwp-gutenberg-forms")}>
 				<div className="cwp-option">
 					<TextControl
 						placeholder={adminId.default}
-						label={__("Field ID", TEXT_DOMAIN)}
+						label={__("Field ID", "cwp-gutenberg-forms")}
 						value={adminId.value}
 						onChange={handleAdminId}
 					/>
@@ -125,14 +124,14 @@ function edit(props) {
 				ref={hiddenField}
 				type="text"
 				value={value}
-				placeholder={__("Enter value...", TEXT_DOMAIN)}
+				placeholder={__("Enter value...", "cwp-gutenberg-forms")}
 				onChange={handleChange}
 			/>
 			<div>
 				<IconButton
 					className="cwp-tag-opener"
 					icon={icon}
-					label={__("Add Dynamic Data", TEXT_DOMAIN)}
+					label={__("Add Dynamic Data", "cwp-gutenberg-forms")}
 					onClick={() => setSelector(!selector)}
 				/>
 				{selector && isSelected && (

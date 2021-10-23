@@ -1,11 +1,10 @@
+import { __ } from "@wordpress/i18n";
 import React, { useState, useEffect } from "react";
 import { TextControl, TabPanel } from "@wordpress/components";
 import { TEXT_DOMAIN } from "../constants";
 import { isEmpty } from "lodash";
 import TagList from "./tagList";
 import SearchTags from "./searchTags";
-
-const { __ } = wp.i18n;
 
 function TagSelector(props) {
 	const { setAttributes } = props;
@@ -14,27 +13,27 @@ function TagSelector(props) {
 	const tabs = [
 		{
 			name: "fields",
-			title: "Fields",
+			title: __("Fields", "cwp-gutenberg-forms"),
 			className: "cwp-tag-button",
 		},
 		{
 			name: "wordpress",
-			title: "Wordpress",
+			title: __("Wordpress", "cwp-gutenberg-forms"),
 			className: "cwp-tag-button",
 		},
 		{
 			name: "form",
-			title: "Form",
+			title: __("Form", "cwp-gutenberg-forms"),
 			className: "cwp-tag-button",
 		},
 		{
 			name: "meta",
-			title: "Meta",
+			title: __("Meta", "cwp-gutenberg-forms"),
 			className: "cwp-tag-button",
 		},
 		{
 			name: "other",
-			title: "Other",
+			title: __("Other", "cwp-gutenberg-forms"),
 			className: "cwp-tag-button",
 		},
 	];

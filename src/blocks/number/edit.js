@@ -17,7 +17,6 @@ import {
 
 import { clone, set, assign } from "lodash";
 import { getRootMessages, detectSimilarFields } from "../../block/functions";
-import { TEXT_DOMAIN } from "../../block/constants/index";
 
 const { __ } = wp.i18n;
 
@@ -154,11 +153,11 @@ function edit(props) {
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
-				<PanelBody title={__("Field Settings", TEXT_DOMAIN)} initialOpen={true}>
+				<PanelBody title={__("Field Settings", "cwp-gutenberg-forms")} initialOpen={true}>
 					<div className="cwp-option">
 						<TextControl
 							placeholder={adminId.default}
-							label={__("Field ID", TEXT_DOMAIN)}
+							label={__("Field ID", "cwp-gutenberg-forms")}
 							value={adminId.value}
 							onChange={handleAdminId}
 						/>
@@ -166,7 +165,7 @@ function edit(props) {
 
 					<div className="cwp-option">
 						<PanelRow>
-							<h3 className="cwp-heading">{__("Required", TEXT_DOMAIN)}</h3>
+							<h3 className="cwp-heading">{__("Required", "cwp-gutenberg-forms")}</h3>
 							<FormToggle
 								label="Required"
 								checked={isRequired}
@@ -177,7 +176,7 @@ function edit(props) {
 					{isRequired && (
 						<div className="cwp-option">
 							<h3 className="cwp-heading">
-								{__("Required Text", TEXT_DOMAIN)}
+								{__("Required Text", "cwp-gutenberg-forms")}
 							</h3>
 							<TextControl
 								onChange={(label) =>
@@ -202,7 +201,7 @@ function edit(props) {
 							step={0.01}
 							value={rangeMax}
 							onChange={(m) => props.setAttributes({ rangeMax: m })}
-							label={__("Range Max", TEXT_DOMAIN)}
+							label={__("Range Max", "cwp-gutenberg-forms")}
 						/>
 						<RangeControl
 							min={0}
@@ -210,7 +209,7 @@ function edit(props) {
 							value={rangeMin}
 							max={10000}
 							onChange={(m) => props.setAttributes({ rangeMin: m })}
-							label={__("Range Min", TEXT_DOMAIN)}
+							label={__("Range Min", "cwp-gutenberg-forms")}
 						/>
 					</div>
 				</PanelBody>
@@ -218,7 +217,7 @@ function edit(props) {
 					{isRequired && (
 						<div className="cwp-option">
 							<h3 className="cwp-heading">
-								{__("Required Error", TEXT_DOMAIN)}
+								{__("Required Error", "cwp-gutenberg-forms")}
 							</h3>
 							<TextControl
 								onChange={(label) => setMessages("empty", label)}
@@ -228,7 +227,7 @@ function edit(props) {
 					)}
 					<div className="cwp-option">
 						<h3 className="cwp-heading">
-							{__("Invalid Number Error", TEXT_DOMAIN)}
+							{__("Invalid Number Error", "cwp-gutenberg-forms")}
 						</h3>
 						<TextControl
 							onChange={(v) => setMessages("invalid", v)}
@@ -238,7 +237,7 @@ function edit(props) {
 					<div className="cwp-option">
 						<p>
 							<Icon icon="info" />{" "}
-							{__("Use {{value}} to insert field value!", TEXT_DOMAIN)}
+							{__("Use {{value}} to insert field value!", "cwp-gutenberg-forms")}
 						</p>
 					</div>
 				</PanelBody>
@@ -248,12 +247,12 @@ function edit(props) {
 		<div className={`cwp-number cwp-field ${props.className}`}>
 			{!!props.isSelected && (
 				<div className="cwp-required">
-					<h3>{__("Range Slider", TEXT_DOMAIN)}</h3>
+					<h3>{__("Range Slider", "cwp-gutenberg-forms")}</h3>
 					<FormToggle
 						checked={isRange}
 						onChange={() => props.setAttributes({ isRange: !isRange })}
 					/>
-					<h3>{__("Required", TEXT_DOMAIN)}</h3>
+					<h3>{__("Required", "cwp-gutenberg-forms")}</h3>
 					<FormToggle checked={isRequired} onChange={handleRequired} />
 				</div>
 			)}
@@ -261,7 +260,7 @@ function edit(props) {
 			<div className="cwp-field-set">
 				<div className="cwp-label-wrap">
 					<RichText
-						placeholder={__("Add a label", TEXT_DOMAIN)}
+						placeholder={__("Add a label", "cwp-gutenberg-forms")}
 						tag="label"
 						value={label}
 						onChange={handleLabel}

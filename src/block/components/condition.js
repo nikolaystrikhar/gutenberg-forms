@@ -1,3 +1,4 @@
+import { __ } from '@wordpress/i18n';
 import React, { Fragment, useEffect } from "react";
 import {
 	SelectControl,
@@ -28,7 +29,7 @@ function Condition(props) {
 		let fields = [
 			{
 				value: null,
-				label: "Select Field",
+				label: __("Select Field", 'cwp-gutenberg-forms'),
 			},
 		];
 
@@ -56,11 +57,11 @@ function Condition(props) {
 	let operators = [
 		{
 			value: "===",
-			label: "Is Equal To",
+			label: __("Is Equal To", 'cwp-gutenberg-forms'),
 		},
 		{
 			value: "!==",
-			label: "Not Equal To",
+			label: __("Not Equal To", 'cwp-gutenberg-forms'),
 		},
 	];
 
@@ -91,7 +92,7 @@ function Condition(props) {
 				});
 
 				generatedOptions.unshift({
-					label: "Select Value",
+					label: __( "Select Value", 'cwp-gutenberg-forms'),
 					value: "",
 				});
 
@@ -138,7 +139,7 @@ function Condition(props) {
 				return (
 					<TextControl
 						value={condition.value}
-						placeholder="value"
+						placeholder={__("value", 'cwp-gutenberg-forms')}
 						onChange={(val) => handleConditionChange(val, "value")}
 					/>
 				);

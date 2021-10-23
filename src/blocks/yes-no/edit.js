@@ -14,7 +14,6 @@ import {
 	extract_admin_id,
 	get_admin_id
 } from "../../block/misc/helper";
-import { TEXT_DOMAIN } from "../../block/constants/index"
 import { detect_similar_forms } from "../../block/functions";
 
 
@@ -99,19 +98,19 @@ function edit(props) {
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
-				<PanelBody title={__("Field Settings", TEXT_DOMAIN)} initialOpen={true}>
+				<PanelBody title={__("Field Settings", "cwp-gutenberg-forms")} initialOpen={true}>
 
 					<div className="cwp-option">
 						<TextControl
 							placeholder={adminId.default}
-							label={__("Field ID", TEXT_DOMAIN)}
+							label={__("Field ID", "cwp-gutenberg-forms")}
 							value={adminId.value}
 							onChange={handleAdminId}
 						/>
 					</div>
 
 					<PanelRow>
-						<h3 className="cwp-heading">{__("Required", TEXT_DOMAIN)}</h3>
+						<h3 className="cwp-heading">{__("Required", "cwp-gutenberg-forms")}</h3>
 						<FormToggle
 							label="Required"
 							checked={isRequired}
@@ -120,7 +119,7 @@ function edit(props) {
 					</PanelRow>
 					{isRequired && (
 						<div className="cwp-option">
-							<h3 className="cwp-heading">{__("Required Text", TEXT_DOMAIN)}</h3>
+							<h3 className="cwp-heading">{__("Required Text", "cwp-gutenberg-forms")}</h3>
 							<TextControl
 								onChange={label =>
 									props.setAttributes({ requiredLabel: label })
@@ -136,14 +135,14 @@ function edit(props) {
 		<div className={`cwp-yes-no cwp-field cwp-misc-field ${props.className}`}>
 			{!!props.isSelected && (
 				<div className="cwp-required">
-					<h3>{__("Required", TEXT_DOMAIN)}</h3>
+					<h3>{__("Required", "cwp-gutenberg-forms")}</h3>
 					<FormToggle checked={isRequired} onChange={handleRequired} />
 				</div>
 			)}
 
 			<div className="cwp-field-set">
 				<div className="cwp-label-wrap">
-					<RichText placeholder={__("Add a label", TEXT_DOMAIN)} tag="label" value={label} onChange={handleLabel} />
+					<RichText placeholder={__("Add a label", "cwp-gutenberg-forms")} tag="label" value={label} onChange={handleLabel} />
 					{!props.isSelected && isRequired && (
 						<div className="cwp-required cwp-noticed">
 							<h3>{requiredLabel}</h3>

@@ -17,7 +17,6 @@ import {
 	includes,
 	omit,
 } from "lodash";
-import { TEXT_DOMAIN } from "../../../block/constants";
 import { serializeFields } from "../../../block/misc/helper";
 
 const { __ } = wp.i18n;
@@ -120,7 +119,7 @@ function FieldPlotter({
 		data.setAttributes({ integrations: newIntegrations });
 
 		if (testErrors(get(newIntegrations, name))) {
-			setError(__("Please Map All Required Fields", TEXT_DOMAIN));
+			setError(__("Please Map All Required Fields", "cwp-gutenberg-forms"));
 		} else {
 			setError("");
 		}
@@ -165,7 +164,7 @@ function FieldPlotter({
 
 					return (
 						<SelectControl
-							label={__(field_label, TEXT_DOMAIN)}
+							label={__(field_label, "cwp-gutenberg-forms")}
 							value={currentValue}
 							options={values}
 							onChange={(v) => handleFieldsChange(key, v)}
@@ -174,7 +173,7 @@ function FieldPlotter({
 				} else if (type === "text") {
 					return (
 						<TextControl
-							label={__(label, TEXT_DOMAIN)}
+							label={__(label, "cwp-gutenberg-forms")}
 							value={currentValue}
 							onChange={(v) => handleFieldsChange(key, v)}
 						/>
@@ -192,7 +191,7 @@ function FieldPlotter({
 
 					return (
 						<FormTokenField
-							label={__(field_label, TEXT_DOMAIN)}
+							label={__(field_label, "cwp-gutenberg-forms")}
 							value={parsedValue}
 							suggestions={suggestions}
 							onChange={(tokens) => {
@@ -224,7 +223,7 @@ function FieldPlotter({
 					<div className="cwp_field_plot">
 						<SelectControl
 							onChange={(val) => handleFieldsChange(key, val)}
-							label={__(field_label, TEXT_DOMAIN)}
+							label={__(field_label, "cwp-gutenberg-forms")}
 							value={value}
 							options={[
 								{

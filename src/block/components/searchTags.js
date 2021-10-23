@@ -1,3 +1,4 @@
+import { __ } from '@wordpress/i18n';
 import React, { Fragment, useEffect } from "react";
 import {
 	getFieldsTags,
@@ -51,27 +52,27 @@ function SearchTags(props) {
 		return [
 			{
 				list: "fields",
-				label: "Fields",
+				label: __("Fields", 'cwp-gutenberg-forms'),
 				data: filteredFields,
 			},
 			{
 				list: "wordpress",
-				label: "Wordpress Tags",
+				label: __("Wordpress Tags", 'cwp-gutenberg-forms'),
 				data: filteredWordpressTags,
 			},
 			{
 				list: "form",
-				label: "Form Tags",
+				label: __("Form Tags", 'cwp-gutenberg-forms'),
 				data: filteredFormTags,
 			},
 			{
 				list: "other",
-				label: "Other Tags",
+				label: __("Other Tags", 'cwp-gutenberg-forms'),
 				data: filteredOtherTags,
 			},
 			{
 				list: "meta",
-				label: "Meta",
+				label: __("Meta", 'cwp-gutenberg-forms'),
 				data: filteredMetaTags,
 			},
 		];
@@ -113,7 +114,7 @@ function SearchTags(props) {
 			})}
 			{noTagsFound() && (
 				<div className="cwp-not-found">
-					<h3>No Tags Found</h3>
+					<h3>{__('No Tags Found', 'cwp-gutenberg-forms')}</h3>
 				</div>
 			)}
 		</div>

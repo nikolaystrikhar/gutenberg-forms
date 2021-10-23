@@ -1,17 +1,18 @@
+import { __ } from '@wordpress/i18n';
 import { each, isEqual } from "lodash";
 const { registerBlockStyle } = wp.blocks;
 
 let fieldStyles = [
 	{
 		name: "inline",
-		label: "Inline"
+		label: __("Inline", "cwp-gutenberg-forms"),
 	}
 ];
 
 const radioFieldStyling = [
 	{
 		name: "button",
-		label: "Button"
+		label: __("Button", "cwp-gutenberg-forms"),
 	}
 ];
 

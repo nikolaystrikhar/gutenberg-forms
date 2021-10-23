@@ -1,3 +1,4 @@
+import { __ } from '@wordpress/i18n';
 import React, { useEffect, useRef, Fragment } from "react";
 import {
 	Button,
@@ -35,8 +36,8 @@ function FormulaBuilder(prop) {
 	return (
 		<div className="cwp-form-calc-builder">
 			<div className="cwp-form-available-fields">
-				<h4>Available Number Fields:</h4>
-				<DropdownMenu icon="list-view" label="Add Field Data">
+				<h4>{__('Available Number Fields:', 'cwp-gutenberg-forms')}</h4>
+				<DropdownMenu icon="list-view" label={__("Add Field Data", 'cwp-gutenberg-forms')}>
 					{({ onClose }) => (
 						<Fragment>
 							<MenuGroup>

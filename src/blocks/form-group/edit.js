@@ -2,7 +2,6 @@ import React, { Fragment } from "react";
 import Inspector from "./Inspector";
 import { Notice } from "@wordpress/components";
 import { isChildFieldsRequired } from "../../block/functions";
-import { TEXT_DOMAIN } from "../../block/constants";
 const { InnerBlocks, RichText } = wp.blockEditor;
 const { __ } = wp.i18n;
 
@@ -26,12 +25,12 @@ function edit(props) {
 			{isChildFieldsRequired(props.clientId) && enableCondition && (
 				<Notice status="error" isDismissible={false}>
 					{
-						__("Do not have a required fields inside a conditional group.", TEXT_DOMAIN)
+						__("Do not have a required fields inside a conditional group.", "cwp-gutenberg-forms")
 					}
 				</Notice>
 			)}
 			<fieldset style={groupStyling} className="cwp-form-group">
-				<RichText placeholder={__("Add a label", TEXT_DOMAIN)} tag="legend" onChange={handleLabel} value={label} />
+				<RichText placeholder={__("Add a label", "cwp-gutenberg-forms")} tag="legend" onChange={handleLabel} value={label} />
 				<div className="cwp-group-fields">
 					<InnerBlocks />
 				</div>

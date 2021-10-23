@@ -2,7 +2,6 @@ import React, { useEffect } from "react";
 import Introduction from "./components/introduction";
 import { isEmpty, get, has } from "lodash";
 import ServerSideRender from "@wordpress/server-side-render";
-import { TEXT_DOMAIN } from "../../block/constants";
 import {
 	SelectControl,
 	Button,
@@ -36,9 +35,9 @@ function edit(props) {
 	return [
 		!!isSelected && !shouldIntroduce && (
 			<InspectorControls>
-				<PanelBody title={__("General", TEXT_DOMAIN)} initialOpen={true}>
+				<PanelBody title={__("General", "cwp-gutenberg-forms")} initialOpen={true}>
 					<SelectControl
-						label={__("Select Form", TEXT_DOMAIN)}
+						label={__("Select Form", "cwp-gutenberg-forms")}
 						className="cwp-reusable-select"
 						value={formId}
 						options={[...formOptions]}

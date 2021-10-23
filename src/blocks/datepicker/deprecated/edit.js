@@ -24,7 +24,6 @@ import {
 import DatePicker from "../../../block/components/datepicker";
 import { clone, set } from "lodash";
 import ConditionalLogic from "../../../block/components/condition";
-import { TEXT_DOMAIN } from "../../../block/constants";
 
 const {
 	InspectorControls,
@@ -154,11 +153,11 @@ function edit(props) {
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
-				<PanelBody title={__("Field Settings", TEXT_DOMAIN)} initialOpen={true}>
+				<PanelBody title={__("Field Settings", "cwp-gutenberg-forms")} initialOpen={true}>
 					<div className="cwp-option">
 						<TextControl
 							placeholder={adminId.default}
-							label={__("Field ID", TEXT_DOMAIN)}
+							label={__("Field ID", "cwp-gutenberg-forms")}
 							value={adminId.value}
 							onChange={handleAdminId}
 						/>
@@ -166,9 +165,9 @@ function edit(props) {
 
 					{!enableCondition ? (
 						<PanelRow>
-							<h3 className="cwp-heading">{__("Required", TEXT_DOMAIN)}</h3>
+							<h3 className="cwp-heading">{__("Required", "cwp-gutenberg-forms")}</h3>
 							<FormToggle
-								label={__("Required", TEXT_DOMAIN)}
+								label={__("Required", "cwp-gutenberg-forms")}
 								checked={isRequired}
 								onChange={handleRequired}
 							/>
@@ -179,7 +178,7 @@ function edit(props) {
 								<Icon icon="info" />{" "}
 								{__(
 									"You cannot set a conditional field required!",
-									TEXT_DOMAIN
+									"cwp-gutenberg-forms"
 								)}
 							</p>
 						</div>
@@ -187,7 +186,7 @@ function edit(props) {
 					{isRequired && (
 						<div className="cwp-option">
 							<h3 className="cwp-heading">
-								{__("Required Text", TEXT_DOMAIN)}
+								{__("Required Text", "cwp-gutenberg-forms")}
 							</h3>
 							<TextControl
 								onChange={(label) =>
@@ -199,19 +198,19 @@ function edit(props) {
 					)}
 					<div className="cwp-option">
 						<SelectControl
-							label={__("Format", TEXT_DOMAIN)}
+							label={__("Format", "cwp-gutenberg-forms")}
 							value={format}
 							options={[
 								{
-									label: __("Day Month Year", TEXT_DOMAIN),
+									label: __("Day Month Year", "cwp-gutenberg-forms"),
 									value: "DD/MM/YYYY",
 								},
 								{
-									label: __("Month Day Year", TEXT_DOMAIN),
+									label: __("Month Day Year", "cwp-gutenberg-forms"),
 									value: "MM/DD/YYYY",
 								},
 								{
-									label: __("Year Month Day", TEXT_DOMAIN),
+									label: __("Year Month Day", "cwp-gutenberg-forms"),
 									value: "YYYY/MM/DD",
 								},
 							]}
@@ -233,7 +232,7 @@ function edit(props) {
 					<PanelBody title="Messages">
 						<div className="cwp-option">
 							<h3 className="cwp-heading">
-								{__("Required Error", TEXT_DOMAIN)}
+								{__("Required Error", "cwp-gutenberg-forms")}
 							</h3>
 							<TextControl
 								onChange={(label) => setMessages("empty", label)}
@@ -248,7 +247,7 @@ function edit(props) {
 		<div className={`cwp-field cwp-datepicker ${props.className}`}>
 			{!!props.isSelected && !enableCondition && (
 				<div className="cwp-required">
-					<h3>{__("Required", TEXT_DOMAIN)}</h3>
+					<h3>{__("Required", "cwp-gutenberg-forms")}</h3>
 					<FormToggle checked={isRequired} onChange={handleRequired} />
 				</div>
 			)}
@@ -256,7 +255,7 @@ function edit(props) {
 			<div className="cwp-field-set">
 				<div className="cwp-label-wrap">
 					<RichText
-						placeholder={__("Add a label", TEXT_DOMAIN)}
+						placeholder={__("Add a label", "cwp-gutenberg-forms")}
 						tag="label"
 						value={label}
 						onChange={handleLabel}

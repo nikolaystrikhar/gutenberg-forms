@@ -1,3 +1,4 @@
+import { __ } from '@wordpress/i18n';
 import { isEmpty, isEqual, isArray } from "lodash";
 const { getBlock } = wp.data.select("core/block-editor");
 
@@ -125,51 +126,51 @@ export function strip_tags(str) {
 export const basicColorScheme = [
 	{
 		color: "rgb(247, 141, 167)",
-		name: "Pale Pink",
+		name: __("Pale Pink", "cwp-gutenberg-forms"),
 	},
 	{
-		name: "Vivid red",
+		name: __("Vivid red", "cwp-gutenberg-forms"),
 		color: "rgb(207, 46, 46)",
 	},
 	{
-		name: "Luminous vivid orange",
+		name: __("Luminous vivid orange", "cwp-gutenberg-forms"),
 		color: "rgb(255, 105, 0)",
 	},
 	{
 		color: "rgb(252, 185, 0)",
-		name: "Luminous vivid amber",
+		name: __("Luminous vivid amber", "cwp-gutenberg-forms"),
 	},
 	{
 		color: "rgb(123, 220, 181)",
-		name: "Light green cyan",
+		name: __("Light green cyan", "cwp-gutenberg-forms"),
 	},
 	{
 		color: "rgb(0, 208, 132)",
-		name: "Vivid green cyan",
+		name: __("Vivid green cyan", "cwp-gutenberg-forms"),
 	},
 	{
 		color: "rgb(142, 209, 252)",
-		name: "Pale cyan blue",
+		name: __("Pale cyan blue", "cwp-gutenberg-forms"),
 	},
 	{
 		color: "rgb(6, 147, 227)",
-		name: "Vivid cyan blue",
+		name: __("Vivid cyan blue", "cwp-gutenberg-forms"),
 	},
 	{
 		color: "rgb(155, 81, 224)",
-		name: "Vivid purple",
+		name: __("Vivid purple", "cwp-gutenberg-forms"),
 	},
 	{
 		color: "rgb(238, 238, 238)",
-		name: "Very light gray",
+		name: __("Very light gray", "cwp-gutenberg-forms"),
 	},
 	{
 		color: "rgb(171, 184, 195)",
-		name: "Cyan bluish gray",
+		name: __("Cyan bluish gray", "cwp-gutenberg-forms"),
 	},
 	{
 		color: "rgb(49, 49, 49)",
-		name: "Very dark gray",
+		name: __("Very dark gray", "cwp-gutenberg-forms"),
 	},
 ];
 
@@ -225,35 +226,35 @@ export function getThemeStyling(theme, id) {
 			!isEmpty(fieldBackgroundColor) ||
 			!isEmpty(textColor) ||
 			!isEmpty(accentColor)
-				? `#${id}.cwp-form .cwp-field [data-cwp-field], 
-			#${id}.cwp-form .cwp-field .cwp-field-set input, 
+				? `#${id}.cwp-form .cwp-field [data-cwp-field],
+			#${id}.cwp-form .cwp-field .cwp-field-set input,
 			#${id}.cwp-form .cwp-field .cwp-field-set textarea
 			  {
-	
+
 				border: 1px solid ${accentColor};
 				background-color: ${fieldBackgroundColor} !important;
 				color: ${textColor} !important;
-	
+
 			}
 
 				${
 					!isEmpty(accentColor)
 						? `
 
-					#${id}.cwp-form .cwp-field .cwp-field-set .cwp-prefix,  
+					#${id}.cwp-form .cwp-field .cwp-field-set .cwp-prefix,
 					#${id}.cwp-form .cwp-field .cwp-field-set .cwp-suffix {
 						border: 1px solid ${accentColor};
 					}
 
 				`
 						: ``
-				} 
+				}
 
 				${
 					!isEmpty(textColor)
 						? `
-					
-							#${id}.cwp-form .cwp-field .cwp-field-set .cwp-prefix,  
+
+							#${id}.cwp-form .cwp-field .cwp-field-set .cwp-prefix,
 							#${id}.cwp-form .cwp-field .cwp-field-set .cwp-suffix {
 								color: ${textColor} !important;
 							}
@@ -261,8 +262,8 @@ export function getThemeStyling(theme, id) {
 						: ``
 				}
 
-			
-			
+
+
 			#${id}.cwp-form .cwp-field.is-style-button .cwp-checkbox-set input[type="checkbox"]:checked + label,
 			#${id}.cwp-form .cwp-field.is-style-button .cwp-radio-set input[type="radio"]:checked + label,
 			#${id}.cwp-form .cwp-field.is-style-button .cwp-radios-set input[type="radio"]:checked + label  {
@@ -283,7 +284,7 @@ export function getThemeStyling(theme, id) {
 
 		}
 
-		
+
 
 	</style>`;
 }
@@ -327,16 +328,16 @@ export function getDeprecatedThemeStyling(theme, id) {
 			!isEmpty(fieldBackgroundColor) ||
 			!isEmpty(textColor) ||
 			!isEmpty(accentColor)
-				? `#${id}.cwp-form .cwp-field [data-cwp-field], 
-			#${id}.cwp-form .cwp-field .cwp-field-set input, 
+				? `#${id}.cwp-form .cwp-field [data-cwp-field],
+			#${id}.cwp-form .cwp-field .cwp-field-set input,
 			#${id}.cwp-form .cwp-field .cwp-field-set textarea  {
-	
+
 				border: 1px solid ${accentColor};
 				background-color: ${fieldBackgroundColor} !important;
 				color: ${textColor} !important;
-	
+
 			}
-			
+
 			#${id}.cwp-form .cwp-field.is-style-button .cwp-checkbox-set input[type="checkbox"]:checked + label,
 			#${id}.cwp-form .cwp-field.is-style-button .cwp-radio-set input[type="radio"]:checked + label,
 			#${id}.cwp-form .cwp-field.is-style-button .cwp-radios-set input[type="radio"]:checked + label  {
@@ -354,6 +355,6 @@ export function getDeprecatedThemeStyling(theme, id) {
 			cursor: pointer;
 			width: 100%;
 		}
-		
+
 	</style>`;
 }

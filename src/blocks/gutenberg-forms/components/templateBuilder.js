@@ -15,7 +15,6 @@ import {
 } from "@wordpress/components";
 import { getFieldIcon, serializeFields } from "../../../block/misc/helper";
 import $ from "jquery";
-import { TEXT_DOMAIN } from "../../../block/constants";
 import TagSelector from "../../../block/components/tagSelector";
 const { getBlock } = wp.data.select("core/block-editor");
 
@@ -155,7 +154,7 @@ function TemplateBuilder(prop) {
 						icon={icon}
 						isDefault
 						className="cwp-tag-opener"
-						label={__("Add Dynamic Data", TEXT_DOMAIN)}
+						label={__("Add Dynamic Data", "cwp-gutenberg-forms")}
 						onClick={() => setSelector(!selector)}
 					/>
 					{selector && isSelected && (
@@ -168,16 +167,16 @@ function TemplateBuilder(prop) {
 
 			<div className="cwp-builder-field">
 				<TextControl
-					label={__("From", TEXT_DOMAIN)}
+					label={__("From", "cwp-gutenberg-forms")}
 					value={fromEmail}
-					placeholder={__("Name, Email", TEXT_DOMAIN)}
+					placeholder={__("Name, Email", "cwp-gutenberg-forms")}
 					onChange={(fromEmail) => props.setAttributes({ fromEmail })}
 				/>
 			</div>
 
 			<div className="cwp-builder-field">
 				<div className="to-field">
-					<span>{__("To", TEXT_DOMAIN)}</span>
+					<span>{__("To", "cwp-gutenberg-forms")}</span>
 					<ButtonGroup>
 						<Button
 							{...getActiveEmailType("to")}
@@ -207,7 +206,7 @@ function TemplateBuilder(prop) {
 
 			<div ref={subjectArea}>
 				<TextControl
-					label={__("Subject", TEXT_DOMAIN)}
+					label={__("Subject", "cwp-gutenberg-forms")}
 					onClick={() => setCurrentForm("subject")}
 					value={subject}
 					onChange={(subject) => handleChange(subject, "subject")}
@@ -216,7 +215,7 @@ function TemplateBuilder(prop) {
 
 			<div ref={bodyArea}>
 				<TextareaControl
-					label={__("Body", TEXT_DOMAIN)}
+					label={__("Body", "cwp-gutenberg-forms")}
 					id={clientId.concat("body")}
 					value={body}
 					onClick={() => setCurrentForm("body")}

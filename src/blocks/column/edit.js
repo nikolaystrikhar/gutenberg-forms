@@ -1,6 +1,5 @@
 import React from 'react';
 import { RangeControl, PanelBody } from '@wordpress/components';
-import { TEXT_DOMAIN } from '../../block/constants/index';
 import { hasChildBlocks } from '../../block/functions';
 
 const { InspectorControls, InnerBlocks } = wp.blockEditor;
@@ -43,11 +42,11 @@ function edit( props ) {
 			<InspectorControls>
 				<PanelBody
 					initialOpen={ true }
-					title={ __( 'Column Settings', TEXT_DOMAIN ) }
+					title={ __( 'Column Settings', "cwp-gutenberg-forms" ) }
 				>
 					<RangeControl
 						value={ width }
-						label={ __( 'Width (%)', TEXT_DOMAIN ) }
+						label={ __( 'Width (%)', "cwp-gutenberg-forms" ) }
 						onChange={ ( newWidth ) => updateAttribute( 'width', newWidth ) }
 					/>
 				</PanelBody>

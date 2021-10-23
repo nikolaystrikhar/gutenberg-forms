@@ -8,7 +8,6 @@ import {
 	FormToggle,
 	Notice,
 } from "@wordpress/components";
-import { TEXT_DOMAIN } from "../../block/constants";
 import { basicColorScheme } from "../../block/misc/helper";
 
 const { InspectorControls } = wp.blockEditor;
@@ -28,10 +27,10 @@ function edit(props) {
 		<InspectorControls>
 			<PanelBody
 				initialOpen={true}
-				title={__("Progress Settings", TEXT_DOMAIN)}
+				title={__("Progress Settings", "cwp-gutenberg-forms")}
 			>
 				<div className="cwp-option">
-					<h3 className="cwp-heading">{__("Base Color", TEXT_DOMAIN)}</h3>
+					<h3 className="cwp-heading">{__("Base Color", "cwp-gutenberg-forms")}</h3>
 					<ColorPalette
 						colors={basicColorScheme}
 						value={progressColor}
@@ -39,7 +38,7 @@ function edit(props) {
 					/>
 				</div>
 				<div className="cwp-option">
-					<h3 className="cwp-heading">{__("Fill Color", TEXT_DOMAIN)}</h3>
+					<h3 className="cwp-heading">{__("Fill Color", "cwp-gutenberg-forms")}</h3>
 					<ColorPalette
 						colors={basicColorScheme}
 						value={progressFillColor}
@@ -50,7 +49,7 @@ function edit(props) {
 				</div>
 				<div className="cwp-option">
 					<RangeControl
-						label={__("Thickness", TEXT_DOMAIN)}
+						label={__("Thickness", "cwp-gutenberg-forms")}
 						value={thickness}
 						min={5}
 						max={50}
@@ -59,7 +58,7 @@ function edit(props) {
 				</div>
 				<div className="cwp-option">
 					<RangeControl
-						label={__("Corner Radius", TEXT_DOMAIN)}
+						label={__("Corner Radius", "cwp-gutenberg-forms")}
 						value={cornerRadius}
 						min={0}
 						max={100}
@@ -73,7 +72,7 @@ function edit(props) {
 				)}
 				<div className="cwp-option">
 					<PanelRow>
-						{__("Show Percentage", TEXT_DOMAIN)}
+						{__("Show Percentage", "cwp-gutenberg-forms")}
 						<FormToggle
 							checked={showPercentage}
 							onChange={() =>
@@ -84,7 +83,7 @@ function edit(props) {
 				</div>
 				{showPercentage && (
 					<div className="cwp-option">
-						<h3 className="cwp-heading">{__("Text Color", TEXT_DOMAIN)}</h3>
+						<h3 className="cwp-heading">{__("Text Color", "cwp-gutenberg-forms")}</h3>
 						<ColorPalette
 							colors={basicColorScheme}
 							value={textColor}

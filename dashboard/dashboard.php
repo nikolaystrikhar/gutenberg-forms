@@ -314,43 +314,43 @@ class Dashboard
             'messages' => array(
                 'spam'  => array(
                     'label' => 'Spam',
-                    'value' => 'There was an error trying to send your message. Please try again later.',
+                    'value' => esc_html__( 'There was an error trying to setnd your message. Please try again later.', 'cwp-gutenberg-forms' ),
                 ),
                 'error'  => array(
                     'label' => 'Error',
-                    'value' => 'There was an error trying to send your message. Please try again later.',
+                    'value' => esc_html__( 'There was an error trying to send your message. Please try again later.', 'cwp-gutenberg-forms' ),
                 ),
                 'name' => array(
                     'label' => 'Name',
-                    'value' => 'The name {{value}} is not valid!'
+                    'value' => esc_html__( 'The name {{value}} is not valid!', 'cwp-gutenberg-forms' ),
                 ),
                 'email' => array(
                     'label' => 'Email',
-                    'value' => 'The email {{value}} is not valid!'
+                    'value' => esc_html__( 'The email {{value}} is not valid!', 'cwp-gutenberg-forms' ),
                 ),
                 'text' => array(
                     'label' => 'Text',
-                    'value' => 'The text {{value}} is not valid!'
+                    'value' => esc_html__( 'The text {{value}} is not valid!', 'cwp-gutenberg-forms' ),
                 ),
                 'message' => array(
                     'label' => 'Message',
-                    'value' => 'The message {{value}} is not valid!'
+                    'value' => esc_html__( 'The message {{value}} is not valid!', 'cwp-gutenberg-forms' ),
                 ),
                 'phone' => array(
                     'label' => 'Phone',
-                    'value' => 'The phone {{value}} is not valid!'
+                    'value' => esc_html__( 'The phone {{value}} is not valid!', 'cwp-gutenberg-forms' ),
                 ),
                 'website' => array(
                     'label' => 'Website',
-                    'value' => 'The website {{value}} is not valid!'
+                    'value' => esc_html__( 'The website {{value}} is not valid!', 'cwp-gutenberg-forms' ),
                 ),
                 'number' => array(
                     'label' => 'Number',
-                    'value' => 'The number {{value}} is not in range!'
+                    'value' => esc_html__( 'The number {{value}} is not in range!', 'cwp-gutenberg-forms' ),
                 ),
                 'file-upload'  => array(
                     'label' => 'File Upload',
-                    'value' => 'The file {{value}} is not valid!'
+                    'value' => esc_html__( 'The file {{value}} is not valid!', 'cwp-gutenberg-forms' ),
                 )
 
             )
@@ -437,7 +437,7 @@ class Dashboard
     public function register()
     {
 
-        //assets 
+        //assets
 
         //currently embedding dashboard after creating in another plugin due to conflicts of our script with webpack
 

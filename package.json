@@ -10,6 +10,7 @@
     "dependencies": {
         "@wordpress/server-side-render": "^1.14.0",
         "cgb-scripts": "1.23.0",
-        "pikaday": "^1.8.0"
+        "pikaday": "^1.8.0",
+        "wp-cli": "0.0.5"
     }
 }

@@ -6,7 +6,6 @@ import {
     MenuItem
 
 } from "@wordpress/components"
-import { TEXT_DOMAIN } from '../../../../block/constants';
 import { get, isEqual } from "lodash"
 
 const { __ } = wp.i18n;
@@ -20,7 +19,7 @@ function Templates(props) {
 
     return (
         <div className="cwp-templates">
-            <Panel header={__(<strong>Available Templates</strong>, TEXT_DOMAIN)}>
+            <Panel header={__(<strong>Available Templates</strong>, "cwp-gutenberg-forms")}>
                 <MenuGroup>
                     {
                         templates.map((template, index) => {

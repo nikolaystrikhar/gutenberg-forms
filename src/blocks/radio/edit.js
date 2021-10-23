@@ -20,7 +20,6 @@ import ImageUpload from "../../block/components/imageUpload";
 import ImagePreview from "../../block/components/imagePreview";
 import ConditionalLogic from "../../block/components/condition";
 import Bulk_Add from "../components/bulk_add";
-import { TEXT_DOMAIN } from "../../block/constants/index"
 
 
 import { clone, pullAt, isEqual, has, set, assign } from "lodash";
@@ -287,7 +286,7 @@ function edit(props) {
 				<div className="cwp-option">
 					<TextControl
 						placeholder={adminId.default}
-						label={__("Field ID", TEXT_DOMAIN)}
+						label={__("Field ID", "cwp-gutenberg-forms")}
 						value={adminId.value}
 						onChange={handleAdminId}
 					/>
@@ -295,7 +294,7 @@ function edit(props) {
 
 				{!enableCondition ? (
 					<PanelRow>
-						<h3 className="cwp-heading">{__("Required", TEXT_DOMAIN)}</h3>
+						<h3 className="cwp-heading">{__("Required", "cwp-gutenberg-forms")}</h3>
 						<FormToggle
 							label="Required"
 							checked={isRequired}
@@ -305,13 +304,13 @@ function edit(props) {
 				) : (
 						<div className="cwp-option">
 							<p>
-								<Icon icon="info" /> {__("You cannot set a conditional field required!", TEXT_DOMAIN)}
+								<Icon icon="info" /> {__("You cannot set a conditional field required!", "cwp-gutenberg-forms")}
 							</p>
 						</div>
 					)}
 				{isRequired && (
 					<div className="cwp-option">
-						<h3 className="cwp-heading">{__("Required Text", TEXT_DOMAIN)}</h3>
+						<h3 className="cwp-heading">{__("Required Text", "cwp-gutenberg-forms")}</h3>
 						<TextControl
 							onChange={label => props.setAttributes({ requiredLabel: label })}
 							value={requiredLabel}
@@ -320,11 +319,11 @@ function edit(props) {
 				)}
 				<div className="cwp-option">
 					<SelectControl
-						label={__("Layout", TEXT_DOMAIN)}
+						label={__("Layout", "cwp-gutenberg-forms")}
 						value={fieldStyle}
 						options={[
-							{ label: __("Block", TEXT_DOMAIN), value: "block" },
-							{ label: __("Inline", TEXT_DOMAIN), value: "inline" }
+							{ label: __("Block", "cwp-gutenberg-forms"), value: "block" },
+							{ label: __("Inline", "cwp-gutenberg-forms"), value: "inline" }
 						]}
 						onChange={s => {
 							props.setAttributes({ fieldStyle: s });
@@ -342,9 +341,9 @@ function edit(props) {
 			</PanelBody>
 
 			{isRequired && (
-				<PanelBody title={__("Messages", TEXT_DOMAIN)}>
+				<PanelBody title={__("Messages", "cwp-gutenberg-forms")}>
 					<div className="cwp-option">
-						<h3 className="cwp-heading">{__("Required Error", TEXT_DOMAIN)}</h3>
+						<h3 className="cwp-heading">{__("Required Error", "cwp-gutenberg-forms")}</h3>
 						<TextControl
 							onChange={label => setMessages("empty", label)}
 							value={empty}
@@ -361,7 +360,7 @@ function edit(props) {
 				bulkAdd ? <Bulk_Add onChange={(c) => setRadios(c)} data={props} /> : <Fragment>
 					{!!props.isSelected && !enableCondition && (
 						<div className="cwp-required">
-							<h3>{__("Required", TEXT_DOMAIN)}</h3>
+							<h3>{__("Required", "cwp-gutenberg-forms")}</h3>
 							<FormToggle checked={isRequired} onChange={handleRequired} />
 						</div>
 					)}
@@ -373,7 +372,7 @@ function edit(props) {
 							}`}
 					>
 						<div className="cwp-label-wrap">
-							<RichText placeholder={__("Add a label", TEXT_DOMAIN)} tag="label" value={label} onChange={handleLabel} />
+							<RichText placeholder={__("Add a label", "cwp-gutenberg-forms")} tag="label" value={label} onChange={handleLabel} />
 							{!props.isSelected && isRequired && !enableCondition && (
 								<div className="cwp-required cwp-noticed">
 									<h3>{requiredLabel}</h3>
@@ -453,11 +452,11 @@ function edit(props) {
 						{!!props.isSelected && (
 							<div className="cwp-radios-controls">
 								<div>
-									<Button isDefault onClick={addRadio}>{__("Add Option", TEXT_DOMAIN)}</Button>
-									<Button isDefault onClick={() => props.setAttributes({ bulkAdd: true })}>{__("Bulk Add", TEXT_DOMAIN)}</Button>
+									<Button isDefault onClick={addRadio}>{__("Add Option", "cwp-gutenberg-forms")}</Button>
+									<Button isDefault onClick={() => props.setAttributes({ bulkAdd: true })}>{__("Bulk Add", "cwp-gutenberg-forms")}</Button>
 								</div>
 								<div>
-									<Button onClick={clearAll}>{__("Clear All", TEXT_DOMAIN)}</Button>
+									<Button onClick={clearAll}>{__("Clear All", "cwp-gutenberg-forms")}</Button>
 								</div>
 							</div>
 						)}

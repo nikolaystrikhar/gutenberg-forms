@@ -1,7 +1,6 @@
 const { __ } = wp.i18n;
 import React, { useState } from "react";
 import { Placeholder, Button, SelectControl } from "@wordpress/components";
-import { TEXT_DOMAIN } from "../../../block/constants";
 import { get } from "lodash";
 
 function Introduction(props) {
@@ -23,7 +22,7 @@ function Introduction(props) {
 		<Placeholder
 			className="cwp-reusable-intro"
 			icon="index-card"
-			label={__("Select Gutenberg Form", TEXT_DOMAIN)}
+			label={__("Select Gutenberg Form", "cwp-gutenberg-forms")}
 			instructions="Select a saved form."
 		>
 			<div className="content">

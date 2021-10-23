@@ -1,3 +1,4 @@
+import { __ } from '@wordpress/i18n';
 import React, { useEffect } from "react";
 import { MenuGroup, MenuItem } from "@wordpress/components";
 import {
@@ -45,7 +46,7 @@ function TagList(props) {
 
 					return (
 						<MenuItem className="cwp-tag-option" onClick={() => onSelect(tag)}>
-							<strong>{isEmpty(label) ? "No Label" : label}</strong>
+							<strong>{isEmpty(label) ? __("No Label", 'cwp-gutenberg-forms') : label}</strong>
 							<span>{tag}</span>
 						</MenuItem>
 					);
@@ -76,7 +77,7 @@ function TagList(props) {
 				<MenuGroup>{listToMap}</MenuGroup>
 			) : (
 				<div className="cwp-empty-list">
-					<h3>No Tags Found!</h3>
+					<h3>{__('No Tags Found !', 'cwp-gutenberg-forms')}</h3>
 				</div>
 			)}
 		</div>

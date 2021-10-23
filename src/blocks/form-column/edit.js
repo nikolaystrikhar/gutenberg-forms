@@ -10,7 +10,6 @@ import {
 import Introduction from "./components/introduction";
 import { createBlock } from "@wordpress/blocks";
 import { map, omitBy } from "lodash";
-import { TEXT_DOMAIN } from "../../block/constants";
 const { __ } = wp.i18n;
 
 const { replaceInnerBlocks, selectBlock } = wp.data.dispatch(
@@ -69,12 +68,12 @@ function edit(props) {
 	return [
 		<InspectorControls>
 			<PanelBody
-				icon={__("layout", TEXT_DOMAIN)}
-				title={__("Layout Settings", TEXT_DOMAIN)}
+				icon={__("layout", "cwp-gutenberg-forms")}
+				title={__("Layout Settings", "cwp-gutenberg-forms")}
 			>
 				<div className="cwp-option">
 					<RangeControl
-						label={__("Columns", TEXT_DOMAIN)}
+						label={__("Columns", "cwp-gutenberg-forms")}
 						max={6}
 						min={2}
 						onChange={handleChange}
@@ -83,7 +82,7 @@ function edit(props) {
 				</div>
 				<div className="cwp-option">
 					<PanelRow>
-						<h3>{__("Stack on Mobile", TEXT_DOMAIN)}</h3>
+						<h3>{__("Stack on Mobile", "cwp-gutenberg-forms")}</h3>
 						<FormToggle
 							checked={stack}
 							onChange={() => setAttributes({ stack: !stack })}

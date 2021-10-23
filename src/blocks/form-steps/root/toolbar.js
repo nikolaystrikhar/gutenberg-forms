@@ -5,7 +5,6 @@ import {
 	ToolbarButton,
 	IconButton,
 } from "@wordpress/components";
-import { TEXT_DOMAIN } from "../../../block/constants";
 import { isEmpty, isEqual, has, get } from "lodash";
 
 const { BlockControls } = wp.blockEditor;
@@ -138,16 +137,16 @@ function BlockToolbar(props) {
 			<Toolbar>
 				{isStepAvailable() && (
 					<Fragment>
-						<Tooltip text={__("Move Step Up", TEXT_DOMAIN)}>
+						<Tooltip text={__("Move Step Up", "cwp-gutenberg-forms")}>
 							<IconButton icon="arrow-left-alt2" onClick={moveStepUp} />
 						</Tooltip>
-						<Tooltip text={__("Move Step Down", TEXT_DOMAIN)}>
+						<Tooltip text={__("Move Step Down", "cwp-gutenberg-forms")}>
 							<IconButton icon="arrow-right-alt2" onClick={moveStepDown} />
 						</Tooltip>
-						<Tooltip text={__("Delete Step", TEXT_DOMAIN)}>
+						<Tooltip text={__("Delete Step", "cwp-gutenberg-forms")}>
 							<IconButton icon="trash" onClick={deleteStep} />
 						</Tooltip>
-						<Tooltip text={__("Duplicate Step", TEXT_DOMAIN)}>
+						<Tooltip text={__("Duplicate Step", "cwp-gutenberg-forms")}>
 							<IconButton icon="admin-page" onClick={duplicateStep} />
 						</Tooltip>
 					</Fragment>
