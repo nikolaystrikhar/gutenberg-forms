@@ -5,7 +5,7 @@
  * Description: The Next Generation WordPress Form Builder. Build forms directly within Gutenberg editor live. Add & arrange form fields like blocks.
  * Author: Extendify
  * Author URI: https://extendify.com/
- * Version: 2.2.3
+ * Version: 2.2.4
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain: cwp-gutenberg-forms

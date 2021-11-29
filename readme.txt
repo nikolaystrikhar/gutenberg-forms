@@ -3,7 +3,7 @@ Contributors: munirkamal
 Tags: wordpress form,  gutenberg form, contact form, subscribe form, multi-step form, gutenberg block, contact form plugin, forms, form builder, custom form, contact button, contact me, custom contact form, form manager, form, forms builder, forms creator, captcha, recaptcha, Akismet, email form, web form, feedback form, email submit form, message form, contact form block, wordpress form plugin
 Requires at least: 5.0
 Tested up to: 5.8
-Stable tag: 2.2.3
+Stable tag: 2.2.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -22,7 +22,7 @@ Gutenberg Forms adds a Form Block in Gutenberg and all the form fields are child
 
 ## Feature Highlights
 
-The following are some of the main features, but there's more which you need to checkout by installing the plugin. 
+The following are some of the main features, but there's more which you need to checkout by installing the plugin.
 
 * No Bulky Form Builder - Build Forms Directly in Gutenberg Editor.
 * Easy Form Layouts using builtin Form Columns Block.
@@ -68,7 +68,7 @@ Read More & Install it, it's **FREE**.
 
 ## Share Your Feedback & Suggestions 👏
 
-Your feedback, ideas and suggestions would be really helpful in adding & improving the features that you need. We have set up a tool to collect your feedback and prioritize the features based on votes. 
+Your feedback, ideas and suggestions would be really helpful in adding & improving the features that you need. We have set up a tool to collect your feedback and prioritize the features based on votes.
 
 [https://gutenbergforms.feedy.app/feedback/](https://gutenbergforms.feedy.app/feedback/)
 
@@ -160,10 +160,10 @@ Improved: Updates to the pattern and template library
 - Improved: Template library SDK
 
 = 2.1.3 = (11 May 2021)
-- Fixed: minor bug in previous release  
+- Fixed: minor bug in previous release
 
 = 2.1.2 = (11 May 2021)
-- Fixed: minor bug in previous release  
+- Fixed: minor bug in previous release
 
 = 2.1.1 = (11 May 2021)
 - Fixed: Bugs
@@ -201,7 +201,7 @@ Improved: Updates to the pattern and template library
 = 1.6.0 = (04 July 2020)
 - Improved: Multi step form creation
 - Added: Progress Bar for multi step form
-- Fixed: Bugs 
+- Fixed: Bugs
 
 = 1.5.0 = (23 June 2020)
 - Added: Dynamically populate field values
@@ -224,10 +224,10 @@ Improved: Updates to the pattern and template library
 - Fixed: File Upload Bugs
 - Added: Form Actions - Now you can enable/disable any action like form entries, email notification etc
 
-= 1.2.0 = (11 Apr 2020) 
+= 1.2.0 = (11 Apr 2020)
 - New: Now form entries are recorded in database
 - New: forms CPT - Create forms and use anywhere using shortcode
-- New: Templates Library - Start creating forms quickly with ready to use templates    
+- New: Templates Library - Start creating forms quickly with ready to use templates
 - Added: Bulk Add Option for select, radio and checkbox fields
 - Fixed: Bugs
 - Improved: Code
@@ -247,7 +247,7 @@ Thanks to All the Contributors: https://github.com/munirkamal/gutenberg-forms/gr
 
 = 1.0.9 = (21 Mar 2020)
 - Fixed: Bugs
-- Improved: Code 
+- Improved: Code
 
 = 1.0.8 = (7 Mar 2020)
 - Fixed: Bugs
@@ -270,7 +270,7 @@ Thanks to All the Contributors: https://github.com/munirkamal/gutenberg-forms/gr
 - Added: Calculation Block
 - Fixed: Bug fixes
 
-= 1.0.5 (15 Feb 2020) = 
+= 1.0.5 (15 Feb 2020) =
 - Fixed: Frontend Styling
 - Added: Inline field Styling
 - Improved: Sanitization

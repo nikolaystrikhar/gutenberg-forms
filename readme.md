@@ -74,7 +74,7 @@ We appreciate all contributions and don't want a wall of rules to get in the way
 ## Changelog
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
-= 2.2.3 = TBD
+= 2.2.4 = (29.11.2021)
 
 - Make it translatable ( https://github.com/WPChill/gutenberg-forms/issues/63 )
 
