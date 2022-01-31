@@ -74,6 +74,11 @@ We appreciate all contributions and don't want a wall of rules to get in the way
 ## Changelog
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
+= 2.2.7 = TBA
+
+- Fixed email trigger cc @ilangleben19
+
+
 = 2.2.5 = (29.11.2021)
 
 - Make it translatable ( https://github.com/WPChill/gutenberg-forms/issues/63 )
