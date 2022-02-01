@@ -22,7 +22,9 @@ class cwp_gf_AssetsHandler
 
     public function enqueue()
     {
-        wp_enqueue_script('gutenberg_forms-recaptcha-render-script', plugins_url('/', __FILE__) . 'scripts/recaptcha-render.js', array('jquery'), 'latest', true);
-        wp_enqueue_script('gutenberg_forms-recaptcha', "https://www.google.com/recaptcha/api.js", array('gutenberg_forms-recaptcha-render-script'), '', true);
+        if( has_block("cwp/block-gutenberg-forms") ) {
+            wp_enqueue_script('gutenberg_forms-recaptcha-render-script', plugins_url('/', __FILE__) . 'scripts/recaptcha-render.js', array('jquery'), 'latest', true);
+            wp_enqueue_script('gutenberg_forms-recaptcha', "https://www.google.com/recaptcha/api.js", array('gutenberg_forms-recaptcha-render-script'), '', true);
+        }
     }
 }

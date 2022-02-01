@@ -77,6 +77,7 @@ For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 = 2.2.7 = TBA
 
 - Fixed email trigger cc @ilangleben19
+- Recaptcha enqueueing when forms are not present (https://github.com/WPChill/gutenberg-forms/issues/200, #190, #195 )
 
 
 = 2.2.5 = (29.11.2021)
