@@ -78,7 +78,7 @@ For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
 - Fixed email trigger cc @ilangleben19
 - Recaptcha enqueueing when forms are not present (https://github.com/WPChill/gutenberg-forms/issues/200, #190, #195 )
-- Fixed broked dashboard in WP 5.9
+- Fixed broken dashboard in WP 5.9
 - Redone build for dashboard
 - Updated React, Redux, ReactDOM to WP versions
 
