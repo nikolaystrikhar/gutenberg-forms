@@ -13,11 +13,13 @@ function save(props) {
 		messages: { empty },
 		condition,
 		fieldStyle,
-		enableCondition
+		enableCondition,
+		hint,
+		showHint,
 	} = props.attributes;
 
 	let errors = JSON.stringify({
-		empty
+		empty,
 	});
 
 	const getLabel = () => {
@@ -33,10 +35,10 @@ function save(props) {
 		return label;
 	};
 
-	const getRequired = index => {
+	const getRequired = (index) => {
 		if (isRequired && index === 0) {
 			return {
-				"data-parsley-mincheck": "1"
+				"data-parsley-mincheck": "1",
 			};
 		} else {
 			return {};
@@ -47,7 +49,7 @@ function save(props) {
 		if (!isEmpty(condition.field) && enableCondition) {
 			//verifying the condition
 			return {
-				"data-condition": stringifyCondition(condition)
+				"data-condition": stringifyCondition(condition),
 			};
 		}
 
@@ -88,7 +90,7 @@ function save(props) {
 										<img
 											style={{
 												height: checkbox.image.height,
-												width: checkbox.image.width
+												width: checkbox.image.width,
 											}}
 											src={checkbox.image.url}
 										/>
@@ -99,6 +101,7 @@ function save(props) {
 					);
 				})}
 			</div>
+			{showHint && <p className="cwp-hint">{hint}</p>}
 		</div>
 	);
 }

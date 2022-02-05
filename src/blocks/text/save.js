@@ -19,6 +19,8 @@ function save(props) {
 		maximumLength,
 		prefix,
 		suffix,
+		hint,
+		showHint
 	} = props.attributes;
 
 	const getLabel = () => {
@@ -92,6 +94,9 @@ function save(props) {
 					)}
 				</div>
 			</div>
+			{showHint && (
+                <p className="cwp-hint">{hint}</p>
+            )}
 		</div>
 	);
 }

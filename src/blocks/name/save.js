@@ -1,3 +1,5 @@
+import './style.scss';
+
 import React from "react";
 import { isEmpty } from "lodash";
 import { strip_tags } from "../../block/misc/helper";
@@ -18,6 +20,8 @@ function save(props) {
 		enableCondition,
 		prefix,
 		suffix,
+		hint,
+		showHint
 	} = props.attributes;
 
 	const getLabel = () => {
@@ -89,6 +93,9 @@ function save(props) {
 					)}
 				</div>
 			</div>
+			{showHint && (
+				<p className="cwp-hint">{hint}</p>
+			)}
 		</div>
 	);
 }

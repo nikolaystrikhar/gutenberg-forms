@@ -1,3 +1,5 @@
+import './style.scss';
+
 import React, { useEffect, Fragment } from "react";
 import {
 	FormToggle,
@@ -25,12 +27,8 @@ import Prefix from "../components/prefix";
 import Suffix from "../components/suffix";
 
 const { __ } = wp.i18n;
-const {
-	InspectorControls,
-	BlockControls,
-	BlockIcon,
-	RichText,
-} = wp.blockEditor;
+const { InspectorControls, BlockControls, BlockIcon, RichText } =
+	wp.blockEditor;
 
 function edit(props) {
 	const handleChange = (e) => {
@@ -64,6 +62,8 @@ function edit(props) {
 		adminId,
 		prefix,
 		suffix,
+		showHint,
+		hint
 	} = props.attributes;
 
 	const getRootData = () => {
@@ -155,7 +155,10 @@ function edit(props) {
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
-				<PanelBody title={__("Field Settings", "cwp-gutenberg-forms")} initialOpen={true}>
+				<PanelBody
+					title={__("Field Settings", "cwp-gutenberg-forms")}
+					initialOpen={true}
+				>
 					<div className="cwp-option">
 						<TextControl
 							placeholder={adminId.default}
@@ -167,7 +170,9 @@ function edit(props) {
 
 					<div className="cwp-option">
 						<PanelRow>
-							<h3 className="cwp-heading">{__("Prefix", "cwp-gutenberg-forms")}</h3>
+							<h3 className="cwp-heading">
+								{__("Prefix", "cwp-gutenberg-forms")}
+							</h3>
 							<FormToggle
 								label="Prefix"
 								checked={prefix.enable}
@@ -180,7 +185,9 @@ function edit(props) {
 
 					<div className="cwp-option">
 						<PanelRow>
-							<h3 className="cwp-heading">{__("Suffix", "cwp-gutenberg-forms")}</h3>
+							<h3 className="cwp-heading">
+								{__("Suffix", "cwp-gutenberg-forms")}
+							</h3>
 							<FormToggle
 								label="Suffix"
 								checked={suffix.enable}
@@ -193,7 +200,9 @@ function edit(props) {
 
 					{!enableCondition ? (
 						<PanelRow>
-							<h3 className="cwp-heading">{__("Required", "cwp-gutenberg-forms")}</h3>
+							<h3 className="cwp-heading">
+								{__("Required", "cwp-gutenberg-forms")}
+							</h3>
 							<FormToggle
 								label="Required"
 								checked={isRequired}
@@ -259,7 +268,10 @@ function edit(props) {
 					<div className="cwp-option">
 						<p>
 							<Icon icon="info" />{" "}
-							{__("Use {{value}} to insert field value!", "cwp-gutenberg-forms")}
+							{__(
+								"Use {{value}} to insert field value!",
+								"cwp-gutenberg-forms"
+							)}
 						</p>
 					</div>
 				</PanelBody>
@@ -270,6 +282,24 @@ function edit(props) {
 							onChange={(pattern) => props.setAttributes({ pattern })}
 							value={pattern}
 						/>
+					</div>
+				</PanelBody>
+				<PanelBody title={__("Show Hint", "cwp-gutenberg-forms")}>
+					<div className="cwp-option">
+						<FormToggle
+							label="Show Hint"
+							checked={showHint}
+							onChange={() => props.setAttributes({ showHint: !showHint })}
+						/>
+						{showHint && (
+							<Fragment>
+								<TextControl
+									label={__("Hint Text", "cwp-gutenberg-forms")}
+									onChange={(hint) => props.setAttributes({ hint })}
+									value={hint}
+								/>
+							</Fragment>
+						)}
 					</div>
 				</PanelBody>
 			</InspectorControls>
@@ -324,6 +354,9 @@ function edit(props) {
 					)}
 				</div>
 			</div>
+			{showHint && (
+				<p className="cwp-hint">{hint}</p>
+			)}
 		</div>,
 	];
 }

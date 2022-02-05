@@ -79,6 +79,14 @@
 				"content": "",
 				"position": "outside"
 			}
+		},
+		"showHint" :{
+			"type": "boolean",
+			"default": false
+		},
+		"hint": {
+			"type": "string",
+			"default": ""
 		}
 	}
 }

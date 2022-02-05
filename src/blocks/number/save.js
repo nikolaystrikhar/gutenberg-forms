@@ -15,7 +15,9 @@ function save(props) {
 		requiredLabel,
 		messages,
 		messages: { invalid, empty },
-		steps
+		steps,
+		hint,
+		showHint
 	} = props.attributes;
 	const getLabel = () => {
 		const { label, isRequired } = props.attributes;
@@ -92,6 +94,9 @@ function save(props) {
 						/>
 					)}
 			</div>
+			{showHint && (
+                <p className="cwp-hint">{hint}</p>
+            )}
 		</div>
 	);
 }

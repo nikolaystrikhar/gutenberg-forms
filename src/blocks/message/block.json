@@ -66,6 +66,14 @@
 				"default": "",
 				"value": ""
 			}
+		},
+		"showHint" :{
+			"type": "boolean",
+			"default": false
+		},
+		"hint": {
+			"type": "string",
+			"default": ""
 		}
 	}
 }

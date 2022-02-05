@@ -1,4 +1,4 @@
-import React, { useEffect } from "react";
+import React, { useEffect, Fragment } from "react";
 import {
 	FormToggle,
 	Toolbar,
@@ -66,6 +66,8 @@ function edit(props) {
 		enableCondition,
 		prefix,
 		suffix,
+		hint,
+		showHint
 	} = props.attributes;
 
 	const getRootData = () => {
@@ -292,6 +294,24 @@ function edit(props) {
 						/>
 					</div>
 				</PanelBody>
+				<PanelBody title={__("Show Hint", "cwp-gutenberg-forms")}>
+					<div className="cwp-option">
+						<FormToggle
+							label="Show Hint"
+							checked={showHint}
+							onChange={() => props.setAttributes({ showHint: !showHint })}
+						/>
+						{showHint && (
+							<Fragment>
+								<TextControl
+									label={__("Hint Text", "cwp-gutenberg-forms")}
+									onChange={(hint) => props.setAttributes({ hint })}
+									value={hint}
+								/>
+							</Fragment>
+						)}
+					</div>
+				</PanelBody>
 			</InspectorControls>
 		),
 		!!props.isSelected && <BlockControls></BlockControls>,
@@ -345,6 +365,9 @@ function edit(props) {
 					)}
 				</div>
 			</div>
+			{showHint && (
+                <p className="cwp-hint">{hint}</p>
+            )}
 		</div>,
 	];
 }

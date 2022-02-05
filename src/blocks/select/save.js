@@ -12,6 +12,8 @@ function save(props) {
 		messages,
 		messages: { empty },
 		condition,
+		hint,
+		showHint
 	} = props.attributes;
 
 	const getLabel = () => {
@@ -64,6 +66,9 @@ function save(props) {
 					})}
 				</select>
 			</div>
+			{showHint && (
+                <p className="cwp-hint">{hint}</p>
+            )}
 		</div>
 	);
 }

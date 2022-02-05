@@ -16,7 +16,9 @@ function save(props) {
 		condition,
 		enableCondition,
 		minimumLength,
-		maximumLength
+		maximumLength,
+		hint,
+		showHint
 	} = props.attributes;
 
 	const getLabel = () => {
@@ -75,6 +77,9 @@ function save(props) {
 					placeholder={message}
 				/>
 			</div>
+			{showHint && (
+				<p className="cwp-hint">{hint}</p>
+			)}
 		</div>
 	);
 }

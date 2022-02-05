@@ -58,6 +58,8 @@ function edit(props) {
 		messages,
 		steps,
 		adminId,
+		hint,
+		showHint
 	} = props.attributes;
 
 	const getRootData = () => {
@@ -241,6 +243,24 @@ function edit(props) {
 						</p>
 					</div>
 				</PanelBody>
+				<PanelBody title={__("Show Hint", "cwp-gutenberg-forms")}>
+					<div className="cwp-option">
+						<FormToggle
+							label="Show Hint"
+							checked={showHint}
+							onChange={() => props.setAttributes({ showHint: !showHint })}
+						/>
+						{showHint && (
+							<Fragment>
+								<TextControl
+									label={__("Hint Text", "cwp-gutenberg-forms")}
+									onChange={(hint) => props.setAttributes({ hint })}
+									value={hint}
+								/>
+							</Fragment>
+						)}
+					</div>
+				</PanelBody>
 			</InspectorControls>
 		),
 		!!props.isSelected && <BlockControls></BlockControls>,
@@ -301,6 +321,9 @@ function edit(props) {
 					/>
 				)}
 			</div>
+			{showHint && (
+                <p className="cwp-hint">{hint}</p>
+            )}
 		</div>,
 	];
 }

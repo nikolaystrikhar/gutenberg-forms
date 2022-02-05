@@ -7,28 +7,29 @@ import {
 	Icon,
 	Button,
 	TextControl,
-	SelectControl
+	SelectControl,
 } from "@wordpress/components";
 import {
 	getFieldName,
 	extract_id,
 	getEncodedData,
 	extract_admin_id,
-	get_admin_id
+	get_admin_id,
 } from "../../block/misc/helper";
 import ImageUpload from "../../block/components/imageUpload";
 import ImagePreview from "../../block/components/imagePreview";
 import ConditionalLogic from "../../block/components/condition";
 import Bulk_Add from "../components/bulk_add";
 
-
 import { clone, pullAt, isEqual, has, set, assign } from "lodash";
-import { getRootMessages, detect_similar_forms } from "../../block/functions/index";
+import {
+	getRootMessages,
+	detect_similar_forms,
+} from "../../block/functions/index";
 
 const { RichText } = wp.blockEditor;
 const { __ } = wp.i18n;
 const { InspectorControls, BlockControls, BlockIcon } = wp.blockEditor;
-
 
 function edit(props) {
 	let {
@@ -44,7 +45,9 @@ function edit(props) {
 		enableCondition,
 		fieldStyle,
 		bulkAdd,
-		adminId
+		adminId,
+		hint,
+		showHint,
 	} = props.attributes;
 
 	const radiosContainer = useRef();
@@ -53,37 +56,45 @@ function edit(props) {
 
 	const [focus, setFocus] = useState({
 		f: false,
-		index: null
+		index: null,
 	});
 
 	const getRootData = () => {
 		if (field_name === "" || detect_similar_forms(props.clientId)) {
-
-
-			const newFieldName = getFieldName("radio", props.clientId)
+			const newFieldName = getFieldName("radio", props.clientId);
 
 			props.setAttributes({
 				field_name: newFieldName,
 				adminId: {
-					value: extract_admin_id(newFieldName, 'radio'),
-					default: extract_admin_id(newFieldName, 'radio')
-				}
+					value: extract_admin_id(newFieldName, "radio"),
+					default: extract_admin_id(newFieldName, "radio"),
+				},
 			});
 			props.setAttributes({
 				id:
 					props.clientId +
 					"__" +
-					getEncodedData("radio", props.clientId, isRequired, get_admin_id(adminId))
+					getEncodedData(
+						"radio",
+						props.clientId,
+						isRequired,
+						get_admin_id(adminId)
+					),
 			});
 		} else if (field_name !== "") {
 			props.setAttributes({
 				id:
 					extract_id(field_name) +
 					"__" +
-					getEncodedData("radio", extract_id(field_name), isRequired, get_admin_id(adminId))
+					getEncodedData(
+						"radio",
+						extract_id(field_name),
+						isRequired,
+						get_admin_id(adminId)
+					),
 			});
 		}
-	}
+	};
 
 	useEffect(() => {
 		let rootMessages = getRootMessages(props.clientId, "radio");
@@ -98,16 +109,16 @@ function edit(props) {
 
 		let { options } = props.attributes;
 
-		const checked = options.find(c => c.checked);
+		const checked = options.find((c) => c.checked);
 
 		if (checked) {
 			let opt = clone(options);
 
-			let remove_extra_checked = opt.map(v => {
+			let remove_extra_checked = opt.map((v) => {
 				if (!isEqual(v, checked)) {
 					return {
 						...v,
-						checked: false
+						checked: false,
 					};
 				} else return v;
 			});
@@ -117,13 +128,11 @@ function edit(props) {
 		}
 
 		getRootData();
-
 	}, []);
 
 	useEffect(() => getRootData(), [props]);
 
 	useEffect(() => {
-
 		if (bulkAdd) return;
 
 		let boxes = radiosContainer.current.querySelectorAll(
@@ -150,7 +159,7 @@ function edit(props) {
 	const addRadio = () => {
 		let newOption = {
 			label: "Option " + (radios.length + 1),
-			checked: false
+			checked: false,
 		};
 
 		let new_options = clone(radios);
@@ -161,7 +170,7 @@ function edit(props) {
 		setRadios(new_options);
 	};
 
-	const handleDelete = index => {
+	const handleDelete = (index) => {
 		let new_options = clone(options);
 
 		let deleted_options = pullAt(new_options, [index]); //dosen't matter :-D
@@ -170,7 +179,7 @@ function edit(props) {
 		setRadios(new_options);
 	};
 
-	const handleLabel = label => {
+	const handleLabel = (label) => {
 		props.setAttributes({ label });
 	};
 
@@ -179,7 +188,7 @@ function edit(props) {
 
 		new_options[index] = {
 			...new_options[index],
-			label: e.target.value
+			label: e.target.value,
 		};
 
 		setRadios(new_options);
@@ -189,7 +198,7 @@ function edit(props) {
 	const handleCheck = (c, index) => {
 		let new_options = clone(options);
 
-		new_options.forEach(v => (v.checked = false));
+		new_options.forEach((v) => (v.checked = false));
 
 		new_options[index].checked = c;
 
@@ -203,14 +212,14 @@ function edit(props) {
 		if (action === "add") {
 			new_options[index] = {
 				...new_options[index],
-				image: img
+				image: img,
 			};
 		}
 
 		if (action === "remove") {
 			const RadioToRemove = new_options[index];
 			new_options[index] = {
-				label: RadioToRemove.label
+				label: RadioToRemove.label,
 			};
 		}
 
@@ -218,7 +227,7 @@ function edit(props) {
 		props.setAttributes({ options: new_options });
 	};
 
-	let handleDuplicate = index => {
+	let handleDuplicate = (index) => {
 		let new_options = clone(options);
 
 		new_options.splice(index, 0, new_options[index]);
@@ -227,7 +236,7 @@ function edit(props) {
 		props.setAttributes({ options: new_options });
 	};
 
-	let handleEnter = index => {
+	let handleEnter = (index) => {
 		let new_options = clone(options);
 
 		new_options.splice(index + 1, 0, { label: "" });
@@ -237,7 +246,7 @@ function edit(props) {
 		setFocus({ f: true, index: index + 1 });
 	};
 
-	let handleBackspace = index => {
+	let handleBackspace = (index) => {
 		if (radios[index].label === "") {
 			handleDelete(index);
 
@@ -256,33 +265,30 @@ function edit(props) {
 	};
 
 	let clearAll = () => {
-
 		const reset = [
 			{
-				label: "Option 1"
-			}
-		]
+				label: "Option 1",
+			},
+		];
 
 		setRadios(reset);
 		props.setAttributes({
-			options: reset
+			options: reset,
 		});
-
-	}
+	};
 
 	const handleAdminId = (id) => {
 		props.setAttributes({
 			adminId: {
 				...adminId,
-				value: id.replace(/\s|-/g, "_")
-			}
-		})
-	}
+				value: id.replace(/\s|-/g, "_"),
+			},
+		});
+	};
 
 	return [
 		<InspectorControls>
 			<PanelBody title="Field Settings" initialOpen={true}>
-
 				<div className="cwp-option">
 					<TextControl
 						placeholder={adminId.default}
@@ -294,7 +300,9 @@ function edit(props) {
 
 				{!enableCondition ? (
 					<PanelRow>
-						<h3 className="cwp-heading">{__("Required", "cwp-gutenberg-forms")}</h3>
+						<h3 className="cwp-heading">
+							{__("Required", "cwp-gutenberg-forms")}
+						</h3>
 						<FormToggle
 							label="Required"
 							checked={isRequired}
@@ -302,17 +310,25 @@ function edit(props) {
 						/>
 					</PanelRow>
 				) : (
-						<div className="cwp-option">
-							<p>
-								<Icon icon="info" /> {__("You cannot set a conditional field required!", "cwp-gutenberg-forms")}
-							</p>
-						</div>
-					)}
+					<div className="cwp-option">
+						<p>
+							<Icon icon="info" />{" "}
+							{__(
+								"You cannot set a conditional field required!",
+								"cwp-gutenberg-forms"
+							)}
+						</p>
+					</div>
+				)}
 				{isRequired && (
 					<div className="cwp-option">
-						<h3 className="cwp-heading">{__("Required Text", "cwp-gutenberg-forms")}</h3>
+						<h3 className="cwp-heading">
+							{__("Required Text", "cwp-gutenberg-forms")}
+						</h3>
 						<TextControl
-							onChange={label => props.setAttributes({ requiredLabel: label })}
+							onChange={(label) =>
+								props.setAttributes({ requiredLabel: label })
+							}
 							value={requiredLabel}
 						/>
 					</div>
@@ -323,12 +339,30 @@ function edit(props) {
 						value={fieldStyle}
 						options={[
 							{ label: __("Block", "cwp-gutenberg-forms"), value: "block" },
-							{ label: __("Inline", "cwp-gutenberg-forms"), value: "inline" }
+							{ label: __("Inline", "cwp-gutenberg-forms"), value: "inline" },
 						]}
-						onChange={s => {
+						onChange={(s) => {
 							props.setAttributes({ fieldStyle: s });
 						}}
 					/>
+				</div>
+			</PanelBody>
+			<PanelBody title={__("Show Hint", "cwp-gutenberg-forms")}>
+				<div className="cwp-option">
+					<FormToggle
+						label="Show Hint"
+						checked={showHint}
+						onChange={() => props.setAttributes({ showHint: !showHint })}
+					/>
+					{showHint && (
+						<Fragment>
+							<TextControl
+								label={__("Hint Text", "cwp-gutenberg-forms")}
+								onChange={(hint) => props.setAttributes({ hint })}
+								value={hint}
+							/>
+						</Fragment>
+					)}
 				</div>
 			</PanelBody>
 			<PanelBody title="Condition">
@@ -343,9 +377,11 @@ function edit(props) {
 			{isRequired && (
 				<PanelBody title={__("Messages", "cwp-gutenberg-forms")}>
 					<div className="cwp-option">
-						<h3 className="cwp-heading">{__("Required Error", "cwp-gutenberg-forms")}</h3>
+						<h3 className="cwp-heading">
+							{__("Required Error", "cwp-gutenberg-forms")}
+						</h3>
 						<TextControl
-							onChange={label => setMessages("empty", label)}
+							onChange={(label) => setMessages("empty", label)}
 							value={empty}
 						/>
 					</div>
@@ -356,8 +392,10 @@ function edit(props) {
 		<div
 			className={`cwp-radios cwp-field ${props.className} is-style-${fieldStyle}`}
 		>
-			{
-				bulkAdd ? <Bulk_Add onChange={(c) => setRadios(c)} data={props} /> : <Fragment>
+			{bulkAdd ? (
+				<Bulk_Add onChange={(c) => setRadios(c)} data={props} />
+			) : (
+				<Fragment>
 					{!!props.isSelected && !enableCondition && (
 						<div className="cwp-required">
 							<h3>{__("Required", "cwp-gutenberg-forms")}</h3>
@@ -369,10 +407,15 @@ function edit(props) {
 						ref={radiosContainer}
 						className={`cwp-radios-set ${
 							!props.isSelected ? "cwp-radio-set-preview" : ""
-							}`}
+						}`}
 					>
 						<div className="cwp-label-wrap">
-							<RichText placeholder={__("Add a label", "cwp-gutenberg-forms")} tag="label" value={label} onChange={handleLabel} />
+							<RichText
+								placeholder={__("Add a label", "cwp-gutenberg-forms")}
+								tag="label"
+								value={label}
+								onChange={handleLabel}
+							/>
 							{!props.isSelected && isRequired && !enableCondition && (
 								<div className="cwp-required cwp-noticed">
 									<h3>{requiredLabel}</h3>
@@ -401,35 +444,38 @@ function edit(props) {
 										)}
 										{!!props.isSelected ? (
 											<input
-												onKeyDown={e => {
+												onKeyDown={(e) => {
 													e.key === "Enter" && handleEnter(index);
 													e.key === "Backspace" && handleBackspace(index);
 												}}
-												onChange={e => handleChange(e, index)}
+												onChange={(e) => handleChange(e, index)}
 												type="text"
 												value={radio.label}
 											/>
 										) : (
-												<label>
-													{radio.label}{" "}
-													{hasImage && !props.isSelected && (
-														<ImagePreview
-															onEdit={img => handleImage(img, index, "add")}
-															onRemove={() => handleImage(null, index, "remove")}
-															isSelected={props.isSelected}
-															image={radio.image}
-														/>
-													)}
-												</label>
-											)}
+											<label>
+												{radio.label}{" "}
+												{hasImage && !props.isSelected && (
+													<ImagePreview
+														onEdit={(img) => handleImage(img, index, "add")}
+														onRemove={() => handleImage(null, index, "remove")}
+														isSelected={props.isSelected}
+														image={radio.image}
+													/>
+												)}
+											</label>
+										)}
 										{!!props.isSelected && (
 											<Fragment>
 												<ImageUpload
 													icon="format-image"
 													value={image}
-													onSelect={img => handleImage(img, index, "add")}
+													onSelect={(img) => handleImage(img, index, "add")}
 												/>
-												<Button isDefault onClick={() => handleDuplicate(index)}>
+												<Button
+													isDefault
+													onClick={() => handleDuplicate(index)}
+												>
 													<Icon icon="admin-page" />
 												</Button>
 												<Button isDefault onClick={() => handleDelete(index)}>
@@ -440,7 +486,7 @@ function edit(props) {
 									</div>
 									{hasImage && !!props.isSelected && (
 										<ImagePreview
-											onEdit={img => handleImage(img, index, "add")}
+											onEdit={(img) => handleImage(img, index, "add")}
 											onRemove={() => handleImage(null, index, "remove")}
 											isSelected={props.isSelected}
 											image={radio.image}
@@ -452,18 +498,30 @@ function edit(props) {
 						{!!props.isSelected && (
 							<div className="cwp-radios-controls">
 								<div>
-									<Button isDefault onClick={addRadio}>{__("Add Option", "cwp-gutenberg-forms")}</Button>
-									<Button isDefault onClick={() => props.setAttributes({ bulkAdd: true })}>{__("Bulk Add", "cwp-gutenberg-forms")}</Button>
+									<Button isDefault onClick={addRadio}>
+										{__("Add Option", "cwp-gutenberg-forms")}
+									</Button>
+									<Button
+										isDefault
+										onClick={() => props.setAttributes({ bulkAdd: true })}
+									>
+										{__("Bulk Add", "cwp-gutenberg-forms")}
+									</Button>
 								</div>
 								<div>
-									<Button onClick={clearAll}>{__("Clear All", "cwp-gutenberg-forms")}</Button>
+									<Button onClick={clearAll}>
+										{__("Clear All", "cwp-gutenberg-forms")}
+									</Button>
 								</div>
 							</div>
 						)}
 					</div>
 				</Fragment>
-			}
-		</div>
+			)}
+			{showHint && (
+                <p className="cwp-hint">{hint}</p>
+            )}
+		</div>,
 	];
 }
 
