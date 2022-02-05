@@ -1952,6 +1952,7 @@ jQuery(function ($) {
 				});
 
 			$(this).on("submit", function (e) {
+
 				let required_checkboxes = $(this).find(
 					".cwp-checkbox-set.required-checkbox"
 				);
@@ -1974,7 +1975,7 @@ jQuery(function ($) {
 								? "Please select atleast one checkbox!"
 								: errMessage.empty
 						}
-                        
+
                       </div>
                     </div>
                   `);
@@ -2012,7 +2013,11 @@ jQuery(function ($) {
 						$(this).find(".cwp-warning").remove();
 					}
 				});
+				// Get form id
+				let form_id = $(this).attr("id");
+				window.location.href = `#${form_id}`;
 			});
+
 		});
 
 		$(".cwp-form form").each(function () {
