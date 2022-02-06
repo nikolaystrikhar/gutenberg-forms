@@ -98,6 +98,10 @@
 		"extendedData": {
 			"type": "object",
 			"default": {}
+		},
+		"customAction" : {
+			"type": "string",
+			"default": ""
 		}
 	},
 	"example": {

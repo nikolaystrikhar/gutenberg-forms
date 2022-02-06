@@ -26,6 +26,7 @@ function save(props) {
 		messages,
 		spamMessage,
 		errorMessage,
+		customAction
 	} = props.attributes;
 
 	const recaptchaEnable = hasProtection("ReCaptcha v2", spamProtections);
@@ -53,7 +54,7 @@ function save(props) {
 				data-recaptchaEnable={recaptchaEnable}
 				data-siteKey={recaptchaEnable ? recaptcha.fields.site_key.value : ""}
 			>
-				<form method="POST" id={id} {...getEncryption()} data-formid={id}>
+				<form method="POST" id={id} {...getEncryption()} data-formid={id} action={customAction}>
 					<InnerBlocks.Content />
 					{recaptchaEnable && (
 						<div

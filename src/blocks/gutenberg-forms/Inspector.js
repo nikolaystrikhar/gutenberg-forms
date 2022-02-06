@@ -53,6 +53,7 @@ function Inspector(prop) {
 		buttonStyling,
 		spamMessage,
 		errorMessage,
+		customAction
 	} = props.attributes;
 
 	const handleAlignment = (aln) => {
@@ -327,6 +328,11 @@ function Inspector(prop) {
 					value={actions}
 					onChange={handleActions}
 					suggestions={get_form_actions()}
+				/>
+				<TextControl
+					label={__("Custom Form Action Name", "cwp-gutenberg-forms")}
+					value={customAction}
+					onChange={(customAction) => props.setAttributes({ customAction })}
 				/>
 			</PanelBody>
 

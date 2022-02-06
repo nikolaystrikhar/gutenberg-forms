@@ -74,6 +74,12 @@ We appreciate all contributions and don't want a wall of rules to get in the way
 ## Changelog
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
+= 2.2.8 = TBA
+
+- Added custom form action ( # 179 )
+- Added field descriptions ( #134 )
+- Fixed form jumping to top after submitting ( #71 )
+
 = 2.2.7 = 02.02.2022
 
 - Fixed email trigger cc @ilangleben19
