@@ -4,8 +4,7 @@
 require_once plugin_dir_path(__DIR__) . 'triggers/functions.php';
 require_once plugin_dir_path(__DIR__) . 'export/index.php';
 
-$path = preg_replace('/wp-content(?!.*wp-content).*/', '', __DIR__);
-include($path . 'wp-load.php');
+include(ABSPATH . 'wp-load.php');
 require_once(ABSPATH . 'wp-admin/includes/plugin-install.php');
 require_once(ABSPATH . 'wp-admin/includes/file.php');
 require_once(ABSPATH . 'wp-admin/includes/misc.php');
