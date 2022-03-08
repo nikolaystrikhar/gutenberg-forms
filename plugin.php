@@ -13,12 +13,15 @@
 
 
 if (!defined('ABSPATH')) {
-	exit;
+    exit;
 }
 
 if (is_readable(dirname(__FILE__) . '/extendify-sdk/loader.php')) {
-    $GLOBALS['extendifySdkSourcePlugin'] = 'Gutenberg Forms';
-	require_once plugin_dir_path(__FILE__) . 'extendify-sdk/loader.php';
+    if (!isset($GLOBALS['extendify_sdk_partner'])) {
+        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
+        $GLOBALS['extendify_sdk_partner'] = 'Partner Name';
+    }
+    require_once plugin_dir_path(__FILE__) . 'extendify-sdk/loader.php';
 }
 
 
