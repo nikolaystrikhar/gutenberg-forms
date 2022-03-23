@@ -7,14 +7,15 @@ if (!defined('ABSPATH')) {
     die('No direct access.');
 }
 
-use Extendify\ExtendifySdk\ApiRouter;
-use Extendify\ExtendifySdk\Controllers\AuthController;
-use Extendify\ExtendifySdk\Controllers\MetaController;
-use Extendify\ExtendifySdk\Controllers\PingController;
-use Extendify\ExtendifySdk\Controllers\UserController;
-use Extendify\ExtendifySdk\Controllers\PluginController;
-use Extendify\ExtendifySdk\Controllers\TaxonomyController;
-use Extendify\ExtendifySdk\Controllers\TemplateController;
+use Extendify\Library\ApiRouter;
+use Extendify\Library\Controllers\AuthController;
+use Extendify\Library\Controllers\MetaController;
+use Extendify\Library\Controllers\PingController;
+use Extendify\Library\Controllers\UserController;
+use Extendify\Library\Controllers\PluginController;
+use Extendify\Library\Controllers\SiteSettingsController;
+use Extendify\Library\Controllers\TaxonomyController;
+use Extendify\Library\Controllers\TemplateController;
 
 \add_action(
     'rest_api_init',
@@ -27,11 +28,13 @@ use Extendify\ExtendifySdk\Controllers\TemplateController;
 
         ApiRouter::post('/templates', [TemplateController::class, 'index']);
         ApiRouter::post('/templates/(?P<template_id>[a-zA-Z0-9-]+)', [TemplateController::class, 'ping']);
-        ApiRouter::post('/related', [TemplateController::class, 'related']);
 
         ApiRouter::get('/user', [UserController::class, 'show']);
         ApiRouter::post('/user', [UserController::class, 'store']);
+        ApiRouter::post('/clear-user', [UserController::class, 'delete']);
         ApiRouter::get('/user-meta', [UserController::class, 'meta']);
+        ApiRouter::get('/max-free-imports', [UserController::class, 'maxImports']);
+
         ApiRouter::post('/register-mailing-list', [UserController::class, 'mailingList']);
 
         ApiRouter::post('/register', [AuthController::class, 'register']);
@@ -39,5 +42,8 @@ use Extendify\ExtendifySdk\Controllers\TemplateController;
 
         ApiRouter::get('/meta-data', [MetaController::class, 'getAll']);
         ApiRouter::post('/simple-ping', [PingController::class, 'ping']);
+
+        ApiRouter::get('/site-settings', [SiteSettingsController::class, 'show']);
+        ApiRouter::post('/site-settings', [SiteSettingsController::class, 'store']);
     }
 );
