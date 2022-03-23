@@ -3,10 +3,10 @@
  * Controls User info
  */
 
-namespace Extendify\ExtendifySdk\Controllers;
+namespace Extendify\Library\Controllers;
 
-use Extendify\ExtendifySdk\Http;
-use Extendify\ExtendifySdk\User;
+use Extendify\Library\Http;
+use Extendify\Library\User;
 
 if (!defined('ABSPATH')) {
     die('No direct access.');
@@ -49,8 +49,20 @@ class UserController
     public static function store($request)
     {
         $userData = json_decode($request->get_param('data'), true);
+        // Keep this key for historical reasons.
         \update_user_meta(\get_current_user_id(), 'extendifysdk_user_data', $userData);
 
+        return new \WP_REST_Response(User::state());
+    }
+
+    /**
+     * Delete the data
+     *
+     * @return array
+     */
+    public static function delete()
+    {
+        \delete_user_meta(\get_current_user_id(), 'extendifysdk_user_data');
         return new \WP_REST_Response(User::state());
     }
 
@@ -63,6 +75,17 @@ class UserController
     public static function mailingList($request)
     {
         $response = Http::post('/register-mailing-list', $request->get_params());
+        return new \WP_REST_Response($response);
+    }
+
+    /**
+     * Get the max imports
+     *
+     * @return WP_REST_Response|WP_Error
+     */
+    public static function maxImports()
+    {
+        $response = Http::get('/max-free-imports');
         return new \WP_REST_Response($response);
     }
 }

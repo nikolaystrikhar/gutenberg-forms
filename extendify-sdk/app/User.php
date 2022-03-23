@@ -3,7 +3,9 @@
  * Helper class for interacting with the user
  */
 
-namespace Extendify\ExtendifySdk;
+namespace Extendify\Library;
+
+use Extendify\Library\App;
 
 /**
  * Helper class for interacting with the user
@@ -26,7 +28,7 @@ class User
     protected $user = null;
 
     /**
-     * The DB key for scoping
+     * The DB key for scoping. For historical reasons do not change
      *
      * @var string
      */
@@ -103,15 +105,26 @@ class User
             $userData['version'] = 0;
         }
 
-        // Get the current default number of imports allowed.
-        if (!isset($userData['state']['allowedImports'])) {
-            $currentImports = Http::get('/max-free-imports');
-            $userData['state']['allowedImports'] = is_numeric($currentImports) && $currentImports > 0 ? $currentImports : 3;
+        // This will reset the allowed max imports to 0 once a week which will force the library to re-check.
+        if (!get_transient('extendify_import_max_check_' . $this->user->ID)) {
+            set_transient('extendify_import_max_check_' . $this->user->ID, time(), strtotime('1 week', 0));
+            $userData['state']['allowedImports'] = 0;
+        }
+
+        // Similiar to above, this will give the user free imports once a month just for logging in.
+        if (!get_transient('extendify_free_extra_imports_check_' . $this->user->ID)) {
+            set_transient('extendify_free_extra_imports_check_' . $this->user->ID, time(), strtotime('first day of next month', 0));
+            $userData['state']['runningImports'] = 0;
+        }
+
+        if (!isset($userData['state']['sdkPartner']) || !$userData['state']['sdkPartner']) {
+            $userData['state']['sdkPartner'] = App::$sdkPartner;
         }
 
         $userData['state']['uuid'] = self::data('uuid');
         $userData['state']['canInstallPlugins'] = \current_user_can('install_plugins');
         $userData['state']['canActivatePlugins'] = \current_user_can('activate_plugins');
+        $userData['state']['isAdmin'] = \current_user_can('create_users');
 
         return \wp_json_encode($userData);
     }

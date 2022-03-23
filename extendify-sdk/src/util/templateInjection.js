@@ -1,27 +1,32 @@
-import { dispatch } from '@wordpress/data'
-import { get } from 'lodash'
-
-import { createBlocksFromInnerBlocksTemplate } from './blocks'
-
-export function injectTemplate(template) {
-    if (!template) {
-        throw Error('Template not found')
-    }
-
-    const { parse } = window.wp.blocks
-    const createdBlocks = createBlocksFromInnerBlocksTemplate(parse(get(template, 'fields.code')))
-    return injectTemplateBlocks(createdBlocks, template)
-}
+import { dispatch, select } from '@wordpress/data'
 
 export function injectTemplateBlocks(blocks, templateRaw) {
-    const { insertBlocks } = dispatch('core/block-editor')
-    return insertBlocks(blocks).then(() => {
-        window.dispatchEvent(new CustomEvent('extendify-sdk::template-inserted', {
-            detail: {
-                template: templateRaw,
-            },
-            bubbles: true,
-        }))
-    })
+    const { insertBlocks, replaceBlock } = dispatch('core/block-editor')
+    const {
+        getSelectedBlock,
+        getBlockHierarchyRootClientId,
+        getBlockIndex,
+        getGlobalBlockCount,
+    } = select('core/block-editor')
 
+    const { clientId, name, attributes } = getSelectedBlock() || {}
+    const rootClientId = clientId ? getBlockHierarchyRootClientId(clientId) : ''
+    const insertPointIndex =
+        (rootClientId ? getBlockIndex(rootClientId) : getGlobalBlockCount()) + 1
+
+    const injectblock = () =>
+        name === 'core/paragraph' && attributes?.content === ''
+            ? replaceBlock(clientId, blocks)
+            : insertBlocks(blocks, insertPointIndex)
+
+    return injectblock().then(() =>
+        window.dispatchEvent(
+            new CustomEvent('extendify::template-inserted', {
+                detail: {
+                    template: templateRaw,
+                },
+                bubbles: true,
+            }),
+        ),
+    )
 }

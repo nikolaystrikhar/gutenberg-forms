@@ -1,16 +1,26 @@
 import create from 'zustand'
+import { persist } from 'zustand/middleware'
+import { Taxonomies as TaxonomiesApi } from '@extendify/api/Taxonomies'
 
-export const useTaxonomyStore = create((set, get) => ({
-    taxonomies: {},
-    openedTaxonomies: [],
-    setTaxonomies: (taxonomies) => set({
-        taxonomies,
-    }),
-    // This is here because I couldn't get the sidebar components to hold state on re-render
-    toggleOpenedTaxonomy: (tax, add) => {
-        const opened = get().openedTaxonomies
-        set({
-            openedTaxonomies: add ? [...opened, tax] : [...opened.filter(t => t != tax)],
-        })
-    },
-}))
+export const useTaxonomyStore = create(
+    persist(
+        (set, get) => ({
+            taxonomies: {},
+            setTaxonomies: (taxonomies) => set({ taxonomies }),
+            fetchTaxonomies: async () => {
+                let tax = await TaxonomiesApi.get()
+                tax = Object.keys(tax).reduce((taxFiltered, key) => {
+                    taxFiltered[key] = tax[key]
+                    return taxFiltered
+                }, {})
+                if (!Object.keys(tax)?.length) {
+                    return
+                }
+                get().setTaxonomies(tax)
+            },
+        }),
+        {
+            name: 'extendify-taxonomies',
+        },
+    ),
+)

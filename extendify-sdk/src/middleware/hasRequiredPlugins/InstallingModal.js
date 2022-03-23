@@ -1,40 +1,57 @@
-import { __ } from '@wordpress/i18n'
 import { Modal, Button } from '@wordpress/components'
 import { useState, render } from '@wordpress/element'
-import { Plugins } from '../../api/Plugins'
-import { useWantedTemplateStore } from '../../state/Importing'
-import ErrorInstalling from './ErrorInstalling'
+import { __ } from '@wordpress/i18n'
+import { Plugins } from '@extendify/api/Plugins'
+import { useWantedTemplateStore } from '@extendify/state/Importing'
 import ReloadRequiredModal from '../ReloadRequiredModal'
+import ErrorInstalling from './ErrorInstalling'
 
-export default function InstallingModal() {
+export default function InstallingModal({ requiredPlugins }) {
     const [errorMessage, setErrorMessage] = useState('')
-    const wantedTemplate = useWantedTemplateStore(store => store.wantedTemplate)
+    const wantedTemplate = useWantedTemplateStore(
+        (store) => store.wantedTemplate,
+    )
 
     // Hardcoded temporarily to not force EP install
     // const required = wantedTemplate?.fields?.required_plugins
-    const required = wantedTemplate?.fields?.required_plugins.filter(p => p !== 'editorplus')
+    const required =
+        requiredPlugins ??
+        wantedTemplate?.fields?.required_plugins.filter(
+            (p) => p !== 'editorplus',
+        )
 
-    Plugins.installAndActivate(required).then(() => {
-        useWantedTemplateStore.setState({
-            importOnLoad: true,
+    Plugins.installAndActivate(required)
+        .then(() => {
+            useWantedTemplateStore.setState({
+                importOnLoad: true,
+            })
+            render(
+                <ReloadRequiredModal />,
+                document.getElementById('extendify-root'),
+            )
         })
-        render(<ReloadRequiredModal />, document.getElementById('extendify-root'))
-    })
         .catch(({ message }) => {
             setErrorMessage(message)
         })
 
     if (errorMessage) {
-        return <ErrorInstalling msg={errorMessage}/>
+        return <ErrorInstalling msg={errorMessage} />
     }
 
-    return <Modal
-        title={__('Installing plugins', 'extendify-sdk')}
-        isDismissible={false}>
-        <Button style={{
-            width: '100%',
-        }} disabled isPrimary isBusy onClick={() => {}}>
-            {__('Installing...', 'extendify-sdk')}
-        </Button>
-    </Modal>
+    return (
+        <Modal
+            title={__('Installing plugins', 'extendify')}
+            isDismissible={false}>
+            <Button
+                style={{
+                    width: '100%',
+                }}
+                disabled
+                isPrimary
+                isBusy
+                onClick={() => {}}>
+                {__('Installing...', 'extendify')}
+            </Button>
+        </Modal>
+    )
 }
