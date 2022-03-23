@@ -5,7 +5,7 @@
  * Description: The Next Generation WordPress Form Builder. Build forms directly within Gutenberg editor live. Add & arrange form fields like blocks.
  * Author: WPChill
  * Author URI: https://wpchill.com/
- * Version: 2.2.7
+ * Version: 2.2.8
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
  * Text Domain: cwp-gutenberg-forms
