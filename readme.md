@@ -74,7 +74,11 @@ We appreciate all contributions and don't want a wall of rules to get in the way
 ## Changelog
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
-= 2.2.8 = TBA
+
+= 2.2.8 = 23.03.2022
+
+- Fixed: Wrong include path for wp-load.php - https://github.com/WPChill/gutenberg-forms/pull/226
+- Updated: Extendify SDK - https://github.com/WPChill/gutenberg-forms/pull/233
 
 - Added custom form action ( # 179 )
 - Added field descriptions ( #134 )
