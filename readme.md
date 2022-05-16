@@ -75,6 +75,11 @@ We appreciate all contributions and don't want a wall of rules to get in the way
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com).
 
+= 2.2.8.1 = 16.05.222
+
+- Updated plugin author and plugin author URI
+- Updated compatibility for WP 5.9
+
 = 2.2.8 = 23.03.2022
 
 - Fixed: Wrong include path for wp-load.php - https://github.com/WPChill/gutenberg-forms/pull/226
