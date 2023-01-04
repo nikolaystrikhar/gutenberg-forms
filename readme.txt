@@ -1,14 +1,13 @@
 === WordPress Form Builder Plugin - Gutenberg Forms ===
-Contributors: jack-kitterhing, nikolaystrikhar, estevao90
+Contributors: nikolaystrikhar
 Tags: wordpress form,  gutenberg form, contact form, subscribe form, multi-step form, gutenberg block, contact form plugin, forms, form builder, custom form, contact button, contact me, custom contact form, form manager, form, forms builder, forms creator, captcha, recaptcha, Akismet, email form, web form, feedback form, email submit form, message form, contact form block, wordpress form plugin
 Requires at least: 5.0
-Tested up to: 5.9
-Stable tag: 2.2.8.1
+Tested up to: 6.0
+Stable tag: 2.2.8.2
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
 The Next Generation WordPress Form Builder. Build forms directly within Gutenberg editor live. Add & arrange form fields like blocks.
-
 
 == Description ==
 
@@ -61,7 +60,7 @@ Read More & Install it, it's **FREE**.
 [https://wordpress.org/plugins/guten-forms-mailchimp/](https://wordpress.org/plugins/guten-forms-mailchimp/)
 
 **Akismet Add-on**
-Akismet integration is ready as an add-on.  It let’s you secure your forms from spammers. Akismet checks your contact form submissions against their global database of spam.
+Akismet integration is ready as an add-on. It let’s you secure your forms from spammers. Akismet checks your contact form submissions against their global database of spam.
 
 Read More & Install it, it's **FREE**.
 [https://wordpress.org/plugins/guten-forms-akismet/](https://wordpress.org/plugins/guten-forms-akismet/)
@@ -71,12 +70,6 @@ Read More & Install it, it's **FREE**.
 Your feedback, ideas and suggestions would be really helpful in adding & improving the features that you need. We have set up a tool to collect your feedback and prioritize the features based on votes.
 
 [https://gutenbergforms.feedy.app/feedback/](https://gutenbergforms.feedy.app/feedback/)
-
-= Get involved with the Development =
-
-This is a new plugin and I am committed to making it one of the best Form Builder plugin for WordPress. But, for that, I need your support to test & contribute. I just want you to test out the plugin and report any bugs you found and suggest features you wish to be added to it. And, if you are a coder and wish to contribute to this Opensource Form Builder you are welcome to get involved via Github.
-
-[https://github.com/munirkamal/gutenberg-forms](https://github.com/munirkamal/gutenberg-forms)
 
 ## Template and Pattern Library
 
@@ -126,17 +119,23 @@ You may also get involved with the development via Github:
 == Changelog ==
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com)
 
-= 2.2.8.1 = 16.05.2022
+= 2.2.8.2 = (5 Jan 2023)
+
+- Fixed: Plugin was broken on wp.org
+- Updated: Compatibility with WP 6.0
+- Updated: Readme
+
+= 2.2.8.1 = (16 May 2022)
 
 - Updated plugin author and plugin author URI
 - Updated compatibility for WP 5.9
 
-= 2.2.8 = 23.03.2022
+= 2.2.8 = (23 Mar 2022)
 
 - Fixed: Wrong include path for wp-load.php - https://github.com/WPChill/gutenberg-forms/pull/226
 - Updated: Extendify SDK - https://github.com/WPChill/gutenberg-forms/pull/233
 
-= 2.2.7 = 02.02.2022
+= 2.2.7 = (2 Feb 2022)
 
 - Fixed email trigger cc @ilangleben19
 - Recaptcha enqueueing when forms are not present (https://github.com/WPChill/gutenberg-forms/issues/200, #190, #195 )
@@ -144,7 +143,7 @@ For more information, visit [Gutenberg Forms](https://gutenbergforms.com)
 - Redone build for dashboard
 - Updated React, Redux, ReactDOM to WP versions
 
-= 2.2.6 = ( 3 Jan 2022 )
+= 2.2.6 = (3 Jan 2022)
 
 - Updated Contributors
 
@@ -258,7 +257,6 @@ Improved: Updates to the pattern and template library
 - Fixed: Bugs
 - Improved: Code
 
-
 = 1.1.0 = (28 Mar 2020)
 - Added: Multi Step feature
 - Added: File Upload Field
@@ -268,8 +266,6 @@ Improved: Updates to the pattern and template library
 - Added: Option To Hide Form On Success
 - Improved: Button Block
 - Improved: Group Block
-
-Thanks to All the Contributors: https://github.com/munirkamal/gutenberg-forms/graphs/contributors
 
 = 1.0.9 = (21 Mar 2020)
 - Fixed: Bugs
