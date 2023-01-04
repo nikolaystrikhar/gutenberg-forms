@@ -43,7 +43,6 @@ yarn.lock
 .wordpress-org
 .github
 LICENSE.md
-dist
 .babelrc
 DOCKER_ENV
 docker_tag
