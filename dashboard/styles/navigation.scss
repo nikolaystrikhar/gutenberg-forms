@@ -1,0 +1,53 @@
+.cwp_navigation {
+  @include breakpoint("md") {
+    text-align: center;
+  }
+
+  .cwp-tab-btn {
+    border-radius: 0px !important;
+    padding: 25px 22px;
+
+    &.is-active {
+      border-bottom: 2px solid #000;
+    }
+
+    &:focus {
+      outline: none !important;
+      box-shadow: none !important;
+    }
+  }
+}
+
+.cwp-header {
+  border-bottom: 1px solid #eee;
+
+  &.sub-header {
+    text-align: center;
+    position: sticky;
+    top: 30px;
+    border-top: 1px solid #eee;
+    z-index: 99999;
+
+    @include breakpoint("md") {
+      top: 45px;
+    }
+
+    @include breakpoint("sm") {
+      top: 30px;
+    }
+
+    @include breakpoint("xs") {
+      top: 45px;
+    }
+
+    @include breakpoint("xxs") {
+      top: 0;
+    }
+  }
+}
+
+.cwp-nav-imp {
+  color: #f00;
+  font-size: 13px;
+  font-weight: bold;
+}

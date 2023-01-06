@@ -1,0 +1,15 @@
+.cwp_settings_root {
+  & .cwp_sidebar {
+    background: #fff;
+    border-right: 1px solid #ccc;
+    height: 100%;
+
+    & button.is-primary {
+      color: #fff;
+
+      &:focus {
+        color: #fff !important;
+      }
+    }
+  }
+}

@@ -1,0 +1,73 @@
+@import "./styles/variables.scss";
+@import "./styles/mixins";
+@import "./styles/utils";
+@import "./styles/header.scss";
+@import "./styles/navigation.scss";
+@import "./styles/dashboard/dashboard.scss";
+@import "./styles/integrations/integrations.scss";
+@import "./styles/settings/settings.scss";
+@import "./styles/entries/index.scss";
+@import "./styles/breadcrumbs.scss";
+
+.cwp-gf-modal {
+  .footer {
+    text-align: right;
+    button:first-child {
+      margin-right: 10px;
+    }
+  }
+}
+
+.cwp-notices-root {
+  .cwp-notice {
+    margin: 10px 0px !important;
+    p {
+      margin: 0 !important;
+    }
+  }
+}
+
+.components-guide__container {
+  padding: 20px;
+  .cwp_guide {
+    img {
+      width: 100%;
+    }
+  }
+
+  .components-guide__footer {
+    width: auto;
+  }
+}
+
+.gutenberg-forms_page_cwp_gf_dashboard #wpcontent {
+  padding-left: 0 !important;
+}
+
+.toplevel_page_gutenberg_forms #wpcontent {
+  padding-left: 0 !important;
+}
+
+.cwp_load {
+  position: absolute;
+  right: 30px;
+  bottom: 0;
+}
+
+.cwp_guide {
+  & img {
+    width: 100%;
+  }
+
+  &.centered {
+    & img {
+      width: 70% !important;
+    }
+  }
+}
+
+.cwp-gf-skeleton {
+  height: 30px;
+  animation: pulse 1s infinite ease-in-out;
+  margin-top: 10px;
+}

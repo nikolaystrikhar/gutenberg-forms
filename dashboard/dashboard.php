@@ -439,13 +439,13 @@ class Dashboard
 
                 if ($production) {
 
-                    $js = "http://gutenberg-forms-latest.local/wp-content/plugins/gutenberghub-dashboard/build/build.js";
-                    $css = "http://gutenberg-forms-latest.local/wp-content/plugins/gutenberghub-dashboard/build/build.css";
+                    $js = "http://gutenberg-forms-latest.local/wp-content/plugins/gutenberghub-dashboard/build/index.js";
+                    $css = "http://gutenberg-forms-latest.local/wp-content/plugins/gutenberghub-dashboard/build/style-index.css";
                     wp_enqueue_script('cwp_gf_dashboard_script', $js, array('wp-api', 'wp-i18n', 'wp-components', 'wp-element'), uniqid(), true);
                     wp_enqueue_style('cwp_gf_dashboard_style', $css, array('wp-components'), uniqid());
                 } else {
-                    wp_enqueue_script('cwp_gf_dashboard_script', plugins_url('/', __DIR__) . '/dist/dashboard/build.js', array('wp-api', 'wp-i18n', 'wp-components', 'wp-element'), 'latest', true);
-                    wp_enqueue_style('cwp_gf_dashboard_style', plugins_url('/', __DIR__) . '/dist/dashboard/build.css', array('wp-components'), 'latest');
+                    wp_enqueue_script('cwp_gf_dashboard_script', plugins_url('/', __DIR__) . '/dist/dashboard/index.js', array('wp-api', 'wp-i18n', 'wp-components', 'wp-element'), 'latest', true);
+                    wp_enqueue_style('cwp_gf_dashboard_style', plugins_url('/', __DIR__) . '/dist/dashboard/style-index.css', array('wp-components'), 'latest');
                 }
             }
 

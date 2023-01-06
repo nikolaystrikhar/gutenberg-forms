@@ -1,0 +1,140 @@
+$primaryColor: rgb(245, 247, 249);
+$secondaryColor: #fff;
+$hoverColor: lighten($primaryColor, 10%);
+$contrastColor: #000;
+$textColor: rgb(104, 124, 147);
+
+@mixin align {
+  display: inline-block;
+  svg {
+    margin-left: 5px;
+    vertical-align: bottom;
+  }
+}
+
+@mixin default_btn() {
+  color: $contrastColor;
+  background: $primaryColor;
+  border: 1px solid rgb(226, 230, 235) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
+  padding: 8px 15px;
+  border: 1px;
+  transition: 0.5s;
+  cursor: pointer !important;
+  text-decoration: none;
+
+  &:focus {
+    outline: none !important;
+  }
+
+  &:hover {
+    border: 1px solid rgb(187, 191, 196) !important;
+  }
+
+  @include align();
+}
+
+@mixin primary_btn() {
+  color: $primaryColor;
+  background: rgb(0, 133, 186);
+  border: 1px solid rgba(1, 118, 165, 0.6) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
+  padding: 8px 15px;
+  border: 1px;
+  transition: 0.5s;
+  cursor: pointer !important;
+  text-decoration: none;
+
+  &:focus {
+    outline: none !important;
+  }
+
+  &:hover {
+    color: $primaryColor !important;
+    border: 1px solid rgba(1, 118, 165, 0.6) !important;
+    background: rgba(0, 133, 186, 0.84);
+  }
+  @include align();
+}
+
+@mixin default_hover_primary_btn() {
+  color: $contrastColor;
+  background: $primaryColor;
+  border: 1px solid rgb(226, 230, 235) !important;
+  box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
+  padding: 8px 15px;
+  border: 1px;
+  transition: 0.15s;
+  cursor: pointer !important;
+  text-decoration: none;
+
+  &:focus {
+    outline: none !important;
+  }
+
+  &:hover {
+    color: $primaryColor;
+    background: rgb(0, 133, 186);
+    border: 1px solid rgba(1, 118, 165, 0.6) !important;
+    box-shadow: 0 1px 3px rgba(0, 0, 0, 0.07);
+    padding: 8px 15px;
+    border: 1px;
+  }
+  @include align();
+}
+
+.cwp-df-btn {
+  @include default_btn();
+}
+
+.cwp-pr-btn {
+  @include primary_btn();
+}
+
+.cwp-df-pr-btn {
+  @include default_hover_primary_btn();
+}
+
+@mixin scrollbar() {
+  &::-webkit-scrollbar {
+    width: 5px;
+    height: 5px;
+  }
+
+  &::-webkit-scrollbar-track {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb {
+    background: transparent;
+  }
+
+  &::-webkit-scrollbar-thumb:hover {
+    background: transparent;
+  }
+
+  &:hover {
+    &::-webkit-scrollbar-track {
+      background: #eee;
+    }
+
+    &::-webkit-scrollbar-thumb {
+      background: #ccc;
+    }
+
+    &::-webkit-scrollbar-thumb:hover {
+      background: #ccc;
+    }
+  }
+}
+@keyframes pulse {
+  0% {
+    background-color: rgba(165, 165, 165, 0.1);
+  }
+  50% {
+    background-color: rgba(165, 165, 165, 0.3);
+  }
+  100% {
+    background-color: rgba(165, 165, 165, 0.1);
+  }
+}

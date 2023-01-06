@@ -1,0 +1,73 @@
+.cwp_plugin_import_root {
+  .cwp_import_plugin_list {
+    .cwp-plugin-import {
+      h3 {
+        display: flex;
+        align-items: center;
+        justify-content: space-between;
+        span,
+        svg {
+          margin-right: 10px;
+          display: flex;
+          flex-direction: row;
+          align-items: center;
+        }
+      }
+    }
+
+    .cwp_import_plugin_list_prompt {
+      padding: 50px 0px;
+      text-align: center;
+      background: #eee;
+      span {
+        display: flex;
+        align-items: center;
+        justify-content: center;
+
+        .components-spinner {
+          margin: 0px 10px 0px 0px;
+        }
+      }
+    }
+
+    .cwp_empty {
+      padding: 50px 0px;
+      text-align: center;
+      display: flex;
+      background: #eee;
+      flex-direction: column;
+      justify-content: center;
+      align-items: center;
+      svg {
+        width: 30px;
+        height: 30px;
+        margin-bottom: 10px;
+      }
+    }
+  }
+
+  .cwp_plugin_import_options {
+    .cwp_plugin_import_settings {
+      .cwp_plugin_import_settings_search {
+        padding: 30px;
+        border: 1px solid #eee;
+        .cwp-sf-label {
+          display: flex;
+          flex-direction: row;
+          padding: 6px 0px;
+          .components-spinner {
+            margin: 0px 0px -3px 10px;
+          }
+        }
+
+        .cwp_plugin_import_settings_footer {
+          display: flex;
+          justify-content: flex-end;
+          & button:first-child {
+            margin-right: 10px;
+          }
+        }
+      }
+    }
+  }
+}

@@ -1,0 +1,49 @@
+/**
+
+Used to insert breakpoints while working directly
+
+**/
+
+@mixin breakpoint($class) {
+  @if $class == "xs" {
+    @media (max-width: 767px) {
+      @content;
+    }
+  } @else if $class == "xxs" {
+    @media (max-width: 600px) {
+      @content;
+    }
+  } @else if $class == "sm" {
+    @media (max-width: 768px) {
+      @content;
+    }
+  } @else if $class == "md" {
+    @media (max-width: 992px) {
+      @content;
+    }
+  } @else if $class == "lg" {
+    @media (max-width: 1200px) {
+      @content;
+    }
+  } @else {
+    @warn "Breakpoint mixin supports: xs, sm, md, lg";
+  }
+}
+
+/**
+  Will make the text un selectable
+**/
+
+@mixin un-selectable() {
+  user-select: none;
+  -moz-user-select: none;
+  -ms-user-select: none;
+}
+
+/**
+ Apply given size to width and height
+**/
+@mixin dimensions($size) {
+  width: $size;
+  height: $size;
+}

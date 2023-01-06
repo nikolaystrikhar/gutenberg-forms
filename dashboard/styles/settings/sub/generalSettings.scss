@@ -1,0 +1,22 @@
+.cwp_general_settings_root {
+  & .cwp_general_settings_messages {
+    & .fields {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      grid-gap: 30px;
+      & input {
+        padding: 10px 10px;
+      }
+
+      @include breakpoint("sm") {
+        grid-template-columns: 1fr;
+      }
+    }
+  }
+
+  & .cwp_general_settings_root_save {
+    margin: 20px 0px;
+    display: flex;
+    justify-content: flex-end;
+  }
+}

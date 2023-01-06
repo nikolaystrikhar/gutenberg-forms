@@ -1,0 +1,30 @@
+.cwp-breadcrumbs {
+  display: flex;
+  flex-direction: row;
+  padding: 20px 0px;
+
+  a {
+    text-decoration: none !important;
+  }
+
+  &.end {
+    justify-content: flex-end;
+  }
+
+  &.center {
+    justify-content: flex-center;
+  }
+
+  &.start {
+    justify-content: flex-start;
+  }
+
+  .breadcrumb {
+    display: flex;
+    align-items: center;
+
+    .cwp-separator {
+      margin: 0px 5px;
+    }
+  }
+}

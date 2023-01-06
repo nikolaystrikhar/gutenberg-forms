@@ -1,0 +1,35 @@
+.cwp_dashboard_root {
+  & .cwp_info_cards {
+    display: grid;
+    grid-template-columns: repeat(3, calc(33.33% - 25px));
+    grid-gap: 30px;
+    @include breakpoint("sm") {
+      grid-template-columns: 100% !important;
+    }
+
+    @include breakpoint("md") {
+      grid-template-columns: repeat(2, calc(50% - 25px));
+    }
+
+    & .cwp_info_card {
+      text-align: center;
+      display: flex;
+      flex-direction: column;
+      justify-content: center;
+      padding: 40px;
+
+      & svg {
+        max-width: 90px;
+        max-height: 90px;
+      }
+
+      & h3 {
+        text-transform: capitalize;
+      }
+
+      & h1 {
+        font-size: 90px;
+      }
+    }
+  }
+}

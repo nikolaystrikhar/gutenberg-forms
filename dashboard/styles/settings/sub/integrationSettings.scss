@@ -1,0 +1,32 @@
+.cwp_integ_fields {
+    & .cwp_setting_options {
+        display: flex;
+        justify-content: flex-end;
+
+        & button:nth-child(1) {
+            margin: 0px 10px 0px 0px;
+        }
+
+    }
+
+    & h3 {
+        & span {
+            vertical-align: text-top;
+        }   
+    }
+
+    & .cwp_api_field {
+        margin: 10px 0px;
+        display: flex;
+        flex-direction: row;
+        align-items: flex-end;
+
+        & .api_input {
+            flex:2;
+
+            & input {
+                padding: 5px 15px;
+            }
+        }
+    }
+}

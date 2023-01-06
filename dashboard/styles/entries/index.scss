@@ -1,0 +1,14 @@
+@import "./all-entries.scss";
+@import "./single-entry.scss";
+@import "./entries-summary.scss";
+@import "./export-modal.scss";
+
+.cwp-icon-button {
+  display: flex;
+  align-items: center;
+  svg {
+    margin-right: 5px;
+    width: 15px;
+    height: 15px;
+  }
+}
