@@ -9,6 +9,7 @@
 	"scripts": {
 		"start": "cgb-scripts start",
 		"build": "cgb-scripts build",
+		"eject": "cgb-scripts eject",
 		"start:admin": "wp-scripts start ./dashboard/index.js --output-path=./dist/dashboard",
 		"build:admin": "wp-scripts build  --webpack-src-dir=dashboard --output-path=./dist/dashboard"
 	},
