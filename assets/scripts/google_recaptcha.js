@@ -2,18 +2,14 @@ jQuery(function ($) {
 	function gutenbergFormsRecaptchaLoad() {
 		// recaptcha required form elements
 		$(".cwp-form").each(function () {
-			const form = $(this)[0]; // current form
-
 			// checking if the current form has recaptcha enabled
-			const isRecaptchaEnabled = $(this).data("recaptchaenable");
-			const sitekey = $(this).data("siteKey");
+			const is_recaptcha_enabled = $(this).data("recaptchaenable");
 
-			console.log(form);
+			if (is_recaptcha_enabled) {
+				const form    = $(this)[0]; // current form
+				const sitekey = $(this).data("siteKey");
 
-			if (isRecaptchaEnabled) {
-				grecaptcha.render(form, {
-					sitekey,
-				});
+				grecaptcha.render(form, { sitekey });
 			}
 		});
 	}

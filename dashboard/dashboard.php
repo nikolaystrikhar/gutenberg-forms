@@ -312,68 +312,64 @@ class Dashboard {
 
 	public function register_settings() {
 		$general_settings = array(
-				'messages' => array(
-						'spam'        => array(
-								'label' => 'Spam',
-								'value' => esc_html__( 'There was an error trying to setnd your message. Please try again later.', 'cwp-gutenberg-forms' ),
-						),
-						'error'       => array(
-								'label' => 'Error',
-								'value' => esc_html__( 'There was an error trying to send your message. Please try again later.', 'cwp-gutenberg-forms' ),
-						),
-						'name'        => array(
-								'label' => 'Name',
-								'value' => esc_html__( 'The name {{value}} is not valid!', 'cwp-gutenberg-forms' ),
-						),
-						'email'       => array(
-								'label' => 'Email',
-								'value' => esc_html__( 'The email {{value}} is not valid!', 'cwp-gutenberg-forms' ),
-						),
-						'text'        => array(
-								'label' => 'Text',
-								'value' => esc_html__( 'The text {{value}} is not valid!', 'cwp-gutenberg-forms' ),
-						),
-						'message'     => array(
-								'label' => 'Message',
-								'value' => esc_html__( 'The message {{value}} is not valid!', 'cwp-gutenberg-forms' ),
-						),
-						'phone'       => array(
-								'label' => 'Phone',
-								'value' => esc_html__( 'The phone {{value}} is not valid!', 'cwp-gutenberg-forms' ),
-						),
-						'website'     => array(
-								'label' => 'Website',
-								'value' => esc_html__( 'The website {{value}} is not valid!', 'cwp-gutenberg-forms' ),
-						),
-						'number'      => array(
-								'label' => 'Number',
-								'value' => esc_html__( 'The number {{value}} is not in range!', 'cwp-gutenberg-forms' ),
-						),
-						'file-upload' => array(
-								'label' => 'File Upload',
-								'value' => esc_html__( 'The file {{value}} is not valid!', 'cwp-gutenberg-forms' ),
-						),
-
+			'messages' => array(
+				'spam'        => array(
+					'label' => 'Spam',
+					'value' => esc_html__( 'There was an error trying to setnd your message. Please try again later.', 'cwp-gutenberg-forms' ),
 				),
+				'error'       => array(
+					'label' => 'Error',
+					'value' => esc_html__( 'There was an error trying to send your message. Please try again later.', 'cwp-gutenberg-forms' ),
+				),
+				'name'        => array(
+					'label' => 'Name',
+					'value' => esc_html__( 'The name {{value}} is not valid!', 'cwp-gutenberg-forms' ),
+				),
+				'email'       => array(
+					'label' => 'Email',
+					'value' => esc_html__( 'The email {{value}} is not valid!', 'cwp-gutenberg-forms' ),
+				),
+				'text'        => array(
+					'label' => 'Text',
+					'value' => esc_html__( 'The text {{value}} is not valid!', 'cwp-gutenberg-forms' ),
+				),
+				'message'     => array(
+					'label' => 'Message',
+					'value' => esc_html__( 'The message {{value}} is not valid!', 'cwp-gutenberg-forms' ),
+				),
+				'phone'       => array(
+					'label' => 'Phone',
+					'value' => esc_html__( 'The phone {{value}} is not valid!', 'cwp-gutenberg-forms' ),
+				),
+				'website'     => array(
+					'label' => 'Website',
+					'value' => esc_html__( 'The website {{value}} is not valid!', 'cwp-gutenberg-forms' ),
+				),
+				'number'      => array(
+					'label' => 'Number',
+					'value' => esc_html__( 'The number {{value}} is not in range!', 'cwp-gutenberg-forms' ),
+				),
+				'file-upload' => array(
+					'label' => 'File Upload',
+					'value' => esc_html__( 'The file {{value}} is not valid!', 'cwp-gutenberg-forms' ),
+				),
+			),
 		);
 
 		register_setting(
-				self::settings_group,
-				'cwp_gutenberg_forms_general_settings',
-				array(
-						'type'         => 'string',
-						'show_in_rest' => true,
-						'default'      => json_encode( $general_settings, JSON_PRETTY_PRINT ),
-				)
+			self::settings_group,
+			'cwp_gutenberg_forms_general_settings',
+			array(
+				'type'         => 'string',
+				'show_in_rest' => true,
+				'default'      => json_encode( $general_settings, JSON_PRETTY_PRINT ),
+			)
 		);
 
 		$saved_general_settings = get_option( 'cwp_gutenberg_forms_general_settings' );
 		$new_messages           = array();
 
-
 		if ( array_key_exists( 'messages', json_decode( $saved_general_settings, true ) ) ) {
-
-
 			# merging updated message
 			$new_messages = array_merge( $general_settings['messages'], json_decode( $saved_general_settings, true )['messages'] );
 		}
@@ -383,30 +379,28 @@ class Dashboard {
 		$new_general_settings['messages'] = $new_messages;
 		$new_general_settings_json        = json_encode( $new_general_settings, JSON_PRETTY_PRINT );
 
-
 		update_option( 'cwp_gutenberg_forms_general_settings', $new_general_settings_json );
 
 		$this->general = $new_general_settings_json;
 
 		foreach ( $this->settings['integrations'] as $integration => $details ) {
-
 			$enable_integration = "cwp__enable__" . $integration;
 
 			register_setting(
-					self::settings_group,
-					$enable_integration,
-					array(
-							'type'         => 'boolean',
-							'show_in_rest' => true,
-							'default'      => false,
-					)
+				self::settings_group,
+				$enable_integration,
+				array(
+					'type'         => 'boolean',
+					'show_in_rest' => true,
+					'default'      => false,
+				)
 			);
 
 			$is_enabled = get_option( $enable_integration ) === "1" ? true : false;
 
 			if (
-					array_key_exists( 'is_disabled', $details ) and
-					$details['is_disabled'] === true
+				array_key_exists( 'is_disabled', $details ) and
+				$details['is_disabled'] === true
 			) {
 				update_option( $enable_integration, false );
 				// disabling the integration if it is disabled and has errors
@@ -414,19 +408,18 @@ class Dashboard {
 
 			$this->settings['integrations'][ $integration ]['enable'] = $is_enabled;
 
-
 			foreach ( $details['fields'] as $field => $initialValue ) {
 
 				$field_group = "cwp__" . $integration . '__' . $field;
 
 				register_setting(
-						self::settings_group,
-						$field_group,
-						array(
-								'type'         => $initialValue['type'],
-								'show_in_rest' => true,
-								'default'      => $initialValue['default'],
-						)
+					self::settings_group,
+					$field_group,
+					array(
+						'type'         => $initialValue['type'],
+						'show_in_rest' => true,
+						'default'      => $initialValue['default'],
+					)
 				);
 
 				//SETTING CURRENT_VALUE

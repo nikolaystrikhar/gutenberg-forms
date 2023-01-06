@@ -1,31 +1,31 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-// TODO make the enqueve function global with the tests so that assets can be loaded conditionally from any other part of the plugin
-
-
-/**
- * All assets will be loaded from this file
- * Either they are conditional assets or not
- */
-
 class cwp_gf_AssetsHandler
 {
+	private array $blocks;
 
-    public function __construct($blocks)
-    {
-        $this->blocks = $blocks; # current post blocks
+	public function __construct( array $blocks = array() ) {
+        $this->blocks = $blocks;
     }
 
-    /**
-     * Will enqueue required assets in the post based on block attributes
-     */
+	public function enqueue(): void {
+		if ( has_block( "cwp/block-gutenberg-forms" ) ) {
+			wp_enqueue_script(
+				'gutenberg-forms-google-recaptcha',
+				plugins_url( '/', __FILE__ ) . 'scripts/google_recaptcha.js',
+				array( 'jquery' ),
+				filemtime( plugin_dir_path( __FILE__ ) . 'scripts/google_recaptcha.js' ),
+				true
+			);
 
-    public function enqueue()
-    {
-        if( has_block("cwp/block-gutenberg-forms") ) {
-            wp_enqueue_script('gutenberg_forms-recaptcha-render-script', plugins_url('/', __FILE__) . 'scripts/recaptcha-render.js', array('jquery'), 'latest', true);
-            wp_enqueue_script('gutenberg_forms-recaptcha', "https://www.google.com/recaptcha/api.js", array('gutenberg_forms-recaptcha-render-script'), '', true);
-        }
-    }
+			wp_enqueue_script(
+				'google-recaptcha',
+				"https://www.google.com/recaptcha/api.js",
+				array( 'gutenberg-forms-google-recaptcha' ),
+				'',
+				true
+			);
+		}
+	}
 }
