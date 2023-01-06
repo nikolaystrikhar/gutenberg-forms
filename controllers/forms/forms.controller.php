@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 
 # Importing sub-controllers to make things organized
 require_once plugin_dir_path(__FILE__) . 'forms.import.controller.php';
@@ -20,7 +21,7 @@ class cwp_gf_Forms_controller
     }
 
     /**
-     * All rest route required for the current controller will be 
+     * All rest route required for the current controller will be
      * registered in the function below
      */
 

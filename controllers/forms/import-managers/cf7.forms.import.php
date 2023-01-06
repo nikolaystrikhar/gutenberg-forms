@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Contact form 7 forms import manager in the gutenberg forms
@@ -23,7 +24,7 @@ class cwp_gf_cf7_import_manager
     /**
      * Will import the selective forms iterating through given list of post ids
      * and converting them into gutenberg forms post in custom post type
-     * @param int[] $ids 
+     * @param int[] $ids
      */
 
     public function import_selective($ids)
@@ -37,13 +38,13 @@ class cwp_gf_cf7_import_manager
         ];
         $query = new WP_Query($query_arguments);
 
-        # cf7 posts has small shortcode tags of fields 
-        # therefore adding parsed shortcode post content in all posts 
+        # cf7 posts has small shortcode tags of fields
+        # therefore adding parsed shortcode post content in all posts
         # fetched by the above query
 
         foreach ($query->posts as $post) :
 
-            # preparing the contact form 7 shortcode for current post 
+            # preparing the contact form 7 shortcode for current post
             $form_shortcode             = "[contact-form-7 id='{$post->ID}' title='$post->post_title']";
 
             # then adding the parsed content using the above shortcode
@@ -73,7 +74,7 @@ class cwp_gf_cf7_import_manager
             $elements = $inputs;
 
             $formatted_options = [];
-            # this template will be used to convert contact form 7 -> gutenberg forms blocks 
+            # this template will be used to convert contact form 7 -> gutenberg forms blocks
             $gutenberg_forms_post_template = [];
 
             foreach ($elements as $element) :
@@ -88,7 +89,7 @@ class cwp_gf_cf7_import_manager
                 $required                   = empty($requiredAttribute) ? false : $requiredAttribute;
                 $is_multi_options_field     = in_array($type, ['select', 'radio', 'checkbox']);
 
-                # checking if the current input is contact form 7 hidden field 
+                # checking if the current input is contact form 7 hidden field
                 # which carries hidden information which will be excluded
                 $is_cf7_hidden_field = $type === 'hidden' && substr($name, 0, strlen('_wpcf7')) == '_wpcf7';
 
@@ -119,7 +120,7 @@ class cwp_gf_cf7_import_manager
      * Will parse options of the multi options fields
      * @example radio, checkbox, select
      * @param DOMNode $field
-     * @return string[] $field_options 
+     * @return string[] $field_options
      */
 
     public function get_options($field)

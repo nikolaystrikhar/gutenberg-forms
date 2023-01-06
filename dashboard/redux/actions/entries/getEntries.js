@@ -35,7 +35,13 @@ export const getEntries =
 
 		const filters_query = httpQuery(filters);
 
-		let proxy = rest_url.concat(`wp/v2/cwp_gf_entries?${filters_query}`);
+		// temp fix.
+		let proxy;
+		if ( rest_url.includes( 'wp-json' ) ) {
+			proxy = rest_url.concat(`wp/v2/cwp_gf_entries?${filters_query}`);
+		} else {
+			proxy = rest_url.concat(`wp/v2/cwp_gf_entries&${filters_query}`);
+		}
 
 		dispatch({
 			type: ENTRIES_FETCHING,
@@ -53,10 +59,7 @@ export const getEntries =
 					payload: {
 						data,
 						totalPages,
-						currentPage:
-							currentPage === null
-								? currentPageInState
-								: currentPage,
+						currentPage: currentPage === null ? currentPageInState : currentPage,
 						totalEntries,
 						filters,
 						hash,

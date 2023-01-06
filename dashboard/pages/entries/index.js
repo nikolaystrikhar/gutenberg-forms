@@ -13,7 +13,7 @@ import EntriesSummary from './subpages/entries-summary';
 const $ = jQuery;
 
 function Entries(props) {
-	const [chart, setChart] = useState(true);
+	const [chart, setChart] = useState(false);
 	const chartContainer = useRef();
 	const { hash } = props.location;
 	const hashBraces = hash.split('/');
@@ -44,7 +44,6 @@ function Entries(props) {
 				)}
 
 				<Header chart={chart} setChart={setChart} />
-				<Pagination />
 				<EntriesTable />
 				<Pagination />
 			</div>

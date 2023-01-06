@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 
 /**
  * @param array $array
@@ -23,7 +24,7 @@ function array_remove_keys($array, $keys)
 
 /**
  * This function will generate labels for a custom cpt
- * 
+ *
  * @param string name The Name of the post_type
  * @param string singular The singular name of the post_type
  * @param string plural The plural name of the post_type
@@ -160,7 +161,7 @@ function get_all_plugins_data()
  * Will replace the following entities to their corresponding html element
  * &#10; => \n [new line] => <br />
  * &#13; => \n [new row] => <br />
- * @param string $str 
+ * @param string $str
  */
 
 function replace_line_break_entities($str)
@@ -175,11 +176,11 @@ function replace_line_break_entities($str)
 }
 
 /**
- * 
+ *
  * @param array keys
  * @param array arr
  * Will order the given array with the given key order
- * 
+ *
  */
 
 function cwp_gf_order_by($keys, $arr)

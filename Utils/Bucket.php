@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Handles the uploads and various function that includes multimedia
@@ -22,10 +23,10 @@ class Bucket
     }
 
     /**
-     * 
+     *
      * upload
-     * @param file Uploads the file to the plugin_upload_directory   
-     * 
+     * @param file Uploads the file to the plugin_upload_directory
+     *
      */
 
     public static function upload($tmp_name, $extension)

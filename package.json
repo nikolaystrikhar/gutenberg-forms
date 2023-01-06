@@ -13,26 +13,27 @@
 		"build:admin": "wp-scripts build  --webpack-src-dir=dashboard --output-path=./dist/dashboard"
 	},
 	"dependencies": {
-		"@wordpress/server-side-render": "^1.14.0",
-		"cgb-scripts": "1.23.0",
-		"pikaday": "^1.8.0",
-		"wp-cli": "0.0.5",
 		"@nivo/bar": "^0.79.1",
 		"@nivo/core": "^0.79.0",
+		"@wordpress/components": "^23.1.0",
+		"@wordpress/server-side-render": "^1.14.0",
+		"cgb-scripts": "1.23.0",
 		"css-loader": "^6.5.1",
+		"lodash": "^4.17.21",
 		"node-sass": "^7.0.1",
+		"pikaday": "^1.8.0",
 		"postcss": "^8.4.6",
 		"postcss-loader": "^6.2.1",
 		"prettier": "^2.5.1",
 		"react": "^16.3.1",
-		"react-countup": "^6.1.1",
 		"react-redux": "^7.2.6",
-		"react-router-dom": "^5.2.1",
 		"react-router": "^5.2.1",
+		"react-router-dom": "^5.2.1",
 		"redux-devtools-extension": "^2.13.9",
 		"redux-thunk": "^2.4.1",
 		"sass-loader": "^12.4.0",
-		"unitize": "0.0.3"
+		"unitize": "0.0.3",
+		"wp-cli": "0.0.5"
 	},
 	"devDependencies": {
 		"@wordpress/scripts": "^25.1.0"

@@ -1,11 +1,12 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 
     class Validator {
 
         public function isEmpty($value) {
 
             if (gettype($value) === 'array') {
-               
+
                 $len = sizeof($value);
 
                 if ($len === 0) return true;
@@ -218,7 +219,7 @@
 
             if ( in_array( $field, $hidden_fields ) ) {
                 return true;
-            } else { 
+            } else {
                 return false;
             }
 

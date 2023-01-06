@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 
 require_once plugin_dir_path(__FILE__) . 'import-managers/cf7.forms.import.php';
 
@@ -73,7 +74,7 @@ class cwp_gf_Forms_Import_controller
     {
         $post_ids       = $request->get_param('post_ids');
         $plugin         = $request->get_param('plugin');
-        $import_type    = $request->get_param('type'); # can either be ["selective", "all"] 
+        $import_type    = $request->get_param('type'); # can either be ["selective", "all"]
         # import manager
         $import_manager;
 
@@ -92,7 +93,7 @@ class cwp_gf_Forms_Import_controller
      * Will return a list of forms available for exports
      * @param array[] list of supported plugins for conversion
      * @param WP_Request $request
-     * @return array[] available Forms 
+     * @return array[] available Forms
      */
 
     public function get_plugin_options($supported_plugins, $request)

@@ -57,10 +57,10 @@ export function timeSince(date) {
 		date = new Date(date);
 	}
 
-	var seconds = Math.floor((new Date() - date) / 1000);
+	var seconds  = Math.floor((new Date() - date) / 1000);
+	var interval = Math.floor(seconds / 31536000);
 	var intervalType;
 
-	var interval = Math.floor(seconds / 31536000);
 	if (interval >= 1) {
 		intervalType = 'year';
 	} else {
@@ -100,7 +100,6 @@ export function timeSince(date) {
  * @param {object} params the query object
  * @return {string} query string
  */
-
 export function httpQuery(params) {
 	const qs = Object.keys(params)
 		.map((key) => `${key}=${params[key]}`)
@@ -113,7 +112,6 @@ export function httpQuery(params) {
  * @param {number} range
  * @return {array}
  */
-
 export function createArrayToNum(range) {
 	let requiredArray = [];
 

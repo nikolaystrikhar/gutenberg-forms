@@ -1,12 +1,10 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 
 require_once plugin_dir_path(__DIR__) . 'triggers/functions.php';
 require_once plugin_dir_path(__DIR__) . 'triggers/validator.php';
 
-
-function get_value_and_name($field)
-{
-
+function get_value_and_name($field) {
     $value = $field['field_value'];
     $adminId = $field['decoded_entry']['admin_id'];
 
@@ -20,14 +18,10 @@ function get_value_and_name($field)
 
 class Entries
 {
-
-
     const text_domain = "cwp-gutenberg-forms";
     const post_type = "cwp_gf_entries";
 
-    public static function register_post_type()
-    {
-
+    public static function register_post_type(): void {
         $labels = generate_post_type_labels('Form Entries', "Entry", "Entries", self::text_domain);
 
         // registering post type for entries

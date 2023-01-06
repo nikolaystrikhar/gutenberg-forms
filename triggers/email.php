@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 
 require_once plugin_dir_path(__DIR__) . 'triggers/validator.php';
 require_once plugin_dir_path(__DIR__) . 'triggers/functions.php';

@@ -23,10 +23,6 @@ function Navigation(props) {
 					title: __('Integrations', TEXT_DOMAIN),
 				},
 				{
-					name: '#/entries',
-					title: __('Entries', TEXT_DOMAIN),
-				},
-				{
 					name: '#/settings',
 					title: __('Settings', TEXT_DOMAIN),
 				},

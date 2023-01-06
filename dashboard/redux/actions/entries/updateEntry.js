@@ -10,8 +10,8 @@ export const updateEntry = (updatedEntry) => (dispatch) => {
 	const idx = findIndex(currentEntries, { id });
 
 	currentEntries.splice(idx, 1, updatedEntry);
-	// now the entry is updated
 
+	// now the entry is updated
 	dispatch({
 		type: UPDATE_ENTRY,
 		payload: {

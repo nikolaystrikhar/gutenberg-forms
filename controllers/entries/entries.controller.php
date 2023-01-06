@@ -1,12 +1,13 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 
 require_once plugin_dir_path(__FILE__) . 'entries.summary.controller.php';
 
 /**
  * - This controller does not meant to replicate the rest api functionality
  * - Using this entries controller only for the formatted entries such as fetching the formatted entries data for displaying charts and complex filtration
- *    & also to register extra fields in the rest api 
- * - To simply get the entries, REST API V3 is used 
+ *    & also to register extra fields in the rest api
+ * - To simply get the entries, REST API V3 is used
  */
 
 class cwp_gf_Entries_Controller extends WP_REST_Controller
@@ -29,7 +30,6 @@ class cwp_gf_Entries_Controller extends WP_REST_Controller
 
     public function test_permissions($request)
     {
-
         //TODO CHECK FOR CURRENT USER READ PERMISSION
 
         // if (!current_user_can('edit_post')) {
@@ -43,7 +43,7 @@ class cwp_gf_Entries_Controller extends WP_REST_Controller
     }
 
     /**
-     * Registering all necessary routes 
+     * Registering all necessary routes
      */
     public function register_routes()
     {
@@ -56,7 +56,6 @@ class cwp_gf_Entries_Controller extends WP_REST_Controller
         # registering a readable endpoint for entries
 
         register_rest_route($this->namespace, '/bar', array(
-
             array(
                 'methods'   => 'GET',
                 'callback'  => array($this, 'get_bar_entries_data'),
@@ -64,7 +63,6 @@ class cwp_gf_Entries_Controller extends WP_REST_Controller
             ),
 
             'schema' => array($this, 'get_bar_entries_schema'),
-
         ));
     }
 
@@ -107,7 +105,7 @@ class cwp_gf_Entries_Controller extends WP_REST_Controller
 
     public function register_filters($args, $request)
     {
-        # handling entries filter based on entry status  
+        # handling entries filter based on entry status
         $has_status_filter = isset($request['entry_status']);
         $has_form_filter = isset($request['form_id']);
         $has_slug_filter = isset($request['post_slug']);
@@ -162,7 +160,7 @@ class cwp_gf_Entries_Controller extends WP_REST_Controller
      * Will post meta data
      * @param REST_API_ARRAY
      * @param string $key meta key
-     * @return metadata 
+     * @return metadata
      */
 
     public function get_meta_from_post($object, $key)
@@ -228,7 +226,7 @@ class cwp_gf_Entries_Controller extends WP_REST_Controller
     {
         $period = 7; # default period is last 7 days
 
-        # fetching the post of last $period days separately        
+        # fetching the post of last $period days separately
 
         $submissions = [];
         $forms = [];
@@ -317,8 +315,8 @@ class cwp_gf_Entries_Controller extends WP_REST_Controller
      * Will return total entries count of specific form between (inclusive) the starting and ending date given
      * @param string $form_id The gutenberg form id
      * @param date $start starting from certain date
-     * @param date $end ending on this date 
-     * @return int 
+     * @param date $end ending on this date
+     * @return int
      */
 
     public function get_entries_counts_with_specific_form($form_id, $start, $end)
@@ -348,7 +346,6 @@ class cwp_gf_Entries_Controller extends WP_REST_Controller
     /**
      * @return {Int} current authorization status code
      */
-
     public function authorization_status_code()
     {
 

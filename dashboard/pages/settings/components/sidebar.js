@@ -1,14 +1,11 @@
 import React from 'react';
 import { connect } from 'react-redux';
 import {
-	Panel,
-	PanelBody,
 	MenuGroup,
 	MenuItem,
 	SelectControl,
 } from '@wordpress/components';
 import { map, isEqual, isEmpty, get, each } from 'lodash';
-import unitize from 'unitize';
 
 function Sidebar(props) {
 	const { integrations } = props.settings;
@@ -22,7 +19,7 @@ function Sidebar(props) {
 
 		if (isEqual(searchHash, currentHash)) {
 			return {
-				isPrimary: true,
+				isSelected: true,
 			};
 		}
 
@@ -75,18 +72,14 @@ function Sidebar(props) {
 		>
 			{!isResponsive ? (
 				<MenuGroup>
-					<MenuItem
-						onClick={() => onSelect('general')}
-						{...getActive('general')}
-					>
+					<MenuItem onClick={() => onSelect('general')} {...getActive('general')}>
 						General
 					</MenuItem>
-					<MenuItem
-						onClick={() => onSelect('import')}
-						{...getActive('import')}
-					>
+
+					<MenuItem onClick={() => onSelect('import')} {...getActive('import')}>
 						Import
 					</MenuItem>
+
 					{map(integrations, (integration, name) => {
 						const hasFields = !isEmpty(get(integration, 'fields'));
 

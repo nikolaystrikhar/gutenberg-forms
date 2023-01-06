@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 
 require_once plugin_dir_path(__FILE__) . 'entries/entries.controller.php';
 require_once plugin_dir_path(__FILE__) . 'forms/forms.controller.php';

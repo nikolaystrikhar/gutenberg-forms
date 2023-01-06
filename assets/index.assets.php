@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 
 // TODO make the enqueve function global with the tests so that assets can be loaded conditionally from any other part of the plugin
 

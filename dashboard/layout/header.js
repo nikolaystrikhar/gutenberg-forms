@@ -39,9 +39,6 @@ function Header(props) {
 				<div className="cwp_header_content">
 					<div className="logo">
 						<Logo />
-						<div className="plugin_version">
-							<span>2.2.7</span>
-						</div>
 					</div>
 					<Navigation {...props} />
 				</div>

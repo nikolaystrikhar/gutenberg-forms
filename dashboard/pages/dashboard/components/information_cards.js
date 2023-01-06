@@ -1,8 +1,7 @@
 import React from 'react';
 import { get, isEmpty } from 'lodash';
 import { test_props } from '../../../functions';
-import CountUp from 'react-countup';
-import { Card, CardBody, CardHeader } from '@wordpress/components';
+import { Card, CardBody, CardFooter } from '@wordpress/components';
 const { Button } = wp.components;
 
 function InformationCards(props) {
@@ -22,11 +21,7 @@ function InformationCards(props) {
 			} else if (type === 'svg') {
 				return <div dangerouslySetInnerHTML={{ __html: src }}></div>;
 			} else if (type === 'counter') {
-				return (
-					<h1>
-						<CountUp useEasing={true} end={src} />
-					</h1>
-				);
+				return <h1>{src}</h1>;
 			}
 		} else {
 			return null;
@@ -36,7 +31,7 @@ function InformationCards(props) {
 	const Actions = () => {
 		if (test_props(action, ['link', 'label'])) {
 			return (
-				<Button target="__blank" href={action.link} isDefault>
+				<Button href={action.link} isDefault>
 					{action.label}
 				</Button>
 			);
@@ -51,8 +46,10 @@ function InformationCards(props) {
 				<Media />
 				{!isEmpty(title) && <h3>{title}</h3>}
 				{!isEmpty(description) && <p>{description}</p>}
-				<Actions />
 			</CardBody>
+			<CardFooter isBorderless justify="center">
+				<Actions />
+			</CardFooter>
 		</Card>
 	);
 }

@@ -1,4 +1,5 @@
 <?php
+defined( 'ABSPATH' ) || exit;
 
 # Rest Controller for handling the entries summary results for a single form entries
 
@@ -90,7 +91,7 @@ class cwp_gf_Entries_Summary_Controller extends WP_REST_Controller
 
         endforeach;
 
-        # deleting some un-used arguments for wp_query 
+        # deleting some un-used arguments for wp_query
 
         unset($args['paged']);
         unset($args['posts_per_page']);
@@ -178,7 +179,7 @@ class cwp_gf_Entries_Summary_Controller extends WP_REST_Controller
 
     /**
      * Will return the data required to preview checkbox field in a visual chart
-     * 
+     *
      * @param string field_id id of the checkbox field
      * @param array entries
      * @param int total entries count

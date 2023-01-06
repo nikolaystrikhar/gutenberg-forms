@@ -3,6 +3,7 @@ Contributors: nikolaystrikhar
 Tags: wordpress form,  gutenberg form, contact form, subscribe form, multi-step form, gutenberg block, contact form plugin, forms, form builder, custom form, contact button, contact me, custom contact form, form manager, form, forms builder, forms creator, captcha, recaptcha, Akismet, email form, web form, feedback form, email submit form, message form, contact form block, wordpress form plugin
 Requires at least: 5.0
 Tested up to: 6.1.1
+Requires PHP: 7.1
 Stable tag: 2.2.8.3
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
@@ -119,11 +120,20 @@ You may also get involved with the development via Github:
 == Changelog ==
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com)
 
-= 2.2.8.3 = (5 Jan 2023)
+= 2.2.8.4 = 6 Jan 2023
 
-- Fixed: Plugin was broken on wp.org
-- Updated: Compatibility with WP 6.1.1
-- Updated: Readme
+- Security: Guests had access to the form entries via WP API
+- Security: Prevent direct access to .php files
+- Security: Other security fixes
+- Fix: Entries not showing if the default permalinks structure is set
+- Enhancement: Minor UX improvements for admins
+- Update: Minimum PHP version is 7.1
+
+= 2.2.8.3 = 5 Jan 2023
+
+- Fix: Plugin was broken on wp.org.
+- Update: Compatibility with WP 6.1.1.
+- Update: Readme.
 
 = 2.2.8.1 = (16 May 2022)
 

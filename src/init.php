@@ -12,7 +12,7 @@ function gutenberg_forms_cwp_block_assets()
 
 	require_once plugin_dir_path(__DIR__) . 'dashboard/dashboard.php';
 
-	$dashboard = new Dashboard(); //? creating and registering plugin dashboard 
+	$dashboard = new Dashboard(); //? creating and registering plugin dashboard
 	$dashboard->register_settings();
 
 
@@ -114,7 +114,6 @@ function gutenberg_forms_cwp_block_assets()
 //! Our custom post type function
 function cwp_form_post_type()
 {
-
 	require_once plugin_dir_path(__DIR__) . 'submissions/entries.php';
 	require_once plugin_dir_path(__DIR__) . 'forms-cpt/index.php';
 	require_once plugin_dir_path(__DIR__) . 'controllers/index.php';
@@ -122,8 +121,20 @@ function cwp_form_post_type()
 	Form::register_post_type(); //? creating a post_type for forms
 	Entries::register_post_type(); //? creating a post_type for our form entries
 
-}
+	add_filter( 'rest_authentication_errors', function( $result ) {
+		global $wp;
 
+		// Quick fix, we don't want others to see entries.
+		if (
+			'wp-json/wp/v2/cwp_gf_entries' === $wp->request
+			&& ! current_user_can( 'manage_options' )
+		) {
+			return new WP_Error( 'rest_not_logged_in', 'You are not allowed to see entries.', array( 'status' => 401 ) );
+		}
+
+		return $result;
+	} );
+}
 
 require_once plugin_dir_path(__DIR__) . 'triggers/email.php';
 
