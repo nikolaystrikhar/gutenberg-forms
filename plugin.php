@@ -11,16 +11,6 @@
  * Text Domain: cwp-gutenberg-forms
  */
 
-if (!defined('ABSPATH')) {
-    exit;
-}
-
-if (is_readable(dirname(__FILE__) . '/extendify-sdk/loader.php')) {
-    if (!isset($GLOBALS['extendify_sdk_partner'])) {
-        // phpcs:ignore WordPress.NamingConventions.PrefixAllGlobals.NonPrefixedVariableFound
-        $GLOBALS['extendify_sdk_partner'] = 'Gutenberg Forms';
-    }
-    require_once plugin_dir_path(__FILE__) . 'extendify-sdk/loader.php';
-}
+defined( 'ABSPATH' ) || exit;
 
 require_once plugin_dir_path(__FILE__) . 'src/init.php';

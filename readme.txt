@@ -127,6 +127,7 @@ For more information, visit [Gutenberg Forms](https://gutenbergforms.com)
 - Security: Other security fixes
 - Fix: Entries not showing if the default permalinks structure is set
 - Enhancement: Minor UX improvements for admins
+- Update: Remove Extendify
 - Update: Minimum PHP version is 7.1
 
 = 2.2.8.3 = 5 Jan 2023
