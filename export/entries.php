@@ -110,7 +110,7 @@ class cwp_gf_Entries_export_handler {
 	 * @param array ?$args = [] - If provided entries will be filtered
 	 *
 	 */
-	public static function excel_export( $args = [], $format ) {
+	public static function excel_export( $args = [], $format = 'xls' ) {
 		$args['post_type']      = self::post_type;
 		$args['posts_per_page'] = - 1; # for returning all posts
 
