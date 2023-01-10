@@ -6,7 +6,7 @@ require_once plugin_dir_path( __DIR__ ) . 'triggers/validator.php';
 
 function get_value_and_name( $field ) {
 	$value   = $field['field_value'];
-	$adminId = $field['decoded_entry']['admin_id'];
+	$adminId = $field['decoded_entry']['admin_id'] ?? null;
 
 	$result = array();
 
