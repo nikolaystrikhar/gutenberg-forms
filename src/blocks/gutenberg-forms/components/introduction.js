@@ -42,15 +42,17 @@ function Introduction(props) {
 
 					<div className="types">
 						<Button isDefault onClick={() => handleType("standard")}>
-							Standard
+							{__('Standard', 'forms-gutenberg')}
 						</Button>
+						<span>
+							{__('or', 'forms-gutenberg')}
+						</span>
 						<Button isDefault onClick={() => handleType("multiStep")}>
-							Multi Step
+							{__('Multistep', 'forms-gutenberg')}
 						</Button>
-						<span> OR </span>
-						<Button isPrimary onClick={() => setModal(true)}>
-							Insert Form
-						</Button>
+						{/*<Button isPrimary onClick={() => setModal(true)}>*/}
+						{/*	Insert Form*/}
+						{/*</Button>*/}
 					</div>
 				</div>
 			</Placeholder>

@@ -46,7 +46,7 @@ function TagList(props) {
 
 					return (
 						<MenuItem className="cwp-tag-option" onClick={() => onSelect(tag)}>
-							<strong>{isEmpty(label) ? __("No Label", 'cwp-gutenberg-forms') : label}</strong>
+							<strong>{isEmpty(label) ? __("No Label", 'forms-gutenberg') : label}</strong>
 							<span>{tag}</span>
 						</MenuItem>
 					);
@@ -77,7 +77,7 @@ function TagList(props) {
 				<MenuGroup>{listToMap}</MenuGroup>
 			) : (
 				<div className="cwp-empty-list">
-					<h3>{__('No Tags Found !', 'cwp-gutenberg-forms')}</h3>
+					<h3>{__('No Tags Found !', 'forms-gutenberg')}</h3>
 				</div>
 			)}
 		</div>

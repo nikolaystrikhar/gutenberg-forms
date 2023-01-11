@@ -29,7 +29,7 @@ function Condition(props) {
 		let fields = [
 			{
 				value: null,
-				label: __("Select Field", 'cwp-gutenberg-forms'),
+				label: __("Select Field", 'forms-gutenberg'),
 			},
 		];
 
@@ -57,11 +57,11 @@ function Condition(props) {
 	let operators = [
 		{
 			value: "===",
-			label: __("Is Equal To", 'cwp-gutenberg-forms'),
+			label: __("Is Equal To", 'forms-gutenberg'),
 		},
 		{
 			value: "!==",
-			label: __("Not Equal To", 'cwp-gutenberg-forms'),
+			label: __("Not Equal To", 'forms-gutenberg'),
 		},
 	];
 
@@ -92,7 +92,7 @@ function Condition(props) {
 				});
 
 				generatedOptions.unshift({
-					label: __( "Select Value", 'cwp-gutenberg-forms'),
+					label: __( "Select Value", 'forms-gutenberg'),
 					value: "",
 				});
 
@@ -139,7 +139,7 @@ function Condition(props) {
 				return (
 					<TextControl
 						value={condition.value}
-						placeholder={__("value", 'cwp-gutenberg-forms')}
+						placeholder={__("value", 'forms-gutenberg')}
 						onChange={(val) => handleConditionChange(val, "value")}
 					/>
 				);

@@ -18,7 +18,6 @@ registerBlockType("cwp/form-calculation", {
 	save: calculationSave,
 	attributes,
 	supports: {
-		align: true,
 		align: ["wide", "full", "center"],
 	},
 	parent: fieldParents,

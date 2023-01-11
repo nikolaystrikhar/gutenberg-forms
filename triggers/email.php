@@ -3,7 +3,7 @@ defined( 'ABSPATH' ) || exit;
 
 require_once plugin_dir_path( __DIR__ ) . 'triggers/validator.php';
 require_once plugin_dir_path( __DIR__ ) . 'triggers/functions.php';
-require_once plugin_dir_path( __DIR__ ) . 'submissions/entries.php';
+require_once plugin_dir_path( __DIR__ ) . 'cpt/entry.php';
 require_once plugin_dir_path( __DIR__ ) . 'Utils/Bucket.php';
 require_once plugin_dir_path( __DIR__ ) . 'integrations/handler.php';
 require_once plugin_dir_path( __DIR__ ) . 'tagsHandler/tagHandler.php';
@@ -413,7 +413,7 @@ class Email {
 			}
 		}
 
-		$newEntry       = Entries::create_entry( $template, $mail_subject, $mail_body, $fields, $this->attachments );
+		$newEntry       = Entries::create( $template, $mail_subject, $mail_body, $fields, $this->attachments );
 		$record_entries = in_array( 'Record Entries', $template['actions'] );
 		$send_email     = in_array( 'Email Notification', $template['actions'] );
 

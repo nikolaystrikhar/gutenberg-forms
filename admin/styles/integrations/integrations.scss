@@ -1,0 +1,161 @@
+.integrations_root {
+  .integrations_blocks {
+    display: grid;
+    grid-template-columns: repeat(3, calc(33.33% - 25px));
+    grid-gap: 30px;
+
+    @include breakpoint("xxs") {
+      grid-template-columns: 100% !important;
+    }
+
+    @include breakpoint("md") {
+      grid-template-columns: repeat(2, calc(50% - 25px));
+    }
+
+    @include breakpoint("sm") {
+      grid-template-columns: repeat(2, calc(50% - 25px));
+    }
+
+    & h3 {
+      margin: auto 0;
+    }
+
+    .cwp_integration_block {
+      display: flex;
+      flex-direction: column;
+      flex-grow: 1;
+
+      &.is-disabled {
+        img,
+        p,
+        button,
+        .components-form-toggle span,
+        input,
+        h4 {
+          opacity: 0.5 !important;
+          pointer-events: none;
+        }
+
+        .cwp_integ_header {
+          background-color: red;
+          & h3 {
+            color: #fff;
+          }
+          .cwp_disabled_info_badge {
+            cursor: pointer;
+            span {
+              color: #fff;
+            }
+          }
+        }
+      }
+
+      & .cwp_integ_header {
+        display: flex;
+        flex-direction: row;
+        justify-content: space-between;
+
+        & .cwp_integ_status {
+          padding: 4px 10px;
+          border-radius: 28px;
+
+          &.free_status {
+            background: #eee;
+            color: #000;
+          }
+
+          &.pro_status {
+            background: #0070ed;
+            color: #fff;
+          }
+        }
+      }
+
+      & .card_data {
+        display: flex;
+        flex-direction: column;
+        justify-content: space-between;
+        flex-grow: 1;
+
+        & .foot {
+          display: flex;
+          justify-content: space-between;
+
+          & div {
+            display: flex;
+            justify-content: space-between;
+
+            & h4 {
+              margin: auto 10px;
+            }
+
+            & .middle {
+              margin: auto 0;
+            }
+          }
+        }
+      }
+    }
+  }
+}
+
+.more_integrations_block {
+  margin: 50px 0px;
+
+  .cwp_install_integrations_root {
+    .cwp-loading-more-integrations {
+      background-color: #fff;
+      text-align: center;
+      padding: 60px 0px;
+    }
+
+    .cwp-fetch-more-addon-err {
+      background-color: #fff;
+      text-align: center;
+      padding: 60px 0px;
+    }
+
+    .cwp_install_integ_grid {
+      display: grid;
+      grid-template-columns: repeat(3, calc(33.33% - 25px));
+      grid-gap: 30px;
+
+      @include breakpoint("xxs") {
+        grid-template-columns: 100% !important;
+      }
+
+      @include breakpoint("md") {
+        grid-template-columns: repeat(2, calc(50% - 25px));
+      }
+
+      @include breakpoint("sm") {
+        grid-template-columns: repeat(2, calc(50% - 25px));
+      }
+
+      .cwp-available_integration {
+        .cwp_integ_header {
+          display: flex;
+          justify-content: space-between;
+          align-items: center;
+        }
+
+        .foot {
+          text-align: right;
+        }
+      }
+    }
+  }
+}
+
+.cwp_setting_status {
+  position: absolute;
+  right: 30px;
+  bottom: 0;
+}
+
+.light-heading {
+  font-weight: 300;
+  @include breakpoint("sm") {
+    font-size: 15px;
+  }
+}

@@ -36,8 +36,8 @@ function FormulaBuilder(prop) {
 	return (
 		<div className="cwp-form-calc-builder">
 			<div className="cwp-form-available-fields">
-				<h4>{__('Available Number Fields:', 'cwp-gutenberg-forms')}</h4>
-				<DropdownMenu icon="list-view" label={__("Add Field Data", 'cwp-gutenberg-forms')}>
+				<h4>{__('Available Number Fields:', 'forms-gutenberg')}</h4>
+				<DropdownMenu icon="list-view" label={__("Add Field Data", 'forms-gutenberg')}>
 					{({ onClose }) => (
 						<Fragment>
 							<MenuGroup>

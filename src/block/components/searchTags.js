@@ -52,27 +52,27 @@ function SearchTags(props) {
 		return [
 			{
 				list: "fields",
-				label: __("Fields", 'cwp-gutenberg-forms'),
+				label: __("Fields", 'forms-gutenberg'),
 				data: filteredFields,
 			},
 			{
 				list: "wordpress",
-				label: __("Wordpress Tags", 'cwp-gutenberg-forms'),
+				label: __("Wordpress Tags", 'forms-gutenberg'),
 				data: filteredWordpressTags,
 			},
 			{
 				list: "form",
-				label: __("Form Tags", 'cwp-gutenberg-forms'),
+				label: __("Form Tags", 'forms-gutenberg'),
 				data: filteredFormTags,
 			},
 			{
 				list: "other",
-				label: __("Other Tags", 'cwp-gutenberg-forms'),
+				label: __("Other Tags", 'forms-gutenberg'),
 				data: filteredOtherTags,
 			},
 			{
 				list: "meta",
-				label: __("Meta", 'cwp-gutenberg-forms'),
+				label: __("Meta", 'forms-gutenberg'),
 				data: filteredMetaTags,
 			},
 		];
@@ -114,7 +114,7 @@ function SearchTags(props) {
 			})}
 			{noTagsFound() && (
 				<div className="cwp-not-found">
-					<h3>{__('No Tags Found', 'cwp-gutenberg-forms')}</h3>
+					<h3>{__('No Tags Found', 'forms-gutenberg')}</h3>
 				</div>
 			)}
 		</div>

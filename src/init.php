@@ -4,7 +4,7 @@ defined( 'ABSPATH' ) || exit;
 require_once plugin_dir_path( __DIR__ ) . 'triggers/functions.php';
 
 function gutenberg_forms_cwp_block_assets(): void {
-	require_once plugin_dir_path( __DIR__ ) . 'dashboard/dashboard.php';
+	require_once plugin_dir_path( __DIR__ ) . 'admin/admin.php';
 
 	$dashboard = new Dashboard();
 	$dashboard->register_settings();
@@ -26,9 +26,9 @@ function gutenberg_forms_cwp_block_assets(): void {
 
 	wp_register_script(
 		'gutenberg-forms-custom-js',
-		plugins_url( '/dist/custom_frontend.js', dirname( __FILE__ ) ),
+		plugins_url( '/dist/frontend.js', dirname( __FILE__ ) ),
 		array( 'jquery' ),
-		filemtime( plugin_dir_path( __DIR__ ) . 'dist/custom_frontend.js' ),
+		filemtime( plugin_dir_path( __DIR__ ) . 'dist/frontend.js' ),
 		true
 	);
 
@@ -69,10 +69,7 @@ function gutenberg_forms_cwp_block_assets(): void {
 		$files['script'] = 'gutenberg-forms-custom-js';
 	}
 
-	register_block_type(
-		'cwp/block-gutenberg-forms',
-		$files
-	);
+	register_block_type( 'cwp/block-gutenberg-forms', $files );
 
 	//? for server side rendering of the block instead of shortcode...
 	register_block_type(
@@ -101,8 +98,8 @@ function gutenberg_forms_cwp_block_assets(): void {
 
 //! Our custom post type function
 function cwp_form_post_type(): void {
-	require_once plugin_dir_path( __DIR__ ) . 'submissions/entries.php';
-	require_once plugin_dir_path( __DIR__ ) . 'forms-cpt/index.php';
+	require_once plugin_dir_path( __DIR__ ) . 'cpt/entry.php';
+	require_once plugin_dir_path( __DIR__ ) . 'cpt/form.php';
 	require_once plugin_dir_path( __DIR__ ) . 'controllers/index.php';
 
 	Form::register_post_type();
@@ -157,7 +154,7 @@ function cwp_gutenberg_forms_messages_meta() {
 add_action(
 	'init',
 	function (): void {
-		wp_set_script_translations( 'gutenberg_forms-cwp-block-js', 'cwp-gutenberg-forms' );
+		wp_set_script_translations( 'gutenberg_forms-cwp-block-js', 'forms-gutenberg' );
 	}
 );
 

@@ -2,15 +2,9 @@
   "name": "gutenberg-forms-cgb-guten-block",
   "version": "1.0.0",
   "private": true,
-  "engines": {
-    "node": ">=14.0.0",
-    "npm": ">=6.14.4"
-  },
   "scripts": {
     "start": "node scripts/start.js",
-    "build": "node scripts/build.js",
-    "start:admin": "wp-scripts start ./dashboard/index.js --output-path=./dist/dashboard",
-    "build:admin": "wp-scripts build  --webpack-src-dir=dashboard --output-path=./dist/dashboard"
+    "build": "node scripts/build.js"
   },
   "dependencies": {
     "@nivo/bar": "^0.79.1",
@@ -85,9 +79,6 @@
       ]
     ],
     "plugins": [
-      [
-        "transform-object-rest-spread"
-      ],
       [
         "transform-object-rest-spread",
         {

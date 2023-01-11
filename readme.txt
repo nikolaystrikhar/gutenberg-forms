@@ -4,7 +4,7 @@ Tags: wordpress form,  gutenberg form, contact form, subscribe form, multi-step 
 Requires at least: 5.0
 Tested up to: 6.1.1
 Requires PHP: 7.4
-Stable tag: 2.2.8.3
+Stable tag: 2.2.8.4
 License: GPLv2 or later
 License URI: https://www.gnu.org/licenses/gpl-2.0.html
 
@@ -16,7 +16,7 @@ The Next Generation WordPress Form Builder. Build forms directly within Gutenber
 
 Existing form plugins do not allow you to build your forms within Gutenberg Editor. They offer mostly custom made form builder which was a great feature earlier. But with the Gutenberg editor, you should be able to build your forms directly in the Gutenberg editor.
 
-That’s why we built <a href="https://gutenbergforms.com/" rel="friend" title="Gutenberg Forms">Gutenberg Forms</a>.This is the next generation **WordPress form builder plugin**. You can easily build your forms by adding form fields as gutenberg blocks within the Gutenberg Editor. You do not need to leave the editor to build your forms using some other drag & drop form builder. Now you can build your form within Gutenberg editor using Gutenberg Forms.
+That’s why we built <a href="https://wptotem.com/gutenberg-forms" rel="friend" title="Gutenberg Forms">Gutenberg Forms</a>.This is the next generation **WordPress form builder plugin**. You can easily build your forms by adding form fields as gutenberg blocks within the Gutenberg Editor. You do not need to leave the editor to build your forms using some other drag & drop form builder. Now you can build your form within Gutenberg editor using Gutenberg Forms.
 
 Gutenberg Forms adds a Form Block in Gutenberg and all the form fields are child blocks which you can add within the Form Block, nice and easy. You can add multiple contact forms, and you can customize the form within the Gutenberg Editor. Google reCAPTCHA integration added for spam filtering.
 
@@ -31,7 +31,6 @@ The following are some of the main features, but there's more which you need to 
 * Form Entries - Form Entries are recorded in the database and accessible via WordPress admin.
 * Use Forms Anywhere - You can create standalone forms using Gutenberg and use it anywhere using a shortcode. That Gutenberg Forms compatible with any WordPress page builder.
 * Form Templates - We have started creating useful form templates to let you get started building your desired form faster.
-* Calculator Forms - Create basic or complex calculations.
 * Dynamically populate field values via URL parameters.
 * Hidden field type with dynamic value tags.
 * Spam Protection - Google reCaptcha & Akismet Integration.
@@ -44,56 +43,15 @@ The following are some of the main features, but there's more which you need to 
 ## Documentation
 
 Please read the docs before creating a support ticket here.
-[https://docs.gutenbergforms.com](https://docs.gutenbergforms.com)
-
-## Add-ons & Integrations
-
-**MailPoet Add-on**
-Our first add-on has been released. It is for MailPoet plugin that lets you connect Gutenberg Forms with MailPoet to send leads to your MailPoet list.
-
-Read More & Install it, it's **FREE**.
-[https://wordpress.org/plugins/guten-forms-mailpoet/](https://wordpress.org/plugins/guten-forms-mailpoet/)
-
-**Mailchimp Add-on**
-Mailchimp integration is ready as an add-on. Mailchimp add-on lets you connect your Mailchimp account with Gutenberg Forms to send leads to your selected list.
-
-Read More & Install it, it's **FREE**.
-[https://wordpress.org/plugins/guten-forms-mailchimp/](https://wordpress.org/plugins/guten-forms-mailchimp/)
-
-**Akismet Add-on**
-Akismet integration is ready as an add-on. It let’s you secure your forms from spammers. Akismet checks your contact form submissions against their global database of spam.
-
-Read More & Install it, it's **FREE**.
-[https://wordpress.org/plugins/guten-forms-akismet/](https://wordpress.org/plugins/guten-forms-akismet/)
+[https://wptotem.com/gutenberg-forms/docs](https://wptotem.com/gutenberg-form/sdocs)
 
 ## Share Your Feedback & Suggestions 👏
 
 Your feedback, ideas and suggestions would be really helpful in adding & improving the features that you need. We have set up a tool to collect your feedback and prioritize the features based on votes.
 
-[https://gutenbergforms.feedy.app/feedback/](https://gutenbergforms.feedy.app/feedback/)
-
-## Template and Pattern Library
-
-Gutenberg Forms now includes access to the Extendify template and pattern library that can be accessed by clicking the "Library" button in the menu bar of the editor. We provide a variety of templates and patterns to serve different use cases and are adding more templates every week.
-Note: Templates and patterns rely on blocks and styling applied by the Editor Plus plugin. The Editor Plus plugin is required when importing a template or pattern. If you uninstall Editor Plus, the templates and patterns will still display on your site, but the styling may be affected. Additionally, stock images included in the templates are hosted on GutenbergHub.com. We recommend replacing the images or adding them to your media library directly.
-
-## Privacy
-Gutenberg Forms uses a custom API to fetch templates and patterns from the Extendify template and pattern library. To improve the service and stability we store logs which may contain the following:
-
-* browser type
-* referring site
-* date and time of request
-* category selection or search term
-* anonymized IP address
-
-API requests are only made when a user clicks on the Library button.
-
-For more details on our privacy policy: https://gutenbergforms.com/privacy-policy/
-For more details on our terms of service: https://gutenbergforms.com/terms-of-service/
+[https://github.com/nikolaystrikhar/gutenberg-forms/issues](https://github.com/nikolaystrikhar/gutenberg-forms/issues)
 
 == Upgrade Notice ==
-
-This update may break Multi-Step forms. We have redone the functionality to make it super easier.
 
 == Installation ==
 
@@ -102,11 +60,7 @@ This update may break Multi-Step forms. We have redone the functionality to make
 
 Once Activated, you will find the 'Gutenberg Forms' block in the Gutenberg editor.
 
-For basic usage, you can also have a look at the plugin website [Gutenberg Forms](https://gutenbergforms.com/).
-
-You may also get involved with the development via Github:
-
-[https://github.com/munirkamal/gutenberg-forms](https://github.com/munirkamal/gutenberg-forms)
+For basic usage, you can also have a look at the plugin website [Gutenberg Forms](https://wptotem.com/gutenberg-forms).
 
 == Screenshots ==
 
@@ -118,23 +72,26 @@ You may also get involved with the development via Github:
 6. Form Styles
 
 == Changelog ==
+
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com)
 
-= 2.2.8.4 = 6 Jan 2023
+= [2.2.8.4] 11 Jan 2023 =
 
 - Security: Guests had access to the form entries via WP API
 - Security: Prevent direct access to .php files
 - Security: Other security fixes
-- Fix: Entries not showing if the default permalinks structure is set
-- Enhancement: Minor UX improvements for admins
-- Update: Remove Extendify
-- Update: Minimum PHP version is 7.4
+- Fix: More strings can be translated
+- Tweak: Improve WP admin screens a bit
+- Tweak: Entries management works the default WP way
+- Tweak: Form templates, they all have to be updated, so hiding for now to avoid confusions
+- Tweak: Remove Extendify
+- Version: Minimum PHP version is 7.4
+- Deprecate: Extensions other than ReCaptcha are no longer supported, too many complaints about them, they have to be tested and reworked
 
-= 2.2.8.3 = 5 Jan 2023
+= [2.2.8.3] 5 Jan 2023 =
 
-- Fix: Plugin was broken on wp.org.
-- Update: Compatibility with WP 6.1.1.
-- Update: Readme.
+* Fix: Plugin was broken on wp.org
+* Update: Compatibility with WP 6.1.1
 
 = 2.2.8.1 = (16 May 2022)
 

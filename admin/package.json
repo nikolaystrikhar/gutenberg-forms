@@ -1,0 +1,32 @@
+{
+	"name": "my-awesome-plugin",
+	"version": "1.0.0",
+	"description": "I build, therefore I'm awesome.",
+	"scripts": {
+		"build": "wp-scripts build ./index.js --output-path=./../dist/admin",
+		"start": "wp-scripts  start ./index.js --output-path=./../dist/admin",
+		"packages-update": "wp-scripts packages-update"
+	},
+	"devDependencies": {
+		"@tailwindcss/forms": "^0.5.3",
+		"@wordpress/scripts": "^19.1.0",
+		"autoprefixer": "^10.4.13",
+		"postcss": "^8.4.21",
+		"tailwindcss": "^3.2.4"
+	},
+	"dependencies": {
+		"@nivo/bar": "^0.79.1",
+		"@nivo/core": "^0.79.0",
+		"css-loader": "^6.5.1",
+		"node-sass": "^7.0.1",
+		"postcss-loader": "^6.2.1",
+		"prettier": "^2.5.1",
+		"react-redux": "^7.2.6",
+		"react-router": "^5.2.1",
+		"react-router-dom": "^5.2.1",
+		"redux-devtools-extension": "^2.13.9",
+		"redux-thunk": "^2.4.1",
+		"sass-loader": "^12.4.0",
+		"unitize": "0.0.3"
+	}
+}

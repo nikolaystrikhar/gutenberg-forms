@@ -1,7 +1,7 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-require_once plugin_dir_path( __DIR__ ) . 'dashboard/dashboard.php';
+require_once plugin_dir_path( __DIR__ ) . 'admin/admin.php';
 require_once plugin_dir_path( __DIR__ ) . 'tagsHandler/tagHandler.php';
 
 /**
