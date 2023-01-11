@@ -209,7 +209,7 @@ class Entries {
 					),
 					array(
 						'title'  => __( 'Additional Information', 'forms-gutenberg' ),
-						'fields' => (array) get_post_meta( $post->ID, 'fields__' . self::post_type, true ),
+						'fields' => (array) get_post_meta( $post->ID, 'extra__' . self::post_type, true ),
 					),
 				);
 				?>
@@ -225,6 +225,7 @@ class Entries {
 								<?php echo esc_html( $box['title'] ); ?>
 							</span>
 						</div>
+
 						<?php foreach ( $box['fields'] as $name => $value ): ?>
 						<div class="gufo-border-t gufo-border-gray-200 gufo-px-4 gufo-py-5 sm:gufo-p-0">
 							<dl class="sm:gufo-divide-y sm:gufo-divide-gray-200">
@@ -233,7 +234,7 @@ class Entries {
 										<?php echo esc_html( $name ); ?>
 									</dt>
 									<dd class="gufo-mt-1 gufo-text-sm gufo-text-gray-900 sm:gufo-col-span-2 sm:gufo-mt-0">
-										<?php echo esc_html( $value ); ?>
+										<?php echo wp_kses_post( $value ); ?>
 									</dd>
 								</div>
 							</dl>
