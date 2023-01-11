@@ -120,7 +120,7 @@ function edit(props) {
 								key={index}
 								formattingControls={[]}
 								value={label}
-								placeholder={__("Form Step", "cwp-gutenberg-forms")}
+								placeholder={__("Form Step", "forms-gutenberg")}
 								onChange={
 									(newLabel) =>
 										updateBlockAttributes(blockId, { label: newLabel }) // updating the form step label
@@ -131,7 +131,7 @@ function edit(props) {
 				})}
 				{blocksLoaded && (
 					<IconButton
-						icon={__(<Icon icon="addOutline" />, "cwp-gutenberg-forms")}
+						icon={__(<Icon icon="addOutline" />, "forms-gutenberg")}
 						onClick={addStep}
 					/>
 				)}
@@ -139,10 +139,10 @@ function edit(props) {
 			{!blocksLoaded ? (
 				<Placeholder
 					icon="editor-help"
-					label={__("No Steps Found!", "cwp-gutenberg-forms")}
+					label={__("No Steps Found!", "forms-gutenberg")}
 					instructions={__(
 						"Please add some steps to create a multistep form",
-						"cwp-gutenberg-forms"
+						"forms-gutenberg"
 					)}
 				>
 					<Button isPrimary onClick={addStep}>
@@ -166,9 +166,9 @@ function edit(props) {
 			setStep={setStep}
 		/>, // toolbar controls
 		<InspectorControls>
-			<PanelBody title={__("Settings", "cwp-gutenberg-forms")}>
+			<PanelBody title={__("Settings", "forms-gutenberg")}>
 				<SelectControl
-					label={__("Effect", "cwp-gutenberg-forms")}
+					label={__("Effect", "forms-gutenberg")}
 					value={multiStepEffect}
 					options={multiStepEffects}
 					onChange={(multiStepEffect) => setAttributes({ multiStepEffect })}

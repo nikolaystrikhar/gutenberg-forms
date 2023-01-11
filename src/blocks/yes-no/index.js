@@ -11,7 +11,7 @@ const { attributes, title } = blockData;
 
 registerBlockType("cwp/yes-no", {
 	title: __(title),
-	icon: __(<Icon icon="switch" />, "cwp-gutenberg-forms"),
+	icon: __(<Icon icon="switch" />, "forms-gutenberg"),
 	category: "common",
 	keywords: [__("gutenberg-forms"), __("forms"), __("yes-no")],
 	edit: yesNoEdit,

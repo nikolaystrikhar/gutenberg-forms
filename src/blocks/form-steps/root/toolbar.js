@@ -137,16 +137,16 @@ function BlockToolbar(props) {
 			<Toolbar>
 				{isStepAvailable() && (
 					<Fragment>
-						<Tooltip text={__("Move Step Up", "cwp-gutenberg-forms")}>
+						<Tooltip text={__("Move Step Up", "forms-gutenberg")}>
 							<IconButton icon="arrow-left-alt2" onClick={moveStepUp} />
 						</Tooltip>
-						<Tooltip text={__("Move Step Down", "cwp-gutenberg-forms")}>
+						<Tooltip text={__("Move Step Down", "forms-gutenberg")}>
 							<IconButton icon="arrow-right-alt2" onClick={moveStepDown} />
 						</Tooltip>
-						<Tooltip text={__("Delete Step", "cwp-gutenberg-forms")}>
+						<Tooltip text={__("Delete Step", "forms-gutenberg")}>
 							<IconButton icon="trash" onClick={deleteStep} />
 						</Tooltip>
-						<Tooltip text={__("Duplicate Step", "cwp-gutenberg-forms")}>
+						<Tooltip text={__("Duplicate Step", "forms-gutenberg")}>
 							<IconButton icon="admin-page" onClick={duplicateStep} />
 						</Tooltip>
 					</Fragment>

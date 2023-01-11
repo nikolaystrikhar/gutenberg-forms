@@ -35,9 +35,9 @@ function edit(props) {
 	return [
 		!!isSelected && !shouldIntroduce && (
 			<InspectorControls>
-				<PanelBody title={__("General", "cwp-gutenberg-forms")} initialOpen={true}>
+				<PanelBody title={__("General", "forms-gutenberg")} initialOpen={true}>
 					<SelectControl
-						label={__("Select Form", "cwp-gutenberg-forms")}
+						label={__("Select Form", "forms-gutenberg")}
 						className="cwp-reusable-select"
 						value={formId}
 						options={[...formOptions]}

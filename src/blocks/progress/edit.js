@@ -27,10 +27,10 @@ function edit(props) {
 		<InspectorControls>
 			<PanelBody
 				initialOpen={true}
-				title={__("Progress Settings", "cwp-gutenberg-forms")}
+				title={__("Progress Settings", "forms-gutenberg")}
 			>
 				<div className="cwp-option">
-					<h3 className="cwp-heading">{__("Base Color", "cwp-gutenberg-forms")}</h3>
+					<h3 className="cwp-heading">{__("Base Color", "forms-gutenberg")}</h3>
 					<ColorPalette
 						colors={basicColorScheme}
 						value={progressColor}
@@ -38,7 +38,7 @@ function edit(props) {
 					/>
 				</div>
 				<div className="cwp-option">
-					<h3 className="cwp-heading">{__("Fill Color", "cwp-gutenberg-forms")}</h3>
+					<h3 className="cwp-heading">{__("Fill Color", "forms-gutenberg")}</h3>
 					<ColorPalette
 						colors={basicColorScheme}
 						value={progressFillColor}
@@ -49,7 +49,7 @@ function edit(props) {
 				</div>
 				<div className="cwp-option">
 					<RangeControl
-						label={__("Thickness", "cwp-gutenberg-forms")}
+						label={__("Thickness", "forms-gutenberg")}
 						value={thickness}
 						min={5}
 						max={50}
@@ -58,7 +58,7 @@ function edit(props) {
 				</div>
 				<div className="cwp-option">
 					<RangeControl
-						label={__("Corner Radius", "cwp-gutenberg-forms")}
+						label={__("Corner Radius", "forms-gutenberg")}
 						value={cornerRadius}
 						min={0}
 						max={100}
@@ -72,7 +72,7 @@ function edit(props) {
 				)}
 				<div className="cwp-option">
 					<PanelRow>
-						{__("Show Percentage", "cwp-gutenberg-forms")}
+						{__("Show Percentage", "forms-gutenberg")}
 						<FormToggle
 							checked={showPercentage}
 							onChange={() =>
@@ -83,7 +83,7 @@ function edit(props) {
 				</div>
 				{showPercentage && (
 					<div className="cwp-option">
-						<h3 className="cwp-heading">{__("Text Color", "cwp-gutenberg-forms")}</h3>
+						<h3 className="cwp-heading">{__("Text Color", "forms-gutenberg")}</h3>
 						<ColorPalette
 							colors={basicColorScheme}
 							value={textColor}

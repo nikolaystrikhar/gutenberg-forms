@@ -13,27 +13,27 @@ function TagSelector(props) {
 	const tabs = [
 		{
 			name: "fields",
-			title: __("Fields", "cwp-gutenberg-forms"),
+			title: __("Fields", "forms-gutenberg"),
 			className: "cwp-tag-button",
 		},
 		{
 			name: "wordpress",
-			title: __("Wordpress", "cwp-gutenberg-forms"),
+			title: __("Wordpress", "forms-gutenberg"),
 			className: "cwp-tag-button",
 		},
 		{
 			name: "form",
-			title: __("Form", "cwp-gutenberg-forms"),
+			title: __("Form", "forms-gutenberg"),
 			className: "cwp-tag-button",
 		},
 		{
 			name: "meta",
-			title: __("Meta", "cwp-gutenberg-forms"),
+			title: __("Meta", "forms-gutenberg"),
 			className: "cwp-tag-button",
 		},
 		{
 			name: "other",
-			title: __("Other", "cwp-gutenberg-forms"),
+			title: __("Other", "forms-gutenberg"),
 			className: "cwp-tag-button",
 		},
 	];

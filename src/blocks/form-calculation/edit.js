@@ -108,19 +108,19 @@ function edit(props) {
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
-				<PanelBody title={__("Field Settings", "cwp-gutenberg-forms")}>
+				<PanelBody title={__("Field Settings", "forms-gutenberg")}>
 
 					<div className="cwp-option">
 						<TextControl
 							placeholder={adminId.default}
-							label={__("Field ID", "cwp-gutenberg-forms")}
+							label={__("Field ID", "forms-gutenberg")}
 							value={adminId.value}
 							onChange={handleAdminId}
 						/>
 					</div>
 
 					<div className="cwp-option">
-						<h3>{__("Prefix", "cwp-gutenberg-forms")}</h3>
+						<h3>{__("Prefix", "forms-gutenberg")}</h3>
 
 						<TextControl
 							value={prefix}
@@ -128,7 +128,7 @@ function edit(props) {
 						/>
 					</div>
 					<div className="cwp-option">
-						<h3>{__("Postfix", "cwp-gutenberg-forms")}</h3>
+						<h3>{__("Postfix", "forms-gutenberg")}</h3>
 
 						<TextControl
 							value={postfix}
@@ -137,7 +137,7 @@ function edit(props) {
 					</div>
 					<div className="cwp-option">
 						<PanelRow>
-							<h3>{__("Formula Editor", "cwp-gutenberg-forms")}</h3>
+							<h3>{__("Formula Editor", "forms-gutenberg")}</h3>
 							<FormToggle
 								checked={formulaBuilder}
 								onChange={() =>
@@ -151,12 +151,12 @@ function edit(props) {
 							value={decimalPlaces}
 							min={0}
 							max={10}
-							label={__("Decimal Places", "cwp-gutenberg-forms")}
+							label={__("Decimal Places", "forms-gutenberg")}
 							onChange={decimalPlaces => props.setAttributes({ decimalPlaces })}
 						/>
 					</div>
 				</PanelBody>
-				<PanelBody title={__("Condition", "cwp-gutenberg-forms")}>
+				<PanelBody title={__("Condition", "forms-gutenberg")}>
 					<ConditionalLogic
 						condition={condition}
 						set={props.setAttributes}
@@ -164,11 +164,11 @@ function edit(props) {
 						useCondition={props.attributes.enableCondition}
 					/>
 				</PanelBody>
-				<PanelBody title={__("Styling", "cwp-gutenberg-forms")}>
+				<PanelBody title={__("Styling", "forms-gutenberg")}>
 					<div className="cwp-option">
 						<RangeControl
 							value={styling.fontSize}
-							label={__("Font Size", "cwp-gutenberg-forms")}
+							label={__("Font Size", "forms-gutenberg")}
 							onChange={size => setStyling(size, "fontSize")}
 						/>
 					</div>
@@ -179,7 +179,7 @@ function edit(props) {
 			<BlockControls>
 				<Toolbar>
 					<Tooltip
-						text={__(formulaBuilder ? __("Preview Field", "cwp-gutenberg-forms") : __("Formula Editor", "cwp-gutenberg-forms"))}
+						text={__(formulaBuilder ? __("Preview Field", "forms-gutenberg") : __("Formula Editor", "forms-gutenberg"))}
 					>
 						<Button
 							onClick={() => {
@@ -195,7 +195,7 @@ function edit(props) {
 
 		<div className={`cwp-calculation cwp-field ${props.className}`}>
 			<div className="cwp-calc-toggle">
-				<h3>{__("Formula Editor", "cwp-gutenberg-forms")}</h3>
+				<h3>{__("Formula Editor", "forms-gutenberg")}</h3>
 				<FormToggle
 					checked={formulaBuilder}
 					onChange={() =>
@@ -207,7 +207,7 @@ function edit(props) {
 				<FormulaBuilder data={props} />
 			) : (
 					<div className="cwp-field-set">
-						<RichText placeholder={__("Add a label", "cwp-gutenberg-forms")} tag="label" value={label} onChange={handleLabel} />
+						<RichText placeholder={__("Add a label", "forms-gutenberg")} tag="label" value={label} onChange={handleLabel} />
 						<div className="cwp-result-wrap">
 							{!isEmpty(prefix) && <span style={styling}>{prefix}</span>}
 							<span className="cwp-calc-result" style={styling}>

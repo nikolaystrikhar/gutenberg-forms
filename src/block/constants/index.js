@@ -1,4 +1,4 @@
-export const TEXT_DOMAIN = "cwp-gutenberg-forms"; // text-domain
+export const TEXT_DOMAIN = "forms-gutenberg"; // text-domain
 
 
 

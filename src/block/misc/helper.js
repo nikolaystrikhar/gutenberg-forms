@@ -126,51 +126,51 @@ export function strip_tags(str) {
 export const basicColorScheme = [
 	{
 		color: "rgb(247, 141, 167)",
-		name: __("Pale Pink", "cwp-gutenberg-forms"),
+		name: __("Pale Pink", "forms-gutenberg"),
 	},
 	{
-		name: __("Vivid red", "cwp-gutenberg-forms"),
+		name: __("Vivid red", "forms-gutenberg"),
 		color: "rgb(207, 46, 46)",
 	},
 	{
-		name: __("Luminous vivid orange", "cwp-gutenberg-forms"),
+		name: __("Luminous vivid orange", "forms-gutenberg"),
 		color: "rgb(255, 105, 0)",
 	},
 	{
 		color: "rgb(252, 185, 0)",
-		name: __("Luminous vivid amber", "cwp-gutenberg-forms"),
+		name: __("Luminous vivid amber", "forms-gutenberg"),
 	},
 	{
 		color: "rgb(123, 220, 181)",
-		name: __("Light green cyan", "cwp-gutenberg-forms"),
+		name: __("Light green cyan", "forms-gutenberg"),
 	},
 	{
 		color: "rgb(0, 208, 132)",
-		name: __("Vivid green cyan", "cwp-gutenberg-forms"),
+		name: __("Vivid green cyan", "forms-gutenberg"),
 	},
 	{
 		color: "rgb(142, 209, 252)",
-		name: __("Pale cyan blue", "cwp-gutenberg-forms"),
+		name: __("Pale cyan blue", "forms-gutenberg"),
 	},
 	{
 		color: "rgb(6, 147, 227)",
-		name: __("Vivid cyan blue", "cwp-gutenberg-forms"),
+		name: __("Vivid cyan blue", "forms-gutenberg"),
 	},
 	{
 		color: "rgb(155, 81, 224)",
-		name: __("Vivid purple", "cwp-gutenberg-forms"),
+		name: __("Vivid purple", "forms-gutenberg"),
 	},
 	{
 		color: "rgb(238, 238, 238)",
-		name: __("Very light gray", "cwp-gutenberg-forms"),
+		name: __("Very light gray", "forms-gutenberg"),
 	},
 	{
 		color: "rgb(171, 184, 195)",
-		name: __("Cyan bluish gray", "cwp-gutenberg-forms"),
+		name: __("Cyan bluish gray", "forms-gutenberg"),
 	},
 	{
 		color: "rgb(49, 49, 49)",
-		name: __("Very dark gray", "cwp-gutenberg-forms"),
+		name: __("Very dark gray", "forms-gutenberg"),
 	},
 ];
 

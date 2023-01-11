@@ -25,12 +25,12 @@ function edit(props) {
 			{isChildFieldsRequired(props.clientId) && enableCondition && (
 				<Notice status="error" isDismissible={false}>
 					{
-						__("Do not have a required fields inside a conditional group.", "cwp-gutenberg-forms")
+						__("Do not have a required fields inside a conditional group.", "forms-gutenberg")
 					}
 				</Notice>
 			)}
 			<fieldset style={groupStyling} className="cwp-form-group">
-				<RichText placeholder={__("Add a label", "cwp-gutenberg-forms")} tag="legend" onChange={handleLabel} value={label} />
+				<RichText placeholder={__("Add a label", "forms-gutenberg")} tag="legend" onChange={handleLabel} value={label} />
 				<div className="cwp-group-fields">
 					<InnerBlocks />
 				</div>

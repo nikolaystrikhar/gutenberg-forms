@@ -107,11 +107,11 @@ function edit(props) {
 
 	return [
 		<InspectorControls>
-			<PanelBody initialOpen={true} title={__("Field Settings", "cwp-gutenberg-forms")}>
+			<PanelBody initialOpen={true} title={__("Field Settings", "forms-gutenberg")}>
 				<div className="cwp-option">
 					<TextControl
 						placeholder={adminId.default}
-						label={__("Field ID", "cwp-gutenberg-forms")}
+						label={__("Field ID", "forms-gutenberg")}
 						value={adminId.value}
 						onChange={handleAdminId}
 					/>
@@ -124,14 +124,14 @@ function edit(props) {
 				ref={hiddenField}
 				type="text"
 				value={value}
-				placeholder={__("Enter value...", "cwp-gutenberg-forms")}
+				placeholder={__("Enter value...", "forms-gutenberg")}
 				onChange={handleChange}
 			/>
 			<div>
 				<IconButton
 					className="cwp-tag-opener"
 					icon={icon}
-					label={__("Add Dynamic Data", "cwp-gutenberg-forms")}
+					label={__("Add Dynamic Data", "forms-gutenberg")}
 					onClick={() => setSelector(!selector)}
 				/>
 				{selector && isSelected && (

@@ -19,7 +19,7 @@ function Templates(props) {
 
     return (
         <div className="cwp-templates">
-            <Panel header={__(<strong>Available Templates</strong>, "cwp-gutenberg-forms")}>
+            <Panel header={__(<strong>Available Templates</strong>, "forms-gutenberg")}>
                 <MenuGroup>
                     {
                         templates.map((template, index) => {

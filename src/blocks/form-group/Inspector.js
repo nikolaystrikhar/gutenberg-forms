@@ -45,13 +45,13 @@ function Inspector(prop) {
 				<Notice status="error" isDismissible={false}>
 					{__(
 						"Do not have a required fields inside a conditional group.",
-						"cwp-gutenberg-forms"
+						"forms-gutenberg"
 					)}
 				</Notice>
 			)}
 			<PanelBody title={__("Styling")}>
 				<div className="cwp-option">
-					<h3 className="cwp-heading">{__("Background Color", "cwp-gutenberg-forms")}</h3>
+					<h3 className="cwp-heading">{__("Background Color", "forms-gutenberg")}</h3>
 					<ColorPalette
 						colors={basicColorScheme}
 						value={backgroundColor}
@@ -59,7 +59,7 @@ function Inspector(prop) {
 					/>
 				</div>
 				<div className="cwp-option">
-					<h3 className="cwp-heading">{__("Color", "cwp-gutenberg-forms")}</h3>
+					<h3 className="cwp-heading">{__("Color", "forms-gutenberg")}</h3>
 					<ColorPalette
 						colors={basicColorScheme}
 						value={color}
@@ -68,7 +68,7 @@ function Inspector(prop) {
 				</div>
 
 				<div className="cwp-option">
-					<h3 className="cwp-heading">{__("Border Color", "cwp-gutenberg-forms")}</h3>
+					<h3 className="cwp-heading">{__("Border Color", "forms-gutenberg")}</h3>
 					<ColorPalette
 						colors={basicColorScheme}
 						value={borderColor}
@@ -77,7 +77,7 @@ function Inspector(prop) {
 				</div>
 				<div className="cwp-option">
 					<h3 className="cwp-heading">
-						{__("Border Width [px]", "cwp-gutenberg-forms")}
+						{__("Border Width [px]", "forms-gutenberg")}
 					</h3>
 					<RangeControl
 						value={borderWidth}
@@ -90,7 +90,7 @@ function Inspector(prop) {
 				</div>
 				<div className="cwp-option">
 					<h3 className="cwp-heading">
-						{__("Border Radius [px]", "cwp-gutenberg-forms")}
+						{__("Border Radius [px]", "forms-gutenberg")}
 					</h3>
 					<RangeControl
 						value={borderRadius}
@@ -103,12 +103,12 @@ function Inspector(prop) {
 				<div className="cwp-option">
 					<RangeControl
 						value={padding}
-						label={__("Padding", "cwp-gutenberg-forms")}
+						label={__("Padding", "forms-gutenberg")}
 						onChange={(padd) => handleStyling(padd, "padding")}
 					/>
 				</div>
 			</PanelBody>
-			<PanelBody title={__("Condition", "cwp-gutenberg-forms")}>
+			<PanelBody title={__("Condition", "forms-gutenberg")}>
 				<ConditionalLogic
 					condition={condition}
 					set={props.setAttributes}

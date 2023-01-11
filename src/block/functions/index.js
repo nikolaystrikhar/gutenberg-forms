@@ -103,58 +103,58 @@ const miscBlocks = ["cwp/form-button"];
 export const defaultFieldMessages = [
 	{
 		fieldName: "name",
-		empty: __("Please fill out this field!", "cwp-gutenberg-forms"),
-		invalidName: __("The name {{value}} is not valid!", "cwp-gutenberg-forms"),
+		empty: __("Please fill out this field!", "forms-gutenberg"),
+		invalidName: __("The name {{value}} is not valid!", "forms-gutenberg"),
 	},
 	{
 		fieldName: "email",
-		empty: __("Please fill out this field!", "cwp-gutenberg-forms"),
+		empty: __("Please fill out this field!", "forms-gutenberg"),
 		invalidEmail: __(
 			"The email {{value}} is not valid!",
-			"cwp-gutenberg-forms"
+			"forms-gutenberg"
 		),
 	},
 	{
 		fieldName: "text",
-		empty: __("Please fill out this field!", "cwp-gutenberg-forms"),
-		invalid: __("The text {{value}} is not valid!", "cwp-gutenberg-forms"),
+		empty: __("Please fill out this field!", "forms-gutenberg"),
+		invalid: __("The text {{value}} is not valid!", "forms-gutenberg"),
 	},
 	{
 		fieldName: "message",
-		empty: __("Please fill out this field!", "cwp-gutenberg-forms"),
-		invalid: __("The message {{value}} is not valid!", "cwp-gutenberg-forms"),
+		empty: __("Please fill out this field!", "forms-gutenberg"),
+		invalid: __("The message {{value}} is not valid!", "forms-gutenberg"),
 	},
 	{
 		fieldName: "checkbox",
-		empty: __("Please select atleast one checkbox!", "cwp-gutenberg-forms"),
+		empty: __("Please select atleast one checkbox!", "forms-gutenberg"),
 	},
 	{
 		fieldName: "radio",
-		empty: __("Please select radio!", "cwp-gutenberg-forms"),
+		empty: __("Please select radio!", "forms-gutenberg"),
 	},
 	{
 		fieldName: "phone",
-		empty: __("Please fill out this field!", "cwp-gutenberg-forms"),
-		invalid: __("The phone {{value}} is not valid!", "cwp-gutenberg-forms"),
+		empty: __("Please fill out this field!", "forms-gutenberg"),
+		invalid: __("The phone {{value}} is not valid!", "forms-gutenberg"),
 	},
 	{
 		fieldName: "website",
-		empty: __("Please fill out this field!", "cwp-gutenberg-forms"),
-		invalid: __("The website {{value}} is not valid!", "cwp-gutenberg-forms"),
+		empty: __("Please fill out this field!", "forms-gutenberg"),
+		invalid: __("The website {{value}} is not valid!", "forms-gutenberg"),
 	},
 	{
 		fieldName: "select",
-		empty: __("Please select option!", "cwp-gutenberg-forms"),
+		empty: __("Please select option!", "forms-gutenberg"),
 	},
 	{
 		fieldName: "number",
-		empty: __("Please fill out this field!", "cwp-gutenberg-forms"),
-		invalid: __("The number {{value}} is not in range!", "cwp-gutenberg-forms"),
+		empty: __("Please fill out this field!", "forms-gutenberg"),
+		invalid: __("The number {{value}} is not in range!", "forms-gutenberg"),
 	},
 	{
 		fieldName: "file-upload",
-		empty: __("Please select a file", "cwp-gutenberg-forms"),
-		invalid: __("The file {{value}} is not valid!", "cwp-gutenberg-forms"),
+		empty: __("Please select a file", "forms-gutenberg"),
+		invalid: __("The file {{value}} is not valid!", "forms-gutenberg"),
 	},
 ];
 
@@ -595,23 +595,23 @@ export function getMetaTags() {
 export function getWordpressTags() {
 	const tags = [
 		{
-			title: __("Post ID", "cwp-gutenberg-forms"),
+			title: __("Post ID", "forms-gutenberg"),
 			tag: `{{wp:post_id}}`, // done
 		},
 		{
-			title: __("Post Title", "cwp-gutenberg-forms"),
+			title: __("Post Title", "forms-gutenberg"),
 			tag: `{{wp:post_title}}`, // done
 		},
 		{
-			title: __("Post URL", "cwp-gutenberg-forms"),
+			title: __("Post URL", "forms-gutenberg"),
 			tag: `{{wp:post_url}}`, // done
 		},
 		{
-			title: __("Post Author", "cwp-gutenberg-forms"),
+			title: __("Post Author", "forms-gutenberg"),
 			tag: `{{wp:post_author}}`, // done
 		},
 		{
-			title: __("Post Author Email", "cwp-gutenberg-forms"),
+			title: __("Post Author Email", "forms-gutenberg"),
 			tag: `{{wp:post_author_email}}`, // done
 		},
 		// {
@@ -619,43 +619,43 @@ export function getWordpressTags() {
 		// 	tag: `{{post_meta:YOUR_META_KEY}}`, // later
 		// },
 		{
-			title: __("User ID", "cwp-gutenberg-forms"),
+			title: __("User ID", "forms-gutenberg"),
 			tag: `{{wp:user_id}}`, // done
 		},
 		{
-			title: __("User First Name", "cwp-gutenberg-forms"),
+			title: __("User First Name", "forms-gutenberg"),
 			tag: `{{wp:user_first_name}}`, // done
 		},
 		{
-			title: __("User Last Name", "cwp-gutenberg-forms"),
+			title: __("User Last Name", "forms-gutenberg"),
 			tag: `{{wp:user_last_name}}`, // done
 		},
 		{
-			title: __("User Display Name", "cwp-gutenberg-forms"),
+			title: __("User Display Name", "forms-gutenberg"),
 			tag: `{{wp:user_display_name}}`, // done
 		},
 		{
-			title: __("User Username", "cwp-gutenberg-forms"),
+			title: __("User Username", "forms-gutenberg"),
 			tag: `{{wp:user_username}}`, // done
 		},
 		{
-			title: __("User Email", "cwp-gutenberg-forms"),
+			title: __("User Email", "forms-gutenberg"),
 			tag: `{{wp:user_email}}`, // done
 		},
 		{
-			title: __("User URL", "cwp-gutenberg-forms"),
+			title: __("User URL", "forms-gutenberg"),
 			tag: `{{wp:user_url}}`, // done
 		},
 		{
-			title: __("Site Title", "cwp-gutenberg-forms"),
+			title: __("Site Title", "forms-gutenberg"),
 			tag: `{{wp:site_title}}`, // done
 		},
 		{
-			title: __("Site URL", "cwp-gutenberg-forms"),
+			title: __("Site URL", "forms-gutenberg"),
 			tag: `{{wp:site_url}}`, // done
 		},
 		{
-			title: __("Admin Email", "cwp-gutenberg-forms"),
+			title: __("Admin Email", "forms-gutenberg"),
 			tag: `{{wp:admin_email}}`, // done
 		},
 	];
@@ -666,11 +666,11 @@ export function getWordpressTags() {
 export function getFormTags() {
 	const tags = [
 		{
-			title: __("Form ID", "cwp-gutenberg-forms"),
+			title: __("Form ID", "forms-gutenberg"),
 			tag: `{{form:form_id}}`, // done
 		},
 		{
-			title: __("Form Label", "cwp-gutenberg-forms"),
+			title: __("Form Label", "forms-gutenberg"),
 			tag: `{{form:form_label}}`, // done
 		},
 	];
@@ -681,15 +681,15 @@ export function getFormTags() {
 export function getOtherTags() {
 	const tags = [
 		{
-			title: __("Date", "cwp-gutenberg-forms"),
+			title: __("Date", "forms-gutenberg"),
 			tag: `{{other:date}}`, // done
 		},
 		{
-			title: __("Time", "cwp-gutenberg-forms"),
+			title: __("Time", "forms-gutenberg"),
 			tag: `{{other:time}}`, // done
 		},
 		{
-			title: __("Query", "cwp-gutenberg-forms"),
+			title: __("Query", "forms-gutenberg"),
 			tag: `{{query:YOUR_URL_QUERY}}`,
 		},
 	];

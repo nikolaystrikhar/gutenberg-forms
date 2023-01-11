@@ -26,10 +26,10 @@ function edit(props) {
 	return [
 		props.isSelected && !disabled && (
 			<InspectorControls>
-				<PanelBody initialOpen={true} title={__("Step Settings", "cwp-gutenberg-forms")}>
+				<PanelBody initialOpen={true} title={__("Step Settings", "forms-gutenberg")}>
 					<TextControl
-						placeholder={__("Form Step", "cwp-gutenberg-forms")}
-						label={__("Label", "cwp-gutenberg-forms")}
+						placeholder={__("Form Step", "forms-gutenberg")}
+						label={__("Label", "forms-gutenberg")}
 						value={label}
 						onChange={(label) => setAttributes({ label })}
 					/>

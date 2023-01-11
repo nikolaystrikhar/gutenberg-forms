@@ -55,7 +55,7 @@ function Sidebar(props) {
                     </MenuItem>
                 </MenuGroup>
 
-                <PanelBody title={__("Categories", "cwp-gutenberg-forms")}>
+                <PanelBody title={__("Categories", "forms-gutenberg")}>
                     <MenuGroup>
                         {catagories.map(c => {
 

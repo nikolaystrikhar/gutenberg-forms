@@ -276,11 +276,11 @@ function edit(props) {
 
 	return [
 		<InspectorControls>
-			<PanelBody title={__("Field Settings", "cwp-gutenberg-forms")} initialOpen={true}>
+			<PanelBody title={__("Field Settings", "forms-gutenberg")} initialOpen={true}>
 				<div className="cwp-option">
 					<TextControl
 						placeholder={adminId.default}
-						label={__("Field ID", "cwp-gutenberg-forms")}
+						label={__("Field ID", "forms-gutenberg")}
 						value={adminId.value}
 						onChange={handleAdminId}
 					/>
@@ -288,9 +288,9 @@ function edit(props) {
 
 				{!enableCondition ? (
 					<PanelRow>
-						<h3 className="cwp-heading">{__("Required", "cwp-gutenberg-forms")}</h3>
+						<h3 className="cwp-heading">{__("Required", "forms-gutenberg")}</h3>
 						<FormToggle
-							label={__("Required", "cwp-gutenberg-forms")}
+							label={__("Required", "forms-gutenberg")}
 							checked={isRequired}
 							onChange={handleRequired}
 						/>
@@ -299,13 +299,13 @@ function edit(props) {
 					<div className="cwp-option">
 						<p>
 							<Icon icon="info" />{" "}
-							{__("You cannot set a conditional field required!", "cwp-gutenberg-forms")}
+							{__("You cannot set a conditional field required!", "forms-gutenberg")}
 						</p>
 					</div>
 				)}
 				{isRequired && (
 					<div className="cwp-option">
-						<h3 className="cwp-heading">{__("Required Text", "cwp-gutenberg-forms")}</h3>
+						<h3 className="cwp-heading">{__("Required Text", "forms-gutenberg")}</h3>
 						<TextControl
 							onChange={(label) =>
 								props.setAttributes({ requiredLabel: label })
@@ -315,7 +315,7 @@ function edit(props) {
 					</div>
 				)}
 			</PanelBody>
-			<PanelBody title={__("Condition", "cwp-gutenberg-forms")}>
+			<PanelBody title={__("Condition", "forms-gutenberg")}>
 				<ConditionalLogic
 					condition={condition}
 					set={props.setAttributes}
@@ -324,9 +324,9 @@ function edit(props) {
 				/>
 			</PanelBody>
 			{isRequired && (
-				<PanelBody title={__("Messages", "cwp-gutenberg-forms")}>
+				<PanelBody title={__("Messages", "forms-gutenberg")}>
 					<div className="cwp-option">
-						<h3 className="cwp-heading">{__("Required Error", "cwp-gutenberg-forms")}</h3>
+						<h3 className="cwp-heading">{__("Required Error", "forms-gutenberg")}</h3>
 						<TextControl
 							onChange={(label) => setMessages("empty", label)}
 							value={empty}
@@ -347,7 +347,7 @@ function edit(props) {
 				<Fragment>
 					{!!props.isSelected && !enableCondition && (
 						<div className="cwp-required">
-							<h3>{__("Required", "cwp-gutenberg-forms")}</h3>
+							<h3>{__("Required", "forms-gutenberg")}</h3>
 							<FormToggle checked={isRequired} onChange={handleRequired} />
 						</div>
 					)}
@@ -355,7 +355,7 @@ function edit(props) {
 					<div className="cwp-select-set" ref={selectContainer}>
 						<div className="cwp-label-wrap">
 							<RichText
-								placeholder={__("Add a label", "cwp-gutenberg-forms")}
+								placeholder={__("Add a label", "forms-gutenberg")}
 								tag="label"
 								value={label}
 								onChange={handleLabel}
@@ -371,18 +371,18 @@ function edit(props) {
 							<div className="cwp-select-controls">
 								<div>
 									<Button isDefault onClick={addSelect}>
-										{__("Add Option", "cwp-gutenberg-forms")}
+										{__("Add Option", "forms-gutenberg")}
 									</Button>
 									<Button
 										isDefault
 										onClick={() => props.setAttributes({ bulkAdd: true })}
 									>
-										{__("Bulk Add", "cwp-gutenberg-forms")}
+										{__("Bulk Add", "forms-gutenberg")}
 									</Button>
 								</div>
 								<div>
 									<Button onClick={clearAll}>
-										{__("Clear All", "cwp-gutenberg-forms")}
+										{__("Clear All", "forms-gutenberg")}
 									</Button>
 								</div>
 							</div>

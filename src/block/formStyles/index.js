@@ -5,7 +5,7 @@ const { registerBlockStyle } = wp.blocks;
 const formStyles = [
 	{
 		name: "paper",
-		label: __("Paper", "cwp-gutenberg-forms"),
+		label: __("Paper", "forms-gutenberg"),
 	}
 ];
 

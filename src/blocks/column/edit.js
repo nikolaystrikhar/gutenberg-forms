@@ -42,11 +42,11 @@ function edit( props ) {
 			<InspectorControls>
 				<PanelBody
 					initialOpen={ true }
-					title={ __( 'Column Settings', "cwp-gutenberg-forms" ) }
+					title={ __( 'Column Settings', "forms-gutenberg" ) }
 				>
 					<RangeControl
 						value={ width }
-						label={ __( 'Width (%)', "cwp-gutenberg-forms" ) }
+						label={ __( 'Width (%)', "forms-gutenberg" ) }
 						onChange={ ( newWidth ) => updateAttribute( 'width', newWidth ) }
 					/>
 				</PanelBody>

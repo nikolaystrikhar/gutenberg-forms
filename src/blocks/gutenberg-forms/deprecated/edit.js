@@ -81,7 +81,7 @@ function edit(props) {
 									className="cwp-submit-btn cwp-default-submit-btn"
 								>
 									<RichText
-										placeholder={__("Add a label", "cwp-gutenberg-forms")}
+										placeholder={__("Add a label", "forms-gutenberg")}
 										tag="span"
 										value={submitLabel}
 										onChange={handleButtonLabel}

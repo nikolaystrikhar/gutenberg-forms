@@ -5,14 +5,14 @@ const { registerBlockStyle } = wp.blocks;
 let fieldStyles = [
 	{
 		name: "inline",
-		label: __("Inline", "cwp-gutenberg-forms"),
+		label: __("Inline", "forms-gutenberg"),
 	}
 ];
 
 const radioFieldStyling = [
 	{
 		name: "button",
-		label: __("Button", "cwp-gutenberg-forms"),
+		label: __("Button", "forms-gutenberg"),
 	}
 ];
 

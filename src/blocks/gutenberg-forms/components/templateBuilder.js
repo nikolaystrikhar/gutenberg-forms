@@ -154,7 +154,7 @@ function TemplateBuilder(prop) {
 						icon={icon}
 						isDefault
 						className="cwp-tag-opener"
-						label={__("Add Dynamic Data", "cwp-gutenberg-forms")}
+						label={__("Add Dynamic Data", "forms-gutenberg")}
 						onClick={() => setSelector(!selector)}
 					/>
 					{selector && isSelected && (
@@ -167,16 +167,16 @@ function TemplateBuilder(prop) {
 
 			<div className="cwp-builder-field">
 				<TextControl
-					label={__("From", "cwp-gutenberg-forms")}
+					label={__("From", "forms-gutenberg")}
 					value={fromEmail}
-					placeholder={__("Name, Email", "cwp-gutenberg-forms")}
+					placeholder={__("Name, Email", "forms-gutenberg")}
 					onChange={(fromEmail) => props.setAttributes({ fromEmail })}
 				/>
 			</div>
 
 			<div className="cwp-builder-field">
 				<div className="to-field">
-					<span>{__("To", "cwp-gutenberg-forms")}</span>
+					<span>{__("To", "forms-gutenberg")}</span>
 					<ButtonGroup>
 						<Button
 							{...getActiveEmailType("to")}
@@ -206,7 +206,7 @@ function TemplateBuilder(prop) {
 
 			<div ref={subjectArea}>
 				<TextControl
-					label={__("Subject", "cwp-gutenberg-forms")}
+					label={__("Subject", "forms-gutenberg")}
 					onClick={() => setCurrentForm("subject")}
 					value={subject}
 					onChange={(subject) => handleChange(subject, "subject")}
@@ -215,7 +215,7 @@ function TemplateBuilder(prop) {
 
 			<div ref={bodyArea}>
 				<TextareaControl
-					label={__("Body", "cwp-gutenberg-forms")}
+					label={__("Body", "forms-gutenberg")}
 					id={clientId.concat("body")}
 					value={body}
 					onClick={() => setCurrentForm("body")}

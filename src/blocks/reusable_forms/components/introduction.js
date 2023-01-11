@@ -22,7 +22,7 @@ function Introduction(props) {
 		<Placeholder
 			className="cwp-reusable-intro"
 			icon="index-card"
-			label={__("Select Gutenberg Form", "cwp-gutenberg-forms")}
+			label={__("Select Gutenberg Form", "forms-gutenberg")}
 			instructions="Select a saved form."
 		>
 			<div className="content">

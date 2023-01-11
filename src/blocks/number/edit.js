@@ -155,11 +155,11 @@ function edit(props) {
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
-				<PanelBody title={__("Field Settings", "cwp-gutenberg-forms")} initialOpen={true}>
+				<PanelBody title={__("Field Settings", "forms-gutenberg")} initialOpen={true}>
 					<div className="cwp-option">
 						<TextControl
 							placeholder={adminId.default}
-							label={__("Field ID", "cwp-gutenberg-forms")}
+							label={__("Field ID", "forms-gutenberg")}
 							value={adminId.value}
 							onChange={handleAdminId}
 						/>
@@ -167,7 +167,7 @@ function edit(props) {
 
 					<div className="cwp-option">
 						<PanelRow>
-							<h3 className="cwp-heading">{__("Required", "cwp-gutenberg-forms")}</h3>
+							<h3 className="cwp-heading">{__("Required", "forms-gutenberg")}</h3>
 							<FormToggle
 								label="Required"
 								checked={isRequired}
@@ -178,7 +178,7 @@ function edit(props) {
 					{isRequired && (
 						<div className="cwp-option">
 							<h3 className="cwp-heading">
-								{__("Required Text", "cwp-gutenberg-forms")}
+								{__("Required Text", "forms-gutenberg")}
 							</h3>
 							<TextControl
 								onChange={(label) =>
@@ -203,7 +203,7 @@ function edit(props) {
 							step={0.01}
 							value={rangeMax}
 							onChange={(m) => props.setAttributes({ rangeMax: m })}
-							label={__("Range Max", "cwp-gutenberg-forms")}
+							label={__("Range Max", "forms-gutenberg")}
 						/>
 						<RangeControl
 							min={0}
@@ -211,7 +211,7 @@ function edit(props) {
 							value={rangeMin}
 							max={10000}
 							onChange={(m) => props.setAttributes({ rangeMin: m })}
-							label={__("Range Min", "cwp-gutenberg-forms")}
+							label={__("Range Min", "forms-gutenberg")}
 						/>
 					</div>
 				</PanelBody>
@@ -219,7 +219,7 @@ function edit(props) {
 					{isRequired && (
 						<div className="cwp-option">
 							<h3 className="cwp-heading">
-								{__("Required Error", "cwp-gutenberg-forms")}
+								{__("Required Error", "forms-gutenberg")}
 							</h3>
 							<TextControl
 								onChange={(label) => setMessages("empty", label)}
@@ -229,7 +229,7 @@ function edit(props) {
 					)}
 					<div className="cwp-option">
 						<h3 className="cwp-heading">
-							{__("Invalid Number Error", "cwp-gutenberg-forms")}
+							{__("Invalid Number Error", "forms-gutenberg")}
 						</h3>
 						<TextControl
 							onChange={(v) => setMessages("invalid", v)}
@@ -239,11 +239,11 @@ function edit(props) {
 					<div className="cwp-option">
 						<p>
 							<Icon icon="info" />{" "}
-							{__("Use {{value}} to insert field value!", "cwp-gutenberg-forms")}
+							{__("Use {{value}} to insert field value!", "forms-gutenberg")}
 						</p>
 					</div>
 				</PanelBody>
-				<PanelBody title={__("Show Hint", "cwp-gutenberg-forms")}>
+				<PanelBody title={__("Show Hint", "forms-gutenberg")}>
 					<div className="cwp-option">
 						<FormToggle
 							label="Show Hint"
@@ -253,7 +253,7 @@ function edit(props) {
 						{showHint && (
 							<Fragment>
 								<TextControl
-									label={__("Hint Text", "cwp-gutenberg-forms")}
+									label={__("Hint Text", "forms-gutenberg")}
 									onChange={(hint) => props.setAttributes({ hint })}
 									value={hint}
 								/>
@@ -267,12 +267,12 @@ function edit(props) {
 		<div className={`cwp-number cwp-field ${props.className}`}>
 			{!!props.isSelected && (
 				<div className="cwp-required">
-					<h3>{__("Range Slider", "cwp-gutenberg-forms")}</h3>
+					<h3>{__("Range Slider", "forms-gutenberg")}</h3>
 					<FormToggle
 						checked={isRange}
 						onChange={() => props.setAttributes({ isRange: !isRange })}
 					/>
-					<h3>{__("Required", "cwp-gutenberg-forms")}</h3>
+					<h3>{__("Required", "forms-gutenberg")}</h3>
 					<FormToggle checked={isRequired} onChange={handleRequired} />
 				</div>
 			)}
@@ -280,7 +280,7 @@ function edit(props) {
 			<div className="cwp-field-set">
 				<div className="cwp-label-wrap">
 					<RichText
-						placeholder={__("Add a label", "cwp-gutenberg-forms")}
+						placeholder={__("Add a label", "forms-gutenberg")}
 						tag="label"
 						value={label}
 						onChange={handleLabel}

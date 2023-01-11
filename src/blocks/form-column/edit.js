@@ -68,12 +68,12 @@ function edit(props) {
 	return [
 		<InspectorControls>
 			<PanelBody
-				icon={__("layout", "cwp-gutenberg-forms")}
-				title={__("Layout Settings", "cwp-gutenberg-forms")}
+				icon={__("layout", "forms-gutenberg")}
+				title={__("Layout Settings", "forms-gutenberg")}
 			>
 				<div className="cwp-option">
 					<RangeControl
-						label={__("Columns", "cwp-gutenberg-forms")}
+						label={__("Columns", "forms-gutenberg")}
 						max={6}
 						min={2}
 						onChange={handleChange}
@@ -82,7 +82,7 @@ function edit(props) {
 				</div>
 				<div className="cwp-option">
 					<PanelRow>
-						<h3>{__("Stack on Mobile", "cwp-gutenberg-forms")}</h3>
+						<h3>{__("Stack on Mobile", "forms-gutenberg")}</h3>
 						<FormToggle
 							checked={stack}
 							onChange={() => setAttributes({ stack: !stack })}

@@ -50,8 +50,8 @@ function bulk_add(prop) {
                 onChange={setBulkText}
             />
             <div className="cwp-save">
-                <Button isPrimary onClick={handleSave}>{__("Save", "cwp-gutenberg-forms")}</Button>
-                <Button isDefault onClick={() => props.setAttributes({ bulkAdd: false })}>{__("Cancel", "cwp-gutenberg-forms")}</Button>
+                <Button isPrimary onClick={handleSave}>{__("Save", "forms-gutenberg")}</Button>
+                <Button isDefault onClick={() => props.setAttributes({ bulkAdd: false })}>{__("Cancel", "forms-gutenberg")}</Button>
             </div>
         </div>
     )

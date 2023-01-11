@@ -1,14 +1,14 @@
 <?php
 /**
  * Plugin Name: Gutenberg Forms
- * Plugin URI: https://www.gutenbergforms.com
+ * Plugin URI: https://wptotem.com/gutenberg-forms
  * Description: The Next Generation WordPress Form Builder. Build forms directly within Gutenberg editor live. Add & arrange form fields like blocks.
  * Author: Nikolay Strikhar
  * Author URI: https://twitter.com/nikolaystrikhar
  * Version: 2.2.8.4
  * License: GPLv2 or later
  * License URI: https://www.gnu.org/licenses/gpl-2.0.txt
- * Text Domain: cwp-gutenberg-forms
+ * Text Domain: forms-gutenberg
  */
 
 defined( 'ABSPATH' ) || exit;

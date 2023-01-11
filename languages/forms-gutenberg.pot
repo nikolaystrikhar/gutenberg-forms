@@ -9,18 +9,17 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-01-11T11:55:42+00:00\n"
+"POT-Creation-Date: 2023-01-11T12:16:31+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
-"X-Domain: cwp-gutenberg-forms\n"
+"X-Domain: forms-gutenberg\n"
 
 #. Plugin Name of the plugin
-#: dist/blocks.build.js:655
 msgid "Gutenberg Forms"
 msgstr ""
 
 #. Plugin URI of the plugin
-msgid "https://www.gutenbergforms.com"
+msgid "https://wptotem.com/gutenberg-forms"
 msgstr ""
 
 #. Description of the plugin
@@ -35,1187 +34,447 @@ msgstr ""
 msgid "https://twitter.com/nikolaystrikhar"
 msgstr ""
 
-#: dist/blocks.build.js:321
-#: src/blocks/components/bulk_add.js:53
-msgid "Save"
+#: admin/admin.php:80
+msgid "entry"
+msgid_plural "entries"
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin/admin.php:81
+msgid "View and manage all of your form entries in one convenient location."
+msgstr ""
+
+#: admin/admin.php:88
+msgid "form"
+msgid_plural "forms"
+msgstr[0] ""
+msgstr[1] ""
+
+#: admin/admin.php:89
+msgid "Create new forms or edit existing ones to fit your needs."
+msgstr ""
+
+#: admin/admin.php:96
+msgid "Documentation"
+msgstr ""
+
+#: admin/admin.php:97
+msgid "Get the help you need to get the most out of our plugin with our comprehensive documentation."
+msgstr ""
+
+#: admin/admin.php:104
+msgid "Have an idea?"
+msgstr ""
+
+#: admin/admin.php:105
+msgid "We value your input! Let us know if you have an idea for a new feature or improvement to our plugin."
+msgstr ""
+
+#: admin/admin.php:112
+msgid "Found a bug?"
+msgstr ""
+
+#: admin/admin.php:113
+msgid "Let us know if you encounter any issues so we can fix them as quickly as possible."
+msgstr ""
+
+#: admin/admin.php:120
+msgid "Like the plugin?"
+msgstr ""
+
+#: admin/admin.php:121
+msgid "We would love to hear your feedback! Let us know what you think of our plugin."
+msgstr ""
+
+#: admin/admin.php:275
+msgid "There was an error trying to setnd your message. Please try again later."
+msgstr ""
+
+#: admin/admin.php:279
+msgid "There was an error trying to send your message. Please try again later."
+msgstr ""
+
+#: admin/admin.php:283
+#: src/block/functions/index.js:107
+msgid "The name {{value}} is not valid!"
+msgstr ""
+
+#: admin/admin.php:287
+#: src/block/functions/index.js:112
+msgid "The email {{value}} is not valid!"
+msgstr ""
+
+#: admin/admin.php:291
+#: src/block/functions/index.js:120
+msgid "The text {{value}} is not valid!"
+msgstr ""
+
+#: admin/admin.php:295
+#: src/block/functions/index.js:125
+msgid "The message {{value}} is not valid!"
+msgstr ""
+
+#: admin/admin.php:299
+#: src/block/functions/index.js:138
+msgid "The phone {{value}} is not valid!"
+msgstr ""
+
+#: admin/admin.php:303
+#: src/block/functions/index.js:143
+msgid "The website {{value}} is not valid!"
+msgstr ""
+
+#: admin/admin.php:307
+#: src/block/functions/index.js:152
+msgid "The number {{value}} is not in range!"
+msgstr ""
+
+#: admin/admin.php:311
+#: src/block/functions/index.js:157
+msgid "The file {{value}} is not valid!"
+msgstr ""
+
+#: cpt/entry.php:29
+#: cpt/entry.php:31
+#: cpt/entry.php:32
+msgid "Entries"
+msgstr ""
+
+#: cpt/entry.php:30
+msgid "Entry"
+msgstr ""
+
+#: cpt/entry.php:33
+msgid "Entries Archives"
+msgstr ""
+
+#: cpt/entry.php:34
+msgid "Entries Attributes"
+msgstr ""
+
+#: cpt/entry.php:35
+msgid "Entries:"
+msgstr ""
+
+#: cpt/entry.php:36
+msgid "All Entries"
+msgstr ""
+
+#: cpt/entry.php:37
+msgid "Add New Entry"
+msgstr ""
+
+#: cpt/entry.php:38
+msgid "Add Entry"
+msgstr ""
+
+#: cpt/entry.php:39
+msgid "New Entry"
+msgstr ""
+
+#: cpt/entry.php:40
+#: cpt/entry.php:42
+msgid "View Entry"
+msgstr ""
+
+#: cpt/entry.php:41
+msgid "Update Entry"
+msgstr ""
+
+#: cpt/entry.php:43
+msgid "View Entries"
+msgstr ""
+
+#: cpt/entry.php:44
+msgid "Search Entry"
+msgstr ""
+
+#: cpt/entry.php:45
+msgid "Entry Not found"
+msgstr ""
+
+#: cpt/entry.php:46
+msgid "Entry Not found in Trash"
+msgstr ""
+
+#: cpt/entry.php:47
+#: cpt/form.php:35
+msgid "Featured Image"
+msgstr ""
+
+#: cpt/entry.php:48
+#: cpt/form.php:36
+msgid "Set featured image"
+msgstr ""
+
+#: cpt/entry.php:49
+#: cpt/form.php:37
+msgid "Remove featured image"
+msgstr ""
+
+#: cpt/entry.php:50
+#: cpt/form.php:38
+msgid "Use as featured image"
+msgstr ""
+
+#: cpt/entry.php:51
+msgid "Insert into entry"
+msgstr ""
+
+#: cpt/entry.php:52
+msgid "Uploaded to this entry"
+msgstr ""
+
+#: cpt/entry.php:53
+msgid "Entries list"
+msgstr ""
+
+#: cpt/entry.php:54
+msgid "Entries list navigation"
+msgstr ""
+
+#: cpt/entry.php:55
+msgid "Filter entries list"
+msgstr ""
+
+#: cpt/entry.php:59
+msgid "For storing entries"
+msgstr ""
+
+#: cpt/entry.php:83
+msgid "Status"
+msgstr ""
+
+#: cpt/entry.php:97
+msgid "Read"
+msgstr ""
+
+#: cpt/entry.php:99
+msgid "Unread"
+msgstr ""
+
+#: cpt/entry.php:120
+msgid "View"
+msgstr ""
+
+#: cpt/entry.php:135
+msgid "Toggle Status"
+msgstr ""
+
+#: cpt/entry.php:197
+#: src/block/components/searchTags.js:55
+#: src/block/components/tagSelector.js:16
+msgid "Fields"
+msgstr ""
+
+#: cpt/entry.php:220
+msgid "Email Template"
+msgstr ""
+
+#: cpt/entry.php:243
+msgid "Additional Information"
+msgstr ""
+
+#: cpt/form.php:17
+#: cpt/form.php:19
+#: cpt/form.php:20
+msgid "Forms"
+msgstr ""
+
+#: cpt/form.php:18
+#: src/block/components/tagSelector.js:26
+msgid "Form"
+msgstr ""
+
+#: cpt/form.php:21
+msgid "Forms Archives"
+msgstr ""
+
+#: cpt/form.php:22
+msgid "Forms Attributes"
+msgstr ""
+
+#: cpt/form.php:23
+msgid "Forms:"
 msgstr ""
 
-#: dist/blocks.build.js:321
-#: src/blocks/components/bulk_add.js:54
-msgid "Cancel"
+#: cpt/form.php:24
+msgid "All Forms"
 msgstr ""
 
-#: dist/blocks.build.js:608
-#: src/blocks/gutenberg-forms/Inspector.js:164
-msgid "Form Design"
+#: cpt/form.php:25
+msgid "Add New Form"
 msgstr ""
 
-#: dist/blocks.build.js:608
-#: src/blocks/gutenberg-forms/Inspector.js:166
-msgid "Accent Color"
+#: cpt/form.php:26
+msgid "Add Form"
 msgstr ""
 
-#: dist/blocks.build.js:608
-#: dist/blocks.build.js:5269
-#: src/blocks/gutenberg-forms/Inspector.js:174
-#: src/blocks/progress/edit.js:86
-msgid "Text Color"
+#: cpt/form.php:27
+msgid "New Form"
 msgstr ""
 
-#: dist/blocks.build.js:608
-#: src/blocks/gutenberg-forms/Inspector.js:183
-msgid "Field Background Color"
+#: cpt/form.php:28
+#: cpt/form.php:30
+msgid "View Form"
 msgstr ""
 
-#: dist/blocks.build.js:608
-#: src/blocks/gutenberg-forms/Inspector.js:193
-msgid "Button Background Color"
+#: cpt/form.php:29
+msgid "Update Form"
 msgstr ""
 
-#: dist/blocks.build.js:608
-#: dist/blocks.build.js:4247
-#: src/blocks/gutenberg-forms/Inspector.js:203
-#: src/blocks/reusable_forms/edit.js:38
-msgid "General"
+#: cpt/form.php:31
+msgid "View Forms"
 msgstr ""
 
-#: dist/blocks.build.js:608
-#: src/block/functions/index.js:673
-#: src/blocks/gutenberg-forms/Inspector.js:206
-msgid "Form Label"
+#: cpt/form.php:32
+msgid "Search Form"
 msgstr ""
 
-#: dist/blocks.build.js:608
-#: src/blocks/gutenberg-forms/Inspector.js:214
-msgid "Disable Submit Button"
+#: cpt/form.php:33
+msgid "Form Not found"
 msgstr ""
 
-#: dist/blocks.build.js:608
-#: src/blocks/gutenberg-forms/Inspector.js:228
-msgid "Button Alignment"
+#: cpt/form.php:34
+msgid "Form Not found in Trash"
 msgstr ""
 
-#: dist/blocks.build.js:608
-#: src/blocks/gutenberg-forms/Inspector.js:256
-msgid "Confirmation Type"
+#: cpt/form.php:39
+msgid "Insert into form"
 msgstr ""
 
-#: dist/blocks.build.js:608
-#: src/blocks/gutenberg-forms/Inspector.js:263
-msgid "URL"
+#: cpt/form.php:40
+msgid "Uploaded to this form"
 msgstr ""
 
-#: dist/blocks.build.js:608
-#: src/blocks/gutenberg-forms/Inspector.js:269
-msgid "Message"
+#: cpt/form.php:41
+msgid "Forms list"
 msgstr ""
 
-#: dist/blocks.build.js:608
-#: src/blocks/gutenberg-forms/Inspector.js:277
-msgid "Success Url (Redirect)"
+#: cpt/form.php:42
+msgid "Forms list navigation"
 msgstr ""
 
-#: dist/blocks.build.js:608
-#: src/blocks/gutenberg-forms/Inspector.js:284
-msgid "Success Message"
+#: cpt/form.php:43
+msgid "Filter forms list"
 msgstr ""
 
-#: dist/blocks.build.js:608
-#: src/blocks/gutenberg-forms/Inspector.js:291
-msgid "Spam Message"
+#: cpt/form.php:72
+msgid "Shortcode"
 msgstr ""
 
-#: dist/blocks.build.js:608
-#: src/blocks/gutenberg-forms/Inspector.js:296
-msgid "Error Message"
+#: admin/layout/navigation.js:18
+#: dist/admin/index.js:3035
+msgid "Dashboard"
 msgstr ""
 
-#: dist/blocks.build.js:608
-#: src/blocks/gutenberg-forms/Inspector.js:308
-msgid "Hide Form On Success"
+#: admin/layout/navigation.js:22
+#: dist/admin/index.js:3038
+msgid "Extensions"
 msgstr ""
 
-#: dist/blocks.build.js:608
-#: src/blocks/gutenberg-forms/Inspector.js:321
-msgid "Email Notification"
-msgstr ""
-
-#: dist/blocks.build.js:608
-#: src/blocks/gutenberg-forms/Inspector.js:326
-msgid "Form Action"
-msgstr ""
-
-#: dist/blocks.build.js:608
-#: src/blocks/gutenberg-forms/Inspector.js:333
-msgid "Custom Form Action Name"
-msgstr ""
-
-#: dist/blocks.build.js:608
-#: src/blocks/gutenberg-forms/Inspector.js:340
-msgid "Spam Protection"
-msgstr ""
-
-#: dist/blocks.build.js:608
-#: dist/blocks.build.js:3429
-#: dist/blocks.build.js:3465
-#: dist/blocks.build.js:3662
-#: dist/blocks.build.js:3708
-#: dist/blocks.build.js:3744
-#: dist/blocks.build.js:3825
-#: dist/blocks.build.js:3861
-#: dist/blocks.build.js:3896
-#: dist/blocks.build.js:3942
-#: dist/blocks.build.js:3978
-#: dist/blocks.build.js:4013
-#: dist/blocks.build.js:4049
-#: dist/blocks.build.js:4084
-#: dist/blocks.build.js:4120
-#: dist/blocks.build.js:5488
-#: src/blocks/email/deprecated/edit.js:187
-#: src/blocks/email/edit.js:229
-#: src/blocks/file_upload/edit.js:233
-#: src/blocks/gutenberg-forms/Inspector.js:360
-#: src/blocks/message/edit.js:217
-#: src/blocks/name/deprecated/edit.js:244
-#: src/blocks/name/edit.js:247
-#: src/blocks/phone/deprecated/edit.js:198
-#: src/blocks/phone/edit.js:240
-#: src/blocks/radio/edit.js:378
-#: src/blocks/select/deprecated/edit.js:327
-#: src/blocks/select/edit.js:338
-#: src/blocks/text/deprecated/edit.js:221
-#: src/blocks/text/edit.js:260
-#: src/blocks/website/deprecated/edit.js:193
-#: src/blocks/website/edit.js:255
-msgid "Messages"
-msgstr ""
-
-#: dist/blocks.build.js:608
-#: src/blocks/gutenberg-forms/Inspector.js:364
-msgid "You can edit validations messages used for various field types here. Use {{ value }} to insert field value."
-msgstr ""
-
-#: dist/blocks.build.js:655
-msgid "Type a label for this form and select an option to get started."
-msgstr ""
-
-#: dist/blocks.build.js:655
-msgid "Type form label here..."
-msgstr ""
-
-#: dist/blocks.build.js:2733
-#: dist/blocks.build.js:2924
-#: dist/blocks.build.js:2947
-#: dist/blocks.build.js:3039
-#: dist/blocks.build.js:3394
-#: dist/blocks.build.js:3429
-#: dist/blocks.build.js:3465
-#: dist/blocks.build.js:3500
-#: dist/blocks.build.js:3604
-#: dist/blocks.build.js:3662
-#: dist/blocks.build.js:3708
-#: dist/blocks.build.js:3744
-#: dist/blocks.build.js:3779
-#: dist/blocks.build.js:3825
-#: dist/blocks.build.js:3861
-#: dist/blocks.build.js:3896
-#: dist/blocks.build.js:3942
-#: dist/blocks.build.js:3978
-#: dist/blocks.build.js:4013
-#: dist/blocks.build.js:4049
-#: dist/blocks.build.js:4084
-#: dist/blocks.build.js:4120
-#: dist/blocks.build.js:4155
-#: dist/blocks.build.js:5430
-#: dist/blocks.build.js:5488
-#: src/blocks/checkbox/edit.js:385
-#: src/blocks/datepicker/deprecated/edit.js:258
-#: src/blocks/datepicker/edit.js:325
-#: src/blocks/email/deprecated/edit.js:237
-#: src/blocks/email/edit.js:297
-#: src/blocks/file_upload/edit.js:268
-#: src/blocks/form-button/edit.js:182
-#: src/blocks/form-calculation/edit.js:210
-#: src/blocks/form-group/edit.js:33
-#: src/blocks/gutenberg-forms/deprecated/edit.js:84
-#: src/blocks/gutenberg-forms/edit.js:80
-#: src/blocks/message/edit.js:287
-#: src/blocks/name/deprecated/edit.js:294
-#: src/blocks/name/edit.js:318
-#: src/blocks/number/edit.js:283
-#: src/blocks/phone/deprecated/edit.js:249
-#: src/blocks/phone/edit.js:309
-#: src/blocks/radio/edit.js:414
-#: src/blocks/select/deprecated/edit.js:358
-#: src/blocks/select/edit.js:369
-#: src/blocks/text/deprecated/edit.js:272
-#: src/blocks/text/edit.js:329
-#: src/blocks/website/deprecated/edit.js:235
-#: src/blocks/website/edit.js:297
-#: src/blocks/yes-no/edit.js:145
-msgid "Add a label"
-msgstr ""
-
-#: dist/blocks.build.js:2757
-#: dist/blocks.build.js:4201
-#: src/blocks/gutenberg-forms/components/templateBuilder.js:157
-#: src/blocks/hidden/edit.js:134
-msgid "Add Dynamic Data"
-msgstr ""
-
-#: dist/blocks.build.js:2757
-#: src/blocks/gutenberg-forms/components/templateBuilder.js:170
-msgid "From"
-msgstr ""
-
-#: dist/blocks.build.js:2757
-#: src/blocks/gutenberg-forms/components/templateBuilder.js:172
-msgid "Name, Email"
-msgstr ""
-
-#: dist/blocks.build.js:2757
-#: src/blocks/gutenberg-forms/components/templateBuilder.js:179
-msgid "To"
-msgstr ""
-
-#: dist/blocks.build.js:2757
-#: src/blocks/gutenberg-forms/components/templateBuilder.js:209
-msgid "Subject"
-msgstr ""
-
-#: dist/blocks.build.js:2757
-#: src/blocks/gutenberg-forms/components/templateBuilder.js:218
-msgid "Body"
-msgstr ""
-
-#: dist/blocks.build.js:2793
-#: src/blocks/gutenberg-forms/components/fieldPlotter.js:122
-msgid "Please Map All Required Fields"
-msgstr ""
-
-#: dist/blocks.build.js:2817
-#: src/blocks/gutenberg-forms/settings_modal/components/sidebar.js:58
-msgid "Categories"
-msgstr ""
-
-#: dist/blocks.build.js:2947
-#: dist/blocks.build.js:3039
-#: dist/blocks.build.js:3394
-#: dist/blocks.build.js:3429
-#: dist/blocks.build.js:3465
-#: dist/blocks.build.js:3662
-#: dist/blocks.build.js:3708
-#: dist/blocks.build.js:3744
-#: dist/blocks.build.js:3779
-#: dist/blocks.build.js:3825
-#: dist/blocks.build.js:3861
-#: dist/blocks.build.js:3942
-#: dist/blocks.build.js:3978
-#: dist/blocks.build.js:4013
-#: dist/blocks.build.js:4049
-#: dist/blocks.build.js:4084
-#: dist/blocks.build.js:4120
-#: dist/blocks.build.js:4155
-#: dist/blocks.build.js:4201
-#: dist/blocks.build.js:5430
-#: dist/blocks.build.js:5488
-#: src/blocks/checkbox/edit.js:261
-#: src/blocks/datepicker/deprecated/edit.js:156
-#: src/blocks/datepicker/edit.js:171
-#: src/blocks/email/deprecated/edit.js:141
-#: src/blocks/email/edit.js:157
-#: src/blocks/file_upload/edit.js:173
-#: src/blocks/form-calculation/edit.js:111
-#: src/blocks/hidden/edit.js:110
-#: src/blocks/message/edit.js:144
-#: src/blocks/name/deprecated/edit.js:164
-#: src/blocks/name/edit.js:159
-#: src/blocks/number/edit.js:158
-#: src/blocks/phone/deprecated/edit.js:145
-#: src/blocks/phone/edit.js:161
-#: src/blocks/select/deprecated/edit.js:279
-#: src/blocks/select/edit.js:272
-#: src/blocks/text/deprecated/edit.js:146
-#: src/blocks/text/edit.js:162
-#: src/blocks/website/deprecated/edit.js:141
-#: src/blocks/website/edit.js:159
-#: src/blocks/yes-no/edit.js:101
-msgid "Field Settings"
-msgstr ""
-
-#: dist/blocks.build.js:2947
-#: dist/blocks.build.js:3039
-#: dist/blocks.build.js:3394
-#: dist/blocks.build.js:3429
-#: dist/blocks.build.js:3465
-#: dist/blocks.build.js:3662
-#: dist/blocks.build.js:3708
-#: dist/blocks.build.js:3744
-#: dist/blocks.build.js:3779
-#: dist/blocks.build.js:3825
-#: dist/blocks.build.js:3861
-#: dist/blocks.build.js:3896
-#: dist/blocks.build.js:3942
-#: dist/blocks.build.js:3978
-#: dist/blocks.build.js:4013
-#: dist/blocks.build.js:4049
-#: dist/blocks.build.js:4084
-#: dist/blocks.build.js:4120
-#: dist/blocks.build.js:4155
-#: dist/blocks.build.js:4201
-#: dist/blocks.build.js:5430
-#: dist/blocks.build.js:5488
-#: src/blocks/checkbox/edit.js:267
-#: src/blocks/datepicker/deprecated/edit.js:160
-#: src/blocks/datepicker/edit.js:177
-#: src/blocks/email/deprecated/edit.js:145
-#: src/blocks/email/edit.js:161
-#: src/blocks/file_upload/edit.js:178
-#: src/blocks/form-calculation/edit.js:116
-#: src/blocks/hidden/edit.js:114
-#: src/blocks/message/edit.js:148
-#: src/blocks/name/deprecated/edit.js:168
-#: src/blocks/name/edit.js:165
-#: src/blocks/number/edit.js:162
-#: src/blocks/phone/deprecated/edit.js:149
-#: src/blocks/phone/edit.js:165
-#: src/blocks/radio/edit.js:295
-#: src/blocks/select/deprecated/edit.js:283
-#: src/blocks/select/edit.js:276
-#: src/blocks/text/deprecated/edit.js:150
-#: src/blocks/text/edit.js:166
-#: src/blocks/website/deprecated/edit.js:145
-#: src/blocks/website/edit.js:163
-#: src/blocks/yes-no/edit.js:106
-msgid "Field ID"
-msgstr ""
-
-#: dist/blocks.build.js:2947
-#: dist/blocks.build.js:3039
-#: dist/blocks.build.js:3394
-#: dist/blocks.build.js:3429
-#: dist/blocks.build.js:3465
-#: dist/blocks.build.js:3662
-#: dist/blocks.build.js:3708
-#: dist/blocks.build.js:3744
-#: dist/blocks.build.js:3779
-#: dist/blocks.build.js:3825
-#: dist/blocks.build.js:3861
-#: dist/blocks.build.js:3896
-#: dist/blocks.build.js:3942
-#: dist/blocks.build.js:3978
-#: dist/blocks.build.js:4013
-#: dist/blocks.build.js:4049
-#: dist/blocks.build.js:4084
-#: dist/blocks.build.js:4120
-#: dist/blocks.build.js:4155
-#: dist/blocks.build.js:5488
-#: src/blocks/checkbox/edit.js:276
-#: src/blocks/checkbox/edit.js:372
-#: src/blocks/datepicker/deprecated/edit.js:168
-#: src/blocks/datepicker/deprecated/edit.js:170
-#: src/blocks/datepicker/deprecated/edit.js:250
-#: src/blocks/datepicker/edit.js:216
-#: src/blocks/datepicker/edit.js:219
-#: src/blocks/datepicker/edit.js:317
-#: src/blocks/email/deprecated/edit.js:153
-#: src/blocks/email/deprecated/edit.js:229
-#: src/blocks/email/edit.js:195
-#: src/blocks/email/edit.js:289
-#: src/blocks/file_upload/edit.js:186
-#: src/blocks/file_upload/edit.js:262
-#: src/blocks/message/edit.js:156
-#: src/blocks/message/edit.js:279
-#: src/blocks/name/deprecated/edit.js:202
-#: src/blocks/name/deprecated/edit.js:287
-#: src/blocks/name/edit.js:204
-#: src/blocks/name/edit.js:311
-#: src/blocks/number/edit.js:170
-#: src/blocks/number/edit.js:275
-#: src/blocks/phone/deprecated/edit.js:157
-#: src/blocks/phone/deprecated/edit.js:241
-#: src/blocks/phone/edit.js:199
-#: src/blocks/phone/edit.js:301
-#: src/blocks/radio/edit.js:304
-#: src/blocks/radio/edit.js:401
-#: src/blocks/select/deprecated/edit.js:291
-#: src/blocks/select/deprecated/edit.js:293
-#: src/blocks/select/deprecated/edit.js:350
-#: src/blocks/select/edit.js:284
-#: src/blocks/select/edit.js:286
-#: src/blocks/select/edit.js:361
-#: src/blocks/text/deprecated/edit.js:158
-#: src/blocks/text/deprecated/edit.js:160
-#: src/blocks/text/edit.js:197
-#: src/blocks/text/edit.js:199
-#: src/blocks/website/deprecated/edit.js:153
-#: src/blocks/website/deprecated/edit.js:227
-#: src/blocks/website/edit.js:197
-#: src/blocks/website/edit.js:289
-#: src/blocks/yes-no/edit.js:113
-#: src/blocks/yes-no/edit.js:138
-msgid "Required"
-msgstr ""
-
-#: dist/blocks.build.js:2947
-#: dist/blocks.build.js:3039
-#: dist/blocks.build.js:3394
-#: dist/blocks.build.js:3429
-#: dist/blocks.build.js:3465
-#: dist/blocks.build.js:3662
-#: dist/blocks.build.js:3708
-#: dist/blocks.build.js:3744
-#: dist/blocks.build.js:3825
-#: dist/blocks.build.js:3861
-#: dist/blocks.build.js:3896
-#: dist/blocks.build.js:3942
-#: dist/blocks.build.js:3978
-#: dist/blocks.build.js:4013
-#: dist/blocks.build.js:4049
-#: dist/blocks.build.js:4084
-#: dist/blocks.build.js:4120
-#: dist/blocks.build.js:5488
-#: src/blocks/checkbox/edit.js:288
-#: src/blocks/datepicker/deprecated/edit.js:179
-#: src/blocks/datepicker/edit.js:228
-#: src/blocks/email/deprecated/edit.js:164
-#: src/blocks/email/edit.js:206
-#: src/blocks/file_upload/edit.js:196
-#: src/blocks/message/edit.js:167
-#: src/blocks/name/deprecated/edit.js:213
-#: src/blocks/name/edit.js:216
-#: src/blocks/phone/deprecated/edit.js:168
-#: src/blocks/phone/edit.js:210
-#: src/blocks/radio/edit.js:316
-#: src/blocks/select/deprecated/edit.js:302
-#: src/blocks/select/edit.js:295
-#: src/blocks/text/deprecated/edit.js:169
-#: src/blocks/text/edit.js:208
-#: src/blocks/website/deprecated/edit.js:164
-#: src/blocks/website/edit.js:208
-msgid "You cannot set a conditional field required!"
-msgstr ""
-
-#: dist/blocks.build.js:2947
-#: dist/blocks.build.js:3039
-#: dist/blocks.build.js:3394
-#: dist/blocks.build.js:3429
-#: dist/blocks.build.js:3465
-#: dist/blocks.build.js:3662
-#: dist/blocks.build.js:3708
-#: dist/blocks.build.js:3744
-#: dist/blocks.build.js:3779
-#: dist/blocks.build.js:3825
-#: dist/blocks.build.js:3861
-#: dist/blocks.build.js:3896
-#: dist/blocks.build.js:3942
-#: dist/blocks.build.js:3978
-#: dist/blocks.build.js:4013
-#: dist/blocks.build.js:4049
-#: dist/blocks.build.js:4084
-#: dist/blocks.build.js:4120
-#: dist/blocks.build.js:4155
-#: dist/blocks.build.js:5488
-#: src/blocks/checkbox/edit.js:298
-#: src/blocks/datepicker/deprecated/edit.js:189
-#: src/blocks/datepicker/edit.js:238
-#: src/blocks/email/deprecated/edit.js:175
-#: src/blocks/email/edit.js:217
-#: src/blocks/file_upload/edit.js:203
-#: src/blocks/message/edit.js:177
-#: src/blocks/name/deprecated/edit.js:224
-#: src/blocks/name/edit.js:227
-#: src/blocks/number/edit.js:181
-#: src/blocks/phone/deprecated/edit.js:178
-#: src/blocks/phone/edit.js:220
-#: src/blocks/radio/edit.js:326
-#: src/blocks/select/deprecated/edit.js:308
-#: src/blocks/select/edit.js:301
-#: src/blocks/text/deprecated/edit.js:180
-#: src/blocks/text/edit.js:219
-#: src/blocks/website/deprecated/edit.js:174
-#: src/blocks/website/edit.js:218
-#: src/blocks/yes-no/edit.js:122
-msgid "Required Text"
-msgstr ""
-
-#: dist/blocks.build.js:2947
-#: dist/blocks.build.js:3896
-#: src/blocks/checkbox/edit.js:310
-#: src/blocks/radio/edit.js:338
-msgid "Layout"
-msgstr ""
-
-#: dist/blocks.build.js:2947
-#: dist/blocks.build.js:3896
-#: src/blocks/checkbox/edit.js:313
-#: src/blocks/radio/edit.js:341
-msgid "Block"
-msgstr ""
-
-#: dist/blocks.build.js:2947
-#: dist/blocks.build.js:3896
-#: src/block/fieldStyles/index.js:8
-#: src/blocks/checkbox/edit.js:314
-#: src/blocks/radio/edit.js:342
-msgid "Inline"
-msgstr ""
-
-#: dist/blocks.build.js:2947
-#: dist/blocks.build.js:3039
-#: dist/blocks.build.js:3394
-#: dist/blocks.build.js:3429
-#: dist/blocks.build.js:3465
-#: dist/blocks.build.js:3662
-#: dist/blocks.build.js:3708
-#: dist/blocks.build.js:3744
-#: dist/blocks.build.js:3779
-#: dist/blocks.build.js:3825
-#: dist/blocks.build.js:3861
-#: dist/blocks.build.js:3896
-#: dist/blocks.build.js:3942
-#: dist/blocks.build.js:3978
-#: dist/blocks.build.js:4013
-#: dist/blocks.build.js:4049
-#: dist/blocks.build.js:4084
-#: dist/blocks.build.js:4120
-#: dist/blocks.build.js:5488
-#: src/blocks/checkbox/edit.js:326
-#: src/blocks/datepicker/deprecated/edit.js:235
-#: src/blocks/datepicker/edit.js:302
-#: src/blocks/email/deprecated/edit.js:191
-#: src/blocks/email/edit.js:233
-#: src/blocks/file_upload/edit.js:236
-#: src/blocks/message/edit.js:221
-#: src/blocks/name/deprecated/edit.js:248
-#: src/blocks/name/edit.js:251
-#: src/blocks/number/edit.js:222
-#: src/blocks/phone/deprecated/edit.js:202
-#: src/blocks/phone/edit.js:244
-#: src/blocks/radio/edit.js:381
-#: src/blocks/select/deprecated/edit.js:329
-#: src/blocks/select/edit.js:340
-#: src/blocks/text/deprecated/edit.js:225
-#: src/blocks/text/edit.js:264
-#: src/blocks/website/deprecated/edit.js:197
-#: src/blocks/website/edit.js:259
-msgid "Required Error"
-msgstr ""
-
-#: dist/blocks.build.js:2947
-#: dist/blocks.build.js:3429
-#: dist/blocks.build.js:3465
-#: dist/blocks.build.js:3616
-#: dist/blocks.build.js:3662
-#: dist/blocks.build.js:3708
-#: dist/blocks.build.js:3744
-#: dist/blocks.build.js:3825
-#: dist/blocks.build.js:3861
-#: dist/blocks.build.js:3942
-#: dist/blocks.build.js:3978
-#: dist/blocks.build.js:4013
-#: dist/blocks.build.js:4049
-#: dist/blocks.build.js:4084
-#: dist/blocks.build.js:4120
-#: dist/blocks.build.js:5430
-#: dist/blocks.build.js:5488
-#: src/blocks/checkbox/edit.js:335
-#: src/blocks/email/deprecated/edit.js:215
-#: src/blocks/email/edit.js:257
-#: src/blocks/file_upload/edit.js:225
-#: src/blocks/form-calculation/edit.js:159
-#: src/blocks/form-group/Inspector.js:111
-#: src/blocks/message/edit.js:209
-#: src/blocks/name/deprecated/edit.js:236
-#: src/blocks/name/edit.js:239
-#: src/blocks/phone/deprecated/edit.js:189
-#: src/blocks/phone/edit.js:231
-#: src/blocks/select/deprecated/edit.js:318
-#: src/blocks/select/edit.js:329
-#: src/blocks/text/deprecated/edit.js:213
-#: src/blocks/text/edit.js:252
-#: src/blocks/website/deprecated/edit.js:185
-#: src/blocks/website/edit.js:247
-msgid "Condition"
-msgstr ""
-
-#: dist/blocks.build.js:2947
-#: dist/blocks.build.js:3039
-#: dist/blocks.build.js:3429
-#: dist/blocks.build.js:3662
-#: dist/blocks.build.js:3708
-#: dist/blocks.build.js:3779
-#: dist/blocks.build.js:3825
-#: dist/blocks.build.js:3896
-#: dist/blocks.build.js:3942
-#: dist/blocks.build.js:4013
-#: dist/blocks.build.js:4084
-#: src/blocks/checkbox/edit.js:343
-#: src/blocks/datepicker/edit.js:272
-#: src/blocks/email/edit.js:265
-#: src/blocks/message/edit.js:254
-#: src/blocks/name/edit.js:287
-#: src/blocks/number/edit.js:246
-#: src/blocks/phone/edit.js:277
-#: src/blocks/radio/edit.js:350
-#: src/blocks/select/edit.js:311
-#: src/blocks/text/edit.js:297
-#: src/blocks/website/edit.js:229
-msgid "Show Hint"
-msgstr ""
-
-#: dist/blocks.build.js:2947
-#: dist/blocks.build.js:3039
-#: dist/blocks.build.js:3429
-#: dist/blocks.build.js:3662
-#: dist/blocks.build.js:3708
-#: dist/blocks.build.js:3779
-#: dist/blocks.build.js:3825
-#: dist/blocks.build.js:3896
-#: dist/blocks.build.js:3942
-#: dist/blocks.build.js:4013
-#: dist/blocks.build.js:4084
-#: src/blocks/checkbox/edit.js:353
-#: src/blocks/datepicker/edit.js:282
-#: src/blocks/email/edit.js:275
-#: src/blocks/message/edit.js:264
-#: src/blocks/name/edit.js:297
-#: src/blocks/number/edit.js:256
-#: src/blocks/phone/edit.js:287
-#: src/blocks/radio/edit.js:360
-#: src/blocks/select/edit.js:321
-#: src/blocks/text/edit.js:307
-#: src/blocks/website/edit.js:239
-msgid "Hint Text"
-msgstr ""
-
-#: dist/blocks.build.js:2947
-#: dist/blocks.build.js:3896
-#: dist/blocks.build.js:3942
-#: dist/blocks.build.js:3978
-#: src/blocks/checkbox/edit.js:474
-#: src/blocks/radio/edit.js:502
-#: src/blocks/select/deprecated/edit.js:374
-#: src/blocks/select/edit.js:385
-msgid "Add Option"
-msgstr ""
-
-#: dist/blocks.build.js:2947
-#: dist/blocks.build.js:3896
-#: dist/blocks.build.js:3942
-#: dist/blocks.build.js:3978
-#: src/blocks/checkbox/edit.js:480
-#: src/blocks/radio/edit.js:508
-#: src/blocks/select/deprecated/edit.js:380
-#: src/blocks/select/edit.js:391
-msgid "Bulk Add"
-msgstr ""
-
-#: dist/blocks.build.js:2947
-#: dist/blocks.build.js:3896
-#: dist/blocks.build.js:3942
-#: dist/blocks.build.js:3978
-#: src/blocks/checkbox/edit.js:485
-#: src/blocks/radio/edit.js:513
-#: src/blocks/select/deprecated/edit.js:385
-#: src/blocks/select/edit.js:396
-msgid "Clear All"
-msgstr ""
-
-#: dist/blocks.build.js:2993
-#: src/blocks/column/edit.js:45
-msgid "Column Settings"
-msgstr ""
-
-#: dist/blocks.build.js:2993
-#: src/blocks/column/edit.js:49
-msgid "Width (%)"
-msgstr ""
-
-#: dist/blocks.build.js:3039
-#: dist/blocks.build.js:3429
-#: dist/blocks.build.js:3708
-#: dist/blocks.build.js:3744
-#: dist/blocks.build.js:3825
-#: dist/blocks.build.js:4013
-#: dist/blocks.build.js:4084
-#: dist/blocks.build.js:5430
-#: src/blocks/datepicker/edit.js:186
-#: src/blocks/datepicker/edit.js:340
-#: src/blocks/email/edit.js:169
-#: src/blocks/email/edit.js:312
-#: src/blocks/form-calculation/edit.js:123
-#: src/blocks/name/deprecated/edit.js:176
-#: src/blocks/name/deprecated/edit.js:309
-#: src/blocks/name/edit.js:174
-#: src/blocks/name/edit.js:333
-#: src/blocks/phone/edit.js:173
-#: src/blocks/phone/edit.js:324
-#: src/blocks/text/edit.js:173
-#: src/blocks/text/edit.js:344
-#: src/blocks/website/edit.js:171
-#: src/blocks/website/edit.js:312
-msgid "Prefix"
-msgstr ""
-
-#: dist/blocks.build.js:3039
-#: dist/blocks.build.js:3429
-#: dist/blocks.build.js:3708
-#: dist/blocks.build.js:3744
-#: dist/blocks.build.js:3825
-#: dist/blocks.build.js:4013
-#: dist/blocks.build.js:4084
-#: src/blocks/datepicker/edit.js:201
-#: src/blocks/datepicker/edit.js:376
-#: src/blocks/email/edit.js:182
-#: src/blocks/email/edit.js:326
-#: src/blocks/name/deprecated/edit.js:189
-#: src/blocks/name/deprecated/edit.js:322
-#: src/blocks/name/edit.js:189
-#: src/blocks/name/edit.js:346
-#: src/blocks/phone/edit.js:186
-#: src/blocks/phone/edit.js:337
-#: src/blocks/text/edit.js:185
-#: src/blocks/text/edit.js:357
-#: src/blocks/website/edit.js:184
-#: src/blocks/website/edit.js:325
-msgid "Suffix"
-msgstr ""
-
-#: dist/blocks.build.js:3039
-#: dist/blocks.build.js:3394
-#: src/blocks/datepicker/deprecated/edit.js:201
-#: src/blocks/datepicker/edit.js:250
-msgid "Format"
-msgstr ""
-
-#: dist/blocks.build.js:3039
-#: dist/blocks.build.js:3394
-#: src/blocks/datepicker/deprecated/edit.js:205
-#: src/blocks/datepicker/edit.js:254
-msgid "Day Month Year"
-msgstr ""
-
-#: dist/blocks.build.js:3039
-#: dist/blocks.build.js:3394
-#: src/blocks/datepicker/deprecated/edit.js:209
-#: src/blocks/datepicker/edit.js:258
-msgid "Month Day Year"
-msgstr ""
-
-#: dist/blocks.build.js:3039
-#: dist/blocks.build.js:3394
-#: src/blocks/datepicker/deprecated/edit.js:213
-#: src/blocks/datepicker/edit.js:262
-msgid "Year Month Day"
-msgstr ""
-
-#: dist/blocks.build.js:3429
-#: dist/blocks.build.js:3465
-#: src/blocks/email/deprecated/edit.js:201
-#: src/blocks/email/edit.js:243
-msgid "Invalid Email Error"
-msgstr ""
-
-#: dist/blocks.build.js:3429
-#: dist/blocks.build.js:3465
-#: dist/blocks.build.js:3662
-#: dist/blocks.build.js:3708
-#: dist/blocks.build.js:3744
-#: dist/blocks.build.js:3779
-#: dist/blocks.build.js:3825
-#: dist/blocks.build.js:3861
-#: dist/blocks.build.js:4013
-#: dist/blocks.build.js:4049
-#: dist/blocks.build.js:4084
-#: dist/blocks.build.js:4120
-#: dist/blocks.build.js:5488
-#: src/blocks/email/deprecated/edit.js:211
-#: src/blocks/email/edit.js:253
-#: src/blocks/file_upload/edit.js:252
-#: src/blocks/message/edit.js:241
-#: src/blocks/name/deprecated/edit.js:268
-#: src/blocks/name/edit.js:271
-#: src/blocks/number/edit.js:242
-#: src/blocks/phone/deprecated/edit.js:222
-#: src/blocks/phone/edit.js:264
-#: src/blocks/text/deprecated/edit.js:245
-#: src/blocks/text/edit.js:284
-#: src/blocks/website/deprecated/edit.js:217
-#: src/blocks/website/edit.js:279
-msgid "Use {{value}} to insert field value!"
-msgstr ""
-
-#: dist/blocks.build.js:3500
-#: src/blocks/form-button/edit.js:68
-msgid "Reset"
-msgstr ""
-
-#: dist/blocks.build.js:3500
-#: src/blocks/form-button/edit.js:72
-msgid "Submit"
-msgstr ""
-
-#: dist/blocks.build.js:3500
-#: src/blocks/form-button/edit.js:81
-msgid "Next"
-msgstr ""
-
-#: dist/blocks.build.js:3500
-#: src/blocks/form-button/edit.js:85
-msgid "Previous"
-msgstr ""
-
-#: dist/blocks.build.js:3500
-#: src/blocks/form-button/edit.js:95
-#: src/blocks/form-button/edit.js:152
-msgid "Action"
-msgstr ""
-
-#: dist/blocks.build.js:3500
-#: dist/blocks.build.js:5315
+#: admin/layout/navigation.js:26
+#: admin/pages/settings/subpages/integrationSettings/components/fields.js:64
+#: dist/admin/index.js:3041
+#: dist/admin/index.js:4458
 #: src/blocks/form-button/edit.js:99
 #: src/blocks/form-steps/root/edit.js:169
 msgid "Settings"
 msgstr ""
 
-#: dist/blocks.build.js:3500
-#: src/blocks/form-button/edit.js:111
-msgid "Colors"
+#: admin/pages/settings/subpages/general/components/messages.js:30
+#: dist/admin/index.js:3895
+#: src/blocks/gutenberg-forms/Inspector.js:203
+#: src/blocks/reusable_forms/edit.js:38
+msgid "General"
 msgstr ""
 
-#: dist/blocks.build.js:3500
-#: dist/blocks.build.js:3616
-#: src/blocks/form-button/edit.js:113
-#: src/blocks/form-group/Inspector.js:54
-msgid "Background Color"
+#: admin/pages/settings/subpages/import/components/pluginList.js:45
+#: dist/admin/index.js:4280
+msgid "Import forms from other plugins"
 msgstr ""
 
-#: dist/blocks.build.js:3500
-#: dist/blocks.build.js:3616
-#: src/blocks/form-button/edit.js:121
-#: src/blocks/form-group/Inspector.js:62
-msgid "Color"
+#: dist/blocks.build.js:655
+msgid "Standard"
 msgstr ""
 
-#: dist/blocks.build.js:3500
-#: dist/blocks.build.js:3616
-#: src/blocks/form-button/edit.js:132
-#: src/blocks/form-group/Inspector.js:106
-msgid "Padding"
+#: dist/blocks.build.js:655
+msgid "or"
 msgstr ""
 
-#: dist/blocks.build.js:3500
-#: src/blocks/form-button/edit.js:141
-msgid "Border Radius"
+#: dist/blocks.build.js:655
+msgid "Multistep"
 msgstr ""
 
-#: dist/blocks.build.js:3500
-#: src/blocks/form-button/edit.js:151
-msgid "Select Action"
+#: src/block/components/condition.js:32
+msgid "Select Field"
 msgstr ""
 
-#: dist/blocks.build.js:3546
-#: src/blocks/form-column/edit.js:71
-msgid "layout"
+#: src/block/components/condition.js:60
+msgid "Is Equal To"
 msgstr ""
 
-#: dist/blocks.build.js:3546
-#: src/blocks/form-column/edit.js:72
-msgid "Layout Settings"
+#: src/block/components/condition.js:64
+msgid "Not Equal To"
 msgstr ""
 
-#: dist/blocks.build.js:3546
-#: src/blocks/form-column/edit.js:76
-msgid "Columns"
+#: src/block/components/condition.js:95
+msgid "Select Value"
 msgstr ""
 
-#: dist/blocks.build.js:3546
-#: src/blocks/form-column/edit.js:85
-msgid "Stack on Mobile"
+#: src/block/components/condition.js:142
+msgid "value"
 msgstr ""
 
-#: dist/blocks.build.js:3604
-#: dist/blocks.build.js:3616
-#: src/blocks/form-group/edit.js:28
-#: src/blocks/form-group/Inspector.js:46
-msgid "Do not have a required fields inside a conditional group."
+#: src/block/components/formulaBuilder.js:39
+msgid "Available Number Fields:"
 msgstr ""
 
-#: dist/blocks.build.js:3616
-#: src/blocks/form-group/Inspector.js:71
-msgid "Border Color"
+#: src/block/components/formulaBuilder.js:40
+msgid "Add Field Data"
 msgstr ""
 
-#: dist/blocks.build.js:3616
-#: src/blocks/form-group/Inspector.js:80
-msgid "Border Width [px]"
+#: src/block/components/searchTags.js:60
+msgid "Wordpress Tags"
 msgstr ""
 
-#: dist/blocks.build.js:3616
-#: src/blocks/form-group/Inspector.js:93
-msgid "Border Radius [px]"
+#: src/block/components/searchTags.js:65
+msgid "Form Tags"
 msgstr ""
 
-#: dist/blocks.build.js:3662
-#: src/blocks/message/edit.js:189
-msgid "Minimum Length (characters)"
+#: src/block/components/searchTags.js:70
+msgid "Other Tags"
 msgstr ""
 
-#: dist/blocks.build.js:3662
-#: src/blocks/message/edit.js:199
-msgid "Maximum Length (characters)"
+#: src/block/components/searchTags.js:75
+#: src/block/components/tagSelector.js:31
+msgid "Meta"
 msgstr ""
 
-#: dist/blocks.build.js:3662
-#: dist/blocks.build.js:3825
-#: dist/blocks.build.js:3861
-#: dist/blocks.build.js:4013
-#: dist/blocks.build.js:4049
-#: dist/blocks.build.js:4084
-#: dist/blocks.build.js:4120
-#: src/blocks/message/edit.js:231
-#: src/blocks/phone/deprecated/edit.js:212
-#: src/blocks/phone/edit.js:254
-#: src/blocks/text/deprecated/edit.js:235
-#: src/blocks/text/edit.js:274
-#: src/blocks/website/deprecated/edit.js:207
-#: src/blocks/website/edit.js:269
-msgid "Invalid Message Error"
+#: src/block/components/searchTags.js:117
+msgid "No Tags Found"
 msgstr ""
 
-#: dist/blocks.build.js:3662
-#: dist/blocks.build.js:3708
-#: dist/blocks.build.js:3744
-#: dist/blocks.build.js:3825
-#: dist/blocks.build.js:3861
-#: dist/blocks.build.js:4013
-#: dist/blocks.build.js:4049
-#: src/blocks/message/edit.js:245
-#: src/blocks/name/deprecated/edit.js:272
-#: src/blocks/name/edit.js:278
-#: src/blocks/phone/deprecated/edit.js:226
-#: src/blocks/phone/edit.js:268
-#: src/blocks/text/deprecated/edit.js:249
-#: src/blocks/text/edit.js:288
-msgid "Validation"
+#: src/block/components/tagList.js:49
+msgid "No Label"
 msgstr ""
 
-#: dist/blocks.build.js:3662
-#: dist/blocks.build.js:3708
-#: dist/blocks.build.js:3744
-#: dist/blocks.build.js:3825
-#: dist/blocks.build.js:3861
-#: dist/blocks.build.js:4013
-#: dist/blocks.build.js:4049
-#: src/blocks/message/edit.js:248
-#: src/blocks/name/deprecated/edit.js:275
-#: src/blocks/name/edit.js:281
-#: src/blocks/phone/deprecated/edit.js:229
-#: src/blocks/phone/edit.js:271
-#: src/blocks/text/deprecated/edit.js:252
-#: src/blocks/text/edit.js:291
-msgid "Pattern (RegExp)"
-msgstr ""
-
-#: dist/blocks.build.js:3708
-#: dist/blocks.build.js:3744
-#: src/blocks/name/deprecated/edit.js:258
-#: src/blocks/name/edit.js:261
-msgid "Invalid Name Error"
-msgstr ""
-
-#: dist/blocks.build.js:3779
-#: src/blocks/number/edit.js:206
-msgid "Range Max"
-msgstr ""
-
-#: dist/blocks.build.js:3779
-#: src/blocks/number/edit.js:214
-msgid "Range Min"
-msgstr ""
-
-#: dist/blocks.build.js:3779
-#: src/blocks/number/edit.js:232
-msgid "Invalid Number Error"
-msgstr ""
-
-#: dist/blocks.build.js:3779
-#: src/blocks/number/edit.js:270
-msgid "Range Slider"
-msgstr ""
-
-#: dist/blocks.build.js:4013
-#: dist/blocks.build.js:4049
-#: src/blocks/text/deprecated/edit.js:193
-#: src/blocks/text/edit.js:232
-msgid "Minimum Length"
-msgstr ""
-
-#: dist/blocks.build.js:4013
-#: dist/blocks.build.js:4049
-#: src/blocks/text/deprecated/edit.js:203
-#: src/blocks/text/edit.js:242
-msgid "Maximum Length"
-msgstr ""
-
-#: dist/blocks.build.js:4201
-#: src/blocks/hidden/edit.js:127
-msgid "Enter value..."
-msgstr ""
-
-#: dist/blocks.build.js:4247
-#: src/blocks/reusable_forms/edit.js:40
-msgid "Select Form"
-msgstr ""
-
-#: dist/blocks.build.js:4259
-#: src/blocks/reusable_forms/components/introduction.js:25
-msgid "Select Gutenberg Form"
-msgstr ""
-
-#: dist/blocks.build.js:5269
-#: src/blocks/progress/edit.js:30
-msgid "Progress Settings"
-msgstr ""
-
-#: dist/blocks.build.js:5269
-#: src/blocks/progress/edit.js:33
-msgid "Base Color"
-msgstr ""
-
-#: dist/blocks.build.js:5269
-#: src/blocks/progress/edit.js:41
-msgid "Fill Color"
-msgstr ""
-
-#: dist/blocks.build.js:5269
-#: src/blocks/progress/edit.js:52
-msgid "Thickness"
-msgstr ""
-
-#: dist/blocks.build.js:5269
-#: src/blocks/progress/edit.js:61
-msgid "Corner Radius"
-msgstr ""
-
-#: dist/blocks.build.js:5269
-#: src/blocks/progress/edit.js:75
-msgid "Show Percentage"
-msgstr ""
-
-#: dist/blocks.build.js:5315
-#: dist/blocks.build.js:5373
-#: src/blocks/form-steps/childs/form-step/edit.js:31
-#: src/blocks/form-steps/root/edit.js:123
-msgid "Form Step"
-msgstr ""
-
-#: dist/blocks.build.js:5315
-#: src/blocks/form-steps/root/edit.js:142
-msgid "No Steps Found!"
-msgstr ""
-
-#: dist/blocks.build.js:5315
-#: src/blocks/form-steps/root/edit.js:143
-msgid "Please add some steps to create a multistep form"
-msgstr ""
-
-#: dist/blocks.build.js:5315
-#: src/blocks/form-steps/root/edit.js:171
-msgid "Effect"
-msgstr ""
-
-#: dist/blocks.build.js:5327
-#: src/blocks/form-steps/root/toolbar.js:140
-msgid "Move Step Up"
-msgstr ""
-
-#: dist/blocks.build.js:5327
-#: src/blocks/form-steps/root/toolbar.js:143
-msgid "Move Step Down"
-msgstr ""
-
-#: dist/blocks.build.js:5327
-#: src/blocks/form-steps/root/toolbar.js:146
-msgid "Delete Step"
-msgstr ""
-
-#: dist/blocks.build.js:5327
-#: src/blocks/form-steps/root/toolbar.js:149
-msgid "Duplicate Step"
-msgstr ""
-
-#: dist/blocks.build.js:5373
-#: src/blocks/form-steps/childs/form-step/edit.js:29
-msgid "Step Settings"
-msgstr ""
-
-#: dist/blocks.build.js:5373
-#: src/blocks/form-steps/childs/form-step/edit.js:32
-msgid "Label"
-msgstr ""
-
-#: dist/blocks.build.js:5430
-#: src/blocks/form-calculation/edit.js:131
-msgid "Postfix"
-msgstr ""
-
-#: dist/blocks.build.js:5430
-#: src/blocks/form-calculation/edit.js:140
-#: src/blocks/form-calculation/edit.js:182
-#: src/blocks/form-calculation/edit.js:198
-msgid "Formula Editor"
-msgstr ""
-
-#: dist/blocks.build.js:5430
-#: src/blocks/form-calculation/edit.js:154
-msgid "Decimal Places"
-msgstr ""
-
-#: dist/blocks.build.js:5430
-#: src/blocks/form-calculation/edit.js:167
-msgid "Styling"
-msgstr ""
-
-#: dist/blocks.build.js:5430
-#: src/blocks/form-calculation/edit.js:171
-msgid "Font Size"
-msgstr ""
-
-#: dist/blocks.build.js:5430
-#: src/blocks/form-calculation/edit.js:182
-msgid "Preview Field"
-msgstr ""
-
-#: dist/blocks.build.js:5488
-#: src/blocks/file_upload/edit.js:214
-msgid "Allowed Formats"
-msgstr ""
-
-#: dist/blocks.build.js:5488
-#: src/blocks/file_upload/edit.js:244
-msgid "Invalid File Error"
-msgstr ""
-
-#: src/block/components/tagSelector.js:16
-msgid "Fields"
+#: src/block/components/tagList.js:80
+msgid "No Tags Found !"
 msgstr ""
 
 #: src/block/components/tagSelector.js:21
 msgid "Wordpress"
 msgstr ""
 
-#: src/block/components/tagSelector.js:26
-msgid "Form"
-msgstr ""
-
-#: src/block/components/tagSelector.js:31
-msgid "Meta"
-msgstr ""
-
 #: src/block/components/tagSelector.js:36
 msgid "Other"
+msgstr ""
+
+#: src/block/fieldStyles/index.js:8
+#: src/blocks/checkbox/edit.js:314
+#: src/blocks/radio/edit.js:342
+msgid "Inline"
 msgstr ""
 
 #: src/block/fieldStyles/index.js:15
@@ -1236,22 +495,6 @@ msgstr ""
 msgid "Please fill out this field!"
 msgstr ""
 
-#: src/block/functions/index.js:107
-msgid "The name {{value}} is not valid!"
-msgstr ""
-
-#: src/block/functions/index.js:112
-msgid "The email {{value}} is not valid!"
-msgstr ""
-
-#: src/block/functions/index.js:120
-msgid "The text {{value}} is not valid!"
-msgstr ""
-
-#: src/block/functions/index.js:125
-msgid "The message {{value}} is not valid!"
-msgstr ""
-
 #: src/block/functions/index.js:129
 msgid "Please select atleast one checkbox!"
 msgstr ""
@@ -1260,28 +503,12 @@ msgstr ""
 msgid "Please select radio!"
 msgstr ""
 
-#: src/block/functions/index.js:138
-msgid "The phone {{value}} is not valid!"
-msgstr ""
-
-#: src/block/functions/index.js:143
-msgid "The website {{value}} is not valid!"
-msgstr ""
-
 #: src/block/functions/index.js:147
 msgid "Please select option!"
 msgstr ""
 
-#: src/block/functions/index.js:152
-msgid "The number {{value}} is not in range!"
-msgstr ""
-
 #: src/block/functions/index.js:156
 msgid "Please select a file"
-msgstr ""
-
-#: src/block/functions/index.js:157
-msgid "The file {{value}} is not valid!"
 msgstr ""
 
 #: src/block/functions/index.js:598
@@ -1348,6 +575,11 @@ msgstr ""
 msgid "Form ID"
 msgstr ""
 
+#: src/block/functions/index.js:673
+#: src/blocks/gutenberg-forms/Inspector.js:206
+msgid "Form Label"
+msgstr ""
+
 #: src/block/functions/index.js:684
 msgid "Date"
 msgstr ""
@@ -1406,6 +638,761 @@ msgstr ""
 
 #: src/block/misc/helper.js:173
 msgid "Very dark gray"
+msgstr ""
+
+#: src/blocks/checkbox/edit.js:261
+#: src/blocks/datepicker/deprecated/edit.js:156
+#: src/blocks/datepicker/edit.js:171
+#: src/blocks/email/deprecated/edit.js:141
+#: src/blocks/email/edit.js:157
+#: src/blocks/file_upload/edit.js:173
+#: src/blocks/form-calculation/edit.js:111
+#: src/blocks/hidden/edit.js:110
+#: src/blocks/message/edit.js:144
+#: src/blocks/name/deprecated/edit.js:164
+#: src/blocks/name/edit.js:159
+#: src/blocks/number/edit.js:158
+#: src/blocks/phone/deprecated/edit.js:145
+#: src/blocks/phone/edit.js:161
+#: src/blocks/select/deprecated/edit.js:279
+#: src/blocks/select/edit.js:272
+#: src/blocks/text/deprecated/edit.js:146
+#: src/blocks/text/edit.js:162
+#: src/blocks/website/deprecated/edit.js:141
+#: src/blocks/website/edit.js:159
+#: src/blocks/yes-no/edit.js:101
+msgid "Field Settings"
+msgstr ""
+
+#: src/blocks/checkbox/edit.js:267
+#: src/blocks/datepicker/deprecated/edit.js:160
+#: src/blocks/datepicker/edit.js:177
+#: src/blocks/email/deprecated/edit.js:145
+#: src/blocks/email/edit.js:161
+#: src/blocks/file_upload/edit.js:178
+#: src/blocks/form-calculation/edit.js:116
+#: src/blocks/hidden/edit.js:114
+#: src/blocks/message/edit.js:148
+#: src/blocks/name/deprecated/edit.js:168
+#: src/blocks/name/edit.js:165
+#: src/blocks/number/edit.js:162
+#: src/blocks/phone/deprecated/edit.js:149
+#: src/blocks/phone/edit.js:165
+#: src/blocks/radio/edit.js:295
+#: src/blocks/select/deprecated/edit.js:283
+#: src/blocks/select/edit.js:276
+#: src/blocks/text/deprecated/edit.js:150
+#: src/blocks/text/edit.js:166
+#: src/blocks/website/deprecated/edit.js:145
+#: src/blocks/website/edit.js:163
+#: src/blocks/yes-no/edit.js:106
+msgid "Field ID"
+msgstr ""
+
+#: src/blocks/checkbox/edit.js:276
+#: src/blocks/checkbox/edit.js:372
+#: src/blocks/datepicker/deprecated/edit.js:168
+#: src/blocks/datepicker/deprecated/edit.js:170
+#: src/blocks/datepicker/deprecated/edit.js:250
+#: src/blocks/datepicker/edit.js:216
+#: src/blocks/datepicker/edit.js:219
+#: src/blocks/datepicker/edit.js:317
+#: src/blocks/email/deprecated/edit.js:153
+#: src/blocks/email/deprecated/edit.js:229
+#: src/blocks/email/edit.js:195
+#: src/blocks/email/edit.js:289
+#: src/blocks/file_upload/edit.js:186
+#: src/blocks/file_upload/edit.js:262
+#: src/blocks/message/edit.js:156
+#: src/blocks/message/edit.js:279
+#: src/blocks/name/deprecated/edit.js:202
+#: src/blocks/name/deprecated/edit.js:287
+#: src/blocks/name/edit.js:204
+#: src/blocks/name/edit.js:311
+#: src/blocks/number/edit.js:170
+#: src/blocks/number/edit.js:275
+#: src/blocks/phone/deprecated/edit.js:157
+#: src/blocks/phone/deprecated/edit.js:241
+#: src/blocks/phone/edit.js:199
+#: src/blocks/phone/edit.js:301
+#: src/blocks/radio/edit.js:304
+#: src/blocks/radio/edit.js:401
+#: src/blocks/select/deprecated/edit.js:291
+#: src/blocks/select/deprecated/edit.js:293
+#: src/blocks/select/deprecated/edit.js:350
+#: src/blocks/select/edit.js:284
+#: src/blocks/select/edit.js:286
+#: src/blocks/select/edit.js:361
+#: src/blocks/text/deprecated/edit.js:158
+#: src/blocks/text/deprecated/edit.js:160
+#: src/blocks/text/edit.js:197
+#: src/blocks/text/edit.js:199
+#: src/blocks/website/deprecated/edit.js:153
+#: src/blocks/website/deprecated/edit.js:227
+#: src/blocks/website/edit.js:197
+#: src/blocks/website/edit.js:289
+#: src/blocks/yes-no/edit.js:113
+#: src/blocks/yes-no/edit.js:138
+msgid "Required"
+msgstr ""
+
+#: src/blocks/checkbox/edit.js:288
+#: src/blocks/datepicker/deprecated/edit.js:179
+#: src/blocks/datepicker/edit.js:228
+#: src/blocks/email/deprecated/edit.js:164
+#: src/blocks/email/edit.js:206
+#: src/blocks/file_upload/edit.js:196
+#: src/blocks/message/edit.js:167
+#: src/blocks/name/deprecated/edit.js:213
+#: src/blocks/name/edit.js:216
+#: src/blocks/phone/deprecated/edit.js:168
+#: src/blocks/phone/edit.js:210
+#: src/blocks/radio/edit.js:316
+#: src/blocks/select/deprecated/edit.js:302
+#: src/blocks/select/edit.js:295
+#: src/blocks/text/deprecated/edit.js:169
+#: src/blocks/text/edit.js:208
+#: src/blocks/website/deprecated/edit.js:164
+#: src/blocks/website/edit.js:208
+msgid "You cannot set a conditional field required!"
+msgstr ""
+
+#: src/blocks/checkbox/edit.js:298
+#: src/blocks/datepicker/deprecated/edit.js:189
+#: src/blocks/datepicker/edit.js:238
+#: src/blocks/email/deprecated/edit.js:175
+#: src/blocks/email/edit.js:217
+#: src/blocks/file_upload/edit.js:203
+#: src/blocks/message/edit.js:177
+#: src/blocks/name/deprecated/edit.js:224
+#: src/blocks/name/edit.js:227
+#: src/blocks/number/edit.js:181
+#: src/blocks/phone/deprecated/edit.js:178
+#: src/blocks/phone/edit.js:220
+#: src/blocks/radio/edit.js:326
+#: src/blocks/select/deprecated/edit.js:308
+#: src/blocks/select/edit.js:301
+#: src/blocks/text/deprecated/edit.js:180
+#: src/blocks/text/edit.js:219
+#: src/blocks/website/deprecated/edit.js:174
+#: src/blocks/website/edit.js:218
+#: src/blocks/yes-no/edit.js:122
+msgid "Required Text"
+msgstr ""
+
+#: src/blocks/checkbox/edit.js:310
+#: src/blocks/radio/edit.js:338
+msgid "Layout"
+msgstr ""
+
+#: src/blocks/checkbox/edit.js:313
+#: src/blocks/radio/edit.js:341
+msgid "Block"
+msgstr ""
+
+#: src/blocks/checkbox/edit.js:326
+#: src/blocks/datepicker/deprecated/edit.js:235
+#: src/blocks/datepicker/edit.js:302
+#: src/blocks/email/deprecated/edit.js:191
+#: src/blocks/email/edit.js:233
+#: src/blocks/file_upload/edit.js:236
+#: src/blocks/message/edit.js:221
+#: src/blocks/name/deprecated/edit.js:248
+#: src/blocks/name/edit.js:251
+#: src/blocks/number/edit.js:222
+#: src/blocks/phone/deprecated/edit.js:202
+#: src/blocks/phone/edit.js:244
+#: src/blocks/radio/edit.js:381
+#: src/blocks/select/deprecated/edit.js:329
+#: src/blocks/select/edit.js:340
+#: src/blocks/text/deprecated/edit.js:225
+#: src/blocks/text/edit.js:264
+#: src/blocks/website/deprecated/edit.js:197
+#: src/blocks/website/edit.js:259
+msgid "Required Error"
+msgstr ""
+
+#: src/blocks/checkbox/edit.js:335
+#: src/blocks/email/deprecated/edit.js:215
+#: src/blocks/email/edit.js:257
+#: src/blocks/file_upload/edit.js:225
+#: src/blocks/form-calculation/edit.js:159
+#: src/blocks/form-group/Inspector.js:111
+#: src/blocks/message/edit.js:209
+#: src/blocks/name/deprecated/edit.js:236
+#: src/blocks/name/edit.js:239
+#: src/blocks/phone/deprecated/edit.js:189
+#: src/blocks/phone/edit.js:231
+#: src/blocks/select/deprecated/edit.js:318
+#: src/blocks/select/edit.js:329
+#: src/blocks/text/deprecated/edit.js:213
+#: src/blocks/text/edit.js:252
+#: src/blocks/website/deprecated/edit.js:185
+#: src/blocks/website/edit.js:247
+msgid "Condition"
+msgstr ""
+
+#: src/blocks/checkbox/edit.js:343
+#: src/blocks/datepicker/edit.js:272
+#: src/blocks/email/edit.js:265
+#: src/blocks/message/edit.js:254
+#: src/blocks/name/edit.js:287
+#: src/blocks/number/edit.js:246
+#: src/blocks/phone/edit.js:277
+#: src/blocks/radio/edit.js:350
+#: src/blocks/select/edit.js:311
+#: src/blocks/text/edit.js:297
+#: src/blocks/website/edit.js:229
+msgid "Show Hint"
+msgstr ""
+
+#: src/blocks/checkbox/edit.js:353
+#: src/blocks/datepicker/edit.js:282
+#: src/blocks/email/edit.js:275
+#: src/blocks/message/edit.js:264
+#: src/blocks/name/edit.js:297
+#: src/blocks/number/edit.js:256
+#: src/blocks/phone/edit.js:287
+#: src/blocks/radio/edit.js:360
+#: src/blocks/select/edit.js:321
+#: src/blocks/text/edit.js:307
+#: src/blocks/website/edit.js:239
+msgid "Hint Text"
+msgstr ""
+
+#: src/blocks/checkbox/edit.js:385
+#: src/blocks/datepicker/deprecated/edit.js:258
+#: src/blocks/datepicker/edit.js:325
+#: src/blocks/email/deprecated/edit.js:237
+#: src/blocks/email/edit.js:297
+#: src/blocks/file_upload/edit.js:268
+#: src/blocks/form-button/edit.js:182
+#: src/blocks/form-calculation/edit.js:210
+#: src/blocks/form-group/edit.js:33
+#: src/blocks/gutenberg-forms/deprecated/edit.js:84
+#: src/blocks/gutenberg-forms/edit.js:80
+#: src/blocks/message/edit.js:287
+#: src/blocks/name/deprecated/edit.js:294
+#: src/blocks/name/edit.js:318
+#: src/blocks/number/edit.js:283
+#: src/blocks/phone/deprecated/edit.js:249
+#: src/blocks/phone/edit.js:309
+#: src/blocks/radio/edit.js:414
+#: src/blocks/select/deprecated/edit.js:358
+#: src/blocks/select/edit.js:369
+#: src/blocks/text/deprecated/edit.js:272
+#: src/blocks/text/edit.js:329
+#: src/blocks/website/deprecated/edit.js:235
+#: src/blocks/website/edit.js:297
+#: src/blocks/yes-no/edit.js:145
+msgid "Add a label"
+msgstr ""
+
+#: src/blocks/checkbox/edit.js:474
+#: src/blocks/radio/edit.js:502
+#: src/blocks/select/deprecated/edit.js:374
+#: src/blocks/select/edit.js:385
+msgid "Add Option"
+msgstr ""
+
+#: src/blocks/checkbox/edit.js:480
+#: src/blocks/radio/edit.js:508
+#: src/blocks/select/deprecated/edit.js:380
+#: src/blocks/select/edit.js:391
+msgid "Bulk Add"
+msgstr ""
+
+#: src/blocks/checkbox/edit.js:485
+#: src/blocks/radio/edit.js:513
+#: src/blocks/select/deprecated/edit.js:385
+#: src/blocks/select/edit.js:396
+msgid "Clear All"
+msgstr ""
+
+#: src/blocks/column/edit.js:45
+msgid "Column Settings"
+msgstr ""
+
+#: src/blocks/column/edit.js:49
+msgid "Width (%)"
+msgstr ""
+
+#: src/blocks/components/bulk_add.js:53
+msgid "Save"
+msgstr ""
+
+#: src/blocks/components/bulk_add.js:54
+msgid "Cancel"
+msgstr ""
+
+#: src/blocks/datepicker/deprecated/edit.js:201
+#: src/blocks/datepicker/edit.js:250
+msgid "Format"
+msgstr ""
+
+#: src/blocks/datepicker/deprecated/edit.js:205
+#: src/blocks/datepicker/edit.js:254
+msgid "Day Month Year"
+msgstr ""
+
+#: src/blocks/datepicker/deprecated/edit.js:209
+#: src/blocks/datepicker/edit.js:258
+msgid "Month Day Year"
+msgstr ""
+
+#: src/blocks/datepicker/deprecated/edit.js:213
+#: src/blocks/datepicker/edit.js:262
+msgid "Year Month Day"
+msgstr ""
+
+#: src/blocks/datepicker/edit.js:186
+#: src/blocks/datepicker/edit.js:340
+#: src/blocks/email/edit.js:169
+#: src/blocks/email/edit.js:312
+#: src/blocks/form-calculation/edit.js:123
+#: src/blocks/name/deprecated/edit.js:176
+#: src/blocks/name/deprecated/edit.js:309
+#: src/blocks/name/edit.js:174
+#: src/blocks/name/edit.js:333
+#: src/blocks/phone/edit.js:173
+#: src/blocks/phone/edit.js:324
+#: src/blocks/text/edit.js:173
+#: src/blocks/text/edit.js:344
+#: src/blocks/website/edit.js:171
+#: src/blocks/website/edit.js:312
+msgid "Prefix"
+msgstr ""
+
+#: src/blocks/datepicker/edit.js:201
+#: src/blocks/datepicker/edit.js:376
+#: src/blocks/email/edit.js:182
+#: src/blocks/email/edit.js:326
+#: src/blocks/name/deprecated/edit.js:189
+#: src/blocks/name/deprecated/edit.js:322
+#: src/blocks/name/edit.js:189
+#: src/blocks/name/edit.js:346
+#: src/blocks/phone/edit.js:186
+#: src/blocks/phone/edit.js:337
+#: src/blocks/text/edit.js:185
+#: src/blocks/text/edit.js:357
+#: src/blocks/website/edit.js:184
+#: src/blocks/website/edit.js:325
+msgid "Suffix"
+msgstr ""
+
+#: src/blocks/email/deprecated/edit.js:187
+#: src/blocks/email/edit.js:229
+#: src/blocks/file_upload/edit.js:233
+#: src/blocks/gutenberg-forms/Inspector.js:360
+#: src/blocks/message/edit.js:217
+#: src/blocks/name/deprecated/edit.js:244
+#: src/blocks/name/edit.js:247
+#: src/blocks/phone/deprecated/edit.js:198
+#: src/blocks/phone/edit.js:240
+#: src/blocks/radio/edit.js:378
+#: src/blocks/select/deprecated/edit.js:327
+#: src/blocks/select/edit.js:338
+#: src/blocks/text/deprecated/edit.js:221
+#: src/blocks/text/edit.js:260
+#: src/blocks/website/deprecated/edit.js:193
+#: src/blocks/website/edit.js:255
+msgid "Messages"
+msgstr ""
+
+#: src/blocks/email/deprecated/edit.js:201
+#: src/blocks/email/edit.js:243
+msgid "Invalid Email Error"
+msgstr ""
+
+#: src/blocks/email/deprecated/edit.js:211
+#: src/blocks/email/edit.js:253
+#: src/blocks/file_upload/edit.js:252
+#: src/blocks/message/edit.js:241
+#: src/blocks/name/deprecated/edit.js:268
+#: src/blocks/name/edit.js:271
+#: src/blocks/number/edit.js:242
+#: src/blocks/phone/deprecated/edit.js:222
+#: src/blocks/phone/edit.js:264
+#: src/blocks/text/deprecated/edit.js:245
+#: src/blocks/text/edit.js:284
+#: src/blocks/website/deprecated/edit.js:217
+#: src/blocks/website/edit.js:279
+msgid "Use {{value}} to insert field value!"
+msgstr ""
+
+#: src/blocks/file_upload/edit.js:214
+msgid "Allowed Formats"
+msgstr ""
+
+#: src/blocks/file_upload/edit.js:244
+msgid "Invalid File Error"
+msgstr ""
+
+#: src/blocks/form-button/edit.js:68
+msgid "Reset"
+msgstr ""
+
+#: src/blocks/form-button/edit.js:72
+msgid "Submit"
+msgstr ""
+
+#: src/blocks/form-button/edit.js:81
+msgid "Next"
+msgstr ""
+
+#: src/blocks/form-button/edit.js:85
+msgid "Previous"
+msgstr ""
+
+#: src/blocks/form-button/edit.js:95
+#: src/blocks/form-button/edit.js:152
+msgid "Action"
+msgstr ""
+
+#: src/blocks/form-button/edit.js:111
+msgid "Colors"
+msgstr ""
+
+#: src/blocks/form-button/edit.js:113
+#: src/blocks/form-group/Inspector.js:54
+msgid "Background Color"
+msgstr ""
+
+#: src/blocks/form-button/edit.js:121
+#: src/blocks/form-group/Inspector.js:62
+msgid "Color"
+msgstr ""
+
+#: src/blocks/form-button/edit.js:132
+#: src/blocks/form-group/Inspector.js:106
+msgid "Padding"
+msgstr ""
+
+#: src/blocks/form-button/edit.js:141
+msgid "Border Radius"
+msgstr ""
+
+#: src/blocks/form-button/edit.js:151
+msgid "Select Action"
+msgstr ""
+
+#: src/blocks/form-calculation/edit.js:131
+msgid "Postfix"
+msgstr ""
+
+#: src/blocks/form-calculation/edit.js:140
+#: src/blocks/form-calculation/edit.js:182
+#: src/blocks/form-calculation/edit.js:198
+msgid "Formula Editor"
+msgstr ""
+
+#: src/blocks/form-calculation/edit.js:154
+msgid "Decimal Places"
+msgstr ""
+
+#: src/blocks/form-calculation/edit.js:167
+msgid "Styling"
+msgstr ""
+
+#: src/blocks/form-calculation/edit.js:171
+msgid "Font Size"
+msgstr ""
+
+#: src/blocks/form-calculation/edit.js:182
+msgid "Preview Field"
+msgstr ""
+
+#: src/blocks/form-column/edit.js:71
+msgid "layout"
+msgstr ""
+
+#: src/blocks/form-column/edit.js:72
+msgid "Layout Settings"
+msgstr ""
+
+#: src/blocks/form-column/edit.js:76
+msgid "Columns"
+msgstr ""
+
+#: src/blocks/form-column/edit.js:85
+msgid "Stack on Mobile"
+msgstr ""
+
+#: src/blocks/form-group/edit.js:28
+#: src/blocks/form-group/Inspector.js:46
+msgid "Do not have a required fields inside a conditional group."
+msgstr ""
+
+#: src/blocks/form-group/Inspector.js:71
+msgid "Border Color"
+msgstr ""
+
+#: src/blocks/form-group/Inspector.js:80
+msgid "Border Width [px]"
+msgstr ""
+
+#: src/blocks/form-group/Inspector.js:93
+msgid "Border Radius [px]"
+msgstr ""
+
+#: src/blocks/form-steps/childs/form-step/edit.js:29
+msgid "Step Settings"
+msgstr ""
+
+#: src/blocks/form-steps/childs/form-step/edit.js:31
+#: src/blocks/form-steps/root/edit.js:123
+msgid "Form Step"
+msgstr ""
+
+#: src/blocks/form-steps/childs/form-step/edit.js:32
+msgid "Label"
+msgstr ""
+
+#: src/blocks/form-steps/root/edit.js:142
+msgid "No Steps Found!"
+msgstr ""
+
+#: src/blocks/form-steps/root/edit.js:143
+msgid "Please add some steps to create a multistep form"
+msgstr ""
+
+#: src/blocks/form-steps/root/edit.js:171
+msgid "Effect"
+msgstr ""
+
+#: src/blocks/form-steps/root/toolbar.js:140
+msgid "Move Step Up"
+msgstr ""
+
+#: src/blocks/form-steps/root/toolbar.js:143
+msgid "Move Step Down"
+msgstr ""
+
+#: src/blocks/form-steps/root/toolbar.js:146
+msgid "Delete Step"
+msgstr ""
+
+#: src/blocks/form-steps/root/toolbar.js:149
+msgid "Duplicate Step"
+msgstr ""
+
+#: src/blocks/gutenberg-forms/components/fieldPlotter.js:122
+msgid "Please Map All Required Fields"
+msgstr ""
+
+#: src/blocks/gutenberg-forms/components/templateBuilder.js:157
+#: src/blocks/hidden/edit.js:134
+msgid "Add Dynamic Data"
+msgstr ""
+
+#: src/blocks/gutenberg-forms/components/templateBuilder.js:170
+msgid "From"
+msgstr ""
+
+#: src/blocks/gutenberg-forms/components/templateBuilder.js:172
+msgid "Name, Email"
+msgstr ""
+
+#: src/blocks/gutenberg-forms/components/templateBuilder.js:179
+msgid "To"
+msgstr ""
+
+#: src/blocks/gutenberg-forms/components/templateBuilder.js:209
+msgid "Subject"
+msgstr ""
+
+#: src/blocks/gutenberg-forms/components/templateBuilder.js:218
+msgid "Body"
+msgstr ""
+
+#: src/blocks/gutenberg-forms/Inspector.js:164
+msgid "Form Design"
+msgstr ""
+
+#: src/blocks/gutenberg-forms/Inspector.js:166
+msgid "Accent Color"
+msgstr ""
+
+#: src/blocks/gutenberg-forms/Inspector.js:174
+#: src/blocks/progress/edit.js:86
+msgid "Text Color"
+msgstr ""
+
+#: src/blocks/gutenberg-forms/Inspector.js:183
+msgid "Field Background Color"
+msgstr ""
+
+#: src/blocks/gutenberg-forms/Inspector.js:193
+msgid "Button Background Color"
+msgstr ""
+
+#: src/blocks/gutenberg-forms/Inspector.js:214
+msgid "Disable Submit Button"
+msgstr ""
+
+#: src/blocks/gutenberg-forms/Inspector.js:228
+msgid "Button Alignment"
+msgstr ""
+
+#: src/blocks/gutenberg-forms/Inspector.js:256
+msgid "Confirmation Type"
+msgstr ""
+
+#: src/blocks/gutenberg-forms/Inspector.js:263
+msgid "URL"
+msgstr ""
+
+#: src/blocks/gutenberg-forms/Inspector.js:269
+msgid "Message"
+msgstr ""
+
+#: src/blocks/gutenberg-forms/Inspector.js:277
+msgid "Success Url (Redirect)"
+msgstr ""
+
+#: src/blocks/gutenberg-forms/Inspector.js:284
+msgid "Success Message"
+msgstr ""
+
+#: src/blocks/gutenberg-forms/Inspector.js:291
+msgid "Spam Message"
+msgstr ""
+
+#: src/blocks/gutenberg-forms/Inspector.js:296
+msgid "Error Message"
+msgstr ""
+
+#: src/blocks/gutenberg-forms/Inspector.js:308
+msgid "Hide Form On Success"
+msgstr ""
+
+#: src/blocks/gutenberg-forms/Inspector.js:321
+msgid "Email Notification"
+msgstr ""
+
+#: src/blocks/gutenberg-forms/Inspector.js:326
+msgid "Form Action"
+msgstr ""
+
+#: src/blocks/gutenberg-forms/Inspector.js:333
+msgid "Custom Form Action Name"
+msgstr ""
+
+#: src/blocks/gutenberg-forms/Inspector.js:340
+msgid "Spam Protection"
+msgstr ""
+
+#: src/blocks/gutenberg-forms/Inspector.js:364
+msgid "You can edit validations messages used for various field types here. Use {{ value }} to insert field value."
+msgstr ""
+
+#: src/blocks/gutenberg-forms/settings_modal/components/sidebar.js:58
+msgid "Categories"
+msgstr ""
+
+#: src/blocks/hidden/edit.js:127
+msgid "Enter value..."
+msgstr ""
+
+#: src/blocks/message/edit.js:189
+msgid "Minimum Length (characters)"
+msgstr ""
+
+#: src/blocks/message/edit.js:199
+msgid "Maximum Length (characters)"
+msgstr ""
+
+#: src/blocks/message/edit.js:231
+#: src/blocks/phone/deprecated/edit.js:212
+#: src/blocks/phone/edit.js:254
+#: src/blocks/text/deprecated/edit.js:235
+#: src/blocks/text/edit.js:274
+#: src/blocks/website/deprecated/edit.js:207
+#: src/blocks/website/edit.js:269
+msgid "Invalid Message Error"
+msgstr ""
+
+#: src/blocks/message/edit.js:245
+#: src/blocks/name/deprecated/edit.js:272
+#: src/blocks/name/edit.js:278
+#: src/blocks/phone/deprecated/edit.js:226
+#: src/blocks/phone/edit.js:268
+#: src/blocks/text/deprecated/edit.js:249
+#: src/blocks/text/edit.js:288
+msgid "Validation"
+msgstr ""
+
+#: src/blocks/message/edit.js:248
+#: src/blocks/name/deprecated/edit.js:275
+#: src/blocks/name/edit.js:281
+#: src/blocks/phone/deprecated/edit.js:229
+#: src/blocks/phone/edit.js:271
+#: src/blocks/text/deprecated/edit.js:252
+#: src/blocks/text/edit.js:291
+msgid "Pattern (RegExp)"
+msgstr ""
+
+#: src/blocks/name/deprecated/edit.js:258
+#: src/blocks/name/edit.js:261
+msgid "Invalid Name Error"
+msgstr ""
+
+#: src/blocks/number/edit.js:206
+msgid "Range Max"
+msgstr ""
+
+#: src/blocks/number/edit.js:214
+msgid "Range Min"
+msgstr ""
+
+#: src/blocks/number/edit.js:232
+msgid "Invalid Number Error"
+msgstr ""
+
+#: src/blocks/number/edit.js:270
+msgid "Range Slider"
+msgstr ""
+
+#: src/blocks/progress/edit.js:30
+msgid "Progress Settings"
+msgstr ""
+
+#: src/blocks/progress/edit.js:33
+msgid "Base Color"
+msgstr ""
+
+#: src/blocks/progress/edit.js:41
+msgid "Fill Color"
+msgstr ""
+
+#: src/blocks/progress/edit.js:52
+msgid "Thickness"
+msgstr ""
+
+#: src/blocks/progress/edit.js:61
+msgid "Corner Radius"
+msgstr ""
+
+#: src/blocks/progress/edit.js:75
+msgid "Show Percentage"
+msgstr ""
+
+#: src/blocks/reusable_forms/components/introduction.js:25
+msgid "Select Gutenberg Form"
+msgstr ""
+
+#: src/blocks/reusable_forms/edit.js:40
+msgid "Select Form"
+msgstr ""
+
+#: src/blocks/text/deprecated/edit.js:193
+#: src/blocks/text/edit.js:232
+msgid "Minimum Length"
+msgstr ""
+
+#: src/blocks/text/deprecated/edit.js:203
+#: src/blocks/text/edit.js:242
+msgid "Maximum Length"
 msgstr ""
 
 #: src/blocks/checkbox/block.json

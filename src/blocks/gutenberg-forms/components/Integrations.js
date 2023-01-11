@@ -59,7 +59,7 @@ function Integrations(props) {
 					!include_all_fields
 				) {
 					return (
-						<PanelBody title={__(title, "cwp-gutenberg-forms")}>
+						<PanelBody title={__(title, "forms-gutenberg")}>
 							<FieldPlotter
 								fields={fields}
 								title={title}

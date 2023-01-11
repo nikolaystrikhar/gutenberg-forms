@@ -27,16 +27,16 @@ function Introduction(props) {
 			/>
 			<Placeholder
 				icon="feedback"
-				label={__("Gutenberg Forms", "cwp-gutenberg-forms")}
+				label={__("Gutenberg Forms", "forms-gutenberg")}
 				instructions={__(
 					"Type a label for this form and select an option to get started.",
-					"cwp-gutenberg-forms"
+					"forms-gutenberg"
 				)}
 			>
 				<div className="content">
 					<TextControl
 						value={formLabel}
-						placeholder={__("Type form label here...", "cwp-gutenberg-forms")}
+						placeholder={__("Type form label here...", "forms-gutenberg")}
 						onChange={(formLabel) => setAttributes({ formLabel })}
 					/>
 
