@@ -9,7 +9,7 @@ msgstr ""
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-01-11T12:16:31+00:00\n"
+"POT-Creation-Date: 2023-01-11T12:56:03+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.5.0\n"
 "X-Domain: forms-gutenberg\n"
@@ -19,7 +19,7 @@ msgid "Gutenberg Forms"
 msgstr ""
 
 #. Plugin URI of the plugin
-msgid "https://wptotem.com/gutenberg-forms"
+msgid "https://gutenbergforms.com"
 msgstr ""
 
 #. Description of the plugin
@@ -134,232 +134,236 @@ msgstr ""
 msgid "The file {{value}} is not valid!"
 msgstr ""
 
+#: cpt/entry.php:27
 #: cpt/entry.php:29
-#: cpt/entry.php:31
-#: cpt/entry.php:32
+#: cpt/entry.php:30
 msgid "Entries"
 msgstr ""
 
-#: cpt/entry.php:30
+#: cpt/entry.php:28
 msgid "Entry"
 msgstr ""
 
-#: cpt/entry.php:33
+#: cpt/entry.php:31
 msgid "Entries Archives"
 msgstr ""
 
-#: cpt/entry.php:34
+#: cpt/entry.php:32
 msgid "Entries Attributes"
 msgstr ""
 
-#: cpt/entry.php:35
+#: cpt/entry.php:33
 msgid "Entries:"
 msgstr ""
 
-#: cpt/entry.php:36
+#: cpt/entry.php:34
 msgid "All Entries"
 msgstr ""
 
-#: cpt/entry.php:37
+#: cpt/entry.php:35
 msgid "Add New Entry"
 msgstr ""
 
-#: cpt/entry.php:38
+#: cpt/entry.php:36
 msgid "Add Entry"
 msgstr ""
 
-#: cpt/entry.php:39
+#: cpt/entry.php:37
 msgid "New Entry"
 msgstr ""
 
+#: cpt/entry.php:38
 #: cpt/entry.php:40
-#: cpt/entry.php:42
 msgid "View Entry"
 msgstr ""
 
-#: cpt/entry.php:41
+#: cpt/entry.php:39
 msgid "Update Entry"
 msgstr ""
 
-#: cpt/entry.php:43
+#: cpt/entry.php:41
 msgid "View Entries"
 msgstr ""
 
-#: cpt/entry.php:44
+#: cpt/entry.php:42
 msgid "Search Entry"
 msgstr ""
 
-#: cpt/entry.php:45
+#: cpt/entry.php:43
 msgid "Entry Not found"
 msgstr ""
 
-#: cpt/entry.php:46
+#: cpt/entry.php:44
 msgid "Entry Not found in Trash"
+msgstr ""
+
+#: cpt/entry.php:45
+#: cpt/form.php:33
+msgid "Featured Image"
+msgstr ""
+
+#: cpt/entry.php:46
+#: cpt/form.php:34
+msgid "Set featured image"
 msgstr ""
 
 #: cpt/entry.php:47
 #: cpt/form.php:35
-msgid "Featured Image"
+msgid "Remove featured image"
 msgstr ""
 
 #: cpt/entry.php:48
 #: cpt/form.php:36
-msgid "Set featured image"
-msgstr ""
-
-#: cpt/entry.php:49
-#: cpt/form.php:37
-msgid "Remove featured image"
-msgstr ""
-
-#: cpt/entry.php:50
-#: cpt/form.php:38
 msgid "Use as featured image"
 msgstr ""
 
-#: cpt/entry.php:51
+#: cpt/entry.php:49
 msgid "Insert into entry"
 msgstr ""
 
-#: cpt/entry.php:52
+#: cpt/entry.php:50
 msgid "Uploaded to this entry"
 msgstr ""
 
-#: cpt/entry.php:53
+#: cpt/entry.php:51
 msgid "Entries list"
 msgstr ""
 
-#: cpt/entry.php:54
+#: cpt/entry.php:52
 msgid "Entries list navigation"
 msgstr ""
 
-#: cpt/entry.php:55
+#: cpt/entry.php:53
 msgid "Filter entries list"
 msgstr ""
 
-#: cpt/entry.php:59
+#: cpt/entry.php:57
 msgid "For storing entries"
 msgstr ""
 
-#: cpt/entry.php:83
+#: cpt/entry.php:81
 msgid "Status"
 msgstr ""
 
-#: cpt/entry.php:97
+#: cpt/entry.php:95
 msgid "Read"
 msgstr ""
 
-#: cpt/entry.php:99
+#: cpt/entry.php:97
 msgid "Unread"
 msgstr ""
 
-#: cpt/entry.php:120
+#: cpt/entry.php:118
 msgid "View"
 msgstr ""
 
-#: cpt/entry.php:135
+#: cpt/entry.php:133
 msgid "Toggle Status"
 msgstr ""
 
-#: cpt/entry.php:197
+#: cpt/entry.php:195
 #: src/block/components/searchTags.js:55
 #: src/block/components/tagSelector.js:16
 msgid "Fields"
 msgstr ""
 
-#: cpt/entry.php:220
+#: cpt/entry.php:218
 msgid "Email Template"
 msgstr ""
 
-#: cpt/entry.php:243
+#: cpt/entry.php:241
 msgid "Additional Information"
 msgstr ""
 
+#: cpt/form.php:15
 #: cpt/form.php:17
-#: cpt/form.php:19
-#: cpt/form.php:20
+#: cpt/form.php:18
 msgid "Forms"
 msgstr ""
 
-#: cpt/form.php:18
+#: cpt/form.php:16
 #: src/block/components/tagSelector.js:26
 msgid "Form"
 msgstr ""
 
-#: cpt/form.php:21
+#: cpt/form.php:19
 msgid "Forms Archives"
 msgstr ""
 
-#: cpt/form.php:22
+#: cpt/form.php:20
 msgid "Forms Attributes"
 msgstr ""
 
-#: cpt/form.php:23
+#: cpt/form.php:21
 msgid "Forms:"
 msgstr ""
 
-#: cpt/form.php:24
+#: cpt/form.php:22
 msgid "All Forms"
 msgstr ""
 
-#: cpt/form.php:25
+#: cpt/form.php:23
 msgid "Add New Form"
 msgstr ""
 
-#: cpt/form.php:26
+#: cpt/form.php:24
 msgid "Add Form"
 msgstr ""
 
-#: cpt/form.php:27
+#: cpt/form.php:25
 msgid "New Form"
 msgstr ""
 
+#: cpt/form.php:26
 #: cpt/form.php:28
-#: cpt/form.php:30
 msgid "View Form"
 msgstr ""
 
-#: cpt/form.php:29
+#: cpt/form.php:27
 msgid "Update Form"
 msgstr ""
 
-#: cpt/form.php:31
+#: cpt/form.php:29
 msgid "View Forms"
 msgstr ""
 
-#: cpt/form.php:32
+#: cpt/form.php:30
 msgid "Search Form"
 msgstr ""
 
-#: cpt/form.php:33
+#: cpt/form.php:31
 msgid "Form Not found"
 msgstr ""
 
-#: cpt/form.php:34
+#: cpt/form.php:32
 msgid "Form Not found in Trash"
 msgstr ""
 
-#: cpt/form.php:39
+#: cpt/form.php:37
 msgid "Insert into form"
 msgstr ""
 
-#: cpt/form.php:40
+#: cpt/form.php:38
 msgid "Uploaded to this form"
 msgstr ""
 
-#: cpt/form.php:41
+#: cpt/form.php:39
 msgid "Forms list"
 msgstr ""
 
-#: cpt/form.php:42
+#: cpt/form.php:40
 msgid "Forms list navigation"
 msgstr ""
 
-#: cpt/form.php:43
+#: cpt/form.php:41
 msgid "Filter forms list"
 msgstr ""
 
-#: cpt/form.php:72
+#: cpt/form.php:43
+msgid "For storing forms"
+msgstr ""
+
+#: cpt/form.php:70
 msgid "Shortcode"
 msgstr ""
 

@@ -98,8 +98,8 @@ function gutenberg_forms_cwp_block_assets(): void {
 
 //! Our custom post type function
 function cwp_form_post_type(): void {
-	require_once plugin_dir_path( __DIR__ ) . 'cpt/entry.php';
-	require_once plugin_dir_path( __DIR__ ) . 'cpt/form.php';
+	require_once plugin_dir_path( __DIR__ ) . 'admin/cpt/entry.php';
+	require_once plugin_dir_path( __DIR__ ) . 'admin/cpt/form.php';
 	require_once plugin_dir_path( __DIR__ ) . 'controllers/index.php';
 
 	Form::register_post_type();
@@ -162,19 +162,4 @@ add_action( 'init', 'cwp_gutenberg_forms_messages_meta' );
 add_action( 'wp_head', 'submitter' );
 add_action( 'wp-load', 'submitter' );
 add_action( 'init', 'cwp_form_post_type' );
-add_action( 'add_meta_boxes', 'cwp_form_post_type' );
 add_action( 'init', 'gutenberg_forms_cwp_block_assets' );
-
-add_filter( 'rest_authentication_errors', function ( $result ) {
-	global $wp;
-
-	// Quick fix, we don't want others to see entries.
-	if (
-		'wp-json/wp/v2/cwp_gf_entries' === $wp->request
-		&& ! current_user_can( 'manage_options' )
-	) {
-		return new WP_Error( 'rest_not_logged_in', 'You are not allowed to see entries.', array( 'status' => 401 ) );
-	}
-
-	return $result;
-} );

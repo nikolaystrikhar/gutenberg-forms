@@ -7,7 +7,6 @@
 @import "./styles/utils";
 @import "./styles/integrations/integrations.scss";
 @import "./styles/settings/settings.scss";
-@import "./styles/entries/index.scss";
 @import "./styles/breadcrumbs.scss";
 
 .cwp-gf-modal {
@@ -51,7 +50,7 @@
 }
 
 .cwp_load {
-  position: absolute;
+  position: fixed;
   right: 30px;
   top: 10px;
 }

@@ -1,7 +1,7 @@
 <?php
 /**
  * Plugin Name: Gutenberg Forms
- * Plugin URI: https://wptotem.com/gutenberg-forms
+ * Plugin URI: https://gutenbergforms.com
  * Description: The Next Generation WordPress Form Builder. Build forms directly within Gutenberg editor live. Add & arrange form fields like blocks.
  * Author: Nikolay Strikhar
  * Author URI: https://twitter.com/nikolaystrikhar

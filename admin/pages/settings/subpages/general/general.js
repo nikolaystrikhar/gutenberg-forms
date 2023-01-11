@@ -1,33 +1,21 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import Messages from './components/messages';
-import { Button, Snackbar } from '@wordpress/components';
+import { Button } from '@wordpress/components';
 import { connect } from 'react-redux';
 import { saveSettings } from '../../../../redux/actions/generalSettings/saveSettings';
-import { isEmpty } from 'lodash';
-import { parseSettingStatus } from '../../../../functions';
 
 function General(props) {
-	const {
-		saveSettings,
-		settings: { loading },
-	} = props;
+	const { saveSettings } = props;
 
 	return (
-		<Fragment>
-			<div className="cwp_general_settings_root">
-				<Messages />
-				<div className="cwp_general_settings_root_save">
-					<Button isPrimary onClick={saveSettings}>
-						Save Settings
-					</Button>
-				</div>
+		<div className="cwp_general_settings_root">
+			<Messages />
+			<div className="cwp_general_settings_root_save">
+				<Button isPrimary onClick={saveSettings}>
+					Save Settings
+				</Button>
 			</div>
-			{!isEmpty(loading) && (
-				<Snackbar className="cwp_load">
-					{parseSettingStatus(loading)}
-				</Snackbar>
-			)}
-		</Fragment>
+		</div>
 	);
 }
 

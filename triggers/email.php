@@ -3,7 +3,7 @@ defined( 'ABSPATH' ) || exit;
 
 require_once plugin_dir_path( __DIR__ ) . 'triggers/validator.php';
 require_once plugin_dir_path( __DIR__ ) . 'triggers/functions.php';
-require_once plugin_dir_path( __DIR__ ) . 'cpt/entry.php';
+require_once plugin_dir_path( __DIR__ ) . 'admin/cpt/entry.php';
 require_once plugin_dir_path( __DIR__ ) . 'Utils/Bucket.php';
 require_once plugin_dir_path( __DIR__ ) . 'integrations/handler.php';
 require_once plugin_dir_path( __DIR__ ) . 'tagsHandler/tagHandler.php';

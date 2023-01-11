@@ -16,7 +16,7 @@ The Next Generation WordPress Form Builder. Build forms directly within Gutenber
 
 Existing form plugins do not allow you to build your forms within Gutenberg Editor. They offer mostly custom made form builder which was a great feature earlier. But with the Gutenberg editor, you should be able to build your forms directly in the Gutenberg editor.
 
-That’s why we built <a href="https://wptotem.com/gutenberg-forms" rel="friend" title="Gutenberg Forms">Gutenberg Forms</a>.This is the next generation **WordPress form builder plugin**. You can easily build your forms by adding form fields as gutenberg blocks within the Gutenberg Editor. You do not need to leave the editor to build your forms using some other drag & drop form builder. Now you can build your form within Gutenberg editor using Gutenberg Forms.
+That’s why we built <a href="https://gutenbergforms.com" rel="friend" title="Gutenberg Forms">Gutenberg Forms</a>.This is the next generation **WordPress form builder plugin**. You can easily build your forms by adding form fields as gutenberg blocks within the Gutenberg Editor. You do not need to leave the editor to build your forms using some other drag & drop form builder. Now you can build your form within Gutenberg editor using Gutenberg Forms.
 
 Gutenberg Forms adds a Form Block in Gutenberg and all the form fields are child blocks which you can add within the Form Block, nice and easy. You can add multiple contact forms, and you can customize the form within the Gutenberg Editor. Google reCAPTCHA integration added for spam filtering.
 
@@ -30,7 +30,6 @@ The following are some of the main features, but there's more which you need to 
 * Conditional Logic - Show/hide fields conditionally.
 * Form Entries - Form Entries are recorded in the database and accessible via WordPress admin.
 * Use Forms Anywhere - You can create standalone forms using Gutenberg and use it anywhere using a shortcode. That Gutenberg Forms compatible with any WordPress page builder.
-* Form Templates - We have started creating useful form templates to let you get started building your desired form faster.
 * Dynamically populate field values via URL parameters.
 * Hidden field type with dynamic value tags.
 * Spam Protection - Google reCaptcha & Akismet Integration.
@@ -43,7 +42,7 @@ The following are some of the main features, but there's more which you need to 
 ## Documentation
 
 Please read the docs before creating a support ticket here.
-[https://wptotem.com/gutenberg-forms/docs](https://wptotem.com/gutenberg-form/sdocs)
+[https://gutenbergforms.com/docs](https://gutenbergforms.com/docs)
 
 ## Share Your Feedback & Suggestions 👏
 
@@ -60,7 +59,7 @@ Your feedback, ideas and suggestions would be really helpful in adding & improvi
 
 Once Activated, you will find the 'Gutenberg Forms' block in the Gutenberg editor.
 
-For basic usage, you can also have a look at the plugin website [Gutenberg Forms](https://wptotem.com/gutenberg-forms).
+For basic usage, you can also have a look at the plugin website [Gutenberg Forms](https://gutenbergforms.com).
 
 == Screenshots ==
 
@@ -86,7 +85,7 @@ For more information, visit [Gutenberg Forms](https://gutenbergforms.com)
 - Tweak: Form templates, they all have to be updated, so hiding for now to avoid confusions
 - Tweak: Remove Extendify
 - Version: Minimum PHP version is 7.4
-- Deprecate: Extensions other than ReCaptcha are no longer supported, too many complaints about them, they have to be tested and reworked
+- Deprecate: Extensions (other than ReCaptcha) are no longer suggested, they have to be reworked
 
 = [2.2.8.3] 5 Jan 2023 =
 

@@ -108,7 +108,7 @@ function Settings({ onClose, status, clientId, cpt }) {
                                         </div>
                                     </Fragment>
                                 ) : (
-                                        <div className="cwp_loader">
+                                        <div>
                                             <Spinner />
                                         </div>
                                     )

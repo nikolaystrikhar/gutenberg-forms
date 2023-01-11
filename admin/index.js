@@ -11,7 +11,6 @@ import './extend/renderAddon';
  */
 import { render } from 'react-dom';
 import { BrowserRouter as Router, Switch, Route } from 'react-router-dom';
-import './style.scss';
 import Layout from './layout';
 import Dashboard from './pages/dashboard/dashboard';
 import Integrations from './pages/integrations/integrations';
@@ -21,6 +20,7 @@ import { Provider } from 'react-redux';
 import store from './redux/store/store';
 import { SlotFillProvider } from '@wordpress/components';
 import AddonsProvider from './extend/addonsProvider';
+import './style.scss';
 
 class App extends Component {
 	render() {

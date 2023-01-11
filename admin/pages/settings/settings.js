@@ -25,19 +25,21 @@ function Settings(props) {
 	};
 
 	return (
-		<div className="lg:gufo-grid lg:gufo-grid-cols-12 lg:gufo-gap-x-5 gufo-bg-white gufo-rounded-lg gufo-p-6">
-			<Sidebar {...props} />
+		<>
+			<div className="lg:gufo-grid lg:gufo-grid-cols-12 lg:gufo-gap-x-5 gufo-bg-white gufo-rounded-lg gufo-p-6">
+				<Sidebar {...props} />
 
-			<div className="gufo-space-y-6 sm:gufo-px-6 lg:gufo-col-span-9 lg:gufo-px-0">
-				<CurrentSettings />
+				<div className="gufo-space-y-6 lg:gufo-col-span-9 sm:gufo-px-6 lg:gufo-pl-6 lg:gufo-pr-0 lg:gufo-border-l lg:gufo-border-gray-100">
+					<CurrentSettings />
+				</div>
 			</div>
 
 			{!isEmpty(loading) && (
-				<Snackbar className="cwp_load">
+				<Snackbar className="gufo-absolute gufo-top-12 gufo-right-10 gufo-bg-yellow-500">
 					{parseSettingStatus(loading)}
 				</Snackbar>
 			)}
-		</div>
+		</>
 	);
 }
 

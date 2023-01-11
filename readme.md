@@ -12,7 +12,7 @@
 
 Existing form plugins do not allow you to build your forms within the Gutenberg Editor. They offer mostly custom made form builders which were a great feature for an earlier era. But with the Gutenberg editor, you should be able to build your forms directly in the Gutenberg editor.
 
-That’s why we built <a href="https://wptotem.com/gutenberg-forms" rel="friend" title="Gutenberg Forms">Gutenberg Forms</a>. This is the next generation **WordPress form builder plugin**. You can easily build your forms by adding form fields as gutenberg blocks within the Gutenberg Editor. You do not need to leave the editor to build your forms using some other drag & drop form builder. Now you can build your form within the Gutenberg editor using Gutenberg Forms.
+That’s why we built <a href="https://gutenbergforms.com" rel="friend" title="Gutenberg Forms">Gutenberg Forms</a>. This is the next generation **WordPress form builder plugin**. You can easily build your forms by adding form fields as gutenberg blocks within the Gutenberg Editor. You do not need to leave the editor to build your forms using some other drag & drop form builder. Now you can build your form within the Gutenberg editor using Gutenberg Forms.
 
 Gutenberg Forms adds a Form Block in Gutenberg and all the form fields are child blocks which you can add within the Form Block, nice and easy. You can add multiple contact forms, and you can customize the form within the Gutenberg Editor. Google reCAPTCHA and Akismet integrations are available for spam filtering.
 
@@ -26,7 +26,6 @@ The following are some of the main features, but there's more which you need to 
 - Conditional Logic: Show/hide fields conditionally.
 - Form Entries - Access Form Entries recorded in the database via WordPress admin.
 - Use Forms Anywhere. You can create standalone forms using Gutenberg and use them anywhere with a shortcode. That makes Gutenberg Forms compatible with any WordPress page builder.
-- Quick-start your form from Form Templates. We have started creating useful form templates to let you get started building your desired form faster.
 - Dynamically populate field values via URL parameters.
 - Create fields with a Hidden field type and dynamic value tags.
 - Create Calculator Fields that perform basic or complex calculations.
@@ -41,7 +40,7 @@ The following are some of the main features, but there's more which you need to 
 
 - [Download on WordPress.org](https://wordpress.org/plugins/forms-gutenberg/)
 - [Follow owner on Twitter](https://twitter.com/nikolaystrikhar)
-- [Visit Website](https://wptotem.com/gutenberg-forms)
+- [Visit Website](https://gutenbergforms.com)
 
 ## Support
 

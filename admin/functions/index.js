@@ -1,13 +1,13 @@
 import { SETTINGS_SAVING, SETTINGS_SAVED } from '../redux/actions/types';
-import { has, isEmpty, get, each } from 'lodash';
+import { __ } from '@wordpress/i18n';
 
 export function parseSettingStatus(status) {
 	switch (status) {
 		case SETTINGS_SAVING:
-			return 'Saving';
+			return __('Saving', 'forms-gutenberg');
 
 		case SETTINGS_SAVED:
-			return 'Settings Saved';
+			return __('Saved', 'forms-gutenberg');
 	}
 }
 

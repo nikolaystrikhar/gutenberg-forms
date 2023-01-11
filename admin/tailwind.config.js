@@ -4,6 +4,7 @@ module.exports = {
 	prefix: 'gufo-',
 	content: [
 		"./*.php",
+		"./**/*.php",
 		"./components/*.js",
 		"./layout/*.js",
 		"./pages/*.js",
