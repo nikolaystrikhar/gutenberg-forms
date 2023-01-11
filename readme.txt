@@ -84,6 +84,7 @@ For more information, visit [Gutenberg Forms](https://gutenbergforms.com)
 - Tweak: Entries management works the default WP way
 - Tweak: Form templates, they all have to be updated, so hiding for now to avoid confusions
 - Tweak: Remove Extendify
+- Tweak: Update text domain
 - Version: Minimum PHP version is 7.4
 - Deprecate: Extensions (other than ReCaptcha) are no longer suggested, they have to be reworked
 
