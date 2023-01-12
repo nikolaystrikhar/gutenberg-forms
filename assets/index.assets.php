@@ -19,9 +19,11 @@ class cwp_gf_AssetsHandler
 				true
 			);
 
+			$locale = substr( get_bloginfo ( 'language' ), 0, 2 );
+
 			wp_enqueue_script(
 				'google-recaptcha',
-				"https://www.google.com/recaptcha/api.js",
+				"https://www.google.com/recaptcha/api.js?hl=" . $locale,
 				array( 'gutenberg-forms-google-recaptcha' ),
 				'',
 				true

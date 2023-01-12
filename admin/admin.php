@@ -398,24 +398,24 @@ class Dashboard {
 
 		add_submenu_page(
 			self::slug,
-			'Settings',
-			'Settings',
+			esc_html__( 'Dashboard', 'forms-gutenberg' ),
+			esc_html__( 'Dashboard', 'forms-gutenberg' ),
 			self::capability,
 			self::slug
 		);
 
 		add_submenu_page(
 			self::slug,
-			'Forms',
-			'Forms',
+			esc_html__( 'Forms', 'forms-gutenberg' ),
+			esc_html__( 'Forms', 'forms-gutenberg' ),
 			self::capability,
 			'edit.php?post_type=cwp_gf_forms'
 		);
 
 		add_submenu_page(
 			self::slug,
-			'Entries',
-			'Entries',
+			esc_html__( 'Entries', 'forms-gutenberg' ),
+			esc_html__( 'Entries', 'forms-gutenberg' ),
 			self::capability,
 			'edit.php?post_type=cwp_gf_entries'
 		);

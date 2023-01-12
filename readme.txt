@@ -74,12 +74,13 @@ For basic usage, you can also have a look at the plugin website [Gutenberg Forms
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com)
 
-= [2.2.8.4] 11 Jan 2023 =
+= 2.2.8.4 = 11 Jan 2023
 
 - Security: Guests had access to the form entries via WP API
 - Security: Prevent direct access to .php files
 - Security: Other security fixes
 - Fix: More strings can be translated
+- Fix: Google recaptcha now respects the WP language setting
 - Tweak: Improve WP admin screens a bit
 - Tweak: Entries management works the default WP way
 - Tweak: Form templates, they all have to be updated, so hiding for now to avoid confusions
@@ -88,22 +89,22 @@ For more information, visit [Gutenberg Forms](https://gutenbergforms.com)
 - Version: Minimum PHP version is 7.4
 - Deprecate: Extensions (other than ReCaptcha) are no longer suggested, they have to be reworked
 
-= [2.2.8.3] 5 Jan 2023 =
+= 2.2.8.3 = 5 Jan 2023
 
-* Fix: Plugin was broken on wp.org
-* Update: Compatibility with WP 6.1.1
+- Fix: Plugin was broken on wp.org
+- Update: Compatibility with WP 6.1.1
 
-= 2.2.8.1 = (16 May 2022)
+= 2.2.8.1 = 16 May 2022
 
 - Updated plugin author and plugin author URI
 - Updated compatibility for WP 5.9
 
-= 2.2.8 = (23 Mar 2022)
+= 2.2.8 = 23 Mar 2022
 
 - Fixed: Wrong include path for wp-load.php - https://github.com/WPChill/gutenberg-forms/pull/226
 - Updated: Extendify SDK - https://github.com/WPChill/gutenberg-forms/pull/233
 
-= 2.2.7 = (2 Feb 2022)
+= 2.2.7 = 2 Feb 2022
 
 - Fixed email trigger cc @ilangleben19
 - Recaptcha enqueueing when forms are not present (https://github.com/WPChill/gutenberg-forms/issues/200, #190, #195 )
@@ -111,103 +112,121 @@ For more information, visit [Gutenberg Forms](https://gutenbergforms.com)
 - Redone build for dashboard
 - Updated React, Redux, ReactDOM to WP versions
 
-= 2.2.6 = (3 Jan 2022)
+= 2.2.6 = 3 Jan 2022
 
 - Updated Contributors
 
-= 2.2.5 = (29 Nov 2021)
+= 2.2.5 = 29 Nov 2021
 
 - Added: Fully Translatable
 
-= 2.2.2 = (14 Sep 2021)
+= 2.2.2 = 14 Sep 2021
 
 - Improve: Templates Library
 
-= 2.2.1 = (26 Aug 2021)
+= 2.2.1 = 26 Aug 2021
 
 - Improve: Templates Library
 
-= 2.2.0 = (12 Aug 2021)
+= 2.2.0 = 12 Aug 2021
 
 - Improve: Templates Library
 
-= 2.1.9 = (13 July 2021)
+= 2.1.9 = 13 July 2021
 
 - Improve: Templates Library
 - Fixed: Bugs
 
-= 2.1.8 = (5 July 2021)
-Fixed: Bugs
+= 2.1.8 = 5 July 2021
 
-= 2.1.7 = (29 Jun 2021)
-New: Toggle to enable/disable Extendify library
-Improved: Updates to the pattern and template library
-
-= 2.1.6 = (17 Jun 2021)
 - Fixed: Bugs
 
-= 2.1.5 = (17 Jun 2021)
+= 2.1.7 = 29 Jun 2021
+
+- New: Toggle to enable/disable Extendify library
+- Improved: Updates to the pattern and template library
+
+= 2.1.6 = 17 Jun 2021
+
+- Fixed: Bugs
+
+= 2.1.5 = 17 Jun 2021
+
 - New: Improved Template library SDK
 
-= 2.1.4 = (25 May 2021)
+= 2.1.4 = 25 May 2021
+
 - Improved: Template library SDK
 
-= 2.1.3 = (11 May 2021)
+= 2.1.3 = 11 May 2021
+
 - Fixed: minor bug in previous release
 
-= 2.1.2 = (11 May 2021)
+= 2.1.2 = 11 May 2021
+
 - Fixed: minor bug in previous release
 
-= 2.1.1 = (11 May 2021)
+= 2.1.1 = 11 May 2021
+
 - Fixed: Bugs
 
-= 2.1.0 = (29 Apr 2021)
+= 2.1.0 = 29 Apr 2021
+
 - New: Access to the Extendify template and pattern library
 
-= 2.0.1 = (5 Oct 2020)
+= 2.0.1 = 5 Oct 2020
+
 - New: Export Entries Feature
 - Fixed: Bugs Reported by users
 
-= 2.0.0 = (31 Aug 2020)
+= 2.0.0 = 31 Aug 2020
+
 - New: Form Summary Screen (Beta)
 - Fixed: Bugs
 - Improved: Code
 
-= 1.9.0 = (11 Aug 2020)
+= 1.9.0 = 11 Aug 2020
+
 - Improved: Form Entries Screen
 - New: Chart Added for Form Entries
 - Fixed: Email Incoding issue for Message field type
 - Fixed: Bugs
 
-= 1.8.0 = (25 July 2020)
+= 1.8.0 = 25 July 2020
+
 - New: Akismet Addon Released
 - Added: Prefix & Suffix Options for fields
 - Added: Option to add Set Spam & Error Message
 - Fixed: Bugs
 
-= 1.7.0 = (15 July 2020)
+= 1.7.0 = 15 July 2020
+
 - Added: Mailchimp Integration
 - Added: Option to adjust width in Form Columns
 - Improved: Dashboard & Add-on Management
 - Fixed: Bugs
 
-= 1.6.0 = (04 July 2020)
+= 1.6.0 = 04 July 2020
+
 - Improved: Multi step form creation
 - Added: Progress Bar for multi step form
 - Fixed: Bugs
 
-= 1.5.0 = (23 June 2020)
+= 1.5.0 = 23 June 2020
+
 - Added: Dynamically populate field values
 - Added: Server side preview for saved forms
 - Added: Hidden field with merge tag inserter (UNDER-PROGRESS)
 - Fixed: Bugs
 
-= 1.4.0 = (03 June 2020)
+= 1.4.0 = 03 June 2020
+
 - Added: Mailpoet Integration ( Separate addon )
 - Fixed: Bugs
 - Improved: Code
 
-= 1.3.0 = (28 Apr 2020)
+= 1.3.0 = 28 Apr 2020
+
 - Improved: Email Notification Builder is moved in the sidebar
 - Added: Admin Page Using Gutenberg Components
 - Improved: Google ReCaptcha settings added in admin page
@@ -217,7 +236,8 @@ Improved: Updates to the pattern and template library
 - Fixed: File Upload Bugs
 - Added: Form Actions - Now you can enable/disable any action like form entries, email notification etc
 
-= 1.2.0 = (11 Apr 2020)
+= 1.2.0 = 11 Apr 2020
+
 - New: Now form entries are recorded in database
 - New: forms CPT - Create forms and use anywhere using shortcode
 - New: Templates Library - Start creating forms quickly with ready to use templates
@@ -225,7 +245,8 @@ Improved: Updates to the pattern and template library
 - Fixed: Bugs
 - Improved: Code
 
-= 1.1.0 = (28 Mar 2020)
+= 1.1.0 = 28 Mar 2020
+
 - Added: Multi Step feature
 - Added: File Upload Field
 - Fixed: Bugs
@@ -235,22 +256,26 @@ Improved: Updates to the pattern and template library
 - Improved: Button Block
 - Improved: Group Block
 
-= 1.0.9 = (21 Mar 2020)
+= 1.0.9 = 21 Mar 2020
+
 - Fixed: Bugs
 - Improved: Code
 
-= 1.0.8 = (7 Mar 2020)
+= 1.0.8 = 7 Mar 2020
+
 - Fixed: Bugs
 - Improved: UI and organized options
 - Added: New style for radio and checkbox fields
 
-= 1.0.7 = (28 Feb 2020)
+= 1.0.7 = 28 Feb 2020
+
 - Added: Form Theme Options
 - Improved: form columns can now be changed after selection
 - Improved: Better organized options for form
 - Improved: Number field
 
-= 1.0.6 (22 Feb 2020) =
+= 1.0.6 = 22 Feb 2020
+
 - Added: Custom Pattern Option for Messages,Text,Phone,Name fields
 - Added: Option to define Custom validation Messages for All fields
 - Added: Option to define default validation Messages in the main form block
@@ -260,7 +285,8 @@ Improved: Updates to the pattern and template library
 - Added: Calculation Block
 - Fixed: Bug fixes
 
-= 1.0.5 (15 Feb 2020) =
+= 1.0.5 = 15 Feb 2020
+
 - Fixed: Frontend Styling
 - Added: Inline field Styling
 - Improved: Sanitization
@@ -271,14 +297,17 @@ Improved: Updates to the pattern and template library
 - Added: Yes/No Field
 - Added: Required Text Option
 
-= 1.0.4 (04 Feb 2020) =
-* Re-done the entire plugin from scratch to work with the latest Gutenberg APIs.
-* Added: Email Notification Builder
-* Added: Form Columns Block
-* Added: Transform Fields to Another functionality
+= 1.0.4 = 04 Feb 2020
 
-= 1.0.1 (18 Oct 2018) =
-* Fixed: Minor issues.
+- Re-done the entire plugin from scratch to work with the latest Gutenberg APIs.
+- Added: Email Notification Builder
+- Added: Form Columns Block
+- Added: Transform Fields to Another functionality
 
-= 1.0.0 (16 Oct 2018) =
-* Initial release with the basic functionality and fields added.
+= 1.0.1 = 18 Oct 2018
+
+- Fixed: Minor issues.
+
+= 1.0.0 = 16 Oct 2018
+
+- Initial release with the basic functionality and fields added.
