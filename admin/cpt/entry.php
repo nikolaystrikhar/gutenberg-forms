@@ -1,7 +1,6 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-require_once plugin_dir_path( __DIR__ ) . '../triggers/functions.php';
 require_once plugin_dir_path( __DIR__ ) . '../triggers/validator.php';
 
 function get_value_and_name( $field ) {

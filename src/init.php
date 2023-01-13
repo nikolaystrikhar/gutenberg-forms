@@ -1,7 +1,25 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-require_once plugin_dir_path( __DIR__ ) . 'triggers/functions.php';
+function get_forms_cpt_data() {
+	$args = array(
+		'post_type' => 'cwp_gf_forms',
+	);
+
+	$form_cpt = get_posts( $args );
+	$posts    = array();
+
+	foreach ( $form_cpt as $post ) {
+		$posts[] = [
+			'url'           => get_post_permalink( $post->ID ),
+			'ID'            => $post->ID,
+			'post_title'    => $post->post_title,
+			'post_edit_url' => get_edit_post_link( $post->ID ),
+		];
+	}
+
+	return $posts;
+}
 
 function gutenberg_forms_cwp_block_assets(): void {
 	require_once plugin_dir_path( __DIR__ ) . 'admin/admin.php';

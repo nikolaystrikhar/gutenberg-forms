@@ -2,7 +2,6 @@
 defined( 'ABSPATH' ) || exit;
 
 require_once plugin_dir_path( __DIR__ ) . 'triggers/validator.php';
-require_once plugin_dir_path( __DIR__ ) . 'triggers/functions.php';
 require_once plugin_dir_path( __DIR__ ) . 'admin/cpt/entry.php';
 require_once plugin_dir_path( __DIR__ ) . 'Utils/Bucket.php';
 require_once plugin_dir_path( __DIR__ ) . 'integrations/handler.php';
@@ -184,12 +183,29 @@ class Email {
 		return array_key_exists( 'gf_form_id', $post );
 	}
 
+	/**
+	 * @param array $array
+	 * @param array $keys
+	 *
+	 * This function removes certain keys from the associative array
+	 *
+	 * @return array
+	 */
+	private function array_remove_keys( $array, $keys ) {
+		$assocKeys = array();
+		foreach ( $keys as $key ) {
+			$assocKeys[ $key ] = true;
+		}
+
+		return array_diff_key( $array, $assocKeys );
+	}
+
 	public function init() {
 		$arranged_fields = array();
 
 		$post = $_POST;
 
-		$post_without_submit = array_remove_keys( $_POST, [ 'submit' ] );
+		$post_without_submit = $this->array_remove_keys( $_POST, [ 'submit' ] );
 
 		if ( ! $this->is_gutenberg_form_submission( $post ) ) {
 			return;
@@ -359,6 +375,24 @@ class Email {
 		}
 	}
 
+	/**
+	 * Will replace the following entities to their corresponding html element
+	 * &#10; => \n [new line] => <br />
+	 * &#13; => \n [new row] => <br />
+	 *
+	 * @param string $str
+	 */
+	private static function replace_line_break_entities( $str ) {
+		$without_special_chars = strtr( $str, [
+			'&#10;' => "\n",
+			'&#13;' => "\n",
+		] );
+
+		$with_html = nl2br( $without_special_chars );
+
+		return $with_html;
+	}
+
 	public function sendMail( $fields ) {
 		$template   = $this->get_templates( $_POST['submit'] )[0];
 		$tagHandler = new gforms_TagHandler( $fields );
@@ -377,7 +411,7 @@ class Email {
 
 		# line breaks can be parsed and used in the gf forms email body
 
-		$mail_body = replace_line_break_entities( $mail_body );
+		$mail_body = self::replace_line_break_entities( $mail_body );
 
 		$CC  = $template['cc'];
 		$BCC = $template['bcc'];

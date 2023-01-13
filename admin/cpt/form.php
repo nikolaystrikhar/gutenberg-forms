@@ -1,7 +1,6 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-require_once plugin_dir_path( __DIR__ ) . '../triggers/functions.php';
 require_once plugin_dir_path( __DIR__ ) . 'cpt/reusable.php';
 
 class Form {

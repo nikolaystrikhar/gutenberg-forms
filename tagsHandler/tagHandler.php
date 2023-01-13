@@ -1,8 +1,6 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-require_once plugin_dir_path( __DIR__ ) . 'triggers/functions.php';
-
 /**
  * TagHandler
  * This class will handle the tag manipulation & insertion of dynamic content
@@ -81,7 +79,7 @@ class gforms_TagHandler {
 			'{{wp:admin_email}}'       => get_bloginfo( 'admin_email' ),
 			'{{other:date}}'           => date( "Y/m/d" ),
 			'{{other:time}}'           => date( "h:i:sa" ),
-			'{{all_data}}'             => merge_fields_with_ids( $this->fields ),
+			'{{all_data}}'             => $this->merge_fields_with_ids( $this->fields ),
 		);
 
 		$data = $this->add_field_data( $data );
@@ -95,6 +93,22 @@ class gforms_TagHandler {
 		}
 
 		$this->data = $data;
+	}
+
+	private function merge_fields_with_ids( $fields ) {
+		$merged_fields = '';
+
+		foreach ( $fields as $value ) {
+
+			$field_value = $value['field_value'];
+			$id          = array_key_exists( 'admin_id', $value['decoded_entry'] ) ? $value['decoded_entry']['admin_id'] : null;
+
+			if ( ! empty( $id ) and ! empty( $field_value ) ) {
+				$merged_fields .= "$id: $field_value \n";
+			}
+		}
+
+		return $merged_fields;
 	}
 
 	/**

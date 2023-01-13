@@ -1,8 +1,6 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-require_once plugin_dir_path( __DIR__ ) . 'triggers/functions.php';
-
 include( ABSPATH . 'wp-load.php' );
 require_once( ABSPATH . 'wp-admin/includes/plugin-install.php' );
 require_once( ABSPATH . 'wp-admin/includes/file.php' );
@@ -61,7 +59,7 @@ class Dashboard {
 						'settings'          => $this->settings,
 						'informations'      => $this->informations,
 						'general'           => json_decode( $this->general, JSON_PRETTY_PRINT ),
-						'installed_plugins' => get_all_plugins_data(),
+						'installed_plugins' => $this->get_all_plugins_data(),
 						'ajax_url'          => admin_url( 'admin-ajax.php' ),
 						'rest_url'          => get_rest_url(),
 					)
@@ -153,6 +151,25 @@ class Dashboard {
 		);
 
 		$this->settings['integrations'] = apply_filters( 'gutenberg_forms_integrations', $this->settings['integrations'] );
+	}
+
+	private function get_all_plugins_data() {
+		$plugins_list = get_plugins();
+		$data         = array();
+
+		foreach ( $plugins_list as $key => $plugin ) {
+			$plugin_data = array();
+
+			if ( array_key_exists( 'TextDomain', $plugin ) ) {
+				$plugin_data['textdomain'] = $plugin['TextDomain'];
+			}
+
+			$plugin_data['script'] = $key;
+
+			$data[] = $plugin_data;
+		}
+
+		return $data;
 	}
 
 	public function on_initialized() {
