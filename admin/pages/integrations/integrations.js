@@ -1,4 +1,4 @@
-import React, { Fragment } from 'react';
+import React from 'react';
 import IntegrationBlock from '../../components/integration-block';
 import { map, isEmpty, get } from 'lodash';
 import { connect } from 'react-redux';
@@ -12,6 +12,10 @@ function Integrations(props) {
 
 	return (
 		<div className="gufo-bg-white gufo-rounded-lg gufo-p-6">
+			<h3 className="gufo-mb-5 gufo-text-lg gufo-font-normal gufo-leading-6 gufo-text-gray-900">
+				{__('Installed', 'forms-gutenberg')}
+			</h3>
+
 			<div className="integrations_root">
 				<div className="integrations_blocks">
 					{map(integrations, (integration, name) => {
@@ -50,9 +54,9 @@ function Integrations(props) {
 				</div>
 			</div>
 
-			{/*<div className="more_integrations_block">*/}
-			{/*	<InstallIntegrations />*/}
-			{/*</div>*/}
+			<div className="more_integrations_block">
+				<InstallIntegrations />
+			</div>
 
 			<div className="cwp_setting_status">
 				{!isEmpty(loading) && (

@@ -5,6 +5,7 @@ import { get, isEmpty, map } from 'lodash';
 import Loading from './loading';
 import FetchError from './error';
 import AvailableIntegration from './availableIntegration';
+const { __ } = wp.i18n;
 
 function InstallIntegrations() {
 	const [availableIntegrations, setAvailableIntegrations] = useState([]);
@@ -15,6 +16,7 @@ function InstallIntegrations() {
 		setLoading(true);
 		setError(false);
 
+		// TODO: Remove addons fetching. They should be static.
 		axios
 			.get(proxy, {
 				headers: {
@@ -51,31 +53,31 @@ function InstallIntegrations() {
 	};
 
 	useEffect(() => {
-		fetchRecords(); // fetching records...
+		fetchRecords();
 	}, []);
 
 	return (
-		<div className="cwp_install_integrations_root">
-			{/*{!loading && !error && !isEmpty(availableIntegrations) && (*/}
-			{/*	<Fragment>*/}
-			{/*		<h1 className="light-heading">More Addons Available</h1>*/}
-			{/*	</Fragment>*/}
-			{/*)}*/}
-			{/*{loading && !error ? (*/}
-			{/*	<Loading />*/}
-			{/*) : (*/}
-			{/*	<div className="cwp_install_integ_grid">*/}
-			{/*		{map(availableIntegrations, (integration, index) => {*/}
-			{/*			return (*/}
-			{/*				<AvailableIntegration*/}
-			{/*					key={index}*/}
-			{/*					integration={integration}*/}
-			{/*				/>*/}
-			{/*			);*/}
-			{/*		})}*/}
-			{/*	</div>*/}
-			{/*)}*/}
-			{/*{!loading && error && <FetchError onRetry={fetchRecords} />}*/}
+		<div className="gufo-mt-10 cwp_install_integrations_root">
+			{!loading && !error && !isEmpty(availableIntegrations) && (
+				<h3 className="gufo-mb-5 gufo-text-lg gufo-font-normal gufo-leading-6 gufo-text-gray-900">
+					{__('Available', 'forms-gutenberg')}
+				</h3>
+			)}
+			{loading && !error ? (
+				<Loading />
+			) : (
+				<div className="cwp_install_integ_grid">
+					{map(availableIntegrations, (integration, index) => {
+						return (
+							<AvailableIntegration
+								key={index}
+								integration={integration}
+							/>
+						);
+					})}
+				</div>
+			)}
+			{!loading && error && <FetchError onRetry={fetchRecords} />}
 		</div>
 	);
 }

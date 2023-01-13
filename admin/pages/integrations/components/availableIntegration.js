@@ -8,7 +8,7 @@ import {
 	Button,
 	IconButton,
 } from '@wordpress/components';
-import { get, attempt, isError, includes, map, filter, isEqual } from 'lodash';
+import { get, attempt, isError, includes, map } from 'lodash';
 import { TEXT_DOMAIN } from '../../../contants';
 
 const { __ } = wp.i18n;

@@ -13,4 +13,5 @@ function FetchError(props) {
 		</div>
 	);
 }
+
 export default FetchError;
