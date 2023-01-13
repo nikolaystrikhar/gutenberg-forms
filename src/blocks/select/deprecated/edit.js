@@ -345,13 +345,6 @@ function edit(props) {
 				<Bulk_Add onChange={(c) => setSelect(c)} data={props} />
 			) : (
 				<Fragment>
-					{!!props.isSelected && !enableCondition && (
-						<div className="cwp-required">
-							<h3>{__("Required", "forms-gutenberg")}</h3>
-							<FormToggle checked={isRequired} onChange={handleRequired} />
-						</div>
-					)}
-
 					<div className="cwp-select-set" ref={selectContainer}>
 						<div className="cwp-label-wrap">
 							<RichText

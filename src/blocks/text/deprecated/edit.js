@@ -259,13 +259,6 @@ function edit(props) {
 		),
 		!!props.isSelected && <BlockControls></BlockControls>,
 		<div className={`cwp-text cwp-field ${props.className}`}>
-			{!!props.isSelected && !enableCondition && (
-				<div className="cwp-required">
-					<h3>Required</h3>
-					<FormToggle checked={isRequired} onChange={handleRequired} />
-				</div>
-			)}
-
 			<div className="cwp-field-set">
 				<div className="cwp-label-wrap">
 					<RichText

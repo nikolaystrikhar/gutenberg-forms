@@ -367,13 +367,6 @@ function edit(props) {
 				<Bulk_Add onChange={(c) => setCheckboxes(c)} data={props} />
 			) : (
 				<Fragment>
-					{!!props.isSelected && !enableCondition && (
-						<div className="cwp-required">
-							<h3>{__("Required", "forms-gutenberg")}</h3>
-							<FormToggle checked={isRequired} onChange={handleRequired} />
-						</div>
-					)}
-
 					<div
 						ref={checkboxContainer}
 						className={`cwp-checkbox-set-backend cwp-checkbox-set ${

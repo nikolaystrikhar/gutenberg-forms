@@ -15,7 +15,7 @@
 		},
 		"label": {
 			"type": "string",
-			"default": "Enter Number:"
+			"default": "Number:"
 		},
 		"id": {
 			"type": "string",

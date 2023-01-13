@@ -396,13 +396,6 @@ function edit(props) {
 				<Bulk_Add onChange={(c) => setRadios(c)} data={props} />
 			) : (
 				<Fragment>
-					{!!props.isSelected && !enableCondition && (
-						<div className="cwp-required">
-							<h3>{__("Required", "forms-gutenberg")}</h3>
-							<FormToggle checked={isRequired} onChange={handleRequired} />
-						</div>
-					)}
-
 					<div
 						ref={radiosContainer}
 						className={`cwp-radios-set ${
