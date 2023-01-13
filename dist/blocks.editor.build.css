@@ -1700,7 +1700,7 @@ html {
     .cwp-form .cwp-field .cwp-field-set .cwp-range-set input[type="number"] {
       -ms-flex: 1;
           flex: 1;
-      width: 50px;
+      width: 80px;
       margin: 0px 0px 0px 15px; }
 
 .cwp-form .cwp-field.cwp-calculation .cwp-calc-toggle {

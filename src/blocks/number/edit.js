@@ -188,6 +188,18 @@ function edit(props) {
 							/>
 						</div>
 					)}
+					<div className="cwp-option">
+						<PanelRow>
+							<h3 className="cwp-heading">{__("Is Range", "forms-gutenberg")}</h3>
+							<FormToggle
+								label="Is Range"
+								checked={isRange}
+								onChange={() => {
+									props.setAttributes({ isRange: !isRange });
+								}}
+							/>
+						</PanelRow>
+					</div>
 					<RangeControl
 						min={0}
 						max={10000}
