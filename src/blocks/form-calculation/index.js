@@ -12,7 +12,7 @@ const { attributes, title } = blockData;
 registerBlockType("cwp/form-calculation", {
 	title: __(title),
 	icon: __(<Icon icon="calculation" />),
-	category: "common",
+	category: "gutenberg-forms",
 	keywords: [__("gutenberg-forms"), __("forms"), __("calculation")],
 	edit: calculationEdit,
 	save: calculationSave,

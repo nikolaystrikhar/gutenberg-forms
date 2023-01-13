@@ -23,6 +23,28 @@ class Dashboard {
 	public function __construct() {
 		$this->on_initialized();
 
+		add_filter(
+			'block_categories_all',
+			function( array $block_categories, $block_editor_context ): array {
+				if (
+					! ( $block_editor_context instanceof WP_Block_Editor_Context )
+					|| empty( $block_editor_context->post )
+				) {
+					return $block_categories;
+				}
+
+				$block_categories[] = array(
+					'slug'  => 'gutenberg-forms',
+					'title' => esc_html__( 'Gutenberg Forms', 'forms-gutenberg' ),
+					'icon'  => null,
+				);
+
+				return $block_categories;
+			},
+			10,
+			2
+		);
+
 		add_action( 'admin_menu', array( $this, 'add_menu' ) );
 
 		add_action(

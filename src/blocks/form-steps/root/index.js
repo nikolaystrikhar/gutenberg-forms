@@ -10,7 +10,7 @@ const { title, attributes } = blockData;
 registerBlockType("cwp/form-steps", {
 	title: __(title),
 	icon: "editor-ol-rtl",
-	category: "common",
+	category: "gutenberg-forms",
 	supports: {
 		inserter: false,
 	},

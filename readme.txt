@@ -1,7 +1,7 @@
 === WordPress Form Builder Plugin - Gutenberg Forms ===
 Contributors: nikolaystrikhar
 Tags: gutenberg form, contact form, multistep form, conditional form, gutenberg block, contact form plugin, forms, form builder, custom form, contact button, contact me, custom contact form, form manager, form, forms builder, forms creator, captcha, recaptcha, Akismet, email form, web form, feedback form, email submit form, message form, contact form block
-Requires at least: 5.0
+Requires at least: 5.8
 Tested up to: 6.1.1
 Requires PHP: 7.4
 Stable tag: 2.2.8.4
@@ -95,19 +95,21 @@ For basic usage, you can also have a look at the plugin website [Gutenberg Forms
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com)
 
-= 2.2.8.4 = 11 Jan 2023
+= 2.2.8.4 = 19 Jan 2023
 
 - Security: Everyone had access to the form entries via WP API
 - Security: Prevent direct access to .php files
 - Security: Other security fixes
-- Fix: More strings can be translated
 - Fix: Google recaptcha now respects the WP language setting
+- Tweak: Removed a "required" switcher from all blocks, it's already available in fields settings, no need to have it twice
+- Tweak: Range switcher of a number field moved to field settings
+- Tweak: Blocks are ordered better and grouped in a "Gutenberg Forms" category
 - Tweak: Improve WP admin screens a bit
 - Tweak: Entries management works the default WP way
 - Tweak: Form templates, they all have to be updated, so hiding for now to avoid confusions
 - Tweak: Remove Extendify
-- Tweak: Update text domain
-- Version: Minimum PHP version is 7.4
+- Tweak: Update text domain and more strings can be translated
+- Version: Minimum PHP version is 7.4 and minimum WP version is 5.8
 
 = 2.2.8.3 = 5 Jan 2023
 

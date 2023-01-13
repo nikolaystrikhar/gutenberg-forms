@@ -12,7 +12,7 @@ const { title, attributes } = blockData;
 registerBlockType("cwp/checkbox", {
 	title: __(title),
 	icon: "yes",
-	category: "common",
+	category: "gutenberg-forms",
 	keywords: [__("gutenberg-forms"), __("forms"), __("checkbox")],
 	edit: checkboxEdit,
 	save: checkboxSave,

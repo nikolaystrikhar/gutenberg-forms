@@ -15,7 +15,7 @@ import { deprecation } from "./deprecated/deprecation";
 registerBlockType("cwp/email", {
 	title: __(title),
 	icon: "email",
-	category: "common",
+	category: "gutenberg-forms",
 	keywords: [__("gutenberg-forms"), __("forms"), __("mail")],
 	edit: emailEdit,
 	save: emailSave,

@@ -11,7 +11,7 @@ const { attributes,title } = blockData;
 registerBlockType("cwp/hidden", {
 	title: __(title),
 	icon: "hidden",
-	category: "common",
+	category: "gutenberg-forms",
 	keywords: [__("gutenberg-forms"), __("forms"), __("hidden"), __("field")],
 	edit: hiddenEdit,
 	save: hiddenSave,

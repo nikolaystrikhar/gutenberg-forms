@@ -1,5 +1,5 @@
 {
-	"title": "Reusable Form",
+	"title": "Existing Form",
 	"attributes": {
 		"formId": {
 			"type": "string",

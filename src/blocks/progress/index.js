@@ -12,7 +12,7 @@ const { attributes, title } = blockData;
 registerBlockType("cwp/progress", {
 	title: __(title),
 	icon: __(<Icon icon="progress" />),
-	category: "common",
+	category: "gutenberg-forms",
 	keywords: [__("gutenberg-forms"), __("progress"), __("bar")],
 	edit: progressEdit,
 	save: progressSave,

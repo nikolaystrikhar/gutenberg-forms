@@ -1,5 +1,5 @@
 {
-	"title": "Message",
+	"title": "Textarea",
 	"attributes": {
 		"enableCondition": {
 			"type": "boolean",

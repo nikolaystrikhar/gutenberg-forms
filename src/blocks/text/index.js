@@ -13,7 +13,7 @@ const { attributes, title } = blockData;
 registerBlockType("cwp/text", {
 	title: __(title),
 	icon: "text",
-	category: "common",
+	category: "gutenberg-forms",
 	keywords: [__("gutenberg-forms"), __("forms"), __("text")],
 	edit: textEdit,
 	save: textSave,

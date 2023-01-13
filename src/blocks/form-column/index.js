@@ -11,7 +11,7 @@ const { attributes, title } = blockData;
 registerBlockType("cwp/form-column", {
 	title: __(title),
 	icon: "editor-table",
-	category: "common",
+	category: "gutenberg-forms",
 	keywords: [
 		__("gutenberg-forms"),
 		__("forms"),

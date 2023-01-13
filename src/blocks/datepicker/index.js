@@ -14,7 +14,7 @@ const { attributes, title } = blockData;
 registerBlockType("cwp/datepicker", {
 	title: __(title),
 	icon: "calendar-alt",
-	category: "common",
+	category: "gutenberg-forms",
 	keywords: [__("gutenberg-forms"), __("forms"), __("datepicker")],
 	edit: datePickerEdit,
 	save: datePickerSave,

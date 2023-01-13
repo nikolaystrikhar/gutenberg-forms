@@ -27,7 +27,7 @@ registerBlockType("cwp/form-button", {
 		align: true,
 		align: ["left", "center", "right"],
 	},
-	category: "common",
+	category: "gutenberg-forms",
 	keywords: [__("gutenberg-forms"), __("forms"), __("button")],
 	edit: formButtonEdit,
 	save: formButtonSave,

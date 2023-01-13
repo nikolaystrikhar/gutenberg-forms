@@ -12,7 +12,7 @@ const { attributes, title } = blockData;
 registerBlockType("cwp/yes-no", {
 	title: __(title),
 	icon: __(<Icon icon="switch" />, "forms-gutenberg"),
-	category: "common",
+	category: "gutenberg-forms",
 	keywords: [__("gutenberg-forms"), __("forms"), __("yes-no")],
 	edit: yesNoEdit,
 	save: yesNoSave,

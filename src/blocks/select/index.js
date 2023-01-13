@@ -13,7 +13,7 @@ const { attributes, title } = blockData;
 registerBlockType("cwp/select", {
 	title: __(title),
 	icon: "menu-alt",
-	category: "common",
+	category: "gutenberg-forms",
 	keywords: [__("gutenberg-forms"), __("forms"), __("select")],
 	edit: selectEdit,
 	save: selectSave,

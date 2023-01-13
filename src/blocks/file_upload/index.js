@@ -13,7 +13,7 @@ const { title, attributes } = blockData;
 registerBlockType("cwp/file-upload", {
 	title: __(title),
 	icon: "media-document",
-	category: "common",
+	category: "gutenberg-forms",
 	keywords: [__("gutenberg-forms"), __("forms"), __("file"), __("file upload")],
 	edit: fileUploadEdit,
 	save: fileUploadSave,

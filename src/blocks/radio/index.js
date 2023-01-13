@@ -12,7 +12,7 @@ const { attributes, title } = blockData;
 registerBlockType("cwp/radio", {
 	title: __(title),
 	icon: "marker",
-	category: "common",
+	category: "gutenberg-forms",
 	keywords: [__("gutenberg-forms"), __("forms"), __("radio")],
 	edit: radioEdit,
 	save: radioSave,

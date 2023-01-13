@@ -45,7 +45,7 @@ registerBlockType("cwp/block-gutenberg-forms", {
 	},
 	title: __(blockData.title),
 	icon: __("feedback"),
-	category: "common",
+	category: "gutenberg-forms",
 	keywords: [__("gutenberg-forms"), __("forms")],
 	example: blockData.example,
 	attributes: blockAttributes,
