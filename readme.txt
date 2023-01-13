@@ -1,4 +1,4 @@
-=== Gutenberg Forms - Contact, Multistep, Calculator, Conditional & Custom Form Builder  ===
+=== WordPress Form Builder Plugin - Gutenberg Forms ===
 Contributors: nikolaystrikhar
 Tags: gutenberg form, contact form, multistep form, conditional form, gutenberg block, contact form plugin, forms, form builder, custom form, contact button, contact me, custom contact form, form manager, form, forms builder, forms creator, captcha, recaptcha, Akismet, email form, web form, feedback form, email submit form, message form, contact form block
 Requires at least: 5.0
@@ -44,6 +44,27 @@ The following are some of the main features, but there's more which you need to 
 Please read the docs before creating a support ticket here.
 [https://gutenbergforms.com/docs](https://gutenbergforms.com/docs)
 
+## Extensions
+
+**MailPoet**
+Our first add-on has been released. It is for MailPoet plugin that lets you connect Gutenberg Forms with MailPoet to send leads to your MailPoet list.
+
+Read More & Install it, it's **FREE**.
+[https://wordpress.org/plugins/guten-forms-mailpoet/](https://wordpress.org/plugins/guten-forms-mailpoet/)
+
+**Mailchimp**
+Mailchimp integration is ready as an add-on. Mailchimp add-on lets you connect your Mailchimp account with Gutenberg Forms to send leads to your selected list.
+
+Read More & Install it, it's **FREE**.
+[https://wordpress.org/plugins/guten-forms-mailchimp/](https://wordpress.org/plugins/guten-forms-mailchimp/)
+
+**Akismet**
+Akismet integration is ready as an add-on. It let’s you secure your forms from spammers. Akismet checks your contact form submissions against their global database of spam.
+
+Read More & Install it, it's **FREE**.
+[https://wordpress.org/plugins/guten-forms-akismet/](https://wordpress.org/plugins/guten-forms-akismet/)
+
+
 ## Share Your Feedback & Suggestions 👏
 
 Your feedback, ideas and suggestions would be really helpful in adding & improving the features that you need. We have set up a tool to collect your feedback and prioritize the features based on votes.
@@ -76,7 +97,7 @@ For more information, visit [Gutenberg Forms](https://gutenbergforms.com)
 
 = 2.2.8.4 = 11 Jan 2023
 
-- Security: Guests had access to the form entries via WP API
+- Security: Everyone had access to the form entries via WP API
 - Security: Prevent direct access to .php files
 - Security: Other security fixes
 - Fix: More strings can be translated
@@ -87,7 +108,6 @@ For more information, visit [Gutenberg Forms](https://gutenbergforms.com)
 - Tweak: Remove Extendify
 - Tweak: Update text domain
 - Version: Minimum PHP version is 7.4
-- Deprecate: Extensions (other than ReCaptcha) are no longer suggested, they have to be reworked
 
 = 2.2.8.3 = 5 Jan 2023
 
