@@ -1,6 +1,6 @@
-=== WordPress Form Builder Plugin - Gutenberg Forms ===
+=== Gutenberg Forms - Contact, Multistep, Calculator, Conditional & Custom Form Builder  ===
 Contributors: nikolaystrikhar
-Tags: wordpress form,  gutenberg form, contact form, subscribe form, multi-step form, gutenberg block, contact form plugin, forms, form builder, custom form, contact button, contact me, custom contact form, form manager, form, forms builder, forms creator, captcha, recaptcha, Akismet, email form, web form, feedback form, email submit form, message form, contact form block, wordpress form plugin
+Tags: gutenberg form, contact form, multistep form, conditional form, gutenberg block, contact form plugin, forms, form builder, custom form, contact button, contact me, custom contact form, form manager, form, forms builder, forms creator, captcha, recaptcha, Akismet, email form, web form, feedback form, email submit form, message form, contact form block
 Requires at least: 5.0
 Tested up to: 6.1.1
 Requires PHP: 7.4
