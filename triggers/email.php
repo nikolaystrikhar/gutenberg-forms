@@ -422,7 +422,7 @@ class Email {
 			$from_name  = $from_details['name'];
 			$from_email = $from_details['email'];
 
-			$headers[] = "From: $from_name <$from_email>";
+			$headers[] = "Reply-To: $from_name <$from_email>";
 		}
 
 		if ( ! $this->validator->isEmpty( $CC ) ) {

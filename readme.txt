@@ -101,6 +101,7 @@ For more information, visit [Gutenberg Forms](https://gutenbergforms.com)
 - Security: Prevent direct access to .php files
 - Security: Other security fixes
 - Fix: Google recaptcha now respects the WP language setting
+- Fix: "From" field for emails did not work in most cases, now it uses reply-to which is what users wanted
 - Tweak: Removed a "required" switcher from all blocks, it's already available in fields settings, no need to have it twice
 - Tweak: Range switcher of a number field moved to field settings
 - Tweak: Blocks are ordered better and grouped in a "Gutenberg Forms" category
