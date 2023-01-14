@@ -390,7 +390,7 @@ class Email {
 
 		$with_html = nl2br( $without_special_chars );
 
-		return $with_html;
+		return remove_accents( $with_html );
 	}
 
 	public function sendMail( $fields ) {
@@ -473,7 +473,7 @@ class Email {
 				}
 
 				if ( $record_entries ) {
-					Entries::post( $newEntry );
+					Entries::save( $newEntry );
 				}
 
 				$this->ExternalServiceHandler->handle( $newEntry );
@@ -486,7 +486,7 @@ class Email {
 				}
 
 				if ( $record_entries ) {
-					Entries::post( $newEntry );
+					Entries::save( $newEntry );
 				}
 
 				$this->ExternalServiceHandler->handle( $newEntry );
@@ -497,7 +497,7 @@ class Email {
 			$this->attempt_success( $template );
 
 			if ( $record_entries ) {
-				Entries::post( $newEntry );
+				Entries::save( $newEntry );
 			}
 		}
 	}

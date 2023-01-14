@@ -200,15 +200,15 @@ class Entries {
 				$boxes = array(
 					array(
 						'title'  => __( 'Fields', 'forms-gutenberg' ),
-						'fields' => (array) get_post_meta( $post->ID, 'fields__' . self::post_type, true ),
+						'fields' => get_post_meta( $post->ID, 'field_types__' . self::post_type, true ),
 					),
 					array(
-						'title'  => __( 'Email Template', 'forms-gutenberg' ),
-						'fields' => (array) get_post_meta( $post->ID, 'template__' . self::post_type, true ),
+						'title'  => __( 'Email', 'forms-gutenberg' ),
+						'fields' => get_post_meta( $post->ID, 'template__' . self::post_type, true ),
 					),
 					array(
-						'title'  => __( 'Additional Information', 'forms-gutenberg' ),
-						'fields' => (array) get_post_meta( $post->ID, 'extra__' . self::post_type, true ),
+						'title'  => __( 'Additional', 'forms-gutenberg' ),
+						'fields' => get_post_meta( $post->ID, 'extra__' . self::post_type, true ),
 					),
 				);
 				?>
@@ -218,6 +218,7 @@ class Entries {
 
 				<div class="gufo-space-y-6 gufo-mt-5">
 					<?php foreach ( $boxes as $box ): ?>
+					<?php if ( ! is_array( $box['fields'] ) || empty( $box['fields'] ) ) continue; ?>
 					<div class=" gufo-w-full gufo-overflow-hidden gufo-bg-white gufo-shadow sm:gufo-rounded-lg">
 						<div class="gufo-px-4 gufo-py-5 sm:gufo-px-6">
 							<span class="gufo-text-lg gufo-font-medium gufo-leading-6 gufo-text-gray-900">
@@ -247,7 +248,7 @@ class Entries {
 		);
 	}
 
-	public static function post( $entry = '' ) {
+	public static function save( $entry = '' ) {
 		// some default arguments for creating a new entry
 		$defaults  = array(
 			'email'    => '',
@@ -360,7 +361,7 @@ class Entries {
 			$field_admin_id     = $parse_entry['admin_id'];
 			$field_type         = $field_value['field_type'];
 
-			$new_entry['field_types'][ $field_admin_id ] = $field_type;
+			$new_entry['field_types'][ remove_accents( $field_admin_id ) ] = $field_type;
 
 			if ( $field_value['field_type'] === 'file_upload' and ! $is_recaptcha_field ) {
 				$parse_entry = get_value_and_name( $field_value );
