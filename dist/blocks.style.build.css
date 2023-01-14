@@ -1062,9 +1062,8 @@ html {
     margin: 3px 5px 0px 0px; }
 
 .cwp-hint {
-  font-style: italic;
   font-weight: 300;
-  font-size: 0.75rem; }
+  font-size: 1.5rem; }
 @charset "UTF-8";
 /*!
  * Pikaday

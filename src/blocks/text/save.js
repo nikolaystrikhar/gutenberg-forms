@@ -13,14 +13,14 @@ function save(props) {
 		id,
 		requiredLabel,
 		messages: { invalid, empty },
-		messages,
 		pattern,
-		minimumLength,
-		maximumLength,
+		condition,
 		prefix,
 		suffix,
 		hint,
-		showHint
+		showHint,
+		minimumLength,
+		maximumLength
 	} = props.attributes;
 
 	const getLabel = () => {

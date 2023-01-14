@@ -1415,7 +1415,7 @@ jQuery(function ($) {
 			};
 		}
 
-		buildCondition(value, operand, condValue, field) {
+		buildCondition(value, operand, condValue) {
 			if (value instanceof Array) {
 				switch (operand) {
 					case "===":
@@ -1434,8 +1434,7 @@ jQuery(function ($) {
 		}
 
 		init() {
-			const { conditionalFields, fields } = this,
-				t = this;
+			const { conditionalFields } = this, t = this;
 
 			conditionalFields.each(function () {
 				let condition = t.parseCondition($(this).data("condition"));
@@ -1450,12 +1449,9 @@ jQuery(function ($) {
 							t.buildCondition( $(this).val(), condition["operand"], condition["value"] )
 						);
 					}
-				});
 
-				t.fields.each(function () {
 					$(this).on("input", function () {
 						let target = $(this).attr("id").startsWith(condition["field"]);
-
 						let fieldValue;
 
 						if ($(this).attr("type") === "checkbox") {
@@ -1466,33 +1462,15 @@ jQuery(function ($) {
 									fieldValue.push($(this).val());
 								});
 						} else if ($(this).attr("type") === "file") {
-							fieldValue = $(this)
-								.val()
-								.replace(/C:\\fakepath\\/i, "");
+							fieldValue = $(this).val().replace(/C:\\fakepath\\/i, "");
 						} else {
 							fieldValue = $(this).val();
 						}
 
-						if (
-							target &&
-							t.buildCondition(
-								fieldValue,
-								condition["operand"],
-								condition["value"],
-								condition["fieldName"]
-							)
-						) {
-							condition.elem.show();
-						} else if (
-							target &&
-							!t.buildCondition(
-								fieldValue,
-								condition["operand"],
-								condition["value"],
-								condition["fieldName"]
-							)
-						) {
-							condition.elem.hide();
+						if ( target ) {
+							condition.elem.toggle(
+								t.buildCondition( fieldValue, condition["operand"], condition["value"] )
+							);
 						}
 					});
 				});

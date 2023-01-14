@@ -104,6 +104,7 @@ For more information, visit [Gutenberg Forms](https://gutenbergforms.com)
 - Fix: "From" field for emails did not work in most cases, now it uses reply-to which is what users wanted
 - Fix: Field IDs with accents on letters were breaking most of the functionality
 - Fix: Initial conditions (when a form appears) were not working for conditional fields
+- Fix: Conditional text fields did not work
 - Tweak: Removed a "required" switcher from all blocks, it's already available in fields settings, no need to have it twice
 - Tweak: Range switcher of a number field moved to field settings
 - Tweak: Blocks are ordered better and grouped in a "Gutenberg Forms" category
