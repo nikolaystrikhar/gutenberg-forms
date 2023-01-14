@@ -1443,18 +1443,12 @@ jQuery(function ($) {
 				condition["elem"] = $(this);
 
 				t.fields.each(function () {
-					let target = $(this).attr("id").startsWith(condition["field"]);
-					if (
-						target &&
-						t.buildCondition(
-							$(this).val(),
-							condition["operand"],
-							condition["value"]
-						)
-					) {
-						condition.elem.show();
-					} else {
-						condition.elem.hide();
+					let target = $(this).attr("id").startsWith( condition["field"] );
+
+					if ( target ) {
+						condition.elem.toggle(
+							t.buildCondition( $(this).val(), condition["operand"], condition["value"] )
+						);
 					}
 				});
 
