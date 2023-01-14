@@ -181,3 +181,20 @@ add_action( 'wp_head', 'submitter' );
 add_action( 'wp-load', 'submitter' );
 add_action( 'init', 'cwp_form_post_type' );
 add_action( 'init', 'gutenberg_forms_cwp_block_assets' );
+
+add_filter(
+	'plugin_row_meta',
+	function( array $plugin_meta, string $plugin_file ): array {
+		if ( 'gutenberg-forms/gutenberg-forms.php' === $plugin_file ) {
+			$plugin_meta['settings'] = sprintf(
+				'<a href="%s">%s</a>',
+				esc_url( admin_url( 'admin.php?page=gutenberg_forms' ) ),
+				__( 'Dashboard', 'forms-gutenberg' ),
+			);
+		}
+
+		return $plugin_meta;
+	},
+	10,
+	2
+);

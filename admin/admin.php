@@ -45,7 +45,52 @@ class Dashboard {
 			2
 		);
 
-		add_action( 'admin_menu', array( $this, 'add_menu' ) );
+		add_action(
+			'admin_menu',
+			function() {
+				add_menu_page(
+					'Gutenberg Forms',
+					'Gutenberg Forms',
+					self::capability,
+					self::slug,
+					function (): void {
+						echo '<div id="cwp-gutenberg-forms-dashboard-root"></div>';
+					},
+					'dashicons-feedback'
+				);
+
+				add_submenu_page(
+					self::slug,
+					esc_html__( 'Dashboard', 'forms-gutenberg' ),
+					esc_html__( 'Dashboard', 'forms-gutenberg' ),
+					self::capability,
+					self::slug
+				);
+
+				add_submenu_page(
+					self::slug,
+					esc_html__( 'Forms', 'forms-gutenberg' ),
+					esc_html__( 'Forms', 'forms-gutenberg' ),
+					self::capability,
+					'edit.php?post_type=cwp_gf_forms'
+				);
+
+				add_submenu_page(
+					self::slug,
+					esc_html__( 'Entries', 'forms-gutenberg' ),
+					esc_html__( 'Entries', 'forms-gutenberg' ),
+					self::capability,
+					'edit.php?post_type=cwp_gf_entries'
+				);
+
+				// Move the Gutenberg Forms top submenu item to bottom.
+
+				global $submenu;
+				if ( ! empty( $submenu[ self::slug ] ) ) {
+					$submenu[ self::slug ][] = array_shift( $submenu[ self::slug ] );
+				}
+			}
+		);
 
 		add_action(
 			'admin_enqueue_scripts',
@@ -201,29 +246,6 @@ class Dashboard {
 			$plugin_script = $_POST[ $activate_plugin_key ];
 
 			$this->plugin_activation( $plugin_script ); // activating the plugin
-		}
-
-		$this->handle_exports();
-	}
-
-	public function handle_exports() {
-		$is_export_request = isset( $_POST['cwp-gutenberg_forms_entries-export-form-id'] ) and isset( $_POST['cwp-gutenberg_forms_entries-export-format'] );
-
-		if ( $is_export_request ) {
-			$export_form_id = $_POST['cwp-gutenberg_forms_entries-export-form-id'];
-			$export_format  = $_POST['cwp-gutenberg_forms_entries-export-format'];
-
-			$args = array();
-
-			$args['meta_query'] = array(
-				array(
-					'key'     => 'form_id__cwp_gf_entries',
-					'value'   => $export_form_id,
-					'compare' => '=',
-				),
-			);
-
-			cwp_gf_Entries_export_handler::export( $export_format, $args );
 		}
 	}
 
@@ -420,50 +442,6 @@ class Dashboard {
 				//SETTING CURRENT_VALUE
 				$this->settings['integrations'][ $integration ]['fields'][ $field ]['value'] = get_option( $field_group );
 			}
-		}
-	}
-
-	public function add_menu() {
-		add_menu_page(
-			'Gutenberg Forms',
-			'Gutenberg Forms',
-			self::capability,
-			self::slug,
-			function (): void {
-				echo '<div id="cwp-gutenberg-forms-dashboard-root"></div>';
-			},
-			'dashicons-feedback'
-		);
-
-		add_submenu_page(
-			self::slug,
-			esc_html__( 'Dashboard', 'forms-gutenberg' ),
-			esc_html__( 'Dashboard', 'forms-gutenberg' ),
-			self::capability,
-			self::slug
-		);
-
-		add_submenu_page(
-			self::slug,
-			esc_html__( 'Forms', 'forms-gutenberg' ),
-			esc_html__( 'Forms', 'forms-gutenberg' ),
-			self::capability,
-			'edit.php?post_type=cwp_gf_forms'
-		);
-
-		add_submenu_page(
-			self::slug,
-			esc_html__( 'Entries', 'forms-gutenberg' ),
-			esc_html__( 'Entries', 'forms-gutenberg' ),
-			self::capability,
-			'edit.php?post_type=cwp_gf_entries'
-		);
-
-		// Move the Gutenberg Forms top submenu item to bottom.
-
-		global $submenu;
-		if ( ! empty( $submenu[ self::slug ] ) ) {
-			$submenu[ self::slug ][] = array_shift( $submenu[ self::slug ] );
 		}
 	}
 }
