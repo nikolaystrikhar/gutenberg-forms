@@ -95,11 +95,20 @@ For basic usage, you can also have a look at the plugin website [Gutenberg Forms
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com)
 
-= 2.2.8.4 = 19 Jan 2023
+= 2.2.9 = 17 Jan 2023
 
 - Security: Everyone had access to the form entries via WP API
 - Security: Prevent direct access to .php files
 - Security: Other security fixes
+- Add: Add a block inserter button to the form block
+- Update: Removed a "required" switcher from all blocks, it's already available in fields settings, no need to have it twice
+- Update: Blocks are ordered better and grouped in a "Gutenberg Forms" category
+- Update: Improve WP admin screens a bit
+- Update: Entries management works the default WP way
+- Update: Form templates, they all have to be updated, so hiding for now to avoid confusions
+- Update: Remove Extendify
+- Update: Update text domain and more strings can be translated
+- Update: Minimum PHP version is 7.4 and minimum WP version is 5.8
 - Fix: A block showing existing forms did not work at all
 - Fix: Missing conditions for the number field
 - Fix: Google recaptcha now respects the WP language setting
@@ -107,16 +116,6 @@ For more information, visit [Gutenberg Forms](https://gutenbergforms.com)
 - Fix: Field IDs with accents on letters were breaking most of the functionality
 - Fix: Initial conditions (when a form appears) were not working for conditional fields
 - Fix: Conditional text fields did not work
-- Tweak: Add a block inserter button to the form block
-- Tweak: Removed a "required" switcher from all blocks, it's already available in fields settings, no need to have it twice
-- Tweak: Range switcher of a number field moved to field settings
-- Tweak: Blocks are ordered better and grouped in a "Gutenberg Forms" category
-- Tweak: Improve WP admin screens a bit
-- Tweak: Entries management works the default WP way
-- Tweak: Form templates, they all have to be updated, so hiding for now to avoid confusions
-- Tweak: Remove Extendify
-- Tweak: Update text domain and more strings can be translated
-- Version: Minimum PHP version is 7.4 and minimum WP version is 5.8
 
 = 2.2.8.3 = 5 Jan 2023
 
