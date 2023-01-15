@@ -14,7 +14,7 @@ import {
 	extract_admin_id,
 	get_admin_id,
 } from "../../block/misc/helper";
-
+import ConditionalLogic from "../../block/components/condition";
 import { clone, set, assign } from "lodash";
 import { getRootMessages, detectSimilarFields } from "../../block/functions";
 
@@ -23,7 +23,6 @@ const { __ } = wp.i18n;
 const {
 	InspectorControls,
 	BlockControls,
-	BlockIcon,
 	RichText,
 } = wp.blockEditor;
 
@@ -48,9 +47,7 @@ function edit(props) {
 		number,
 		isRequired,
 		label,
-		id,
 		field_name,
-		isRange,
 		rangeMax,
 		rangeMin,
 		requiredLabel,
@@ -58,6 +55,8 @@ function edit(props) {
 		messages,
 		steps,
 		adminId,
+		condition,
+		enableCondition,
 		hint,
 		showHint
 	} = props.attributes;
@@ -165,16 +164,27 @@ function edit(props) {
 						/>
 					</div>
 
-					<div className="cwp-option">
+					{!enableCondition ? (
 						<PanelRow>
 							<h3 className="cwp-heading">{__("Required", "forms-gutenberg")}</h3>
 							<FormToggle
-								label="Required"
+								label={__("Required", "forms-gutenberg")}
 								checked={isRequired}
 								onChange={handleRequired}
 							/>
 						</PanelRow>
-					</div>
+					) : (
+						<div className="cwp-option">
+							<p>
+								<Icon icon="info" />{" "}
+								{__(
+									"You cannot set a conditional field required!",
+									"forms-gutenberg"
+								)}
+							</p>
+						</div>
+					)}
+
 					{isRequired && (
 						<div className="cwp-option">
 							<h3 className="cwp-heading">
@@ -189,44 +199,44 @@ function edit(props) {
 						</div>
 					)}
 					<div className="cwp-option">
-						<PanelRow>
-							<h3 className="cwp-heading">{__("Is Range", "forms-gutenberg")}</h3>
-							<FormToggle
-								label="Is Range"
-								checked={isRange}
-								onChange={() => {
-									props.setAttributes({ isRange: !isRange });
-								}}
+						<RangeControl
+							min={0}
+							max={10000}
+							value={steps}
+							step={0.01}
+							onChange={(steps) => props.setAttributes({ steps })}
+							label="Steps"
+						/>
+						<div className="cwp-option">
+							<RangeControl
+								min={0}
+								max={10000}
+								step={0.01}
+								value={rangeMax}
+								onChange={(m) => props.setAttributes({ rangeMax: m })}
+								label={__("Range Max", "forms-gutenberg")}
 							/>
-						</PanelRow>
-					</div>
-					<RangeControl
-						min={0}
-						max={10000}
-						value={steps}
-						step={0.01}
-						onChange={(steps) => props.setAttributes({ steps })}
-						label="Steps"
-					/>
-					<div className="cwp-option">
-						<RangeControl
-							min={0}
-							max={10000}
-							step={0.01}
-							value={rangeMax}
-							onChange={(m) => props.setAttributes({ rangeMax: m })}
-							label={__("Range Max", "forms-gutenberg")}
-						/>
-						<RangeControl
-							min={0}
-							step={0.01}
-							value={rangeMin}
-							max={10000}
-							onChange={(m) => props.setAttributes({ rangeMin: m })}
-							label={__("Range Min", "forms-gutenberg")}
-						/>
+							<RangeControl
+								min={0}
+								step={0.01}
+								value={rangeMin}
+								max={10000}
+								onChange={(m) => props.setAttributes({ rangeMin: m })}
+								label={__("Range Min", "forms-gutenberg")}
+							/>
+						</div>
 					</div>
 				</PanelBody>
+
+				<PanelBody title={__("Condition", "forms-gutenberg")}>
+					<ConditionalLogic
+						condition={condition}
+						set={props.setAttributes}
+						clientId={props.clientId}
+						useCondition={props.attributes.enableCondition}
+					/>
+				</PanelBody>
+
 				<PanelBody title="Messages">
 					{isRequired && (
 						<div className="cwp-option">
@@ -285,41 +295,20 @@ function edit(props) {
 						value={label}
 						onChange={handleLabel}
 					/>
-					{!props.isSelected && isRequired && (
+					{!props.isSelected && isRequired && !enableCondition && (
 						<div className="cwp-required cwp-noticed">
 							<h3>{requiredLabel}</h3>
 						</div>
 					)}
 				</div>
-				{isRange ? (
-					<div className="cwp-range-set">
-						<input
-							value={number}
-							max={rangeMax}
-							min={rangeMin}
-							type="range"
-							step={steps}
-							onChange={handleChange}
-						/>
-						<input
-							value={number}
-							step={steps}
-							type="number"
-							max={rangeMax}
-							min={rangeMin}
-							onChange={handleChange}
-						/>
-					</div>
-				) : (
-					<input
-						value={number}
-						max={rangeMax}
-						step={steps}
-						min={rangeMin}
-						type="number"
-						onChange={handleChange}
-					/>
-				)}
+				<input
+					value={number}
+					max={rangeMax}
+					step={steps}
+					min={rangeMin}
+					type="number"
+					onChange={handleChange}
+				/>
 			</div>
 			{showHint && (
                 <p className="cwp-hint">{hint}</p>

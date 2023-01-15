@@ -1,6 +1,7 @@
-import React, { Fragment } from "react";
+import React from "react";
 import { isEmpty } from "lodash";
 import { strip_tags } from "../../block/misc/helper";
+import { stringifyCondition } from "../../block/functions";
 
 function save(props) {
 	const {
@@ -8,17 +9,16 @@ function save(props) {
 		isRequired,
 		label,
 		id,
-		field_name,
-		isRange,
 		rangeMax,
 		rangeMin,
 		requiredLabel,
-		messages,
 		messages: { invalid, empty },
+		condition,
 		steps,
 		hint,
 		showHint
 	} = props.attributes;
+
 	const getLabel = () => {
 		const { label, isRequired } = props.attributes;
 
@@ -37,8 +37,19 @@ function save(props) {
 		empty
 	});
 
+	const getCondition = () => {
+		if (props.attributes.enableCondition && !isEmpty(condition.field)) {
+			//verifying the condition
+			return {
+				"data-condition": stringifyCondition(condition),
+			};
+		}
+
+		return {};
+	};
+
 	return (
-		<div className="cwp-number cwp-field">
+		<div className="cwp-number cwp-field"  {...getCondition()}>
 			<div className="cwp-field-set">
 				{!isEmpty(label) && (
 					<label
@@ -46,53 +57,21 @@ function save(props) {
 						dangerouslySetInnerHTML={{ __html: getLabel() }}
 					></label>
 				)}
-				{isRange ? (
-					<div className="cwp-range-set">
-						<input
-							id={id}
-							value={number}
-							max={rangeMax}
-							required={isRequired}
-							min={rangeMin}
-							data-default={number}
-							data-rule="false"
-							type="range"
-							data-cwp-field
-							step={steps}
-						/>
-						<input
-							id={id}
-							aria-label={strip_tags(label)}
-							data-cwp-field
-							data-errors={errors}
-							name={id}
-							step={steps}
-							data-rule="false"
-							data-default={number}
-							value={number}
-							required={isRequired}
-							max={rangeMax}
-							min={rangeMin}
-							type="number"
-						/>
-					</div>
-				) : (
-						<input
-							id={id}
-							aria-label={strip_tags(label)}
-							data-cwp-field
-							data-errors={errors}
-							name={id}
-							data-rule="false"
-							data-default={number}
-							value={number}
-							required={isRequired}
-							step={steps}
-							max={rangeMax}
-							min={rangeMin}
-							type="number"
-						/>
-					)}
+				<input
+					id={id}
+					aria-label={strip_tags(label)}
+					data-cwp-field
+					data-errors={errors}
+					name={id}
+					data-rule="false"
+					data-default={number}
+					value={number}
+					required={isRequired}
+					step={steps}
+					max={rangeMax}
+					min={rangeMin}
+					type="number"
+				/>
 			</div>
 			{showHint && (
                 <p className="cwp-hint">{hint}</p>

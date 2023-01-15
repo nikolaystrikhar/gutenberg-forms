@@ -25,10 +25,6 @@
 			"type": "string",
 			"default": ""
 		},
-		"isRange": {
-			"type": "boolean",
-			"default": false
-		},
 		"steps": {
 			"type": "number",
 			"default": 1
