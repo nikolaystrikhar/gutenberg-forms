@@ -2,14 +2,14 @@
 # This file is distributed under the GPLv2 or later.
 msgid ""
 msgstr ""
-"Project-Id-Version: Gutenberg Forms 2.2.8.4\n"
+"Project-Id-Version: Gutenberg Forms 2.2.9\n"
 "Report-Msgid-Bugs-To: https://wordpress.org/support/plugin/gutenberg-forms\n"
 "Last-Translator: FULL NAME <EMAIL@ADDRESS>\n"
 "Language-Team: LANGUAGE <LL@li.org>\n"
 "MIME-Version: 1.0\n"
 "Content-Type: text/plain; charset=UTF-8\n"
 "Content-Transfer-Encoding: 8bit\n"
-"POT-Creation-Date: 2023-01-15T14:13:28+00:00\n"
+"POT-Creation-Date: 2023-01-15T14:59:56+00:00\n"
 "PO-Revision-Date: YEAR-MO-DA HO:MI+ZONE\n"
 "X-Generator: WP-CLI 2.7.1\n"
 "X-Domain: forms-gutenberg\n"
@@ -41,8 +41,6 @@ msgstr ""
 #: admin/admin.php:65
 #: src/init.php:172
 #: admin/layout/navigation.js:18
-#: dist/admin/index.js:3035
-#: dist/admin/index.js:2569
 msgid "Dashboard"
 msgstr ""
 
@@ -62,109 +60,125 @@ msgstr ""
 msgid "Entries"
 msgstr ""
 
-#: admin/admin.php:145
+#: admin/admin.php:88
+#: admin/admin.php:89
+#: admin/layout/navigation.js:22
+msgid "Extensions"
+msgstr ""
+
+#: admin/admin.php:96
+#: admin/admin.php:97
+#: admin/layout/navigation.js:26
+#: admin/pages/settings/subpages/integrationSettings/components/fields.js:64
+#: dist/blocks.build.js:1
+#: src/blocks/form-button/edit.js:99
+#: src/blocks/form-steps/root/edit.js:169
+msgid "Settings"
+msgstr ""
+
+#: admin/admin.php:161
 msgid "entry"
 msgid_plural "entries"
 msgstr[0] ""
 msgstr[1] ""
 
-#: admin/admin.php:146
+#: admin/admin.php:162
 msgid "View and manage all of your form entries in one convenient location."
 msgstr ""
 
-#: admin/admin.php:153
+#: admin/admin.php:169
 msgid "form"
 msgid_plural "forms"
 msgstr[0] ""
 msgstr[1] ""
 
-#: admin/admin.php:154
+#: admin/admin.php:170
 msgid "Create new forms or edit existing ones to fit your needs."
 msgstr ""
 
-#: admin/admin.php:161
+#: admin/admin.php:177
 msgid "Documentation"
 msgstr ""
 
-#: admin/admin.php:162
+#: admin/admin.php:178
 msgid "Get the help you need to get the most out of our plugin with our comprehensive documentation."
 msgstr ""
 
-#: admin/admin.php:169
+#: admin/admin.php:185
 msgid "Have an idea?"
 msgstr ""
 
-#: admin/admin.php:170
+#: admin/admin.php:186
 msgid "We value your input! Let us know if you have an idea for a new feature or improvement to our plugin."
 msgstr ""
 
-#: admin/admin.php:177
+#: admin/admin.php:193
 msgid "Found a bug?"
 msgstr ""
 
-#: admin/admin.php:178
+#: admin/admin.php:194
 msgid "Let us know if you encounter any issues so we can fix them as quickly as possible."
 msgstr ""
 
-#: admin/admin.php:185
+#: admin/admin.php:201
 msgid "Like the plugin?"
 msgstr ""
 
-#: admin/admin.php:186
+#: admin/admin.php:202
 msgid "We would love to hear your feedback! Let us know what you think of our plugin."
 msgstr ""
 
-#: admin/admin.php:336
+#: admin/admin.php:352
 msgid "There was an error trying to setnd your message. Please try again later."
 msgstr ""
 
-#: admin/admin.php:340
+#: admin/admin.php:356
 msgid "There was an error trying to send your message. Please try again later."
 msgstr ""
 
-#: admin/admin.php:344
+#: admin/admin.php:360
 #: dist/blocks.build.js:1
 #: src/block/functions/index.js:107
 msgid "The name {{value}} is not valid!"
 msgstr ""
 
-#: admin/admin.php:348
+#: admin/admin.php:364
 #: dist/blocks.build.js:1
 #: src/block/functions/index.js:112
 msgid "The email {{value}} is not valid!"
 msgstr ""
 
-#: admin/admin.php:352
+#: admin/admin.php:368
 #: dist/blocks.build.js:1
 #: src/block/functions/index.js:120
 msgid "The text {{value}} is not valid!"
 msgstr ""
 
-#: admin/admin.php:356
+#: admin/admin.php:372
 #: dist/blocks.build.js:1
 #: src/block/functions/index.js:125
 msgid "The message {{value}} is not valid!"
 msgstr ""
 
-#: admin/admin.php:360
+#: admin/admin.php:376
 #: dist/blocks.build.js:1
 #: src/block/functions/index.js:138
 msgid "The phone {{value}} is not valid!"
 msgstr ""
 
-#: admin/admin.php:364
+#: admin/admin.php:380
 #: dist/blocks.build.js:1
 #: src/block/functions/index.js:143
 msgid "The website {{value}} is not valid!"
 msgstr ""
 
-#: admin/admin.php:368
+#: admin/admin.php:384
 #: dist/blocks.build.js:1
 #: src/block/functions/index.js:152
 msgid "The number {{value}} is not in range!"
 msgstr ""
 
-#: admin/admin.php:372
+#: admin/admin.php:388
 #: dist/blocks.build.js:1
 #: src/block/functions/index.js:157
 msgid "The file {{value}} is not valid!"
@@ -393,59 +407,31 @@ msgid "Shortcode"
 msgstr ""
 
 #: admin/functions/index.js:7
-#: dist/admin/index.js:2851
-#: dist/admin/index.js:2425
+#: dist/admin/index.js:1
 msgid "Saving"
 msgstr ""
 
 #: admin/functions/index.js:10
-#: dist/admin/index.js:2854
-#: dist/admin/index.js:2428
+#: dist/admin/index.js:1
 msgid "Saved"
 msgstr ""
 
-#: admin/layout/navigation.js:22
-#: dist/admin/index.js:3038
-#: dist/admin/index.js:2573
-msgid "Extensions"
-msgstr ""
-
-#: admin/layout/navigation.js:26
-#: admin/pages/settings/subpages/integrationSettings/components/fields.js:64
-#: dist/admin/index.js:3041
-#: dist/admin/index.js:4438
-#: dist/blocks.build.js:1
-#: src/blocks/form-button/edit.js:99
-#: src/blocks/form-steps/root/edit.js:169
-#: dist/admin/index.js:2577
-#: dist/admin/index.js:3727
-msgid "Settings"
-msgstr ""
-
 #: admin/pages/integrations/components/install_integrations.js:63
-#: dist/admin/index.js:3508
-#: dist/admin/index.js:2942
 msgid "Available"
 msgstr ""
 
 #: admin/pages/integrations/integrations.js:16
-#: dist/admin/index.js:3603
-#: dist/admin/index.js:2996
 msgid "Installed"
 msgstr ""
 
 #: admin/pages/settings/subpages/general/components/messages.js:30
-#: dist/admin/index.js:3885
 #: dist/blocks.build.js:1
 #: src/blocks/gutenberg-forms/Inspector.js:203
 #: src/blocks/reusable_forms/edit.js:29
-#: dist/admin/index.js:3231
 msgid "General"
 msgstr ""
 
 #: admin/pages/settings/subpages/import/components/pluginList.js:45
-#: dist/admin/index.js:4260
-#: dist/admin/index.js:3552
 msgid "Import forms from other plugins"
 msgstr ""
 
