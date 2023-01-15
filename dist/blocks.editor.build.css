@@ -1963,6 +1963,9 @@ html {
     padding: 10px 25px;
     letter-spacing: 1px; }
 
+.cwp-form .cwp-button-block-appender .block-editor-inserter {
+  width: 100%; }
+
 .cwp-heading {
   margin: 0px 0px !important; }
 

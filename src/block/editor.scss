@@ -253,6 +253,10 @@
 			@include defaultSubmit();
 		}
 	}
+
+	.cwp-button-block-appender .block-editor-inserter {
+		width: 100%;
+	}
 }
 
 //miscs

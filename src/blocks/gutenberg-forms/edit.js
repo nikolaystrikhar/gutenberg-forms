@@ -85,6 +85,9 @@ function edit(props) {
 								</button>
 							</div>
 						)}
+						<div className="cwp-button-block-appender">
+							<InnerBlocks.ButtonBlockAppender />
+						</div>
 					</div>
 					<div
 						dangerouslySetInnerHTML={{ __html: getThemeStyling(theme, formId) }}
