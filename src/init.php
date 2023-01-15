@@ -2,23 +2,27 @@
 defined( 'ABSPATH' ) || exit;
 
 function get_forms_cpt_data() {
-	$args = array(
-		'post_type' => 'cwp_gf_forms',
+	$posts = get_posts(
+		array(
+			'post_type'   => 'cwp_gf_forms',
+			'post_status' => 'publish',
+			'numberposts' => - 1,
+			'orderby'     => 'post_title',
+			'order'       => 'ASC',
+		)
 	);
 
-	$form_cpt = get_posts( $args );
-	$posts    = array();
-
-	foreach ( $form_cpt as $post ) {
-		$posts[] = [
+	$result = array();
+	foreach ( $posts as $post ) {
+		$result[] = array(
 			'url'           => get_post_permalink( $post->ID ),
 			'ID'            => $post->ID,
 			'post_title'    => $post->post_title,
 			'post_edit_url' => get_edit_post_link( $post->ID ),
-		];
+		);
 	}
 
-	return $posts;
+	return $result;
 }
 
 function gutenberg_forms_cwp_block_assets(): void {

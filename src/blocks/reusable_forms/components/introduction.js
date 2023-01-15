@@ -7,7 +7,7 @@ function Introduction(props) {
 	const savedForms = get(window, "cwpGlobal.cwp-cpt-forms");
 	const [form, setForm] = useState("");
 
-	const formOptions = savedForms.map((form) => {
+	const formOptions = [...savedForms].map((form) => {
 		const form_id = get(form, "ID");
 		const title = get(form, "post_title");
 

@@ -9,8 +9,8 @@ const { __ } = wp.i18n;
 function edit(props) {
 	const savedForms = get(window, "cwpGlobal.cwp-cpt-forms");
 
-	let formIdTitleHash = get(window, "cwpGlobal.cwp-cpt-forms");
-	savedForms.map((form) => {
+	let formIdTitleHash = [];
+	[...savedForms].map((form) => {
 		formIdTitleHash[ get(form, "ID") ] = get(form, "post_title");
 	});
 
