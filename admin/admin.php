@@ -83,12 +83,28 @@ class Dashboard {
 					'edit.php?post_type=cwp_gf_entries'
 				);
 
+				add_submenu_page(
+					self::slug,
+					esc_html__( 'Extensions', 'forms-gutenberg' ),
+					esc_html__( 'Extensions', 'forms-gutenberg' ),
+					self::capability,
+					'admin.php?page=gutenberg_forms#/integrations'
+				);
+
+				add_submenu_page(
+					self::slug,
+					esc_html__( 'Settings', 'forms-gutenberg' ),
+					esc_html__( 'Settings', 'forms-gutenberg' ),
+					self::capability,
+					'admin.php?page=gutenberg_forms#/settings'
+				);
+
 				// Move the Gutenberg Forms top submenu item to bottom.
 
-				global $submenu;
-				if ( ! empty( $submenu[ self::slug ] ) ) {
-					$submenu[ self::slug ][] = array_shift( $submenu[ self::slug ] );
-				}
+//				global $submenu;
+//				if ( ! empty( $submenu[ self::slug ] ) ) {
+//					$submenu[ self::slug ][] = array_shift( $submenu[ self::slug ] );
+//				}
 			}
 		);
 

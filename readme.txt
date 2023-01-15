@@ -14,9 +14,7 @@ The Next Generation WordPress Form Builder. Build forms directly within Gutenber
 
 **WordPress Form Builder Plugin - Gutenberg Forms**
 
-Existing form plugins do not allow you to build your forms within Gutenberg Editor. They offer mostly custom made form builder which was a great feature earlier. But with the Gutenberg editor, you should be able to build your forms directly in the Gutenberg editor.
-
-That’s why we built <a href="https://gutenbergforms.com" rel="friend" title="Gutenberg Forms">Gutenberg Forms</a>.This is the next generation **WordPress form builder plugin**. You can easily build your forms by adding form fields as gutenberg blocks within the Gutenberg Editor. You do not need to leave the editor to build your forms using some other drag & drop form builder. Now you can build your form within Gutenberg editor using Gutenberg Forms.
+This is the next generation **WordPress form builder plugin**. You can easily build your forms by adding form fields as gutenberg blocks within the Gutenberg Editor. You do not need to leave the editor to build your forms using some other drag & drop form builder. Now you can build your form within Gutenberg editor using Gutenberg Forms.
 
 Gutenberg Forms adds a Form Block in Gutenberg and all the form fields are child blocks which you can add within the Form Block, nice and easy. You can add multiple contact forms, and you can customize the form within the Gutenberg Editor. Google reCAPTCHA integration added for spam filtering.
 
@@ -95,7 +93,7 @@ For basic usage, you can also have a look at the plugin website [Gutenberg Forms
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com)
 
-= 2.2.9 = 17 Jan 2023
+= 2.2.9 = 15 Jan 2023
 
 - Security: Everyone had access to the form entries via WP API
 - Security: Prevent direct access to .php files
