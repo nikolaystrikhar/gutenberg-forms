@@ -5,7 +5,6 @@ import { get } from "lodash";
 
 function Introduction(props) {
 	const savedForms = get(window, "cwpGlobal.cwp-cpt-forms");
-
 	const [form, setForm] = useState("");
 
 	const formOptions = savedForms.map((form) => {
@@ -23,7 +22,6 @@ function Introduction(props) {
 			className="cwp-reusable-intro"
 			icon="index-card"
 			label={__("Select Gutenberg Form", "forms-gutenberg")}
-			instructions="Select a saved form."
 		>
 			<div className="content">
 				<SelectControl
@@ -31,7 +29,7 @@ function Introduction(props) {
 					value={form}
 					options={[
 						{
-							label: "Insert Form",
+							label: __("Select", "forms-gutenberg"),
 							value: "",
 						},
 						...formOptions,
@@ -39,7 +37,7 @@ function Introduction(props) {
 					onChange={setForm}
 				/>
 				<Button isPrimary isSmall onClick={() => props.onSelect(form)}>
-					Select
+					{__("Choose", "forms-gutenberg")}
 				</Button>
 			</div>
 		</Placeholder>

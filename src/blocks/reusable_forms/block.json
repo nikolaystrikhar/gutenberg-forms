@@ -1,5 +1,4 @@
 {
-	"title": "Existing Form",
 	"attributes": {
 		"formId": {
 			"type": "string",

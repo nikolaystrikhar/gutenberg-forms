@@ -100,6 +100,7 @@ For more information, visit [Gutenberg Forms](https://gutenbergforms.com)
 - Security: Everyone had access to the form entries via WP API
 - Security: Prevent direct access to .php files
 - Security: Other security fixes
+- Fix: A block showing existing forms did not work at all
 - Fix: Google recaptcha now respects the WP language setting
 - Fix: "From" field for emails did not work in most cases, now it uses reply-to which is what users wanted
 - Fix: Field IDs with accents on letters were breaking most of the functionality

@@ -1,28 +1,17 @@
-import React, { useEffect } from "react";
+import React from "react";
 import Introduction from "./components/introduction";
-import { isEmpty, get, has } from "lodash";
-import ServerSideRender from "@wordpress/server-side-render";
-import {
-	SelectControl,
-	Button,
-	PanelBody,
-	PanelRow,
-} from "@wordpress/components";
+import { isEmpty, get } from "lodash";
+import { SelectControl, Button, PanelBody } from "@wordpress/components";
 import { getPostUrl } from "../../block/functions";
-
 const { InspectorControls } = wp.blockEditor;
 const { __ } = wp.i18n;
 
 function edit(props) {
 	const savedForms = get(window, "cwpGlobal.cwp-cpt-forms");
-	const formOptions = savedForms.map((form) => {
-		const form_id = get(form, "ID");
-		const title = get(form, "post_title");
 
-		return {
-			label: title,
-			value: form_id,
-		};
+	let formIdTitleHash = get(window, "cwpGlobal.cwp-cpt-forms");
+	savedForms.map((form) => {
+		formIdTitleHash[ get(form, "ID") ] = get(form, "post_title");
 	});
 
 	const {
@@ -30,7 +19,9 @@ function edit(props) {
 		attributes: { formId },
 		isSelected,
 	} = props;
-	const shouldIntroduce = isEmpty(formId); // render the introduction if there is no form attributes to preview
+
+	const shouldIntroduce = isEmpty(formId); // render the introduction if there is no form attributes to preview  useEffect( () => {
+	const formTitle = get(formIdTitleHash, formId, '');
 
 	return [
 		!!isSelected && !shouldIntroduce && (
@@ -40,34 +31,31 @@ function edit(props) {
 						label={__("Select Form", "forms-gutenberg")}
 						className="cwp-reusable-select"
 						value={formId}
-						options={[...formOptions]}
 						onChange={(form) => setAttributes({ formId: form })}
 					/>
 					<div className="cwp-reusable-edit-url">
 						<Button isLink href={getPostUrl(formId)} target="__blanks">
-							Edit Form
+							{__("Edit Form", "forms-gutenberg")}
 						</Button>
 					</div>
 				</PanelBody>
 			</InspectorControls>
 		),
 		null,
-		<div className={`cwp-gutenberg-forms-reusable`}>
-			{shouldIntroduce ? (
-				<Introduction
-					value={formId}
-					onSelect={(id) => setAttributes({ formId: id })}
-				/>
-			) : (
-				<div className="cwp-rendered-content">
-					<ServerSideRender
-						block="cwp/gutenbergformspreview"
-						attributes={{
-							post_id: formId,
-						}}
-					/>
-				</div>
-			)}
+		<div className="cwp-gutenberg-forms-reusable">
+			{shouldIntroduce
+				? <Introduction value={formId} onSelect={formId => setAttributes({ formId })} />
+				: (
+					<div className="cwp-rendered-content">
+						<div className={`cwp-gutenberg-forms-reusable`}>
+							{formTitle.length > 0
+								? <p>{__('Here will be shown a Gutenberg Form called', 'forms-gutenberg')} "{formTitle}".</p>
+								: <p>{__('This Gutenberg Form was deleted and will not be shown. You may want to delete this block or restore a form if possible.', 'forms-gutenberg')} (ID {formId})</p>
+							}
+						</div>
+					</div>
+				)
+			}
 		</div>,
 	];
 }

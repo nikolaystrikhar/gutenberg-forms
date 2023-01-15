@@ -88,30 +88,6 @@ function gutenberg_forms_cwp_block_assets(): void {
 	}
 
 	register_block_type( 'cwp/block-gutenberg-forms', $files );
-
-	//? for server side rendering of the block instead of shortcode...
-	register_block_type(
-		'cwp/gutenbergformspreview',
-		array(
-			'attributes'      => array(
-				'post_id' => '',
-			),
-			'render_callback' => function ( $block_attributes, $content ) {
-
-				$post_id = $block_attributes['post_id'];
-
-				if ( empty( $post_id ) or empty( get_post( $post_id ) ) ) {
-					return "<p>Form not found!</p>";
-				} else {
-
-					$form         = get_post( $post_id );
-					$form_content = $form->post_content;
-
-					return $form_content;
-				}
-			},
-		)
-	);
 }
 
 //! Our custom post type function

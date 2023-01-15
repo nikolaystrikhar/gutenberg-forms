@@ -879,14 +879,13 @@
 
 @mixin reusable_form() {
 	position: relative;
-	padding: 20px;
 	.cwp-reusable-intro {
 		.content {
 			width: 100%;
 			display: flex;
 
 			.cwp-reusable-select {
-				width: 40%;
+				min-width: 300px;
 				margin-right: 5px;
 
 				select {
@@ -901,6 +900,9 @@
 		}
 	}
 	.cwp-rendered-content {
+		background-color: #fff;
+		padding: 20px;
+		border: 1px solid rgb(49, 49, 49);
 		pointer-events: none !important;
 	}
 }

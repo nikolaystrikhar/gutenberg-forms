@@ -1288,14 +1288,13 @@ html {
     min-width: 320px !important; }
 
 .cwp-gutenberg-forms-reusable {
-  position: relative;
-  padding: 20px; }
+  position: relative; }
   .cwp-gutenberg-forms-reusable .cwp-reusable-intro .content {
     width: 100%;
     display: -ms-flexbox;
     display: flex; }
     .cwp-gutenberg-forms-reusable .cwp-reusable-intro .content .cwp-reusable-select {
-      width: 40%;
+      min-width: 300px;
       margin-right: 5px; }
       .cwp-gutenberg-forms-reusable .cwp-reusable-intro .content .cwp-reusable-select select {
         min-height: 30px; }
@@ -1303,6 +1302,9 @@ html {
       padding: 0px 14px !important;
       min-height: 30px; }
   .cwp-gutenberg-forms-reusable .cwp-rendered-content {
+    background-color: #fff;
+    padding: 20px;
+    border: 1px solid #313131;
     pointer-events: none !important; }
 
 .cwp-reusable-edit-url {

@@ -1,11 +1,10 @@
 <?php
 defined( 'ABSPATH' ) || exit;
 
-function get_block( $ID ) {
-	$content_post = get_post( $ID );
-	$content      = $content_post->post_content;
+function get_block( $id ) {
+	$post = get_post( $id );
 
-	return $content;
+	return $post->post_status === 'publish' ? $post->post_content : '';
 }
 
 function short_code_callback( $atts ) {

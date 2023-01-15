@@ -3,10 +3,9 @@ const { registerBlockType } = wp.blocks;
 
 import reusableEdit from "./edit";
 import reusableSave from "./save";
-import { fieldParents } from "../../constants";
 import blockData from "./block.json";
 
-const { attributes, title } = blockData;
+const { attributes } = blockData;
 
 /**
  *
@@ -17,7 +16,7 @@ const { attributes, title } = blockData;
  */
 
 registerBlockType("cwp/reusable-form", {
-	title: __(title),
+	title: __("Existing Form", "forms-gutenberg"),
 	icon: "index-card",
 	category: "gutenberg-forms",
 	keywords: [
@@ -25,6 +24,7 @@ registerBlockType("cwp/reusable-form", {
 		__("forms"),
 		__("reusable"),
 		__("reusable forms"),
+		__("existing form"),
 	],
 	attributes,
 	edit: reusableEdit,
