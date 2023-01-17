@@ -93,6 +93,10 @@ For basic usage, you can also have a look at the plugin website [Gutenberg Forms
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com)
 
+= 2.2.9.1 = 26 Jan 2023
+
+- Update: Reorganized block panels.
+
 = 2.2.9 = 15 Jan 2023
 
 - Security: Everyone had access to the form entries via WP API
