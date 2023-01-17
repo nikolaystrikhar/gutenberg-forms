@@ -333,6 +333,30 @@ function edit(props) {
 						/>
 					</div>
 				)}
+
+
+
+				<div className="cwp-option">
+					<PanelRow>
+						<h3 className="cwp-heading">
+							{__("Show Hint", "forms-gutenberg")}
+						</h3>
+						<FormToggle
+							checked={showHint}
+							onChange={() => props.setAttributes({ showHint: !showHint })}
+						/>
+					</PanelRow>
+				</div>
+
+				{showHint && (
+					<div className="cwp-option">
+						<TextControl
+							label={__("Hint Text", "forms-gutenberg")}
+							onChange={(hint) => props.setAttributes({ hint })}
+							value={hint}
+						/>
+					</div>
+				)}
 				<div className="cwp-option">
 					<SelectControl
 						label={__("Layout", "forms-gutenberg")}
@@ -345,24 +369,6 @@ function edit(props) {
 							props.setAttributes({ fieldStyle: s });
 						}}
 					/>
-				</div>
-			</PanelBody>
-			<PanelBody title={__("Show Hint", "forms-gutenberg")}>
-				<div className="cwp-option">
-					<FormToggle
-						label="Show Hint"
-						checked={showHint}
-						onChange={() => props.setAttributes({ showHint: !showHint })}
-					/>
-					{showHint && (
-						<Fragment>
-							<TextControl
-								label={__("Hint Text", "forms-gutenberg")}
-								onChange={(hint) => props.setAttributes({ hint })}
-								value={hint}
-							/>
-						</Fragment>
-					)}
 				</div>
 			</PanelBody>
 			<PanelBody title="Condition">

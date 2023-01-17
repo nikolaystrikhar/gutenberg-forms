@@ -227,6 +227,28 @@ function edit(props) {
 							/>
 						</div>
 					)}
+
+					<div className="cwp-option">
+						<PanelRow>
+							<h3 className="cwp-heading">
+								{__("Show Hint", "forms-gutenberg")}
+							</h3>
+							<FormToggle
+								checked={showHint}
+								onChange={() => props.setAttributes({ showHint: !showHint })}
+							/>
+						</PanelRow>
+					</div>
+
+					{showHint && (
+						<div className="cwp-option">
+							<TextControl
+								label={__("Hint Text", "forms-gutenberg")}
+								onChange={(hint) => props.setAttributes({ hint })}
+								value={hint}
+							/>
+						</div>
+					)}
 				</PanelBody>
 				<PanelBody title={__("Condition", "forms-gutenberg")}>
 					<ConditionalLogic
@@ -272,24 +294,6 @@ function edit(props) {
 							onChange={(pattern) => props.setAttributes({ pattern })}
 							value={pattern}
 						/>
-					</div>
-				</PanelBody>
-				<PanelBody title={__("Show Hint", "forms-gutenberg")}>
-					<div className="cwp-option">
-						<FormToggle
-							label="Show Hint"
-							checked={showHint}
-							onChange={() => props.setAttributes({ showHint: !showHint })}
-						/>
-						{showHint && (
-							<Fragment>
-								<TextControl
-									label={__("Hint Text", "forms-gutenberg")}
-									onChange={(hint) => props.setAttributes({ hint })}
-									value={hint}
-								/>
-							</Fragment>
-						)}
 					</div>
 				</PanelBody>
 			</InspectorControls>
