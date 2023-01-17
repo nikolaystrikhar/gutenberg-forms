@@ -161,45 +161,6 @@ function Inspector(prop) {
 
 	return (
 		<InspectorControls>
-			<PanelBody initialOpen={false} title={__("Form Design", "forms-gutenberg")}>
-				<div className="cwp-option">
-					<h3 className="cwp-heading">{__("Accent Color", "forms-gutenberg")}</h3>
-					<ColorPalette
-						colors={basicColorScheme}
-						value={theme.accentColor}
-						onChange={(color) => handleStyling(color, "accentColor")}
-					/>
-				</div>
-				<div className="cwp-option">
-					<h3 className="cwp-heading">{__("Text Color", "forms-gutenberg")}</h3>
-					<ColorPalette
-						colors={basicColorScheme}
-						value={theme.textColor}
-						onChange={(color) => handleStyling(color, "textColor")}
-					/>
-				</div>
-				<div className="cwp-option">
-					<h3 className="cwp-heading">
-						{__("Field Background Color", "forms-gutenberg")}
-					</h3>
-					<ColorPalette
-						colors={basicColorScheme}
-						value={theme.fieldBackgroundColor}
-						onChange={(color) => handleStyling(color, "fieldBackgroundColor")}
-					/>
-				</div>
-				<div className="cwp-option">
-					<h3 className="cwp-heading">
-						{__("Button Background Color", "forms-gutenberg")}
-					</h3>
-					<ColorPalette
-						value={buttonStyling.backgroundColor}
-						onChange={(newbg) => handleButtonStyling(newbg, "backgroundColor")}
-						colors={basicColorScheme}
-					/>
-				</div>
-			</PanelBody>
-
 			<PanelBody initialOpen={true} title={__("General", "forms-gutenberg")}>
 				<TextControl
 					disabled
@@ -317,13 +278,46 @@ function Inspector(prop) {
 				)}
 			</PanelBody>
 
-			{actions.includes("Email Notification") && (
-				<PanelBody title={__("Email Notification", "forms-gutenberg")}>
-					<TemplateBuilder clientId={props.clientId} data={props} />
-				</PanelBody>
-			)}
+			<PanelBody title={__("Design", "forms-gutenberg")} initialOpen={false}>
+				<div className="cwp-option">
+					<h3 className="cwp-heading">{__("Accent Color", "forms-gutenberg")}</h3>
+					<ColorPalette
+						colors={basicColorScheme}
+						value={theme.accentColor}
+						onChange={(color) => handleStyling(color, "accentColor")}
+					/>
+				</div>
+				<div className="cwp-option">
+					<h3 className="cwp-heading">{__("Text Color", "forms-gutenberg")}</h3>
+					<ColorPalette
+						colors={basicColorScheme}
+						value={theme.textColor}
+						onChange={(color) => handleStyling(color, "textColor")}
+					/>
+				</div>
+				<div className="cwp-option">
+					<h3 className="cwp-heading">
+						{__("Field Background Color", "forms-gutenberg")}
+					</h3>
+					<ColorPalette
+						colors={basicColorScheme}
+						value={theme.fieldBackgroundColor}
+						onChange={(color) => handleStyling(color, "fieldBackgroundColor")}
+					/>
+				</div>
+				<div className="cwp-option">
+					<h3 className="cwp-heading">
+						{__("Button Background Color", "forms-gutenberg")}
+					</h3>
+					<ColorPalette
+						value={buttonStyling.backgroundColor}
+						onChange={(newbg) => handleButtonStyling(newbg, "backgroundColor")}
+						colors={basicColorScheme}
+					/>
+				</div>
+			</PanelBody>
 
-			<PanelBody title={__("Form Action", "forms-gutenberg")}>
+			<PanelBody title={__("Actions", "forms-gutenberg")} initialOpen={false}>
 				<FormTokenField
 					value={actions}
 					onChange={handleActions}
@@ -336,8 +330,14 @@ function Inspector(prop) {
 				/>
 			</PanelBody>
 
+			{actions.includes("Email Notification") && (
+				<PanelBody title={__("Email Notification", "forms-gutenberg")} initialOpen={false}>
+					<TemplateBuilder clientId={props.clientId} data={props} />
+				</PanelBody>
+			)}
+
 			{!isEmpty(get_spam_protectors()) && (
-				<PanelBody title={__("Spam Protection", "forms-gutenberg")}>
+				<PanelBody title={__("Spam Protection", "forms-gutenberg")} initialOpen={ false }>
 					{get_spam_protectors().map((protection) => {
 						const isEnabled = hasObject(spamProtections, protection);
 
