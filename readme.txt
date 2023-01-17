@@ -1,6 +1,6 @@
-=== Gutenberg Forms - WordPress Form Builder Plugin ===
+=== Gutenberg Forms – WordPress Custom Form Builder Plugin ===
 Contributors: nikolaystrikhar
-Tags: gutenberg form, contact form, multistep form, conditional form, gutenberg block, forms, form builder, custom form, contact button, contact me, custom contact form, form manager, form, forms builder, forms creator, captcha, recaptcha, Akismet, email form, web form, feedback form, email submit form, message form, contact form block
+Tags: gutenberg form, contact form, custom form, multi step form, conditional form, gutenberg block, forms, form builder, contact button, contact me, custom contact form, form manager, form, forms builder, forms creator, captcha, recaptcha, Akismet, email form, web form, feedback form, email submit form, message form, contact form block
 Requires at least: 5.8
 Tested up to: 6.1.1
 Requires PHP: 7.4
@@ -12,11 +12,11 @@ The Next Generation WordPress Form Builder. Build forms directly within Gutenber
 
 == Description ==
 
-**WordPress Form Builder Plugin - Gutenberg Forms**
+**WordPress Contact Form Builder Plugin – Gutenberg Forms**
 
-This is the next generation **WordPress form builder plugin**. You can easily build your forms by adding form fields as gutenberg blocks within the Gutenberg Editor. You do not need to leave the editor to build your forms using some other drag & drop form builder. Now you can build your form within Gutenberg editor using Gutenberg Forms.
+This is the next generation **WordPress Custom form builder plugin**. You can easily build your forms by adding form fields as gutenberg blocks within the Gutenberg Editor. You do not need to leave the editor to build your forms using some other drag & drop form builder. Now you can build your form within Gutenberg editor using Gutenberg Forms.
 
-Gutenberg Forms adds a Form Block in Gutenberg and all the form fields are child blocks which you can add within the Form Block, nice and easy. You can add multiple contact forms, and you can customize the form within the Gutenberg Editor. Google reCAPTCHA integration added for spam filtering.
+Gutenberg Forms adds a Form Block in Gutenberg and all the form fields are child blocks which you can add within the Form Block, nice and easy. You can add multiple contact forms, and you can customize the form within the Gutenberg Editor. Google reCAPTCHA integration added for spam filtering. Build multi step and conditional forms with ease.
 
 ## Feature Highlights
 
@@ -24,8 +24,8 @@ The following are some of the main features, but there's more which you need to 
 
 * No Bulky Form Builder - Build Forms Directly in Gutenberg Editor.
 * Easy Form Layouts using builtin Form Columns Block.
-* Create Multi-Step / Multi-Page Forms Easily.
-* Conditional Logic - Show/hide fields conditionally.
+* Create Multi Step Forms Easily.
+* Conditional Forms - Show/hide fields conditionally.
 * Form Entries - Form Entries are recorded in the database and accessible via WordPress admin.
 * Use Forms Anywhere - You can create standalone forms using Gutenberg and use it anywhere using a shortcode. That Gutenberg Forms compatible with any WordPress page builder.
 * Dynamically populate field values via URL parameters.
