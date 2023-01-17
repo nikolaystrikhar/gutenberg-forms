@@ -108,7 +108,7 @@ function Inspector(prop) {
 					/>
 				</div>
 			</PanelBody>
-			<PanelBody title={__("Condition", "forms-gutenberg")}>
+			<PanelBody title={__("Condition", "forms-gutenberg")} initialOpen={ false }>
 				<ConditionalLogic
 					condition={condition}
 					set={props.setAttributes}

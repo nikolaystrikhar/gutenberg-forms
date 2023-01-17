@@ -141,7 +141,7 @@ function edit(props) {
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
-				<PanelBody title={__("Field Settings", "forms-gutenberg")} initialOpen={true}>
+				<PanelBody title={__("General", "forms-gutenberg")} initialOpen={true}>
 					<div className="cwp-option">
 						<TextControl
 							placeholder={adminId.default}
@@ -229,7 +229,7 @@ function edit(props) {
 						/>
 					</div>
 				</PanelBody>
-				<PanelBody title={__("Condition", "forms-gutenberg")}>
+				<PanelBody title={__("Condition", "forms-gutenberg")} initialOpen={ false }>
 					<ConditionalLogic
 						condition={condition}
 						set={props.setAttributes}
@@ -237,7 +237,7 @@ function edit(props) {
 						useCondition={props.attributes.enableCondition}
 					/>
 				</PanelBody>
-				<PanelBody title={__("Messages", "forms-gutenberg")}>
+				<PanelBody title={__("Messages", "forms-gutenberg")} initialOpen={ false }>
 					{isRequired && (
 						<div className="cwp-option">
 							<h3 className="cwp-heading">
@@ -265,7 +265,7 @@ function edit(props) {
 						</p>
 					</div>
 				</PanelBody>
-				<PanelBody title={__("Validation", "forms-gutenberg")}>
+				<PanelBody title={__("Validation", "forms-gutenberg")} initialOpen={ false }>
 					<div className="cwp-option">
 						<TextControl
 							label={__("Pattern (RegExp)", "forms-gutenberg")}

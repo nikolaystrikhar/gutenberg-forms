@@ -357,7 +357,7 @@ function Inspector(prop) {
 				</PanelBody>
 			)}
 
-			<PanelBody initialOpen={false} title={__("Messages", "forms-gutenberg")}>
+			<PanelBody title={__("Messages", "forms-gutenberg")} initialOpen={false}>
 				<div className="cwp-option">
 					<p>
 						<Icon icon="info" />{" "}

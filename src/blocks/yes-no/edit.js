@@ -98,7 +98,7 @@ function edit(props) {
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
-				<PanelBody title={__("Field Settings", "forms-gutenberg")} initialOpen={true}>
+				<PanelBody title={__("General", "forms-gutenberg")} initialOpen={true}>
 
 					<div className="cwp-option">
 						<TextControl

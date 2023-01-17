@@ -107,7 +107,7 @@ function edit(props) {
 
 	return [
 		<InspectorControls>
-			<PanelBody initialOpen={true} title={__("Field Settings", "forms-gutenberg")}>
+			<PanelBody title={__("General", "forms-gutenberg")} initialOpen={true}>
 				<div className="cwp-option">
 					<TextControl
 						placeholder={adminId.default}
