@@ -42,8 +42,7 @@ function gutenberg_forms_cwp_block_assets(): void {
 		'gutenberg_forms-cwp-block-js',
 		plugins_url( '/dist/blocks.build.js', dirname( __FILE__ ) ),
 		array( 'wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor' ),
-		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' ),
-		false
+		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.build.js' )
 	);
 
 	wp_register_script(
@@ -58,8 +57,7 @@ function gutenberg_forms_cwp_block_assets(): void {
 		'gutenberg_forms-cwp-block-editor-css',
 		plugins_url( 'dist/blocks.editor.build.css', dirname( __FILE__ ) ),
 		array( 'wp-edit-blocks' ),
-		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' ),
-		'all'
+		filemtime( plugin_dir_path( __DIR__ ) . 'dist/blocks.editor.build.css' )
 	);
 
 	wp_localize_script(
@@ -94,16 +92,6 @@ function gutenberg_forms_cwp_block_assets(): void {
 	register_block_type( 'cwp/block-gutenberg-forms', $files );
 }
 
-//! Our custom post type function
-function cwp_form_post_type(): void {
-	require_once plugin_dir_path( __DIR__ ) . 'admin/cpt/entry.php';
-	require_once plugin_dir_path( __DIR__ ) . 'admin/cpt/form.php';
-	require_once plugin_dir_path( __DIR__ ) . 'controllers/index.php';
-
-	Form::register_post_type();
-	Entries::register_post_type();
-}
-
 require_once plugin_dir_path( __DIR__ ) . 'triggers/email.php';
 
 add_action(
@@ -126,6 +114,28 @@ add_action(
 	}
 );
 
+add_action(
+	'init',
+	function(): void {
+		require_once plugin_dir_path( __DIR__ ) . 'admin/cpt/entry.php';
+		require_once plugin_dir_path( __DIR__ ) . 'admin/cpt/form.php';
+		require_once plugin_dir_path( __DIR__ ) . 'controllers/index.php';
+
+		register_post_meta( 'post', 'myguten_meta_block_field', array(
+			'show_in_rest' => true,
+			'single'       => true,
+			'type'         => 'string',
+		) );
+
+		Form::register_post_type();
+		Entries::register_post_type();
+
+		wp_set_script_translations( 'gutenberg_forms-cwp-block-js', 'forms-gutenberg' );
+
+		gutenberg_forms_cwp_block_assets();
+	}
+);
+
 function submitter() {
 	global $post;
 
@@ -141,26 +151,8 @@ function submitter() {
 	}
 }
 
-function cwp_gutenberg_forms_messages_meta() {
-	register_post_meta( 'post', 'myguten_meta_block_field', array(
-		'show_in_rest' => true,
-		'single'       => true,
-		'type'         => 'string',
-	) );
-}
-
-add_action(
-	'init',
-	function (): void {
-		wp_set_script_translations( 'gutenberg_forms-cwp-block-js', 'forms-gutenberg' );
-	}
-);
-
-add_action( 'init', 'cwp_gutenberg_forms_messages_meta' );
 add_action( 'wp_head', 'submitter' );
 add_action( 'wp-load', 'submitter' );
-add_action( 'init', 'cwp_form_post_type' );
-add_action( 'init', 'gutenberg_forms_cwp_block_assets' );
 
 add_filter(
 	'plugin_row_meta',
