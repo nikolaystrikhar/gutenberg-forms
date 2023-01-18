@@ -45,6 +45,9 @@ import "./blocks/form-group/index.js";
 import "./blocks/form-steps/root/index.js";
 import "./blocks/form-steps/childs/form-step/index.js";
 
+import "./blocks/message-v2/index.js";
+
+
 /**
  * extended index
  */
