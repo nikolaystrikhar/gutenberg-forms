@@ -3,8 +3,7 @@ defined('ABSPATH') || exit;
 
 function theHTML($attributes)
 {
-	echo 'Hello, Krystian! It is a new block';
-	return;
+	return 'Hello, Krystian! It is a new block';
 
 	$message = $attributes['message'];
 	$isRequired = $attributes['isRequired'];
