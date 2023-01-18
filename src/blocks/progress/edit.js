@@ -8,7 +8,6 @@ import {
 	FormToggle,
 	Notice,
 } from "@wordpress/components";
-import { basicColorScheme } from "../../block/misc/helper";
 
 const { InspectorControls } = wp.blockEditor;
 const { __ } = wp.i18n;
@@ -32,7 +31,7 @@ function edit(props) {
 				<div className="cwp-option">
 					<h3 className="cwp-heading">{__("Base Color", "forms-gutenberg")}</h3>
 					<ColorPalette
-						colors={basicColorScheme}
+						colors={wp.data.select( 'core/block-editor' ).getSettings().colors}
 						value={progressColor}
 						onChange={(pBg) => props.setAttributes({ progressColor: pBg })}
 					/>
@@ -40,7 +39,7 @@ function edit(props) {
 				<div className="cwp-option">
 					<h3 className="cwp-heading">{__("Fill Color", "forms-gutenberg")}</h3>
 					<ColorPalette
-						colors={basicColorScheme}
+						colors={wp.data.select( 'core/block-editor' ).getSettings().colors}
 						value={progressFillColor}
 						onChange={(pfBg) =>
 							props.setAttributes({ progressFillColor: pfBg })
@@ -85,7 +84,7 @@ function edit(props) {
 					<div className="cwp-option">
 						<h3 className="cwp-heading">{__("Text Color", "forms-gutenberg")}</h3>
 						<ColorPalette
-							colors={basicColorScheme}
+							colors={wp.data.select( 'core/block-editor' ).getSettings().colors}
 							value={textColor}
 							onChange={(textColor) => props.setAttributes({ textColor })}
 						/>

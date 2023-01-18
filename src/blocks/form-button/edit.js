@@ -12,7 +12,6 @@ import {
 	Button,
 } from "@wordpress/components";
 import {
-	basicColorScheme,
 	strip_tags,
 	firstCapital,
 } from "../../block/misc/helper";
@@ -112,7 +111,7 @@ function edit(props) {
 				<div className="cwp-option">
 					<h3 className="cwp-heading">{__("Background Color", "forms-gutenberg")}</h3>
 					<ColorPalette
-						colors={basicColorScheme}
+						colors={wp.data.select( 'core/block-editor' ).getSettings().colors}
 						value={backgroundColor}
 						onChange={(color) => handleStyling(color, "backgroundColor")}
 					/>
@@ -120,7 +119,7 @@ function edit(props) {
 				<div className="cwp-option">
 					<h3 className="cwp-heading">{__("Color", "forms-gutenberg")}</h3>
 					<ColorPalette
-						colors={basicColorScheme}
+						colors={wp.data.select( 'core/block-editor' ).getSettings().colors}
 						value={color}
 						onChange={(color) => handleStyling(color, "color")}
 					/>

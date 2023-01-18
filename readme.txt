@@ -95,6 +95,7 @@ For more information, visit [Gutenberg Forms](https://gutenbergforms.com)
 
 = 2.2.9.1 = 26 Jan 2023
 
+- Update: Use registered colors in color pickers instead of hard-coded colors.
 - Update: Reorganized block panels.
 
 = 2.2.9 = 15 Jan 2023

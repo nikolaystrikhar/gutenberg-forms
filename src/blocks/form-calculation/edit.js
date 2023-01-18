@@ -14,7 +14,6 @@ import {
 	getFieldName,
 	extract_id,
 	getEncodedData,
-	basicColorScheme,
 	extract_admin_id,
 	get_admin_id
 } from "../../block/misc/helper";

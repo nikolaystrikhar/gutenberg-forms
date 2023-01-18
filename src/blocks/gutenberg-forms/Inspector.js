@@ -23,7 +23,6 @@ import {
 	hasObject,
 	getRootFormBlock,
 } from "../../block/functions/index";
-import { basicColorScheme } from "../../block/misc/helper";
 import TemplateBuilder from "./components/templateBuilder";
 import Integrations from "./components/Integrations";
 
@@ -282,7 +281,7 @@ function Inspector(prop) {
 				<div className="cwp-option">
 					<h3 className="cwp-heading">{__("Accent Color", "forms-gutenberg")}</h3>
 					<ColorPalette
-						colors={basicColorScheme}
+						colors={wp.data.select( 'core/block-editor' ).getSettings().colors}
 						value={theme.accentColor}
 						onChange={(color) => handleStyling(color, "accentColor")}
 					/>
@@ -290,7 +289,7 @@ function Inspector(prop) {
 				<div className="cwp-option">
 					<h3 className="cwp-heading">{__("Text Color", "forms-gutenberg")}</h3>
 					<ColorPalette
-						colors={basicColorScheme}
+						colors={wp.data.select( 'core/block-editor' ).getSettings().colors}
 						value={theme.textColor}
 						onChange={(color) => handleStyling(color, "textColor")}
 					/>
@@ -300,7 +299,7 @@ function Inspector(prop) {
 						{__("Field Background Color", "forms-gutenberg")}
 					</h3>
 					<ColorPalette
-						colors={basicColorScheme}
+						colors={wp.data.select( 'core/block-editor' ).getSettings().colors}
 						value={theme.fieldBackgroundColor}
 						onChange={(color) => handleStyling(color, "fieldBackgroundColor")}
 					/>
@@ -312,7 +311,7 @@ function Inspector(prop) {
 					<ColorPalette
 						value={buttonStyling.backgroundColor}
 						onChange={(newbg) => handleButtonStyling(newbg, "backgroundColor")}
-						colors={basicColorScheme}
+						colors={wp.data.select( 'core/block-editor' ).getSettings().colors}
 					/>
 				</div>
 			</PanelBody>
