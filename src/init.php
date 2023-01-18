@@ -3,6 +3,8 @@ defined('ABSPATH') || exit;
 
 function theHTML($attributes)
 {
+	echo 'Hello, Krystian! It is a new block';
+	return;
 
 	$message = $attributes['message'];
 	$isRequired = $attributes['isRequired'];
@@ -113,7 +115,7 @@ function gutenberg_forms_cwp_block_assets(): void
 	);
 
 	register_block_type(
-		'ourplugin/are-you-paying-attention',
+		'cwp/message-v2',
 		array(
 			'editor_script' => 'gutenberg_forms-cwp-block-js',
 			'render_callback' => 'theHTML'

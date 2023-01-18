@@ -322,6 +322,7 @@ function edit(props) {
 					/>
 				</ResizableBox>
 			</div>
+			<div>TEEEEST</div>
 			{showHint && (
 				<p className="cwp-hint">{hint}</p>
 			)}

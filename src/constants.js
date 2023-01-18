@@ -6,7 +6,6 @@ export const fieldParents = [
 ];
 
 export const fieldSupport = {
-	align: true,
 	align: ["wide", "full", "center"],
 };
 
