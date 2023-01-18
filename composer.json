@@ -1,0 +1,15 @@
+{
+	"name": "wptotem/gutenberg-forms",
+	"description": "description",
+	"minimum-stability": "stable",
+	"license": "proprietary",
+	"authors": [
+		{
+			"name": "Nikolay Strikhar",
+			"email": "nikolay.strikhar@gmail.com"
+		}
+	],
+	"autoload": {
+		"psr-4": {"GutenbergForms\\Core\\": "src/Core"}
+	}
+}

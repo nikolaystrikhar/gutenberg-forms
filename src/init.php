@@ -1,72 +1,6 @@
 <?php
 defined('ABSPATH') || exit;
 
-function theHTML($attributes)
-{
-	return 'Hello, Krystian! It is a new block';
-
-	$message = $attributes['message'];
-	$isRequired = $attributes['isRequired'];
-	$label = $attributes['label'];
-	$id = $attributes['id'];
-	$height = $attributes['isRequiheightred'];
-	$requiredLabel = $attributes['requiredLabel'];
-	$messages = $attributes['message'];
-	$empty = $messages['empty'];
-	$invalid = $messages->invalid;
-	$pattern = $attributes->pattern;
-	$condition = $attributes['condition'];
-	$enableCondition = $attributes['enableCondition'];
-	$minimumLength = $attributes['minimumLength'];
-	$maximumLength = $attributes['maximumLength'];
-	$hint = $attributes['hint'];
-	$showHint = $attributes['showHint'];
-	// JSON.stringify({ mismatch: invalid, empty})
-	$errors = 'errors';
-
-	function getLabel()
-	{
-		return 'getLabel';
-	}
-
-	function getPattern()
-	{
-		return 'getPattern';
-	}
-
-	function getCondition()
-	{
-		return 'getCondition';
-	}
-
-	function strip_tags()
-	{
-		'strip_tags';
-	}
-
-	function isEmpty()
-	{
-		return false;
-	}
-
-	ob_start(); ?>
-	<p>Message V2</p>
-	<div class="cwp-message cwp-field" <?php echo esc_html(getCondition()) ?>>
-		<div class="cwp-field-set">
-			<?php if (!isEmpty($label)) : ?>
-				<label for='<?php echo $id; ?>' innerHTML="<?php echo getLabel(); ?>"></label>
-			<?php endif; ?>
-
-			<textarea id='<?php echo $id; ?>' aria-label="<?php esc_html(strip_tags($label)); ?>" style="height: <?php esc_html($height); ?>" data-cwp-field minlength="<?php echo esc_html($minimumLength); ?>" maxlength="<?php echo esc_html($maximumLength); ?>" name="<?php echo esc_html($id); ?>" title="<?php echo esc_html($invalid); ?>" required="<?php echo esc_html($isRequired); ?>" data-errors="<?php echo esc_html($errors); ?>" data-rule="false" <?php echo esc_html(getPattern()) ?> placeholder="<?php echo esc_html($message); ?>"></textarea>
-		</div>
-		<?php if ($showHint) : ?>
-			<p class="cwp-hint"><?php esc_html($hint); ?></p>
-		<?php endif; ?>
-	</div>
-<?php return ob_get_clean();
-}
-
-
 function get_forms_cpt_data()
 {
 	$posts = get_posts(
@@ -107,18 +41,10 @@ function gutenberg_forms_cwp_block_assets(): void
 	);
 
 	wp_register_script(
-		'gutenberg_forms-cwp-block-js',
+		'gutenberg-forms-blocks',
 		plugins_url('/dist/blocks.build.js', dirname(__FILE__)),
 		array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor'),
 		filemtime(plugin_dir_path(__DIR__) . 'dist/blocks.build.js')
-	);
-
-	register_block_type(
-		'cwp/message-v2',
-		array(
-			'editor_script' => 'gutenberg_forms-cwp-block-js',
-			'render_callback' => 'theHTML'
-		)
 	);
 
 	wp_register_script(
@@ -137,7 +63,7 @@ function gutenberg_forms_cwp_block_assets(): void
 	);
 
 	wp_localize_script(
-		'gutenberg_forms-cwp-block-js',
+		'gutenberg-forms-blocks',
 		'cwpGlobal',
 		array(
 			'pluginDirPath'   => plugin_dir_path(__DIR__),
@@ -154,7 +80,7 @@ function gutenberg_forms_cwp_block_assets(): void
 
 	$files = array(
 		'style'           => 'gutenberg_forms-cwp-style-css',
-		'editor_script'   => 'gutenberg_forms-cwp-block-js',
+		'editor_script'   => 'gutenberg-forms-blocks',
 		'editor_style'    => 'gutenberg_forms-cwp-block-editor-css',
 		'assets_callback' => function ($attributes) {
 			var_dump($attributes);
@@ -196,7 +122,7 @@ add_action(
 		Form::register_post_type();
 		Entries::register_post_type();
 
-		wp_set_script_translations('gutenberg_forms-cwp-block-js', 'forms-gutenberg');
+		wp_set_script_translations('gutenberg-forms-blocks', 'forms-gutenberg');
 
 		gutenberg_forms_cwp_block_assets();
 	}
