@@ -99,18 +99,8 @@ add_action(
 	function () {
 		require_once plugin_dir_path( __DIR__ ) . 'assets/index.assets.php';
 
-		global $post;
-
-		if ( ! empty( $post ) ) {
-			$post = get_post( $post->ID );
-
-			$parsed_blocks = parse_blocks( do_shortcode( $post->post_content ) );
-
-			if ( ! empty( $parsed_blocks ) ) {
-				$assets_holder = new cwp_gf_AssetsHandler( $parsed_blocks ); # for enqueuing conditional block assets
-				$assets_holder->enqueue();
-			}
-		}
+		$assets_holder = new cwp_gf_AssetsHandler();
+		$assets_holder->enqueue();
 	}
 );
 
