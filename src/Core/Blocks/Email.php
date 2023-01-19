@@ -4,12 +4,12 @@ namespace GutenbergForms\Core\Blocks;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Textarea block.
+ * Email block.
  *
  * @since 2.9.9.1
  */
-class Textarea extends Block {
-	private const NAME = 'cwp/message';
+class Email extends Block {
+	private const NAME = 'cwp/email';
 
 	/**
 	 * Returns a block name.
@@ -52,13 +52,11 @@ class Textarea extends Block {
 
 		// Custom attributes.
 
-		$height     = $attributes['height'] ?? 200;
-		$min_length = $attributes['minimumLength'] ?? 0;
-		$max_length = $attributes['maximumLength'] ?? 524288;
+		// TODO: sort out prefix and suffix mapping.
 
 		ob_start();
 		?>
-		<div class="cwp-message cwp-field" data-condition="<?php echo esc_html( wp_json_encode( $condition ) ); ?>">
+		<div class="cwp-email cwp-field" data-condition="<?php echo esc_html( wp_json_encode( $condition ) ); ?>">
 			<div class="cwp-field-set">
 				<?php if ( ! empty( $label ) ) : ?>
 					<label for="<?php echo esc_attr( $id ); ?>">
@@ -72,19 +70,19 @@ class Textarea extends Block {
 					</label>
 				<?php endif; ?>
 
-				<textarea
+				<input
 					name="<?php echo esc_attr( $id ); ?>"
 					id="<?php echo esc_attr( $id ); ?>"
+					type="email"
 					required="<?php echo esc_attr( $is_required ); ?>"
 					placeholder="<?php echo esc_attr( $placeholder ); ?>"
 					title=""
 					data-errors="<?php echo esc_attr( wp_json_encode( $error_messages ) ); ?>"
 					data-rule="false"
 					data-cwp-field
-					style="height: <?php echo esc_attr( $height ); ?>"
-					minlength="<?php echo esc_attr( $min_length ); ?>"
-					maxlength="<?php echo esc_attr( $max_length ); ?>"
-				></textarea>
+					data-validation="email"
+					data-parsley-type="email"
+				/>
 			</div>
 
 			<?php if ( $show_hint && ! empty( $hint ) ): ?>

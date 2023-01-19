@@ -2,6 +2,7 @@
 
 namespace GutenbergForms\Core;
 
+use GutenbergForms\Core\Blocks\Email;
 use GutenbergForms\Core\Blocks\Textarea;
 
 /**
@@ -19,5 +20,6 @@ class BlockHandler {
 	 */
 	public static function init(): void {
 		Textarea::init();
+		Email::init();
 	}
 }
