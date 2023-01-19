@@ -1,7 +1,6 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect } from "react";
 import {
 	FormToggle,
-	Toolbar,
 	PanelRow,
 	PanelBody,
 	ResizableBox,
@@ -28,7 +27,6 @@ const { __ } = wp.i18n;
 const {
 	InspectorControls,
 	BlockControls,
-	BlockIcon,
 	RichText,
 } = wp.blockEditor;
 
@@ -53,7 +51,6 @@ function edit(props) {
 		message,
 		isRequired,
 		label,
-		id,
 		height,
 		field_name,
 		requiredLabel,

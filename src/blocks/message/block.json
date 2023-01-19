@@ -1,5 +1,4 @@
 {
-	"title": "Textarea",
 	"attributes": {
 		"enableCondition": {
 			"type": "boolean",
@@ -63,7 +62,7 @@
 				"value": ""
 			}
 		},
-		"showHint" :{
+		"showHint": {
 			"type": "boolean",
 			"default": false
 		},
