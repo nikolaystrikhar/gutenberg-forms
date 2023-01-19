@@ -43,7 +43,7 @@ class Textarea extends Block {
 		$label            = $attributes['label'] ?? '';
 		$show_hint        = $attributes['showHint'] ?? false;
 		$hint             = $attributes['hint'] ?? '';
-		$placeholder      = $attributes['message'];
+		$placeholder      = $attributes['message'] ?? '';
 		$error_messages   = $attributes['messages'] ?? array();
 		$enable_condition = $attributes['enableCondition'] ?? false;
 		$condition        = $enable_condition
