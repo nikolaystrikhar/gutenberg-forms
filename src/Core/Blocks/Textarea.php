@@ -40,7 +40,7 @@ class Textarea extends Block
 		$is_required     = $attributes['isRequired'];
 		$label           = $attributes['label'];
 		$id              = $attributes['id'];
-		$height          = $attributes['isRequiheightred'];
+		$height          = $attributes['height'];
 		$required_label   = $attributes['requiredLabel'];
 		$messages        = $attributes['messages'];
 		$empty           = $messages['empty'];
