@@ -27,7 +27,6 @@ import "./blocks/checkbox/index.js";
 import "./blocks/select/index.js";
 import "./blocks/datepicker/index.js";
 import "./blocks/message/index.js";
-import "./blocks/message-v2/index.js";
 import "./blocks/email/index.js";
 import "./blocks/form-button/index.js";
 import "./blocks/name/index.js";

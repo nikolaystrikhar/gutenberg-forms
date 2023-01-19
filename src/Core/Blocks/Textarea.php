@@ -9,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
  * @since 2.9.9.1
  */
 class Textarea extends Block {
-	private const NAME = 'cwp/message-v2'; // TODO: rename.
+	private const NAME = 'cwp/message';
 
 	/**
 	 * Returns a block name.
@@ -72,17 +72,17 @@ class Textarea extends Block {
 				<?php endif; ?>
 
 				<textarea
-					id="<?php echo esc_attr( $id ); ?>"
-					aria-label="<?php echo esc_attr( strip_tags( $label ) ); ?>"
-					style="height: <?php echo esc_attr( $height ); ?>"
-					minlength="<?php echo esc_attr( $min_length ); ?>"
-					maxlength="<?php echo esc_attr( $max_length ); ?>"
 					name="<?php echo esc_attr( $id ); ?>"
+					id="<?php echo esc_attr( $id ); ?>"
 					required="<?php echo esc_attr( $is_required ); ?>"
 					placeholder="<?php echo esc_attr( $placeholder ); ?>"
+					title=""
 					data-errors="<?php echo esc_attr( wp_json_encode( $error_messages ) ); ?>"
 					data-rule="false"
 					data-cwp-field
+					style="height: <?php echo esc_attr( $height ); ?>"
+					minlength="<?php echo esc_attr( $min_length ); ?>"
+					maxlength="<?php echo esc_attr( $max_length ); ?>"
 				></textarea>
 			</div>
 

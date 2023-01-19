@@ -4,19 +4,19 @@ const { registerBlockType } = wp.blocks;
 import { getFieldTransform } from "../../block/functions";
 import { fieldParents, myAttrs } from "../../constants";
 import messageEdit from "./edit.js";
-import messageSave from "./save.js";
 
 import blockData from "./block.json";
-const { attributes, title } = blockData;
+const { attributes } = blockData;
+import { deprecated } from "./deprecated/deprecated";
 
 registerBlockType("cwp/message", {
-	title: __(title),
+	title: __("Textarea", "forms-gutenberg"),
 	icon: "testimonial",
 	category: "gutenberg-forms",
-	keywords: [__("gutenberg-forms"), __("forms"), __("message")],
-	edit: messageEdit,
-	save: messageSave,
+	keywords: [__("gutenberg-forms", "forms-gutenberg"), __("forms", "forms-gutenberg"), __("message", "forms-gutenberg")],
 	attributes,
+	edit: messageEdit,
+	parent: fieldParents,
 	transforms: {
 		from: [
 			{
@@ -26,5 +26,5 @@ registerBlockType("cwp/message", {
 			},
 		],
 	},
-	parent: fieldParents,
+	deprecated,
 });
