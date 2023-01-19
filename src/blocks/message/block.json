@@ -15,7 +15,7 @@
 		},
 		"label": {
 			"type": "string",
-			"default": "Message"
+			"default": ""
 		},
 		"id": {
 			"type": "string",
@@ -35,10 +35,6 @@
 				"empty": "Please fill out this field!",
 				"invalid": "The message {{value}} is not valid!"
 			}
-		},
-		"pattern": {
-			"type": "string",
-			"default": ""
 		},
 		"condition": {
 			"type": "object",

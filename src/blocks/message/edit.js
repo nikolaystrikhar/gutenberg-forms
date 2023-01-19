@@ -59,7 +59,6 @@ function edit(props) {
 		requiredLabel,
 		messages: { invalid, empty },
 		messages,
-		pattern,
 		condition,
 		enableCondition,
 		minimumLength,
@@ -263,15 +262,6 @@ function edit(props) {
 							<Icon icon="info" />{" "}
 							{__("Use {{value}} to insert field value!", "forms-gutenberg")}
 						</p>
-					</div>
-				</PanelBody>
-				<PanelBody title={__("Validation", "forms-gutenberg")} initialOpen={ false }>
-					<div className="cwp-option">
-						<TextControl
-							label={__("Pattern (RegExp)", "forms-gutenberg")}
-							onChange={(pattern) => props.setAttributes({ pattern })}
-							value={pattern}
-						/>
 					</div>
 				</PanelBody>
 			</InspectorControls>
