@@ -1,16 +1,14 @@
 <?php
-
 namespace GutenbergForms\Core\Blocks;
 
-defined('ABSPATH') || exit;
+defined( 'ABSPATH' ) || exit;
 
 /**
  * Textarea block.
  *
  * @since 2.9.9.1
  */
-class Textarea extends Block
-{
+class Textarea extends Block {
 	private const NAME = 'cwp/message-v2'; // TODO: rename.
 
 	/**
@@ -20,8 +18,7 @@ class Textarea extends Block
 	 *
 	 * @return string
 	 */
-	public static function get_name(): string
-	{
+	public static function get_name(): string {
 		return self::NAME;
 	}
 
@@ -34,84 +31,67 @@ class Textarea extends Block
 	 *
 	 * @return string
 	 */
-	public function render(array $attributes): string
-	{
-		$message         = $attributes['message'];
-		$is_required     = $attributes['isRequired'];
-		$label           = $attributes['label'];
-		$id              = $attributes['id'];
-		$height          = $attributes['height'];
-		$required_label   = $attributes['requiredLabel'];
-		$messages        = $attributes['messages'];
-		$empty           = $messages['empty'];
-		$invalid         = $messages['invalid'];
-		$pattern         = $attributes['pattern'];
-		$condition       = $attributes['condition'];
-		$enable_condition = $attributes['enableCondition'];
-		$min_length      = $attributes['minimumLength'];
-		$max_length      = $attributes['maximumLength'];
-		$hint            = $attributes['hint'];
-		$show_hint        = $attributes['showHint'];
-		$errors = json_encode(array("mismatch" => $invalid, "empty" => $empty));
+	public function render( array $attributes ): string {
+		// Attributes that always exist.
 
-		// TODO test and refactor
-		function getLabel($required_label, $label, $is_required)
-		{
-			// ! don't know for sure if php empty() is this same as lodash isEmpty()
-			$required = empty($required_label) ? '<abbr title="required" aria-label="required">' .  $required_label . '</abbr>' : "";
-			$required_label = $label . " " . $required;
-			if ($is_required) return $required_label;
+		$id = $attributes['id'];
 
-			return $label;
-		}
+		// Stable attributes.
 
-		// TODO what is Pattern?
-		function getPattern($pattern)
-		{
-			return empty($pattern) ? "" : $pattern;
-		}
+		$is_required      = $attributes['isRequired'] ?? false;
+		$required_label   = $attributes['requiredLabel'] ?? '*';
+		$label            = $attributes['label'] ?? '';
+		$show_hint        = $attributes['showHint'] ?? false;
+		$hint             = $attributes['hint'] ?? '';
+		$placeholder      = $attributes['message'];
+		$error_messages   = $attributes['messages'] ?? array();
+		$enable_condition = $attributes['enableCondition'] ?? false;
+		$condition        = $enable_condition
+			? $attributes['condition'] ?? array()
+			: array();
 
-		// TODO test and refactor
-		function getCondition($enable_condition, $condition)
-		{
-			if ($enable_condition and !empty($condition->field)) {
-				//verifying the condition
-				return 'data-condition: ' . json_encode($condition);
-			}
+		// Custom attributes.
 
-			return "";
-		}
+		$height     = $attributes['height'] ?? 200;
+		$min_length = $attributes['minimumLength'] ?? 0;
+		$max_length = $attributes['maximumLength'] ?? 524288;
 
-		// TODO check aria-label="<?php echo esc_html(strip_tags($label));
-		// in save.js it was imported a helper fn to strip tags, php has build in fn fot that 
-ob_start(); ?>
-<div class="cwp-message cwp-field" <?php echo esc_html(getCondition($enable_condition, $condition)) ?>>
-	<div class="cwp-field-set">
-		<?php if (!empty($label)) : ?>
-			<label for='<?php echo $id; ?>'><?php echo esc_html(getLabel($required_label, $label, $is_required)); ?></label>
-		<?php endif; ?>
-		<textarea
-			id="<?php echo esc_attr($id); ?>"
-			aria-label="<?php echo esc_html(strip_tags($label)); ?>"
-			style="height: <?php echo esc_attr($height); ?>"
-			minlength="<?php echo esc_attr($min_length); ?>"
-			maxlength="<?php echo esc_attr($max_length); ?>"
-			name="<?php echo esc_html($id); ?>"
-			title="<?php echo esc_html($invalid); ?>"
-			required="<?php echo esc_html($is_required); ?>"
-			placeholder="<?php echo esc_html($message); ?>"
-			data-errors="<?php echo esc_html($errors); ?>"
-			data-rule="false"
-			data-cwp-field <?php echo esc_html(getPattern($pattern)) ?>>
-		</textarea>
-	</div>
+		ob_start(); ?>
+		<div class="cwp-message cwp-field" data-condition="<?php echo esc_html( wp_json_encode( $condition ) ); ?>">
+			<div class="cwp-field-set">
+				<?php if ( ! empty( $label ) ) : ?>
+					<label for="<?php echo esc_attr( $id ); ?>">
+						<?php echo esc_html( $label ); ?>
 
-	<?php if ($show_hint) : ?>
-		<p class="cwp-hint">
-			<?php esc_html($hint); ?>
-		</p>
-	<?php endif; ?>
-</div>
-<?php return ob_get_clean();
+						<?php if ( $is_required && ! empty( $required_label ) ) : ?>
+							<abbr title="required" aria-label="required">
+								<?php echo esc_html( $required_label ); ?>
+							</abbr>
+						<?php endif; ?>
+					</label>
+				<?php endif; ?>
+
+				<textarea
+					id="<?php echo esc_attr( $id ); ?>"
+					aria-label="<?php echo esc_attr( strip_tags( $label ) ); ?>"
+					style="height: <?php echo esc_attr( $height ); ?>"
+					minlength="<?php echo esc_attr( $min_length ); ?>"
+					maxlength="<?php echo esc_attr( $max_length ); ?>"
+					name="<?php echo esc_attr( $id ); ?>"
+					required="<?php echo esc_attr( $is_required ); ?>"
+					placeholder="<?php echo esc_attr( $placeholder ); ?>"
+					data-errors="<?php echo esc_attr( wp_json_encode( $error_messages ) ); ?>"
+					data-rule="false"
+					data-cwp-field
+				></textarea>
+			</div>
+
+			<?php if ( $show_hint && ! empty( $hint ) ): ?>
+				<p class="cwp-hint">
+					<?php echo esc_html( $hint ); ?>
+				</p>
+			<?php endif; ?>
+		</div>
+		<?php return ob_get_clean();
 	}
 }
