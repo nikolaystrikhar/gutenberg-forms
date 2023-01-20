@@ -2,23 +2,21 @@ const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 
 import emailEdit from "./edit.js";
-import emailSave from "./save.js";
 import { getFieldTransform } from "../../block/functions";
 import { fieldParents, myAttrs } from "../../constants";
 
 import blockData from "./block.json";
-
 const { title, attributes } = blockData;
-
-import { deprecation } from "./deprecated/deprecation";
+import { deprecated } from "./deprecated/deprecated";
 
 registerBlockType("cwp/email", {
 	title: __(title),
 	icon: "email",
 	category: "gutenberg-forms",
 	keywords: [__("gutenberg-forms"), __("forms"), __("mail")],
+	attributes,
 	edit: emailEdit,
-	save: emailSave,
+	parent: fieldParents,
 	transforms: {
 		from: [
 			{
@@ -28,7 +26,7 @@ registerBlockType("cwp/email", {
 			},
 		],
 	},
-	deprecated: deprecation,
-	attributes,
-	parent: fieldParents,
+	deprecated: deprecated,
 });
+
+

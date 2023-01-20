@@ -1,7 +1,5 @@
 /**
- *
- * ! Deprecated Edit Version
- *
+ * ! Deprecated Edit Version 2
  */
 
 import React, { useEffect, Fragment } from "react";
@@ -20,14 +18,16 @@ import {
 	getEncodedData,
 	extract_admin_id,
 	get_admin_id,
-} from "../../../block/misc/helper";
+} from "../../../../block/misc/helper";
 
 import { clone, set, assign } from "lodash";
 import {
 	getRootMessages,
 	detect_similar_forms,
-} from "../../../block/functions/index";
-import ConditionalLogic from "../../../block/components/condition";
+} from "../../../../block/functions/index";
+import ConditionalLogic from "../../../../block/components/condition";
+import Suffix from "../../../components/suffix";
+import Prefix from "../../../components/prefix";
 
 const { __ } = wp.i18n;
 
@@ -62,6 +62,10 @@ function edit(props) {
 		condition,
 		enableCondition,
 		adminId,
+		prefix,
+		suffix,
+		hint,
+		showHint
 	} = props.attributes;
 
 	const getRootData = () => {
@@ -135,6 +139,22 @@ function edit(props) {
 		});
 	};
 
+	const handleInputElementChange = (type, property, value) => {
+		const newSuffix = clone(suffix);
+		const newPrefix = clone(prefix);
+
+		switch (type) {
+			case "suffix":
+				set(newSuffix, property, value);
+				props.setAttributes({ suffix: newSuffix });
+
+				break;
+			case "prefix":
+				set(newPrefix, property, value);
+				props.setAttributes({ prefix: newPrefix });
+		}
+	};
+
 	return [
 		!!props.isSelected && (
 			<InspectorControls>
@@ -146,6 +166,32 @@ function edit(props) {
 							value={adminId.value}
 							onChange={handleAdminId}
 						/>
+					</div>
+
+					<div className="cwp-option">
+						<PanelRow>
+							<h3 className="cwp-heading">{__("Prefix", "forms-gutenberg")}</h3>
+							<FormToggle
+								label="Prefix"
+								checked={prefix.enable}
+								onChange={() =>
+									handleInputElementChange("prefix", "enable", !prefix.enable)
+								}
+							/>
+						</PanelRow>
+					</div>
+
+					<div className="cwp-option">
+						<PanelRow>
+							<h3 className="cwp-heading">{__("Suffix", "forms-gutenberg")}</h3>
+							<FormToggle
+								label="Suffix"
+								checked={suffix.enable}
+								onChange={() =>
+									handleInputElementChange("suffix", "enable", !suffix.enable)
+								}
+							/>
+						</PanelRow>
 					</div>
 
 					{!enableCondition ? (
@@ -183,7 +229,30 @@ function edit(props) {
 							</div>
 						</Fragment>
 					)}
+
+					<div className="cwp-option">
+						<PanelRow>
+							<h3 className="cwp-heading">
+								{__("Show Hint", "forms-gutenberg")}
+							</h3>
+							<FormToggle
+								checked={showHint}
+								onChange={() => props.setAttributes({ showHint: !showHint })}
+							/>
+						</PanelRow>
+					</div>
+
+					{showHint && (
+						<div className="cwp-option">
+							<TextControl
+								label={__("Hint Text", "forms-gutenberg")}
+								onChange={(hint) => props.setAttributes({ hint })}
+								value={hint}
+							/>
+						</div>
+					)}
 				</PanelBody>
+
 				<PanelBody title={__("Messages", "forms-gutenberg")} initialOpen={ false }>
 					{isRequired && (
 						<div className="cwp-option">
@@ -238,8 +307,38 @@ function edit(props) {
 						</div>
 					)}
 				</div>
-				<input value={email} onChange={handleChange} />
+				<div className="cwp-field-with-elements">
+					{prefix.enable && (
+						<Prefix prefix={prefix}>
+							<RichText
+								placeholder={__("Prefix", "forms-gutenberg")}
+								tag="span"
+								value={prefix.content}
+								onChange={(newContent) =>
+									handleInputElementChange("prefix", "content", newContent)
+								}
+							/>
+						</Prefix>
+					)}
+
+					<input value={email} onChange={handleChange} />
+					{suffix.enable && (
+						<Suffix suffix={suffix}>
+							<RichText
+								placeholder={__("Suffix", "forms-gutenberg")}
+								tag="span"
+								value={suffix.content}
+								onChange={(newContent) =>
+									handleInputElementChange("suffix", "content", newContent)
+								}
+							/>
+						</Suffix>
+					)}
+				</div>
 			</div>
+			{showHint && (
+                <p className="cwp-hint">{hint}</p>
+            )}
 		</div>,
 	];
 }

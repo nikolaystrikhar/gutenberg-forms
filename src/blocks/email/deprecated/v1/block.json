@@ -1,0 +1,79 @@
+{
+	"title": "Email",
+	"attributes": {
+		"enableCondition": {
+			"type": "boolean",
+			"default": false
+		},
+		"email": {
+			"type": "string",
+			"default": ""
+		},
+		"isRequired": {
+			"type": "boolean",
+			"default": false
+		},
+		"label": {
+			"type": "string",
+			"default": "Email"
+		},
+		"id": {
+			"type": "string",
+			"default": ""
+		},
+		"field_name": {
+			"type": "string",
+			"default": ""
+		},
+		"requiredLabel": {
+			"type": "string",
+			"default": "*"
+		},
+		"messages": {
+			"type": "object",
+			"default": {
+				"empty": "Please fill out this field!",
+				"invalidEmail": "The email {{value}} is not valid!"
+			}
+		},
+		"condition": {
+			"type": "object",
+			"default": {
+				"field": null,
+				"condition": "===",
+				"value": ""
+			}
+		},
+		"adminId": {
+			"type": "object",
+			"default": {
+				"default": "",
+				"value": ""
+			}
+		},
+		"prefix": {
+			"type": "object",
+			"default": {
+				"enable": false,
+				"content": "",
+				"position": "outside"
+			}
+		},
+		"suffix": {
+			"type": "object",
+			"default": {
+				"enable": false,
+				"content": "",
+				"position": "outside"
+			}
+		},
+		"showHint" :{
+			"type": "boolean",
+			"default": false
+		},
+		"hint": {
+			"type": "string",
+			"default": ""
+		}
+	}
+}
