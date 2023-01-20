@@ -26,5 +26,5 @@ registerBlockType("cwp/message", {
 			},
 		],
 	},
-	deprecated,
+	deprecated: deprecated,
 });

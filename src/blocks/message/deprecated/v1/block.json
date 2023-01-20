@@ -1,0 +1,79 @@
+{
+	"title": "Textarea",
+	"attributes": {
+		"enableCondition": {
+			"type": "boolean",
+			"default": false
+		},
+		"message": {
+			"type": "string",
+			"default": ""
+		},
+		"isRequired": {
+			"type": "boolean",
+			"default": false
+		},
+		"label": {
+			"type": "string",
+			"default": "Message"
+		},
+		"id": {
+			"type": "string",
+			"default": ""
+		},
+		"height": {
+			"type": "number",
+			"default": 200
+		},
+		"field_name": {
+			"type": "string",
+			"default": ""
+		},
+		"messages": {
+			"type": "object",
+			"default": {
+				"empty": "Please fill out this field!",
+				"invalid": "The message {{value}} is not valid!"
+			}
+		},
+		"pattern": {
+			"type": "string",
+			"default": ""
+		},
+		"condition": {
+			"type": "object",
+			"default": {
+				"field": null,
+				"condition": "===",
+				"value": ""
+			}
+		},
+		"requiredLabel": {
+			"type": "string",
+			"default": "*"
+		},
+		"minimumLength": {
+			"type": "number",
+			"default": 0
+		},
+		"maximumLength": {
+			"type": "number",
+			"default": 1000
+		},
+		"adminId": {
+			"type": "object",
+			"default": {
+				"default": "",
+				"value": ""
+			}
+		},
+		"showHint" :{
+			"type": "boolean",
+			"default": false
+		},
+		"hint": {
+			"type": "string",
+			"default": ""
+		}
+	}
+}

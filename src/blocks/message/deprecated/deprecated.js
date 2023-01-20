@@ -1,14 +1,5 @@
-import { attributes } from "../block.json";
+// email deprecated versions
 
-// deprecated version
+import { v1 } from './v1/v1'
 
-import edit from "./edit";
-import save from "./save";
-
-export const deprecated = [
-	{
-		attributes,
-		edit,
-		save,
-	},
-];
+export const deprecated = [ v1 ];
