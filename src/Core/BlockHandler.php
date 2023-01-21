@@ -16,7 +16,7 @@ use GutenbergForms\Core\Blocks\FormCalculation;
 use GutenbergForms\Core\Blocks\FormColumn;
 use GutenbergForms\Core\Blocks\FormGroup;
 // use GutenbergForms\Core\Blocks\FormSteps;
-// use GutenbergForms\Core\Blocks\Hidden;
+use GutenbergForms\Core\Blocks\Hidden;
 // use GutenbergForms\Core\Blocks\Name;
 // use GutenbergForms\Core\Blocks\Number;
 // use GutenbergForms\Core\Blocks\Phone;
@@ -58,7 +58,7 @@ class BlockHandler {
 		FormColumn::init();
 		FormGroup::init();
 		// Form_Steps::init();
-		// Hidden::init();
+		Hidden::init();
 		// Name::init();
 		// Number::init();
 		// Phone::init();

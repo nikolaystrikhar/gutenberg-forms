@@ -1,0 +1,28 @@
+{
+	"title": "Hidden",
+	"attributes": {
+		"value": {
+			"type": "string",
+			"default": ""
+		},
+		"label": {
+			"type": "string",
+			"default": "Hidden"
+		},
+		"id": {
+			"type": "string",
+			"default": ""
+		},
+		"field_name": {
+			"type": "string",
+			"default": ""
+		},
+		"adminId": {
+			"type": "object",
+			"default": {
+				"default": "",
+				"value": ""
+			}
+		}
+	}
+}

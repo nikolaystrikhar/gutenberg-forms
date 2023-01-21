@@ -1,20 +1,18 @@
-const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
+const { __ } = wp.i18n;
 
+import { attributes, title } from "./block.json";
 import hiddenEdit from "./edit.js";
-import hiddenSave from "./save.js";
 import { fieldParents } from "../../constants";
-
-import blockData from "./block.json";
-const { attributes,title } = blockData;
+import { deprecated } from "./deprecated/deprecated";
 
 registerBlockType("cwp/hidden", {
-	title: __(title),
+	title: __(title, "forms-gutenberg"),
 	icon: "hidden",
 	category: "gutenberg-forms",
-	keywords: [__("gutenberg-forms"), __("forms"), __("hidden"), __("field")],
-	edit: hiddenEdit,
-	save: hiddenSave,
+	keywords: [__("gutenberg-forms", "forms-gutenberg"), __("forms", "forms-gutenberg"), __("hidden", "forms-gutenberg"), __("field", "forms-gutenberg")],
 	attributes,
+	edit: hiddenEdit,
 	parent: fieldParents,
+	deprecated: deprecated,
 });
