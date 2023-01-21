@@ -1,8 +1,4 @@
-/***
- *
- * ! DEPRECATED EDIT VERSION
- *
- */
+// ! Deprecated Datepicker Edit Version 1
 
 import React, { useEffect } from "react";
 import {
@@ -20,10 +16,10 @@ import {
 	getEncodedData,
 	extract_admin_id,
 	get_admin_id,
-} from "../../../block/misc/helper";
-import DatePicker from "../../../block/components/datepicker";
+} from "../../../../block/misc/helper";
+import DatePicker from "../../../../block/components/datepicker";
 import { clone, set } from "lodash";
-import ConditionalLogic from "../../../block/components/condition";
+import ConditionalLogic from "../../../../block/components/condition";
 
 const {
 	InspectorControls,

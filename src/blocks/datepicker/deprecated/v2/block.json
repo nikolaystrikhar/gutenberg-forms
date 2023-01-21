@@ -1,0 +1,86 @@
+{
+	"title": "Date Picker",
+	"attributes": {
+		"enableCondition": {
+			"type": "boolean",
+			"default": false
+		},
+		"isRequired": {
+			"type": "boolean",
+			"default": false
+		},
+		"label": {
+			"type": "string",
+			"default": "Pick Date"
+		},
+		"placeholder": {
+			"type": "string",
+			"default": ""
+		},
+		"id": {
+			"type": "string",
+			"default": ""
+		},
+		"field_name": {
+			"type": "string",
+			"default": ""
+		},
+		"requiredLabel": {
+			"type": "string",
+			"default": "*"
+		},
+		"format": {
+			"type": "string",
+			"default": "DD/MM/YYYY"
+		},
+		"messages": {
+			"type": "object",
+			"default": {
+				"empty": "Please select date!"
+			}
+		},
+		"condition": {
+			"type": "object",
+			"default": {
+				"field": null,
+				"condition": "===",
+				"value": ""
+			}
+		},
+		"requiredLabel": {
+			"type": "string",
+			"default": "*"
+		},
+		"adminId": {
+			"type": "object",
+			"default": {
+				"default": "",
+				"value": ""
+			}
+		},
+		"prefix": {
+			"type": "object",
+			"default": {
+				"enable": false,
+				"content": "",
+				"position": "outside"
+			}
+		},
+		"suffix": {
+			"type": "object",
+			"default": {
+				"enable": false,
+				"content": "",
+				"position": "outside"
+			}
+		},
+		"showHint" :{
+			"type": "boolean",
+			"default": false
+		},
+		"hint": {
+			"type": "string",
+			"default": ""
+		}
+	}
+}

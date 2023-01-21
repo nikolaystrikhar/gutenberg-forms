@@ -1,4 +1,4 @@
-// ! Deprecated EXAMPLE Version 1
+// ! Deprecated Columns Version 1
 
 import save from "./save";
 import edit from "./edit";
