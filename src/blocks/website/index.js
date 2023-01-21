@@ -1,24 +1,20 @@
-const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
+const { __ } = wp.i18n;
 
+import { attributes, title } from "./block.json";
 import websiteEdit from "./edit.js";
-import websiteSave from "./save.js";
-import { getFieldTransform } from "../../block/functions";
 import { fieldParents, myAttrs } from "../../constants";
-
-import blockData from "./block.json";
+import { getFieldTransform } from "../../block/functions";
 import { deprecated } from "./deprecated/deprecated";
-const { attributes, title } = blockData;
 
 registerBlockType("cwp/website", {
-	title: __(title),
+	title: __(title, "forms-gutenberg"),
 	icon: "laptop",
 	category: "gutenberg-forms",
-	keywords: [__("gutenberg-forms"), __("forms"), __("website")],
-	edit: websiteEdit,
-	save: websiteSave,
-	deprecated,
+	keywords: [__("gutenberg-forms"), __("forms", "forms-gutenberg"), __("website", "forms-gutenberg")],
 	attributes,
+	edit: websiteEdit,
+	parent: fieldParents,
 	transforms: {
 		from: [
 			{
@@ -28,5 +24,5 @@ registerBlockType("cwp/website", {
 			},
 		],
 	},
-	parent: fieldParents,
+	deprecated: deprecated,
 });
