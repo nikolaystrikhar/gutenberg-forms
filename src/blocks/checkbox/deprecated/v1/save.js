@@ -1,7 +1,9 @@
+// ! Deprecated Checkbox Save Version 1
+
 import React from "react";
 import { isEmpty, has } from "lodash";
-import { strip_tags } from "../../block/misc/helper";
-import { stringifyCondition } from "../../block/functions";
+import { strip_tags } from "../../../../block/misc/helper";
+import { stringifyCondition } from "../../../../block/functions";
 
 function save(props) {
 	const {

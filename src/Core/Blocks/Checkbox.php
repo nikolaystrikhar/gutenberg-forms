@@ -56,7 +56,7 @@ class Checkbox extends Block {
 
 		ob_start();
 		?>
-    // TODO remove Checkbox name
+    // TODO remove column name
     <h2>Checkbox</h2>
 		<!-- <div class="cwp-email cwp-field" data-condition="<?php //echo esc_html( wp_json_encode( $condition ) ); ?>">
 			<div class="cwp-field-set">
@@ -92,7 +92,7 @@ class Checkbox extends Block {
 					<?php //echo esc_html( $hint ); ?>
 				</p>
 			<?php //endif; ?>
-		</div>
-		<?php //return ob_get_clean(); -->
+		</div> -->
+		<?php return ob_get_clean();
 	}
 }

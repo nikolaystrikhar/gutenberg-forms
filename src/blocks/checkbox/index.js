@@ -1,22 +1,21 @@
-const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
+const { __ } = wp.i18n;
+
+import { title, attributes } from "./block.json";
+import checkboxEdit from "./edit.js";
 import { fieldParents, myAttrs } from "../../constants.js";
 import { getFieldTransform } from "../../block/functions";
-import checkboxEdit from "./edit.js";
-import checkboxSave from "./save.js";
+import { deprecated } from "./deprecated/deprecated";
 
-import blockData from "./block.json";
-
-const { title, attributes } = blockData;
 
 registerBlockType("cwp/checkbox", {
-	title: __(title),
+	title: __(title, "forms-gutenberg"),
 	icon: "yes",
 	category: "gutenberg-forms",
-	keywords: [__("gutenberg-forms"), __("forms"), __("checkbox")],
-	edit: checkboxEdit,
-	save: checkboxSave,
+	keywords: [__("gutenberg-forms", "forms-gutenberg"), __("forms", "forms-gutenberg"), __("checkbox", "forms-gutenberg")],
 	attributes,
+	edit: checkboxEdit,
+	parent: fieldParents,
 	transforms: {
 		from: [
 			{
@@ -26,5 +25,5 @@ registerBlockType("cwp/checkbox", {
 			},
 		],
 	},
-	parent: fieldParents,
+	deprecated: deprecated,
 });

@@ -9,7 +9,7 @@ use GutenbergForms\Core\Blocks\Textarea;
 // use GutenbergForms\Core\Blocks\Block;
 // use GutenbergForms\Core\Blocks\Button;
 // use GutenbergForms\Core\Blocks\Calculation;
-// use GutenbergForms\Core\Blocks\Checkbox;
+use GutenbergForms\Core\Blocks\Checkbox;
 // use GutenbergForms\Core\Blocks\Column;
 // use GutenbergForms\Core\Blocks\Components;
 // use GutenbergForms\Core\Blocks\Datepicker;
@@ -52,7 +52,7 @@ class BlockHandler {
 		// Block::init();
 		// Button::init();
 		// Calculation::init();
-		// Checkbox::init();
+		Checkbox::init();
 		// Column::init();
 		// Components::init();
 		// Datepicker::init();
