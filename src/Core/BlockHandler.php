@@ -13,7 +13,7 @@ use GutenbergForms\Core\Blocks\Datepicker;
 use GutenbergForms\Core\Blocks\File;
 use GutenbergForms\Core\Blocks\FormButton;
 use GutenbergForms\Core\Blocks\FormCalculation;
-// use GutenbergForms\Core\Blocks\FormColumn;
+use GutenbergForms\Core\Blocks\FormColumn;
 // use GutenbergForms\Core\Blocks\FormSteps;
 // use GutenbergForms\Core\Blocks\Group;
 // use GutenbergForms\Core\Blocks\Hidden;
@@ -55,7 +55,7 @@ class BlockHandler {
 		File::init();
 		FormButton::init();
 		FormCalculation::init();
-		// Form_Column::init();
+		FormColumn::init();
 		// Form_Steps::init();
 		// Group::init();
 		// Hidden::init();
