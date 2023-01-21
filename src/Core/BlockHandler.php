@@ -12,7 +12,7 @@ use GutenbergForms\Core\Blocks\Checkbox;
 use GutenbergForms\Core\Blocks\Column;
 // use GutenbergForms\Core\Blocks\Components;
 use GutenbergForms\Core\Blocks\Datepicker;
-// use GutenbergForms\Core\Blocks\File;
+use GutenbergForms\Core\Blocks\File;
 // use GutenbergForms\Core\Blocks\FormColumn;
 // use GutenbergForms\Core\Blocks\FormSteps;
 // use GutenbergForms\Core\Blocks\Group;
@@ -54,7 +54,7 @@ class BlockHandler {
 		Column::init();
 		// Components::init();
 		Datepicker::init();	
-		// File::init();
+		File::init();
 		// Form_Column::init();
 		// Form_Steps::init();
 		// Group::init();

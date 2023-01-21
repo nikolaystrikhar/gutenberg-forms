@@ -1,26 +1,23 @@
-const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
+const { __ } = wp.i18n;
 
-import { fieldParents } from "../../constants";
-
+import { title, attributes } from "./block.json";
 import fileUploadEdit from "./edit.js";
-import fileUploadSave from "./save.js";
-
-import blockData from "./block.json";
-
-const { title, attributes } = blockData;
+import { fieldParents } from "../../constants";
+import { deprecated } from "./deprecated/deprecated";
 
 registerBlockType("cwp/file-upload", {
-	title: __(title),
+	title: __(title, "forms-gutenberg"),
 	icon: "media-document",
-	category: "gutenberg-forms",
-	keywords: [__("gutenberg-forms"), __("forms"), __("file"), __("file upload")],
-	edit: fileUploadEdit,
-	save: fileUploadSave,
-	attributes,
+	// TODO duplicated key align
 	supports: {
 		align: true,
 		align: ["wide", "full", "center"],
 	},
+	category: "gutenberg-forms",
+	keywords: [__("gutenberg-forms", "forms-gutenberg"), __("forms", "forms-gutenberg"), __("file", "forms-gutenberg"), __("file upload", "forms-gutenberg")],
+	attributes,
+	edit: fileUploadEdit,
 	parent: fieldParents,
+	deprecated: deprecated,
 });
