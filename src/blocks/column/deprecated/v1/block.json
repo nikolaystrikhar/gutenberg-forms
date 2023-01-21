@@ -1,0 +1,9 @@
+{
+	"title": "Column",
+	"attributes": {
+		"width": {
+			"type": "number",
+			"default": 100
+		}
+	}
+}
