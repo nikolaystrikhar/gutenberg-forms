@@ -92,7 +92,7 @@ class Step extends Block {
 					<?php //echo esc_html( $hint ); ?>
 				</p>
 			<?php //endif; ?>
-		</div>
-		<?php //return ob_get_clean(); -->
+		</div> -->
+		<?php return ob_get_clean();
 	}
 }
