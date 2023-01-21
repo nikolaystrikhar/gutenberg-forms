@@ -1,29 +1,28 @@
-const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
+const { __ } = wp.i18n;
 
-import { fieldParents } from "../../constants";
+import { attributes, title } from "./block.json";
 import formGroupEdit from "./edit.js";
-import formGroupSave from "./save.js";
-
-import blockData from "./block.json";
-const { attributes, title } = blockData;
+import { fieldParents } from "../../constants";
+import { deprecated } from "./deprecated/deprecated";
 
 registerBlockType("cwp/form-group", {
-	title: __(title),
+	title: __(title, "forms-gutenberg"),
 	icon: "forms",
 	category: "gutenberg-forms",
 	keywords: [
-		__("gutenberg-forms"),
-		__("forms"),
-		__("form group"),
-		__("column"),
+		__("gutenberg-forms", "forms-gutenberg"),
+		__("forms", "forms-gutenberg"),
+		__("form group", "forms-gutenberg"),
+		__("column", "forms-gutenberg"),
 	],
-	edit: formGroupEdit,
-	save: formGroupSave,
-	attributes,
+	// TODO duplicated key align
 	supports: {
 		align: true,
 		align: ["wide", "full", "center"],
 	},
+	attributes,
+	edit: formGroupEdit,
 	parent: fieldParents,
+	deprecated: deprecated,
 });

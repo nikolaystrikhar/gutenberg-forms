@@ -4,13 +4,13 @@ namespace GutenbergForms\Core\Blocks;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Group block.
+ * FormGroup block.
  *
  * @since 2.9.9.1
  */
-class Group extends Block {
+class FormGroup extends Block {
 	// TODO update NAME
-	private const NAME = 'cwp/group';
+	private const NAME = 'cwp/form-group';
 
 	/**
 	 * Returns a block name.
@@ -56,8 +56,8 @@ class Group extends Block {
 
 		ob_start();
 		?>
-    // TODO remove Group name
-    <h2>Group</h2>
+    // TODO remove FormGroup name
+    <h2>FormGroup</h2>
 		<!-- <div class="cwp-email cwp-field" data-condition="<?php //echo esc_html( wp_json_encode( $condition ) ); ?>">
 			<div class="cwp-field-set">
 				<?php //if ( ! empty( $label ) ) : ?>
