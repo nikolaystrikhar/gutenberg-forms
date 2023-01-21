@@ -5,3 +5,4 @@ dist/dashboard/blocks
 ## Uncomment line below if you prefer to
 ## keep compiled files out of version control
 # dist/
+src/blocks/A_deprecated_pattern
