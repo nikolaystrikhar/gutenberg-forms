@@ -1,0 +1,29 @@
+{
+	"title": "Progress Bar",
+	"attributes": {
+		"progressColor": {
+			"type": "string",
+			"default": "rgb(238, 238, 238)"
+		},
+		"progressFillColor": {
+			"type": "string",
+			"default": "rgb(6, 147, 227)"
+		},
+		"thickness": {
+			"type": "number",
+			"default": 20
+		},
+		"cornerRadius": {
+			"type": "number",
+			"default": 0
+		},
+		"showPercentage": {
+			"type": "boolean",
+			"default": true
+		},
+		"textColor": {
+			"type": "string",
+			"default": "rgb(238, 238, 238)"
+		}
+	}
+}

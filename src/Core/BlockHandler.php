@@ -20,7 +20,7 @@ use GutenbergForms\Core\Blocks\Hidden;
 use GutenbergForms\Core\Blocks\Name;
 use GutenbergForms\Core\Blocks\Number;
 use GutenbergForms\Core\Blocks\Phone;
-// use GutenbergForms\Core\Blocks\ProgressBar;
+use GutenbergForms\Core\Blocks\Progress;
 // use GutenbergForms\Core\Blocks\Radio;
 // use GutenbergForms\Core\Blocks\ReusableForms;
 // use GutenbergForms\Core\Blocks\Select;
@@ -62,7 +62,7 @@ class BlockHandler {
 		Name::init();
 		Number::init();
 		Phone::init();
-		// Progress_Bar::init();
+		Progress::init();
 		// Radio::init();
 		// Reusable_Forms::init();
 		// Select::init();

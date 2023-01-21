@@ -4,13 +4,13 @@ namespace GutenbergForms\Core\Blocks;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * ProgressBar block.
+ * Progress block.
  *
  * @since 2.9.9.1
  */
-class ProgressBar extends Block {
+class Progress extends Block {
 	// TODO update NAME
-	private const NAME = 'cwp/progressBar';
+	private const NAME = 'cwp/progress';
 
 	/**
 	 * Returns a block name.
@@ -56,8 +56,8 @@ class ProgressBar extends Block {
 
 		ob_start();
 		?>
-    // TODO remove ProgressBar name
-    <h2>ProgressBar</h2>
+    // TODO remove Progress name
+    <h2>Progress</h2>
 		<!-- <div class="cwp-email cwp-field" data-condition="<?php //echo esc_html( wp_json_encode( $condition ) ); ?>">
 			<div class="cwp-field-set">
 				<?php //if ( ! empty( $label ) ) : ?>

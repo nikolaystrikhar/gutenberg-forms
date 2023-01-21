@@ -1,21 +1,19 @@
-const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
+const { __ } = wp.i18n;
 
-import progressEdit from "./edit.js";
-import progressSave from "./save.js";
-import { fieldParents } from "../../constants";
 import Icon from "../../block/Icon";
-
-import blockData from "./block.json";
-const { attributes, title } = blockData;
+import { attributes, title } from "./block.json";
+import progressEdit from "./edit.js";
+import { fieldParents } from "../../constants";
+import { deprecated } from "./deprecated/deprecated";
 
 registerBlockType("cwp/progress", {
-	title: __(title),
-	icon: __(<Icon icon="progress" />),
+	title: __(title, "forms-gutenberg"),
+	icon: __(<Icon icon="progress" />, "forms-gutenberg"),
 	category: "gutenberg-forms",
-	keywords: [__("gutenberg-forms"), __("progress"), __("bar")],
-	edit: progressEdit,
-	save: progressSave,
+	keywords: [__("gutenberg-forms", "forms-gutenberg"), __("progress", "forms-gutenberg"), __("bar", "forms-gutenberg")],
 	attributes,
+	edit: progressEdit,
 	parent: fieldParents,
+	deprecated: deprecated,
 });
