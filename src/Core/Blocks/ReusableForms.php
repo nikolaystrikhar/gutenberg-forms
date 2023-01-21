@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
  */
 class ReusableForms extends Block {
 	// TODO update NAME
-	private const NAME = 'cwp/reusableForms';
+	private const NAME = 'cwp/reusable-form';
 
 	/**
 	 * Returns a block name.

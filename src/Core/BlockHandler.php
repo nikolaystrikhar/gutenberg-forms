@@ -22,7 +22,7 @@ use GutenbergForms\Core\Blocks\Number;
 use GutenbergForms\Core\Blocks\Phone;
 use GutenbergForms\Core\Blocks\Progress;
 use GutenbergForms\Core\Blocks\Radio;
-// use GutenbergForms\Core\Blocks\ReusableForms;
+use GutenbergForms\Core\Blocks\ReusableForms;
 // use GutenbergForms\Core\Blocks\Select;
 // use GutenbergForms\Core\Blocks\Step;
 // use GutenbergForms\Core\Blocks\Text;
@@ -64,7 +64,7 @@ class BlockHandler {
 		Phone::init();
 		Progress::init();
 		Radio::init();
-		// Reusable_Forms::init();
+		ReusableForms::init();
 		// Select::init();
 		// Step::init();
 		// Text::init();
