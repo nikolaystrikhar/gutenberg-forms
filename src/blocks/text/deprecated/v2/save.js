@@ -1,9 +1,11 @@
+// ! Deprecated Text Save Version 2
+
 import React from "react";
 import { isEmpty } from "lodash";
-import { strip_tags } from "../../block/misc/helper";
-import { stringifyCondition } from "../../block/functions";
-import Prefix from "../components/prefix";
-import Suffix from "../components/suffix";
+import { strip_tags } from "../../../../block/misc/helper";
+import { stringifyCondition } from "../../../../block/functions";
+import Prefix from "../../../components/prefix";
+import Suffix from "../../../components/suffix";
 
 function save(props) {
 	const {

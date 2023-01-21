@@ -1,13 +1,9 @@
-/**
- *
- * ! DEPRECATED SAVE VERSION
- *
- */
+// ! Deprecated Text Save Version 1
 
 import React from "react";
 import { isEmpty } from "lodash";
-import { strip_tags } from "../../../block/misc/helper";
-import { stringifyCondition } from "../../../block/functions";
+import { strip_tags } from "../../../../block/misc/helper";
+import { stringifyCondition } from "../../../../block/functions";
 
 function save(props) {
 	const {

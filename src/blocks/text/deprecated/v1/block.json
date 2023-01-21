@@ -1,0 +1,92 @@
+{
+	"title": "Text",
+	"attributes": {
+		"enableCondition": {
+			"type": "boolean",
+			"default": false
+		},
+		"text": {
+			"type": "string",
+			"default": ""
+		},
+		"isRequired": {
+			"type": "boolean",
+			"default": false
+		},
+		"label": {
+			"type": "string",
+			"default": "Text"
+		},
+		"id": {
+			"type": "string",
+			"default": ""
+		},
+		"field_name": {
+			"type": "string",
+			"default": ""
+		},
+		"messages": {
+			"type": "object",
+			"default": {
+				"empty": "Please fill out this field!",
+				"invalid": "The text {{value}} is not valid!"
+			}
+		},
+		"pattern": {
+			"type": "string",
+			"default": ""
+		},
+		"minimumLength": {
+			"type": "number",
+			"default": 0
+		},
+		"maximumLength": {
+			"type": "number",
+			"default": 100
+		},
+		"condition": {
+			"type": "object",
+			"default": {
+				"field": null,
+				"condition": "===",
+				"value": ""
+			}
+		},
+		"requiredLabel": {
+			"type": "string",
+			"default": "*"
+		},
+
+		"adminId": {
+			"type": "object",
+			"default": {
+				"default": "",
+				"value": ""
+			}
+		},
+		"prefix": {
+			"type": "object",
+			"default": {
+				"enable": false,
+				"content": "",
+				"position": "outside"
+			}
+		},
+		"suffix": {
+			"type": "object",
+			"default": {
+				"enable": false,
+				"content": "",
+				"position": "outside"
+			}
+		},
+		"showHint" :{
+			"type": "boolean",
+			"default": false
+		},
+		"hint": {
+			"type": "string",
+			"default": ""
+		}
+	}
+}
