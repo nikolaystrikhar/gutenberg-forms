@@ -4,12 +4,12 @@ namespace GutenbergForms\Core\Blocks;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Phone block.
+ * yesNo block.
  *
  * @since 2.9.9.1
  */
-class Phone extends FieldBlock {
-	private const NAME = 'cwp/phone';
+class Toggle extends FieldBlock {
+	private const NAME = 'cwp/yes-no';
 
 	/**
 	 * Returns a block name.
@@ -61,33 +61,37 @@ class Phone extends FieldBlock {
 			'position' => 'outside',
 		);
 
+		// Custom attributes.
+
+		$enabled = $attributes['yes_no'] ?? false;
+
 		ob_start();
 		?>
-		<div class="cwp-phone cwp-field" data-condition="<?php echo esc_html( wp_json_encode( $condition ) ); ?>">
+		<div class="cwp-yes-no cwp-field" data-condition="<?php echo esc_html( wp_json_encode( $condition ) ); ?>">
 			<div class="cwp-field-set">
 				<?php echo $this->map_label( $is_required, $label, $required_label, $id ); ?>
 
-				<div class="cwp-field-with-elements">
-					<?php echo $this->map_prefix( $prefix['enable'], $prefix['content'], $prefix['position'] ); ?>
+				<label class="cwp-switch">
+					<input
+						name="<?php echo esc_attr( $id ); ?>"
+						id="<?php echo esc_attr( $id ); ?>"
+						type="hidden"
+						value="<?php echo esc_attr( $enabled ? 'yes' : 'no' ); ?>"
+						readOnly
+					/>
 
 					<input
 						name="<?php echo esc_attr( $id ); ?>"
 						id="<?php echo esc_attr( $id ); ?>"
-						type="tel"
+						type="checkbox"
 						required="<?php echo esc_attr( $is_required ); ?>"
-						placeholder="<?php echo esc_attr( $placeholder ); ?>"
-						title=""
-						data-errors="<?php echo esc_attr( wp_json_encode( $error_messages ) ); ?>"
-						data-rule="false"
 						data-cwp-field
-						data-phone="true"
+						checked="<?php echo esc_attr( $enabled ? 'checked' : '' ); ?>"
 					/>
 
-					<?php echo $this->map_suffix( $suffix['enable'], $suffix['content'], $suffix['position'] ); ?>
-				</div>
+					<span class="cwp-slider"></span>
+				</label>
 			</div>
-
-			<?php echo $this->map_hint( $show_hint, $hint ); ?>
 		</div>
 		<?php
 		return ob_get_clean();

@@ -107,7 +107,7 @@ function edit(props) {
 					</div>
 				</div>
 			</PanelBody>
-			<PanelBody title={__("Colors", "forms-gutenberg")}>
+			<PanelBody title={__("Colors", "forms-gutenberg")}  initialOpen={false}>
 				<div className="cwp-option">
 					<h3 className="cwp-heading">{__("Background Color", "forms-gutenberg")}</h3>
 					<ColorPalette

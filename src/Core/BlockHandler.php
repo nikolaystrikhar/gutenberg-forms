@@ -25,8 +25,8 @@ use GutenbergForms\Core\Blocks\ReusableForms;
 use GutenbergForms\Core\Blocks\Select;
 // use GutenbergForms\Core\Blocks\Step;
 use GutenbergForms\Core\Blocks\Text;
+use GutenbergForms\Core\Blocks\Toggle;
 use GutenbergForms\Core\Blocks\Website;
-use GutenbergForms\Core\Blocks\YesNo;
 
 /**
  * Handles Gutenberg blocks.
@@ -42,29 +42,29 @@ class BlockHandler {
 	 * @return void
 	 */
 	public static function init(): void {
+		Text::init();
 		Textarea::init();
-		Email::init();
 		Hidden::init();
+		Email::init();
 		Name::init();
+		Phone::init();
+		Toggle::init();
+		Website::init();
 		File::init();
-		// TODO update the following classes.
+		// TODO: update the following classes.
 		// Column::init(); // TODO: investigate 2 of our column blocks and a compatibility with the core column block.
+		// FormColumn::init(); // TODO: investigate 2 of our column blocks and a compatibility with the core column block.
+		// FormGroup::init(); // TODO: investigate our group block and a compatibility with the core column block.
 		// Components::init();
+		Radio::init();
+		Select::init();
 		Checkbox::init();
-		Datepicker::init();
 		FormButton::init();
 		FormCalculation::init();
-		FormColumn::init();
-		FormGroup::init();
-		// Form_Steps::init();
-		Phone::init();
 		Progress::init();
-		Radio::init();
 		ReusableForms::init();
-		Select::init();
+		// Datepicker::init(); // TODO: decide what to about it.
+		// Form_Steps::init();
 		// Step::init();
-		Text::init();
-		Website::init();
-		YesNo::init();
 	}
 }
