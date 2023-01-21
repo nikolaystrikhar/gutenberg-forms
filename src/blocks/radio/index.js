@@ -1,22 +1,20 @@
-const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
+const { __ } = wp.i18n;
 
+import { attributes, title } from "./block.json";
 import radioEdit from "./edit.js";
-import radioSave from "./save.js";
-import { getFieldTransform } from "../../block/functions";
 import { fieldParents, myAttrs } from "../../constants";
-
-import blockData from "./block.json";
-const { attributes, title } = blockData;
+import { getFieldTransform } from "../../block/functions";
+import { deprecated } from "./deprecated/deprecated";
 
 registerBlockType("cwp/radio", {
-	title: __(title),
+	title: __(title, "forms-gutenberg"),
 	icon: "marker",
 	category: "gutenberg-forms",
-	keywords: [__("gutenberg-forms"), __("forms"), __("radio")],
-	edit: radioEdit,
-	save: radioSave,
+	keywords: [__("gutenberg-forms", "forms-gutenberg"), __("forms", "forms-gutenberg"), __("radio", "forms-gutenberg")],
 	attributes,
+	edit: radioEdit,
+	parent: fieldParents,
 	transforms: {
 		from: [
 			{
@@ -26,5 +24,5 @@ registerBlockType("cwp/radio", {
 			},
 		],
 	},
-	parent: fieldParents,
+	deprecated: deprecated,
 });

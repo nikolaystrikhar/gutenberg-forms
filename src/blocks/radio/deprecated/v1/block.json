@@ -1,0 +1,81 @@
+{
+	"title": "Radio",
+	"attributes": {
+		"enableCondition": {
+			"type": "boolean",
+			"default": false
+		},
+		"isRequired": {
+			"type": "boolean",
+			"default": false
+		},
+		"options": {
+			"type": "array",
+			"default": [
+				{
+					"label": "Option 1"
+				},
+				{
+					"label": "Option 2"
+				}
+			]
+		},
+		"label": {
+			"type": "string",
+			"default": "Choose One"
+		},
+		"id": {
+			"type": "string",
+			"default": ""
+		},
+		"field_name": {
+			"type": "string",
+			"default": ""
+		},
+		"requiredLabel": {
+			"type": "string",
+			"default": "*"
+		},
+		"messages": {
+			"type": "object",
+			"default": {
+				"empty": "Please select radio!"
+			}
+		},
+		"condition": {
+			"type": "object",
+			"default": {
+				"field": null,
+				"condition": "===",
+				"value": ""
+			}
+		},
+		"requiredLabel": {
+			"type": "string",
+			"default": "*"
+		},
+		"fieldStyle": {
+			"type": "string",
+			"default": "block"
+		},
+		"bulkAdd": {
+			"type": "boolean",
+			"default": false
+		},
+		"adminId": {
+			"type": "object",
+			"default": {
+				"default": "",
+				"value": ""
+			}
+		},
+		"showHint" :{
+			"type": "boolean",
+			"default": false
+		},
+		"hint": {
+			"type": "string",
+			"default": ""
+		}
+	}
+}
