@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
  */
 class FormButton extends Block {
 	// TODO update NAME
-	private const NAME = 'cwp/formButton';
+	private const NAME = 'cwp/form-button';
 
 	/**
 	 * Returns a block name.
