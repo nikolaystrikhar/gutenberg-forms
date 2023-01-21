@@ -5,7 +5,6 @@ namespace GutenbergForms\Core;
 use GutenbergForms\Core\Blocks\Email;
 use GutenbergForms\Core\Blocks\Textarea;
 
-// TODO update Mocked Classes
 use GutenbergForms\Core\Blocks\Checkbox;
 use GutenbergForms\Core\Blocks\Column;
 // use GutenbergForms\Core\Blocks\Components;
@@ -29,8 +28,6 @@ use GutenbergForms\Core\Blocks\Text;
 use GutenbergForms\Core\Blocks\Website;
 use GutenbergForms\Core\Blocks\YesNo;
 
-
-
 /**
  * Handles Gutenberg blocks.
  *
@@ -47,20 +44,19 @@ class BlockHandler {
 	public static function init(): void {
 		Textarea::init();
 		Email::init();
-		// TODO update Mocked Classes
-		Checkbox::init();
-		Column::init();
-		// Components::init();
-		Datepicker::init();	
+		Hidden::init();
+		Name::init();
 		File::init();
+		// TODO update the following classes.
+		// Column::init(); // TODO: investigate 2 of our column blocks and a compatibility with the core column block.
+		// Components::init();
+		Checkbox::init();
+		Datepicker::init();
 		FormButton::init();
 		FormCalculation::init();
 		FormColumn::init();
 		FormGroup::init();
 		// Form_Steps::init();
-		Hidden::init();
-		Name::init();
-		Number::init();
 		Phone::init();
 		Progress::init();
 		Radio::init();

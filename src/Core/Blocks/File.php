@@ -8,8 +8,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 2.9.9.1
  */
-class File extends Block {
-	// TODO update NAME
+class File extends FieldBlock {
 	private const NAME = 'cwp/file-upload';
 
 	/**
@@ -44,7 +43,6 @@ class File extends Block {
 		$label            = $attributes['label'] ?? '';
 		$show_hint        = $attributes['showHint'] ?? false;
 		$hint             = $attributes['hint'] ?? '';
-		$placeholder      = $attributes['message'] ?? '';
 		$error_messages   = $attributes['messages'] ?? array();
 		$enable_condition = $attributes['enableCondition'] ?? false;
 		$condition        = $enable_condition
@@ -52,47 +50,60 @@ class File extends Block {
 			: array();
 
 		// Custom attributes.
-    // TODO add custom attributes
+
+		$allowed_formats = $attributes['accept'] ?? array(
+			"jpg",
+			"jpeg",
+			"png",
+			"gif",
+			"pdf",
+			"doc",
+			"docx",
+			"ppt",
+			"pptx",
+			"odt",
+			"avi",
+			"ogg",
+			"m4a",
+			"mov",
+			"mp3",
+			"mp4",
+			"mpg",
+			"wav",
+			"wmv"
+		);
+
+		$allowed_formats = array_map(
+			function($item) {
+				return '.' . $item;
+			},
+			$allowed_formats
+		);
+
+		$allowed_formats = implode(',', $allowed_formats);
 
 		ob_start();
 		?>
-    // TODO remove File name
-    <h2>File</h2>
-		<!-- <div class="cwp-email cwp-field" data-condition="<?php //echo esc_html( wp_json_encode( $condition ) ); ?>">
+		<div class="cwp-file cwp-field" data-condition="<?php echo esc_html( wp_json_encode( $condition ) ); ?>">
 			<div class="cwp-field-set">
-				<?php //if ( ! empty( $label ) ) : ?>
-					<label for="<?php //echo esc_attr( $id ); ?>">
-						<?php //echo esc_html( $label ); ?>
+				<?php echo $this->map_label( $is_required, $label, $required_label, $id ); ?>
 
-						<?php //if ( $is_required && ! empty( $required_label ) ) : ?>
-							<abbr title="required" aria-label="required">
-								<?php //echo esc_html( $required_label ); ?>
-							</abbr>
-						<?php //endif; ?>
-					</label>
-				<?php //endif; ?>
-
-				<TODO
-					name="<?php //echo esc_attr( $id ); ?>"
-					id="<?php //echo esc_attr( $id ); ?>"
-					type="email"
-					required="<?php //echo esc_attr( $is_required ); ?>"
-					placeholder="<?php //echo esc_attr( $placeholder ); ?>"
+				<input
+					name="<?php echo esc_attr( $id ); ?>"
+					id="<?php echo esc_attr( $id ); ?>"
+					type="file"
+					required="<?php echo esc_attr( $is_required ); ?>"
 					title=""
-					data-errors="<?php //echo esc_attr( wp_json_encode( $error_messages ) ); ?>"
+					data-errors="<?php echo esc_attr( wp_json_encode( $error_messages ) ); ?>"
 					data-rule="false"
 					data-cwp-field
-					data-validation="email"
-					data-parsley-type="email"
+					accept="<?php echo esc_attr( $allowed_formats ); ?>"
 				/>
 			</div>
 
-			<?php //if ( $show_hint && ! empty( $hint ) ): ?>
-				<p class="cwp-hint">
-					<?php //echo esc_html( $hint ); ?>
-				</p>
-			<?php //endif; ?>
-		</div> -->
-		<?php return ob_get_clean();
+			<?php echo $this->map_hint( $show_hint, $hint ); ?>
+		</div>
+		<?php
+		return ob_get_clean();
 	}
 }

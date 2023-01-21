@@ -8,7 +8,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 2.9.9.1
  */
-class Textarea extends Block {
+class Textarea extends FieldBlock {
 	private const NAME = 'cwp/message';
 
 	/**
@@ -60,17 +60,7 @@ class Textarea extends Block {
 		?>
 		<div class="cwp-message cwp-field" data-condition="<?php echo esc_html( wp_json_encode( $condition ) ); ?>">
 			<div class="cwp-field-set">
-				<?php if ( ! empty( $label ) ) : ?>
-					<label for="<?php echo esc_attr( $id ); ?>">
-						<?php echo esc_html( $label ); ?>
-
-						<?php if ( $is_required && ! empty( $required_label ) ) : ?>
-							<abbr title="required" aria-label="required">
-								<?php echo esc_html( $required_label ); ?>
-							</abbr>
-						<?php endif; ?>
-					</label>
-				<?php endif; ?>
+				<?php echo $this->map_label( $is_required, $label, $required_label, $id ); ?>
 
 				<textarea
 					name="<?php echo esc_attr( $id ); ?>"
@@ -87,12 +77,9 @@ class Textarea extends Block {
 				></textarea>
 			</div>
 
-			<?php if ( $show_hint && ! empty( $hint ) ): ?>
-				<p class="cwp-hint">
-					<?php echo esc_html( $hint ); ?>
-				</p>
-			<?php endif; ?>
+			<?php echo $this->map_hint( $show_hint, $hint ); ?>
 		</div>
-		<?php return ob_get_clean();
+		<?php
+		return ob_get_clean();
 	}
 }

@@ -67,7 +67,9 @@ function save(props) {
 		"wmv"
 	  ]
 
-	const acceptFiles = isEmpty(allowedFormats) ? suggestions.map(s => ".".concat(s)).join(",") : allowedFormats.map(s => ".".concat(s)).join(",");
+	const acceptFiles = isEmpty(allowedFormats)
+		? suggestions.map(s => ".".concat(s)).join(",")
+		: allowedFormats.map(s => ".".concat(s)).join(",");
 
 	return (
 		<div className="cwp-file cwp-field" {...getCondition()}>

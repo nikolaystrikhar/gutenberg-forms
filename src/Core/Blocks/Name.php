@@ -8,8 +8,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 2.9.9.1
  */
-class Name extends Block {
-	// TODO update NAME
+class Name extends FieldBlock {
 	private const NAME = 'cwp/name';
 
 	/**
@@ -51,48 +50,45 @@ class Name extends Block {
 			? $attributes['condition'] ?? array()
 			: array();
 
-		// Custom attributes.
-    // TODO add custom attributes
+		$prefix = $attributes['prefix'] ?? array(
+			'enable'   => false,
+			'content'  => '',
+			'position' => 'outside',
+		);
+		$suffix = $attributes['suffix'] ?? array(
+			'enable'   => false,
+			'content'  => '',
+			'position' => 'outside',
+		);
 
 		ob_start();
 		?>
-    // TODO remove Name name
-    <h2>Name</h2>
-		<!-- <div class="cwp-email cwp-field" data-condition="<?php //echo esc_html( wp_json_encode( $condition ) ); ?>">
+		<div class="cwp-name cwp-field" data-condition="<?php echo esc_html( wp_json_encode( $condition ) ); ?>">
 			<div class="cwp-field-set">
-				<?php //if ( ! empty( $label ) ) : ?>
-					<label for="<?php //echo esc_attr( $id ); ?>">
-						<?php //echo esc_html( $label ); ?>
+				<?php echo $this->map_label( $is_required, $label, $required_label, $id ); ?>
 
-						<?php //if ( $is_required && ! empty( $required_label ) ) : ?>
-							<abbr title="required" aria-label="required">
-								<?php //echo esc_html( $required_label ); ?>
-							</abbr>
-						<?php //endif; ?>
-					</label>
-				<?php //endif; ?>
+				<div class="cwp-field-with-elements">
+					<?php echo $this->map_prefix( $prefix['enable'], $prefix['content'], $prefix['position'] ); ?>
 
-				<TODO
-					name="<?php //echo esc_attr( $id ); ?>"
-					id="<?php //echo esc_attr( $id ); ?>"
-					type="email"
-					required="<?php //echo esc_attr( $is_required ); ?>"
-					placeholder="<?php //echo esc_attr( $placeholder ); ?>"
-					title=""
-					data-errors="<?php //echo esc_attr( wp_json_encode( $error_messages ) ); ?>"
-					data-rule="false"
-					data-cwp-field
-					data-validation="email"
-					data-parsley-type="email"
-				/>
+					<input
+						name="<?php echo esc_attr( $id ); ?>"
+						id="<?php echo esc_attr( $id ); ?>"
+						type="text"
+						required="<?php echo esc_attr( $is_required ); ?>"
+						placeholder="<?php echo esc_attr( $placeholder ); ?>"
+						title=""
+						data-errors="<?php echo esc_attr( wp_json_encode( $error_messages ) ); ?>"
+						data-rule="false"
+						data-cwp-field
+					/>
+
+					<?php echo $this->map_suffix( $suffix['enable'], $suffix['content'], $suffix['position'] ); ?>
+				</div>
 			</div>
 
-			<?php //if ( $show_hint && ! empty( $hint ) ): ?>
-				<p class="cwp-hint">
-					<?php //echo esc_html( $hint ); ?>
-				</p>
-			<?php //endif; ?>
-		</div> -->
-		<?php return ob_get_clean();
+			<?php echo $this->map_hint( $show_hint, $hint ); ?>
+		</div>
+		<?php
+		return ob_get_clean();
 	}
 }
