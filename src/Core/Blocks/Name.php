@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
  */
 class Name extends Block {
 	// TODO update NAME
-	private const NAME = 'cwp/Name';
+	private const NAME = 'cwp/name';
 
 	/**
 	 * Returns a block name.

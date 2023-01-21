@@ -1,8 +1,4 @@
-/**
- *
- * ! DEPRECATED EDIT VERSION
- *
- */
+// ! Deprecated Name Edit Version 1
 
 import React, { useEffect, Fragment } from "react";
 import {
@@ -19,16 +15,16 @@ import {
 	getEncodedData,
 	extract_admin_id,
 	get_admin_id,
-} from "../../../block/misc/helper";
+} from "../../../../block/misc/helper";
 import {
 	getRootMessages,
 	detect_similar_forms,
-} from "../../../block/functions/index";
-import ConditionalLogic from "../../../block/components/condition";
+} from "../../../../block/functions/index";
+import ConditionalLogic from "../../../../block/components/condition";
 
 import { clone, set, assign } from "lodash";
-import Prefix from "../../components/prefix";
-import Suffix from "../../components/suffix";
+import Prefix from "../../../components/prefix";
+import Suffix from "../../../components/suffix";
 
 const { __ } = wp.i18n;
 const {

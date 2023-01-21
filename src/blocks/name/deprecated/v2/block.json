@@ -5,9 +5,9 @@
 			"type": "boolean",
 			"default": false
 		},
-		"version": {
-			"type": "number",
-			"default": 3
+		"name": {
+			"type": "string",
+			"default": ""
 		},
 		"isRequired": {
 			"type": "boolean",

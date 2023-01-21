@@ -1,11 +1,11 @@
-import './style.scss';
+// ! Deprecated Name Save Version 1
 
 import React from "react";
 import { isEmpty } from "lodash";
-import { strip_tags } from "../../block/misc/helper";
-import { stringifyCondition } from "../../block/functions";
-import Prefix from "../components/prefix";
-import Suffix from "../components/suffix";
+import { strip_tags } from "../../../../block/misc/helper";
+import { stringifyCondition } from "../../../../block/functions";
+import Prefix from "../../../components/prefix";
+import Suffix from "../../../components/suffix";
 
 function save(props) {
 	const {
@@ -20,8 +20,6 @@ function save(props) {
 		enableCondition,
 		prefix,
 		suffix,
-		hint,
-		showHint
 	} = props.attributes;
 
 	const getLabel = () => {
@@ -80,7 +78,6 @@ function save(props) {
 						name={id}
 						title={invalidName}
 						data-errors={errors}
-						type="text"
 						data-rule="false"
 						placeholder={name}
 						required={isRequired}
@@ -93,9 +90,6 @@ function save(props) {
 					)}
 				</div>
 			</div>
-			{showHint && (
-				<p className="cwp-hint">{hint}</p>
-			)}
 		</div>
 	);
 }
