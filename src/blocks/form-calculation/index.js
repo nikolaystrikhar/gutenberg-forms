@@ -1,24 +1,22 @@
-const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
+const { __ } = wp.i18n;
 
-import calculationEdit from "./edit.js";
-import calculationSave from "./save.js";
-import { fieldParents } from "../../constants";
 import Icon from "../../block/Icon.js";
-
-import blockData from "./block.json";
-const { attributes, title } = blockData;
+import { attributes, title } from "./block.json";
+import calculationEdit from "./edit.js";
+import { fieldParents } from "../../constants";
+import { deprecated } from "./deprecated/deprecated";
 
 registerBlockType("cwp/form-calculation", {
-	title: __(title),
-	icon: __(<Icon icon="calculation" />),
+	title: __(title, "forms-gutenberg"),
+	icon: __(<Icon icon="calculation" />, "forms-gutenberg"),
 	category: "gutenberg-forms",
-	keywords: [__("gutenberg-forms"), __("forms"), __("calculation")],
-	edit: calculationEdit,
-	save: calculationSave,
-	attributes,
+	keywords: [__("gutenberg-forms", "forms-gutenberg"), __("forms", "forms-gutenberg"), __("calculation", "forms-gutenberg")],
 	supports: {
 		align: ["wide", "full", "center"],
 	},
+	attributes,
+	edit: calculationEdit,
 	parent: fieldParents,
+	deprecated: deprecated,
 });

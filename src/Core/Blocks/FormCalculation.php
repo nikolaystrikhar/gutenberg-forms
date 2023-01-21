@@ -4,13 +4,13 @@ namespace GutenbergForms\Core\Blocks;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Calculation block.
+ * FormCalculation block.
  *
  * @since 2.9.9.1
  */
-class Calculation extends Block {
+class FormCalculation extends Block {
 	// TODO update NAME
-	private const NAME = 'cwp/calculation';
+	private const NAME = 'cwp/form-calculation';
 
 	/**
 	 * Returns a block name.
@@ -56,8 +56,8 @@ class Calculation extends Block {
 
 		ob_start();
 		?>
-    // TODO remove Calculation name
-    <h2>Calculation</h2>
+    // TODO remove FormCalculation name
+    <h2>FormCalculation</h2>
 		<!-- <div class="cwp-email cwp-field" data-condition="<?php //echo esc_html( wp_json_encode( $condition ) ); ?>">
 			<div class="cwp-field-set">
 				<?php //if ( ! empty( $label ) ) : ?>
