@@ -1,8 +1,4 @@
-/**
- *
- * ! DEPRECATED EDIT VERSION
- *
- */
+// ! Deprecated Select Save Version 2
 
 import React, { useState, useEffect, useRef, Fragment } from "react";
 import {
@@ -21,15 +17,15 @@ import {
 	strip_tags,
 	extract_admin_id,
 	get_admin_id,
-} from "../../../block/misc/helper";
+} from "../../../../block/misc/helper";
 
 import { clone, pullAt, set, assign } from "lodash";
 import {
 	getRootMessages,
 	detect_similar_forms,
-} from "../../../block/functions/index";
-import ConditionalLogic from "../../../block/components/condition";
-import Bulk_Add from "../../components/bulk_add";
+} from "../../../../block/functions/index";
+import ConditionalLogic from "../../../../block/components/condition";
+import Bulk_Add from "../../../components/bulk_add";
 
 const { __ } = wp.i18n;
 const { InspectorControls, BlockControls, BlockIcon } = wp.blockEditor;
@@ -49,6 +45,8 @@ function edit(props) {
 		enableCondition,
 		bulkAdd,
 		adminId,
+		hint,
+		showHint
 	} = props.attributes;
 
 	const [select, setSelect] = useState([]);
@@ -264,9 +262,6 @@ function edit(props) {
 	const SelectView = () => {
 		return (
 			<select data-cwp-field>
-				<option value="" disabled selected>
-					Select your option
-				</option>
 				{select.map((s, index) => {
 					return <option value={s.label}>{s.label}</option>;
 				})}
@@ -311,6 +306,28 @@ function edit(props) {
 								props.setAttributes({ requiredLabel: label })
 							}
 							value={requiredLabel}
+						/>
+					</div>
+				)}
+
+				<div className="cwp-option">
+					<PanelRow>
+						<h3 className="cwp-heading">
+							{__("Show Hint", "forms-gutenberg")}
+						</h3>
+						<FormToggle
+							checked={showHint}
+							onChange={() => props.setAttributes({ showHint: !showHint })}
+						/>
+					</PanelRow>
+				</div>
+
+				{showHint && (
+					<div className="cwp-option">
+						<TextControl
+							label={__("Hint Text", "forms-gutenberg")}
+							onChange={(hint) => props.setAttributes({ hint })}
+							value={hint}
 						/>
 					</div>
 				)}
@@ -383,6 +400,9 @@ function edit(props) {
 					</div>
 				</Fragment>
 			)}
+			{showHint && (
+                <p className="cwp-hint">{hint}</p>
+            )}
 		</div>,
 	];
 }

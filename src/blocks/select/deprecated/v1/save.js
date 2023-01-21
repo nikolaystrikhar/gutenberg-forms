@@ -1,6 +1,8 @@
+// ! Deprecated Select Save Version 1
+
 import React from "react";
 import { isEmpty } from "lodash";
-import { stringifyCondition } from "../../block/functions";
+import { stringifyCondition } from "../../../../block/functions";
 
 function save(props) {
 	const {
@@ -12,8 +14,6 @@ function save(props) {
 		messages,
 		messages: { empty },
 		condition,
-		hint,
-		showHint
 	} = props.attributes;
 
 	const getLabel = () => {
@@ -52,23 +52,19 @@ function save(props) {
 					name={id}
 					id={id}
 					data-rule="false"
-					// value={label}
+					value={label}
 					data-cwp-field
 					data-errors={errors}
 					required={isRequired}
 				>
+					<option value="" disabled selected>
+						Select your option
+					</option>
 					{options.map((s, index) => {
-						return (
-							<option selected={index === 0} value={s.label}>
-								{s.label}
-							</option>
-						);
+						return <option value={s.label}>{s.label}</option>;
 					})}
 				</select>
 			</div>
-			{showHint && (
-                <p className="cwp-hint">{hint}</p>
-            )}
 		</div>
 	);
 }

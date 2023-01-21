@@ -1,13 +1,6 @@
-import { attributes } from "../block.json";
+// ! Deprecated EXAMPLE Versions
 
-// deprecated version
-import edit from "./edit";
-import save from "./save";
+import { v1 } from './v1/v1';
+import { v2 } from './v2/v2';
 
-export const deprecated = [
-	{
-		attributes,
-		edit,
-		save,
-	},
-];
+export const deprecated = [ v2, v1 ];
