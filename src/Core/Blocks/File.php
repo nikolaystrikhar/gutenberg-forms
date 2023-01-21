@@ -10,7 +10,7 @@ defined( 'ABSPATH' ) || exit;
  */
 class File extends Block {
 	// TODO update NAME
-	private const NAME = 'cwp/file';
+	private const NAME = 'cwp/file-upload';
 
 	/**
 	 * Returns a block name.
