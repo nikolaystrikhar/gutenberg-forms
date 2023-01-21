@@ -1,25 +1,20 @@
-const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
+const { __ } = wp.i18n;
 
+import { attributes, title } from "./block.json";
 import phoneEdit from "./edit.js";
-import phoneSave from "./save.js";
-import { getFieldTransform } from "../../block/functions";
 import { fieldParents, myAttrs } from "../../constants";
-
-import blockData from "./block.json";
-import { deprecated } from "./deprecated/deprected";
-
-const { attributes, title } = blockData;
+import { getFieldTransform } from "../../block/functions";
+import { deprecated } from "./deprecated/deprecated";
 
 registerBlockType("cwp/phone", {
-	title: __(title),
+	title: __(title, "forms-gutenberg"),
 	icon: "phone",
 	category: "gutenberg-forms",
-	keywords: [__("gutenberg-forms"), __("forms"), __("phone")],
-	edit: phoneEdit,
-	save: phoneSave,
+	keywords: [__("gutenberg-forms", "forms-gutenberg"), __("forms", "forms-gutenberg"), __("phone", "forms-gutenberg")],
 	attributes,
-	deprecated,
+	edit: phoneEdit,
+	parent: fieldParents,
 	transforms: {
 		from: [
 			{
@@ -29,5 +24,5 @@ registerBlockType("cwp/phone", {
 			},
 		],
 	},
-	parent: fieldParents,
+	deprecated: deprecated,
 });

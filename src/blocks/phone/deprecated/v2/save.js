@@ -1,13 +1,11 @@
-/**
- *
- * ! DEPRECATED SAVE VERSION
- *
- */
+// ! Deprecated Phone Save Version 2
 
 import React from "react";
 import { isEmpty } from "lodash";
-import { strip_tags } from "../../../block/misc/helper";
-import { stringifyCondition } from "../../../block/functions";
+import { strip_tags } from "../../../../block/misc/helper";
+import { stringifyCondition } from "../../../../block/functions";
+import Prefix from "../../../components/prefix";
+import Suffix from "../../../components/suffix";
 
 function save(props) {
 	const {
@@ -19,6 +17,10 @@ function save(props) {
 		messages: { empty, invalid },
 		pattern,
 		condition,
+		prefix,
+		suffix,
+		hint,
+		showHint
 	} = props.attributes;
 
 	const getLabel = () => {
@@ -44,7 +46,7 @@ function save(props) {
 
 	const getCondition = () => {
 		if (props.attributes.enableCondition && !isEmpty(condition.field)) {
-			// verifying the condition
+			//verifying the condition
 			return {
 				"data-condition": stringifyCondition(condition),
 			};
@@ -62,20 +64,36 @@ function save(props) {
 						dangerouslySetInnerHTML={{ __html: getLabel() }}
 					></label>
 				)}
-				<input
-					id={id}
-					aria-label={strip_tags(label)}
-					data-cwp-field
-					data-errors={errors}
-					name={id}
-					type="tel"
-					data-phone="true"
-					data-rule="false"
-					placeholder={phone}
-					{...getPattern()}
-					required={isRequired}
-				/>
+
+				<div className="cwp-field-with-elements">
+					{prefix.enable && (
+						<Prefix prefix={prefix}>
+							<span dangerouslySetInnerHTML={{ __html: prefix.content }}></span>
+						</Prefix>
+					)}
+					<input
+						id={id}
+						aria-label={strip_tags(label)}
+						data-cwp-field
+						data-errors={errors}
+						name={id}
+						type="tel"
+						data-phone="true"
+						data-rule="false"
+						placeholder={phone}
+						{...getPattern()}
+						required={isRequired}
+					/>
+					{suffix.enable && (
+						<Suffix suffix={suffix}>
+							<span dangerouslySetInnerHTML={{ __html: suffix.content }}></span>
+						</Suffix>
+					)}
+				</div>
 			</div>
+			{showHint && (
+                <p className="cwp-hint">{hint}</p>
+            )}
 		</div>
 	);
 }

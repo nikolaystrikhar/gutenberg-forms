@@ -1,0 +1,87 @@
+{
+	"title": "Phone",
+	"attributes": {
+		"enableCondition": {
+			"type": "boolean",
+			"default": false
+		},
+		"phone": {
+			"type": "string",
+			"default": ""
+		},
+		"isRequired": {
+			"type": "boolean",
+			"default": false
+		},
+		"label": {
+			"type": "string",
+			"default": "Phone:"
+		},
+		"id": {
+			"type": "string",
+			"default": ""
+		},
+		"field_name": {
+			"type": "string",
+			"default": ""
+		},
+		"requiredLabel": {
+			"type": "string",
+			"default": "*"
+		},
+		"messages": {
+			"type": "object",
+			"default": {
+				"empty": "Please fill out this field!",
+				"invalid": "The phone {{value}} is not valid!"
+			}
+		},
+		"pattern": {
+			"type": "string",
+			"default": "[\\+\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d\\d]+"
+		},
+		"condition": {
+			"type": "object",
+			"default": {
+				"field": null,
+				"condition": "===",
+				"value": ""
+			}
+		},
+		"requiredLabel": {
+			"type": "string",
+			"default": "*"
+		},
+		"adminId": {
+			"type": "object",
+			"default": {
+				"default": "",
+				"value": ""
+			}
+		},
+		"prefix": {
+			"type": "object",
+			"default": {
+				"enable": false,
+				"content": "",
+				"position": "outside"
+			}
+		},
+		"suffix": {
+			"type": "object",
+			"default": {
+				"enable": false,
+				"content": "",
+				"position": "outside"
+			}
+		},
+		"showHint" :{
+			"type": "boolean",
+			"default": false
+		},
+		"hint": {
+			"type": "string",
+			"default": ""
+		}
+	}
+}

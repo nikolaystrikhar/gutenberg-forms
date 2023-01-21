@@ -1,9 +1,4 @@
-/**
- *
- *
- * ! DEPRECATED EDIT VERSION
- *
- */
+// ! Deprecated Phone Edit Version 1
 
 import React, { useEffect } from "react";
 import {
@@ -20,14 +15,14 @@ import {
 	getEncodedData,
 	extract_admin_id,
 	get_admin_id,
-} from "../../../block/misc/helper";
+} from "../../../../block/misc/helper";
 
 import { clone, set, assign } from "lodash";
 import {
 	getRootMessages,
 	detect_similar_forms,
-} from "../../../block/functions/index";
-import ConditionalLogic from "../../../block/components/condition";
+} from "../../../../block/functions/index";
+import ConditionalLogic from "../../../../block/components/condition";
 const { __ } = wp.i18n;
 
 const {
