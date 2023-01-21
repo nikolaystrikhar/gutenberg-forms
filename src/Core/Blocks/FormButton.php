@@ -4,13 +4,13 @@ namespace GutenbergForms\Core\Blocks;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * Button block.
+ * FormButton block.
  *
  * @since 2.9.9.1
  */
-class Button extends Block {
+class FormButton extends Block {
 	// TODO update NAME
-	private const NAME = 'cwp/button';
+	private const NAME = 'cwp/formButton';
 
 	/**
 	 * Returns a block name.
@@ -56,8 +56,8 @@ class Button extends Block {
 
 		ob_start();
 		?>
-    // TODO remove Button name
-    <h2>Button</h2>
+    // TODO remove FormButton name
+    <h2>FormButton</h2>
 		<!-- <div class="cwp-email cwp-field" data-condition="<?php //echo esc_html( wp_json_encode( $condition ) ); ?>">
 			<div class="cwp-field-set">
 				<?php //if ( ! empty( $label ) ) : ?>

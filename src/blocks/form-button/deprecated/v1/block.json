@@ -1,0 +1,30 @@
+{
+	"title": "Button",
+	"attributes": {
+		"label": {
+			"type": "string",
+			"default": "Submit"
+		},
+		"parentId": {
+			"type": "string",
+			"default": ""
+		},
+		"action": {
+			"default": "submit",
+			"type": "string"
+		},
+		"styling": {
+			"type": "object",
+			"default": {
+				"backgroundColor": "rgb(238, 238, 238)",
+				"color": "rgb(49, 49, 49)",
+				"padding": 25,
+				"borderRadius": 0
+			}
+		}
+	},
+	"supports": {
+		"align": true,
+		"align": ["wide", "full", "center", "left", "right"]
+	}
+}

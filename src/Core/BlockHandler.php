@@ -6,13 +6,13 @@ use GutenbergForms\Core\Blocks\Email;
 use GutenbergForms\Core\Blocks\Textarea;
 
 // TODO update Mocked Classes
-// use GutenbergForms\Core\Blocks\Button;
 // use GutenbergForms\Core\Blocks\Calculation;
 use GutenbergForms\Core\Blocks\Checkbox;
 use GutenbergForms\Core\Blocks\Column;
 // use GutenbergForms\Core\Blocks\Components;
 use GutenbergForms\Core\Blocks\Datepicker;
 use GutenbergForms\Core\Blocks\File;
+use GutenbergForms\Core\Blocks\FormButton;
 // use GutenbergForms\Core\Blocks\FormColumn;
 // use GutenbergForms\Core\Blocks\FormSteps;
 // use GutenbergForms\Core\Blocks\Group;
@@ -48,13 +48,13 @@ class BlockHandler {
 		Textarea::init();
 		Email::init();
 		// TODO update Mocked Classes
-		// Button::init();
 		// Calculation::init();
 		Checkbox::init();
 		Column::init();
 		// Components::init();
 		Datepicker::init();	
 		File::init();
+		FormButton::init();
 		// Form_Column::init();
 		// Form_Steps::init();
 		// Group::init();
