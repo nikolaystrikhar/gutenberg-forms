@@ -27,7 +27,7 @@ use GutenbergForms\Core\Blocks\Select;
 // use GutenbergForms\Core\Blocks\Step;
 use GutenbergForms\Core\Blocks\Text;
 use GutenbergForms\Core\Blocks\Website;
-// use GutenbergForms\Core\Blocks\YesNo;
+use GutenbergForms\Core\Blocks\YesNo;
 
 
 
@@ -69,6 +69,6 @@ class BlockHandler {
 		// Step::init();
 		Text::init();
 		Website::init();
-		// Yes_No::init();
+		YesNo::init();
 	}
 }

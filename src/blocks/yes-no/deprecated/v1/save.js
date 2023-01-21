@@ -1,6 +1,8 @@
+// ! Deprecated YesNo Save Version 1
+
 import React from "react";
 import { isEmpty } from "lodash";
-import { strip_tags } from "../../block/misc/helper";
+import { strip_tags } from "../../../../block/misc/helper";
 
 function save(props) {
 	const { yes_no, isRequired, label, id, requiredLabel } = props.attributes;

@@ -8,9 +8,9 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 2.9.9.1
  */
-class yesNo extends Block {
+class YesNo extends Block {
 	// TODO update NAME
-	private const NAME = 'cwp/yesNo';
+	private const NAME = 'cwp/yes-no';
 
 	/**
 	 * Returns a block name.
