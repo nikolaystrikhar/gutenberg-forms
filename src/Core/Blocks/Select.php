@@ -55,7 +55,7 @@ class Select extends FieldBlock {
 
 		ob_start();
 		?>
-		<div class="cwp-select cwp-field" data-condition="<?php echo esc_attr( wp_json_encode( $condition ) ); ?>">
+		<div class="cwp-select cwp-field" data-condition="<?php echo esc_attr( ! empty( $condition ) ? wp_json_encode( $condition ) : '' ); ?>">
 			<div class="cwp-field-set cwp-select-set">
 				<?php echo $this->map_label( $is_required, $label, $required_label, $id ); ?>
 
@@ -63,7 +63,7 @@ class Select extends FieldBlock {
 					name="<?php echo esc_attr( $id ); ?>"
 					id="<?php echo esc_attr( $id ); ?>"
 					required="<?php echo esc_attr( $is_required ); ?>"
-					data-errors="<?php echo esc_attr( wp_json_encode( $error_messages ) ); ?>"
+					data-errors="<?php echo esc_attr( ! empty( $error_messages ) ? wp_json_encode( $error_messages ) : '' ); ?>"
 					data-rule="false"
 					data-cwp-field
 				>

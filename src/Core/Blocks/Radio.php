@@ -58,10 +58,10 @@ class Radio extends FieldBlock {
 		?>
 		<div
 			class="cwp-radio cwp-field <?php echo esc_attr( $field_style ); ?>"
-			data-condition="<?php echo esc_attr( wp_json_encode( $condition ) ); ?>"
+			data-condition="<?php echo esc_attr( ! empty( $condition ) ? wp_json_encode( $condition ) : '' ); ?>"
 		>
 			<div
-				data-errors="<?php echo esc_attr( wp_json_encode( $error_messages ) ); ?>"
+				data-errors="<?php echo esc_attr( ! empty( $error_messages ) ? wp_json_encode( $error_messages ) : '' ); ?>"
 				class="cwp-radio-set <?php echo esc_attr( $is_required ? 'required-radio' : '' ); ?>"
 			>
 				<?php echo $this->map_label( $is_required, $label, $required_label, $id ); ?>

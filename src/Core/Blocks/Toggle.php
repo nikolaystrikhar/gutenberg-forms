@@ -67,7 +67,7 @@ class Toggle extends FieldBlock {
 
 		ob_start();
 		?>
-		<div class="cwp-yes-no cwp-field" data-condition="<?php echo esc_attr( wp_json_encode( $condition ) ); ?>">
+		<div class="cwp-yes-no cwp-field" data-condition="<?php echo esc_attr( ! empty( $condition ) ? wp_json_encode( $condition ) : '' ); ?>">
 			<div class="cwp-field-set">
 				<?php echo $this->map_label( $is_required, $label, $required_label, $id ); ?>
 
