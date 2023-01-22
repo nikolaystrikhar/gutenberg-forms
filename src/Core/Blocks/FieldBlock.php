@@ -19,7 +19,7 @@ abstract class FieldBlock extends Block {
 	 * @param string $required_label Required label.
 	 * @param string $input_id       Input ID.
 	 *
-	 * @return void
+	 * @return string
 	 */
 	protected function map_label( bool $is_required, string $label, string $required_label, string $input_id ): string {
 		if ( empty( $label ) ) {
@@ -49,7 +49,7 @@ abstract class FieldBlock extends Block {
 	 * @param bool   $enabled Hint enabled.
 	 * @param string $text    Hint text.
 	 *
-	 * @return void
+	 * @return string
 	 */
 	protected function map_hint( bool $enabled, string $text ): string {
 		if ( ! $enabled || empty( $text ) ) {
@@ -74,7 +74,7 @@ abstract class FieldBlock extends Block {
 	 * @param string $text     Prefix text.
 	 * @param string $position Prefix position.
 	 *
-	 * @return void
+	 * @return string
 	 */
 	protected function map_prefix( bool $enabled, string $text, string $position ): string {
 		if ( ! $enabled || empty( $text ) ) {
@@ -101,7 +101,7 @@ abstract class FieldBlock extends Block {
 	 * @param string $text     Suffix text.
 	 * @param string $position Suffix position.
 	 *
-	 * @return void
+	 * @return string
 	 */
 	protected function map_suffix( bool $enabled, string $text, string $position ): string {
 		if ( ! $enabled || empty( $text ) ) {

@@ -9,6 +9,8 @@ defined( 'ABSPATH' ) || exit;
  * @since 2.9.9.1
  */
 class Calculation extends FieldBlock {
+	use Traits\HasStyles;
+
 	private const NAME = 'cwp/form-calculation';
 
 	/**
@@ -51,14 +53,12 @@ class Calculation extends FieldBlock {
 			'fontSize' => 40,
 		);
 
-		$styling = array(
-			'font-size' => $styling['fontSize'] . 'px',
+		$style = $this->map_style_attribute(
+			array(
+				'font-size' => $styling['fontSize'] . 'px',
+			)
 		);
 
-		$style = '';
-		foreach ( $styling as $key => $value ) {
-			$style .= $key . ':' . $value . ';';
-		}
 		ob_start();
 		?>
 		<div

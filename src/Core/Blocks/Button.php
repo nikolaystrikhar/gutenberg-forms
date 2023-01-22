@@ -9,6 +9,8 @@ defined( 'ABSPATH' ) || exit;
  * @since 2.9.9.1
  */
 class Button extends Block {
+	use Traits\HasStyles;
+
 	private const NAME = 'cwp/form-button';
 
 	/**
@@ -37,24 +39,21 @@ class Button extends Block {
 		$label     = $attributes['label'] ?? esc_html__( 'Submit', 'forms-gutenberg' );
 		$action    = $attributes['action'] ?? 'submit';
 		$parent_id = $attributes['parentId'] ?? '';
-
-		$styling = $attributes['styling'] ?? array(
+		$styling   = $attributes['styling'] ?? array(
 			'backgroundColor' => '#6d6d6d',
 			'color'           => 'rgb(49, 49, 49)',
 			'padding'         => 25,
-			"borderRadius"    => 0,
-		);
-		$styling = array(
-			'background-color' => $styling['backgroundColor'],
-			'color'            => $styling['color'],
-			'padding'          => floor( $styling['padding'] / 3 ) . 'px ' . $styling['padding'] . 'px',
-			'border-radius'    => $styling['borderRadius'] . 'px',
+			'borderRadius'    => 0,
 		);
 
-		$style = '';
-		foreach ( $styling as $key => $value ) {
-			$style .= $key . ':' . $value . ';';
-		}
+		$style = $this->map_style_attribute(
+			array(
+				'background-color' => $styling['backgroundColor'],
+				'color'            => $styling['color'],
+				'padding'          => floor( $styling['padding'] / 3 ) . 'px ' . $styling['padding'] . 'px',
+				'border-radius'    => $styling['borderRadius'] . 'px',
+			)
+		);
 
 		ob_start();
 		?>

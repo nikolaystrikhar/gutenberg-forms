@@ -8,8 +8,9 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 2.9.9.1
  */
-class Progress extends Block {
-	// TODO update NAME
+class Progress extends FieldBlock {
+	use Traits\HasStyles;
+
 	private const NAME = 'cwp/progress';
 
 	/**
@@ -33,66 +34,51 @@ class Progress extends Block {
 	 * @return string
 	 */
 	public function render( array $attributes ): string {
-		// Attributes that always exist.
-
-		$id = $attributes['id'];
-
-		// Stable attributes.
-
-		$is_required      = $attributes['isRequired'] ?? false;
-		$required_label   = $attributes['requiredLabel'] ?? '*';
-		$label            = $attributes['label'] ?? '';
-		$show_hint        = $attributes['showHint'] ?? false;
-		$hint             = $attributes['hint'] ?? '';
-		$placeholder      = $attributes['message'] ?? '';
-		$error_messages   = $attributes['messages'] ?? '';
-		$enable_condition = $attributes['enableCondition'] ?? false;
-		$condition        = $enable_condition
-			? $attributes['condition'] ?? ''
-			: '';
-
 		// Custom attributes.
-    // TODO add custom attributes
+
+		$show_percentage     = $attributes['showPercentage'] ?? false;
+		$progress_color      = $attributes['progressColor'] ?? 'rgb(238, 238, 238)';
+		$progress_fill_color = $attributes['progressFillColor'] ?? 'rgb(6, 147, 227)';
+		$text_color          = $attributes['textColor'] ?? 'rgb(238, 238, 238)';
+		$thickness           = $attributes['thickness'] ?? 20;
+		$corner_radius       = $attributes['cornerRadius'] ?? 0;
+
+		$styles = array(
+			'base' => $this->map_style_attribute(
+				array(
+					'background-color' => $progress_color,
+					'height'           => $thickness . 'px',
+					'border-radius'    => $corner_radius . 'px',
+				)
+			),
+			'fill' => $this->map_style_attribute(
+				array(
+					'background-color' => $progress_fill_color,
+					'border-radius'    => $corner_radius . 'px',
+				)
+			),
+			'text' => $this->map_style_attribute(
+				array(
+					'color' => $text_color,
+				)
+			),
+		);
 
 		ob_start();
 		?>
-    // TODO remove Progress name
-    <h2>Progress</h2>
-		<!-- <div class="cwp-email cwp-field" data-condition="<?php //echo esc_html( wp_json_encode( $condition ) ); ?>">
-			<div class="cwp-field-set">
-				<?php //if ( ! empty( $label ) ) : ?>
-					<label for="<?php //echo esc_attr( $id ); ?>">
-						<?php //echo esc_html( $label ); ?>
-
-						<?php //if ( $is_required && ! empty( $required_label ) ) : ?>
-							<abbr title="required" aria-label="required">
-								<?php //echo esc_html( $required_label ); ?>
-							</abbr>
-						<?php //endif; ?>
-					</label>
-				<?php //endif; ?>
-
-				<TODO
-					name="<?php //echo esc_attr( $id ); ?>"
-					id="<?php //echo esc_attr( $id ); ?>"
-					type="email"
-					required="<?php //echo esc_attr( $is_required ); ?>"
-					placeholder="<?php //echo esc_attr( $placeholder ); ?>"
-					title=""
-					data-errors="<?php //echo esc_attr( wp_json_encode( $error_messages ) ); ?>"
-					data-rule="false"
-					data-cwp-field
-					data-validation="email"
-					data-parsley-type="email"
-				/>
+		<div
+			class="cwp-gutenberg-form cwp-progress-bar"
+			style="<?php echo esc_attr( $styles['base'] ); ?>"
+		>
+			<div class="bar-fill" style="<?php echo esc_attr( $styles['fill'] ); ?>">
+				<?php if ( $show_percentage && $thickness > 10 ) : ?>
+					<span class="percentage-indicator" style="<?php echo esc_attr( $styles['text'] ); ?>">
+						50%
+					</span>
+				<?php endif; ?>
 			</div>
-
-			<?php //if ( $show_hint && ! empty( $hint ) ): ?>
-				<p class="cwp-hint">
-					<?php //echo esc_html( $hint ); ?>
-				</p>
-			<?php //endif; ?>
-		</div> -->
-		<?php return ob_get_clean();
+		</div>
+		<?php
+		return ob_get_clean();
 	}
 }
