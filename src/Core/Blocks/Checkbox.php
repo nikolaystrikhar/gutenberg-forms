@@ -62,7 +62,7 @@ class Checkbox extends FieldBlock {
 
 		// Custom attributes.
 
-		$options     = $attributes['options'] ?? array();
+		$options = $attributes['options'] ?? array();
 
 		ob_start();
 		?>
