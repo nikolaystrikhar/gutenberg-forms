@@ -10,7 +10,7 @@ use GutenbergForms\Core\Blocks\Column;
 // use GutenbergForms\Core\Blocks\Components;
 use GutenbergForms\Core\Blocks\Datepicker;
 use GutenbergForms\Core\Blocks\File;
-use GutenbergForms\Core\Blocks\FormButton;
+use GutenbergForms\Core\Blocks\Button;
 use GutenbergForms\Core\Blocks\FormCalculation;
 use GutenbergForms\Core\Blocks\FormColumn;
 use GutenbergForms\Core\Blocks\FormGroup;
@@ -54,12 +54,12 @@ class BlockHandler {
 		Select::init();
 		Radio::init();
 		Checkbox::init();
+		Button::init();
 		// TODO: update the following classes.
 		// Column::init(); // TODO: investigate 2 of our column blocks and a compatibility with the core column block.
 		// FormColumn::init(); // TODO: investigate 2 of our column blocks and a compatibility with the core column block.
 		// FormGroup::init(); // TODO: investigate our group block and a compatibility with the core column block.
 		// Components::init();
-		FormButton::init();
 		FormCalculation::init();
 		Progress::init();
 		ReusableForms::init();
