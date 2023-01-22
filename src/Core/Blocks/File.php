@@ -46,8 +46,8 @@ class File extends FieldBlock {
 		$error_messages   = $attributes['messages'] ?? array();
 		$enable_condition = $attributes['enableCondition'] ?? false;
 		$condition        = $enable_condition
-			? $attributes['condition'] ?? array()
-			: array();
+			? $attributes['condition'] ?? ''
+			: '';
 
 		// Custom attributes.
 
@@ -84,7 +84,7 @@ class File extends FieldBlock {
 
 		ob_start();
 		?>
-		<div class="cwp-file cwp-field" data-condition="<?php echo esc_html( wp_json_encode( $condition ) ); ?>">
+		<div class="cwp-file cwp-field" data-condition="<?php echo esc_attr( wp_json_encode( $condition ) ); ?>">
 			<div class="cwp-field-set">
 				<?php echo $this->map_label( $is_required, $label, $required_label, $id ); ?>
 

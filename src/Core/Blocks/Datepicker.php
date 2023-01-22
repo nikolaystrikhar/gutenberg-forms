@@ -48,8 +48,8 @@ class Datepicker extends Block {
 		$error_messages   = $attributes['messages'] ?? array();
 		$enable_condition = $attributes['enableCondition'] ?? false;
 		$condition        = $enable_condition
-			? $attributes['condition'] ?? array()
-			: array();
+			? $attributes['condition'] ?? ''
+			: '';
 
 		// Custom attributes.
     // TODO add custom attributes

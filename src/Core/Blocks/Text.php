@@ -57,8 +57,8 @@ class Text extends FieldBlock {
 		$error_messages   = $attributes['messages'] ?? array();
 		$enable_condition = $attributes['enableCondition'] ?? false;
 		$condition        = $enable_condition
-			? $attributes['condition'] ?? array()
-			: array();
+			? $attributes['condition'] ?? ''
+			: '';
 
 		$prefix = $attributes['prefix'] ?? array(
 			'enable'   => false,
@@ -78,7 +78,7 @@ class Text extends FieldBlock {
 
 		ob_start();
 		?>
-		<div class="cwp-text cwp-field" data-condition="<?php echo esc_html( wp_json_encode( $condition ) ); ?>">
+		<div class="cwp-text cwp-field" data-condition="<?php echo esc_attr( wp_json_encode( $condition ) ); ?>">
 			<div class="cwp-field-set">
 				<?php echo $this->map_label( $is_required, $label, $required_label, $id ); ?>
 
