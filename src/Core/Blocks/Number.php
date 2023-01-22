@@ -8,8 +8,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 2.9.9.1
  */
-class Number extends Block {
-	// TODO update NAME
+class Number extends FieldBlock {
 	private const NAME = 'cwp/number';
 
 	/**
@@ -44,55 +43,66 @@ class Number extends Block {
 		$label            = $attributes['label'] ?? '';
 		$show_hint        = $attributes['showHint'] ?? false;
 		$hint             = $attributes['hint'] ?? '';
-		$placeholder      = $attributes['message'] ?? '';
 		$error_messages   = $attributes['messages'] ?? '';
 		$enable_condition = $attributes['enableCondition'] ?? false;
 		$condition        = $enable_condition
 			? $attributes['condition'] ?? ''
 			: '';
+		$field_style      = $attributes['className'] ?? 'is-style-default';
+
+		$prefix = $attributes['prefix'] ?? array(
+			'enable'   => false,
+			'content'  => '',
+			'position' => 'outside',
+		);
+		$suffix = $attributes['suffix'] ?? array(
+			'enable'   => false,
+			'content'  => '',
+			'position' => 'outside',
+		);
 
 		// Custom attributes.
-    // TODO add custom attributes
+
+		$placeholder = $attributes['number'] ?? '';
+		$range_min   = $attributes['rangeMin'] ?? '';
+		$range_max   = $attributes['rangeMax'] ?? '';
+		$step        = $attributes['steps'] ?? '';
 
 		ob_start();
 		?>
-    // TODO remove Number name
-    <h2>Number</h2>
-		<!-- <div class="cwp-email cwp-field" data-condition="<?php //echo esc_html( wp_json_encode( $condition ) ); ?>">
+		<div
+			class="cwp-number cwp-field  <?php echo esc_attr( $field_style ); ?>"
+			data-condition="<?php echo esc_attr( ! empty( $condition ) ? wp_json_encode( $condition ) : '' ); ?>"
+		>
 			<div class="cwp-field-set">
-				<?php //if ( ! empty( $label ) ) : ?>
-					<label for="<?php //echo esc_attr( $id ); ?>">
-						<?php //echo esc_html( $label ); ?>
+				<?php echo $this->map_label( $is_required, $label, $required_label, $id ); ?>
 
-						<?php //if ( $is_required && ! empty( $required_label ) ) : ?>
-							<abbr title="required" aria-label="required">
-								<?php //echo esc_html( $required_label ); ?>
-							</abbr>
-						<?php //endif; ?>
-					</label>
-				<?php //endif; ?>
+				<div class="cwp-field-with-elements">
+					<?php echo $this->map_prefix( $prefix['enable'], $prefix['content'], $prefix['position'] ); ?>
 
-				<TODO
-					name="<?php //echo esc_attr( $id ); ?>"
-					id="<?php //echo esc_attr( $id ); ?>"
-					type="email"
-					required="<?php //echo esc_attr( $is_required ); ?>"
-					placeholder="<?php //echo esc_attr( $placeholder ); ?>"
-					title=""
-					data-errors="<?php //echo esc_attr( wp_json_encode( $error_messages ) ); ?>"
-					data-rule="false"
-					data-cwp-field
-					data-validation="email"
-					data-parsley-type="email"
-				/>
+					<input
+						name="<?php echo esc_attr( $id ); ?>"
+						id="<?php echo esc_attr( $id ); ?>"
+						type="number"
+						required="<?php echo esc_attr( $is_required ); ?>"
+						title=""
+						data-errors="<?php echo esc_attr( ! empty( $error_messages ) ? wp_json_encode( $error_messages ) : '' ); ?>"
+						data-rule="false"
+						data-cwp-field
+						data-default="<?php echo esc_attr( $placeholder ); ?>"
+						value="<?php echo esc_attr( $placeholder ); ?>"
+						step="<?php echo esc_attr( $step ); ?>"
+						min="<?php echo esc_attr( $range_min ); ?>"
+						max="<?php echo esc_attr( $range_max ); ?>"
+					/>
+
+					<?php echo $this->map_suffix( $suffix['enable'], $suffix['content'], $suffix['position'] ); ?>
+				</div>
 			</div>
 
-			<?php //if ( $show_hint && ! empty( $hint ) ): ?>
-				<p class="cwp-hint">
-					<?php //echo esc_html( $hint ); ?>
-				</p>
-			<?php //endif; ?>
-		</div> -->
-		<?php return ob_get_clean();
+			<?php echo $this->map_hint( $show_hint, $hint ); ?>
+		</div>
+		<?php
+		return ob_get_clean();
 	}
 }
