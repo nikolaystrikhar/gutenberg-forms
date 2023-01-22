@@ -8,8 +8,7 @@ defined( 'ABSPATH' ) || exit;
  *
  * @since 2.9.9.1
  */
-class Radio extends Block {
-	// TODO update NAME
+class Radio extends FieldBlock {
 	private const NAME = 'cwp/radio';
 
 	/**
@@ -44,7 +43,6 @@ class Radio extends Block {
 		$label            = $attributes['label'] ?? '';
 		$show_hint        = $attributes['showHint'] ?? false;
 		$hint             = $attributes['hint'] ?? '';
-		$placeholder      = $attributes['message'] ?? '';
 		$error_messages   = $attributes['messages'] ?? '';
 		$enable_condition = $attributes['enableCondition'] ?? false;
 		$condition        = $enable_condition
@@ -52,47 +50,54 @@ class Radio extends Block {
 			: '';
 
 		// Custom attributes.
-    // TODO add custom attributes
+
+		$options     = $attributes['options'] ?? array();
+		$field_style = $attributes['className'] ?? 'is-style-default';
 
 		ob_start();
 		?>
-    // TODO remove Radio name
-    <h2>Radio</h2>
-		<!-- <div class="cwp-email cwp-field" data-condition="<?php //echo esc_html( wp_json_encode( $condition ) ); ?>">
-			<div class="cwp-field-set">
-				<?php //if ( ! empty( $label ) ) : ?>
-					<label for="<?php //echo esc_attr( $id ); ?>">
-						<?php //echo esc_html( $label ); ?>
+		<div
+			class="cwp-radio cwp-field <?php echo esc_attr( $field_style ); ?>"
+			data-condition="<?php echo esc_attr( wp_json_encode( $condition ) ); ?>"
+		>
+			<div
+				data-errors="<?php echo esc_attr( wp_json_encode( $error_messages ) ); ?>"
+				class="cwp-radio-set <?php echo esc_attr( $is_required ? 'required-radio' : '' ); ?>"
+			>
+				<?php echo $this->map_label( $is_required, $label, $required_label, $id ); ?>
 
-						<?php //if ( $is_required && ! empty( $required_label ) ) : ?>
-							<abbr title="required" aria-label="required">
-								<?php //echo esc_html( $required_label ); ?>
-							</abbr>
-						<?php //endif; ?>
+				<?php foreach ( $options as $index => $option ): ?>
+				<div class="cwp-radio-option">
+					<input
+						name="<?php echo esc_attr( $id ); ?>"
+						id="<?php echo esc_attr( $id . '_' . $index ); ?>"
+						type="checkbox"
+						required="<?php echo esc_attr( $is_required ); ?>"
+						data-rule="false"
+						data-cwp-field
+						data-required="false"
+						value="<?php echo esc_attr( $option['label'] ); ?>"
+						checked="<?php echo esc_attr( $option['checked'] ? 'checked' : '' ); ?>"
+					>
+
+					<label for="<?php echo esc_attr( $id . '_' . $index ); ?>">
+						<?php echo esc_html( $option['label'] ); ?>
+
+						<?php if ( $option['image'] ): ?>
+							<div class="cwp-radio-image">
+								<img
+									style="height: <?php echo esc_attr( $option['image']['height'] ); ?>; width: <?php echo esc_attr( $option['image']['width'] ); ?>;"
+									src="<?php echo esc_url( $option['image']['url'] ); ?>"
+								/>
+							</div>
+						<?php endif; ?>
 					</label>
-				<?php //endif; ?>
-
-				<TODO
-					name="<?php //echo esc_attr( $id ); ?>"
-					id="<?php //echo esc_attr( $id ); ?>"
-					type="email"
-					required="<?php //echo esc_attr( $is_required ); ?>"
-					placeholder="<?php //echo esc_attr( $placeholder ); ?>"
-					title=""
-					data-errors="<?php //echo esc_attr( wp_json_encode( $error_messages ) ); ?>"
-					data-rule="false"
-					data-cwp-field
-					data-validation="email"
-					data-parsley-type="email"
-				/>
+				<?php endforeach; ?>
 			</div>
 
-			<?php //if ( $show_hint && ! empty( $hint ) ): ?>
-				<p class="cwp-hint">
-					<?php //echo esc_html( $hint ); ?>
-				</p>
-			<?php //endif; ?>
-		</div> -->
-		<?php return ob_get_clean();
+			<?php echo $this->map_hint( $show_hint, $hint ); ?>
+		</div>
+		<?php
+		return ob_get_clean();
 	}
 }

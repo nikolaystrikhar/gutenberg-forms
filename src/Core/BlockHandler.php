@@ -51,14 +51,14 @@ class BlockHandler {
 		Toggle::init();
 		Website::init();
 		File::init();
+		Select::init();
+		Radio::init();
+		Checkbox::init();
 		// TODO: update the following classes.
 		// Column::init(); // TODO: investigate 2 of our column blocks and a compatibility with the core column block.
 		// FormColumn::init(); // TODO: investigate 2 of our column blocks and a compatibility with the core column block.
 		// FormGroup::init(); // TODO: investigate our group block and a compatibility with the core column block.
 		// Components::init();
-		Radio::init();
-		Select::init();
-		Checkbox::init();
 		FormButton::init();
 		FormCalculation::init();
 		Progress::init();
