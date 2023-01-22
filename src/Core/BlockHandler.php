@@ -14,7 +14,7 @@ use GutenbergForms\Core\Blocks\Number;
 use GutenbergForms\Core\Blocks\Phone;
 use GutenbergForms\Core\Blocks\Progress;
 use GutenbergForms\Core\Blocks\Radio;
-use GutenbergForms\Core\Blocks\ReusableForms;
+use GutenbergForms\Core\Blocks\ExistingForm;
 use GutenbergForms\Core\Blocks\Select;
 use GutenbergForms\Core\Blocks\Text;
 use GutenbergForms\Core\Blocks\Toggle;
@@ -50,13 +50,13 @@ class BlockHandler {
 		Button::init();
 		Calculation::init();
 		Progress::init();
+		ExistingForm::init();
 		// TODO: update the following classes.
 		// Form_Steps::init();
 		// Step::init();
 		// Column::init(); // TODO: investigate 2 of our column blocks and a compatibility with the core column block.
 		// FormColumn::init(); // TODO: investigate 2 of our column blocks and a compatibility with the core column block.
 		// FormGroup::init(); // TODO: investigate our group block and a compatibility with the core column block.
-		ReusableForms::init();
 		// Datepicker::init(); // TODO: decide what to about it.
 	}
 }
