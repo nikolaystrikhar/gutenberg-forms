@@ -54,7 +54,7 @@ class Text extends FieldBlock {
 		$show_hint        = $attributes['showHint'] ?? false;
 		$hint             = $attributes['hint'] ?? '';
 		$placeholder      = $attributes['message'] ?? '';
-		$error_messages   = $attributes['messages'] ?? array();
+		$error_messages   = $attributes['messages'] ?? '';
 		$enable_condition = $attributes['enableCondition'] ?? false;
 		$condition        = $enable_condition
 			? $attributes['condition'] ?? ''

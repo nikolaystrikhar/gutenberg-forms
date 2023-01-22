@@ -43,7 +43,7 @@ class File extends FieldBlock {
 		$label            = $attributes['label'] ?? '';
 		$show_hint        = $attributes['showHint'] ?? false;
 		$hint             = $attributes['hint'] ?? '';
-		$error_messages   = $attributes['messages'] ?? array();
+		$error_messages   = $attributes['messages'] ?? '';
 		$enable_condition = $attributes['enableCondition'] ?? false;
 		$condition        = $enable_condition
 			? $attributes['condition'] ?? ''
