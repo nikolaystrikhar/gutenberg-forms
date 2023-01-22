@@ -41,25 +41,11 @@ class Toggle extends FieldBlock {
 		$is_required      = $attributes['isRequired'] ?? false;
 		$required_label   = $attributes['requiredLabel'] ?? '*';
 		$label            = $attributes['label'] ?? '';
-		$show_hint        = $attributes['showHint'] ?? false;
-		$hint             = $attributes['hint'] ?? '';
-		$placeholder      = $attributes['message'] ?? '';
-		$error_messages   = $attributes['messages'] ?? '';
 		$enable_condition = $attributes['enableCondition'] ?? false;
 		$condition        = $enable_condition
 			? $attributes['condition'] ?? ''
 			: '';
-
-		$prefix = $attributes['prefix'] ?? array(
-			'enable'   => false,
-			'content'  => '',
-			'position' => 'outside',
-		);
-		$suffix = $attributes['suffix'] ?? array(
-			'enable'   => false,
-			'content'  => '',
-			'position' => 'outside',
-		);
+		$field_style      = $attributes['className'] ?? 'is-style-default';
 
 		// Custom attributes.
 
@@ -67,7 +53,10 @@ class Toggle extends FieldBlock {
 
 		ob_start();
 		?>
-		<div class="cwp-yes-no cwp-field" data-condition="<?php echo esc_attr( ! empty( $condition ) ? wp_json_encode( $condition ) : '' ); ?>">
+		<div
+			class="cwp-yes-no cwp-field <?php echo esc_attr( $field_style ); ?>"
+			data-condition="<?php echo esc_attr( ! empty( $condition ) ? wp_json_encode( $condition ) : '' ); ?>"
+		>
 			<div class="cwp-field-set">
 				<?php echo $this->map_label( $is_required, $label, $required_label, $id ); ?>
 

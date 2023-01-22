@@ -58,11 +58,11 @@ class Checkbox extends FieldBlock {
 		$condition        = $enable_condition
 			? $attributes['condition'] ?? ''
 			: '';
+		$field_style      = $attributes['className'] ?? 'is-style-default';
 
 		// Custom attributes.
 
 		$options     = $attributes['options'] ?? array();
-		$field_style = $attributes['className'] ?? 'is-style-default';
 
 		ob_start();
 		?>

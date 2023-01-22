@@ -48,6 +48,7 @@ class File extends FieldBlock {
 		$condition        = $enable_condition
 			? $attributes['condition'] ?? ''
 			: '';
+		$field_style      = $attributes['className'] ?? 'is-style-default';
 
 		// Custom attributes.
 
@@ -84,7 +85,10 @@ class File extends FieldBlock {
 
 		ob_start();
 		?>
-		<div class="cwp-file cwp-field" data-condition="<?php echo esc_attr( ! empty( $condition ) ? wp_json_encode( $condition ) : '' ); ?>">
+		<div
+			class="cwp-file cwp-field <?php echo esc_attr( $field_style ); ?>"
+			data-condition="<?php echo esc_attr( ! empty( $condition ) ? wp_json_encode( $condition ) : '' ); ?>"
+		>
 			<div class="cwp-field-set">
 				<?php echo $this->map_label( $is_required, $label, $required_label, $id ); ?>
 

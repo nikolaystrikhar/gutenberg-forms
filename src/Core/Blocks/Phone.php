@@ -49,6 +49,7 @@ class Phone extends FieldBlock {
 		$condition        = $enable_condition
 			? $attributes['condition'] ?? ''
 			: '';
+		$field_style      = $attributes['className'] ?? 'is-style-default';
 
 		$prefix = $attributes['prefix'] ?? array(
 			'enable'   => false,
@@ -63,7 +64,10 @@ class Phone extends FieldBlock {
 
 		ob_start();
 		?>
-		<div class="cwp-phone cwp-field" data-condition="<?php echo esc_attr( ! empty( $condition ) ? wp_json_encode( $condition ) : '' ); ?>">
+		<div
+			class="cwp-phone cwp-field <?php echo esc_attr( $field_style ); ?>"
+			data-condition="<?php echo esc_attr( ! empty( $condition ) ? wp_json_encode( $condition ) : '' ); ?>"
+		>
 			<div class="cwp-field-set">
 				<?php echo $this->map_label( $is_required, $label, $required_label, $id ); ?>
 

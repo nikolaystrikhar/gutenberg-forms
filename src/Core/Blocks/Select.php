@@ -48,6 +48,7 @@ class Select extends FieldBlock {
 		$condition        = $enable_condition
 			? $attributes['condition'] ?? ''
 			: '';
+		$field_style      = $attributes['className'] ?? 'is-style-default';
 
 		// Custom attributes.
 
@@ -55,7 +56,10 @@ class Select extends FieldBlock {
 
 		ob_start();
 		?>
-		<div class="cwp-select cwp-field" data-condition="<?php echo esc_attr( ! empty( $condition ) ? wp_json_encode( $condition ) : '' ); ?>">
+		<div
+			class="cwp-select cwp-field <?php echo esc_attr( $field_style ); ?>"
+			data-condition="<?php echo esc_attr( ! empty( $condition ) ? wp_json_encode( $condition ) : '' ); ?>"
+		>
 			<div class="cwp-field-set cwp-select-set">
 				<?php echo $this->map_label( $is_required, $label, $required_label, $id ); ?>
 

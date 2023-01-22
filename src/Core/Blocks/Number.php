@@ -71,7 +71,7 @@ class Number extends FieldBlock {
 		ob_start();
 		?>
 		<div
-			class="cwp-number cwp-field  <?php echo esc_attr( $field_style ); ?>"
+			class="cwp-number cwp-field <?php echo esc_attr( $field_style ); ?>"
 			data-condition="<?php echo esc_attr( ! empty( $condition ) ? wp_json_encode( $condition ) : '' ); ?>"
 		>
 			<div class="cwp-field-set">

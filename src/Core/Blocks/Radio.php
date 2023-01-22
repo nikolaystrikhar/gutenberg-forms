@@ -48,11 +48,11 @@ class Radio extends FieldBlock {
 		$condition        = $enable_condition
 			? $attributes['condition'] ?? ''
 			: '';
+		$field_style      = $attributes['className'] ?? 'is-style-default';
 
 		// Custom attributes.
 
-		$options     = $attributes['options'] ?? array();
-		$field_style = $attributes['className'] ?? 'is-style-default';
+		$options = $attributes['options'] ?? array();
 
 		ob_start();
 		?>
