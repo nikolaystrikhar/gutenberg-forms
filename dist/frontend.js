@@ -1397,7 +1397,7 @@ jQuery(function ($) {
 		constructor(form) {
 			this.form = $(form);
 			this.fields = this.form.find("[data-cwp-field]");
-			this.conditionalFields = this.form.find("[data-condition]");
+			this.conditionalFields = this.form.find("[data-condition]:not([data-condition=''])");
 
 			if (this.conditionalFields.length) {
 				this.init();
