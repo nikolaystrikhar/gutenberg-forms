@@ -6,7 +6,7 @@ require_once plugin_dir_path( __DIR__ ) . 'cpt/reusable.php';
 class Form {
     private const post_type = "cwp_gf_forms";
 
-	public static function register_post_type() {
+	public static function init() {
 		register_post_type(
 			self::post_type,
 			array(

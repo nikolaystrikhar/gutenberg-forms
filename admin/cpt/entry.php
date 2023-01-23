@@ -18,7 +18,7 @@ function get_value_and_name( $field ) {
 class Entries {
 	private const post_type = "cwp_gf_entries";
 
-	public static function register_post_type(): void {
+	public static function init(): void {
 		register_post_type(
 			self::post_type,
 			array(

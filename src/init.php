@@ -1,4 +1,7 @@
 <?php
+
+use GutenbergForms\Core\AssetHandler;
+
 defined('ABSPATH') || exit;
 
 function get_forms_cpt_data()
@@ -97,16 +100,6 @@ function gutenberg_forms_cwp_block_assets(): void
 require_once plugin_dir_path(__DIR__) . 'triggers/email.php';
 
 add_action(
-	'wp_head',
-	function () {
-		require_once plugin_dir_path(__DIR__) . 'assets/index.assets.php';
-
-		$assets_holder = new cwp_gf_AssetsHandler();
-		$assets_holder->enqueue();
-	}
-);
-
-add_action(
 	'init',
 	function (): void {
 		require_once plugin_dir_path(__DIR__) . 'admin/cpt/entry.php';
@@ -119,8 +112,10 @@ add_action(
 			'type'         => 'string',
 		));
 
-		Form::register_post_type();
-		Entries::register_post_type();
+		Form::init();
+		Entries::init();
+
+		AssetHandler::init();
 
 		wp_set_script_translations('gutenberg-forms-blocks', 'forms-gutenberg');
 
