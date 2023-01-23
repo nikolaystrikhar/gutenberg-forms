@@ -49,9 +49,9 @@ function gutenberg_forms_cwp_block_assets(): void
 
 	wp_register_script(
 		'gutenberg-forms-custom-js',
-		plugins_url('/dist/frontend.js', dirname(__FILE__)),
+		plugins_url('/dist/gutenberg-forms.js', dirname(__FILE__)),
 		array('jquery'),
-		filemtime(plugin_dir_path(__DIR__) . 'dist/frontend.js'),
+		filemtime(plugin_dir_path(__DIR__) . 'dist/gutenberg-forms.js'),
 		true
 	);
 
