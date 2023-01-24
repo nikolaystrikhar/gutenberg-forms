@@ -43,8 +43,9 @@ class Checkbox extends FieldBlock {
 	 */
 	public function render( array $attributes ): string {
 		// Attributes that always exist.
-
-		$id = $attributes['id'];
+		
+		// FIX for versions pre 2.2.9.1
+		$id = (substr($attributes['id'], -2) == "[]" ? substr($attributes['id'], 0, -2) : $attributes['id']);
 
 		// Stable attributes.
 
@@ -75,11 +76,10 @@ class Checkbox extends FieldBlock {
 			class="cwp-checkbox-set <?php echo esc_attr( $is_required ? 'required-checkbox' : '' ); ?>"
 		>
 			<?php echo $this->map_label( $is_required, $label, $required_label, $id ); ?>
-
 			<?php foreach ( $options as $index => $option ): ?>
 			<div class="cwp-checkbox-option">
 				<input
-					name="<?php echo esc_attr( $id ); ?>"
+					name="<?php echo esc_attr( $id ); ?>[]"
 					id="<?php echo esc_attr( $id . '_' . $index ); ?>"
 					type="checkbox"
 					required="<?php echo esc_attr( $is_required ); ?>"

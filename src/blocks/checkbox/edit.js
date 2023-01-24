@@ -76,8 +76,7 @@ function edit(props) {
 						props.clientId,
 						isRequired,
 						get_admin_id(adminId)
-					) +
-					"[]",
+					),
 			});
 		} else if (field_name !== "") {
 			props.setAttributes({
