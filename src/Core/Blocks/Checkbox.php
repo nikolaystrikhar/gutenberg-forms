@@ -43,9 +43,13 @@ class Checkbox extends FieldBlock {
 	 */
 	public function render( array $attributes ): string {
 		// Attributes that always exist.
-		
-		// FIX for versions pre 2.2.9.1
-		$id = (substr($attributes['id'], -2) == "[]" ? substr($attributes['id'], 0, -2) : $attributes['id']);
+
+		$id = $attributes['id'];
+
+		// Fix for versions pre 2.2.9.1.
+		if ( '[]' === mb_substr( $id, -2 ) ) {
+			$id = mb_substr( $id, 0, -2 );
+		}
 
 		// Stable attributes.
 
