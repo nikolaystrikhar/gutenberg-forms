@@ -71,7 +71,7 @@ class Radio extends FieldBlock {
 					<input
 						name="<?php echo esc_attr( $id ); ?>"
 						id="<?php echo esc_attr( $id . '_' . $index ); ?>"
-						type="checkbox"
+						type="radio"
 						required="<?php echo esc_attr( $is_required ); ?>"
 						data-rule="false"
 						data-cwp-field
