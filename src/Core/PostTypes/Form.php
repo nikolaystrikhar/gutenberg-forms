@@ -1,8 +1,13 @@
 <?php
+namespace GutenbergForms\Core\PostTypes;
+
 defined( 'ABSPATH' ) || exit;
 
-require_once plugin_dir_path( __DIR__ ) . 'cpt/reusable.php';
-
+/**
+ * Form post type.
+ *
+ * @since 2.9.9.1
+ */
 class Form {
     private const post_type = "cwp_gf_forms";
 
@@ -58,8 +63,31 @@ class Form {
 			)
 		);
 
-		// registering short_code for reusable gutenberg form block through short_code
-		register_form_shortcode( self::post_type );
+		add_shortcode(
+			'gutenberg_form',
+			function( $atts ): string {
+				$atts = shortcode_atts(
+					array(
+						'id' => 0,
+					),
+					$atts
+				);
+
+				$id = absint( $atts['id'] );
+
+				if ( 0 === $id ) {
+					return '';
+				}
+
+				$post = get_post( $id );
+
+				if ( ! $post || $post->post_status !== 'publish' ) {
+					return '';
+				}
+
+				return $post->post_content;
+			}
+		);
 
 		add_filter(
 			'manage_' . self::post_type . '_posts_columns',

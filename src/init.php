@@ -1,6 +1,8 @@
 <?php
 
 use GutenbergForms\Core\AssetHandler;
+use GutenbergForms\Core\PostTypes\Entry;
+use GutenbergForms\Core\PostTypes\Form;
 
 defined('ABSPATH') || exit;
 
@@ -102,19 +104,10 @@ require_once plugin_dir_path(__DIR__) . 'triggers/email.php';
 add_action(
 	'init',
 	function (): void {
-		require_once plugin_dir_path(__DIR__) . 'admin/cpt/entry.php';
-		require_once plugin_dir_path(__DIR__) . 'admin/cpt/form.php';
 		require_once plugin_dir_path(__DIR__) . 'controllers/index.php';
 
-		register_post_meta('post', 'myguten_meta_block_field', array(
-			'show_in_rest' => true,
-			'single'       => true,
-			'type'         => 'string',
-		));
-
 		Form::init();
-		Entries::init();
-
+		Entry::init();
 		AssetHandler::init();
 
 		wp_set_script_translations('gutenberg-forms-blocks', 'forms-gutenberg');
@@ -148,7 +141,7 @@ add_filter(
 		if ('gutenberg-forms/gutenberg-forms.php' === $plugin_file) {
 			$plugin_meta['settings'] = sprintf(
 				'<a href="%s">%s</a>',
-				esc_url(admin_url('admin.php?page=gutenberg_forms')),
+				esc_url( admin_url( 'admin.php?page=gutenberg_forms' ) ),
 				__('Dashboard', 'forms-gutenberg'),
 			);
 		}

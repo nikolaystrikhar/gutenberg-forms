@@ -1,21 +1,18 @@
 <?php
+namespace GutenbergForms\Core\PostTypes;
+
+use WP_Post;
+
 defined( 'ABSPATH' ) || exit;
 
-require_once plugin_dir_path( __DIR__ ) . '../triggers/validator.php';
+require_once GUTENBERG_FORMS_PLUGIN_DIR . 'triggers/validator.php';
 
-function get_value_and_name( $field ) {
-	$value   = $field['field_value'];
-	$adminId = $field['decoded_entry']['admin_id'] ?? null; // TODO: check later.
-
-	$result = array();
-
-	$result['value']    = $value;
-	$result['admin_id'] = $adminId;
-
-	return $result;
-}
-
-class Entries {
+/**
+ * Entry post type.
+ *
+ * @since 2.9.9.1
+ */
+class Entry {
 	private const post_type = "cwp_gf_entries";
 
 	public static function init(): void {
@@ -218,32 +215,32 @@ class Entries {
 
 				<div class="gufo-space-y-6 gufo-mt-5">
 					<?php foreach ( $boxes as $box ): ?>
-					<?php if ( ! is_array( $box['fields'] ) || empty( $box['fields'] ) ) continue; ?>
-					<div class=" gufo-w-full gufo-overflow-hidden gufo-bg-white gufo-shadow sm:gufo-rounded-lg">
-						<div class="gufo-px-4 gufo-py-5 sm:gufo-px-6">
+						<?php if ( ! is_array( $box['fields'] ) || empty( $box['fields'] ) ) continue; ?>
+						<div class=" gufo-w-full gufo-overflow-hidden gufo-bg-white gufo-shadow sm:gufo-rounded-lg">
+							<div class="gufo-px-4 gufo-py-5 sm:gufo-px-6">
 							<span class="gufo-text-lg gufo-font-medium gufo-leading-6 gufo-text-gray-900">
 								<?php echo esc_html( $box['title'] ); ?>
 							</span>
-						</div>
+							</div>
 
-						<?php foreach ( $box['fields'] as $name => $value ): ?>
-						<div class="gufo-border-t gufo-border-gray-200 gufo-px-4 gufo-py-5 sm:gufo-p-0">
-							<dl class="sm:gufo-divide-y sm:gufo-divide-gray-200">
-								<div class="gufo-py-4 sm:gufo-grid sm:gufo-grid-cols-3 sm:gufo-gap-4 sm:gufo-py-5 sm:gufo-px-6">
-									<dt class="gufo-text-sm gufo-font-medium gufo-text-gray-500">
-										<?php echo esc_html( $name ); ?>
-									</dt>
-									<dd class="gufo-mt-1 gufo-text-sm gufo-text-gray-900 sm:gufo-col-span-2 sm:gufo-mt-0">
-										<?php echo wp_kses_post( $value ); ?>
-									</dd>
+							<?php foreach ( $box['fields'] as $name => $value ): ?>
+								<div class="gufo-border-t gufo-border-gray-200 gufo-px-4 gufo-py-5 sm:gufo-p-0">
+									<dl class="sm:gufo-divide-y sm:gufo-divide-gray-200">
+										<div class="gufo-py-4 sm:gufo-grid sm:gufo-grid-cols-3 sm:gufo-gap-4 sm:gufo-py-5 sm:gufo-px-6">
+											<dt class="gufo-text-sm gufo-font-medium gufo-text-gray-500">
+												<?php echo esc_html( $name ); ?>
+											</dt>
+											<dd class="gufo-mt-1 gufo-text-sm gufo-text-gray-900 sm:gufo-col-span-2 sm:gufo-mt-0">
+												<?php echo wp_kses_post( $value ); ?>
+											</dd>
+										</div>
+									</dl>
 								</div>
-							</dl>
+							<?php endforeach; ?>
 						</div>
-						<?php endforeach; ?>
-					</div>
 					<?php endforeach; ?>
 				</div>
-			<?php
+				<?php
 			}
 		);
 	}
@@ -357,14 +354,14 @@ class Entries {
 		foreach ( $fields as $field_value ) {
 			$is_hidden_field    = Validator::is_hidden_data_field( $field_value['field_id'] );
 			$is_recaptcha_field = $field_value['field_id'] === 'g-recaptcha-response';
-			$parse_entry        = get_value_and_name( $field_value );
+			$parse_entry        = self::get_value_and_name( $field_value );
 			$field_admin_id     = $parse_entry['admin_id'];
 			$field_type         = $field_value['field_type'];
 
 			$new_entry['field_types'][ remove_accents( $field_admin_id ) ] = $field_type;
 
 			if ( $field_value['field_type'] === 'file_upload' and ! $is_recaptcha_field ) {
-				$parse_entry = get_value_and_name( $field_value );
+				$parse_entry = self::get_value_and_name( $field_value );
 
 				$upload_dir_base = wp_get_upload_dir()['baseurl'];
 				$filename        = $upload_dir_base . '/gutenberg-forms-uploads/' . $field_value['file_name'];
@@ -377,7 +374,7 @@ class Entries {
 					$new_entry['post_meta']['form_id'] = $field_value['field_value'];
 				}
 			} elseif ( ! $is_hidden_field and ! $is_recaptcha_field ) {
-				$parse_entry                                     = get_value_and_name( $field_value );
+				$parse_entry                                     = self::get_value_and_name( $field_value );
 				$new_entry['fields'][ $parse_entry['admin_id'] ] = $parse_entry['value'];
 			}
 		}
@@ -399,5 +396,17 @@ class Entries {
 		}
 
 		return $new_entry;
+	}
+
+	private static function get_value_and_name( array $field ): array {
+		$value   = $field['field_value'];
+		$adminId = $field['decoded_entry']['admin_id'] ?? null; // TODO: check later.
+
+		$result = array();
+
+		$result['value']    = $value;
+		$result['admin_id'] = $adminId;
+
+		return $result;
 	}
 }

@@ -1,8 +1,10 @@
 <?php
+
+use GutenbergForms\Core\PostTypes\Entry;
+
 defined( 'ABSPATH' ) || exit;
 
 require_once plugin_dir_path( __DIR__ ) . 'triggers/validator.php';
-require_once plugin_dir_path( __DIR__ ) . 'admin/cpt/entry.php';
 require_once plugin_dir_path( __DIR__ ) . 'Utils/Bucket.php';
 require_once plugin_dir_path( __DIR__ ) . 'integrations/handler.php';
 require_once plugin_dir_path( __DIR__ ) . 'tagsHandler/tagHandler.php';
@@ -287,12 +289,33 @@ class Email {
 			$arranged_fields[] = $arranged_data;
 		}
 
-		$arranged_fields = gforms_add_dynamic_values( $arranged_fields ); // adding dynamic values
+		$arranged_fields = $this->gforms_add_dynamic_values( $arranged_fields ); // adding dynamic values
 
 		if ( $this->is_fields_valid( $arranged_fields ) ) {
 			// check if all the fields are valid;
 			$this->sendMail( $arranged_fields );
 		}
+	}
+
+	/**
+	 * Adds dynamic values to all hidden fields
+	 *
+	 * @param array $fields
+	 */
+	private function gforms_add_dynamic_values( $fields ) {
+		$tagHandler = new gforms_TagHandler( $fields );
+
+		foreach ( $fields as $key => $field ) {
+			if ( $field['field_type'] === 'hidden' ) {
+
+				$value             = $field['field_value'];
+				$with_dynamic_data = $tagHandler->merge( $value );
+
+				$fields[ $key ]['field_value'] = $with_dynamic_data;
+			}
+		}
+
+		return $fields;
 	}
 
 	private function url_success( $url ) {
@@ -447,7 +470,7 @@ class Email {
 			}
 		}
 
-		$newEntry       = Entries::create( $template, $mail_subject, $mail_body, $fields, $this->attachments );
+		$newEntry       = Entry::create( $template, $mail_subject, $mail_body, $fields, $this->attachments );
 		$record_entries = in_array( 'Record Entries', $template['actions'] );
 		$send_email     = in_array( 'Email Notification', $template['actions'] );
 
@@ -473,7 +496,7 @@ class Email {
 				}
 
 				if ( $record_entries ) {
-					Entries::save( $newEntry );
+					Entry::save( $newEntry );
 				}
 
 				$this->ExternalServiceHandler->handle( $newEntry );
@@ -486,7 +509,7 @@ class Email {
 				}
 
 				if ( $record_entries ) {
-					Entries::save( $newEntry );
+					Entry::save( $newEntry );
 				}
 
 				$this->ExternalServiceHandler->handle( $newEntry );
@@ -497,7 +520,7 @@ class Email {
 			$this->attempt_success( $template );
 
 			if ( $record_entries ) {
-				Entries::save( $newEntry );
+				Entry::save( $newEntry );
 			}
 		}
 	}

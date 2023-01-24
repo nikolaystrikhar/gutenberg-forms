@@ -18,4 +18,27 @@ defined( 'ABSPATH' ) || exit;
 require __DIR__ . '/vendor/autoload.php';
 require_once plugin_dir_path(__FILE__) . 'src/init.php';
 
-GutenbergForms::init();
+add_action(
+	'plugins_loaded',
+	function(): void {
+		define( 'GUTENBERG_FORMS_VERSION', '2.9.9.1' );
+
+		define(
+			'GUTENBERG_FORMS_PLUGIN_DIR',
+			trailingslashit(
+				str_replace( '\\', '/', WP_PLUGIN_DIR ) . '/' . basename( dirname( __FILE__ ) )
+			)
+		);
+
+		define(
+			'GUTENBERG_FORMS_PLUGIN_URL',
+			str_replace(
+				array( 'https://', 'http://' ),
+				array( '//', '//' ),
+				trailingslashit( WP_PLUGIN_URL . '/' . basename( dirname( __FILE__ ) ) )
+			)
+		);
+
+		GutenbergForms::init();
+	}
+);

@@ -125,25 +125,3 @@ class gforms_TagHandler {
 		return strtr( $input, $this->data );
 	}
 }
-
-/**
- * gforms_add_dynamic_values will add dynamic values to all hidden fields
- *
- * @param array $fields
- */
-
-function gforms_add_dynamic_values( $fields ) {
-	$tagHandler = new gforms_TagHandler( $fields );
-
-	foreach ( $fields as $key => $field ) {
-		if ( $field['field_type'] === 'hidden' ) {
-
-			$value             = $field['field_value'];
-			$with_dynamic_data = $tagHandler->merge( $value );
-
-			$fields[ $key ]['field_value'] = $with_dynamic_data;
-		}
-	}
-
-	return $fields;
-}
