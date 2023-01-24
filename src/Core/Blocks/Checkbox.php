@@ -81,13 +81,12 @@ class Checkbox extends FieldBlock {
 				<input
 					name="<?php echo esc_attr( $id ); ?>"
 					id="<?php echo esc_attr( $id . '_' . $index ); ?>"
-					type="radio"
+					type="checkbox"
 					required="<?php echo esc_attr( $is_required ); ?>"
 					data-rule="false"
 					data-cwp-field
 					data-required="false"
 					value="<?php echo esc_attr( $option['label'] ); ?>"
-					checked="<?php echo esc_attr( $option['checked'] ? 'checked' : '' ); ?>"
 				>
 
 				<label for="<?php echo esc_attr( $id . '_' . $index ); ?>">

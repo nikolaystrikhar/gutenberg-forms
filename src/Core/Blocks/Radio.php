@@ -77,7 +77,6 @@ class Radio extends FieldBlock {
 						data-cwp-field
 						data-required="false"
 						value="<?php echo esc_attr( $option['label'] ); ?>"
-						checked="<?php echo esc_attr( $option['checked'] ? 'checked' : '' ); ?>"
 					>
 
 					<label for="<?php echo esc_attr( $id . '_' . $index ); ?>">
