@@ -95,11 +95,11 @@ For more information, visit [Gutenberg Forms](https://gutenbergforms.com)
 
 = 2.2.9.1 = 26 Jan 2023
 
-- Update: Use registered colors in color pickers instead of hard-coded colors.
-- Update: Reorganized block panels.
-- Fix: Google Recaptcha was not working with ab "existing form" block.
-- Fix: Conflict with GeneratePress back to top button.
-- Fix: Fix: Auto population did not work for checkboxes
+- Update: Use registered colors in color pickers instead of hard-coded colors
+- Update: Reorganized block panels
+- Fix: Google Recaptcha was not working with ab "existing form" block
+- Fix: Conflict with GeneratePress back to top button
+- Fix: Auto population did not work for checkboxes
 
 = 2.2.9 = 15 Jan 2023
 
