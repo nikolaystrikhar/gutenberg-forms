@@ -2,6 +2,7 @@
 
 namespace GutenbergForms\Core;
 
+use Exception;
 use GutenbergForms\Core\Blocks\Email;
 use GutenbergForms\Core\Blocks\Textarea;
 use GutenbergForms\Core\Blocks\Checkbox;
@@ -30,6 +31,8 @@ class BlockHandler {
 	 * Initiates blocks.
 	 *
 	 * @since 2.9.9.1
+	 *
+	 * @throws Exception If a block folder is not found.
 	 *
 	 * @return void
 	 */

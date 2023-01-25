@@ -9,20 +9,6 @@ defined( 'ABSPATH' ) || exit;
  * @since 2.9.9.1
  */
 class Step extends Block {
-	// TODO update NAME
-	private const NAME = 'cwp/step';
-
-	/**
-	 * Returns a block name.
-	 *
-	 * @since 2.9.9.1
-	 *
-	 * @return string
-	 */
-	public static function get_name(): string {
-		return self::NAME;
-	}
-
 	/**
 	 * Renders a block.
 	 *

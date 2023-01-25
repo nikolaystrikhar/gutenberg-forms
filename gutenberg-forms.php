@@ -24,7 +24,7 @@ add_action(
 		define( 'GUTENBERG_FORMS_VERSION', '2.9.9.1' );
 
 		define(
-			'GUTENBERG_FORMS_PLUGIN_DIR',
+			'GUTENBERG_FORMS_PLUGIN_PATH',
 			trailingslashit(
 				str_replace( '\\', '/', WP_PLUGIN_DIR ) . '/' . basename( dirname( __FILE__ ) )
 			)

@@ -1,5 +1,23 @@
 {
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "cwp/checkbox",
 	"title": "Checkbox",
+	"category": "gutenberg-forms",
+	"parent": [
+		"cwp/block-gutenberg-forms",
+		"cwp/column",
+		"cwp/form-group",
+		"cwp/form-step"
+	],
+	"icon": "yes",
+	"keywords": [
+		"checkbox",
+		"input",
+		"form"
+	],
+	"version": "1.0.0",
+	"textdomain": "forms-gutenberg",
 	"attributes": {
 		"isRequired": {
 			"type": "boolean",

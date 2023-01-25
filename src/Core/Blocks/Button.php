@@ -11,19 +11,6 @@ defined( 'ABSPATH' ) || exit;
 class Button extends Block {
 	use Traits\HasStyles;
 
-	private const NAME = 'cwp/form-button';
-
-	/**
-	 * Returns a block name.
-	 *
-	 * @since 2.9.9.1
-	 *
-	 * @return string
-	 */
-	public static function get_name(): string {
-		return self::NAME;
-	}
-
 	/**
 	 * Renders a block.
 	 *

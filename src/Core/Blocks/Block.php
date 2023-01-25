@@ -9,6 +9,13 @@ defined( 'ABSPATH' ) || exit;
  * @since 2.9.9.1
  */
 abstract class Block {
+	/**
+	 * Initiates a block.
+	 *
+	 * @since 2.9.9.1
+	 *
+	 * @return void
+	 */
 	public static function init(): void {
 		$block = new static();
 
@@ -18,8 +25,18 @@ abstract class Block {
 		add_action(
 			'init',
 			function() use ( $block ): void {
+				$block_name = ( new \ReflectionClass( $block ) )->getShortName();
+				$block_name = array_filter( preg_split( '/(?=[A-Z])/', $block_name ) );
+				$block_name = mb_strtolower( implode( '-', $block_name ) );
+
+				$block_path = GUTENBERG_FORMS_PLUGIN_PATH . 'src/blocks/' . $block_name;
+
+				if ( ! is_dir( $block_path ) ) {
+					throw new \Exception( "Directory '$block_name' does not exist in blocks folder." );
+				}
+
 				register_block_type(
-					static::get_name(),
+					$block_path,
 					array(
 						'editor_script' => 'gutenberg-forms-blocks',
 						'render_callback' => array( $block, 'render' )
@@ -28,15 +45,6 @@ abstract class Block {
 			}
 		);
 	}
-
-	/**
-	 * Returns a block name.
-	 *
-	 * @since 2.9.9.1
-	 *
-	 * @return void
-	 */
-	abstract public static function get_name(): string;
 
 	/**
 	 * Renders a block.

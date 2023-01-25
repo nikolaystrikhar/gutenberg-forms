@@ -9,19 +9,6 @@ defined( 'ABSPATH' ) || exit;
  * @since 2.9.9.1
  */
 class File extends FieldBlock {
-	private const NAME = 'cwp/file-upload';
-
-	/**
-	 * Returns a block name.
-	 *
-	 * @since 2.9.9.1
-	 *
-	 * @return string
-	 */
-	public static function get_name(): string {
-		return self::NAME;
-	}
-
 	/**
 	 * Renders a block.
 	 *

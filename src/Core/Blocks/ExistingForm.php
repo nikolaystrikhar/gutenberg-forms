@@ -9,19 +9,6 @@ defined( 'ABSPATH' ) || exit;
  * @since 2.9.9.1
  */
 class ExistingForm extends Block {
-	private const NAME = 'cwp/reusable-form';
-
-	/**
-	 * Returns a block name.
-	 *
-	 * @since 2.9.9.1
-	 *
-	 * @return string
-	 */
-	public static function get_name(): string {
-		return self::NAME;
-	}
-
 	/**
 	 * Renders a block.
 	 *
