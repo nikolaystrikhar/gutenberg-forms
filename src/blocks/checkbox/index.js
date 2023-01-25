@@ -1,13 +1,14 @@
 const { registerBlockType } = wp.blocks;
 
 import metadata from './block.json';
-import Edit from "./edit.js";
+import edit from "./edit.js";
+import deprecated from "./deprecated/deprecated";
 import { myAttrs } from "../../constants.js";
 import { getFieldTransform } from "../../block/functions";
-import { deprecated } from "./deprecated/deprecated";
 
 registerBlockType( "cwp/checkbox", {
-	edit: Edit,
+	...metadata,
+	edit,
 	deprecated,
 	transforms: {
 		from: [
@@ -18,5 +19,4 @@ registerBlockType( "cwp/checkbox", {
 			},
 		],
 	},
-	...metadata
 } );
