@@ -29,7 +29,7 @@ abstract class Block {
 				$block_name = array_filter( preg_split( '/(?=[A-Z])/', $block_name ) );
 				$block_name = mb_strtolower( implode( '-', $block_name ) );
 
-				$block_path = GUTENBERG_FORMS_PLUGIN_PATH . 'src/blocks/' . $block_name;
+				$block_path = GUTENBERG_FORMS_PATH . 'src/blocks/' . $block_name;
 
 				if ( ! is_dir( $block_path ) ) {
 					throw new \Exception( "Directory '$block_name' does not exist in blocks folder." );

@@ -5,7 +5,7 @@ use WP_Post;
 
 defined( 'ABSPATH' ) || exit;
 
-require_once GUTENBERG_FORMS_PLUGIN_PATH . 'triggers/validator.php';
+require_once GUTENBERG_FORMS_PATH . 'triggers/validator.php';
 
 /**
  * Entry post type.

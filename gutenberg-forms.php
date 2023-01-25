@@ -16,7 +16,6 @@ use GutenbergForms\Core\GutenbergForms;
 defined( 'ABSPATH' ) || exit;
 
 require __DIR__ . '/vendor/autoload.php';
-require_once plugin_dir_path(__FILE__) . 'src/init.php';
 
 add_action(
 	'plugins_loaded',
@@ -24,21 +23,25 @@ add_action(
 		define( 'GUTENBERG_FORMS_VERSION', '2.9.9.1' );
 
 		define(
-			'GUTENBERG_FORMS_PLUGIN_PATH',
+			'GUTENBERG_FORMS_PATH',
 			trailingslashit(
 				str_replace( '\\', '/', WP_PLUGIN_DIR ) . '/' . basename( dirname( __FILE__ ) )
 			)
 		);
 
 		define(
-			'GUTENBERG_FORMS_PLUGIN_URL',
+			'GUTENBERG_FORMS_URL',
 			str_replace(
 				array( 'https://', 'http://' ),
 				array( '//', '//' ),
 				trailingslashit( WP_PLUGIN_URL . '/' . basename( dirname( __FILE__ ) ) )
 			)
 		);
+	},
+	0
+);
 
-		GutenbergForms::init();
-	}
+add_action(
+	'plugins_loaded',
+	array( GutenbergForms::class, 'init' )
 );
