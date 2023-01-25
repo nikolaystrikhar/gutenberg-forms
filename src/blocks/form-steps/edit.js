@@ -3,7 +3,7 @@ import {
 	getLinearChildAttributes,
 	addInnerBlock,
 	createBlocksFromInnerBlocksTemplate,
-} from "../../../block/functions";
+} from "../../block/functions";
 import { map, get, isEqual, each } from "lodash";
 import {
 	Button,
@@ -13,7 +13,7 @@ import {
 	PanelBody,
 } from "@wordpress/components";
 import Toolbar from "./toolbar";
-import Icon from "../../../block/Icon";
+import Icon from "../../block/Icon";
 
 const { updateBlockAttributes } = wp.data.dispatch("core/block-editor"); // for updating the label of steps
 const { InnerBlocks, RichText, InspectorControls } = wp.blockEditor;

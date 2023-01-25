@@ -55,11 +55,11 @@ class BlockHandler {
 		Progress::init();
 		ExistingForm::init();
 		// TODO: update the following classes.
-		// Form_Steps::init();
+		// Steps::init();
 		// Step::init();
 		// Column::init(); // TODO: investigate 2 of our column blocks and a compatibility with the core column block.
 		// FormColumn::init(); // TODO: investigate 2 of our column blocks and a compatibility with the core column block.
-		// FormGroup::init(); // TODO: investigate our group block and a compatibility with the core column block.
-		// Datepicker::init(); // TODO: decide what to about it.
+		// Group::init(); // TODO: investigate our group block and a compatibility with the core column block.
+		// Date::init(); // TODO: decide what to about it.
 	}
 }

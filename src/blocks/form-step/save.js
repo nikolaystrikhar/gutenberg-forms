@@ -1,5 +1,4 @@
 import React from "react";
-import { InnerBlocks } from "@wordpress/block-editor";
 import { isEmpty } from "lodash";
 
 function save(props) {

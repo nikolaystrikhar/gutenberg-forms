@@ -12,22 +12,22 @@
 import "./block/block.js";
 
 /**
- * Main Gutenberg Forms block
+ * Main blocks.
  */
-import "./blocks/gutenberg-forms/index.js";
+import "./blocks/form/index.js";
+import "./blocks/existing-form/index.js";
 
 /**
- * Inner blocks
+ * Inner blocks.
  */
-
 import "./blocks/text/index.js";
 import "./blocks/number/index.js";
 import "./blocks/checkbox/index.js";
 import "./blocks/select/index.js";
-import "./blocks/datepicker/index.js";
+import "./blocks/date/index.js";
 import "./blocks/textarea/index.js";
 import "./blocks/email/index.js";
-import "./blocks/form-button/index.js";
+import "./blocks/button/index.js";
 import "./blocks/name/index.js";
 import "./blocks/phone/index.js";
 import "./blocks/radio/index.js";
@@ -37,15 +37,13 @@ import "./blocks/hidden/index.js";
 import "./blocks/file/index.js";
 import "./blocks/progress/index.js";
 import "./blocks/calculation/index.js";
+import "./blocks/group/index.js";
+import "./blocks/steps/index.js";
+import "./blocks/step/index.js";
 import "./blocks/column/index.js";
 import "./blocks/form-column/index.js";
-import "./blocks/form-group/index.js";
-import "./blocks/form-steps/root/index.js";
-import "./blocks/form-steps/childs/form-step/index.js";
-import "./blocks/existing-form/index.js";
 
 /**
  * extended index
  */
-
 import "./extend/index.js";
