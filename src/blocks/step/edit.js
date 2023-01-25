@@ -1,6 +1,6 @@
 import React, { useEffect, useState, Fragment } from "react";
 import { InnerBlocks } from "@wordpress/block-editor";
-import { getRootFormBlock } from "../../../../block/functions/index";
+import { getRootFormBlock } from "../../block/functions/index";
 import { isEmpty, get } from "lodash";
 import { Notice, TextControl, PanelBody } from "@wordpress/components";
 
