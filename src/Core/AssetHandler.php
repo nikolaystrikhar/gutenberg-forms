@@ -23,8 +23,8 @@ class AssetHandler {
 			'wp_enqueue_scripts',
 			function(): void {
 				if (
-					! has_block( "cwp/block-gutenberg-forms" )
-					&& ! has_block( ExistingForm::get_name() )
+					! has_block( 'cwp/block-gutenberg-forms' )
+					&& ! has_block( 'cwp/reusable-form' )
 				) {
 					return;
 				}

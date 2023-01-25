@@ -18,16 +18,6 @@ class Checkbox extends FieldBlock {
 	 *
 	 * @return string
 	 */
-
-	/**
-	 * Renders a block.
-	 *
-	 * @since 2.9.9.1
-	 *
-	 * @param array $attributes Block attributes.
-	 *
-	 * @return string
-	 */
 	public function render( array $attributes ): string {
 		// Attributes that always exist.
 
