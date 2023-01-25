@@ -18,7 +18,6 @@
 	],
 	"version": "1.0.0",
 	"textdomain": "forms-gutenberg",
-	"editorScript": "file:./edit.js",
 	"attributes": {
 		"isRequired": {
 			"type": "boolean",
