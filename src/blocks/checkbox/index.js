@@ -6,8 +6,7 @@ import deprecated from "./deprecated/deprecated";
 import { myAttrs } from "../../constants.js";
 import { getFieldTransform } from "../../block/functions";
 
-registerBlockType( "cwp/checkbox", {
-	...metadata,
+registerBlockType( metadata, {
 	edit,
 	deprecated,
 	transforms: {
