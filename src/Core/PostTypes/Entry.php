@@ -5,8 +5,6 @@ use WP_Post;
 
 defined( 'ABSPATH' ) || exit;
 
-require_once GUTENBERG_FORMS_PATH . 'triggers/validator.php';
-
 /**
  * Entry post type.
  *
@@ -352,7 +350,7 @@ class Entry {
 		$new_entry['extended_fields'] = $fields;
 
 		foreach ( $fields as $field_value ) {
-			$is_hidden_field    = Validator::is_hidden_data_field( $field_value['field_id'] );
+			$is_hidden_field    = in_array( $field_value['field_id'], array( 'gf_form_label', 'gf_form_id' ) );
 			$is_recaptcha_field = $field_value['field_id'] === 'g-recaptcha-response';
 			$parse_entry        = self::get_value_and_name( $field_value );
 			$field_admin_id     = $parse_entry['admin_id'];

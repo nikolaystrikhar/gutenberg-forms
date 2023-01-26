@@ -1,20 +1,22 @@
 <?php
+namespace GutenbergForms\Core;
 
+use ExternalServiceHandler;
+use GutenbergForms\Core\Email\Bucket;
+use GutenbergForms\Core\Email\DynamicTag;
+use GutenbergForms\Core\Email\Validator;
 use GutenbergForms\Core\PostTypes\Entry;
 
 defined( 'ABSPATH' ) || exit;
 
-require_once plugin_dir_path( __DIR__ ) . 'triggers/validator.php';
-require_once plugin_dir_path( __DIR__ ) . 'Utils/Bucket.php';
 require_once plugin_dir_path( __DIR__ ) . 'integrations/handler.php';
-require_once plugin_dir_path( __DIR__ ) . 'tagsHandler/tagHandler.php';
 
 /**
  * @property Validator       validator
- * @property wp_post_content post_content
+ * @property string post_content
  * @property array           attachments
  */
-class Email {
+class EmailHandler {
 	public function __construct( $post_content ) {
 
 		$this->validator              = new Validator();
@@ -303,7 +305,7 @@ class Email {
 	 * @param array $fields
 	 */
 	private function gforms_add_dynamic_values( $fields ) {
-		$tagHandler = new gforms_TagHandler( $fields );
+		$tagHandler = new DynamicTag( $fields );
 
 		foreach ( $fields as $key => $field ) {
 			if ( $field['field_type'] === 'hidden' ) {
@@ -418,7 +420,7 @@ class Email {
 
 	public function sendMail( $fields ) {
 		$template   = $this->get_templates( $_POST['submit'] )[0];
-		$tagHandler = new gforms_TagHandler( $fields );
+		$tagHandler = new DynamicTag( $fields );
 
 		/**
 		 * @var string $fromEmail

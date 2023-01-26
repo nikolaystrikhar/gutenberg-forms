@@ -1,4 +1,6 @@
 <?php
+namespace GutenbergForms\Core\Email;
+
 defined( 'ABSPATH' ) || exit;
 
 class Validator {

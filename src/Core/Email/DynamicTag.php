@@ -1,11 +1,13 @@
 <?php
+namespace GutenbergForms\Core\Email;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
- * TagHandler
+ * GutenbergForms\Core\Email\TagHandler
  * This class will handle the tag manipulation & insertion of dynamic content
  */
-class gforms_TagHandler {
+class DynamicTag {
 	public function __construct( $fields ) {
 		$this->data   = array(); // data with their respective tags
 		$this->fields = $fields; // form fields

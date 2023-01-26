@@ -1,4 +1,6 @@
 <?php
+namespace GutenbergForms\Core\Email;
+
 defined( 'ABSPATH' ) || exit;
 
 /**
@@ -7,7 +9,7 @@ defined( 'ABSPATH' ) || exit;
 class Bucket {
 	private const plugin_upload_dir = 'gutenberg-forms-uploads';
 
-    private const plugin_upload_path = WP_CONTENT_DIR . '/uploads' . '/' . self::plugin_upload_dir;
+	private const plugin_upload_path = WP_CONTENT_DIR . '/uploads' . '/' . self::plugin_upload_dir;
 
 	/**
 	 *

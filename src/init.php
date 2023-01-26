@@ -1,6 +1,7 @@
 <?php
 
 use GutenbergForms\Core\AssetHandler;
+use GutenbergForms\Core\EmailHandler;
 use GutenbergForms\Core\PostTypes\Entry;
 use GutenbergForms\Core\PostTypes\Form;
 
@@ -99,8 +100,6 @@ function gutenberg_forms_cwp_block_assets(): void
 	register_block_type('cwp/block-gutenberg-forms', $files);
 }
 
-require_once plugin_dir_path(__DIR__) . 'triggers/email.php';
-
 add_action(
 	'init',
 	function (): void {
@@ -125,7 +124,7 @@ function submitter()
 		$parsed_blocks = parse_blocks(do_shortcode($post->post_content));
 
 		if (!empty($parsed_blocks)) {
-			$email_apply = new Email($parsed_blocks);
+			$email_apply = new EmailHandler($parsed_blocks);
 
 			$email_apply->init();
 		}
