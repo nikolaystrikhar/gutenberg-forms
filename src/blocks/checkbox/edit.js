@@ -26,7 +26,7 @@ import { detect_similar_forms } from "../../block/functions";
 
 const { RichText } = wp.blockEditor;
 const { __ } = wp.i18n;
-const { InspectorControls, BlockControls, BlockIcon } = wp.blockEditor;
+const { InspectorControls, useBlockProps } = wp.blockEditor;
 
 function edit(props) {
 	let {
@@ -47,6 +47,7 @@ function edit(props) {
 		showHint,
 	} = props.attributes;
 
+	const blockProps = useBlockProps();
 	const [checkboxes, setCheckboxes] = useState([]);
 	const [focus, setFocus] = useState({
 		f: false,
@@ -363,6 +364,7 @@ function edit(props) {
 		null,
 		<div
 			className={`cwp-checkbox cwp-field ${props.className} is-style-${fieldStyle}`}
+			{...blockProps}
 		>
 			{bulkAdd ? (
 				<Bulk_Add onChange={(c) => setCheckboxes(c)} data={props} />

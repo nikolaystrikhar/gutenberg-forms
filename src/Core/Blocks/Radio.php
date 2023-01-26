@@ -69,7 +69,7 @@ class Radio extends FieldBlock {
 					<label for="<?php echo esc_attr( $id . '_' . $index ); ?>">
 						<?php echo esc_html( $option['label'] ); ?>
 
-						<?php if ( $option['image'] ): ?>
+						<?php if ( ! empty( $option['image'] ) ): ?>
 							<div class="cwp-radio-image">
 								<img
 									style="height: <?php echo esc_attr( $option['image']['height'] ); ?>; width: <?php echo esc_attr( $option['image']['width'] ); ?>;"
