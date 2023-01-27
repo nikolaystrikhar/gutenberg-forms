@@ -1,7 +1,6 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect } from "react";
 import {
 	FormToggle,
-	Toolbar,
 	PanelRow,
 	PanelBody,
 	TextControl,
@@ -26,9 +25,9 @@ import Suffix from "../components/suffix";
 
 const { __ } = wp.i18n;
 const {
+	useBlockProps,
 	InspectorControls,
 	BlockControls,
-	BlockIcon,
 	RichText,
 } = wp.blockEditor;
 
@@ -287,7 +286,7 @@ function edit(props) {
 			</InspectorControls>
 		),
 		!!props.isSelected && <BlockControls></BlockControls>,
-		<div className={`cwp-website cwp-field ${props.className}`}>
+		<div {...useBlockProps} className={`cwp-website cwp-field ${props.className}`}>
 			<div className="cwp-field-set">
 				<div className="cwp-label-wrap">
 					<RichText
