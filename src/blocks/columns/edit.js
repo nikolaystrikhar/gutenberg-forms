@@ -1,6 +1,5 @@
 import React from "react";
-import { useBlockProps } from "@wordpress/blocks"
-import { InnerBlocks, InspectorControls } from "@wordpress/block-editor";
+import { useBlockProps, InnerBlocks, InspectorControls } from "@wordpress/block-editor";
 import {
 	RangeControl,
 	PanelBody,
