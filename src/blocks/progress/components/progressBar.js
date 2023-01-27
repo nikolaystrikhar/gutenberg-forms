@@ -1,6 +1,8 @@
 import React from "react";
+const { useBlockProps } = wp.blockEditor;
 
 function ProgressBar(props) {
+	const blockProps = useBlockProps();
 	const { attributes } = props;
 	const {
 		progressColor,
@@ -28,6 +30,7 @@ function ProgressBar(props) {
 
 	return (
 		<div
+			{...blockProps}
 			className="cwp-gutenberg-form cwp-progress-bar"
 			style={progressStyling}
 		>
