@@ -1,22 +1,23 @@
 const { registerBlockType } = wp.blocks;
-const { __ } = wp.i18n;
 
+import metadata from './block.json';
 import Icon from "../../block/Icon.js";
-import { attributes, title } from "./block.json";
-import calculationEdit from "./edit.js";
-import { fieldParents } from "../../constants";
-import { deprecated } from "./deprecated/deprecated";
+import edit from "./edit.js";
+import deprecated from "./deprecated/deprecated";
+import { myAttrs } from "../../constants.js";
+import { getFieldTransform } from "../../block/functions";
 
-registerBlockType("cwp/form-calculation", {
-	title: __(title, "forms-gutenberg"),
-	icon: __(<Icon icon="calculation" />, "forms-gutenberg"),
-	category: "gutenberg-forms",
-	keywords: [__("gutenberg-forms", "forms-gutenberg"), __("forms", "forms-gutenberg"), __("calculation", "forms-gutenberg")],
-	supports: {
-		align: ["wide", "full", "center"],
+registerBlockType( metadata, {
+	icon: <Icon icon="calculation" />,
+	edit,
+	deprecated,
+	transforms: {
+		from: [
+			{
+				type: "block",
+				blocks: myAttrs.map((block) => "cwp/".concat(block)),
+				transform: (a) => getFieldTransform(a, "checkbox"),
+			},
+		],
 	},
-	attributes,
-	edit: calculationEdit,
-	parent: fieldParents,
-	deprecated: deprecated,
-});
+} );

@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import {
 	PanelBody,
-	ColorPalette,
 	RangeControl,
 	Button,
 	Toolbar,
@@ -18,12 +17,13 @@ import {
 	get_admin_id
 } from "../../block/misc/helper";
 import { set, clone, isEmpty } from "lodash";
-import { getSiblings, detect_similar_forms } from "../../block/functions/index";
+import { detect_similar_forms } from "../../block/functions/index";
 import ConditionalLogic from "../../block/components/condition";
 import FormulaBuilder from "../../block/components/formulaBuilder";
 
 
 const {
+	useBlockProps,
 	InspectorControls,
 	BlockControls,
 	BlockIcon,
@@ -32,12 +32,12 @@ const {
 
 const { __ } = wp.i18n;
 function edit(props) {
+	const blockProps = useBlockProps();
 	const handleLabel = label => {
 		props.setAttributes({ label });
 	};
 
 	const {
-		calculation,
 		label,
 		field_name,
 		condition,
@@ -191,8 +191,7 @@ function edit(props) {
 				</Toolbar>
 			</BlockControls>
 		),
-
-		<div className={`cwp-calculation cwp-field ${props.className}`}>
+		<div {...blockProps} className={`cwp-calculation cwp-field ${props.className}`}>
 			<div className="cwp-calc-toggle">
 				<h3>{__("Formula Editor", "forms-gutenberg")}</h3>
 				<FormToggle
