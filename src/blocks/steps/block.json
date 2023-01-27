@@ -1,5 +1,23 @@
 {
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "cwp/form-steps",
 	"title": "Form Steps",
+	"category": "gutenberg-forms",
+	"supports": {
+		"inserter": false
+	},
+	"ancestor": [ "cwp/block-gutenberg-forms" ],
+	"icon": "editor-ol-rtl",
+	"keywords": [
+		"multistep",
+		"steps",
+		"step",
+		"input",
+		"form"
+	],
+	"version": "1.0.0",
+	"textdomain": "forms-gutenberg",
 	"attributes": {
 		"currentStep": {
 			"type": "number",

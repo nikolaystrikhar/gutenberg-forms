@@ -16,14 +16,15 @@ import Toolbar from "./toolbar";
 import Icon from "../../block/Icon";
 
 const { updateBlockAttributes } = wp.data.dispatch("core/block-editor"); // for updating the label of steps
-const { InnerBlocks, RichText, InspectorControls } = wp.blockEditor;
+const { useBlockProps, InnerBlocks, RichText, InspectorControls } = wp.blockEditor;
 const { __ } = wp.i18n;
 
 function edit(props) {
+	const blockProps = useBlockProps();
 	const [childAttributes, updateChildAttributes] = useState([]), // initializing child attributes state
 		[step, setStep] = useState(0),
 		[blocksLoaded, setBlockLoaded] = useState(false),
-		{ clientId, attributes, setAttributes, onRemove } = props,
+		{ clientId, attributes, setAttributes } = props,
 		{ currentStep, multiStepEffect } = attributes;
 
 	useEffect(() => {
@@ -102,7 +103,7 @@ function edit(props) {
 	];
 
 	return [
-		<div className="cwp-form-steps-wrapper">
+		<div {...blockProps} className="cwp-form-steps-wrapper">
 			<div className="cwp-form-steps-labels">
 				{map(childAttributes, (attr, index) => {
 					const label = get(attr, "attributes.label");
