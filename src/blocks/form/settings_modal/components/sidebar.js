@@ -57,7 +57,7 @@ function Sidebar(props) {
 
                 <PanelBody title={__("Categories", "forms-gutenberg")}>
                     <MenuGroup>
-                        {catagories.map(c => {
+                        {catagories.map((c, i) => {
 
                             const catagory_data = data.filter(v => {
                                 return isEqual(v.fields.Category, c);
@@ -68,6 +68,7 @@ function Sidebar(props) {
                                 isSelected={true}
                                 isDefault={props.currentCatagory === c}
                                 initialOpen={false}
+								key={i}
                             >
                                 {c}
                             </MenuItem>

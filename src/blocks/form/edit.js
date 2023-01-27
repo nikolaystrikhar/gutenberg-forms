@@ -1,13 +1,8 @@
 import React, { useEffect, Fragment } from "react";
 import Inspector from "./Inspector";
 import Introduction from "./components/introduction";
-import { isEmpty, get } from "lodash";
-import {
-	getFormTemplates,
-	detect_similar_forms,
-	getGlobalMessages,
-	get_submission_message,
-} from "../../block/functions/index";
+import { isEmpty } from "lodash";
+import { getFormTemplates, detect_similar_forms } from "../../block/functions/index";
 import { getThemeStyling } from "../../block/misc/helper";
 import { withDispatch } from "@wordpress/data";
 import { InnerBlocks, RichText } from "@wordpress/block-editor";
@@ -21,13 +16,9 @@ function edit(props) {
 		buttonSetting: { alignment },
 		buttonSetting,
 		templateBuilder,
-		template,
 		id,
 		theme,
 		formType,
-		cpt,
-		formLabel,
-		integrations,
 		buttonStyling,
 	} = props.attributes;
 

@@ -62,10 +62,6 @@ function Settings({ onClose, status, clientId, cpt }) {
 
     const saved_forms = cwpGlobal["cwp-cpt-forms"];
 
-    // const templates = data.map((data, index) => {
-    //     return <PreviewBlock onSelect={onClose} clientId={clientId} key={index} data={data} />
-    // });
-
     const post_types = !isEmpty(saved_forms) ? saved_forms.map((form, index) => {
         return <PostTypeBlock onSelect={onClose} clientId={clientId} key={index} form={form} />
     }) : <Empty message="No Saved Forms!" />

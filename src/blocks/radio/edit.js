@@ -427,7 +427,7 @@ function edit(props) {
 								image = hasImage ? radio.image.url : "";
 
 							return (
-								<Fragment>
+								<Fragment key={index}>
 									<div className="cwp-radios-option">
 										<input
 											id={id.concat(index.toString())}

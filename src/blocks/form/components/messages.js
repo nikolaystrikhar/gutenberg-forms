@@ -17,7 +17,7 @@ export default function CustomMessages(props) {
 				let fieldName = "cwp/".concat(v.fieldName);
 
 				return (
-					<Fragment>
+					<Fragment key={i}>
 						<div className="cwp-option">
 							{/* <TextControl
 								onChange={value => handleChange("empty", value, i, fieldName)}

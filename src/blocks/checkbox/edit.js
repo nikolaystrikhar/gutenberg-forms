@@ -395,7 +395,7 @@ function edit(props) {
 								image = hasImage ? checkbox.image.url : "";
 
 							return (
-								<Fragment>
+								<Fragment key={index}>
 									<div className="cwp-checkbox-option">
 										<input
 											id={id.concat(index.toString())}

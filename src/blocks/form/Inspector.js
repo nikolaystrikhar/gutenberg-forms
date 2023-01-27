@@ -337,11 +337,11 @@ function Inspector(prop) {
 
 			{!isEmpty(get_spam_protectors()) && (
 				<PanelBody title={__("Spam Protection", "forms-gutenberg")} initialOpen={ false }>
-					{get_spam_protectors().map((protection) => {
+					{get_spam_protectors().map((protection, index) => {
 						const isEnabled = hasObject(spamProtections, protection);
 
 						return (
-							<div className="cwp-option">
+							<div className="cwp-option" key={index}>
 								<PanelRow>
 									<h3>{protection.title}</h3>
 									<FormToggle
