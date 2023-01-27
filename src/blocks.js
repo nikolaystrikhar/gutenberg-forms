@@ -37,11 +37,11 @@ import "./blocks/hidden/index.js";
 import "./blocks/file/index.js";
 import "./blocks/progress/index.js";
 import "./blocks/calculation/index.js";
-import "./blocks/group/index.js";
 import "./blocks/steps/index.js";
 import "./blocks/step/index.js";
+import "./blocks/group/index.js";
+import "./blocks/columns/index.js";
 import "./blocks/column/index.js";
-import "./blocks/form-column/index.js";
 
 /**
  * extended index

@@ -57,9 +57,6 @@ class BlockHandler {
 		// TODO: update the following classes.
 		// Steps::init();
 		// Step::init();
-		// Column::init(); // TODO: investigate 2 of our column blocks and a compatibility with the core column block.
-		// FormColumn::init(); // TODO: investigate 2 of our column blocks and a compatibility with the core column block.
-		// Group::init(); // TODO: investigate our group block and a compatibility with the core column block.
 		// Date::init(); // TODO: decide what to about it.
 	}
 }

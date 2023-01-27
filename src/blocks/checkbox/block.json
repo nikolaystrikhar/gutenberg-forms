@@ -4,12 +4,7 @@
 	"name": "cwp/checkbox",
 	"title": "Checkbox",
 	"category": "gutenberg-forms",
-	"parent": [
-		"cwp/block-gutenberg-forms",
-		"cwp/column",
-		"cwp/form-group",
-		"cwp/form-step"
-	],
+	"ancestor": [ "cwp/block-gutenberg-forms" ],
 	"icon": "yes",
 	"keywords": [
 		"checkbox",

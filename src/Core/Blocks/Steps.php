@@ -4,11 +4,11 @@ namespace GutenbergForms\Core\Blocks;
 defined( 'ABSPATH' ) || exit;
 
 /**
- * column block.
+ * Steps block.
  *
  * @since 2.9.9.1
  */
-class Column extends Block {
+class Steps extends Block {
 	/**
 	 * Renders a block.
 	 *
@@ -42,8 +42,8 @@ class Column extends Block {
 
 		ob_start();
 		?>
-    // TODO remove column name
-    <h2>column</h2>
+    // TODO remove FormSteps name
+    <h2>FormSteps</h2>
 		<!-- <div class="cwp-email cwp-field" data-condition="<?php //echo esc_html( wp_json_encode( $condition ) ); ?>">
 			<div class="cwp-field-set">
 				<?php //if ( ! empty( $label ) ) : ?>
