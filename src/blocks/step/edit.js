@@ -1,13 +1,14 @@
-import React, { useEffect, useState, Fragment } from "react";
+import React, { useEffect, useState } from "react";
 import { InnerBlocks } from "@wordpress/block-editor";
 import { getRootFormBlock } from "../../block/functions/index";
 import { isEmpty, get } from "lodash";
 import { Notice, TextControl, PanelBody } from "@wordpress/components";
 
-const { InspectorControls } = wp.blockEditor;
+const { useBlockProps, InspectorControls } = wp.blockEditor;
 const { __ } = wp.i18n;
 
 function edit(props) {
+	const blockProps = useBlockProps();
 	const [disabled, setDisabled] = useState(false);
 
 	const { setAttributes } = props;
@@ -37,7 +38,7 @@ function edit(props) {
 			</InspectorControls>
 		),
 		null,
-		<div className="cwp-form-step">
+		<div {...blockProps} className="cwp-form-step">
 			{disabled ? (
 				<Notice status="warning" isDismissible={false}>
 					This is to be used only within the Multi-Step Form.
