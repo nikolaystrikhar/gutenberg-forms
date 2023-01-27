@@ -14,5 +14,5 @@ import deprecated from "./deprecated/deprecated";
 
 registerBlockType(metadata, {
 	edit,
-	deprecated: deprecated,
+ 	deprecated,
 });
