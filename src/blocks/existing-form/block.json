@@ -4,7 +4,6 @@
 	"name": "cwp/reusable-form",
 	"title": "Existing Form",
 	"category": "gutenberg-forms",
-	"ancestor": [ "cwp/block-gutenberg-forms" ],
 	"icon": "yes",
 	"keywords": [
 		"gutenberg-forms",
