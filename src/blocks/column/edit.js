@@ -2,11 +2,12 @@ import React from 'react';
 import { RangeControl, PanelBody } from '@wordpress/components';
 import { hasChildBlocks } from '../../block/functions';
 
-const { InspectorControls, InnerBlocks } = wp.blockEditor;
+const { useBlockProps, InspectorControls, InnerBlocks } = "@wordpress/blocks";
 const { __ } = wp.i18n;
 const $ = jQuery;
 
 function edit( props ) {
+	const blockProps = useBlockProps();
 	const { width } = props.attributes;
 	const { setAttributes, clientId } = props;
 
@@ -26,7 +27,7 @@ function edit( props ) {
 
 	return [
 		// eslint-disable-next-line react/jsx-key
-		<div className="cwp-col">
+		<div {...blockProps} className="cwp-col">
 			<InnerBlocks
 				templateLock={ false }
 				className="cwp-col_inserter"
