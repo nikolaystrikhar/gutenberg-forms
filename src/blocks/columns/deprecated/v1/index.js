@@ -24,7 +24,6 @@ registerBlockType("cwp/form-column", {
 	save: formColumnSave,
 	attributes,
 	supports: {
-		align: true,
 		align: ["wide", "full", "center"],
 	},
 	parent: fieldParents,

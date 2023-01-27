@@ -16,9 +16,7 @@ registerBlockType("cwp/form-group", {
 		__("form group", "forms-gutenberg"),
 		__("column", "forms-gutenberg"),
 	],
-	// TODO duplicated key align
 	supports: {
-		align: true,
 		align: ["wide", "full", "center"],
 	},
 	attributes,

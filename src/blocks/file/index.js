@@ -9,9 +9,7 @@ import { deprecated } from "./deprecated/deprecated";
 registerBlockType("cwp/file-upload", {
 	title: __(title, "forms-gutenberg"),
 	icon: "media-document",
-	// TODO duplicated key align
 	supports: {
-		align: true,
 		align: ["wide", "full", "center"],
 	},
 	category: "gutenberg-forms",
