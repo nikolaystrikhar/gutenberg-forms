@@ -410,7 +410,18 @@ export function getFormTemplates(type) {
 	}
 
 	if (type === "multiStep") {
-		return [["cwp/form-steps", {}, [["cwp/form-step", {}]]]];
+		return [
+			[
+				"cwp/form-steps",
+				{},
+				[
+					[
+						"cwp/form-step",
+						{}
+					]
+				]
+			]
+		];
 	}
 }
 
