@@ -1,0 +1,17 @@
+{
+	"title": "Column",
+	"attributes": {
+		"columns": {
+			"type": "number",
+			"default": 3
+		},
+		"intro": {
+			"type": "boolean",
+			"default": false
+		},
+		"stack": {
+			"type": "boolean",
+			"default": true
+		}
+	}
+}

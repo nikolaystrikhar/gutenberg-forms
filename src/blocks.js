@@ -39,11 +39,13 @@ import "./blocks/progress/index.js";
 import "./blocks/calculation/index.js";
 import "./blocks/steps/index.js";
 import "./blocks/step/index.js";
-import "./blocks/group/index.js";
-import "./blocks/columns/index.js";
-import "./blocks/column/index.js";
 
 /**
  * extended index
  */
 import "./extend/index.js";
+
+/**
+ * Deprecated blocks.
+ */
+import "./blocks/deprecated/index.js";
