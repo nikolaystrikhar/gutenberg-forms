@@ -1,7 +1,6 @@
 import React, { useEffect } from "react";
 import {
 	FormToggle,
-	Toolbar,
 	PanelRow,
 	PanelBody,
 	TextControl
@@ -19,13 +18,13 @@ import { detect_similar_forms } from "../../block/functions";
 
 const { __ } = wp.i18n;
 const {
+	useBlockProps,
 	InspectorControls,
-	BlockControls,
-	BlockIcon,
 	RichText
 } = wp.blockEditor;
 
 function edit(props) {
+	const blockProps = useBlockProps();
 	const handleChange = v => {
 		let yes_no = v;
 
@@ -132,7 +131,7 @@ function edit(props) {
 			</InspectorControls>
 		),
 		null,
-		<div className={`cwp-yes-no cwp-field cwp-misc-field ${props.className}`}>
+		<div {...blockProps} className={`cwp-yes-no cwp-field cwp-misc-field ${props.className}`}>
 			<div className="cwp-field-set">
 				<div className="cwp-label-wrap">
 					<RichText placeholder={__("Add a label", "forms-gutenberg")} tag="label" value={label} onChange={handleLabel} />
