@@ -1,7 +1,6 @@
 import React, { useEffect, Fragment } from "react";
 import {
 	FormToggle,
-	Toolbar,
 	PanelRow,
 	PanelBody,
 	TextControl,
@@ -21,6 +20,7 @@ import ConditionalLogic from "../../block/components/condition";
 import { clone, set, assign, isEqual } from "lodash";
 
 const {
+	useBlockProps,
 	InspectorControls,
 	BlockControls,
 	RichText
@@ -30,6 +30,8 @@ const { __ } = wp.i18n;
 
 
 function edit(props) {
+	const blockProps = useBlockProps();
+	// TODO unused handler
 	const handleChange = e => {
 		let file = e.target.value;
 
@@ -53,6 +55,7 @@ function edit(props) {
 		id,
 		field_name,
 		requiredLabel,
+		// TODO double messages
 		messages: { empty, invalid },
 		messages,
 		condition,
@@ -256,7 +259,7 @@ function edit(props) {
 			</InspectorControls>
 		),
 		!!props.isSelected && <BlockControls></BlockControls>,
-		<div className={`cwp-file cwp-field ${props.className}`}>
+		<div {...blockProps} className={`cwp-file cwp-field ${props.className}`}>
 			<div className="cwp-field-set">
 				<div className="cwp-label-wrap">
 					<RichText placeholder={__("Add a label", "forms-gutenberg")} tag="label" value={label} onChange={handleLabel} />
