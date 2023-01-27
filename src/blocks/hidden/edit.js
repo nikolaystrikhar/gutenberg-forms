@@ -16,10 +16,11 @@ import { detect_similar_forms } from "../../block/functions";
 import TagSelector from "../../block/components/tagSelector";
 import $ from "jquery";
 
-const { InspectorControls } = wp.blockEditor;
+const { useBlockProps, InspectorControls } = wp.blockEditor;
 const { __ } = wp.i18n;
 
 function edit(props) {
+	const blockProps = useBlockProps();
 	const { field_name, adminId, value } = props.attributes;
 	const { setAttributes, isSelected } = props;
 
@@ -119,7 +120,7 @@ function edit(props) {
 			</PanelBody>
 		</InspectorControls>,
 		null,
-		<div className="cwp-field cwp-hidden">
+		<div {...blockProps} className="cwp-field cwp-hidden">
 			<input
 				ref={hiddenField}
 				type="text"
