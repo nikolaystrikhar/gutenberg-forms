@@ -1,5 +1,17 @@
 {
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "cwp/number",
 	"title": "Number",
+	"category": "gutenberg-forms",
+	"ancestor": [ "cwp/block-gutenberg-forms" ],
+	"keywords": [
+		"number",
+		"input",
+		"form"
+	],
+	"version": "1.0.0",
+	"textdomain": "forms-gutenberg",
 	"attributes": {
 		"enableCondition": {
 			"type": "boolean",

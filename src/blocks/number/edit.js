@@ -1,4 +1,4 @@
-import React, { useEffect, Fragment } from "react";
+import React, { useEffect } from "react";
 import {
 	FormToggle,
 	PanelRow,
@@ -21,12 +21,14 @@ import { getRootMessages, detectSimilarFields } from "../../block/functions";
 const { __ } = wp.i18n;
 
 const {
+	useBlockProps,
 	InspectorControls,
 	BlockControls,
 	RichText,
 } = wp.blockEditor;
 
 function edit(props) {
+	const blockProps = useBlockProps();
 	const handleChange = (e) => {
 		let number = e.target.value;
 
@@ -291,7 +293,7 @@ function edit(props) {
 			</InspectorControls>
 		),
 		!!props.isSelected && <BlockControls></BlockControls>,
-		<div className={`cwp-number cwp-field ${props.className}`}>
+		<div {...blockPropss} className={`cwp-number cwp-field ${props.className}`}>
 			<div className="cwp-field-set">
 				<div className="cwp-label-wrap">
 					<RichText
