@@ -25,12 +25,14 @@ import ConditionalLogic from "../../block/components/condition";
 
 const { __ } = wp.i18n;
 const {
+	useBlockProps,
 	InspectorControls,
 	BlockControls,
 	RichText,
 } = wp.blockEditor;
 
 function edit(props) {
+	const blockProps = useBlockProps();
 	const handleChange = (e) => {
 		let message = e.target.value;
 
@@ -264,7 +266,7 @@ function edit(props) {
 			</InspectorControls>
 		),
 		!!props.isSelected && <BlockControls></BlockControls>,
-		<div className={`cwp-message cwp-field ${props.className}`}>
+		<div {...blockProps} className={`cwp-message cwp-field ${props.className}`}>
 			<div className="cwp-field-set">
 				<div className="cwp-label-wrap">
 					<RichText

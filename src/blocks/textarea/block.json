@@ -1,4 +1,19 @@
 {
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "cwp/message",
+	"title": "Textarea",
+	"category": "gutenberg-forms",
+	"ancestor": [ "cwp/block-gutenberg-forms" ],
+	"icon": "testimonial",
+	"keywords": [
+		"textarea",
+		"message",
+		"input",
+		"form"
+	],
+	"version": "1.0.0",
+	"textdomain": "forms-gutenberg",
 	"attributes": {
 		"enableCondition": {
 			"type": "boolean",
