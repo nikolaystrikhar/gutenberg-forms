@@ -1,4 +1,19 @@
 {
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "cwp/reusable-form",
+	"title": "Existing Form",
+	"category": "gutenberg-forms",
+	"ancestor": [ "cwp/block-gutenberg-forms" ],
+	"icon": "yes",
+	"keywords": [
+		"gutenberg-forms",
+		"forms",
+		"reusable forms",
+		"existing form"
+	],
+	"version": "1.0.0",
+	"textdomain": "forms-gutenberg",
 	"attributes": {
 		"formId": {
 			"type": "string",

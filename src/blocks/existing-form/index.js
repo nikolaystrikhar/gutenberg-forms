@@ -1,9 +1,8 @@
 const { registerBlockType } = wp.blocks;
-const { __ } = wp.i18n;
 
-import { attributes } from "./block.json";
-import reusableEdit from "./edit";
-import { deprecated } from "./deprecated/deprecated";
+import metadata from './block.json';
+import edit from "./edit";
+import deprecated from "./deprecated/deprecated";
 
 /**
  *
@@ -13,18 +12,7 @@ import { deprecated } from "./deprecated/deprecated";
  *
  */
 
-registerBlockType("cwp/reusable-form", {
-	title: __("Existing Form", "forms-gutenberg"),
-	icon: "index-card",
-	category: "gutenberg-forms",
-	keywords: [
-		__("gutenberg-forms", "forms-gutenberg"),
-		__("forms", "forms-gutenberg"),
-		__("reusable", "forms-gutenberg"),
-		__("reusable forms", "forms-gutenberg"),
-		__("existing form", "forms-gutenberg"),
-	],
-	attributes,
-	edit: reusableEdit,
+registerBlockType(metadata, {
+	edit,
 	deprecated: deprecated,
 });

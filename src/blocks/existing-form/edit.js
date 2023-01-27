@@ -3,10 +3,11 @@ import Introduction from "./components/introduction";
 import { isEmpty, get } from "lodash";
 import { SelectControl, Button, PanelBody } from "@wordpress/components";
 import { getPostUrl } from "../../block/functions";
-const { InspectorControls } = wp.blockEditor;
+const { useBlockProps, InspectorControls } = wp.blockEditor;
 const { __ } = wp.i18n;
 
 function edit(props) {
+	const blockProps = useBlockProps();
 	const savedForms = get(window, "cwpGlobal.cwp-cpt-forms");
 
 	let formIdTitleHash = [];
@@ -42,7 +43,7 @@ function edit(props) {
 			</InspectorControls>
 		),
 		null,
-		<div className="cwp-gutenberg-forms-reusable">
+		<div {...blockProps} className="cwp-gutenberg-forms-reusable">
 			{shouldIntroduce
 				? <Introduction value={formId} onSelect={formId => setAttributes({ formId })} />
 				: (
