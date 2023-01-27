@@ -62,7 +62,7 @@ class Textarea extends FieldBlock {
 					data-errors="<?php echo esc_attr( ! empty( $error_messages ) ? wp_json_encode( $error_messages ) : '' ); ?>"
 					data-rule="false"
 					data-cwp-field
-					style="height: <?php echo esc_attr( $height ); ?>"
+					style="height: <?php echo esc_attr( $height ); ?>px;"
 					minlength="<?php echo esc_attr( $min_length ); ?>"
 					maxlength="<?php echo esc_attr( $max_length ); ?>"
 				></textarea>

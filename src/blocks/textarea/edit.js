@@ -306,7 +306,7 @@ function edit(props) {
 				>
 					<textarea
 						value={message}
-						style={{ height: height }}
+						style={{ height: "100%" }}
 						onChange={handleChange}
 					/>
 				</ResizableBox>
