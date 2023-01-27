@@ -8,7 +8,7 @@ import { myAttrs } from "../../constants.js";
 import { getFieldTransform } from "../../block/functions";
 
 registerBlockType( metadata, {
-	icon: __(<Icon icon="number" />),
+	icon: <Icon icon="number" />,
 	edit,
 	deprecated,
 	transforms: {

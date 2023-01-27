@@ -17,7 +17,6 @@ import {
 import ConditionalLogic from "../../block/components/condition";
 import { clone, set, assign } from "lodash";
 import { getRootMessages, detectSimilarFields } from "../../block/functions";
-
 const { __ } = wp.i18n;
 
 const {
