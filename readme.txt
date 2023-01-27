@@ -1,7 +1,7 @@
 === Gutenberg Forms – WordPress Custom Form Builder Plugin ===
 Contributors: nikolaystrikhar
 Tags: gutenberg form, contact form, custom form, multi step form, conditional form, gutenberg block, forms, form builder, contact button, contact me, custom contact form, form manager, form, forms builder, forms creator, captcha, recaptcha, Akismet, email form, web form, feedback form, email submit form, message form, contact form block
-Requires at least: 5.8
+Requires at least: 6.0
 Tested up to: 6.1.1
 Requires PHP: 7.4
 Stable tag: 2.2.9
@@ -93,11 +93,12 @@ For basic usage, you can also have a look at the plugin website [Gutenberg Forms
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com)
 
-= 2.2.9.1 = 26 Jan 2023
+= 2.2.9.1 = 7 FEB 2023
 
 - Update: Use registered colors in color pickers instead of hard-coded colors
 - Update: Reorganized block panels
-- Fix: Google Recaptcha was not working with ab "existing form" block
+- Update: Minimum WP version is 6.0
+- Fix: Google Recaptcha was not working with an "existing form" block
 - Fix: Conflict with GeneratePress back to top button
 - Fix: Auto population did not work for checkboxes
 
