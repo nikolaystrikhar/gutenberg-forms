@@ -8,8 +8,6 @@ import {
 	MenuGroup,
 	MenuItem,
 	Toolbar,
-	Tooltip,
-	Button,
 } from "@wordpress/components";
 import {
 	strip_tags,
@@ -17,10 +15,11 @@ import {
 } from "../../block/misc/helper";
 import { clone, set, get } from "lodash";
 import { getRootFormBlock } from "../../block/functions/index";
-const { RichText, InspectorControls, BlockControls } = wp.blockEditor;
+const { useBlockProps, RichText, InspectorControls, BlockControls } = wp.blockEditor;
 const { __ } = wp.i18n;
 
 function edit(props) {
+	const blockProps = useBlockProps();
 	const {
 		styling,
 		styling: { backgroundColor, color, padding, borderRadius },
@@ -176,7 +175,7 @@ function edit(props) {
 			</Toolbar>
 		</BlockControls>,
 		,
-		<button style={buttonStyling} className={props.className}>
+		<button {...blockProps} style={buttonStyling} className={props.className}>
 			<RichText
 				placeholder={__("Add a label", "forms-gutenberg")}
 				tag="span"
