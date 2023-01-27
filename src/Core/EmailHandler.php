@@ -9,7 +9,7 @@ use GutenbergForms\Core\PostTypes\Entry;
 
 defined( 'ABSPATH' ) || exit;
 
-require_once plugin_dir_path( __DIR__ ) . 'integrations/handler.php';
+require_once GUTENBERG_FORMS_PATH . 'integrations/handler.php';
 
 /**
  * @property Validator       validator
