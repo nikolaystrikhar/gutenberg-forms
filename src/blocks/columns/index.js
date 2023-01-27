@@ -1,27 +1,11 @@
-const { __ } = wp.i18n;
-const { registerBlockType, createBlock } = wp.blocks;
 
-import { attributes, title } from "./block.json";
-import formColumnEdit from "./edit.js";
-import { fieldParents } from "../../constants";
-import { deprecated } from "./deprecated/deprecated";
+const { registerBlockType } = wp.blocks;
 
+import metadata from './block.json';
+import edit from "./edit.js";
+import deprecated from "./deprecated/deprecated";
 
-registerBlockType("cwp/form-column", {
-	title: __(title, "forms-gutenberg"),
-	icon: "editor-table",
-	category: "gutenberg-forms",
-	keywords: [
-		__("gutenberg-forms", "forms-gutenberg"),
-		__("forms", "forms-gutenberg"),
-		__("form-column", "forms-gutenberg"),
-		__("column", "forms-gutenberg"),
-	],
-	supports: {
-		align: ["wide", "full", "center"],
-	},
-	attributes,
-	edit: formColumnEdit,
-	parent: fieldParents,
-	deprecated: deprecated,
+registerBlockType(metadata, {
+	edit,
+	deprecated,
 });

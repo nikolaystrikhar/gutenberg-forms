@@ -1,15 +1,15 @@
-import React, { useEffect } from "react";
+import React from "react";
+import { useBlockProps } from "@wordpress/blocks"
 import { InnerBlocks, InspectorControls } from "@wordpress/block-editor";
 import {
 	RangeControl,
 	PanelBody,
 	FormToggle,
 	PanelRow,
-	ResizableBox,
 } from "@wordpress/components";
 import Introduction from "./components/introduction";
 import { createBlock } from "@wordpress/blocks";
-import { map, omitBy } from "lodash";
+import { map } from "lodash";
 const { __ } = wp.i18n;
 
 const { replaceInnerBlocks, selectBlock } = wp.data.dispatch(
@@ -18,6 +18,7 @@ const { replaceInnerBlocks, selectBlock } = wp.data.dispatch(
 const { getBlock } = wp.data.select("core/block-editor");
 
 function edit(props) {
+	const blockProps = useBlockProps();
 	const { columns, intro, stack } = props.attributes,
 		{ setAttributes } = props;
 
@@ -92,7 +93,7 @@ function edit(props) {
 			</PanelBody>
 		</InspectorControls>,
 		null,
-		<div className="cwp-form-col-main">
+		<div {...blockProps} className="cwp-form-col-main">
 			{!intro ? (
 				<Introduction onSelect={handleSelect} />
 			) : (
