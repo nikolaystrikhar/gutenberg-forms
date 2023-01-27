@@ -1,5 +1,6 @@
 {
 	"title": "New Form",
+	"apiVersion": 1,
 	"attributes": {
 		"submitLabel": {
 			"type": "string",

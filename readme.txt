@@ -98,6 +98,7 @@ For more information, visit [Gutenberg Forms](https://gutenbergforms.com)
 - Update: Use registered colors in color pickers instead of hard-coded colors
 - Update: Reorganized block panels
 - Update: Minimum WP version is 6.0
+- Fix: Textarea during resizing was looking weird
 - Fix: A form can't be inside another form (directly for now)
 - Fix: Google Recaptcha was not working with an "existing form" block
 - Fix: Conflict with GeneratePress back to top button

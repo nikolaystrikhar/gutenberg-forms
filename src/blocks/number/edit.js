@@ -21,6 +21,7 @@ const { __ } = wp.i18n;
 
 const {
 	useBlockProps,
+	useInnerBlocksProps,
 	InspectorControls,
 	BlockControls,
 	RichText,
@@ -28,6 +29,8 @@ const {
 
 function edit(props) {
 	const blockProps = useBlockProps();
+	const innerBlockProps = useInnerBlocksProps(blockProps);
+
 	const handleChange = (e) => {
 		let number = e.target.value;
 
@@ -292,7 +295,7 @@ function edit(props) {
 			</InspectorControls>
 		),
 		!!props.isSelected && <BlockControls></BlockControls>,
-		<div {...blockPropss} className={`cwp-number cwp-field ${props.className}`}>
+		<div {...innerBlockProps} className={`cwp-number cwp-field ${props.className}`}>
 			<div className="cwp-field-set">
 				<div className="cwp-label-wrap">
 					<RichText

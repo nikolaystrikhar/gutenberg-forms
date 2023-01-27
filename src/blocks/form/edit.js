@@ -5,12 +5,14 @@ import { isEmpty } from "lodash";
 import { getFormTemplates, detect_similar_forms } from "../../block/functions/index";
 import { getThemeStyling } from "../../block/misc/helper";
 import { withDispatch } from "@wordpress/data";
-import { InnerBlocks, RichText } from "@wordpress/block-editor";
+import { InnerBlocks, RichText, useBlockProps } from "@wordpress/block-editor";
 
 const { compose } = wp.compose;
 const { __ } = wp.i18n;
 
 function edit(props) {
+	const blockProps = useBlockProps();
+
 	const {
 		submitLabel,
 		buttonSetting: { alignment },
@@ -54,7 +56,7 @@ function edit(props) {
 	return [
 		isEmpty(formType) ? null : <Inspector data={props} />,
 		null,
-		<Fragment>
+		<Fragment {...blockProps}>
 			{isEmpty(formType) ? (
 				<Introduction onSelect={handleTypeChange} data={props} />
 			) : (
