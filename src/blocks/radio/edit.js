@@ -1,7 +1,6 @@
 import React, { useState, useEffect, Fragment, useRef } from "react";
 import {
 	FormToggle,
-	Toolbar,
 	PanelRow,
 	PanelBody,
 	Icon,
@@ -29,9 +28,10 @@ import {
 
 const { RichText } = wp.blockEditor;
 const { __ } = wp.i18n;
-const { InspectorControls, BlockControls, BlockIcon } = wp.blockEditor;
+const { useBlockProps, InspectorControls } = wp.blockEditor;
 
 function edit(props) {
+	const blockProps = useBlockProps();
 	let {
 		options,
 		isRequired,
@@ -396,6 +396,7 @@ function edit(props) {
 		</InspectorControls>,
 		null,
 		<div
+			{...blockProps}
 			className={`cwp-radios cwp-field ${props.className} is-style-${fieldStyle}`}
 		>
 			{bulkAdd ? (
