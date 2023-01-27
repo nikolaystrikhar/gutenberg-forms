@@ -2,11 +2,12 @@ import React, { Fragment } from "react";
 import Inspector from "./Inspector";
 import { Notice } from "@wordpress/components";
 import { isChildFieldsRequired } from "../../block/functions";
-const { InnerBlocks, RichText } = wp.blockEditor;
+const { useBlockProps, InnerBlocks, RichText } = wp.blockEditor;
 const { __ } = wp.i18n;
 
 
 function edit(props) {
+	const blockProps = useBlockProps();
 	const { styling, label, enableCondition } = props.attributes;
 
 	const handleLabel = label => {
@@ -21,7 +22,7 @@ function edit(props) {
 	return [
 		!!props.isSelected && <Inspector data={props} />,
 		null,
-		<Fragment>
+		<Fragment {...blockProps}>
 			{isChildFieldsRequired(props.clientId) && enableCondition && (
 				<Notice status="error" isDismissible={false}>
 					{
