@@ -2,7 +2,7 @@ import React from 'react';
 import { RangeControl, PanelBody } from '@wordpress/components';
 import { hasChildBlocks } from '../../block/functions';
 
-const { useBlockProps, InspectorControls, InnerBlocks } = "@wordpress/blocks";
+const { useBlockProps, InspectorControls, InnerBlocks } = "@wordpress/block-editor";
 const { __ } = wp.i18n;
 const $ = jQuery;
 

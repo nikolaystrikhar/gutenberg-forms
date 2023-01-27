@@ -1,4 +1,4 @@
-const { registerBlockType } = "@wordpress/blocks"
+const { registerBlockType } = wp.blocks;
 
 import metadata from './block.json';
 import edit from "./edit.js";
