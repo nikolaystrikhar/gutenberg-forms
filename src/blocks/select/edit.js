@@ -1,7 +1,6 @@
 import React, { useState, useEffect, useRef, Fragment } from "react";
 import {
 	FormToggle,
-	Toolbar,
 	PanelRow,
 	PanelBody,
 	Icon,
@@ -26,10 +25,11 @@ import ConditionalLogic from "../../block/components/condition";
 import Bulk_Add from "../components/bulk_add";
 
 const { __ } = wp.i18n;
-const { InspectorControls, BlockControls, BlockIcon } = wp.blockEditor;
+const { useBlockProps, InspectorControls } = wp.blockEditor;
 const { RichText } = wp.blockEditor;
 
 function edit(props) {
+	const blockProps = useBlockProps();
 	let {
 		options,
 		isRequired,
@@ -236,7 +236,7 @@ function edit(props) {
 
 	const editView = select.map((s, index) => {
 		return (
-			<div className="cwp-select-option">
+			<div {...blockProps} className="cwp-select-option">
 				<input
 					aria-label={strip_tags(label)}
 					onChange={(e) => handleChange(e, index)}
