@@ -1,5 +1,19 @@
 {
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 2,
+	"name": "cwp/email",
 	"title": "Email",
+	"category": "gutenberg-forms",
+	"ancestor": [ "cwp/block-gutenberg-forms" ],
+	"icon": "email",
+	"keywords": [
+		"email",
+		"mail",
+		"input",
+		"form"
+	],
+	"version": "1.0.0",
+	"textdomain": "forms-gutenberg",
 	"attributes": {
 		"enableCondition": {
 			"type": "boolean",
