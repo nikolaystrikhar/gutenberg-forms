@@ -53,6 +53,13 @@ function edit(props) {
 		props.setAttributes({ formType: type, buttonSetting });
 	};
 
+	// All blocks except the form blocks.
+	const ALLOWED_BLOCKS = wp.blocks.getBlockTypes()
+		.map(block => block.name)
+		.filter(
+			blockName => ['cwp/block-gutenberg-forms', 'cwp/reusable-form'].indexOf(blockName) === -1
+		);
+
 	return [
 		isEmpty(formType) ? null : <Inspector data={props} />,
 		null,
@@ -68,6 +75,7 @@ function edit(props) {
 						<InnerBlocks
 							template={getFormTemplates(formType)}
 							templateLock={false}
+							allowedBlocks={ALLOWED_BLOCKS}
 							renderAppender={() => null}
 						/>
 						{!buttonSetting.disable && (

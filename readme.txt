@@ -93,11 +93,12 @@ For basic usage, you can also have a look at the plugin website [Gutenberg Forms
 
 For more information, visit [Gutenberg Forms](https://gutenbergforms.com)
 
-= 2.2.9.1 = 7 FEB 2023
+= 2.2.9.1 = 7 Feb 2023
 
 - Update: Use registered colors in color pickers instead of hard-coded colors
 - Update: Reorganized block panels
 - Update: Minimum WP version is 6.0
+- Fix: A form can't be inside another form (directly for now)
 - Fix: Google Recaptcha was not working with an "existing form" block
 - Fix: Conflict with GeneratePress back to top button
 - Fix: Auto population did not work for checkboxes
