@@ -5,7 +5,7 @@
 	"title": "File",
 	"icon": "media-document",
 	"supports": {
-		"align": ["wide", "full", "center"],
+		"align": ["wide", "full", "center"]
 	},
 	"keywords": [
 		"file",
