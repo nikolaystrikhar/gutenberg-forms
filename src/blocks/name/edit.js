@@ -3,7 +3,6 @@ import './style.scss';
 import React, { useEffect, Fragment } from "react";
 import {
 	FormToggle,
-	Toolbar,
 	PanelRow,
 	PanelBody,
 	TextControl,
@@ -27,10 +26,11 @@ import Prefix from "../components/prefix";
 import Suffix from "../components/suffix";
 
 const { __ } = wp.i18n;
-const { InspectorControls, BlockControls, BlockIcon, RichText } =
+const { useBlockProps, InspectorControls, BlockControls, RichText } =
 	wp.blockEditor;
 
 function edit(props) {
+	const blockProps = useBlockProps();
 	const handleChange = (e) => {
 		let name = e.target.value;
 
@@ -51,9 +51,9 @@ function edit(props) {
 		name,
 		isRequired,
 		label,
-		id,
 		field_name,
 		requiredLabel,
+		// TODO duble messages
 		messages: { empty, invalidName },
 		messages,
 		pattern,
@@ -306,7 +306,7 @@ function edit(props) {
 			</InspectorControls>
 		),
 		!!props.isSelected && <BlockControls></BlockControls>,
-		<div className={`cwp-name cwp-field ${props.className}`}>
+		<div {...blockProps} className={`cwp-name cwp-field ${props.className}`}>
 			<div className="cwp-field-set">
 				<div className="cwp-label-wrap">
 					<RichText
