@@ -2,11 +2,12 @@
 	"$schema": "https://schemas.wp.org/trunk/block.json",
 	"apiVersion": 1,
 	"name": "cwp/checkbox",
-	"title": "Checkbox",
+	"title": "Multiple Choice",
 	"category": "gutenberg-forms",
 	"ancestor": [ "cwp/block-gutenberg-forms" ],
 	"icon": "yes",
 	"keywords": [
+		"choice",
 		"checkbox",
 		"input",
 		"form"

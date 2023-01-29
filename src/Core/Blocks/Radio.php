@@ -56,36 +56,37 @@ class Radio extends FieldBlock {
 				<?php echo $this->map_label( $is_required, $label, $required_label, $id ); ?>
 
 				<?php foreach ( $options as $index => $option ): ?>
-				<div class="cwp-radio-option">
-					<input
-						name="<?php echo esc_attr( $id ); ?>"
-						id="<?php echo esc_attr( $id . '_' . $index ); ?>"
-						type="radio"
-						<?php if ( $is_required ): ?>
-							required
-						<?php endif; ?>
-						data-rule="false"
-						data-cwp-field
-						data-required="false"
-						value="<?php echo esc_attr( $option['label'] ); ?>"
-					>
+					<div class="cwp-radio-option">
+						<input
+							name="<?php echo esc_attr( $id ); ?>"
+							id="<?php echo esc_attr( $id . '_' . $index ); ?>"
+							type="radio"
+							<?php if ( $is_required ): ?>
+								required
+							<?php endif; ?>
+							data-rule="false"
+							data-cwp-field
+							data-required="false"
+							value="<?php echo esc_attr( $option['label'] ); ?>"
+						>
 
-					<label for="<?php echo esc_attr( $id . '_' . $index ); ?>">
-						<?php echo esc_html( $option['label'] ); ?>
+						<label for="<?php echo esc_attr( $id . '_' . $index ); ?>">
+							<?php echo esc_html( $option['label'] ); ?>
 
-						<?php if ( ! empty( $option['image'] ) ): ?>
-							<div class="cwp-radio-image">
-								<img
-									style="height: <?php echo esc_attr( $option['image']['height'] ); ?>; width: <?php echo esc_attr( $option['image']['width'] ); ?>;"
-									src="<?php echo esc_url( $option['image']['url'] ); ?>"
-								/>
-							</div>
-						<?php endif; ?>
-					</label>
+							<?php if ( ! empty( $option['image'] ) ): ?>
+								<div class="cwp-radio-image">
+									<img
+										style="height: <?php echo esc_attr( $option['image']['height'] ); ?>; width: <?php echo esc_attr( $option['image']['width'] ); ?>;"
+										src="<?php echo esc_url( $option['image']['url'] ); ?>"
+									/>
+								</div>
+							<?php endif; ?>
+						</label>
+					</div>
 				<?php endforeach; ?>
-			</div>
 
-			<?php echo $this->map_hint( $show_hint, $hint ); ?>
+				<?php echo $this->map_hint( $show_hint, $hint ); ?>
+			</div>
 		</div>
 		<?php
 		return ob_get_clean();
