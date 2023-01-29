@@ -1,10 +1,42 @@
+const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 
-import metadata from './block.json';
-import edit from "./edit.js";
-import deprecated from "./deprecated/deprecated";
+import { fieldParents } from "../../../constants";
+import formGroupEdit from "./edit.js";
+import formGroupSave from "./save.js";
 
-registerBlockType( metadata, {
-	edit,
-	deprecated,
-} );
+import blockData from "./block.json";
+const { attributes, title } = blockData;
+
+registerBlockType("cwp/form-group", {
+	title: __(title),
+	icon: "forms",
+	category: "gutenberg-forms",
+	keywords: [
+		__("gutenberg-forms"),
+		__("forms"),
+		__("form group"),
+		__("column"),
+	],
+	edit: formGroupEdit,
+	save: formGroupSave,
+	attributes,
+	supports: {
+		align: true,
+		align: ["wide", "full", "center"],
+	},
+	parent: fieldParents,
+	migrate( attributes, innerBlocks ) {
+		const { title, ...restAttributes } = attributes;
+
+		return [
+				restAttributes,
+				[
+						createBlock( 'core/group', {
+								content: attributes.title,
+						} ),
+						...innerBlocks,
+				],
+		];
+},
+});

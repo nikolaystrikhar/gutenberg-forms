@@ -1,12 +1,40 @@
+const { __ } = wp.i18n;
 const { registerBlockType } = wp.blocks;
 
-import metadata from './block.json';
-import edit from "./edit.js";
-import deprecated from "./deprecated/deprecated";
+import columnEdit from "./edit.js";
+import columnSave from "./save.js";
+
+import blockData from "./block.json";
 
 // Child block for the form-column block for creating layouts
 
-registerBlockType(metadata, {
-	edit,
-	deprecated,
+const { title, attributes } = blockData;
+
+registerBlockType("cwp/column", {
+	title: __(title),
+	icon: "editor-table",
+	category: "gutenberg-forms",
+	keywords: [
+		__("gutenberg-forms"),
+		__("forms"),
+		__("form-column"),
+		__("column"),
+	],
+	edit: columnEdit,
+	save: columnSave,
+	attributes,
+	parent: ["cwp/form-column"],
+	migrate( attributes, innerBlocks ) {
+		const { title, ...restAttributes } = attributes;
+
+		return [
+				restAttributes,
+				[
+						createBlock( 'core/column', {
+								content: attributes.title,
+						} ),
+						...innerBlocks,
+				],
+		];
+},
 });

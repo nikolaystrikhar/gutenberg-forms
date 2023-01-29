@@ -1,13 +1,12 @@
-import React from 'react';
+import React, { Fragment } from 'react';
 import { RangeControl, PanelBody } from '@wordpress/components';
 import { hasChildBlocks } from '../../../block/functions';
 
-const { useBlockProps, InspectorControls, InnerBlocks } = "@wordpress/block-editor";
+const { InspectorControls, InnerBlocks } = wp.blockEditor;
 const { __ } = wp.i18n;
 const $ = jQuery;
 
 function edit( props ) {
-	const blockProps = useBlockProps();
 	const { width } = props.attributes;
 	const { setAttributes, clientId } = props;
 
@@ -27,7 +26,8 @@ function edit( props ) {
 
 	return [
 		// eslint-disable-next-line react/jsx-key
-		<div {...blockProps} className="cwp-col">
+		<Fragment>
+		<div className="cwp-col">
 			<InnerBlocks
 				templateLock={ false }
 				className="cwp-col_inserter"
@@ -37,7 +37,9 @@ function edit( props ) {
 						() => <InnerBlocks.ButtonBlockAppender />
 				}
 			/>
-		</div>,
+		</div>
+		<p style={{color: "red", fontSize: "20px"}}>This block is deprecated, please transfer it to core column block!</p>
+		</Fragment>,
 		null,
 		!! props.isSelected && (
 			<InspectorControls>

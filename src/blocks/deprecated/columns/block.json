@@ -1,21 +1,5 @@
 {
-	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"apiVersion": 1,
-	"name": "cwp/form-column",
 	"title": "Column",
-	"category": "gutenberg-forms",
-	"ancestor": [ "cwp/block-gutenberg-forms" ],
-	"icon": "editor-table",
-	"keywords": [
-		"column",
-		"form-column",
-		"form"
-	],
-	"supports": {
-		"align": ["wide", "full", "center"]
-	},
-	"version": "1.0.0",
-	"textdomain": "forms-gutenberg",
 	"attributes": {
 		"columns": {
 			"type": "number",

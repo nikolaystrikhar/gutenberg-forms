@@ -1,10 +1,12 @@
 import React from "react";
 import {
+	PanelRow,
 	PanelBody,
 	ColorPalette,
 	RangeControl,
 	Notice,
 } from "@wordpress/components";
+import { basicColorScheme } from "../../../block/misc/helper";
 import { set, clone } from "lodash";
 import ConditionalLogic from "../../../block/components/condition";
 import { isChildFieldsRequired } from "../../../block/functions";
@@ -51,7 +53,7 @@ function Inspector(prop) {
 				<div className="cwp-option">
 					<h3 className="cwp-heading">{__("Background Color", "forms-gutenberg")}</h3>
 					<ColorPalette
-						colors={wp.data.select( 'core/block-editor' ).getSettings().colors}
+						colors={basicColorScheme}
 						value={backgroundColor}
 						onChange={(color) => handleStyling(color, "backgroundColor")}
 					/>
@@ -59,7 +61,7 @@ function Inspector(prop) {
 				<div className="cwp-option">
 					<h3 className="cwp-heading">{__("Color", "forms-gutenberg")}</h3>
 					<ColorPalette
-						colors={wp.data.select( 'core/block-editor' ).getSettings().colors}
+						colors={basicColorScheme}
 						value={color}
 						onChange={(color) => handleStyling(color, "color")}
 					/>
@@ -68,7 +70,7 @@ function Inspector(prop) {
 				<div className="cwp-option">
 					<h3 className="cwp-heading">{__("Border Color", "forms-gutenberg")}</h3>
 					<ColorPalette
-						colors={wp.data.select( 'core/block-editor' ).getSettings().colors}
+						colors={basicColorScheme}
 						value={borderColor}
 						onChange={(color) => handleStyling(color, "borderColor")}
 					/>
@@ -106,7 +108,7 @@ function Inspector(prop) {
 					/>
 				</div>
 			</PanelBody>
-			<PanelBody title={__("Condition", "forms-gutenberg")} initialOpen={ false }>
+			<PanelBody title={__("Condition", "forms-gutenberg")}>
 				<ConditionalLogic
 					condition={condition}
 					set={props.setAttributes}

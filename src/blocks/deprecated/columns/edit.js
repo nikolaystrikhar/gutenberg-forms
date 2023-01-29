@@ -1,14 +1,15 @@
-import React from "react";
-import { useBlockProps, InnerBlocks, InspectorControls } from "@wordpress/block-editor";
+import React, { useEffect, Fragment } from "react";
+import { InnerBlocks, InspectorControls } from "@wordpress/block-editor";
 import {
 	RangeControl,
 	PanelBody,
 	FormToggle,
 	PanelRow,
+	ResizableBox,
 } from "@wordpress/components";
 import Introduction from "./components/introduction";
 import { createBlock } from "@wordpress/blocks";
-import { map } from "lodash";
+import { map, omitBy } from "lodash";
 const { __ } = wp.i18n;
 
 const { replaceInnerBlocks, selectBlock } = wp.data.dispatch(
@@ -17,7 +18,6 @@ const { replaceInnerBlocks, selectBlock } = wp.data.dispatch(
 const { getBlock } = wp.data.select("core/block-editor");
 
 function edit(props) {
-	const blockProps = useBlockProps();
 	const { columns, intro, stack } = props.attributes,
 		{ setAttributes } = props;
 
@@ -92,7 +92,8 @@ function edit(props) {
 			</PanelBody>
 		</InspectorControls>,
 		null,
-		<div {...blockProps} className="cwp-form-col-main">
+		<Fragment>
+		<div className="cwp-form-col-main">
 			{!intro ? (
 				<Introduction onSelect={handleSelect} />
 			) : (
@@ -103,7 +104,9 @@ function edit(props) {
 					templateInsertUpdatesSelection={true}
 				/>
 			)}
-		</div>,
+		</div>
+		<p style={{color: "red", fontSize: "20px"}}>This block is deprecated, please transfer it to core column block!</p>
+		</Fragment>,
 	];
 }
 

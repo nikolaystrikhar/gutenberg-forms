@@ -2,12 +2,11 @@ import React, { Fragment } from "react";
 import Inspector from "./Inspector";
 import { Notice } from "@wordpress/components";
 import { isChildFieldsRequired } from "../../../block/functions";
-const { useBlockProps, InnerBlocks, RichText } = wp.blockEditor;
+const { InnerBlocks, RichText } = wp.blockEditor;
 const { __ } = wp.i18n;
 
 
 function edit(props) {
-	const blockProps = useBlockProps();
 	const { styling, label, enableCondition } = props.attributes;
 
 	const handleLabel = label => {
@@ -22,7 +21,7 @@ function edit(props) {
 	return [
 		!!props.isSelected && <Inspector data={props} />,
 		null,
-		<Fragment {...blockProps}>
+		<Fragment>
 			{isChildFieldsRequired(props.clientId) && enableCondition && (
 				<Notice status="error" isDismissible={false}>
 					{
@@ -36,6 +35,7 @@ function edit(props) {
 					<InnerBlocks />
 				</div>
 			</fieldset>
+			<p style={{color: "red", fontSize: "20px"}}>This block is deprecated, please transfer it to core group block!</p>
 		</Fragment>
 	];
 }

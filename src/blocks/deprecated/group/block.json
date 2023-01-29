@@ -1,22 +1,5 @@
 {
-	"$schema": "https://schemas.wp.org/trunk/block.json",
-	"apiVersion": 1,
-	"name": "cwp/form-group",
 	"title": "Group",
-	"category": "gutenberg-forms",
-	"ancestor": [ "cwp/block-gutenberg-forms" ],
-	"icon": "forms",
-	"supports": {
-		"align": ["wide", "full", "center"]
-	},
-	"keywords": [
-		"group",
-		"form group",
-		"column",
-		"form"
-	],
-	"version": "1.0.0",
-	"textdomain": "forms-gutenberg",
 	"attributes": {
 		"styling": {
 			"type": "object",
