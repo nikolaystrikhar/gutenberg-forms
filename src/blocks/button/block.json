@@ -16,6 +16,7 @@
 	],
 	"version": "1.0.0",
 	"textdomain": "forms-gutenberg",
+	"example": {},
 	"attributes": {
 		"label": {
 			"type": "string",

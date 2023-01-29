@@ -13,6 +13,7 @@
 	],
 	"version": "1.0.0",
 	"textdomain": "forms-gutenberg",
+	"example": {},
 	"attributes": {
 		"formId": {
 			"type": "string",
