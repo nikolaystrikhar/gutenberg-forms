@@ -45,7 +45,9 @@ class Radio extends FieldBlock {
 		?>
 		<div
 			class="cwp-radio cwp-field <?php echo esc_attr( $field_style ); ?>"
-			data-condition="<?php echo esc_attr( ! empty( $condition ) ? wp_json_encode( $condition ) : '' ); ?>"
+			<?php if ( ! empty( $condition ) ): ?>
+				data-condition="<?php echo esc_attr( wp_json_encode( $condition ) ); ?>"
+			<?php endif; ?>
 		>
 			<div
 				data-errors="<?php echo esc_attr( ! empty( $error_messages ) ? wp_json_encode( $error_messages ) : '' ); ?>"
@@ -59,7 +61,9 @@ class Radio extends FieldBlock {
 						name="<?php echo esc_attr( $id ); ?>"
 						id="<?php echo esc_attr( $id . '_' . $index ); ?>"
 						type="radio"
-						required="<?php echo esc_attr( $is_required ); ?>"
+						<?php if ( $is_required ): ?>
+							required
+						<?php endif; ?>
 						data-rule="false"
 						data-cwp-field
 						data-required="false"

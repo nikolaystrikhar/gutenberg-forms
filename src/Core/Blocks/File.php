@@ -74,7 +74,9 @@ class File extends FieldBlock {
 		?>
 		<div
 			class="cwp-file cwp-field <?php echo esc_attr( $field_style ); ?>"
-			data-condition="<?php echo esc_attr( ! empty( $condition ) ? wp_json_encode( $condition ) : '' ); ?>"
+			<?php if ( ! empty( $condition ) ): ?>
+				data-condition="<?php echo esc_attr( wp_json_encode( $condition ) ); ?>"
+			<?php endif; ?>
 		>
 			<div class="cwp-field-set">
 				<?php echo $this->map_label( $is_required, $label, $required_label, $id ); ?>
@@ -83,7 +85,9 @@ class File extends FieldBlock {
 					name="<?php echo esc_attr( $id ); ?>"
 					id="<?php echo esc_attr( $id ); ?>"
 					type="file"
-					required="<?php echo esc_attr( $is_required ); ?>"
+					<?php if ( $is_required ): ?>
+							required
+						<?php endif; ?>
 					title=""
 					data-errors="<?php echo esc_attr( ! empty( $error_messages ) ? wp_json_encode( $error_messages ) : '' ); ?>"
 					data-rule="false"

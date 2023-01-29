@@ -574,20 +574,24 @@ http://nicolasgallagher.com/micro-clearfix-hack/
       margin: 0px 0px 0px 10px; }
 
 .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field .cwp-field-with-elements {
-  display: table;
+  display: -ms-flexbox;
+  display: flex;
   width: 100%;
   position: relative; }
 
 .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field .cwp-suffix {
   /**
 
-        This mixin will be applied to both input element ( prefix & suffix ) 
+        This mixin will be applied to both input element ( prefix & suffix )
         @params {$type} can either be prefix or suffix
 
     **/
-  display: table-cell;
-  padding: 0px 15px;
-  width: 1%; }
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  padding: 0 10px;
+  white-space: nowrap; }
   .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field .cwp-suffix.outside {
     border-top: 1px solid;
     border-bottom: 1px solid;
@@ -608,13 +612,16 @@ http://nicolasgallagher.com/micro-clearfix-hack/
 .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field .cwp-prefix {
   /**
 
-        This mixin will be applied to both input element ( prefix & suffix ) 
+        This mixin will be applied to both input element ( prefix & suffix )
         @params {$type} can either be prefix or suffix
 
     **/
-  display: table-cell;
-  padding: 0px 15px;
-  width: 1%; }
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  padding: 0 10px;
+  white-space: nowrap; }
   .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field .cwp-prefix.outside {
     border-top: 1px solid;
     border-bottom: 1px solid;
@@ -840,9 +847,12 @@ http://nicolasgallagher.com/micro-clearfix-hack/
   .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field .cwp-field-set input {
     width: 100%;
     padding: 10px 10px;
+    border-radius: 0;
     -webkit-transition: 0.5s;
     -o-transition: 0.5s;
-    transition: 0.5s; }
+    transition: 0.5s;
+    background: #fff;
+    line-height: 1.4; }
   .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field .cwp-field-set input.error {
     border: 1px solid red;
     outline: red; }
@@ -872,9 +882,12 @@ http://nicolasgallagher.com/micro-clearfix-hack/
   .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field.cwp-captcha .cwp-captcha-inner input {
     width: 100%;
     padding: 10px 10px;
+    border-radius: 0;
     -webkit-transition: 0.5s;
     -o-transition: 0.5s;
-    transition: 0.5s; }
+    transition: 0.5s;
+    background: #fff;
+    line-height: 1.4; }
   .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field.cwp-captcha .cwp-captcha-inner input.error {
     border: 1px solid red;
     outline: red; }
@@ -1640,20 +1653,24 @@ http://nicolasgallagher.com/micro-clearfix-hack/
       margin: 0px 0px 0px 10px; }
 
 .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field .cwp-field-with-elements {
-  display: table;
+  display: -ms-flexbox;
+  display: flex;
   width: 100%;
   position: relative; }
 
 .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field .cwp-suffix {
   /**
 
-        This mixin will be applied to both input element ( prefix & suffix ) 
+        This mixin will be applied to both input element ( prefix & suffix )
         @params {$type} can either be prefix or suffix
 
     **/
-  display: table-cell;
-  padding: 0px 15px;
-  width: 1%; }
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  padding: 0 10px;
+  white-space: nowrap; }
   .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field .cwp-suffix.outside {
     border-top: 1px solid;
     border-bottom: 1px solid;
@@ -1674,13 +1691,16 @@ http://nicolasgallagher.com/micro-clearfix-hack/
 .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field .cwp-prefix {
   /**
 
-        This mixin will be applied to both input element ( prefix & suffix ) 
+        This mixin will be applied to both input element ( prefix & suffix )
         @params {$type} can either be prefix or suffix
 
     **/
-  display: table-cell;
-  padding: 0px 15px;
-  width: 1%; }
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  padding: 0 10px;
+  white-space: nowrap; }
   .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field .cwp-prefix.outside {
     border-top: 1px solid;
     border-bottom: 1px solid;
@@ -1906,9 +1926,12 @@ http://nicolasgallagher.com/micro-clearfix-hack/
   .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field .cwp-field-set input {
     width: 100%;
     padding: 10px 10px;
+    border-radius: 0;
     -webkit-transition: 0.5s;
     -o-transition: 0.5s;
-    transition: 0.5s; }
+    transition: 0.5s;
+    background: #fff;
+    line-height: 1.4; }
   .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field .cwp-field-set input.error {
     border: 1px solid red;
     outline: red; }
@@ -1938,9 +1961,12 @@ http://nicolasgallagher.com/micro-clearfix-hack/
   .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field.cwp-captcha .cwp-captcha-inner input {
     width: 100%;
     padding: 10px 10px;
+    border-radius: 0;
     -webkit-transition: 0.5s;
     -o-transition: 0.5s;
-    transition: 0.5s; }
+    transition: 0.5s;
+    background: #fff;
+    line-height: 1.4; }
   .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field.cwp-captcha .cwp-captcha-inner input.error {
     border: 1px solid red;
     outline: red; }
@@ -2702,20 +2728,24 @@ http://nicolasgallagher.com/micro-clearfix-hack/
       margin: 0px 0px 0px 10px; }
 
 .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field .cwp-field-with-elements {
-  display: table;
+  display: -ms-flexbox;
+  display: flex;
   width: 100%;
   position: relative; }
 
 .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field .cwp-suffix {
   /**
 
-        This mixin will be applied to both input element ( prefix & suffix ) 
+        This mixin will be applied to both input element ( prefix & suffix )
         @params {$type} can either be prefix or suffix
 
     **/
-  display: table-cell;
-  padding: 0px 15px;
-  width: 1%; }
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  padding: 0 10px;
+  white-space: nowrap; }
   .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field .cwp-suffix.outside {
     border-top: 1px solid;
     border-bottom: 1px solid;
@@ -2736,13 +2766,16 @@ http://nicolasgallagher.com/micro-clearfix-hack/
 .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field .cwp-prefix {
   /**
 
-        This mixin will be applied to both input element ( prefix & suffix ) 
+        This mixin will be applied to both input element ( prefix & suffix )
         @params {$type} can either be prefix or suffix
 
     **/
-  display: table-cell;
-  padding: 0px 15px;
-  width: 1%; }
+  display: -ms-flexbox;
+  display: flex;
+  -ms-flex-align: center;
+      align-items: center;
+  padding: 0 10px;
+  white-space: nowrap; }
   .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field .cwp-prefix.outside {
     border-top: 1px solid;
     border-bottom: 1px solid;
@@ -2968,9 +3001,12 @@ http://nicolasgallagher.com/micro-clearfix-hack/
   .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field .cwp-field-set input {
     width: 100%;
     padding: 10px 10px;
+    border-radius: 0;
     -webkit-transition: 0.5s;
     -o-transition: 0.5s;
-    transition: 0.5s; }
+    transition: 0.5s;
+    background: #fff;
+    line-height: 1.4; }
   .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field .cwp-field-set input.error {
     border: 1px solid red;
     outline: red; }
@@ -3000,9 +3036,12 @@ http://nicolasgallagher.com/micro-clearfix-hack/
   .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field.cwp-captcha .cwp-captcha-inner input {
     width: 100%;
     padding: 10px 10px;
+    border-radius: 0;
     -webkit-transition: 0.5s;
     -o-transition: 0.5s;
-    transition: 0.5s; }
+    transition: 0.5s;
+    background: #fff;
+    line-height: 1.4; }
   .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field.cwp-captcha .cwp-captcha-inner input.error {
     border: 1px solid red;
     outline: red; }

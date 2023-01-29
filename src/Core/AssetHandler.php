@@ -29,11 +29,10 @@ class AssetHandler {
 					return;
 				}
 
-				$locale = substr( get_bloginfo ( 'language' ), 0, 2 );
-
+				// TODO: Include it for forms with google recaptcha only.
 				wp_enqueue_script(
 					'google-recaptcha',
-					"https://www.google.com/recaptcha/api.js?hl=" . $locale,
+					"https://www.google.com/recaptcha/api.js?hl=" . Helper::get_language_code(),
 					array(),
 					false,
 					true

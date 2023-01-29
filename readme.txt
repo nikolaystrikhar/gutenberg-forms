@@ -95,14 +95,16 @@ For more information, visit [Gutenberg Forms](https://gutenbergforms.com)
 
 = 2.2.9.1 = 7 Feb 2023
 
-- Update: Use registered colors in color pickers instead of hard-coded colors
-- Update: Reorganized block panels
+- Update: Registered colors are used in color pickers instead of hard-coded colors
+- Update: Reorganized sidebar panels
+- Update: Added preview for all blocks
 - Update: Minimum WP version is 6.0
 - Fix: Textarea during resizing was looking weird
 - Fix: A form can't be inside another form (directly for now)
 - Fix: Google Recaptcha was not working with an "existing form" block
 - Fix: Conflict with GeneratePress back to top button
 - Fix: Auto population did not work for checkboxes
+- Fix: Incorrect fields look in some cases
 
 = 2.2.9 = 15 Jan 2023
 

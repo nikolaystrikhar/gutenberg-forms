@@ -1,5 +1,20 @@
 {
-	"title": "Date Picker",
+	"$schema": "https://schemas.wp.org/trunk/block.json",
+	"apiVersion": 1,
+	"name": "cwp/datepicker",
+	"title": "Email",
+	"category": "gutenberg-forms",
+	"ancestor": [ "cwp/block-gutenberg-forms" ],
+	"icon": "calendar-alt",
+	"keywords": [
+		"date",
+		"datepicker",
+		"input",
+		"form"
+	],
+	"version": "1.0.0",
+	"textdomain": "forms-gutenberg",
+	"example": {},
 	"attributes": {
 		"enableCondition": {
 			"type": "boolean",

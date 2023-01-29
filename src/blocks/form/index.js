@@ -40,7 +40,7 @@ const blockAttributes = {
 
 registerBlockType("cwp/block-gutenberg-forms", {
 	supports: {
-		...fieldSupport,
+		align: ["wide", "full", "center"],
 		reusable: false,
 	},
 	title: __(blockData.title),

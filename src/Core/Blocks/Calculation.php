@@ -50,7 +50,9 @@ class Calculation extends FieldBlock {
 		?>
 		<div
 			class="cwp-calculation cwp-field"
-			data-condition="<?php echo esc_attr( ! empty( $condition ) ? wp_json_encode( $condition ) : '' ); ?>"
+			<?php if ( ! empty( $condition ) ): ?>
+				data-condition="<?php echo esc_attr( wp_json_encode( $condition ) ); ?>"
+			<?php endif; ?>
 			data-cwp-calculation="<?php echo esc_attr( $formula ); ?>"
 			data-deci="<?php echo esc_attr( $decimal_places ); ?>"
 		>

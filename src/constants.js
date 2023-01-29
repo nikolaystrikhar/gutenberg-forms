@@ -5,11 +5,7 @@ export const fieldParents = [
 	"cwp/form-step",
 ];
 
-export const fieldSupport = {
-	align: ["wide", "full", "center"],
-};
-
-export const myAttrs = [
+export const fieldBlockNames = [
 	"email",
 	"name",
 	"message",

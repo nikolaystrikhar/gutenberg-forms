@@ -3,6 +3,7 @@
 namespace GutenbergForms\Core;
 
 use Exception;
+use GutenbergForms\Core\Blocks\Date;
 use GutenbergForms\Core\Blocks\Email;
 use GutenbergForms\Core\Blocks\Textarea;
 use GutenbergForms\Core\Blocks\Checkbox;
@@ -43,6 +44,7 @@ class BlockHandler {
 		Hidden::init();
 		Email::init();
 		Name::init();
+		Date::init();
 		Phone::init();
 		Toggle::init();
 		Website::init();
@@ -57,6 +59,5 @@ class BlockHandler {
 		// TODO: update the following classes.
 		// Steps::init();
 		// Step::init();
-		// Date::init(); // TODO: decide what to about it.
 	}
 }

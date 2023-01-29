@@ -54,7 +54,10 @@
 	input {
 		width: 100%;
 		padding: 10px 10px;
+		border-radius: 0;
 		transition: 0.5s;
+		background: #fff;
+		line-height: 1.4;
 	}
 
 	& input.error {

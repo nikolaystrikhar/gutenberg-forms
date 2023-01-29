@@ -1,13 +1,11 @@
-import React, { useEffect,Fragment } from "react";
+import React, { useEffect } from "react";
 import {
 	FormToggle,
-	Toolbar,
 	PanelRow,
 	PanelBody,
 	TextControl,
 	SelectControl,
 	Icon,
-
 } from "@wordpress/components";
 import {
 	getFieldName,
@@ -19,11 +17,10 @@ import {
 import DatePicker from "../../block/components/datepicker";
 import { clone, set } from "lodash";
 import ConditionalLogic from "../../block/components/condition";
-
 import Prefix from "../components/prefix";
 import Suffix from "../components/suffix";
 
-const { InspectorControls, BlockControls, BlockIcon, RichText } =
+const { InspectorControls, BlockControls, RichText } =
 	wp.blockEditor;
 const { __ } = wp.i18n;
 
@@ -43,13 +40,11 @@ function edit(props) {
 	const handleLabel = (label) => {
 		props.setAttributes({ label });
 	};
-	const inputField = React.useRef();
 
 	const {
 		placeholder,
 		isRequired,
 		label,
-		id,
 		field_name,
 		requiredLabel,
 		type,
@@ -118,17 +113,6 @@ function edit(props) {
 		return {
 			isPrimary: true,
 		};
-	};
-
-	let getFieldType = () => {
-		switch (type) {
-			case "both":
-				return "datetime-local";
-			case "time":
-				return "time";
-			case "date":
-				return "date";
-		}
 	};
 
 	const setMessages = (type, m) => {

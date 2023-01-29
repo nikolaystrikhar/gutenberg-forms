@@ -115,10 +115,12 @@
 	& .cwp-field {
 		.cwp-suffix {
 			@include Suffix();
+			margin-left: -1px;
 		}
 
 		.cwp-prefix {
 			@include Prefix();
+			margin-right: -1px;
 		}
 
 		&.is-style-inline {
@@ -166,7 +168,7 @@
 
 		& .cwp-field-set {
 			.cwp-field-with-elements {
-				display: table;
+				display: flex;
 				width: 100%;
 				position: relative;
 			}
