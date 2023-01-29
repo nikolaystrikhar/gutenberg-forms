@@ -248,6 +248,7 @@
 				@include captcha();
 			}
 
+
 			&.cwp-yes-no {
 				& .cwp-field-set {
 					@include switch();
@@ -274,6 +275,11 @@
 
 		& .g-recaptcha {
 			margin: 20px 0px;
+		}
+
+		button {
+			font-size: 1rem;
+			border: none;
 		}
 
 		& .cwp-submit {

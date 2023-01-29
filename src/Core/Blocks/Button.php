@@ -21,52 +21,40 @@ class Button extends Block {
 	 * @return string
 	 */
 	public function render( array $attributes ): string {
-		// Custom attributes.
-
-		$label     = $attributes['label'] ?? esc_html__( 'Submit', 'forms-gutenberg' );
-		$action    = $attributes['action'] ?? 'submit';
-		$parent_id = $attributes['parentId'] ?? '';
-		$styling   = $attributes['styling'] ?? array(
-			'backgroundColor' => '#6d6d6d',
-			'color'           => 'rgb(49, 49, 49)',
-			'padding'         => 25,
-			'borderRadius'    => 0,
-		);
-
 		$style = $this->map_style_attribute(
 			array(
-				'background-color' => $styling['backgroundColor'],
-				'color'            => $styling['color'],
-				'padding'          => floor( $styling['padding'] / 3 ) . 'px ' . $styling['padding'] . 'px',
-				'border-radius'    => $styling['borderRadius'] . 'px',
+				'background-color' => $attributes['styling']['backgroundColor'],
+				'color'            => $attributes['styling']['color'],
+				'padding'          => floor( $attributes['styling']['padding'] / 3 ) . 'px ' . $attributes['styling']['padding'] . 'px',
+				'border-radius'    => $attributes['styling']['borderRadius'] . 'px',
 			)
 		);
 
 		ob_start();
 		?>
-		<?php if ( $action === 'submit' ): ?>
+		<?php if ( $attributes['action'] === 'submit' ): ?>
 			<button
 				name="submit"
-				value="<?php echo esc_attr( $parent_id ); ?>"
+				value="<?php echo esc_attr( $attributes['parentId'] ); ?>"
 				type="submit"
 				style="<?php echo esc_attr( $style ); ?>"
 			>
-				<?php echo esc_html( $label ); ?>
+				<?php echo esc_html( $attributes['label'] ); ?>
 			</button>
-		<?php elseif ( $action === 'reset' ): ?>
+		<?php elseif ( $attributes['action'] === 'reset' ): ?>
 			<button
 				class="cwp-reset_btn"
 				style="<?php echo esc_attr( $style ); ?>"
 			>
-				<?php echo esc_html( $label ); ?>
+				<?php echo esc_html( $attributes['label'] ); ?>
 			</button>
 		<?php else: ?>
 			<button
-				data-trigger="<?php echo esc_attr( $action ); ?>"
+				data-trigger="<?php echo esc_attr( $attributes['action'] ); ?>"
 				class="cwp-multistep_btn multistep-trigger"
 				style="<?php echo esc_attr( $style ); ?>"
 			>
-				<?php echo esc_html( $label ); ?>
+				<?php echo esc_html( $attributes['label'] ); ?>
 			</button>
 		<?php endif; ?>
 		<?php

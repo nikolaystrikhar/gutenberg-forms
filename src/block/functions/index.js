@@ -32,7 +32,7 @@ const { withSelect } = wp.data;
 
 const radio_enabled_fields = ["select", "radio", "checkbox"]; //fields that support multiple
 
-export const myAttrs = [
+export const blockFieldNames = [
 	"email",
 	"name",
 	"message",
@@ -48,7 +48,7 @@ export const myAttrs = [
 ];
 
 export function getAllowedBlocks(type) {
-	const prefixed = myAttrs.map((slug) => "cwp/" + slug); // ["cwp/email" , .....];
+	const prefixed = blockFieldNames.map((slug) => "cwp/" + slug); // ["cwp/email" , .....];
 
 	if (type === "multiStep") {
 		prefixed.push("cwp/form-step");
@@ -59,7 +59,7 @@ export function getAllowedBlocks(type) {
 
 //?custom-function for fields_transformation purpose;
 export const getFieldTransform = (attrs, field) => {
-	const matchedKey = myAttrs.find((prop) => prop in attrs);
+	const matchedKey = blockFieldNames.find((prop) => prop in attrs);
 	const fieldBlock = "cwp/".concat(field);
 
 	const config = {
@@ -73,7 +73,7 @@ export const getFieldTransform = (attrs, field) => {
 	}
 
 	if (
-		!myAttrs.includes(strip_tags(attrs.label.toLowerCase())) &&
+		!blockFieldNames.includes(strip_tags(attrs.label.toLowerCase())) &&
 		strip_tags(attrs.label) !== "Choose One"
 	) {
 		//when the label has changed...
@@ -326,7 +326,7 @@ export function getSiblings(clientId, slug = null) {
 
 		const conditions = {
 			isCakewpBlock: v.name.startsWith("cwp/"), //ensuring that this is our block!
-			isFieldBlock: myAttrs.includes(breaked[breaked.length - 1]), //ensuring that it is a gutenberg-form field;
+			isFieldBlock: blockFieldNames.includes(breaked[breaked.length - 1]), //ensuring that it is a gutenberg-form field;
 			isLayoutBlock: layoutBlocks.includes(v.name), //ensuring that it is not a layout block
 			currentBlock: v.clientId === clientId, //ensuring that this is not the block
 			miscBlocks: miscBlocks.includes(v.name),

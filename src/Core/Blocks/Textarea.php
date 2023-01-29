@@ -19,60 +19,35 @@ class Textarea extends FieldBlock {
 	 * @return string
 	 */
 	public function render( array $attributes ): string {
-		// Attributes that always exist.
-
-		$id = $attributes['id'];
-
-		// Stable attributes.
-
-		$is_required      = $attributes['isRequired'] ?? false;
-		$required_label   = $attributes['requiredLabel'] ?? '*';
-		$label            = $attributes['label'] ?? '';
-		$show_hint        = $attributes['showHint'] ?? false;
-		$hint             = $attributes['hint'] ?? '';
-		$placeholder      = $attributes['message'] ?? '';
-		$error_messages   = $attributes['messages'] ?? '';
-		$enable_condition = $attributes['enableCondition'] ?? false;
-		$condition        = $enable_condition
-			? $attributes['condition'] ?? ''
-			: '';
-		$field_style      = $attributes['className'] ?? 'is-style-default';
-
-		// Custom attributes.
-
-		$height     = $attributes['height'] ?? 200;
-		$min_length = $attributes['minimumLength'] ?? 0;
-		$max_length = $attributes['maximumLength'] ?? 524288;
-
 		ob_start();
 		?>
 		<div
-			class="cwp-message cwp-field <?php echo esc_attr( $field_style ); ?>"
-			<?php if ( ! empty( $condition ) ): ?>
-				data-condition="<?php echo esc_attr( wp_json_encode( $condition ) ); ?>"
+			class="cwp-message cwp-field <?php echo esc_attr( $attributes['className'] ?? 'is-style-default' ); ?>"
+			<?php if ( ! empty( $attributes['condition']['field'] ) ): ?>
+				data-condition="<?php echo esc_attr( wp_json_encode( $attributes['condition'] ) ); ?>"
 			<?php endif; ?>
 		>
 			<div class="cwp-field-set">
-				<?php echo $this->map_label( $is_required, $label, $required_label, $id ); ?>
+				<?php echo $this->map_label( $attributes['isRequired'], $attributes['label'], $attributes['requiredLabel'], $attributes['id'] ); ?>
 
 				<textarea
-					name="<?php echo esc_attr( $id ); ?>"
-					id="<?php echo esc_attr( $id ); ?>"
-					<?php if ( $is_required ): ?>
-							required
-						<?php endif; ?>
-					placeholder="<?php echo esc_attr( $placeholder ); ?>"
+					name="<?php echo esc_attr( $attributes['id'] ); ?>"
+					id="<?php echo esc_attr( $attributes['id'] ); ?>"
+					<?php if ( $attributes['isRequired'] ): ?>
+						required
+					<?php endif; ?>
+					placeholder="<?php echo esc_attr( $attributes['message'] ); ?>"
 					title=""
-					data-errors="<?php echo esc_attr( ! empty( $error_messages ) ? wp_json_encode( $error_messages ) : '' ); ?>"
+					data-errors="<?php echo esc_attr( ! empty( $attributes['messages'] ) ? wp_json_encode( $attributes['messages'] ) : '' ); ?>"
 					data-rule="false"
 					data-cwp-field
-					style="height: <?php echo esc_attr( $height ); ?>px;"
-					minlength="<?php echo esc_attr( $min_length ); ?>"
-					maxlength="<?php echo esc_attr( $max_length ); ?>"
+					style="height: <?php echo esc_attr( $attributes['height'] ); ?>px;"
+					minlength="<?php echo esc_attr( $attributes['minimumLength'] ); ?>"
+					maxlength="<?php echo esc_attr( $attributes['maximumLength'] ); ?>"
 				></textarea>
 			</div>
 
-			<?php echo $this->map_hint( $show_hint, $hint ); ?>
+			<?php echo $this->map_hint( $attributes['showHint'], $attributes['hint'] ); ?>
 		</div>
 		<?php
 		return ob_get_clean();

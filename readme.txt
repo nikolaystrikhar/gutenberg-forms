@@ -100,12 +100,12 @@ For more information, visit [Gutenberg Forms](https://gutenbergforms.com)
 - Update: Added preview for all blocks
 - Update: Optimize frontend assets, forms without date fields are now loading only 13kb of JS instead of 51kb
 - Update: Minimum WP version is 6.0
+- Fix: Many styling issues
 - Fix: Textarea during resizing was looking weird
 - Fix: A form can't be inside another form (directly for now)
 - Fix: Google Recaptcha was not working with an "existing form" block
 - Fix: Conflict with GeneratePress back to top button
 - Fix: Auto population did not work for checkboxes
-- Fix: Incorrect fields look in some cases
 
 = 2.2.9 = 15 Jan 2023
 

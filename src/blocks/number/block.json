@@ -54,10 +54,6 @@
 			"type": "string",
 			"default": "*"
 		},
-		"errorValidityText": {
-			"type": "string",
-			"default": "Please fill out this field!"
-		},
 		"condition": {
 			"type": "object",
 			"default": {

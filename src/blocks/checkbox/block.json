@@ -34,7 +34,7 @@
 		},
 		"label": {
 			"type": "string",
-			"default": "Choose One"
+			"default": "Choose One or More"
 		},
 		"id": {
 			"type": "string",
@@ -65,10 +65,6 @@
 		"fieldStyle": {
 			"type": "string",
 			"default": "block"
-		},
-		"bulkAdd": {
-			"type": "boolean",
-			"default": false
 		},
 		"adminId": {
 			"type": "object",

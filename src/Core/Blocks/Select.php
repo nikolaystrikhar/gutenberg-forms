@@ -19,50 +19,28 @@ class Select extends FieldBlock {
 	 * @return string
 	 */
 	public function render( array $attributes ): string {
-		// Attributes that always exist.
-
-		$id = $attributes['id'];
-
-		// Stable attributes.
-
-		$is_required      = $attributes['isRequired'] ?? false;
-		$required_label   = $attributes['requiredLabel'] ?? '*';
-		$label            = $attributes['label'] ?? '';
-		$show_hint        = $attributes['showHint'] ?? false;
-		$hint             = $attributes['hint'] ?? '';
-		$error_messages   = $attributes['messages'] ?? '';
-		$enable_condition = $attributes['enableCondition'] ?? false;
-		$condition        = $enable_condition
-			? $attributes['condition'] ?? ''
-			: '';
-		$field_style      = $attributes['className'] ?? 'is-style-default';
-
-		// Custom attributes.
-
-		$options = $attributes['options'] ?? array();
-
 		ob_start();
 		?>
 		<div
-			class="cwp-select cwp-field <?php echo esc_attr( $field_style ); ?>"
-			<?php if ( ! empty( $condition ) ): ?>
-				data-condition="<?php echo esc_attr( wp_json_encode( $condition ) ); ?>"
+			class="cwp-select cwp-field <?php echo esc_attr( $attributes['className'] ?? 'is-style-default' ); ?>"
+			<?php if ( ! empty( $attributes['condition']['field'] ) ): ?>
+				data-condition="<?php echo esc_attr( wp_json_encode( $attributes['condition'] ) ); ?>"
 			<?php endif; ?>
 		>
 			<div class="cwp-field-set cwp-select-set">
-				<?php echo $this->map_label( $is_required, $label, $required_label, $id ); ?>
+				<?php echo $this->map_label( $attributes['isRequired'], $attributes['label'], $attributes['requiredLabel'], $attributes['id'] ); ?>
 
 				<select
-					name="<?php echo esc_attr( $id ); ?>"
-					id="<?php echo esc_attr( $id ); ?>"
-					<?php if ( $is_required ): ?>
-							required
-						<?php endif; ?>
-					data-errors="<?php echo esc_attr( ! empty( $error_messages ) ? wp_json_encode( $error_messages ) : '' ); ?>"
+					name="<?php echo esc_attr( $attributes['id'] ); ?>"
+					id="<?php echo esc_attr( $attributes['id'] ); ?>"
+					<?php if ( $attributes['isRequired'] ): ?>
+						required
+					<?php endif; ?>
+					data-errors="<?php echo esc_attr( ! empty( $attributes['messages'] ) ? wp_json_encode( $attributes['messages'] ) : '' ); ?>"
 					data-rule="false"
 					data-cwp-field
 				>
-					<?php foreach ( $options as $option ) : ?>
+					<?php foreach ( $attributes['options'] as $option ) : ?>
 						<option value="<?php echo esc_attr( $option['label'] ); ?>">
 							<?php echo esc_html( $option['label'] ); ?>
 						</option>
@@ -70,7 +48,7 @@ class Select extends FieldBlock {
 				</select>
 			</div>
 
-			<?php echo $this->map_hint( $show_hint, $hint ); ?>
+			<?php echo $this->map_hint( $attributes['showHint'], $attributes['hint'] ); ?>
 		</div>
 		<?php
 		return ob_get_clean();

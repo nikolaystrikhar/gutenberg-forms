@@ -19,53 +19,32 @@ class NewForm extends Block {
 	 * @return string
 	 */
 	public function render( array $attributes ): string {
-		// Attributes that always exist.
-
-		$id = $attributes['id'];
-
-		// Stable attributes.
-
-		$is_required      = $attributes['isRequired'] ?? false;
-		$required_label   = $attributes['requiredLabel'] ?? '*';
-		$label            = $attributes['label'] ?? '';
-		$show_hint        = $attributes['showHint'] ?? false;
-		$hint             = $attributes['hint'] ?? '';
-		$placeholder      = $attributes['message'] ?? '';
-		$error_messages   = $attributes['messages'] ?? '';
-		$enable_condition = $attributes['enableCondition'] ?? false;
-		$condition        = $enable_condition
-			? $attributes['condition'] ?? ''
-			: '';
-
-		// Custom attributes.
-    // TODO add custom attributes
-
 		ob_start();
 		?>
     // TODO remove NewForm name
     <h2>NewForm</h2>
-		<!-- <div class="cwp-email cwp-field" data-condition="<?php //echo esc_html( wp_json_encode( $condition ) ); ?>">
+		<!-- <div class="cwp-email cwp-field" data-condition="<?php //echo esc_html( wp_json_encode( $attributes['condition'] ) ); ?>">
 			<div class="cwp-field-set">
-				<?php //if ( ! empty( $label ) ) : ?>
-					<label for="<?php //echo esc_attr( $id ); ?>">
-						<?php //echo esc_html( $label ); ?>
+				<?php //if ( ! empty( $attributes['label'] ) ) : ?>
+					<label for="<?php //echo esc_attr( $attributes['id'] ); ?>">
+						<?php //echo esc_html( $attributes['label'] ); ?>
 
-						<?php //if ( $is_required && ! empty( $required_label ) ) : ?>
+						<?php //if ( $attributes['isRequired'] && ! empty( $attributes['requiredLabel'] ) ) : ?>
 							<abbr title="required" aria-label="required">
-								<?php //echo esc_html( $required_label ); ?>
+								<?php //echo esc_html( $attributes['requiredLabel'] ); ?>
 							</abbr>
 						<?php //endif; ?>
 					</label>
 				<?php //endif; ?>
 
 				<TODO
-					name="<?php //echo esc_attr( $id ); ?>"
-					id="<?php //echo esc_attr( $id ); ?>"
+					name="<?php //echo esc_attr( $attributes['id'] ); ?>"
+					id="<?php //echo esc_attr( $attributes['id'] ); ?>"
 					type="email"
-					required="<?php //echo esc_attr( $is_required ); ?>"
+					required="<?php //echo esc_attr( $attributes['isRequired'] ); ?>"
 					placeholder="<?php //echo esc_attr( $placeholder ); ?>"
 					title=""
-					data-errors="<?php //echo esc_attr( wp_json_encode( $error_messages ) ); ?>"
+					data-errors="<?php //echo esc_attr( wp_json_encode( $attributes['messages'] ) ); ?>"
 					data-rule="false"
 					data-cwp-field
 					data-validation="email"
@@ -73,9 +52,9 @@ class NewForm extends Block {
 				/>
 			</div>
 
-			<?php //if ( $show_hint && ! empty( $hint ) ): ?>
+			<?php //if ( $attributes['showHint'] && ! empty( $attributes['hint'] ) ): ?>
 				<p class="cwp-hint">
-					<?php //echo esc_html( $hint ); ?>
+					<?php //echo esc_html( $attributes['hint'] ); ?>
 				</p>
 			<?php //endif; ?>
 		</div> -->

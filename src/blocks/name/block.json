@@ -15,13 +15,13 @@
 	"textdomain": "forms-gutenberg",
 	"example": {},
 	"attributes": {
+		"name": {
+			"type": "string",
+			"default": ""
+		},
 		"enableCondition": {
 			"type": "boolean",
 			"default": false
-		},
-		"version": {
-			"type": "number",
-			"default": 3
 		},
 		"isRequired": {
 			"type": "boolean",

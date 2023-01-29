@@ -21,28 +21,9 @@ class Calculation extends FieldBlock {
 	 * @return string
 	 */
 	public function render( array $attributes ): string {
-		// Attributes that always exist.
-
-		$id = $attributes['id'];
-
-		// Stable attributes.
-
-		$label = $attributes['label'] ?? '';
-
-		// Custom attributes.
-
-		$calculation    = $attributes['calculation'] ?? 0;
-		$decimal_places = $attributes['decimalPlaces'] ?? 0;
-		$formula        = $attributes['formula'] ?? '';
-		$prefix         = $attributes['prefix'] ?? '';
-		$suffix         = $attributes['postfix'] ?? '';
-		$styling        = $attributes['styling'] ?? array(
-			'fontSize' => 40,
-		);
-
 		$style = $this->map_style_attribute(
 			array(
-				'font-size' => $styling['fontSize'] . 'px',
+				'font-size' => $attributes['styling']['fontSize'] . 'px',
 			)
 		);
 
@@ -50,19 +31,19 @@ class Calculation extends FieldBlock {
 		?>
 		<div
 			class="cwp-calculation cwp-field"
-			<?php if ( ! empty( $condition ) ): ?>
-				data-condition="<?php echo esc_attr( wp_json_encode( $condition ) ); ?>"
+			<?php if ( ! empty( $attributes['condition']['field'] ) ): ?>
+				data-condition="<?php echo esc_attr( wp_json_encode( $attributes['condition'] ) ); ?>"
 			<?php endif; ?>
-			data-cwp-calculation="<?php echo esc_attr( $formula ); ?>"
-			data-deci="<?php echo esc_attr( $decimal_places ); ?>"
+			data-cwp-calculation="<?php echo esc_attr( $attributes['formula'] ); ?>"
+			data-deci="<?php echo esc_attr( $attributes['decimalPlaces'] ); ?>"
 		>
 			<div class="cwp-field-set">
-				<?php echo $this->map_label( false, $label, '', $id ); ?>
+				<?php echo $this->map_label( false, $attributes['label'], '', $attributes['id'] ); ?>
 
 				<div class="cwp-result-wrap">
-					<?php if ( ! empty( $prefix ) ): ?>
+					<?php if ( ! empty( $attributes['prefix'] ) ): ?>
 						<span style="<?php echo esc_attr( $style ); ?>">
-							<?php echo esc_html( $prefix ); ?>
+							<?php echo esc_html( $attributes['prefix'] ); ?>
 						</span>
 					<?php endif; ?>
 
@@ -70,20 +51,20 @@ class Calculation extends FieldBlock {
 						0
 					</span>
 
-					<?php if ( ! empty( $suffix ) ): ?>
+					<?php if ( ! empty( $attributes['suffix'] ) ): ?>
 						<span style="<?php echo esc_attr( $style ); ?>">
-							<?php echo esc_html( $suffix ); ?>
+							<?php echo esc_html( $attributes['suffix'] ); ?>
 						</span>
 					<?php endif; ?>
 				</div>
 
 				<input
-					name="<?php echo esc_attr( $id ); ?>"
-					id="<?php echo esc_attr( $id ); ?>"
+					name="<?php echo esc_attr( $attributes['id'] ); ?>"
+					id="<?php echo esc_attr( $attributes['id'] ); ?>"
 					type="hidden"
 					data-rule="false"
 					data-cwp-field
-					placeholder=<?php echo esc_attr( $calculation ); ?>
+					placeholder=<?php echo esc_attr( $attributes['calculation'] ); ?>
 				/>
 			</div>
 		</div>

@@ -224,6 +224,7 @@
 				@include switch();
 			}
 		}
+
 		@include bulk_add();
 
 		&.cwp-hidden {
@@ -249,6 +250,10 @@
 		& .cwp-required.cwp-noticed {
 			@include isRequired("noticed");
 		}
+	}
+
+	button {
+		font-size: 1rem;
 	}
 
 	& .cwp-submit {

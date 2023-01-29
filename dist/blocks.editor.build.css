@@ -623,18 +623,20 @@
       margin: 0px 5px; }
 
 .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field .cwp-field-set {
-  margin: 20px 0px; }
+  margin: 20px 0; }
   .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field .cwp-field-set .cwp-error {
     color: red; }
   .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field .cwp-field-set input {
     width: 100%;
-    padding: 10px 10px;
+    padding: 10px;
     border-radius: 0;
     -webkit-transition: 0.5s;
     -o-transition: 0.5s;
     transition: 0.5s;
     background: #fff;
-    line-height: 1.4; }
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    font-size: 1rem; }
   .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field .cwp-field-set input.error {
     border: 1px solid red;
     outline: red; }
@@ -645,10 +647,12 @@
     color: red; }
   .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field .cwp-field-set textarea {
     width: 100%;
-    padding: 10px 10px;
+    padding: 10px;
     max-width: 100%;
     height: 257px;
-    display: block; }
+    display: block;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box; }
   .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field .cwp-field-set textarea.error {
     border: 1px solid red;
     outline: red; }
@@ -660,16 +664,18 @@
     font-weight: 600; }
 
 .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field.cwp-captcha .cwp-captcha-inner {
-  margin: 20px 0px; }
+  margin: 20px 0; }
   .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field.cwp-captcha .cwp-captcha-inner input {
     width: 100%;
-    padding: 10px 10px;
+    padding: 10px;
     border-radius: 0;
     -webkit-transition: 0.5s;
     -o-transition: 0.5s;
     transition: 0.5s;
     background: #fff;
-    line-height: 1.4; }
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    font-size: 1rem; }
   .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field.cwp-captcha .cwp-captcha-inner input.error {
     border: 1px solid red;
     outline: red; }
@@ -680,10 +686,12 @@
     color: red; }
   .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field.cwp-captcha .cwp-captcha-inner textarea {
     width: 100%;
-    padding: 10px 10px;
+    padding: 10px;
     max-width: 100%;
     height: 257px;
-    display: block; }
+    display: block;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box; }
   .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field.cwp-captcha .cwp-captcha-inner textarea.error {
     border: 1px solid red;
     outline: red; }
@@ -795,6 +803,8 @@
     font-weight: 600; }
   .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field .cwp-select-set label.error {
     color: red; }
+  .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field .cwp-select-set select {
+    height: 40px; }
   .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-field .cwp-select-set select.error {
     outline: red;
     border: 1px solid red; }
@@ -809,6 +819,10 @@
 
 .wp-block-cwp-block-gutenberg-forms .cwp-form .g-recaptcha {
   margin: 20px 0px; }
+
+.wp-block-cwp-block-gutenberg-forms .cwp-form button {
+  font-size: 1rem;
+  border: none; }
 
 .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-submit {
   padding: 20px 0px;
@@ -827,7 +841,8 @@
     border: none;
     outline: none;
     padding: 10px 25px;
-    letter-spacing: 1px; }
+    letter-spacing: 1px;
+    font-size: 1rem; }
 
 .wp-block-cwp-block-gutenberg-forms .cwp-form .cwp-danger-captcha {
   background-color: #ed9898;
@@ -1460,7 +1475,7 @@
         justify-content: start; }
 
 .cwp-form .cwp-field .cwp-field-set {
-  margin: 20px 0px; }
+  margin: 20px 0; }
   .cwp-form .cwp-field .cwp-field-set .cwp-field-with-elements {
     display: -ms-flexbox;
     display: flex;
@@ -1475,13 +1490,15 @@
         justify-content: start; }
   .cwp-form .cwp-field .cwp-field-set input {
     width: 100%;
-    padding: 10px 10px;
+    padding: 10px;
     border-radius: 0;
     -webkit-transition: 0.5s;
     -o-transition: 0.5s;
     transition: 0.5s;
     background: #fff;
-    line-height: 1.4; }
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    font-size: 1rem; }
   .cwp-form .cwp-field .cwp-field-set input.error {
     border: 1px solid red;
     outline: red; }
@@ -1492,10 +1509,12 @@
     color: red; }
   .cwp-form .cwp-field .cwp-field-set textarea {
     width: 100%;
-    padding: 10px 10px;
+    padding: 10px;
     max-width: 100%;
     height: 257px;
-    display: block; }
+    display: block;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box; }
   .cwp-form .cwp-field .cwp-field-set textarea.error {
     border: 1px solid red;
     outline: red; }
@@ -1609,19 +1628,21 @@
 .cwp-form .cwp-field.cwp-hidden {
   display: -ms-flexbox;
   display: flex;
-  margin: 20px 0px; }
+  margin: 20px 0; }
   .cwp-form .cwp-field.cwp-hidden .cwp-tag-opener {
     margin-left: 5px;
     height: 100%; }
   .cwp-form .cwp-field.cwp-hidden input {
     width: 100%;
-    padding: 10px 10px;
+    padding: 10px;
     border-radius: 0;
     -webkit-transition: 0.5s;
     -o-transition: 0.5s;
     transition: 0.5s;
     background: #fff;
-    line-height: 1.4; }
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box;
+    font-size: 1rem; }
   .cwp-form .cwp-field.cwp-hidden input.error {
     border: 1px solid red;
     outline: red; }
@@ -1632,10 +1653,12 @@
     color: red; }
   .cwp-form .cwp-field.cwp-hidden textarea {
     width: 100%;
-    padding: 10px 10px;
+    padding: 10px;
     max-width: 100%;
     height: 257px;
-    display: block; }
+    display: block;
+    -webkit-box-sizing: border-box;
+            box-sizing: border-box; }
   .cwp-form .cwp-field.cwp-hidden textarea.error {
     border: 1px solid red;
     outline: red; }
@@ -1723,7 +1746,8 @@
 
 .cwp-form .cwp-field .cwp-select-set select {
   width: 100%;
-  max-width: 100%; }
+  max-width: 100%;
+  height: 40px; }
 
 .cwp-form .cwp-field .cwp-select-set .cwp-select-controls {
   display: -ms-flexbox;
@@ -1758,6 +1782,9 @@
     margin: 0px 8px !important;
     color: red !important; }
 
+.cwp-form button {
+  font-size: 1rem; }
+
 .cwp-form .cwp-submit {
   padding: 20px 0px;
   display: -ms-flexbox;
@@ -1775,7 +1802,8 @@
     border: none;
     outline: none;
     padding: 10px 25px;
-    letter-spacing: 1px; }
+    letter-spacing: 1px;
+    font-size: 1rem; }
 
 .cwp-form .cwp-button-block-appender .block-editor-inserter {
   width: 100%; }

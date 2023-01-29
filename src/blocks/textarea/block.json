@@ -22,7 +22,7 @@
 		},
 		"message": {
 			"type": "string",
-			"default": ""
+			"default": "Message"
 		},
 		"isRequired": {
 			"type": "boolean",

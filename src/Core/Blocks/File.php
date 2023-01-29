@@ -19,84 +19,43 @@ class File extends FieldBlock {
 	 * @return string
 	 */
 	public function render( array $attributes ): string {
-		// Attributes that always exist.
+		// TODO: Add hint support.
 
-		$id = $attributes['id'];
-
-		// Stable attributes.
-
-		$is_required      = $attributes['isRequired'] ?? false;
-		$required_label   = $attributes['requiredLabel'] ?? '*';
-		$label            = $attributes['label'] ?? '';
-		$show_hint        = $attributes['showHint'] ?? false;
-		$hint             = $attributes['hint'] ?? '';
-		$error_messages   = $attributes['messages'] ?? '';
-		$enable_condition = $attributes['enableCondition'] ?? false;
-		$condition        = $enable_condition
-			? $attributes['condition'] ?? ''
-			: '';
-		$field_style      = $attributes['className'] ?? 'is-style-default';
-
-		// Custom attributes.
-
-		$allowed_formats = $attributes['accept'] ?? array(
-			"jpg",
-			"jpeg",
-			"png",
-			"gif",
-			"pdf",
-			"doc",
-			"docx",
-			"ppt",
-			"pptx",
-			"odt",
-			"avi",
-			"ogg",
-			"m4a",
-			"mov",
-			"mp3",
-			"mp4",
-			"mpg",
-			"wav",
-			"wmv"
+		$allowed_formats = implode(
+			',',
+			array_map(
+				function($item) {
+					return '.' . $item;
+				},
+				$attributes['allowedFormats']
+			)
 		);
-
-		$allowed_formats = array_map(
-			function($item) {
-				return '.' . $item;
-			},
-			$allowed_formats
-		);
-
-		$allowed_formats = implode(',', $allowed_formats);
 
 		ob_start();
 		?>
 		<div
-			class="cwp-file cwp-field <?php echo esc_attr( $field_style ); ?>"
-			<?php if ( ! empty( $condition ) ): ?>
-				data-condition="<?php echo esc_attr( wp_json_encode( $condition ) ); ?>"
+			class="cwp-file cwp-field <?php echo esc_attr( $attributes['className'] ?? 'is-style-default' ); ?>"
+			<?php if ( ! empty( $attributes['condition']['field'] ) ): ?>
+				data-condition="<?php echo esc_attr( wp_json_encode( $attributes['condition'] ) ); ?>"
 			<?php endif; ?>
 		>
 			<div class="cwp-field-set">
-				<?php echo $this->map_label( $is_required, $label, $required_label, $id ); ?>
+				<?php echo $this->map_label( $attributes['isRequired'], $attributes['label'], $attributes['requiredLabel'], $attributes['id'] ); ?>
 
 				<input
-					name="<?php echo esc_attr( $id ); ?>"
-					id="<?php echo esc_attr( $id ); ?>"
+					name="<?php echo esc_attr( $attributes['id'] ); ?>"
+					id="<?php echo esc_attr( $attributes['id'] ); ?>"
 					type="file"
-					<?php if ( $is_required ): ?>
-							required
-						<?php endif; ?>
+					<?php if ( $attributes['isRequired'] ): ?>
+						required
+					<?php endif; ?>
 					title=""
-					data-errors="<?php echo esc_attr( ! empty( $error_messages ) ? wp_json_encode( $error_messages ) : '' ); ?>"
+					data-errors="<?php echo esc_attr( ! empty( $attributes['messages'] ) ? wp_json_encode( $attributes['messages'] ) : '' ); ?>"
 					data-rule="false"
 					data-cwp-field
 					accept="<?php echo esc_attr( $allowed_formats ); ?>"
 				/>
 			</div>
-
-			<?php echo $this->map_hint( $show_hint, $hint ); ?>
 		</div>
 		<?php
 		return ob_get_clean();

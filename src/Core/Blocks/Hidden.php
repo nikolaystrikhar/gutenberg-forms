@@ -19,22 +19,14 @@ class Hidden extends FieldBlock {
 	 * @return string
 	 */
 	public function render( array $attributes ): string {
-		// Attributes that always exist.
-
-		$id = $attributes['id'];
-
-		// Custom attributes.
-
-		$value = $attributes['value'] ?? '';
-
 		ob_start();
 		?>
 		<div class="cwp-hidden cwp-field">
 			<input
-				name="<?php echo esc_attr( $id ); ?>"
-				id="<?php echo esc_attr( $id ); ?>"
+				name="<?php echo esc_attr( $attributes['id'] ); ?>"
+				id="<?php echo esc_attr( $attributes['id'] ); ?>"
 				type="hidden"
-				value="<?php echo esc_attr( $value ); ?>"
+				value="<?php echo esc_attr( $attributes['value'] ); ?>"
 			/>
 		</div>
 		<?php
