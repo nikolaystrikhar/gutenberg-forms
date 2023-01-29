@@ -416,6 +416,7 @@ function edit(props) {
 								value={label}
 								onChange={handleLabel}
 							/>
+
 							{!props.isSelected && isRequired && !enableCondition && (
 								<div className="cwp-required cwp-noticed">
 									<h3>{requiredLabel}</h3>
@@ -439,7 +440,7 @@ function edit(props) {
 											<label
 												style={{ width: "auto" }}
 												onClick={() => handleCheck(!radio.checked, index)}
-												for={id.concat(index.toString())}
+												htmlFor={id.concat(index.toString())}
 											></label>
 										)}
 										{!!props.isSelected ? (

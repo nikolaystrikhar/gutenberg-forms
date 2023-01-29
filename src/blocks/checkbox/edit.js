@@ -363,8 +363,8 @@ function edit(props) {
 		</InspectorControls>,
 		null,
 		<div
-			className={`cwp-checkbox cwp-field ${props.className} is-style-${fieldStyle}`}
 			{...blockProps}
+			className={`cwp-checkbox cwp-field ${props.className} is-style-${fieldStyle}`}
 		>
 			{bulkAdd ? (
 				<Bulk_Add onChange={(c) => setCheckboxes(c)} data={props} />
@@ -372,7 +372,7 @@ function edit(props) {
 				<Fragment>
 					<div
 						ref={checkboxContainer}
-						className={`cwp-checkbox-set-backend cwp-checkbox-set ${
+						className={`cwp-checkbox-set ${
 							!props.isSelected ? "cwp-checkbox-set-preview" : ""
 						}`}
 					>
@@ -406,7 +406,7 @@ function edit(props) {
 										{!!props.isSelected && (
 											<label
 												style={{ width: "auto" }}
-												for={id.concat(index.toString())}
+												htmlFor={id.concat(index.toString())}
 												onClick={() => handleCheck(!checkbox.checked, index)}
 											></label>
 										)}
