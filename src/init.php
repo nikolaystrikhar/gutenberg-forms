@@ -43,21 +43,21 @@ function gutenberg_forms_cwp_block_assets(): void
 		'gutenberg_forms-cwp-style-css',
 		plugins_url('dist/blocks.style.build.css', dirname(__FILE__)),
 		is_admin() ? array('wp-editor') : null,
-		filemtime(plugin_dir_path(__DIR__) . 'dist/blocks.style.build.css')
+		GUTENBERG_FORMS_VERSION
 	);
 
 	wp_register_script(
 		'gutenberg-forms-blocks',
 		plugins_url('/dist/blocks.build.js', dirname(__FILE__)),
 		array('wp-blocks', 'wp-i18n', 'wp-element', 'wp-editor'),
-		filemtime(plugin_dir_path(__DIR__) . 'dist/blocks.build.js')
+		GUTENBERG_FORMS_VERSION
 	);
 
 	wp_register_script(
-		'gutenberg-forms-custom-js',
-		plugins_url('/dist/gutenberg-forms.js', dirname(__FILE__)),
-		array('jquery'),
-		filemtime(plugin_dir_path(__DIR__) . 'dist/gutenberg-forms.js'),
+		'gutenberg-forms',
+		plugins_url( '/dist/gutenberg-forms.min.js', dirname( __FILE__ ) ),
+		array( 'jquery' ),
+		GUTENBERG_FORMS_VERSION,
 		true
 	);
 
@@ -65,7 +65,7 @@ function gutenberg_forms_cwp_block_assets(): void
 		'gutenberg_forms-cwp-block-editor-css',
 		plugins_url('dist/blocks.editor.build.css', dirname(__FILE__)),
 		array('wp-edit-blocks'),
-		filemtime(plugin_dir_path(__DIR__) . 'dist/blocks.editor.build.css')
+		GUTENBERG_FORMS_VERSION
 	);
 
 	wp_localize_script(
@@ -94,7 +94,7 @@ function gutenberg_forms_cwp_block_assets(): void
 	);
 
 	if (!is_admin()) {
-		$files['script'] = 'gutenberg-forms-custom-js';
+		$files['script'] = 'gutenberg-forms';
 	}
 
 	register_block_type('cwp/block-gutenberg-forms', $files);

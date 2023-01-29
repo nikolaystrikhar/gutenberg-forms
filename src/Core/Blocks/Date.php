@@ -97,4 +97,27 @@ class Date extends FieldBlock {
 		<?php
 		return ob_get_clean();
 	}
+
+	/**
+	 * Enqueues assets.
+	 *
+	 * @since 2.9.9.1
+	 *
+	 * @return void
+	 */
+	protected function enqueue_assets(): void {
+		wp_enqueue_script(
+			'pikaday',
+			GUTENBERG_FORMS_URL . 'dist/libs/pikaday/pikaday.min.js',
+			array(),
+			GUTENBERG_FORMS_VERSION
+		);
+
+		wp_enqueue_style(
+			'pikaday',
+			GUTENBERG_FORMS_URL . 'dist/libs/pikaday/pikaday.min.css',
+			array(),
+			GUTENBERG_FORMS_VERSION
+		);
+	}
 }

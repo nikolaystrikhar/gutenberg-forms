@@ -48,6 +48,8 @@ abstract class Block {
 						'render_callback' => array( $block, 'render' )
 					)
 				);
+
+				$block->enqueue_assets();
 			}
 		);
 	}
@@ -62,4 +64,15 @@ abstract class Block {
 	 * @return string
 	 */
 	abstract public function render( array $attributes ): string;
+
+	/**
+	 * Enqueues assets.
+	 *
+	 * @since 2.9.9.1
+	 *
+	 * @return void
+	 */
+	protected function enqueue_assets(): void {
+		// Override this method in the child class if needed.
+	}
 }

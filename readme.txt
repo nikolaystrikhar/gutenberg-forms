@@ -98,6 +98,7 @@ For more information, visit [Gutenberg Forms](https://gutenbergforms.com)
 - Update: Registered colors are used in color pickers instead of hard-coded colors
 - Update: Reorganized sidebar panels
 - Update: Added preview for all blocks
+- Update: Optimize frontend assets, forms without date fields are now loading only 13kb of JS instead of 51kb
 - Update: Minimum WP version is 6.0
 - Fix: Textarea during resizing was looking weird
 - Fix: A form can't be inside another form (directly for now)
